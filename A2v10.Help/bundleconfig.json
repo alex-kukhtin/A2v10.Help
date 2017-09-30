@@ -1,0 +1,15 @@
+[
+  {
+    "outputFileName": "scripts/vue.js",
+    "inputFiles": [ "bower_components/vue/dist/vue.js" ],
+    "minify": {"enabled": false}
+  },
+  {
+    "outputFileName": "scripts/main.js",
+    "inputFiles": [
+      "app/include.js",
+      "app/app.js"
+    ],
+    "minify": { "enabled": false }
+  }
+]
