@@ -56,6 +56,7 @@
     <Content Include="Less\Site.less" />
     <Content Include="Less\Variables.less" />
     <None Include="packages.config" />
+    <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
