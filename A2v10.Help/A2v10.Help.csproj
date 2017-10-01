@@ -48,13 +48,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".htaccess" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="404.html" />
+    <Content Include="html\whatsnew\w201710.html" />
+    <Content Include="html\whatsnew\index.html" />
     <Content Include="Less\Site.less" />
     <Content Include="Less\Variables.less" />
+    <Content Include="content.txt" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>
@@ -65,11 +70,14 @@
     <Content Include="css\site.min.css">
       <DependentUpon>site.css</DependentUpon>
     </Content>
-    <Content Include="Html\Default.html" />
+    <Content Include="html\index.html" />
     <Content Include="index.html" />
+    <Content Include="robots.txt" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\vue.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,194 @@
+﻿using System;
+using System.IO;
+using System.Xml;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using MakeHelp.Properties;
+
+namespace MakeHelp
+{
+    public class FileInfo
+    {
+        public String url;
+        public String title;
+    }
+
+    public class FileDictionary : Dictionary<String, List<Int32>>
+    {
+        public void Add(String key, Int32 value)
+        {
+            List<Int32> files;
+            if (this.TryGetValue(key, out files))
+            {
+                if (!files.Contains(value))
+                    files.Add(value);
+            }
+            else
+            {
+                files = new List<Int32>();
+                files.Add(value);
+                this.Add(key, files);
+            }
+        }
+    }
+
+    public class HelpProcessor
+    {
+        const String HTML = "*.html";
+
+        List<FileInfo> _files = new List<FileInfo>();
+
+        FileDictionary _keywords = new FileDictionary();
+        FileDictionary _fts = new FileDictionary();
+
+        public Boolean HasErrors { get; set; }
+
+        HashSet<String> _stopWords;
+
+        Boolean IsStopWord(String word)
+        {
+            if (_stopWords == null)
+            {
+                _stopWords = new HashSet<String>();
+                foreach (var x in Resources.stopwords.Split('\n'))
+                    _stopWords.Add(x.Trim());
+            }
+            return _stopWords.Contains(word);
+        }
+
+        void ProcessKeywords(String keywords, Int32 fileIndex)
+        {
+            var kw = keywords.Split(';');
+            foreach (var w in kw)
+            {
+                String key = w.Trim();
+                _keywords.Add(key, fileIndex);
+            }
+        }
+
+        void ProcessComment(XmlComment comment, Int32 fileIndex)
+        {
+            String val = comment.Value.ToString();
+            if (val.IndexOf("keywords:") == 0)
+            {
+                var kw = val.Substring(9).Trim();
+                ProcessKeywords(kw, fileIndex);
+            }
+            else if (val.IndexOf("title:") == 0)
+            {
+                var title = val.Substring(6);
+                var fi = _files[fileIndex];
+                fi.title = title;
+            }
+        }
+
+        void ProcessText(String txt, Int32 fileIndex)
+        {
+            var words = Regex.Split(txt.ToLower(), @"[\s,\(\)\[\]\}\{\?;!@&]+");
+            foreach (var ww in words)
+            {
+                var word = ww.Trim();
+                if (word.EndsWith("."))
+                {
+                    word = word.Substring(0, word.Length - 1);
+                }
+                if (String.IsNullOrEmpty(word))
+                    continue;
+                if (IsStopWord(word))
+                    continue;
+                _fts.Add(word, fileIndex);
+            }
+        }
+
+        void PopulateXml(XmlElement elem, Int32 fileIndex)
+        {
+            foreach (var xe in elem.ChildNodes)
+            {
+                if (xe is XmlComment)
+                    ProcessComment((xe as XmlComment), fileIndex);
+                else if (xe is XmlText)
+                {
+                    var xmlt = xe as XmlText;
+                    String txt = xmlt.Value.ToString().Trim();
+                    if (!String.IsNullOrEmpty(txt))
+                        ProcessText(txt, fileIndex);
+                }
+                else if (xe is XmlElement)
+                {
+                    var xmle = xe as XmlElement;
+                    PopulateXml(xmle, fileIndex);
+                }
+            }
+        }
+
+        void ProcessOneFile(String path, String fileUrl)
+        {
+            var fi = new FileInfo();
+            fi.url = fileUrl;
+            _files.Add(fi);
+
+            Int32 ix = _files.Count - 1;
+
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                PopulateXml(doc.DocumentElement, ix);
+            }
+            catch (XmlException ex)
+            {
+                HasErrors = true;
+                Console.WriteLine($"ERROR: {ex.Message}");
+            }
+        }
+
+        void ProcessFile(String file, String dir, Int32 level)
+        {
+            String fileName = Path.GetFileNameWithoutExtension(file);
+            String fileUrl = $"{dir}/{fileName}";
+            String tab = new String(' ', level * 2);
+            Console.WriteLine($"{tab}file: {fileUrl}");
+            ProcessOneFile(file, fileUrl);
+        }
+
+        void ProcessDirectory(String dir, String root, Int32 level)
+        {
+            foreach(var f in Directory.GetFiles(dir, HTML))
+            {
+                ProcessFile(f, root, level);
+            }
+            foreach (var d in Directory.GetDirectories(dir))
+            {
+                String pathName = Path.GetFileName(d);
+                ProcessDirectory(d, $"{root}/{pathName}", level + 1);
+            }
+        }
+
+        public void Process(String dir)
+        {
+            ProcessDirectory($"{dir}\\html", String.Empty, 0);
+        }
+
+        public void MakeContent(String fileName)
+        {
+            foreach (var ln in File.ReadAllLines(fileName))
+            {
+                String str = ln.Trim();
+                if (String.IsNullOrEmpty(str))
+                    continue;
+                Console.WriteLine("content:" + ln);
+            }
+        }
+
+        public String GetIndex()
+        {
+            return JsonConvert.SerializeObject(_keywords);
+        }
+
+        public String GetFts()
+        {
+            return JsonConvert.SerializeObject(_fts);
+        }
+    }
+}

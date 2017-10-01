@@ -14,7 +14,7 @@
 			if (href.startsWith('http')) return; // external link
 			an.setAttribute('href', '');
 			an.setAttribute('data-route', href);
-			an.addEventListener('click', onClickAnchor);
+			an.addEventListener('click', doNavigate);
 		});
 	}
 
@@ -46,7 +46,10 @@
 		methods: {
 			navigateTo(url) {
 				let me = this;
-				loadHtml('html/' + url + '.html').then(function (elem) {
+				if (url === '/')
+					url += 'index';
+				console.warn(url);
+				loadHtml('/html' + url + '.html').then(function (elem) {
 					me.$el.innerHTML = '';
 					let div = document.createElement('div');
 					let ch = elem.children;
