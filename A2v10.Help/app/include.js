@@ -27,7 +27,7 @@
 				let body = doc.body;
 				setHrefs(body);
 				resolve(body);
-			}
+			};
 			xhr.open('GET', url, true);
 			xhr.send();
 		});

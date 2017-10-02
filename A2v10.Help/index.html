@@ -9,12 +9,19 @@
 </head>
 <body>
     <div id="app" class="main-view">
-        <header class="header">Header</header>
+        <header class="header">A2:SDK</header>
+        <ul class="tab-header">
+            <li @click.prevent="tab('content')" :class="{active: isActive('content')}">Содержание</li>
+            <li @click.prevent="tab('index')" :class="{active: isActive('index')}">Индекс</li>
+            <li @click.prevent="tab('fts')"  :class="{active: isActive('fts')}">Поиск</li>
+        </ul>
         <aside class="side-bar">
-            Side-Bar
+            <a2-content-view v-show="isActive('content')"></a2-content-view>
+            <a2-index-view v-show="isActive('index')"></a2-index-view>
+            <a2-search-view v-show="isActive('fts')"></a2-search-view>
         </aside>
         <a2-include :source="content"></a2-include>
-        <footer class="footer">footer</footer>
+        <footer class="footer"><span>&copy; 2017 А. Кухтин</span><span class="divider"></span><span>A2:SDK version 10.0.7023</span></footer>
     </div>
     <script type="text/javascript" src="/scripts/vue.js"></script>
     <script type="text/javascript" src="/scripts/main.js"></script>

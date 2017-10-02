@@ -1,5 +1,7 @@
 ﻿@import "Variables.less";
 
+@side-bar-width: 290px;
+
 html {
     font-family: @font-family;
     font-size: @font-size;
@@ -29,37 +31,90 @@ html, body {
     display:grid;
     grid-gap:0;
     grid-template-columns:auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     width:100%;
     height:100%;
-    background-color:aliceblue;
 }
 
 header, .header {
-    grid-row:1;
-    grid-column:1 / span 2;
-    background-color:aquamarine;
-    font-size:1.6rem;
-    padding:.1rem .4rem;
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    background-color: @brand-bk_color;
+    color:white;
+    font-size: 1.5rem;
+    padding: .1rem .4rem;
 }
 
 footer, .footer {
-    grid-row:3;
-    grid-column:1 / span 2;
-    background-color:mintcream;
+    grid-row: 4;
+    display: flex;
+    grid-column: 1 / span 2;
+    background-color: @lightgray-bg-color;
     font-size: .95rem;
-    padding: .1rem .4rem;
-    border-top:1px solid @defaut-brd-color;
+    padding: .2rem .4rem;
+    border-top: 1px solid @defaut-brd-color;
+    align-items:stretch;
+    .divider {
+        flex-grow:2;
+    }
 }
 
 .side-bar {
-    grid-row:2;
-    grid-column:1;
-    width: 250px; //TODO
+    grid-row: 3;
+    grid-column: 1;
+    width: @side-bar-width;
     background-color:lightyellow;
+    overflow: auto;
+}
+
+.tab-header {
+    grid-row: 2;
+    grid-column: 1;
+    background-color: @lightgray-bg-color;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    border-bottom: 1px solid @defaut-brd-color;
+
+    li {
+        display: block;
+        flex-grow: 1;
+        padding: .3em 0 .5em 0;
+        border-top: 3px solid transparent;
+        border-left:1px solid @defaut-brd-color;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: -1px;
+        user-select:none;
+        border-bottom:1px solid transparent;
+        
+        &:first-child {
+            border-left-style:none;
+        }
+
+        &:hover {
+            background-color:darken(@lightgray-bg-color, 3%);
+            border-bottom-color:@defaut-brd-color;
+        }
+
+        &.active {
+            background-color: white;
+            border-top-color: gold;
+            &:hover {
+                border-bottom-color:transparent;
+            }
+        }
+    }
 }
 
 .content-view {
-    grid-row:2;
+    grid-row:2 / span 2;
     grid-column:2;
+    padding:0 .8em;
+    border-left:1px solid @defaut-brd-color;
+}
+
+pre {
+    font-family:@monospace-font;
+    font-size:0.85em;
 }

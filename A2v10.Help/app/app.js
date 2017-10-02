@@ -13,7 +13,7 @@
 				cUrl.splice(cUrl.length - 1, 1);
 			else
 				xUrl.push(x);
-		})
+		});
 		let newUrl = cUrl.concat(xUrl);
 		return '/' + newUrl.join('/');
 	}
@@ -21,13 +21,20 @@
 	const vm = new Vue({
 		el: '#app',
 		data: {
-			content: ''
+			content: '',
+			activeTab: 'content'
 		},
 		methods: {
 			navigate(url) {
 				url = makeUrl(url);
 				window.history.pushState(null, null, url);
 				this.content = url;
+			},
+			tab(name) {
+				this.activeTab = name;
+			},
+			isActive(name) {
+				return name === this.activeTab;
 			}
 		},
 		created() {
@@ -39,6 +46,12 @@
 
 			this.$on('navigate', function (url) {
 				me.navigate(url);
+			});
+
+			this.$on('navigateFile', function (index) {
+				let files = window.app.files;
+				let file = files[index];
+				me.navigate(file.url);
 			});
 		},
 		mounted() {

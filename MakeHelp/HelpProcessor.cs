@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using MakeHelp.Properties;
+using System.Text;
 
 namespace MakeHelp
 {
@@ -41,6 +42,8 @@ namespace MakeHelp
 
         FileDictionary _keywords = new FileDictionary();
         FileDictionary _fts = new FileDictionary();
+
+        ContentItem _content = new ContentItem();
 
         public Boolean HasErrors { get; set; }
 
@@ -172,23 +175,55 @@ namespace MakeHelp
 
         public void MakeContent(String fileName)
         {
-            foreach (var ln in File.ReadAllLines(fileName))
+            try
             {
-                String str = ln.Trim();
-                if (String.IsNullOrEmpty(str))
-                    continue;
-                Console.WriteLine("content:" + ln);
+                foreach (var ln in File.ReadAllLines(fileName))
+                {
+                    if (String.IsNullOrEmpty(ln))
+                        continue;
+                    _content.Add(ln);
+                }
+            }
+            catch (Exception ex)
+            {
+                HasErrors = true;
+                Console.WriteLine($"ERROR: {ex.Message}");
             }
         }
 
-        public String GetIndex()
+        public String MakeJsFile()
         {
-            return JsonConvert.SerializeObject(_keywords);
-        }
+            var sb = new StringBuilder();
+            sb.AppendLine(@"(function() { ");
+            sb.AppendLine("/*GENERATED*/");
+            sb.Append("const content = ")
+                .AppendLine(JsonConvert.SerializeObject(_content,
+                    new JsonSerializerSettings()
+                    {
+                        Formatting = Newtonsoft.Json.Formatting.Indented,
+                        NullValueHandling = NullValueHandling.Ignore
+                    }))
+                .Append(";")
+                .AppendLine();
 
-        public String GetFts()
-        {
-            return JsonConvert.SerializeObject(_fts);
+            sb.Append("const files = ")
+                .Append(JsonConvert.SerializeObject(_files))
+                .Append(";")
+                .AppendLine();
+
+            sb.Append("const index = ")
+                .Append(JsonConvert.SerializeObject(_keywords))
+                .Append(";")
+                .AppendLine();
+
+            sb.Append("const fts = ")
+                .Append(JsonConvert.SerializeObject(_fts))
+                .Append(";")
+                .AppendLine();
+
+            sb.AppendLine("window.app = {content: content, files: files, index: index, fts: fts};");
+            sb.Append("})();");
+            return sb.ToString();
         }
     }
 }
