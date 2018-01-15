@@ -1,4 +1,6 @@
-﻿(function () {
+﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+
+(function () {
 
 
 

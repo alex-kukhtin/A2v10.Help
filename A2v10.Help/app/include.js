@@ -1,4 +1,5 @@
-﻿
+﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+
 (function () {
 
 	function doNavigate(event) {
@@ -48,7 +49,7 @@
 				let me = this;
 				if (url === '/')
 					url += 'index';
-				console.warn(url);
+				//console.warn(url);
 				loadHtml('/html' + url + '.html').then(function (elem) {
 					me.$el.innerHTML = '';
 					let div = document.createElement('div');

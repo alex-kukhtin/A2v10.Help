@@ -59,11 +59,15 @@
     <Content Include="app\contentview.js" />
     <Content Include="app\indexview.js" />
     <Content Include="app\searchview.js" />
+    <Content Include="html\template\index.html" />
     <Content Include="html\whatsnew\w201710.html" />
     <Content Include="html\whatsnew\index.html" />
     <Content Include="Less\Site.less" />
     <Content Include="Less\Variables.less" />
     <Content Include="content.txt" />
+    <Content Include="Less\TreeView.less" />
+    <Content Include="Less\Bowtie.less" />
+    <Content Include="Less\IndexView.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>

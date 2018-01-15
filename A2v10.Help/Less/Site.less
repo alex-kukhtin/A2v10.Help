@@ -36,6 +36,8 @@ html, body {
     height:100%;
 }
 
+@import "Bowtie.less";
+
 header, .header {
     grid-row: 1;
     grid-column: 1 / span 2;
@@ -59,12 +61,40 @@ footer, .footer {
     }
 }
 
+a {
+    color: @link-color;
+    text-decoration: none;
+    cursor: pointer;
+
+    &[disabled] {
+        pointer-events: none; // disable click
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        color: @link-hover-color;
+        text-decoration: none;
+    }
+
+    &:focus {
+        color: @link-hover-color;
+        outline-style: none;
+    }
+
+    &:active {
+        color: @link-hover-color;
+    }
+}
+
 .side-bar {
     grid-row: 3;
     grid-column: 1;
     width: @side-bar-width;
-    background-color:lightyellow;
     overflow: auto;
+    .sub-side {
+        margin:6px 0;
+    }
 }
 
 .tab-header {
@@ -118,3 +148,6 @@ pre {
     font-family:@monospace-font;
     font-size:0.85em;
 }
+
+@import "TreeView.less";
+@import "IndexView.less";

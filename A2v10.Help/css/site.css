@@ -28,6 +28,37 @@ body {
   width: 100%;
   height: 100%;
 }
+/* icon colors */
+@font-face {
+  font-family: 'Bowtie';
+  src: url('/css/fonts/bowtie.eot');
+  src: url('/css/fonts/bowtie.eot?#iefix') format('eot'), url('/css/fonts/bowtie.woff') format('woff'), url('/css/fonts/bowtie.ttf') format('truetype'), url('/css/fonts/bowtie.svg#bowtie') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+i,
+.ico {
+  font-family: 'Bowtie';
+  speak: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ico-folder:before,
+.ico-node:before {
+  content: "\e95b";
+  color: #dcb67a;
+}
+.ico-file:before,
+.ico-leaf:before {
+  content: "\e9dd";
+}
 header,
 .header {
   grid-row: 1;
@@ -52,12 +83,35 @@ footer .divider,
 .footer .divider {
   flex-grow: 2;
 }
+a {
+  color: #57a8fa;
+  text-decoration: none;
+  cursor: pointer;
+}
+a[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+a:hover {
+  color: #0d82f8;
+  text-decoration: none;
+}
+a:focus {
+  color: #0d82f8;
+  outline-style: none;
+}
+a:active {
+  color: #0d82f8;
+}
 .side-bar {
   grid-row: 3;
   grid-column: 1;
   width: 290px;
-  background-color: lightyellow;
   overflow: auto;
+}
+.side-bar .sub-side {
+  margin: 6px 0;
 }
 .tab-header {
   grid-row: 2;
@@ -103,4 +157,106 @@ footer .divider,
 pre {
   font-family: Consolas, Courier New, Courier, monospace;
   font-size: 0.85em;
+}
+.tree-view {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.tree-view li {
+  list-style: none;
+  position: relative;
+  cursor: pointer;
+}
+.tree-view li a:hover,
+.tree-view li a:active {
+  text-decoration: none;
+  color: #0d82f8;
+}
+.tree-view li.active > .overlay {
+  background-color: #cde6f7;
+}
+.tree-view li.active > .overlay:hover {
+  background-color: #cde6f7;
+}
+.tree-view li > .overlay {
+  display: inline-flex;
+  align-items: baseline;
+  width: 100%;
+  padding: 2px 0 4px 0;
+}
+.tree-view li > .overlay .tv-folder {
+  font-weight: bold;
+  color: #8591a2;
+}
+.tree-view li > .overlay .toggle {
+  display: inline-block;
+  flex-shrink: 0;
+  /*fixed*/
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  font-family: "Bowtie";
+  color: #8591a2;
+}
+.tree-view li > .overlay:hover {
+  background-color: #fdf4bf;
+}
+.tree-view li > .overlay i.ico {
+  flex-shrink: 0;
+  /*fixed*/
+  color: #8591a2;
+  font-size: 1rem;
+  margin-left: 2px;
+  width: 17px;
+  /*13 + 4 margin*/
+}
+.tree-view li > .overlay .no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tree-view li > .overlay.no-icons > .toggle {
+  margin-right: 4px;
+}
+.tree-view li > ul {
+  margin: 0;
+  padding-left: 16px;
+  /*indentation*/
+}
+.tree-view li.collapsed > .overlay > .toggle:after {
+  content: "\e9cd";
+  /*tree-collapsed*/
+  position: absolute;
+  left: 4px;
+  top: 6px;
+}
+.tree-view li.collapsed ul {
+  display: none;
+}
+.tree-view li.expanded > .overlay > .toggle:after {
+  content: "\e9cb";
+  /*tree-expanded*/
+  position: absolute;
+  left: 2px;
+  top: 5px;
+}
+ul.index-view {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+ul.index-view li {
+  list-style: none;
+  position: relative;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+ul.index-view li:hover {
+  background-color: #fdf4bf;
+}
+ul.index-view li.active {
+  background-color: #cde6f7;
 }

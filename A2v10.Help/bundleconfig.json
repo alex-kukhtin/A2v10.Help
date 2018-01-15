@@ -1,7 +1,9 @@
 [
   {
     "outputFileName": "scripts/vue.js",
-    "inputFiles": [ "bower_components/vue/dist/vue.js" ],
+    "inputFiles": [
+      "bower_components/vue/dist/vue.min.js"
+    ],
     "minify": {"enabled": false}
   },
   {

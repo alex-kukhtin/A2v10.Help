@@ -1,4 +1,5 @@
-﻿
+﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+
 (function () {
 
 	function makeUrl(url) {
@@ -26,9 +27,12 @@
 		},
 		methods: {
 			navigate(url) {
-				url = makeUrl(url);
+                url = makeUrl(url);
+                if (this.content === url)
+                    return;
 				window.history.pushState(null, null, url);
-				this.content = url;
+                this.content = url;
+                this.$emit('navigated', this.content);
 			},
 			tab(name) {
 				this.activeTab = name;
@@ -39,16 +43,17 @@
 		},
 		created() {
 			let me = this;
-
+            window.vm = this;
 			window.addEventListener('popstate', function () {
-				me.content = window.location.pathname;
+                me.content = window.location.pathname;
+                me.$emit('navigated', me.content);
 			}, false);
 
 			this.$on('navigate', function (url) {
 				me.navigate(url);
 			});
 
-			this.$on('navigateFile', function (index) {
+            this.$on('navigateFile', function (index) {
 				let files = window.app.files;
 				let file = files[index];
 				me.navigate(file.url);
@@ -61,7 +66,4 @@
 			this.navigate(url);
 		}
 	});
-
-	window.vm = vm;
-
 })();

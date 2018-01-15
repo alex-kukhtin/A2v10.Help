@@ -1,0 +1,22 @@
+﻿@import "Variables.less";
+
+ul.index-view {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    li {
+        list-style: none;
+        position: relative;
+        cursor: pointer;
+        padding:4px 6px;
+
+        &:hover {
+            background-color:@hover-bg-color;
+        }
+        &.active {
+            background-color:@active-bg-color;
+        }
+    }
+}

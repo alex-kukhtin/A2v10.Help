@@ -1,22 +1,25 @@
-﻿A2:SDK	index
-	Что нового		whatsnew/index
-		Октябрь 2017		whatsnew/w201710
+﻿A2:SDK	/index
+	Что нового		/whatsnew/index
+		Октябрь 2017		/whatsnew/w201710
 
-База данных		database/index
-	Основные концепции		database/concepts
-	Таблицы					database/tables
-	Пердставления			database/views
-	Модели данных			database/models
+База данных		/database/index
+	Основные концепции		/database/concepts
+	Таблицы					/database/tables
+	Пердставления			/database/views
+	Модели данных			/database/models
 
-Представления		views/index
-	Язык XAML		xaml/language
+Модели		/models/index
+	model.json		/models/modelfile
 
-Шаблоны	= template/index
-	Свойства		template/properties
-	События			template/events
-	Команды			template/commands
-	Валидаторы		template/validators
+Представления		/views/index
+	Язык XAML		/xaml/language
 
-Справочник	reference/index
-	A2v10.Xaml - пространство имен		reference/a2v10.xaml
+Шаблоны		/template/index
+	Свойства		/template/properties
+	События			/template/events
+	Команды			/template/commands
+	Валидаторы		/template/validators
+
+Справочник	/reference/index
+	A2v10.Xaml - пространство имен		/reference/a2v10.xaml
 

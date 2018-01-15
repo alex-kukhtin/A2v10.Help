@@ -1,0 +1,103 @@
+﻿@import "Variables.less";
+
+.tree-view {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    li {
+        list-style: none;
+        position: relative;
+        cursor: pointer;
+
+        a:hover, a:active {
+            text-decoration: none;
+            color: @link-hover-color;
+        }
+
+        &.active > .overlay {
+            background-color: @active-bg-color;
+
+            &:hover {
+                background-color: @active-bg-color;
+            }
+        }
+
+        > .overlay {
+            display: inline-flex;
+            align-items: baseline;
+            width: 100%;
+            padding: 2px 0 4px 0;
+
+            .tv-folder {
+                font-weight: bold;
+                color: @tv-icon-color;
+            }
+
+            .toggle {
+                display: inline-block;
+                flex-shrink: 0; /*fixed*/
+                width: 16px;
+                height: 16px;
+                font-size: 16px;
+                font-family: "Bowtie";
+                color: @tv-icon-color;
+            }
+
+            &:hover {
+                background-color: @hover-bg-color;
+            }
+
+            i.ico {
+                flex-shrink: 0; /*fixed*/
+                color: #8591a2;
+                font-size: 1rem;
+                margin-left: 2px;
+                width: 17px; /*13 + 4 margin*/
+            }
+
+            .no-wrap {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &.no-icons > .toggle {
+                margin-right: 4px;
+            }
+        }
+
+        > ul {
+            margin: 0;
+            padding-left: 16px; /*indentation*/
+        }
+
+        &.collapsed {
+            > .overlay > .toggle {
+
+                &:after {
+                    content: "\e9cd"; /*tree-collapsed*/
+                    position: absolute;
+                    left: 4px;
+                    top: 6px;
+                }
+            }
+
+            ul {
+                display: none;
+            }
+        }
+
+        &.expanded {
+            > .overlay > .toggle {
+                &:after {
+                    content: "\e9cb"; /*tree-expanded*/
+                    position: absolute;
+                    left: 2px;
+                    top: 5px;
+                }
+            }
+        }
+    }
+}
