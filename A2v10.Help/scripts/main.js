@@ -13,6 +13,10 @@ const content = {
             {
               "title": "Октябрь 2017",
               "url": "/whatsnew/w201710"
+            },
+            {
+              "title": "Январь 2018",
+              "url": "/whatsnew/w201801"
             }
           ]
         }
@@ -95,9 +99,9 @@ const content = {
   ]
 }
 ;
-const files = [{"url":"/index","title":"Главная"},{"url":"/template/index","title":"Главная"},{"url":"/whatsnew/index","title":"Что нового"},{"url":"/whatsnew/w201710","title":"Октябрь 2017"}];
-const index = {"word1":[0],"word2":[0,1],"template":[1],"Что нового":[2,3],"Описание":[2],"Октябрь 2017":[3]};
-const fts = {"default":[0],"page":[0,1],"another":[0],"paragraph":[0],"длинный":[0],"текст":[0],"разными":[0],"знаками":[0],"препинания":[0],"скобки":[0],"такие":[0],"$доллар":[0],"амперсанд":[0],"несколько":[0],"строк":[0],"скобками":[0],"a2.web.text":[0],"whats":[0,1],"new":[0,1,2],"большими":[0],"буквами":[0],"template":[1],"index":[1],"общая":[1],"информация":[1],"шаблонах":[1],"what's":[2],"a2":[2],"main":[2],"october":[2],"2017":[2,3],"октябрь":[3],"нового":[3],"content":[3]};
+const files = [{"url":"/index","title":"Главная"},{"url":"/template/index","title":"Шаблоны - общая информация"},{"url":"/whatsnew/index","title":"Что нового"},{"url":"/whatsnew/w201710","title":"Октябрь 2017"},{"url":"/whatsnew/w201801","title":"Что нового. Январь 2018"}];
+const index = {"word1":[0],"word2":[0,1],"Шаблоны":[1],"template":[1],"Что нового":[2,3,4],"Описание":[2],"Октябрь 2017":[3]};
+const fts = {"default":[0],"page":[0,1],"another":[0],"paragraph":[0],"длинный":[0],"текст":[0],"разными":[0],"знаками":[0],"препинания":[0],"скобки":[0],"такие":[0],"$доллар":[0],"амперсанд":[0],"несколько":[0],"строк":[0],"скобками":[0],"a2.web.text":[0],"whats":[0,1],"new":[0,1,2],"большими":[0],"буквами":[0],"template":[1],"index":[1],"общая":[1],"информация":[1],"шаблонах":[1],"what's":[2],"a2":[2],"main":[2],"october":[2],"2017":[2,3],"январь":[2,4],"2018":[2,4],"октябрь":[3],"нового":[3,4],"content":[3,4]};
 window.app = {content: content, files: files, index: index, fts: fts};
 })();
 // Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
@@ -124,12 +128,21 @@ window.app = {content: content, files: files, index: index, fts: fts};
 	function loadHtml(url) {
 		return new Promise(function (resolve, reject) {
 			let xhr = new XMLHttpRequest();
-			xhr.onload = function () {
-				let prs = new DOMParser();
-				let doc = prs.parseFromString(xhr.responseText, 'text/html');
-				let body = doc.body;
-				setHrefs(body);
-				resolve(body);
+            xhr.onload = function () {
+                if (xhr.responseText.startsWith('<!DOCTYPE')) {
+                    let body = document.createElement("body");
+                    let elem = document.createElement("div");
+                    body.appendChild(elem);
+                    elem.innerText = 'Not found';
+                    resolve(body);
+                }
+                else {
+                    let prs = new DOMParser();
+                    let doc = prs.parseFromString(xhr.responseText, 'text/html');
+                    let body = doc.body;
+                    setHrefs(body);
+                    resolve(body);
+                }
 			};
 			xhr.open('GET', url, true);
 			xhr.send();
@@ -318,30 +331,66 @@ window.app = {content: content, files: files, index: index, fts: fts};
 	Vue.component('a2-index-view', {
 		template: `
 <div class="sub-side">
-	<ul class="index-view">
-		<li :class="{'active': isActive(val)}" @click.prevent="navigate(val)" v-for="(val, key) in root">{{key}}
-            <a v-for="itm in val" v-text="itm.length"></a>
-        </li>
-	</ul>
-	<pre v-once>{{root}}</pre><pre v-once>{{files}}</pre>
+    <div class="index-view">
+        <div class="search-block">
+            <label>Введите ключевое слово для поиска:</label>
+            <input class="input-search" type=text v-model="fragment"></input>
+        </div>
+	    <ul class="index-tree">
+		    <li v-for="(val, valIndex) in list">
+                <a :class="{'active': isActive(val)}" v-if="val.files.length === 1" v-text="val.word" @click.stop.prevent="navigate(val, 0)"></a>
+                <div v-else>
+                    <span class="word-folder" v-text="val.word"></span>
+                    <ul>
+                        <li class="file-link" v-for="(itm, itmIndex) in val.files">
+                            <a :class="{active: isActive(itm)}" v-text="itm.title" @click.stop.prevent="navigateFile(itm)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+	    </ul>
+    </div>
 </div>`,
+/*
+    <pre>list: {{active}}</pre>
+	<pre v-once>{{root}}</pre><pre v-once>{{files}}</pre>
+*/
 		data() {
 			return {
 				root: window.app.index,
                 files: window.app.files,
-                active: null
+                active: null,
+                fragment: '',
 			};
-		},
+        },
+        computed: {
+            list() {
+                const f = this.fragment.toLowerCase();
+                const root = this.root;
+                const files = this.files;
+                return Object.keys(this.root)
+                    .filter(val => !f || val.toLowerCase().indexOf(f) !== -1)
+                    .map(v => { return { word: v, files: root[v].map(f => files[f]) }; });
+            }
+        },
         methods: {
             isActive(itm) {
                 return itm === this.active;
             },
-			navigate(itm) {
+			navigate(itm, ix) {
                 var vm = window.vm;
                 this.active = itm;
-				vm.$emit('navigateFile', itm[0]);
-			}
-		}
+				vm.$emit('navigate', itm.files[ix].url);
+			},
+			navigateFile(itm) {
+                var vm = window.vm;
+                this.active = itm;
+                vm.$emit('navigate', itm.url);
+            }
+        },
+        mounted() {
+            console.dir('mounted');
+        }
 	});
 })();
 // Copyright © 2017-2018 Alex Kukhtin. All rights reserved.

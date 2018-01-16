@@ -1,22 +1,85 @@
 ﻿@import "Variables.less";
 
-ul.index-view {
+.index-view {
     margin: 0;
     padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    user-select:none;
 
-    li {
-        list-style: none;
-        position: relative;
-        cursor: pointer;
-        padding:4px 6px;
+    .search-block {
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+    }
 
-        &:hover {
-            background-color:@hover-bg-color;
+    label {
+        color: @dark-bk-color;
+        display: block;
+        margin-bottom: 4px;
+        font-size:.96rem;
+    }
+
+    .input-search {
+        display: block;
+        padding: 4px 6px;
+        border: 1px solid @defaut-brd-color;
+
+        &:focus {
+            //outline:1px solid @link-hover-color;
+            //outline-offset:0;
+            outline: none;
+            border-color: @link-hover-color;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        &.active {
-            background-color:@active-bg-color;
+    }
+
+    ul.index-tree {
+        padding: 0;
+        margin: 0 6px 6px 6px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: absolute;
+        left: 0;
+        top: 60px;
+        right: 0;
+        bottom: 0;
+
+        .word-folder {
+            display: block;
+            padding: 4px 6px;
+            color: @dark-bk-color;
+            font-weight: bold;
+        }
+
+        ul {
+            padding-left: 12px;
+        }
+
+        li {
+            list-style: none;
+            position: relative;
+            cursor: pointer;
+            margin: 0;
+
+            a {
+                display: block;
+                width: 100%;
+                padding: 4px 6px;
+
+                &:hover {
+                    background-color: @hover-bg-color;
+                }
+
+                &.active {
+                    background-color: @active-bg-color;
+                }
+            }
+
+            li.file-link {
+                font-size:0.96rem;
+            }
         }
     }
 }

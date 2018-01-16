@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MakeHelp
 {
@@ -24,8 +21,19 @@ namespace MakeHelp
 
             String jsFile = hp.MakeJsFile();
             String contentFileName = $"{dir}\\app\\content.js";
+            Console.WriteLine();
             Console.WriteLine($"Generating content file: {contentFileName}");
             File.WriteAllText(contentFileName, jsFile);
+
+            Console.WriteLine();
+            hp.WriteBundle(dir);
+            Console.WriteLine();
+
+            var zp = new ZipProcessor();
+            zp.Process(dir);
+            Console.WriteLine();
+            Console.WriteLine($"Generating zip file: {zp.FileName}");
+            Console.WriteLine();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿A2:SDK	/index
 	Что нового		/whatsnew/index
 		Октябрь 2017		/whatsnew/w201710
+		Январь 2018			/whatsnew/w201801
 
 База данных		/database/index
 	Основные концепции		/database/concepts

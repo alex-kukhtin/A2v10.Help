@@ -111,7 +111,8 @@ a:active {
   overflow: auto;
 }
 .side-bar .sub-side {
-  margin: 6px 0;
+  position: relative;
+  height: 100%;
 }
 .tab-header {
   grid-row: 2;
@@ -160,7 +161,7 @@ pre {
 }
 .tree-view {
   margin: 0;
-  padding: 0;
+  padding: 6px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -242,21 +243,72 @@ pre {
   left: 2px;
   top: 5px;
 }
-ul.index-view {
+.index-view {
   margin: 0;
   padding: 0;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  user-select: none;
+}
+.index-view .search-block {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+}
+.index-view label {
+  color: #8591a2;
+  display: block;
+  margin-bottom: 4px;
+  font-size: .96rem;
+}
+.index-view .input-search {
+  display: block;
+  padding: 4px 6px;
+  border: 1px solid #ddd;
+}
+.index-view .input-search:focus {
+  outline: none;
+  border-color: #0d82f8;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.index-view ul.index-tree {
+  padding: 0;
+  margin: 0 6px 6px 6px;
   overflow-y: auto;
   overflow-x: hidden;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  right: 0;
+  bottom: 0;
 }
-ul.index-view li {
+.index-view ul.index-tree .word-folder {
+  display: block;
+  padding: 4px 6px;
+  color: #8591a2;
+  font-weight: bold;
+}
+.index-view ul.index-tree ul {
+  padding-left: 12px;
+}
+.index-view ul.index-tree li {
   list-style: none;
   position: relative;
   cursor: pointer;
+  margin: 0;
+}
+.index-view ul.index-tree li a {
+  display: block;
+  width: 100%;
   padding: 4px 6px;
 }
-ul.index-view li:hover {
+.index-view ul.index-tree li a:hover {
   background-color: #fdf4bf;
 }
-ul.index-view li.active {
+.index-view ul.index-tree li a.active {
   background-color: #cde6f7;
+}
+.index-view ul.index-tree li li.file-link {
+  font-size: 0.96rem;
 }

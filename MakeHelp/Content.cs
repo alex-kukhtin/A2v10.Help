@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿// Copyright © 2012-2017 Alex Kukhtin. All rights reserved.
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
+using Newtonsoft.Json;
 
 namespace MakeHelp
 {

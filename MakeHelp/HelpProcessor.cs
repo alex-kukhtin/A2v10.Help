@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 using MakeHelp.Properties;
 using System.Text;
+using System.Diagnostics;
 
 namespace MakeHelp
 {
@@ -224,6 +226,19 @@ namespace MakeHelp
             sb.AppendLine("window.app = {content: content, files: files, index: index, fts: fts};");
             sb.Append("})();");
             return sb.ToString();
+        }
+
+        public void WriteBundle(String dirName)
+        {
+            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            String bundlerPath = Path.Combine(appDataPath, @"Microsoft\VisualStudio\15.0_1705bee0\Extensions\lh1eakt1.nnl\BundlerMinifierConsole.exe");
+            
+            if (!File.Exists(bundlerPath))
+                throw new FileNotFoundException("update bundler path");
+            ProcessStartInfo psi = new ProcessStartInfo(bundlerPath, Path.Combine(dirName, "bundleconfig.json"));
+            psi.UseShellExecute = false;
+            psi.RedirectStandardOutput = false;
+            System.Diagnostics.Process.Start(psi).WaitForExit();
         }
     }
 }

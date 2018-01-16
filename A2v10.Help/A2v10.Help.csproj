@@ -59,7 +59,9 @@
     <Content Include="app\contentview.js" />
     <Content Include="app\indexview.js" />
     <Content Include="app\searchview.js" />
+    <Content Include="css\fonts\bowtie.svg" />
     <Content Include="html\template\index.html" />
+    <Content Include="html\whatsnew\w201801.html" />
     <Content Include="html\whatsnew\w201710.html" />
     <Content Include="html\whatsnew\index.html" />
     <Content Include="Less\Site.less" />
@@ -68,6 +70,9 @@
     <Content Include="Less\TreeView.less" />
     <Content Include="Less\Bowtie.less" />
     <Content Include="Less\IndexView.less" />
+    <Content Include="css\fonts\bowtie.eot" />
+    <Content Include="css\fonts\bowtie.ttf" />
+    <Content Include="css\fonts\bowtie.woff" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>
