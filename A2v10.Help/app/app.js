@@ -65,5 +65,5 @@
 				url = '/index';
 			this.navigate(url);
 		}
-	});
+    });
 })();

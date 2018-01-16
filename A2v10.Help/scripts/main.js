@@ -500,5 +500,5 @@ window.app = {content: content, files: files, index: index, fts: fts};
 				url = '/index';
 			this.navigate(url);
 		}
-	});
+    });
 })();

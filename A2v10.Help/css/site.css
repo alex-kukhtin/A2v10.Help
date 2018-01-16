@@ -10,6 +10,15 @@ body {
   overflow: hidden;
   background-color: white;
 }
+.not-supported {
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #dca7a7;
+}
 html,
 body {
   height: 100%;
@@ -164,6 +173,7 @@ pre {
   padding: 6px;
   overflow-y: auto;
   overflow-x: hidden;
+  user-select: none;
 }
 .tree-view li {
   list-style: none;

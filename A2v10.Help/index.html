@@ -27,7 +27,24 @@
             <span>A2:SDK версия 10.0.7091</span>
         </footer>
     </div>
+    <script type="text/javascript">
+        (function () {
+            function isNewBrowser() {
+                if (typeof CSS === 'undefined') return false;
+                return CSS.supports && CSS.supports("display", "grid");
+            }
+
+            if (!isNewBrowser()) {
+                var appElem = document.getElementById("app");
+                appElem.parentElement.removeChild(appElem);
+                var nsd = document.createElement("div");
+                nsd.classList.add("not-supported");
+                nsd.innerText = "We're sorry, but this browser is not supported.";
+                document.body.appendChild(nsd);
+            }
+        })();
+    </script>
     <script type="text/javascript" src="/scripts/vue.js?v=2.5.13"></script>
-    <script type="text/javascript" src="/scripts/main.js?v=10.0.7091"></script>
+    <script type="text/javascript" src="/scripts/main.js?v=10.0.7091"></script>    
 </body>
 </html>
