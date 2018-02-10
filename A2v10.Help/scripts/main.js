@@ -171,12 +171,14 @@ window.app = {content: content, files: files, index: index, fts: fts};
 					me.$el.innerHTML = '';
 					let div = document.createElement('div');
 					let ch = elem.children;
-					let cha = [];
-					for (let ch of elem.children) {
-						cha.push(ch);
+                    let cha = [];
+                    // for..of does not not for HtmlCollection in EDGE
+                    let esrc = elem.children;
+                    for (let i = 0; i < esrc.length; i++) {
+						cha.push(esrc[i]);
 					}
 					for (ch of cha)
-						me.$el.appendChild(ch);
+                        me.$el.appendChild(ch);
 				});
 			}
 		}
