@@ -1,0 +1,64 @@
+﻿<div>
+    <!--title:Главная-->
+    <!--keywords:word1;word2-->
+    <h1>Header 1</h1>
+    <h2>Header 2</h2>
+    <h3>Header 3</h3>
+    <hr />
+
+    <p>
+        Это пример кода <code>v-model</code>, <code>v-code</code>, <a href="whatsnew/w201802" class="code-link">v-code</a>
+    </p>
+    <p>
+        <pre>var t = 5;
+let f = function(a, b, c) {
+    let x = 5;
+    let y = a * b;
+    return c * x + y;                
+}</pre>
+    </p>
+    <p>
+        Another paragraph
+        Длинный текст с разными, знаками. препинания; [скобки] {и такие} $доллар
+        &amp;амперсанд
+        в несколько строк (со скобками, <br /><b>A2.Web.Text</b>)
+    </p>
+    <p>
+        <a href="whatsnew/index">Whats New</a>
+        И Большими БОЛЬШИМИ БУКВАМИ
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>h1</th>
+                <th>h2</th>
+                <th>h3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <code>oldValue</code>: предыдущее значение
+                <ul>
+                    <li><code>name</code>: наименование</li>
+                </ul>
+        </li>
+        <li>list item 1</li>
+        <li>list item 2</li>
+        <li>list item 3</li>
+    </ul>
+</div>

@@ -60,9 +60,25 @@
     <Content Include="app\indexview.js" />
     <Content Include="app\searchview.js" />
     <Content Include="css\fonts\bowtie.svg" />
+    <None Include="html\index .htmlx" />
+    <Content Include="html\models\modelfile.html" />
+    <Content Include="html\models\datamodels.html" />
+    <Content Include="html\models\index.html" />
+    <Content Include="html\template\commands.html" />
+    <Content Include="html\template\validators.html" />
+    <Content Include="html\template\properties.html" />
+    <Content Include="html\template\events.html" />
     <Content Include="html\template\index.html" />
-    <Content Include="html\whatsnew\w201801.html" />
-    <Content Include="html\whatsnew\w201710.html" />
+    <Content Include="html\views\index.html" />
+    <Content Include="html\views\xaml\containers\stackpanel.html" />
+    <Content Include="html\views\xaml\containers\index.html" />
+    <Content Include="html\views\xaml\containers\block.html" />
+    <Content Include="html\views\xaml\containers\splitter.html" />
+    <Content Include="html\views\xaml\controls\index.html" />
+    <Content Include="html\views\xaml\controls\button.html" />
+    <Content Include="html\views\xaml\controls\selector.html" />
+    <Content Include="html\views\xaml\index.html" />
+    <Content Include="html\whatsnew\w201802.html" />
     <Content Include="html\whatsnew\index.html" />
     <Content Include="Less\Site.less" />
     <Content Include="Less\Variables.less" />
@@ -73,6 +89,7 @@
     <Content Include="css\fonts\bowtie.eot" />
     <Content Include="css\fonts\bowtie.ttf" />
     <Content Include="css\fonts\bowtie.woff" />
+    <Content Include="Less\MainView.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>

@@ -68,6 +68,9 @@ i,
 .ico-leaf:before {
   content: "\e9dd";
 }
+.ico-search:before {
+  content: "\e986";
+}
 header,
 .header {
   grid-row: 1;
@@ -161,12 +164,29 @@ a:active {
 .content-view {
   grid-row: 2 / span 2;
   grid-column: 2;
-  padding: 0 .8em;
+  padding: 0 .8rem;
   border-left: 1px solid #ddd;
+  overflow: auto;
 }
+code,
 pre {
   font-family: Consolas, Courier New, Courier, monospace;
-  font-size: 0.85em;
+  font-size: 0.9rem;
+  background-color: #f8f8f8;
+}
+pre {
+  padding: .6rem;
+  line-height: 1.2rem;
+}
+code {
+  background-color: #f8f8f8;
+  padding: 2px;
+  color: brown;
+}
+a.disabled {
+  color: #999;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 .tree-view {
   margin: 0;
@@ -321,4 +341,78 @@ pre {
 }
 .index-view ul.index-tree li li.file-link {
   font-size: 0.96rem;
+}
+h1,
+h2,
+h3 {
+  color: #8591a2;
+}
+hr {
+  border: none;
+  color: #8591a2;
+  background-color: #8591a2;
+  height: 1px;
+}
+h1 {
+  font-size: 1.3rem;
+  margin: .5rem 0;
+}
+h2 {
+  font-size: 1.1rem;
+  margin: .25rem 0;
+}
+h3 {
+  font-size: 1rem;
+  margin: .15rem 0;
+}
+.content-view ul {
+  padding-left: 20px;
+  margin: 0.8rem 0;
+}
+.content-view ul li {
+  line-height: 1.5rem;
+  list-style-type: disc;
+}
+.content-view table {
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+.content-view table td {
+  background-color: #f8f8f8;
+  padding: 4px 6px;
+}
+.content-view table th {
+  padding: 4px 6px;
+  background-color: #e0e0e0;
+  font-weight: normal;
+}
+a.code-link {
+  font-family: Consolas, Courier New, Courier, monospace;
+  padding: 2px;
+  background-color: #f8f8f8;
+}
+.title {
+  margin: 0 -0.8rem;
+  background-color: #e0f0ff;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+.title h1 {
+  margin: 0;
+  padding: .25rem .8rem;
+  height: 24px;
+  color: #777;
+}
+.title .breadcrumb {
+  border-top: 1px solid #ddd;
+  background-color: #f3faff;
+  padding: 0.3rem 0.8rem;
+  font-size: .9rem;
+  color: #ddd;
+}
+.title .breadcrumb a {
+  margin: 0 0.5rem;
+}
+p {
+  margin: 0.8rem 0;
 }

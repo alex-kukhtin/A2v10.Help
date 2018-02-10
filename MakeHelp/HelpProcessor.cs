@@ -68,6 +68,8 @@ namespace MakeHelp
             foreach (var w in kw)
             {
                 String key = w.Trim();
+                if (String.IsNullOrEmpty(key))
+                    continue;
                 _keywords.Add(key, fileIndex);
             }
         }
@@ -140,6 +142,8 @@ namespace MakeHelp
                 XmlDocument doc = new XmlDocument();
                 doc.Load(path);
                 PopulateXml(doc.DocumentElement, ix);
+                if (String.IsNullOrEmpty(fi.title))
+                    throw new InvalidOperationException($"There is no title in {fi.url} file");
             }
             catch (XmlException ex)
             {

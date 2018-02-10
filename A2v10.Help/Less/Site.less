@@ -151,14 +151,38 @@ a {
 .content-view {
     grid-row:2 / span 2;
     grid-column:2;
-    padding:0 .8em;
+    padding:0 .8rem;
     border-left:1px solid @defaut-brd-color;
+    overflow:auto;
+}
+
+code, pre {
+    font-family: @monospace-font;
+    font-size: 0.9rem;
+    background-color: @shadow-bg-color;
 }
 
 pre {
-    font-family:@monospace-font;
-    font-size:0.85em;
+    padding:.6rem;
+    line-height:1.2rem;
+}
+
+code {
+    background-color: @shadow-bg-color;
+    padding: 2px;
+    color: @code-txt-color;
+}
+
+a.disabled {
+    color:#999;
+    cursor:not-allowed;
+    pointer-events:none;
 }
 
 @import "TreeView.less";
 @import "IndexView.less";
+@import "MainView.less";
+
+p {
+    margin: 0.8rem 0;
+}

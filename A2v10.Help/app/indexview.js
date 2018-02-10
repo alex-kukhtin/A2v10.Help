@@ -65,7 +65,6 @@
             }
         },
         mounted() {
-            console.dir('mounted');
         }
 	});
 })();

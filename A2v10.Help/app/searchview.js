@@ -2,38 +2,72 @@
 
 (function () {
 
+// {{key}} : {{res}} : {{res.length}}
 
 
 	Vue.component('a2-search-view', {
 		template: 
-`<div>
-	<div>
-		<input v-model.lazy="searchText">
-	</div>
-	<span>{{searchText}}</span>
-	<ul>
-		<li @click.prevent="navigate(res)" v-for="(res, key) in searchResult">{{key}} : {{res}}</li>
-	</ul>
+`<div class="sub-side">
+    <div class="index-view">
+	    <div class="search-block">
+            <label>Введите слово для поиска:</label>
+		    <input class="input-search" v-model.lazy="searchText">
+	    </div>
+	    <ul class="index-tree">
+		    <li @click.prevent="navigate(res[0], key)" v-for="(res, key) in searchResult">
+                <a v-text="key" v-if="res.length == 1" 
+                    :class="{active: isActive(0, key)}" 
+                    @click.stop.prevent="navigate(0, key)"></a>
+                <div v-else>
+                    <span class="word-folder" v-text="key"></span>
+                    <ul>
+                        <li class="file-link" v-for="(ix) in res">
+                            <a v-text="file(ix)" 
+                                :class="{active: isActive(ix, key)}" 
+                                @click.stop.prevent="navigate(ix, key)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+	    </ul>
+    </div>
 </div>`,
 		data() {
 			return {
-				searchText: ''
+                searchText: '',
+                activeKey: '',
+                activeIndex: 0
 			};
 		},
 		watch: {
 			searchText(newVal) {
-				alert(newVal);
 			}
 		},
 		computed: {
-			searchResult() {
-				return window.app.fts;
+            searchResult() {
+                let fts = window.app.fts;
+                let r = {};
+                if (!this.searchText) return r;
+                for (let key in fts) {
+                    if (key.indexOf(this.searchText) !== -1)
+                        r[key] = fts[key];
+                }
+				return r;
 			}
 		},
-		methods: {
-			navigate(arr) {
-				var vm = window.vm;
-				vm.$emit('navigateFile', arr[0]);
+        methods: {
+            file(ix) {
+                let file = window.app.files[ix]
+                return file ? file.title : '#ERR';
+            },
+            isActive(ix, key) {
+                return ix === this.activeIndex && key === this.activeKey;
+            },
+			navigate(ix, key) {
+                var vm = window.vm;
+                this.activeKey = key;
+                this.activeIndex = ix;
+				vm.$emit('navigateFile', ix);
 			}
 		}
 	});

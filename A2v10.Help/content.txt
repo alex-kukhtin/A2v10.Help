@@ -1,19 +1,21 @@
 ﻿A2:SDK	/index
 	Что нового		/whatsnew/index
-		Октябрь 2017		/whatsnew/w201710
-		Январь 2018			/whatsnew/w201801
+		Февраль 2018			/whatsnew/w201802
 
-База данных		/database/index
-	Основные концепции		/database/concepts
-	Таблицы					/database/tables
-	Пердставления			/database/views
-	Модели данных			/database/models
 
 Модели		/models/index
+	Модели данных	/models/datamodels
 	model.json		/models/modelfile
 
-Представления		/views/index
-	Язык XAML		/xaml/language
+Представления	/views/index
+	Xaml			/views/xaml/index
+		Элементы управления	/views/xaml/controls/index
+			Button				/views/xaml/controls/button
+			Selector			/views/xaml/controls/selector
+		Контейнеры			/views/xaml/containers/index
+			Block				/views/xaml/containers/block
+			Splitter			/views/xaml/containers/splitter
+			StackPanel			/views/xaml/containers/stackpanel
 
 Шаблоны		/template/index
 	Свойства		/template/properties
@@ -21,6 +23,4 @@
 	Команды			/template/commands
 	Валидаторы		/template/validators
 
-Справочник	/reference/index
-	A2v10.Xaml - пространство имен		/reference/a2v10.xaml
 
