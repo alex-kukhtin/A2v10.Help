@@ -11,11 +11,13 @@
 	Xaml			/views/xaml/index
 		Элементы управления	/views/xaml/controls/index
 			Button				/views/xaml/controls/button
+			MenuItem			/views/xaml/controls/menuitem
 			Selector			/views/xaml/controls/selector
 		Контейнеры			/views/xaml/containers/index
 			Block				/views/xaml/containers/block
 			Splitter			/views/xaml/containers/splitter
 			StackPanel			/views/xaml/containers/stackpanel
+			MenuItem			/views/xaml/containers/dropdownmenu
 
 Шаблоны		/template/index
 	Свойства		/template/properties

@@ -70,10 +70,12 @@
     <Content Include="html\template\events.html" />
     <Content Include="html\template\index.html" />
     <Content Include="html\views\index.html" />
+    <Content Include="html\views\xaml\containers\dropdownmenu.html" />
     <Content Include="html\views\xaml\containers\stackpanel.html" />
     <Content Include="html\views\xaml\containers\index.html" />
     <Content Include="html\views\xaml\containers\block.html" />
     <Content Include="html\views\xaml\containers\splitter.html" />
+    <Content Include="html\views\xaml\controls\menuitem.html" />
     <Content Include="html\views\xaml\controls\index.html" />
     <Content Include="html\views\xaml\controls\button.html" />
     <Content Include="html\views\xaml\controls\selector.html" />

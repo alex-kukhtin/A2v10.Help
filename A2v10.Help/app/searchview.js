@@ -48,8 +48,9 @@
                 let fts = window.app.fts;
                 let r = {};
                 if (!this.searchText) return r;
+                let st = this.searchText.toUpperCase();
                 for (let key in fts) {
-                    if (key.indexOf(this.searchText) !== -1)
+                    if (key.toUpperCase().indexOf(st) !== -1)
                         r[key] = fts[key];
                 }
 				return r;
