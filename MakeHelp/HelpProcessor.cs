@@ -92,7 +92,7 @@ namespace MakeHelp
 
         void ProcessText(String txt, Int32 fileIndex)
         {
-            var words = Regex.Split(txt.ToLower(), @"[\s,\(\)\[\]\}\{\?;!@&]+");
+            var words = Regex.Split(txt.ToLower(), @"[\s,\'\""\-\(\)\[\]\}\{\?;!@&]+");
             foreach (var ww in words)
             {
                 var word = ww.Trim();
@@ -124,6 +124,8 @@ namespace MakeHelp
                 else if (xe is XmlElement)
                 {
                     var xmle = xe as XmlElement;
+                    if (xmle.Name.ToUpper() == "PRE")
+                        continue; // skip code
                     PopulateXml(xmle, fileIndex);
                 }
             }

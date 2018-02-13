@@ -14,10 +14,10 @@
 		    <input class="input-search" v-model.lazy="searchText">
 	    </div>
 	    <ul class="index-tree">
-		    <li @click.prevent="navigate(res[0], key)" v-for="(res, key) in searchResult">
+		    <li v-for="(res, key) in searchResult">
                 <a v-text="key" v-if="res.length == 1" 
-                    :class="{active: isActive(0, key)}" 
-                    @click.stop.prevent="navigate(0, key)"></a>
+                    :class="{active: isActive(res[0], key)}" 
+                    @click.stop.prevent="navigate(res[0], key)"></a>
                 <div v-else>
                     <span class="word-folder" v-text="key"></span>
                     <ul>
@@ -68,7 +68,7 @@
                 var vm = window.vm;
                 this.activeKey = key;
                 this.activeIndex = ix;
-				vm.$emit('navigateFile', ix);
+     			vm.$emit('navigateFile', ix);
 			}
 		}
 	});

@@ -318,6 +318,7 @@ a.disabled {
   padding: 4px 6px;
   color: #8591a2;
   font-weight: bold;
+  cursor: default;
 }
 .index-view ul.index-tree ul {
   padding-left: 12px;
