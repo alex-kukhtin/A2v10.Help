@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using MakeHelp.Properties;
 using System.Text;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace MakeHelp
 {
@@ -21,8 +22,7 @@ namespace MakeHelp
     {
         public void Add(String key, Int32 value)
         {
-            List<Int32> files;
-            if (this.TryGetValue(key, out files))
+            if (this.TryGetValue(key, out List<Int32> files))
             {
                 if (!files.Contains(value))
                     files.Add(value);
@@ -36,13 +36,37 @@ namespace MakeHelp
         }
     }
 
+    public class SortedFileDictionary : SortedDictionary<String, List<Int32>>
+    {
+        public SortedFileDictionary()
+            : base(StringComparer.OrdinalIgnoreCase)
+        {
+        }
+
+        public void Add(String key, Int32 value)
+        {
+            if (this.TryGetValue(key, out List<Int32> files))
+            {
+                if (!files.Contains(value))
+                    files.Add(value);
+            }
+            else
+            {
+                files = new List<Int32>();
+                files.Add(value);
+                this.Add(key, files);
+            }
+        }
+    }
+
+
     public class HelpProcessor
     {
         const String HTML = "*.html";
 
         List<FileInfo> _files = new List<FileInfo>();
 
-        FileDictionary _keywords = new FileDictionary();
+        SortedFileDictionary _keywords = new SortedFileDictionary();
         FileDictionary _fts = new FileDictionary();
 
         ContentItem _content = new ContentItem();
@@ -237,7 +261,12 @@ namespace MakeHelp
         public void WriteBundle(String dirName)
         {
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            String bundlerPath = Path.Combine(appDataPath, @"Microsoft\VisualStudio\15.0_1705bee0\Extensions\lh1eakt1.nnl\BundlerMinifierConsole.exe");
+            var bmPath = ConfigurationManager.AppSettings["bundlerMinifier"];
+            if (bmPath == null)
+                throw new ConfigurationErrorsException("Bundler path is not specified in app.config");
+            String bundlerPath = Path.Combine(appDataPath, bmPath);
+
+            //@"Microsoft\VisualStudio\15.0_1705bee0\Extensions\lh1eakt1.nnl\BundlerMinifierConsole.exe");
             
             if (!File.Exists(bundlerPath))
                 throw new FileNotFoundException("update bundler path");

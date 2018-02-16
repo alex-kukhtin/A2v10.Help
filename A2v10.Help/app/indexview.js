@@ -36,7 +36,7 @@
 				root: window.app.index,
                 files: window.app.files,
                 active: null,
-                fragment: '',
+                fragment: ''
 			};
         },
         computed: {

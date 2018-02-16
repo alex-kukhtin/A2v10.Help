@@ -52,9 +52,26 @@ header, .header {
     grid-row: 1;
     grid-column: 1 / span 2;
     background-color: @brand-bk_color;
-    color:white;
+    color: white;
     font-size: 1.5rem;
-    padding: .1rem .4rem;
+    padding: .1rem;
+
+    a {
+        padding: 0 0.3rem;
+        color: inherit;
+
+        &:hover {
+            color: white;
+            background-color: @brand-hover-bk-color;
+        }
+    }
+
+    .h-title {
+    }
+
+    .h-sub-title {
+        font-size: 0.8em;
+    }
 }
 
 footer, .footer {
@@ -185,4 +202,33 @@ a.disabled {
 
 p {
     margin: 0.8rem 0;
+}
+
+.os-product {
+    background-color:#f6f9ff;
+    padding:6px;
+    display:block;
+    height:1.3rem;
+    .os-title {
+        float:left;
+    }
+    .os-lic {
+        float:right;
+        margin-right:12px;
+    }
+    .os-homepage {
+        float:right;
+    }
+    .cr {
+        font-size:0.86rem;
+    }
+}
+
+.debug-list {
+    list-style-type:none;
+    overflow:auto;
+    height:450px;
+    padding:0 20px;
+    background-color:antiquewhite;
+    margin:0;
 }

@@ -1,12 +1,9 @@
 ﻿// Copyright © 2012-2017 Alex Kukhtin. All rights reserved.
 
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MakeHelp
 {
@@ -20,6 +17,9 @@ namespace MakeHelp
         public void Process(String dir)
         {
             _dirName = dir;
+            var apacheFile = ConfigurationManager.AppSettings["apacheFile"];
+            if (String.IsNullOrEmpty(apacheFile))
+                return;
             _fileName = Path.Combine(dir, "..\\..\\apache.zip");
             _fileName = Path.GetFullPath(_fileName);
             WriteFile();

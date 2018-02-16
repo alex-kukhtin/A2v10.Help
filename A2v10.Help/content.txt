@@ -8,21 +8,24 @@
 	model.json		/models/modelfile
 
 Представления	/views/index
-	Xaml			/views/xaml/index
-		Элементы управления	/views/xaml/controls/index
-			Button				/views/xaml/controls/button
-			MenuItem			/views/xaml/controls/menuitem
-			Selector			/views/xaml/controls/selector
-		Контейнеры			/views/xaml/containers/index
-			Block				/views/xaml/containers/block
-			Splitter			/views/xaml/containers/splitter
-			StackPanel			/views/xaml/containers/stackpanel
-			MenuItem			/views/xaml/containers/dropdownmenu
+	Xaml			/xaml/index
+		Элементы управления	/xaml/controls/index
+			Button				/xaml/controls/button
+			Radio				/xaml/controls/radio
+			Checkbox			/xaml/controls/checkbox
+			MenuItem			/xaml/controls/menuitem
+			Selector			/xaml/controls/selector
+		Контейнеры			/xaml/containers/index
+			Block				/xaml/containers/block
+			Splitter			/xaml/containers/splitter
+			StackPanel			/xaml/containers/stackpanel
+			DropDownMenu		/xaml/containers/dropdownmenu
 
-Шаблоны		/template/index
-	Свойства		/template/properties
-	События			/template/events
-	Команды			/template/commands
-	Валидаторы		/template/validators
+Контроллеры	/controllers/index
+	Шаблоны		/template/index
+		Свойства		/template/properties
+		События			/template/events
+		Команды			/template/commands
+		Валидаторы		/template/validators
 
-
+О справочной системе	/app/about

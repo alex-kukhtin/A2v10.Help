@@ -2,8 +2,6 @@
 
 (function () {
 
-
-
     const treeItemComponent = {
         name: 'tree-item',
         template: `
@@ -121,10 +119,13 @@
                 function findOne(item) {
                     let active = item.url.toLowerCase() === url.toLowerCase();
                     Vue.set(item, 'active', active);
+                    if (active)
+                        document.title  = item.title;
                     if (!item.items) return;
                     item.items.forEach(findOne);
-                    if (item.items.some((itm) => itm.active || itm.open))
+                    if (item.items.some((itm) => itm.active || itm.open)) {
                         Vue.set(item, 'open', true);
+                    }
                 }
 
                 this.root.items.forEach(findOne);
@@ -135,7 +136,7 @@
             vm.$on('navigated', (url) => {
                 //console.warn('navigated:' + url);
                 this.findActive(url);
-            })
+            });
         }
 	});
 })();

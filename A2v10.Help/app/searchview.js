@@ -5,6 +5,8 @@
 // {{key}} : {{res}} : {{res.length}}
 
 
+    const debugMode = false;
+
 	Vue.component('a2-search-view', {
 		template: 
 `<div class="sub-side">
@@ -12,8 +14,12 @@
 	    <div class="search-block">
             <label>Введите слово для поиска:</label>
 		    <input class="input-search" v-model.lazy="searchText">
+            <a v-if="debugMode" @click="showDebug">debug</a>
 	    </div>
-	    <ul class="index-tree">
+        <ul class="debug-list" v-if="debugVisible">
+            <li v-for="(res, key) in words" v-text="res"></li>
+        </ul>
+	    <ul class="index-tree" v-else>
 		    <li v-for="(res, key) in searchResult">
                 <a v-text="key" v-if="res.length == 1" 
                     :class="{active: isActive(res[0], key)}" 
@@ -36,14 +42,20 @@
 			return {
                 searchText: '',
                 activeKey: '',
-                activeIndex: 0
+                activeIndex: 0,
+                debugMode: debugMode,
+                debugVisible: false
 			};
 		},
 		watch: {
 			searchText(newVal) {
 			}
 		},
-		computed: {
+        computed: {
+            words() {
+                let fts = window.app.fts;
+                return Object.keys(fts);
+            },
             searchResult() {
                 let fts = window.app.fts;
                 let r = {};
@@ -58,7 +70,7 @@
 		},
         methods: {
             file(ix) {
-                let file = window.app.files[ix]
+                let file = window.app.files[ix];
                 return file ? file.title : '#ERR';
             },
             isActive(ix, key) {
@@ -68,8 +80,12 @@
                 var vm = window.vm;
                 this.activeKey = key;
                 this.activeIndex = ix;
-     			vm.$emit('navigateFile', ix);
-			}
+                vm.$emit('navigateFile', ix);
+            },
+            showDebug() {
+                if (this.debugMode)
+                    this.debugVisible = true;
+            }
 		}
 	});
 })();

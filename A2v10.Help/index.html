@@ -5,11 +5,16 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>A2:SDK version 10</title>
-    <link rel="stylesheet" href="/css/site.min.css?v=10.0.7112" />
+    <link rel="stylesheet" href="/css/site.min.css?v=10.0.7117" />
 </head>
 <body>
     <div id="app" class="main-view">
-        <header class="header">A2:SDK</header>
+        <header class="header">
+            <a href="/index">
+                <span class="h-title">A2:SDK</span>
+                <span class="h-sub-title">справочная система</span>
+            </a>
+        </header>
         <ul class="tab-header">
             <li @click.prevent="tab('content')" :class="{active: isActive('content')}">Содержание</li>
             <li @click.prevent="tab('index')" :class="{active: isActive('index')}">Индекс</li>
@@ -24,7 +29,9 @@
         <footer class="footer">
             <span>Copyright &copy; 2017-2018 А. Кухтин</span>
             <span class="divider"></span>
-            <span>A2:SDK версия 10.0.7112</span>
+            <a href="/app/about">о справочной системе...</a>
+            <span class="divider"></span>
+            <span>A2:SDK версия 10.0.7117</span>
         </footer>
     </div>
     <script type="text/javascript">
@@ -45,6 +52,6 @@
         })();
     </script>
     <script type="text/javascript" src="/scripts/vue.js?v=2.5.13"></script>
-    <script type="text/javascript" src="/scripts/main.js?v=10.0.7112"></script>    
+    <script type="text/javascript" src="/scripts/main.js?v=10.0.7117"></script>    
 </body>
 </html>
