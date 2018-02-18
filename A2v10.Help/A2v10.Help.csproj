@@ -73,6 +73,7 @@
     <Content Include="html\template\index.html" />
     <Content Include="html\views\index.html" />
     <Content Include="html\xaml\containers\dropdownmenu.html" />
+    <Content Include="html\xaml\containers\grid.html" />
     <Content Include="html\xaml\containers\stackpanel.html" />
     <Content Include="html\xaml\containers\index.html" />
     <Content Include="html\xaml\containers\block.html" />

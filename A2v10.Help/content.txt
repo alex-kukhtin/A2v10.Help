@@ -17,8 +17,9 @@
 			Selector			/xaml/controls/selector
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
-			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
+			Grid				/xaml/containers/grid
+			Splitter			/xaml/containers/splitter
 			DropDownMenu		/xaml/containers/dropdownmenu
 
 Контроллеры	/controllers/index

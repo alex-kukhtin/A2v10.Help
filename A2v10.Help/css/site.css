@@ -378,7 +378,7 @@ h2 {
 }
 h3 {
   font-size: 1rem;
-  margin: .15rem 0;
+  margin: .75rem 0 .15rem 0;
 }
 .content-view ul {
   padding-left: 20px;
