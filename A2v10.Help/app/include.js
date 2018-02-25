@@ -17,6 +17,11 @@
 			an.setAttribute('data-route', href);
 			an.addEventListener('click', doNavigate);
 		});
+		let img = body.querySelectorAll('img');
+		img.forEach(function (im) {
+			let src = im.getAttribute('src');
+			im.setAttribute('src', '/html/' + src);
+		});
 	}
 
 	function loadHtml(url) {

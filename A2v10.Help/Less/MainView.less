@@ -4,92 +4,96 @@
 @header-bg-color: #8df1f5;
 
 
-@table-td-bk-color:#f8f8f8;
-@table-th-bk-color:#e0e0e0;
+@table-td-bk-color: #f8f8f8;
+@table-th-bk-color: #e0e0e0;
 
 
 h1, h2, h3 {
-    color:@header-color;
+	color: @header-color;
 }
 
 hr {
-    border: none;
-    color: @line-color;
-    background-color: @line-color;
-    height: 1px;
+	border: none;
+	color: @line-color;
+	background-color: @line-color;
+	height: 1px;
 }
 
 h1 {
-    font-size:1.3rem;
-    margin:.5rem 0;
+	font-size: 1.3rem;
+	margin: .5rem 0;
 }
 
 h2 {
-    font-size: 1.1rem;
-    margin: .25rem 0;
+	font-size: 1.1rem;
+	margin: .25rem 0;
 }
 
 h3 {
-    font-size: 1rem;
-    margin: .75rem 0 .15rem 0;
+	font-size: 1rem;
+	margin: .75rem 0 .15rem 0;
 }
 
 .content-view {
-    ul {
-        padding-left: 20px;
-        margin: 0.8rem 0;
+	ul {
+		padding-left: 20px;
+		margin: 0.8rem 0;
 
-        li {
-            line-height: 1.5rem;
-            list-style-type: disc;
-        }
-    }
+		li {
+			line-height: 1.5rem;
+			list-style-type: disc;
+		}
+	}
 
-    table {
-        border-collapse: separate;
-        border-spacing: 2px;
+	table {
+		border-collapse: separate;
+		border-spacing: 2px;
+		width:100%;
 
-        td {
-            background-color: @table-td-bk-color;
-            padding: 4px 6px;
-        }
+		td {
+			background-color: @table-td-bk-color;
+			padding: 2px 4px;
+			&.prop-name {
+				font-weight:bold;
+			}
+		}
 
-        th {
-            padding: 4px 6px;
-            background-color: @table-th-bk-color;
-            font-weight: normal;
-        }
-    }
+		th {
+			padding: 4px 6px;
+			background-color: @table-th-bk-color;
+			font-weight: normal;
+		}
+	}
 }
 
 a.code-link {
-    font-family: @monospace-font;
-    padding: 2px;
-    background-color: @shadow-bg-color;
+	font-family: @monospace-font;
+	padding: 2px;
+	background-color: @shadow-bg-color;
 }
 
 .title {
-    margin: 0 -0.8rem;
-    background-color: #e0f0ff;
-    border-bottom: 1px solid @defaut-brd-color;
-    margin-bottom: 1rem;
+	margin: 0 -0.8rem;
+	background-color: #e0f0ff;
+	border-bottom: 1px solid @defaut-brd-color;
+	margin-bottom: 1rem;
 
-    h1 {
-        margin: 0;
-        padding: .25rem .8rem;
-        height:24px; // like tab
-        color: #777;
-    }
+	h1 {
+		margin: 0;
+		padding: .25rem .8rem;
+		height: 24px; // like tab
+		color: #777;
+	}
 
-    .breadcrumb {
-        border-top: 1px solid @defaut-brd-color;
-        background-color: #f3faff;
-        padding: 0.3rem 0.8rem;
-        font-size: .9rem;
-        color: @defaut-brd-color;
+	.breadcrumb {
+		border-top: 1px solid @defaut-brd-color;
+		background-color: #f3faff;
+		padding: 0.3rem 0.8rem;
+		font-size: .9rem;
+		color: @defaut-brd-color;
 
-        a {
-            margin: 0 0.5rem;
-        }
-    }
+		a {
+			margin: 0 0.5rem;
+		}
+	}
 }

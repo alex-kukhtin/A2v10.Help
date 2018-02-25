@@ -1,57 +1,108 @@
 ﻿<div>
-    <!--title:Xaml.Grid-->
-    <!--keywords:Grid;Grid.Row;Grid.Col;Grid.RowSpan;Grid.ColSpan-->
-    <div class="title">
-        <h1>
-            Элемент Grid
-        </h1>
-        <div class="breadcrumb">
-            <a href="index">Все контейнеры</a>
-        </div>
-    </div>
-    <p>
-        Представляет собой сетку из строк и колонок.
-    </p>
+	<!--title:Xaml.Grid-->
+	<!--keywords:Grid;Grid.Row;Grid.Col;Grid.RowSpan;Grid.ColSpan-->
+	<div class="title">
+		<h1>
+			Элемент Grid
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой сетку из строк и колонок.
+	</p>
 
-    <h3>Свойства</h3>
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Имя</th>
-                <th>Описание</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td>Children</td>
-                <td>Коллекция дочерних элементов сетки</td>
-            </tr>
-        </tbody>
-    </table>
+	<p>Примечание. Контейнер Grid используется в макетах пользовательского интерфейса. Он не предназначен 
+	для отображения данных. Для отображения и привязки к данным используйте соответствующие элементы упрвления, такие 
+	как <a class="code-link" href="../controls/table">Table</a> или <a class="code-link" href="../controls/datagrid">DataGrid</a>.</p>
+
+	<h3>Свойства</h3>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td class="prop-name">Children</td>
+				<td>UIElementCollection</td>
+				<td>Свойство содержимого. Коллекция дочерних элементов сетки. Унаследовано от Contrainer.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">If</td>
+				<td>Boolean?</td>
+				<td>Включать ли элемент управления в поток рендеринга.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">Height</td>
+				<td>Length</td>
+				<td>Высота элемента управления</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">Rows</td>
+				<td>RowDefinitions</td>
+				<td>Определения строк сетки</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">Columns</td>
+				<td>ColumnDefinitions</td>
+				<td>Определения колонок сетки</td>
+			</tr>
+		</tbody>
+	</table>
 
 
-    <h3>Присоединенные свойства</h3>
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Имя</th>
-                <th>Описание</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td>Row</td>
-                <td>Определяет номер строки, в которую должен быть помещен дочерний элемент</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Col</td>
-                <td>Определяет номер колонки, в которую должен быть помещен дочерний элемент</td>
-            </tr>
-        </tbody>
-    </table>
+	<h3>Присоединенные свойства</h3>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td class="prop-name">Row</td>
+				<td>Int32</td>
+				<td>Определяет номер строки, в которую должен быть помещен дочерний элемент</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">Col</td>
+				<td>Int32</td>
+				<td>Определяет номер колонки, в которую должен быть помещен дочерний элемент</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">RowSpan</td>
+				<td>Int32</td>
+				<td>Определяет количество строк, которые будет занимать дочерний элемент. По умолчанию - 1.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">ColSpan</td>
+				<td>Int32</td>
+				<td>Определяет количество колонок, которые будет занимать дочерний элемент. По умолчанию - 1.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="prop-name">VAlign</td>
+				<td>VerticalAlign</td>
+				<td>Определяет вертикальное выравнивание дочернего элемента таблицы. По умолчанию - Top.</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

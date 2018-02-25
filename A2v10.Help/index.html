@@ -1,57 +1,57 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>A2:SDK version 10</title>
-    <link rel="stylesheet" href="/css/site.min.css?v=10.0.7118" />
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>A2:SDK version 10</title>
+	<link rel="stylesheet" href="/css/site.min.css?v=10.0.7119" />
 </head>
 <body>
-    <div id="app" class="main-view">
-        <header class="header">
-            <a href="/index">
-                <span class="h-title">A2:SDK</span>
-                <span class="h-sub-title">справочная система</span>
-            </a>
-        </header>
-        <ul class="tab-header">
-            <li @click.prevent="tab('content')" :class="{active: isActive('content')}">Содержание</li>
-            <li @click.prevent="tab('index')" :class="{active: isActive('index')}">Индекс</li>
-            <li @click.prevent="tab('fts')"  :class="{active: isActive('fts')}">Поиск</li>
-        </ul>
-        <aside class="side-bar">
-            <a2-content-view v-show="isActive('content')"></a2-content-view>
-            <a2-index-view v-show="isActive('index')"></a2-index-view>
-            <a2-search-view v-show="isActive('fts')"></a2-search-view>
-        </aside>
-        <a2-include :source="content"></a2-include>
-        <footer class="footer">
-            <span>Copyright &copy; 2017-2018 А. Кухтин</span>
-            <span class="divider"></span>
-            <a href="/app/about">о справочной системе...</a>
-            <span class="divider"></span>
-            <span>A2:SDK версия 10.0.7118</span>
-        </footer>
-    </div>
-    <script type="text/javascript">
-        (function () {
-            function isNewBrowser() {
-                if (typeof CSS === 'undefined') return false;
-                return CSS.supports && CSS.supports("display", "grid");
-            }
+	<div id="app" class="main-view">
+		<header class="header">
+			<a href="/index">
+				<span class="h-title">A2v10:SDK</span>
+				<span class="h-sub-title">справочная система</span>
+			</a>
+		</header>
+		<ul class="tab-header">
+			<li @click.prevent="tab('content')" :class="{active: isActive('content')}">Содержание</li>
+			<li @click.prevent="tab('index')" :class="{active: isActive('index')}">Индекс</li>
+			<li @click.prevent="tab('fts')" :class="{active: isActive('fts')}">Поиск</li>
+		</ul>
+		<aside class="side-bar">
+			<a2-content-view v-show="isActive('content')"></a2-content-view>
+			<a2-index-view v-show="isActive('index')"></a2-index-view>
+			<a2-search-view v-show="isActive('fts')"></a2-search-view>
+		</aside>
+		<a2-include :source="content"></a2-include>
+		<footer class="footer">
+			<span>Copyright &copy; 2017-2018 А. Кухтин</span>
+			<span class="divider"></span>
+			<a href="/app/about">о справочной системе...</a>
+			<span class="divider"></span>
+			<span>A2:SDK версия 10.0.7119</span>
+		</footer>
+	</div>
+	<script type="text/javascript">
+		(function () {
+			function isNewBrowser() {
+				if (typeof CSS === 'undefined') return false;
+				return CSS.supports && CSS.supports("display", "grid");
+			}
 
-            if (!isNewBrowser()) {
-                var appElem = document.getElementById("app");
-                appElem.parentElement.removeChild(appElem);
-                var nsd = document.createElement("div");
-                nsd.classList.add("not-supported");
-                nsd.innerText = "We're sorry, but this browser is not supported.";
-                document.body.appendChild(nsd);
-            }
-        })();
-    </script>
-    <script type="text/javascript" src="/scripts/vue.js?v=2.5.13"></script>
-    <script type="text/javascript" src="/scripts/main.js?v=10.0.7118"></script>    
+			if (!isNewBrowser()) {
+				var appElem = document.getElementById("app");
+				appElem.parentElement.removeChild(appElem);
+				var nsd = document.createElement("div");
+				nsd.classList.add("not-supported");
+				nsd.innerText = "We're sorry, but this browser is not supported.";
+				document.body.appendChild(nsd);
+			}
+		})();
+	</script>
+	<script type="text/javascript" src="/scripts/vue.js?v=2.5.13"></script>
+	<script type="text/javascript" src="/scripts/main.js?v=10.0.7118"></script>
 </body>
 </html>

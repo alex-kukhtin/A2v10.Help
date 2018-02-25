@@ -391,10 +391,14 @@ h3 {
 .content-view table {
   border-collapse: separate;
   border-spacing: 2px;
+  width: 100%;
 }
 .content-view table td {
   background-color: #f8f8f8;
-  padding: 4px 6px;
+  padding: 2px 4px;
+}
+.content-view table td.prop-name {
+  font-weight: bold;
 }
 .content-view table th {
   padding: 4px 6px;

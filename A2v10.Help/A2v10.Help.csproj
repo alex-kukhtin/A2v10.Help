@@ -63,6 +63,7 @@
     <None Include="html\index .htmlx" />
     <Content Include="html\app\about.html" />
     <Content Include="html\controllers\index.html" />
+    <Content Include="html\images\demo.png" />
     <Content Include="html\models\modelfile.html" />
     <Content Include="html\models\datamodels.html" />
     <Content Include="html\models\index.html" />
@@ -79,6 +80,8 @@
     <Content Include="html\xaml\containers\block.html" />
     <Content Include="html\xaml\containers\splitter.html" />
     <Content Include="html\xaml\controls\checkbox.html" />
+    <Content Include="html\xaml\controls\table.html" />
+    <Content Include="html\xaml\controls\datagrid.html" />
     <Content Include="html\xaml\controls\radio.html" />
     <Content Include="html\xaml\controls\menuitem.html" />
     <Content Include="html\xaml\controls\index.html" />
