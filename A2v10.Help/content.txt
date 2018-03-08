@@ -1,6 +1,7 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
 		Февраль 2018			/whatsnew/w201802
+		Март 2018				/whatsnew/w201803
 
 
 Модели		/models/index
@@ -23,6 +24,14 @@
 			Grid				/xaml/containers/grid
 			Splitter			/xaml/containers/splitter
 			DropDownMenu		/xaml/containers/dropdownmenu
+		Текстовые элементы			/xaml/text/index
+			Text				/xaml/text/text
+			Span				/xaml/text/span
+			TagLabel			/xaml/text/taglabel
+			Hyperlink			/xaml/text/hyperlink
+			Popover				/xaml/text/popover
+			Break				/xaml/text/break
+			Line				/xaml/text/line
 
 Контроллеры	/controllers/index
 	Шаблоны		/template/index

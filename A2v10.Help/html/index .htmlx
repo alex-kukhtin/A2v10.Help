@@ -61,4 +61,5 @@ let f = function(a, b, c) {
         <li>list item 2</li>
         <li>list item 3</li>
     </ul>
+		<img src="images/demo.png" alt="image here"/>
 </div>

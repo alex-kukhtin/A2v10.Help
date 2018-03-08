@@ -73,6 +73,7 @@
     <Content Include="html\template\events.html" />
     <Content Include="html\template\index.html" />
     <Content Include="html\views\index.html" />
+    <Content Include="html\whatsnew\w201803.html" />
     <Content Include="html\xaml\containers\dropdownmenu.html" />
     <Content Include="html\xaml\containers\grid.html" />
     <Content Include="html\xaml\containers\stackpanel.html" />
@@ -90,6 +91,14 @@
     <Content Include="html\xaml\index.html" />
     <Content Include="html\whatsnew\w201802.html" />
     <Content Include="html\whatsnew\index.html" />
+    <Content Include="html\xaml\text\popover.html" />
+    <Content Include="html\xaml\text\hyperlink.html" />
+    <Content Include="html\xaml\text\taglabel.html" />
+    <Content Include="html\xaml\text\line.html" />
+    <Content Include="html\xaml\text\index.html" />
+    <Content Include="html\xaml\text\break.html" />
+    <Content Include="html\xaml\text\span.html" />
+    <Content Include="html\xaml\text\text.html" />
     <Content Include="Less\Site.less" />
     <Content Include="Less\Variables.less" />
     <Content Include="content.txt" />
@@ -155,6 +164,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>$(SolutionDir)MakeHelp\bin\Release\makeHelp.exe $(SolutionDir)\A2v10.Help</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -3,197 +3,200 @@
 @side-bar-width: 290px;
 
 html {
-    font-family: @font-family;
-    font-size: @font-size;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    color: @text-color;
-    box-sizing: border-box;
+	font-family: @font-family;
+	font-size: @font-size;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	color: @text-color;
+	box-sizing: border-box;
 }
 
 body {
-    overflow: hidden;
-    background-color: white;
+	overflow: hidden;
+	background-color: white;
 }
 
 .not-supported {
-    width: 400px;
-    margin: 20px auto;
-    padding:20px;
-    text-align:center;
-    background-color:@danger-bg-color;
-    color:@danger-txt-color;
-    border:1px solid @danger-brd-color;
+	width: 400px;
+	margin: 20px auto;
+	padding: 20px;
+	text-align: center;
+	background-color: @danger-bg-color;
+	color: @danger-txt-color;
+	border: 1px solid @danger-brd-color;
 }
 
 html, body {
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin:0;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
 }
 
 [v-cloak] {
-    display: none;
+	display: none;
 }
 
 .main-view {
-    display:grid;
-    grid-gap:0;
-    grid-template-columns:auto 1fr;
-    grid-template-rows: auto auto 1fr auto;
-    width:100%;
-    height:100%;
+	display: grid;
+	grid-gap: 0;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto auto 1fr auto;
+	width: 100%;
+	height: 100%;
 }
 
 @import "Bowtie.less";
 
 header, .header {
-    grid-row: 1;
-    grid-column: 1 / span 2;
-    background-color: @brand-bk_color;
-    color: white;
-    font-size: 1.5rem;
-    padding: .1rem;
+	grid-row: 1;
+	grid-column: 1 / span 2;
+	background-color: @brand-bk_color;
+	color: white;
+	font-size: 1.5rem;
+	padding: .1rem;
 
-    a {
-        padding: 0 0.3rem;
-        color: inherit;
+	a {
+		padding: 0 0.3rem;
+		color: inherit;
 
-        &:hover {
-            color: white;
-            background-color: @brand-hover-bk-color;
-        }
-    }
+		&:hover {
+			color: white;
+			background-color: @brand-hover-bk-color;
+		}
+	}
 
-    .h-title {
-    }
+	.h-title {
+	}
 
-    .h-sub-title {
-        font-size: 0.8em;
-    }
+	.h-sub-title {
+		font-size: 0.8em;
+	}
 }
 
 footer, .footer {
-    grid-row: 4;
-    display: flex;
-    grid-column: 1 / span 2;
-    background-color: @lightgray-bg-color;
-    font-size: .95rem;
-    padding: .2rem .4rem;
-    border-top: 1px solid @defaut-brd-color;
-    align-items:stretch;
-    .divider {
-        flex-grow:2;
-    }
+	grid-row: 4;
+	display: flex;
+	grid-column: 1 / span 2;
+	background-color: @lightgray-bg-color;
+	font-size: .95rem;
+	padding: .2rem .4rem;
+	border-top: 1px solid @defaut-brd-color;
+	align-items: stretch;
+
+	.divider {
+		flex-grow: 2;
+	}
 }
 
 a {
-    color: @link-color;
-    text-decoration: none;
-    cursor: pointer;
+	color: @link-color;
+	text-decoration: none;
+	cursor: pointer;
 
-    &[disabled] {
-        pointer-events: none; // disable click
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
+	&[disabled] {
+		pointer-events: none; // disable click
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
 
-    &:hover {
-        color: @link-hover-color;
-        text-decoration: none;
-    }
+	&:hover {
+		color: @link-hover-color;
+		text-decoration: none;
+	}
 
-    &:focus {
-        color: @link-hover-color;
-        outline-style: none;
-    }
+	&:focus {
+		color: @link-hover-color;
+		outline-style: none;
+	}
 
-    &:active {
-        color: @link-hover-color;
-    }
+	&:active {
+		color: @link-hover-color;
+	}
 }
 
 .side-bar {
-    grid-row: 3;
-    grid-column: 1;
-    width: @side-bar-width;
-    overflow: auto;
-    .sub-side {
-        position:relative;
-        height:100%;
-    }
+	grid-row: 3;
+	grid-column: 1;
+	width: @side-bar-width;
+	overflow: auto;
+
+	.sub-side {
+		position: relative;
+		height: 100%;
+	}
 }
 
 .tab-header {
-    grid-row: 2;
-    grid-column: 1;
-    background-color: @lightgray-bg-color;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    border-bottom: 1px solid @defaut-brd-color;
+	grid-row: 2;
+	grid-column: 1;
+	background-color: @lightgray-bg-color;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	border-bottom: 1px solid @defaut-brd-color;
 
-    li {
-        display: block;
-        flex-grow: 1;
-        padding: .3em 0 .5em 0;
-        border-top: 3px solid transparent;
-        border-left:1px solid @defaut-brd-color;
-        text-align: center;
-        cursor: pointer;
-        margin-bottom: -1px;
-        user-select:none;
-        border-bottom:1px solid transparent;
-        
-        &:first-child {
-            border-left-style:none;
-        }
+	li {
+		display: block;
+		flex-grow: 1;
+		padding: .3em 0 .5em 0;
+		border-top: 3px solid transparent;
+		border-left: 1px solid @defaut-brd-color;
+		text-align: center;
+		cursor: pointer;
+		margin-bottom: -1px;
+		user-select: none;
+		border-bottom: 1px solid transparent;
 
-        &:hover {
-            background-color:darken(@lightgray-bg-color, 3%);
-            border-bottom-color:@defaut-brd-color;
-        }
+		&:first-child {
+			border-left-style: none;
+		}
 
-        &.active {
-            background-color: white;
-            border-top-color: gold;
-            &:hover {
-                border-bottom-color:transparent;
-            }
-        }
-    }
+		&:hover {
+			background-color: darken(@lightgray-bg-color, 3%);
+			border-bottom-color: @defaut-brd-color;
+		}
+
+		&.active {
+			background-color: white;
+			border-top-color: gold;
+
+			&:hover {
+				border-bottom-color: transparent;
+			}
+		}
+	}
 }
 
 .content-view {
-    grid-row:2 / span 2;
-    grid-column:2;
-    padding:0 .8rem;
-    border-left:1px solid @defaut-brd-color;
-    overflow:auto;
+	grid-row: 2 / span 2;
+	grid-column: 2;
+	padding: 0 .8rem;
+	border-left: 1px solid @defaut-brd-color;
+	overflow: auto;
 }
 
 code, pre {
-    font-family: @monospace-font;
-    font-size: 0.9rem;
-    background-color: @shadow-bg-color;
+	font-family: @monospace-font;
+	font-size: 0.9rem;
+	background-color: @shadow-bg-color;
 }
 
 pre {
-    padding:.6rem;
-    line-height:1.2rem;
+	padding: .6rem;
+	line-height: 1.2rem;
 }
 
 code {
-    background-color: @shadow-bg-color;
-    padding: 2px;
-    color: @code-txt-color;
+	background-color: @shadow-bg-color;
+	padding: 2px;
+	color: @code-txt-color;
 }
 
 a.disabled {
-    color:#999;
-    cursor:not-allowed;
-    pointer-events:none;
+	color: #999;
+	cursor: not-allowed;
+	pointer-events: none;
 }
 
 @import "TreeView.less";
@@ -201,34 +204,38 @@ a.disabled {
 @import "MainView.less";
 
 p {
-    margin: 0.8rem 0;
+	margin: 0.8rem 0;
 }
 
 .os-product {
-    background-color:#f6f9ff;
-    padding:6px;
-    display:block;
-    height:1.3rem;
-    .os-title {
-        float:left;
-    }
-    .os-lic {
-        float:right;
-        margin-right:12px;
-    }
-    .os-homepage {
-        float:right;
-    }
-    .cr {
-        font-size:0.86rem;
-    }
+	background-color: #f6f9ff;
+	padding: 6px;
+	display: block;
+	height: 1.3rem;
+
+	.os-title {
+		float: left;
+	}
+
+	.os-lic {
+		float: right;
+		margin-right: 12px;
+	}
+
+	.os-homepage {
+		float: right;
+	}
+
+	.cr {
+		font-size: 0.86rem;
+	}
 }
 
 .debug-list {
-    list-style-type:none;
-    overflow:auto;
-    height:450px;
-    padding:0 20px;
-    background-color:antiquewhite;
-    margin:0;
+	list-style-type: none;
+	overflow: auto;
+	height: 450px;
+	padding: 0 20px;
+	background-color: antiquewhite;
+	margin: 0;
 }
