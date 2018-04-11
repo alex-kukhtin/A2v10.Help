@@ -1,7 +1,8 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
-		Февраль 2018			/whatsnew/w201802
+		Апрель 2018				/whatsnew/w201804
 		Март 2018				/whatsnew/w201803
+		Февраль 2018			/whatsnew/w201802
 
 
 Модели		/models/index
@@ -12,26 +13,41 @@
 	Xaml			/xaml/index
 		Элементы управления	/xaml/controls/index
 			Button				/xaml/controls/button
-			Radio				/xaml/controls/radio
 			Checkbox			/xaml/controls/checkbox
-			MenuItem			/xaml/controls/menuitem
-			Selector			/xaml/controls/selector
-			Table			/xaml/controls/table
 			DataGrid			/xaml/controls/datagrid
+			DataGridColumn		/xaml/controls/datagridcolumn
+			DatePicker			/xaml/controls/datepicker
+			MenuItem			/xaml/controls/menuitem
+			Radio				/xaml/controls/radio
+			Selector			/xaml/controls/selector
+			Table				/xaml/controls/table
+			TableCell			/xaml/controls/tablecell
+			TableMarkCell		/xaml/controls/tablemarkcell
+			TableRow			/xaml/controls/tablerow
+			TextBox				/xaml/controls/texbox
+
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
-			StackPanel			/xaml/containers/stackpanel
-			Grid				/xaml/containers/grid
-			Splitter			/xaml/containers/splitter
+			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
+			Grid				/xaml/containers/grid
+			Include				/xaml/containers/include
+			Partial				/xaml/containers/partial
+			Splitter			/xaml/containers/splitter
+			StackPanel			/xaml/containers/stackpanel
+
 		Текстовые элементы			/xaml/text/index
-			Text				/xaml/text/text
+			Break				/xaml/text/break
+			Hyperlink			/xaml/text/hyperlink
+			Line				/xaml/text/line
+			Popover				/xaml/text/popover
 			Span				/xaml/text/span
 			TagLabel			/xaml/text/taglabel
-			Hyperlink			/xaml/text/hyperlink
-			Popover				/xaml/text/popover
-			Break				/xaml/text/break
-			Line				/xaml/text/line
+			Text				/xaml/text/text
+
+	Привязки					/bind/index
+		Bind			/bind/bind
+		BindCmd			/bind/bindcmd
 
 Контроллеры	/controllers/index
 	Шаблоны		/template/index
@@ -39,5 +55,10 @@
 		События			/template/events
 		Команды			/template/commands
 		Валидаторы		/template/validators
+
+	Модули		/modules/index
+		std:utils	/modules/stdutils
+
+	ViewModel	/viewmodel/index
 
 О справочной системе	/app/about

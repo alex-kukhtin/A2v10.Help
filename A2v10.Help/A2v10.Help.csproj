@@ -62,6 +62,9 @@
     <Content Include="css\fonts\bowtie.svg" />
     <None Include="html\index .htmlx" />
     <Content Include="html\app\about.html" />
+    <Content Include="html\bind\bindcmd.html" />
+    <Content Include="html\bind\index.html" />
+    <Content Include="html\bind\bind.html" />
     <Content Include="html\controllers\index.html" />
     <Content Include="html\images\demo.png" />
     <Content Include="html\models\modelfile.html" />
@@ -73,14 +76,25 @@
     <Content Include="html\template\events.html" />
     <Content Include="html\template\index.html" />
     <Content Include="html\views\index.html" />
+    <Content Include="html\whatsnew\w201804.html" />
     <Content Include="html\whatsnew\w201803.html" />
+    <Content Include="html\xaml\containers\container.html" />
+    <Content Include="html\xaml\containers\dialog.html" />
     <Content Include="html\xaml\containers\dropdownmenu.html" />
     <Content Include="html\xaml\containers\grid.html" />
+    <Content Include="html\xaml\containers\partial.html" />
+    <Content Include="html\xaml\containers\include.html" />
     <Content Include="html\xaml\containers\stackpanel.html" />
     <Content Include="html\xaml\containers\index.html" />
     <Content Include="html\xaml\containers\block.html" />
     <Content Include="html\xaml\containers\splitter.html" />
+    <Content Include="html\xaml\controls\textbox.html" />
     <Content Include="html\xaml\controls\checkbox.html" />
+    <Content Include="html\xaml\controls\datepicker.html" />
+    <Content Include="html\xaml\controls\datagridcolumn.html" />
+    <Content Include="html\xaml\controls\tablemarkcell.html" />
+    <Content Include="html\xaml\controls\tablecell.html" />
+    <Content Include="html\xaml\controls\tablerow.html" />
     <Content Include="html\xaml\controls\table.html" />
     <Content Include="html\xaml\controls\datagrid.html" />
     <Content Include="html\xaml\controls\radio.html" />
@@ -91,6 +105,7 @@
     <Content Include="html\xaml\index.html" />
     <Content Include="html\whatsnew\w201802.html" />
     <Content Include="html\whatsnew\index.html" />
+    <Content Include="html\xaml\text\inline.html" />
     <Content Include="html\xaml\text\popover.html" />
     <Content Include="html\xaml\text\hyperlink.html" />
     <Content Include="html\xaml\text\taglabel.html" />
@@ -100,7 +115,7 @@
     <Content Include="html\xaml\text\span.html" />
     <Content Include="html\xaml\text\text.html" />
     <Content Include="Less\Site.less" />
-    <Content Include="Less\Variables.less" />
+    <Content Include="Less\Variables.Local.less" />
     <Content Include="content.txt" />
     <Content Include="Less\TreeView.less" />
     <Content Include="Less\Bowtie.less" />
@@ -109,6 +124,8 @@
     <Content Include="css\fonts\bowtie.ttf" />
     <Content Include="css\fonts\bowtie.woff" />
     <Content Include="Less\MainView.less" />
+    <Content Include="Less\Variables.less" />
+    <Content Include="Less\Text.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>

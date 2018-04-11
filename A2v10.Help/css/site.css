@@ -1,4 +1,20 @@
-﻿html {
+﻿/* controls */
+/* header-footer */
+/* nav bar */
+/* side bar */
+/* data grid */
+/* toolbar */
+/* table */
+/* tree-view*/
+/* dialog */
+/* z-index */
+/*
+@hover-open-index: auto;
+@invalid-index: auto;
+@focus-index: auto;
+@hover-index: auto;
+*/
+html {
   font-family: system-ui, 'Segoe UI', Tahoma, Verdana, sans-serif;
   font-size: 13px;
   -ms-text-size-adjust: 100%;
@@ -184,7 +200,7 @@ a:active {
 }
 code,
 pre {
-  font-family: Consolas, Courier New, Courier, monospace;
+  font-family: Consolas, 'Courier New', Courier, monospace;
   font-size: 0.9rem;
   background-color: #f8f8f8;
 }
@@ -398,15 +414,26 @@ h3 {
   padding: 2px 4px;
 }
 .content-view table td.prop-name {
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  width: 1%;
   font-weight: bold;
 }
 .content-view table th {
   padding: 4px 6px;
   background-color: #e0e0e0;
   font-weight: normal;
+  text-align: left;
+}
+.content-view .enum-vals {
+  margin: .5rem 1rem;
+  padding: 0;
+}
+.content-view .enum-vals li {
+  list-style: none;
+  line-height: normal;
 }
 a.code-link {
-  font-family: Consolas, Courier New, Courier, monospace;
+  font-family: Consolas, 'Courier New', Courier, monospace;
   padding: 2px;
   background-color: #f8f8f8;
 }
@@ -474,4 +501,57 @@ p {
   padding: 0 20px;
   background-color: antiquewhite;
   margin: 0;
+}
+.tag-label {
+  background-color: #999;
+  color: white;
+  font-size: 0.86rem;
+  padding: 0 .25rem .1rem .25rem;
+  display: inline-block;
+  margin: 1px;
+  line-height: normal;
+}
+.tag-label.success,
+.tag-label.green {
+  background-color: #5db750;
+}
+.tag-label.warning,
+.tag-label.orange {
+  background-color: #f0ad4e;
+}
+.tag-label.danger,
+.tag-label.red,
+.tag-label.error {
+  background-color: #da533f;
+}
+.tag-label.info,
+.tag-label.cyan {
+  background-color: #60bbe5;
+}
+.tag-label.purple {
+  background-color: mediumpurple;
+}
+.tag-label.pink {
+  background-color: hotpink;
+}
+.tag-label.gold {
+  background-color: #eac500;
+}
+.tag-label.blue {
+  background-color: cornflowerblue;
+}
+.tag-label.salmon {
+  background-color: salmon;
+}
+.tag-label.seagreen {
+  background-color: darkseagreen;
+}
+.tag-label.tan {
+  background-color: tan;
+}
+.tag-label.magenta {
+  background-color: darkmagenta;
+}
+.tag-label.hidden {
+  display: none;
 }

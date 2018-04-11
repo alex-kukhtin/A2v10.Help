@@ -27,44 +27,44 @@
 	    </ul>
     </div>
 </div>`,
-/*
-    <pre>list: {{active}}</pre>
-	<pre v-once>{{root}}</pre><pre v-once>{{files}}</pre>
-*/
+		/*
+			<pre>list: {{active}}</pre>
+			<pre v-once>{{root}}</pre><pre v-once>{{files}}</pre>
+		*/
 		data() {
 			return {
 				root: window.app.index,
-                files: window.app.files,
-                active: null,
-                fragment: ''
+				files: window.app.files,
+				active: null,
+				fragment: ''
 			};
-        },
-        computed: {
-            list() {
-                const f = this.fragment.toLowerCase();
-                const root = this.root;
-                const files = this.files;
-                return Object.keys(this.root)
-                    .filter(val => !f || val.toLowerCase().indexOf(f) !== -1)
-                    .map(v => { return { word: v, files: root[v].map(f => files[f]) }; });
-            }
-        },
-        methods: {
-            isActive(itm) {
-                return itm === this.active;
-            },
+		},
+		computed: {
+			list() {
+				const f = this.fragment.toLowerCase();
+				const root = this.root;
+				const files = this.files;
+				return Object.keys(this.root)
+					.filter(val => !f || val.toLowerCase().indexOf(f) !== -1)
+					.map(v => { return { word: v, files: root[v].map(f => files[f]) }; });
+			}
+		},
+		methods: {
+			isActive(itm) {
+				return itm === this.active;
+			},
 			navigate(itm, ix) {
-                var vm = window.vm;
-                this.active = itm;
+				var vm = window.vm;
+				this.active = itm;
 				vm.$emit('navigate', itm.files[ix].url);
 			},
 			navigateFile(itm) {
-                var vm = window.vm;
-                this.active = itm;
-                vm.$emit('navigate', itm.url);
-            }
-        },
-        mounted() {
-        }
+				var vm = window.vm;
+				this.active = itm;
+				vm.$emit('navigate', itm.url);
+			}
+		},
+		mounted() {
+		}
 	});
 })();

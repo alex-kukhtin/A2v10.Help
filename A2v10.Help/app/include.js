@@ -27,21 +27,21 @@
 	function loadHtml(url) {
 		return new Promise(function (resolve, reject) {
 			let xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (xhr.responseText.startsWith('<!DOCTYPE')) {
-                    let body = document.createElement("body");
-                    let elem = document.createElement("div");
-                    body.appendChild(elem);
-                    elem.innerText = 'Not found';
-                    resolve(body);
-                }
-                else {
-                    let prs = new DOMParser();
-                    let doc = prs.parseFromString(xhr.responseText, 'text/html');
-                    let body = doc.body;
-                    setHrefs(body);
-                    resolve(body);
-                }
+			xhr.onload = function () {
+				if (xhr.responseText.startsWith('<!DOCTYPE')) {
+					let body = document.createElement("body");
+					let elem = document.createElement("div");
+					body.appendChild(elem);
+					elem.innerText = 'Not found';
+					resolve(body);
+				}
+				else {
+					let prs = new DOMParser();
+					let doc = prs.parseFromString(xhr.responseText, 'text/html');
+					let body = doc.body;
+					setHrefs(body);
+					resolve(body);
+				}
 			};
 			xhr.open('GET', url, true);
 			xhr.send();
@@ -68,14 +68,14 @@
 					me.$el.innerHTML = '';
 					let div = document.createElement('div');
 					let ch = elem.children;
-                    let cha = [];
-                    // for..of does not not for HtmlCollection in EDGE
-                    let esrc = elem.children;
-                    for (let i = 0; i < esrc.length; i++) {
+					let cha = [];
+					// for..of does not not for HtmlCollection in EDGE
+					let esrc = elem.children;
+					for (let i = 0; i < esrc.length; i++) {
 						cha.push(esrc[i]);
 					}
 					for (ch of cha)
-                        me.$el.appendChild(ch);
+						me.$el.appendChild(ch);
 				});
 			}
 		}

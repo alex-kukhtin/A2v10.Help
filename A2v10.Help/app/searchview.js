@@ -2,14 +2,14 @@
 
 (function () {
 
-// {{key}} : {{res}} : {{res.length}}
+	// {{key}} : {{res}} : {{res.length}}
 
 
-    const debugMode = false;
+	const debugMode = false;
 
 	Vue.component('a2-search-view', {
-		template: 
-`<div class="sub-side">
+		template:
+			`<div class="sub-side">
     <div class="index-view">
 	    <div class="search-block">
             <label>Введите слово для поиска:</label>
@@ -40,52 +40,52 @@
 </div>`,
 		data() {
 			return {
-                searchText: '',
-                activeKey: '',
-                activeIndex: 0,
-                debugMode: debugMode,
-                debugVisible: false
+				searchText: '',
+				activeKey: '',
+				activeIndex: 0,
+				debugMode: debugMode,
+				debugVisible: false
 			};
 		},
 		watch: {
 			searchText(newVal) {
 			}
 		},
-        computed: {
-            words() {
-                let fts = window.app.fts;
-                return Object.keys(fts);
-            },
-            searchResult() {
-                let fts = window.app.fts;
-                let r = {};
-                if (!this.searchText) return r;
-                let st = this.searchText.toUpperCase();
-                for (let key in fts) {
-                    if (key.toUpperCase().indexOf(st) !== -1)
-                        r[key] = fts[key];
-                }
+		computed: {
+			words() {
+				let fts = window.app.fts;
+				return Object.keys(fts);
+			},
+			searchResult() {
+				let fts = window.app.fts;
+				let r = {};
+				if (!this.searchText) return r;
+				let st = this.searchText.toUpperCase();
+				for (let key in fts) {
+					if (key.toUpperCase().indexOf(st) !== -1)
+						r[key] = fts[key];
+				}
 				return r;
 			}
 		},
-        methods: {
-            file(ix) {
-                let file = window.app.files[ix];
-                return file ? file.title : '#ERR';
-            },
-            isActive(ix, key) {
-                return ix === this.activeIndex && key === this.activeKey;
-            },
+		methods: {
+			file(ix) {
+				let file = window.app.files[ix];
+				return file ? file.title : '#ERR';
+			},
+			isActive(ix, key) {
+				return ix === this.activeIndex && key === this.activeKey;
+			},
 			navigate(ix, key) {
-                var vm = window.vm;
-                this.activeKey = key;
-                this.activeIndex = ix;
-                vm.$emit('navigateFile', ix);
-            },
-            showDebug() {
-                if (this.debugMode)
-                    this.debugVisible = true;
-            }
+				var vm = window.vm;
+				this.activeKey = key;
+				this.activeIndex = ix;
+				vm.$emit('navigateFile', ix);
+			},
+			showDebug() {
+				if (this.debugMode)
+					this.debugVisible = true;
+			}
 		}
 	});
 })();

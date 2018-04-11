@@ -1,4 +1,5 @@
 ﻿@import "Variables.less";
+@import "Variables.Local.less";
 
 @side-bar-width: 290px;
 
@@ -51,7 +52,7 @@ html, body {
 header, .header {
 	grid-row: 1;
 	grid-column: 1 / span 2;
-	background-color: @brand-bk_color;
+	background-color: @brand-bk-color;
 	color: white;
 	font-size: 1.5rem;
 	padding: .1rem;
@@ -239,3 +240,5 @@ p {
 	background-color: antiquewhite;
 	margin: 0;
 }
+
+@import "Text.less";
