@@ -1,4 +1,4 @@
-﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+﻿/* Copyright © 2017-2018 Alex Kukhtin. All rights reserved. */
 
 (function () {
 
@@ -7,25 +7,25 @@
 	Vue.component('a2-index-view', {
 		template: `
 <div class="sub-side">
-    <div class="index-view">
-        <div class="search-block">
-            <label>Введите ключевое слово для поиска:</label>
-            <input class="input-search" type=text v-model="fragment"></input>
-        </div>
-	    <ul class="index-tree">
-		    <li v-for="(val, valIndex) in list">
-                <a :class="{'active': isActive(val)}" v-if="val.files.length === 1" v-text="val.word" @click.stop.prevent="navigate(val, 0)"></a>
-                <div v-else>
-                    <span class="word-folder" v-text="val.word"></span>
-                    <ul>
-                        <li class="file-link" v-for="(itm, itmIndex) in val.files">
-                            <a :class="{active: isActive(itm)}" v-text="itm.title" @click.stop.prevent="navigateFile(itm)"></a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-	    </ul>
-    </div>
+	<div class="index-view">
+		<div class="search-block">
+			<label>Введите ключевое слово для поиска:</label>
+			<input class="input-search" type=text v-model="fragment"></input>
+		</div>
+		<ul class="index-tree">
+			<li v-for="(val, valIndex) in list">
+				<a :class="{'active': isActive(val)}" v-if="val.files.length === 1" v-text="val.word" @click.stop.prevent="navigate(val, 0)"></a>
+				<div v-else>
+					<span class="word-folder" v-text="val.word"></span>
+					<ul>
+						<li class="file-link" v-for="(itm, itmIndex) in val.files">
+							<a :class="{active: isActive(itm)}" v-text="itm.title" @click.stop.prevent="navigateFile(itm)"></a>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>`,
 		/*
 			<pre>list: {{active}}</pre>

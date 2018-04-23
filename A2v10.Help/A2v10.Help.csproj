@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".htaccess" />
-    <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -141,6 +140,7 @@
     <Content Include="robots.txt" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\vue.js" />
+    <Content Include="scripts\vue.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

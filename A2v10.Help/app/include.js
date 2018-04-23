@@ -1,4 +1,4 @@
-﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+﻿/* Copyright © 2017-2018 Alex Kukhtin. All rights reserved.*/
 
 (function () {
 
@@ -12,7 +12,7 @@
 		let a = body.querySelectorAll('a');
 		a.forEach(function (an) {
 			let href = an.getAttribute('href');
-			if (href.startsWith('http')) return; // external link
+			if (href.startsWith('http')) return; /* external link */
 			an.setAttribute('href', '');
 			an.setAttribute('data-route', href);
 			an.addEventListener('click', doNavigate);
@@ -63,13 +63,13 @@
 				let me = this;
 				if (url === '/')
 					url += 'index';
-				//console.warn(url);
+				/*console.warn(url);*/
 				loadHtml('/html' + url + '.html').then(function (elem) {
 					me.$el.innerHTML = '';
 					let div = document.createElement('div');
 					let ch = elem.children;
 					let cha = [];
-					// for..of does not not for HtmlCollection in EDGE
+					/* for..of does not not for HtmlCollection in EDGE */
 					let esrc = elem.children;
 					for (let i = 0; i < esrc.length; i++) {
 						cha.push(esrc[i]);

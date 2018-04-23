@@ -1,4 +1,4 @@
-﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+﻿/* Copyright © 2017-2018 Alex Kukhtin. All rights reserved.*/
 
 (function () {
 
@@ -6,17 +6,17 @@
 		name: 'tree-item',
 		template: `
 <li :title="item.title" @click.stop.prevent="doClick(item)"
-    :class="{expanded: isExpanded, collapsed:isCollapsed, active:isActive(item)}" >
-    <div class="overlay">
-        <a class="toggle" v-if="isFolder" href @click.stop.prevent="toggle"></a>
-        <span v-else class="toggle"/>
-        <i :class="iconClass"/>
-        <a :href="dataHref" tabindex="-1" v-text="item.title"/>
-    </div>
-    <ul v-if="isFolder" v-show="isExpanded">
-        <tree-item v-for="(itm, index) in item.items"
-            :key="index" :item="itm" :click="click" :get-href="getHref" :is-active="isActive" :expand="expand" :root-items="rootItems"/>
-    </ul>   
+		:class="{expanded: isExpanded, collapsed:isCollapsed, active:isActive(item)}" >
+	<div class="overlay">
+		<a class="toggle" v-if="isFolder" href @click.stop.prevent="toggle"></a>
+		<span v-else class="toggle"/>
+		<i :class="iconClass"/>
+		<a :href="dataHref" tabindex="-1" v-text="item.title"/>
+	</div>
+	<ul v-if="isFolder" v-show="isExpanded">
+		<tree-item v-for="(itm, index) in item.items"
+			:key="index" :item="itm" :click="click" :get-href="getHref" :is-active="isActive" :expand="expand" :root-items="rootItems"/>
+	</ul>
 </li>
 `,
 		props: {
@@ -38,7 +38,7 @@
 					return;
 				Vue.set(this.item, "open", !this.item.open);
 				if (!this.item.open) {
-					// close all inner
+					/* close all inner */
 					this.closeInner(this.item);
 				}
 			},
@@ -145,7 +145,7 @@
 		mounted() {
 			const vm = window.vm;
 			vm.$on('navigated', (url) => {
-				//console.warn('navigated:' + url);
+				/*console.warn('navigated:' + url);*/
 				this.findActive(url);
 			});
 		}

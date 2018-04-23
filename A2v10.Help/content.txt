@@ -24,7 +24,7 @@
 			TableCell			/xaml/controls/tablecell
 			TableMarkCell		/xaml/controls/tablemarkcell
 			TableRow			/xaml/controls/tablerow
-			TextBox				/xaml/controls/texbox
+			TextBox				/xaml/controls/textbox
 
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block

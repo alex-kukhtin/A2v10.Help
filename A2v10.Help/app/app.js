@@ -1,19 +1,20 @@
-﻿// Copyright © 2017-2018 Alex Kukhtin. All rights reserved.
+﻿/* Copyright © 2017-2018 Alex Kukhtin. All rights reserved. */
 
 (function () {
 
 	function makeUrl(url) {
 		if (url.startsWith('/'))
-			return url; // root-based
+			return url; /* root-based */
 		let cUrl = window.location.pathname.split('/').filter(x => !!x);
 		cUrl.splice(cUrl.length - 1, 1);
 		let nUrl = url.split('/').filter(x => !!x);
 		let xUrl = [];
 		nUrl.forEach(x => {
-			if (x === '..')
+			if (x === '..') {
 				cUrl.splice(cUrl.length - 1, 1);
-			else
+			} else {
 				xUrl.push(x);
+			}
 		});
 		let newUrl = cUrl.concat(xUrl);
 		return '/' + newUrl.join('/');
