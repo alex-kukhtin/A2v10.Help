@@ -3,7 +3,7 @@
 	<!--keywords:Что нового-->
 	<div class="title">
 		<h1>
-			Выпуск 3 - версии 7150-7152 (апрель 2018)
+			Выпуск 3 - версии 7150-7172 (апрель 2018)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все выпуски</a>|
@@ -11,6 +11,7 @@
 			<a href="" class="disabled">Следующий выпуск »</a>
 		</div>
 	</div>
+
 
 	<h3>Общие</h3>
 	<ul>
@@ -20,19 +21,38 @@
 
 	<h3>Модель данных</h3>
 	<ul>
-		<li>В метаданные модели добавлена длина текстовых полей. В связанных элементах 
-		управления эта длина учитывается автоматически.</li>
+		<li>
+			В метаданные модели добавлена длина текстовых полей. В связанных элементах
+			управления эта длина учитывается автоматически.
+		</li>
 	</ul>
 
 	<h3>Общие модули</h3>
 	<ul>
 		<li>utils.fromJson</li>
+		<li>utils.date.diff</li>
+		<li>arr.$selectedIndex</li>
 	</ul>
 
 	<h3>Xaml</h3>
 	<ul>
-		<li>Добавлен элемент Image.</li>
+		<li>Добавлен элемент <a class="code-link" href="/xaml/controls/image">Image</a>.</li>
 		<li>В элемент <a class="code-link" href="/xaml/controls/textbox">TextBox</a> добавлено свойство <code>UpdateTrigger</code>.</li>
 		<li>В элемент <a class="code-link" href="/xaml/controls/datepicker">DatePicker</a> добавлено свойство <code>Direction</code>.</li>
+		<li>В элемент <a class="code-link" href="/xaml/controls/datagridcolumn">DataGridColumn</a> добавлено свойство <code>If</code>.</li>
+		<li>Исправлена ошибка, из-за которой неправильно работало свойство <code>Show</code> 
+			элемента <a class="code-link" href="/xaml/controls/tab">Tab</a> (в случае связанного свойства).</li>
+		<li>
+			В элемент <a class="code-link" href="/xaml/containers/block">Block</a> добавлены свойства
+			<code>Height</code>, <code>Scroll</code>, <code>Border</code>, <code>Align</code>.
+		</li>
+		<li>
+			В <a class="code-link" href="/xaml/binding/Bind">Bind</a> добавлены свойства
+			<code>Mask</code>, <code>UpdateAfter</code>.
+		</li>
+		<li>
+			В элемент <a class="code-link" href="/xaml/controls/Selector">Selector</a> добавлены свойства
+			<code>ItemsPanel</code>, <code>PanelPlacement</code>.
+		</li>
 	</ul>
 </div>

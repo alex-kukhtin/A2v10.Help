@@ -87,6 +87,7 @@
     <Content Include="html\xaml\containers\index.html" />
     <Content Include="html\xaml\containers\block.html" />
     <Content Include="html\xaml\containers\splitter.html" />
+    <Content Include="html\xaml\controls\image.html" />
     <Content Include="html\xaml\controls\textbox.html" />
     <Content Include="html\xaml\controls\checkbox.html" />
     <Content Include="html\xaml\controls\datepicker.html" />

@@ -18,6 +18,7 @@
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
 			MenuItem			/xaml/controls/menuitem
+			Image				/xaml/controls/image
 			Radio				/xaml/controls/radio
 			Selector			/xaml/controls/selector
 			Table				/xaml/controls/table
