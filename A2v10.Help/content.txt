@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Май 2018				/whatsnew/w201805
 		Апрель 2018				/whatsnew/w201804
 		Март 2018				/whatsnew/w201803
 		Февраль 2018			/whatsnew/w201802
@@ -20,6 +21,7 @@
 			MenuItem			/xaml/controls/menuitem
 			Image				/xaml/controls/image
 			Radio				/xaml/controls/radio
+			PeriodPicker		/xaml/controls/periodpicker
 			Selector			/xaml/controls/selector
 			Table				/xaml/controls/table
 			TableCell			/xaml/controls/tablecell
