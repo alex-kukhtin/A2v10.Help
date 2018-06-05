@@ -29,8 +29,10 @@ namespace MakeHelp
 			}
 			else
 			{
-				files = new List<Int32>();
-				files.Add(value);
+				files = new List<Int32>
+				{
+					value
+				};
 				this.Add(key, files);
 			}
 		}
@@ -52,8 +54,10 @@ namespace MakeHelp
 			}
 			else
 			{
-				files = new List<Int32>();
-				files.Add(value);
+				files = new List<Int32>
+				{
+					value
+				};
 				this.Add(key, files);
 			}
 		}
@@ -157,8 +161,10 @@ namespace MakeHelp
 
 		void ProcessOneFile(String path, String fileUrl)
 		{
-			var fi = new FileInfo();
-			fi.url = fileUrl;
+			var fi = new FileInfo
+			{
+				url = fileUrl
+			};
 			_files.Add(fi);
 
 			Int32 ix = _files.Count - 1;
@@ -299,9 +305,11 @@ namespace MakeHelp
 
 			if (!File.Exists(bundlerPath))
 				throw new FileNotFoundException("update bundler path");
-			ProcessStartInfo psi = new ProcessStartInfo(bundlerPath, Path.Combine(dirName, "bundleconfig.json"));
-			psi.UseShellExecute = false;
-			psi.RedirectStandardOutput = false;
+			ProcessStartInfo psi = new ProcessStartInfo(bundlerPath, Path.Combine(dirName, "bundleconfig.json"))
+			{
+				UseShellExecute = false,
+				RedirectStandardOutput = false
+			};
 			System.Diagnostics.Process.Start(psi).WaitForExit();
 		}
 	}

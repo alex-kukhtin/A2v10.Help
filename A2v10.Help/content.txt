@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Июнь 2018				/whatsnew/w201806
 		Май 2018				/whatsnew/w201805
 		Апрель 2018				/whatsnew/w201804
 		Март 2018				/whatsnew/w201803
@@ -18,6 +19,8 @@
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
+			List				/xaml/controls/list
+			ListItem			/xaml/controls/listitem
 			MenuItem			/xaml/controls/menuitem
 			Image				/xaml/controls/image
 			Radio				/xaml/controls/radio
@@ -34,10 +37,12 @@
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
 			Grid				/xaml/containers/grid
+			GridGroup			/xaml/containers/gridgroup
 			Include				/xaml/containers/include
 			Partial				/xaml/containers/partial
 			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
+			Taskpad				/xaml/containers/taskpad
 
 		Текстовые элементы			/xaml/text/index
 			Break				/xaml/text/break
@@ -48,9 +53,9 @@
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
 
-	Привязки					/bind/index
-		Bind			/bind/bind
-		BindCmd			/bind/bindcmd
+		Привязки					/xaml/bind/index
+			Bind					/xaml/bind/bind
+			BindCmd					/xaml/bind/bindcmd
 
 Контроллеры	/controllers/index
 	Шаблоны		/template/index

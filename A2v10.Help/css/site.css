@@ -552,6 +552,9 @@ p {
 .tag-label.magenta {
   background-color: darkmagenta;
 }
+.tag-label.lightgray {
+  background-color: #ccc;
+}
 .tag-label.hidden {
   display: none;
 }
