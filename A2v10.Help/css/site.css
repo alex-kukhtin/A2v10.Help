@@ -55,15 +55,15 @@ body {
 }
 /* icon colors */
 @font-face {
-  font-family: 'Bowtie';
-  src: url('/css/fonts/bowtie.eot');
-  src: url('/css/fonts/bowtie.eot?#iefix') format('eot'), url('/css/fonts/bowtie.woff') format('woff'), url('/css/fonts/bowtie.ttf') format('truetype'), url('/css/fonts/bowtie.svg#bowtie') format('svg');
+  font-family: 'a2v10';
+  src: url('/css/fonts/a2v10.eot');
+  src: url('/css/fonts/@import "a2v10";.eot?#iefix') format('eot'), url('/css/fonts/a2v10.woff') format('woff'), url('/css/a2v10/a2v10.ttf') format('truetype'), url('/css/fonts/a2v10.svg#a2v10') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 i,
 .ico {
-  font-family: 'Bowtie';
+  font-family: 'a2v10';
   speak: none;
   font-size: 14px;
   font-style: normal;
@@ -255,11 +255,16 @@ a.disabled {
   display: inline-block;
   flex-shrink: 0;
   /*fixed*/
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
-  font-family: "Bowtie";
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  font-family: "a2v10";
   color: #8591a2;
+}
+.tree-view li > .overlay .toggle:after {
+  position: absolute;
+  top: 6px;
+  left: 2px;
 }
 .tree-view li > .overlay:hover {
   background-color: #fdf4bf;
@@ -289,9 +294,6 @@ a.disabled {
 .tree-view li.collapsed > .overlay > .toggle:after {
   content: "\e9cd";
   /*tree-collapsed*/
-  position: absolute;
-  left: 4px;
-  top: 6px;
 }
 .tree-view li.collapsed ul {
   display: none;
@@ -299,9 +301,6 @@ a.disabled {
 .tree-view li.expanded > .overlay > .toggle:after {
   content: "\e9cb";
   /*tree-expanded*/
-  position: absolute;
-  left: 2px;
-  top: 5px;
 }
 .index-view {
   margin: 0;
@@ -417,6 +416,12 @@ h3 {
   font-family: Consolas, 'Courier New', Courier, monospace;
   width: 1%;
   font-weight: bold;
+}
+.content-view table td.prop-image {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMvvhp8YAAACtSURBVDhPpZDBDcQgDARTG38K4E8tVEGdfH23ltbZEBA6HdJExHjWJJeZ/cW9WSzUxxg2Ef3bANYglFIspeS01h4h7sVGRIBGiqDWGrKGhKABaNDJs9x793f3KM0BOl2u7nvUfgpgCGVwDMg5PwIUfN4rgOBAJ61AzxfvP8p6E538CljJeEd9gv13AA52Ms4JJMJ/dpRVIlwRsJMZsFsRwBusrn3CH5CIHp6x6wMQ8ZH6L0gAuQAAAABJRU5ErkJggg==") no-repeat;
+  width: 16px;
+  padding: 0;
+  background-color: #f8f8f8;
 }
 .content-view table th {
   padding: 4px 6px;

@@ -48,15 +48,23 @@ h3 {
 	table {
 		border-collapse: separate;
 		border-spacing: 2px;
-		width:100%;
+		width: 100%;
 
 		td {
 			background-color: @table-td-bk-color;
 			padding: 2px 4px;
+
 			&.prop-name {
-				font-family:@monospace-font;
-				width:1%;
-				font-weight:bold;
+				font-family: @monospace-font;
+				width: 1%;
+				font-weight: bold;
+			}
+
+			&.prop-image {
+				background: data-uri("../html/images/property16.png") no-repeat;
+				width: 16px;
+				padding: 0;
+				background-color: @table-td-bk-color;
 			}
 		}
 
@@ -64,7 +72,7 @@ h3 {
 			padding: 4px 6px;
 			background-color: @table-th-bk-color;
 			font-weight: normal;
-			text-align:left;
+			text-align: left;
 		}
 	}
 }

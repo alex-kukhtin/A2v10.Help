@@ -55,9 +55,15 @@
     <Content Include="app\contentview.js" />
     <Content Include="app\indexview.js" />
     <Content Include="app\searchview.js" />
-    <Content Include="css\fonts\bowtie.svg" />
+    <Content Include="css\fonts\A2v10.svg" />
+    <Content Include="css\fonts\A2v10.eot" />
+    <Content Include="css\fonts\A2v10.ttf" />
+    <Content Include="css\fonts\A2v10.woff" />
+    <Content Include="css\fonts\A2v10.woff2" />
     <None Include="html\index .htmlx" />
     <Content Include="html\app\about.html" />
+    <Content Include="html\images\property16.png" />
+    <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\xaml\bind\bindcmd.html" />
     <Content Include="html\xaml\bind\index.html" />
     <Content Include="html\xaml\bind\bind.html" />
@@ -122,14 +128,11 @@
     <Content Include="Less\Variables.Local.less" />
     <Content Include="content.txt" />
     <Content Include="Less\TreeView.less" />
-    <Content Include="Less\Bowtie.less" />
     <Content Include="Less\IndexView.less" />
-    <Content Include="css\fonts\bowtie.eot" />
-    <Content Include="css\fonts\bowtie.ttf" />
-    <Content Include="css\fonts\bowtie.woff" />
     <Content Include="Less\MainView.less" />
     <Content Include="Less\Variables.less" />
     <Content Include="Less\Text.less" />
+    <Content Include="Less\A2v10Font.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>
