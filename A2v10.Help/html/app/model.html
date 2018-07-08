@@ -1,0 +1,100 @@
+﻿<div>
+	<!--title:Файл model.json-->
+	<!--keywords:model.json-->
+	<div class="title">
+		<h1>
+			Файл model.json
+		</h1>
+	</div>
+
+	<p>Каждая папка прикладного приложения, описывающая конечную точку должна содержать файл описания <code>model.json</code>. 
+	В этом файле описываются все возможные действия, допустимые с этой конечной точкой.</p>
+	
+	<p>
+		<pre>{
+  "source": "",
+  "schema": "",
+  "model": "",
+  "actions":  {},
+  "dialogs":  {},
+  "popups":   {},
+  "commands": {},
+  "reports":  {},
+  "uploads":  {}
+}
+</pre>
+	</p>
+	<p>
+		Все объектные свойства представлены объектами, в которых имя свойства определяет название действия, а содержимое - объект,
+		описывающий это действие.
+	</p>
+
+	<h3>Свойства объекта конечной точки</h3>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">source</td>
+				<td>String</td>
+				<td>Источник данных. Фактически это имя строки подключения (connectionString) из файла конфигурации приложения.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">schema</td>
+				<td>String</td>
+				<td>Имя sql-схемы для модели данных. Может переопределяться в конкретных действиях. Если не указано - то <b>dbo</b>.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">model</td>
+				<td>String</td>
+				<td>Имя модели. Может переопределяться в конкретных действиях.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">actions</td>
+				<td><a href="actions">actions</a></td>
+				<td>Объект, описывающий возможные действия с этой конечной точкой.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">dialogs</td>
+				<td><a href="dialogs">dialogs</a></td>
+				<td>Объект, описывающий диалоги, которые можно вызывать для этой конечной точки.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">popups</td>
+				<td><a href="popups">popups</a></td>
+				<td>Объект, описывающий всплывающие окна, которые можно вызывать для этой конечной точки.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">commands</td>
+				<td><a href="commands">commands</a></td>
+				<td>Объект, описывающий команды, которые можно выполнять для этой конечной точки.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">reports</td>
+				<td><a href="commands">reports</a></td>
+				<td>Объект, описывающий отчеты, связанные с этой конечной точкой.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">uploads</td>
+				<td><a href="uploads">uploads</a></td>
+				<td>Объект, описывающий загрузки, связанные с этой конечной точкой.</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

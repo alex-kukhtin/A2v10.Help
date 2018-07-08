@@ -241,4 +241,25 @@ p {
 	margin: 0;
 }
 
+.tip {
+	padding:12px 18px;
+	margin-left:1rem;
+	border-left:4px solid #f66;
+	position:relative;
+	background-color:#f8f8f8;
+
+	&:before {
+		content:'!';
+		width:20px;
+		height:20px;
+		border-radius:100%;
+		position:absolute;
+		top:14px;
+		left:-12px;
+		background-color:#f66;
+		color:white;
+		text-align:center;
+	}
+}
+
 @import "Text.less";

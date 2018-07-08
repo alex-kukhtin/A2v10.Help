@@ -6,11 +6,24 @@
 		Апрель 2018				/whatsnew/w201804
 		Март 2018				/whatsnew/w201803
 		Февраль 2018			/whatsnew/w201802
+	
+Общая информация		/common/index
+	Платформа		/common/platform
 
+Прикладные приложения		/app/index
+	model.json			/app/model
+		actions			/app/actions
+		dialogs			/app/dialogs
+		popups			/app/popups
+		commands		/app/commands
+		reports			/app/reports
+		uploads			/app/uploads
+
+	redirect.json		/app/redirect
 
 Модели		/models/index
 	Модели данных	/models/datamodels
-	model.json		/models/modelfile
+
 
 Представления	/views/index
 	Xaml			/xaml/index
@@ -58,6 +71,9 @@
 			Bind					/xaml/bind/bind
 			BindCmd					/xaml/bind/bindcmd
 
+		Компоненты					/xaml/components/index
+			CollectionView			/xaml/components/collectionview
+
 Контроллеры	/controllers/index
 	Шаблоны		/template/index
 		Свойства		/template/properties
@@ -70,4 +86,4 @@
 
 	ViewModel	/viewmodel/index
 
-О справочной системе	/app/about
+О справочной системе	/help/about

@@ -61,7 +61,17 @@
     <Content Include="css\fonts\A2v10.woff" />
     <Content Include="css\fonts\A2v10.woff2" />
     <None Include="html\index .htmlx" />
-    <Content Include="html\app\about.html" />
+    <Content Include="html\app\commands.html" />
+    <Content Include="html\app\uploads.html" />
+    <Content Include="html\app\reports.html" />
+    <Content Include="html\app\popups.html" />
+    <Content Include="html\app\dialogs.html" />
+    <Content Include="html\app\actions.html" />
+    <Content Include="html\common\platform.html" />
+    <Content Include="html\common\index.html" />
+    <Content Include="html\app\redirect.html" />
+    <Content Include="html\help\about.html" />
+    <Content Include="html\app\index.html" />
     <Content Include="html\images\property16.png" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\xaml\bind\bindcmd.html" />
@@ -69,7 +79,7 @@
     <Content Include="html\xaml\bind\bind.html" />
     <Content Include="html\controllers\index.html" />
     <Content Include="html\images\demo.png" />
-    <Content Include="html\models\modelfile.html" />
+    <Content Include="html\app\model.html" />
     <Content Include="html\models\datamodels.html" />
     <Content Include="html\models\index.html" />
     <Content Include="html\template\commands.html" />
@@ -82,6 +92,8 @@
     <Content Include="html\whatsnew\w201805.html" />
     <Content Include="html\whatsnew\w201804.html" />
     <Content Include="html\whatsnew\w201803.html" />
+    <Content Include="html\xaml\components\collectionview.html" />
+    <Content Include="html\xaml\components\index.html" />
     <Content Include="html\xaml\containers\container.html" />
     <Content Include="html\xaml\containers\dialog.html" />
     <Content Include="html\xaml\containers\dropdownmenu.html" />

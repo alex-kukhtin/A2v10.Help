@@ -429,6 +429,15 @@ h3 {
   font-weight: normal;
   text-align: left;
 }
+.content-view table.sub-table {
+  border-collapse: collapse;
+  margin: 6px 0;
+  width: auto;
+}
+.content-view table.sub-table td {
+  border: 1px solid #ddd;
+  width: auto;
+}
 .content-view .enum-vals {
   margin: .5rem 1rem;
   padding: 0;
@@ -506,6 +515,25 @@ p {
   padding: 0 20px;
   background-color: antiquewhite;
   margin: 0;
+}
+.tip {
+  padding: 12px 18px;
+  margin-left: 1rem;
+  border-left: 4px solid #f66;
+  position: relative;
+  background-color: #f8f8f8;
+}
+.tip:before {
+  content: '!';
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  background-color: #f66;
+  color: white;
+  text-align: center;
 }
 .tag-label {
   background-color: #999;
