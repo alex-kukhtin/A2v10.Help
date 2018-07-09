@@ -42,6 +42,7 @@
 			Selector			/xaml/controls/selector
 			Table				/xaml/controls/table
 			TableCell			/xaml/controls/tablecell
+			TableColumn			/xaml/controls/tablecolumn
 			TableMarkCell		/xaml/controls/tablemarkcell
 			TableRow			/xaml/controls/tablerow
 			TextBox				/xaml/controls/textbox

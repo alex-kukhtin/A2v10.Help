@@ -110,6 +110,7 @@
     <Content Include="html\xaml\controls\periodpicker.html" />
     <Content Include="html\xaml\controls\image.html" />
     <Content Include="html\xaml\controls\list.html" />
+    <Content Include="html\xaml\controls\tablecolumn.html" />
     <Content Include="html\xaml\controls\textbox.html" />
     <Content Include="html\xaml\controls\checkbox.html" />
     <Content Include="html\xaml\controls\datepicker.html" />

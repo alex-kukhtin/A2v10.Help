@@ -5,5 +5,125 @@
 		<h1>
 			Команды (commands)
 		</h1>
+		<div class="breadcrumb">
+			<a href="model">model.json</a>
+		</div>
 	</div>
+	<p>
+		Объект <b>commands</b> описывает команды, доступные в текущей конечной точке.
+		Имена свойств объекта представляют собой имена команд. Каждое свойство представляет собой объект следующей структуры:
+	</p>
+
+	<p>
+		<pre>{
+  "type": "sql"|"clr"|"startProcess"|"resumeProcess",
+  "source": "",
+  "schema": "",
+  "procedure": "",
+  "file": "",
+  "clrType": "",
+  "parameters": {}
+}
+</pre>
+	</p>
+
+	<h3>Свойства объекта команды</h3>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">type</td>
+				<td>Enum</td>
+				<td>
+					Обязательно. Тип команды:
+					<table class="sub-table">
+						<tr>
+							<td class="prop-name">sql</td>
+							<td>Вызов хранимой процедуры sql. Должно быть указано свойство <code>procedure</code>.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">clr</td>
+							<td>Вызов метода .NET объекта. Должно быть указано свойство <code>clrType</code>.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">startProcess</td>
+							<td>Запуск бизнес-процесса.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">resumeProcess</td>
+							<td>Возобновление бизнес-процесса.</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">source</td>
+				<td>String</td>
+				<td>Необязательно. Имеет смысл только для типа <b>sql</b>. Источник данных для хранимой процедуры. Если не указан, берется из родительского элемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">schema</td>
+				<td>String</td>
+				<td>Необязательно.  Имеет смысл только для типа <b>sql</b>. Имя sql-схемы для хранимой процедуры. Если не указана, берется из родительского элемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">procedure</td>
+				<td>String</td>
+				<td>Обязательно для типа <b>sql</b>. Имя хранимой процедуры.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">clrType</td>
+				<td>String</td>
+				<td>Обязательно для типа <b>clr</b>. Строка, описывающая сборку и .NET тип.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">file</td>
+				<td>String</td>
+				<td>Строка. Имя файла для бизнес-процессов.</td>
+			</tr>
+			<tr>
+				<td class="prop-image"></td>
+				<td class="prop-name">parameters</td>
+				<td>Object</td>
+				<td>
+					Необязательно. Имеет смысл только для типа <b>sql</b>. Объект, статические параметры, которые передаются в хранимую процедуру. Имя свойства является именем параметра,
+					значение - значением параметра.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Команды типа sql</h3>
+	<p>
+		Команда типа <b>sql</b> выполняет хранимую процедуру. Имя процедуры задается свойством <code>procedure</code>. Sql-cхема задается свойством 
+		<code>schema</code> или берется из родительского элемента (если не указано). Процедура выполняется в источнике, который задается свойством 
+		<code>source</code> или берется из родительского элемента (если не указано).
+	</p>
+	<p>
+		Процедуре передеются следующие параметры:
+		<ul>
+			<li>Стандартные параметры (@TenantId, @UserId).</li>
+			<li>Параметры переданные в url.</li>
+			<li>Параметры из свойства <code>parameters</code>.</li>
+		</ul>
+	</p>
+
+	<h3>Команды типа clr</h3>
+	<p>
+		Команда типа <b>clr</b> вызывают метод из типа, заданного свойством <code>clrType</code>.
+	</p>
 </div>

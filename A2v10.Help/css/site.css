@@ -419,7 +419,8 @@ h3 {
 }
 .content-view table td.prop-image {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMvvhp8YAAACtSURBVDhPpZDBDcQgDARTG38K4E8tVEGdfH23ltbZEBA6HdJExHjWJJeZ/cW9WSzUxxg2Ef3bANYglFIspeS01h4h7sVGRIBGiqDWGrKGhKABaNDJs9x793f3KM0BOl2u7nvUfgpgCGVwDMg5PwIUfN4rgOBAJ61AzxfvP8p6E538CljJeEd9gv13AA52Ms4JJMJ/dpRVIlwRsJMZsFsRwBusrn3CH5CIHp6x6wMQ8ZH6L0gAuQAAAABJRU5ErkJggg==") no-repeat;
-  width: 16px;
+  background-position: center;
+  width: 20px;
   padding: 0;
   background-color: #f8f8f8;
 }
@@ -435,7 +436,6 @@ h3 {
   width: auto;
 }
 .content-view table.sub-table td {
-  border: 1px solid #ddd;
   width: auto;
 }
 .content-view .enum-vals {
