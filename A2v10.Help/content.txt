@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Август 2018				/whatsnew/w201808
 		Июль 2018				/whatsnew/w201807
 		Июнь 2018				/whatsnew/w201806
 		Май 2018				/whatsnew/w201805
@@ -30,6 +31,7 @@
 		Элементы управления	/xaml/controls/index
 			Button				/xaml/controls/button
 			Checkbox			/xaml/controls/checkbox
+			Control				/xaml/controls/control
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
@@ -49,15 +51,20 @@
 
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
+			Container			/xaml/containers/container
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup
+			IFrame				/xaml/containers/iframe
 			Include				/xaml/containers/include
 			Partial				/xaml/containers/partial
 			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
+			Tab					/xaml/containers/tab
+			TabPanel			/xaml/containers/tabpanel
 			Taskpad				/xaml/containers/taskpad
+			Toolbar				/xaml/containers/toolbar
 
 		Текстовые элементы			/xaml/text/index
 			Break				/xaml/text/break
@@ -74,6 +81,24 @@
 
 		Компоненты					/xaml/components/index
 			CollectionView			/xaml/components/collectionview
+
+		Простые элементы	/xaml/simple/index
+			Length			/xaml/simple/length
+			Size			/xaml/simple/size
+			Thickness		/xaml/simple/thickness
+			UIElementCollection			/xaml/simple/uielementcollection
+
+		Перечисления	/xaml/enums/index
+			AutoSelectMode		/xaml/enums/autoselectmode
+			ListStyle			/xaml/enums/liststyle
+			Orientation			/xaml/enums/orientation
+			VerticalAlign		/xaml/enums/verticalalign
+			StackPanelAlignItems		/xaml/enums/stackpanelalignitems
+			WrapMode			/xaml/enums/wrapmode
+
+		Абстрактные элементы	/xaml/abstract/index
+			UIElementBase		/xaml/abstract/uielementbase
+			UIElement			/xaml/abstract/uielement
 
 Контроллеры	/controllers/index
 	Шаблоны		/template/index

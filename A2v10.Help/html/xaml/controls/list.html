@@ -9,4 +9,117 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>Представляет собой список элементов. Содержимое обычно представляет собой список элементов <a class="code-link" href="listitem">ListItem</a>.</p>
+
+	Наследует: <a class="code-link" href="/xaml/controls/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+
+	<h3>Свойства</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>
+					Свойство содержимого. Содержимое списка
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Источник данных для отображения в списке
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Style</td>
+				<td><a class="code-link" href="/xaml/enums/liststyle">ListStyle</a></td>
+				<td>
+					Стиль отображения списка
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">BackgroundStyle</td>
+				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>
+					Стиль фона для списка
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Border</td>
+				<td>Boolean</td>
+				<td>
+					Отображать ли рамку вокруг списка
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Striped</td>
+				<td>Boolean</td>
+				<td>
+					Раскраска списка "в полоску" с выделением четных и нечентых элементов
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AutoSelect</td>
+				<td><a class="code-link" href="/xaml/enums/autoselectmode">AutoSelectMode</a></td>
+				<td>
+					Автоматически выделять элемент после загрузки или обновления списка
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Высота списка
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Select</td>
+				<td>Boolean?</td>
+				<td>
+					Разрешено ли выделение элементов в списке
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mark</td>
+				<td>Object</td>
+				<td>
+					Только привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка элемента списка.
+					Маркер представляет собой вертикальную линию слева от элемента.
+					Подробности ниже.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="control">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Маркировка элементов списка</h4>
+	<p>
+		Выражение привязки для свойства <code>Mark</code> должно возвращать текстовую строку, которая представляет собой дополнительный
+		css-класс, добавляемый к элементу списка.
+
+		В теме по умолчанию поддерживаются следующие варианты маркировки элементов списка:
+		<div style="display:inline-grid;grid-template-columns:auto 90px;align-items:center;grid-gap:4px 8px;">
+			<code>"danger", "red", "error"</code>
+			<span class="markcss_sample" style="border-left-color:#fc7c7c">#fc7c7c</span>
+			<code>"warning", "yellow"</code>
+			<span class="markcss_sample" style="border-left-color:#ffd700">#ffd700</span>
+			<code>"success", "green"</code>
+			<span class="markcss_sample" style="border-left-color:#89e489">#89e489</span>
+			<code>"info", "cyan"</code>
+			<span class="markcss_sample" style="border-left-color:#72eaea">#72eaea</span>
+		</div>
+	</p>
 </div>

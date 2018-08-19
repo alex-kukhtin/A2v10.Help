@@ -519,7 +519,6 @@ p {
 .tip {
   padding: 12px 18px;
   margin-left: 1rem;
-  border-left: 4px solid #f66;
   position: relative;
   background-color: #f8f8f8;
 }
@@ -531,9 +530,20 @@ p {
   position: absolute;
   top: 14px;
   left: -12px;
-  background-color: #f66;
   color: white;
   text-align: center;
+}
+.tip.alert {
+  border-left: 4px solid #f66;
+}
+.tip.alert:before {
+  background-color: #f66;
+}
+.tip.warning {
+  border-left: 4px solid gold;
+}
+.tip.warning:before {
+  background-color: gold;
 }
 .tag-label {
   background-color: #999;
@@ -590,4 +600,18 @@ p {
 }
 .tag-label.hidden {
   display: none;
+}
+.bkstyle-sample {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+}
+.markcss_sample {
+  display: inline-block;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  border: 1px solid #f5f5f5;
+  padding: 4px 0;
+  border-left-width: 5px;
+  text-align: center;
 }

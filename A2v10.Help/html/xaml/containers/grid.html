@@ -13,15 +13,21 @@
 		Представляет собой сетку из строк и колонок.
 	</p>
 
-	<p>Примечание. Контейнер Grid используется в макетах пользовательского интерфейса. Он не предназначен 
-	для отображения данных. Для отображения и привязки к данным используйте соответствующие элементы упрвления, такие 
-	как <a class="code-link" href="../controls/table">Table</a> или <a class="code-link" href="../controls/datagrid">DataGrid</a>.</p>
+	<p>
+		Наследует: <a class="code-link" href="container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>
+		Примечание. Контейнер <code>Grid</code> используется в макетах пользовательского интерфейса. Он не предназначен
+		для отображения данных. Для отображения и привязки к данным используйте соответствующие элементы упрвления, такие
+		как <a class="code-link" href="../controls/table">Table</a> или <a class="code-link" href="../controls/datagrid">DataGrid</a>.
+	</p>
+
 
 	<h3>Свойства</h3>
 	<table>
 		<thead>
 			<tr>
-				<th></th>
 				<th>Имя</th>
 				<th>Тип</th>
 				<th>Описание</th>
@@ -29,36 +35,26 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="prop-image"></td>
-				<td class="prop-name">Children</td>
-				<td>UIElementCollection</td>
-				<td>Свойство содержимого. Коллекция дочерних элементов сетки. Унаследовано от Contrainer.</td>
-			</tr>
-			<tr>
-				<td class="prop-image"></td>
-				<td class="prop-name">If</td>
-				<td>Boolean?</td>
-				<td>Включать ли элемент управления в поток рендеринга.</td>
-			</tr>
-			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">Height</td>
-				<td>Length</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>Высота элемента управления</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">Rows</td>
 				<td>RowDefinitions</td>
 				<td>Определения строк сетки</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">Columns</td>
 				<td>ColumnDefinitions</td>
 				<td>Определения колонок сетки</td>
 			</tr>
 		</tbody>
+		<tr>
+			<td colspan="3">
+				<a href="container">Свойства базового элемента</a>
+			</td>
+		</tr>
 	</table>
 
 
@@ -66,7 +62,6 @@
 	<table>
 		<thead>
 			<tr>
-				<th></th>
 				<th>Имя</th>
 				<th>Тип</th>
 				<th>Описание</th>
@@ -74,34 +69,29 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td></td>
 				<td class="prop-name">Grid.Row</td>
 				<td>Int32</td>
 				<td>Определяет номер строки, в которую должен быть помещен дочерний элемент</td>
 			</tr>
 			<tr>
-				<td></td>
 				<td class="prop-name">Grid.Col</td>
 				<td>Int32</td>
 				<td>Определяет номер колонки, в которую должен быть помещен дочерний элемент</td>
 			</tr>
 			<tr>
-				<td></td>
 				<td class="prop-name">Grid.RowSpan</td>
 				<td>Int32</td>
-				<td>Определяет количество строк, которые будет занимать дочерний элемент. По умолчанию - 1.</td>
+				<td>Определяет количество строк, которые будет занимать дочерний элемент. По умолчанию - 1</td>
 			</tr>
 			<tr>
-				<td></td>
 				<td class="prop-name">Grid.ColSpan</td>
 				<td>Int32</td>
-				<td>Определяет количество колонок, которые будет занимать дочерний элемент. По умолчанию - 1.</td>
+				<td>Определяет количество колонок, которые будет занимать дочерний элемент. По умолчанию - 1</td>
 			</tr>
 			<tr>
-				<td></td>
 				<td class="prop-name">Grid.VAlign</td>
-				<td>VerticalAlign</td>
-				<td>Определяет вертикальное выравнивание дочернего элемента таблицы. По умолчанию - Top.</td>
+				<td><a class="code-link" href="/xaml/enums/verticalalign">VerticalAlign</a></td>
+				<td>Определяет вертикальное выравнивание дочернего элемента таблицы. По умолчанию - <code>Top</code></td>
 			</tr>
 		</tbody>
 	</table>

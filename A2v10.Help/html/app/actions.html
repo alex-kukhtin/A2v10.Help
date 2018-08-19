@@ -39,7 +39,6 @@
 	<table>
 		<thead>
 			<tr>
-				<th></th>
 				<th>Имя</th>
 				<th>Тип</th>
 				<th>Описание</th>
@@ -47,61 +46,52 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">source</td>
 				<td>String</td>
-				<td>Необязательно. Источник данных. Если не указан, берется из родительского элемента.</td>
+				<td>Необязательно. Источник данных. Если не указан, берется из родительского элемента</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">schema</td>
 				<td>String</td>
-				<td>Необязательно. Имя sql-схемы. Если не указана, берется из родительского элемента.</td>
+				<td>Необязательно. Имя sql-схемы. Если не указана, берется из родительского элемента</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">model</td>
 				<td>String</td>
-				<td>Имя модели. Если не указано, берется из родительского элемента.</td>
+				<td>Имя модели. Если не указано, берется из родительского элемента</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">index</td>
 				<td>Boolean</td>
 				<td>
 					Является ли действие индексным. Для индексного действия выполняется хранимая процедура с суффиксом <code>'.Index'</code>,
-					для обычного действия - с суффиксом <code>'.Load'</code>.
+					для обычного действия - с суффиксом <code>'.Load'</code>
 				</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">copy</td>
 				<td>Boolean</td>
 				<td>
 					Является ли действие действием копирования. В этом случае выполняется хранимая процедура с
-					суффиксом <code>'.Copy'</code>. Копирование в индексных действиях не поддерживается.
+					суффиксом <code>'.Copy'</code>. Копирование в индексных действиях не поддерживается
 				</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">template</td>
 				<td>String</td>
-				<td>Путь к файлу шаблона для действия.</td>
+				<td>Путь к файлу шаблона для действия</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">view</td>
 				<td>String</td>
-				<td>Путь к файлу представления для действия.</td>
+				<td>Путь к файлу представления для действия</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">indirect</td>
 				<td>Boolean</td>
-				<td>Косвенность. Действие выполняется в два этапа.</td>
+				<td>Косвенность. Действие выполняется в два этапа</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">parameters</td>
 				<td>Object</td>
 				<td>
@@ -110,11 +100,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="prop-image"></td>
 				<td class="prop-name">export</td>
 				<td>Object</td>
 				<td>
-					Объект- описываеющий действие экспорта (загрузки) модели данных. Объект имеет следующие параметры:
+					Объект, описывающий действие экспорта (загрузки) модели данных. Объект имеет следующие параметры:
 					<table class="sub-table">
 						<tr>
 							<td class="prop-name">fileName</td>
@@ -122,11 +111,11 @@
 						</tr>
 						<tr>
 							<td class="prop-name">template</td>
-							<td>Строка. Имя файла шаблона, на основании которого будет выполняться экспорт.</td>
+							<td>Строка. Имя файла шаблона, на основании которого будет выполняться экспорт</td>
 						</tr>
 						<tr>
 							<td class="prop-name">format</td>
-							<td>Перечисление "xlsx"|unknown". В текущей реализации поддерживается только экспорт в формат <code>*.xlsx</code>.</td>
+							<td>Перечисление "xlsx"|unknown". В текущей реализации поддерживается только экспорт в формат <code>*.xlsx</code></td>
 						</tr>
 					</table>
 				</td>
