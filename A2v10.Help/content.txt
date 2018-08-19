@@ -69,6 +69,7 @@
 		Текстовые элементы			/xaml/text/index
 			Break				/xaml/text/break
 			Hyperlink			/xaml/text/hyperlink
+			Inline				/xaml/text/inline
 			Line				/xaml/text/line
 			Popover				/xaml/text/popover
 			Span				/xaml/text/span
