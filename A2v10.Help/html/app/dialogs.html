@@ -1,9 +1,94 @@
 ﻿<div>
-	<!--title:dialogs (model.json)-->
+	<!--title:actions (model.json)-->
 	<!--keywords:dialogs-->
 	<div class="title">
 		<h1>
 			Диалоги (dialogs)
 		</h1>
+		<div class="breadcrumb">
+			<a href="model">model.json</a>
+		</div>
 	</div>
+
+	<p>
+		Объект <b>dialogs</b> описывает диалоги, возможные в текущей конечной точке.
+		Имена свойств объекта представляют собой имена диалогов. Каждое свойство представляет собой объект следующей структуры:
+	</p>
+
+	<p>
+		<pre>{
+  "source": "",
+  "schema": "",
+  "model": "",
+  "index": true|false,
+  "copy": true|false,
+  "template": "",
+  "view": "",
+  "parameters": {}
+}
+</pre>
+	</p>
+
+	<h3>Свойства объекта диалога</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">source</td>
+				<td>String</td>
+				<td>Необязательно. Источник данных. Если не указан, берется из родительского элемента</td>
+			</tr>
+			<tr>
+				<td class="prop-name">schema</td>
+				<td>String</td>
+				<td>Необязательно. Имя sql-схемы. Если не указана, берется из родительского элемента</td>
+			</tr>
+			<tr>
+				<td class="prop-name">model</td>
+				<td>String</td>
+				<td>Имя модели. Если не указано, берется из родительского элемента</td>
+			</tr>
+			<tr>
+				<td class="prop-name">index</td>
+				<td>Boolean</td>
+				<td>
+					Показывает ли диалог индексную модель. Для индексных моделей выполняется хранимая процедура с суффиксом <code>'.Index'</code>,
+					для обычных - с суффиксом <code>'.Load'</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">copy</td>
+				<td>Boolean</td>
+				<td>
+					Является ли диалог диалогом копирования. В этом случае выполняется хранимая процедура с
+					суффиксом <code>'.Copy'</code>. Копирование в индексных диалогах не поддерживается
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">template</td>
+				<td>String</td>
+				<td>Путь к файлу шаблона для диалога</td>
+			</tr>
+			<tr>
+				<td class="prop-name">view</td>
+				<td>String</td>
+				<td>Путь к файлу представления для диалога</td>
+			</tr>
+			<tr>
+				<td class="prop-name">parameters</td>
+				<td>Object</td>
+				<td>
+					Объект, статические параметры, которые передаются в хранимую процедуру загрузки модели. Имя свойства является именем параметра,
+					значение - значением параметра
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>
