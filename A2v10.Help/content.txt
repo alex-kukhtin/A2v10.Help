@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Сентябрь 2018			/whatsnew/w201809
 		Август 2018				/whatsnew/w201808
 		Июль 2018				/whatsnew/w201807
 		Июнь 2018				/whatsnew/w201806
@@ -42,6 +43,7 @@
 			Radio				/xaml/controls/radio
 			PeriodPicker		/xaml/controls/periodpicker
 			Selector			/xaml/controls/selector
+			StateCard			/xaml/controls/statecard
 			Table				/xaml/controls/table
 			TableCell			/xaml/controls/tablecell
 			TableColumn			/xaml/controls/tablecolumn
@@ -67,6 +69,7 @@
 			Toolbar				/xaml/containers/toolbar
 
 		Текстовые элементы			/xaml/text/index
+			Badge				/xaml/text/badge
 			Break				/xaml/text/break
 			Hyperlink			/xaml/text/hyperlink
 			Inline				/xaml/text/inline

@@ -73,12 +73,14 @@
     <Content Include="html\help\about.html" />
     <Content Include="html\app\index.html" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\whatsnew\w201809.html" />
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\xaml\abstract\index.html" />
     <Content Include="html\xaml\containers\tabpanel.html" />
     <Content Include="html\xaml\containers\tab.html" />
     <Content Include="html\xaml\containers\toolbar.html" />
+    <Content Include="html\xaml\controls\statecard.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
     <Content Include="html\xaml\enums\liststyle.html" />
     <Content Include="html\xaml\enums\stackpanelalignitems.html" />
@@ -150,6 +152,7 @@
     <Content Include="html\xaml\index.html" />
     <Content Include="html\whatsnew\w201802.html" />
     <Content Include="html\whatsnew\index.html" />
+    <Content Include="html\xaml\text\badge.html" />
     <Content Include="html\xaml\text\inline.html" />
     <Content Include="html\xaml\text\popover.html" />
     <Content Include="html\xaml\text\hyperlink.html" />
