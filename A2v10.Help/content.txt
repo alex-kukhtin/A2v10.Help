@@ -32,7 +32,6 @@
 		Элементы управления	/xaml/controls/index
 			Button				/xaml/controls/button
 			Checkbox			/xaml/controls/checkbox
-			Control				/xaml/controls/control
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
@@ -94,15 +93,25 @@
 
 		Перечисления	/xaml/enums/index
 			AutoSelectMode		/xaml/enums/autoselectmode
+			BackgroundStyle		/xaml/enums/backgroundstyle
+			ButtonStyle			/xaml/enums/buttonstyle
+			ColumnControlType	/xaml/enums/columncontroltype
+			ControlSize			/xaml/enums/controlsize
+			Icon				/xaml/enums/icon
+			IconAlign			/xaml/enums/iconalign
 			ListStyle			/xaml/enums/liststyle
 			Orientation			/xaml/enums/orientation
-			VerticalAlign		/xaml/enums/verticalalign
 			StackPanelAlignItems		/xaml/enums/stackpanelalignitems
+			TextAlign				/xaml/enums/textalign
+			VerticalAlign		/xaml/enums/verticalalign
 			WrapMode			/xaml/enums/wrapmode
 
 		Абстрактные элементы	/xaml/abstract/index
 			UIElementBase		/xaml/abstract/uielementbase
 			UIElement			/xaml/abstract/uielement
+			Control				/xaml/abstract/control
+			CommandControl		/xaml/abstract/commandcontrol
+			ContentControl		/xaml/abstract/contentcontrol
 
 Контроллеры	/controllers/index
 	Шаблоны		/template/index
