@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Октябрь 2018			/whatsnew/w201810
 		Сентябрь 2018			/whatsnew/w201809
 		Август 2018				/whatsnew/w201808
 		Июль 2018				/whatsnew/w201807
@@ -24,12 +25,14 @@
 	redirect.json		/app/redirect
 
 Модели		/models/index
-	Модели данных	/models/datamodels
+	Структура				/models/struct
+	Модели данных			/models/datamodels
 
 
 Представления	/views/index
 	Xaml			/xaml/index
 		Элементы управления	/xaml/controls/index
+			Attachments			/xaml/controls/attachments
 			Button				/xaml/controls/button
 			Checkbox			/xaml/controls/checkbox
 			DataGrid			/xaml/controls/datagrid
@@ -52,9 +55,9 @@
 
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
-			Container			/xaml/containers/container
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
+			FullHeightPanel		/xaml/containers/fullheightpanel
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup
 			IFrame				/xaml/containers/iframe
@@ -71,10 +74,11 @@
 			Badge				/xaml/text/badge
 			Break				/xaml/text/break
 			Hyperlink			/xaml/text/hyperlink
-			Inline				/xaml/text/inline
+			Html				/xaml/text/html
 			Line				/xaml/text/line
 			Popover				/xaml/text/popover
 			Span				/xaml/text/span
+			SpanIcon			/xaml/text/spanicon
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
 
@@ -107,22 +111,27 @@
 			WrapMode			/xaml/enums/wrapmode
 
 		Абстрактные элементы	/xaml/abstract/index
-			UIElementBase		/xaml/abstract/uielementbase
-			UIElement			/xaml/abstract/uielement
 			Control				/xaml/abstract/control
 			CommandControl		/xaml/abstract/commandcontrol
+			Container			/xaml/abstract/container
 			ContentControl		/xaml/abstract/contentcontrol
+			Inline				/xaml/abstract/inline
+			UIElement			/xaml/abstract/uielement
+			UIElementBase		/xaml/abstract/uielementbase
 
-Контроллеры	/controllers/index
+Контроллеры	/controller/index
+	Свойства контроллера	/controllers/props
+
 	Шаблоны		/template/index
 		Свойства		/template/properties
+		Валидаторы		/template/validators
 		События			/template/events
 		Команды			/template/commands
-		Валидаторы		/template/validators
+		Делегаты		/template/delegates
+	Модули				/modules/index
 
-	Модули		/modules/index
-		std:utils	/modules/stdutils
+Стандартные модули		/modules/standard
+	std:utils			/modules/stdutils
 
-	ViewModel	/viewmodel/index
 
 О справочной системе	/help/about

@@ -1,0 +1,60 @@
+﻿<div>
+	<!--title:Xaml.Html-->
+	<!--keywords:Html-->
+	<div class="title">
+		<h1>
+			Элемент Html
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все текстовые элементы</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой фрагмент текста, которые отображает html-разметку.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/inline">Inline</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+
+	<h3>Свойства</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>String</td>
+				<td>Свойство содержимого. Текстовое содержимое. Допустимы html-теги</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/inline">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Описание</h3>
+	<p>
+		Использовать разметку html при непсредственной работе с xaml неудобно. Приходится экранировать все html-теги.
+		Например, если нужно отобразить текст полужирным шрифтом, приходится писать такой код:
+		<pre>&lt;Html&gt;Это &amp;lt;b&amp;gt;полужирный&amp;lt;/b&amp;gt; текст&lt;/Html&gt;</pre>
+		Вместо этого значительно удобнее использовать элементы xaml:
+		<pre>&lt;Text&gt;Это &lt;Span Bold="True"&gt;полужирный&lt;/Span&gt; текст&lt;/Text&gt;</pre>
+		Чаще всего этот элемент используется для отображения html-текста, полученного, например, из базы данных.
+	</p>
+
+	<p class="tip warning">
+		Обратите внимание! <b>Никогда</b> не пытайтесь отобразить html-код, введенный пользователем или полученный из внешнего источника.
+		Хотя система и исключает из такого кода потенциально опасные фрагменты типа скриптов или фреймов, разметка может быть необратимо испорчена.
+	</p>
+
+</div>

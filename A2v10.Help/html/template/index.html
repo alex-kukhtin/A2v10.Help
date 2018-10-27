@@ -1,9 +1,63 @@
 ﻿<div>
-    <!--title:Шаблоны-->
-    <!--keywords:template;Шаблон;-->
-    <div class="title">
-        <h1>
-            Шаблоны
-        </h1>
-    </div>
+	<!--title:Шаблоны-->
+	<!--keywords:template;Шаблон;-->
+	<div class="title">
+		<h1>
+			Шаблоны
+		</h1>
+	</div>
+
+	<p>Шаблон представляет собой объект javascript, который определяет поведение модели данных. Общая структура шаблона:</p>
+
+	<p>
+		<pre>const template = {
+  "properties": {},
+  "validators": {},
+  "events":     {},
+  "commands":   {},
+  "delegates":  {}
+}
+
+module.exports = template; /*экспорт шаблона из текущего модуля*/
+</pre>
+	</p>
+
+
+	<h3>Свойства объекта шаблона</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">properties</td>
+				<td><a href="properties">properties</a></td>
+				<td>Объект, описывающий дополнительные свойства, которые будут добавлены в модель</td>
+			</tr>
+			<tr>
+				<td class="prop-name">validators</td>
+				<td><a href="validators">validators</a></td>
+				<td>Объект, описывающий правила проверки достоверности для элементов модели</td>
+			</tr>
+			<tr>
+				<td class="prop-name">events</td>
+				<td><a href="events">events</a></td>
+				<td>Объект, описывающий обработчики событий модели</td>
+			</tr>
+			<tr>
+				<td class="prop-name">commands</td>
+				<td><a href="commands">commands</a></td>
+				<td>Объект, описывающий команды для модели</td>
+			</tr>
+			<tr>
+				<td class="prop-name">delegates</td>
+				<td><a href="delegates">delegates</a></td>
+				<td>Объект, описывающий делегаты (функции обратного вызова, callback functions), необходимые для работы модели</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
