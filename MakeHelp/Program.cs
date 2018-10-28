@@ -1,4 +1,5 @@
-﻿
+﻿// Copyright © 2012-2018 Alex Kukhtin. All rights reserved.
+
 using System;
 using System.IO;
 
@@ -6,7 +7,7 @@ namespace MakeHelp
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main(String[] args)
 		{
 			if (args.Length == 0)
 			{
@@ -32,10 +33,12 @@ namespace MakeHelp
 			Console.WriteLine();
 
 			var zp = new ZipProcessor();
-			zp.Process(dir);
-			Console.WriteLine();
-			Console.WriteLine($"Generating zip file: {zp.FileName}");
-			Console.WriteLine();
+			if (zp.Process(dir))
+			{
+				Console.WriteLine();
+				Console.WriteLine($"Generating zip file: {zp.FileName}");
+				Console.WriteLine();
+			}
 		}
 	}
 }

@@ -192,6 +192,23 @@ code {
 	background-color: @shadow-bg-color;
 	padding: 2px;
 	color: @code-txt-color;
+	&.string {
+		color: @string-txt-color;
+	}
+}
+
+.syntax {
+	font-family: @monospace-font;
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin: 1rem 0;
+	padding: 6px;
+	border-left: 4px solid #7598d8;
+	background-color: #f3faff;
+}
+
+.content-view ul.params {
+	margin-left:1rem;
 }
 
 a.disabled {

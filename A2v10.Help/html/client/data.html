@@ -1,0 +1,66 @@
+﻿<div>
+	<!--title:Модель-->
+	<div class="title">
+		<h1>
+			Модель на клиенте
+		</h1>
+	</div>
+
+	<h3>Свойства объекта</h3>
+	<p>Каждый объект расширяется следующимии служебными свойствами и методами:</p>
+	<p>
+<pre>{
+  // свойства
+  $root: Object,
+  $parent: Object,
+  <a href="data_$ctrl">$ctrl</a>: Object,
+  $id: Object,
+  $name: Object,
+  $isNew: Boolean,
+  $isEmpty: Boolean,
+  // методы
+  <a href="data_$empty">$empty</a>: Function,   // очищает объект
+  $merge: Function
+}
+</pre>
+	</p>
+
+	<h3>Дополнительные свойства корневого объекта</h3>
+	<p>Корневой объект (TRoot) кроме основных свойств, расширяется следующимии дополнительными служебными свойствами и методами:</p>
+	<p>
+		<pre>{
+  // свойства
+  $template: Object,
+  // методы
+  $setDirty: Function
+  $defer: Function,
+  $forceValidate: Function
+}
+</pre>
+	</p>
+
+
+	<h3>Свойства массива</h3>
+	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
+	<p>
+		<pre>{
+  // свойства
+  $root: Object,
+  $parent: Object,
+  <a href="data_$ctrl">$ctrl</a>: Object,
+  $isEmpty: Boolean,
+  // методы
+  <a href="data_$empty">$empty</a>: Function,   // очищает объект
+  $remove: Function,
+  $select: Function,
+  $clearSelected: Function,
+  $append: Function,
+  $prepend: Function,
+  $insert: Function
+  $copy: Function,
+}
+</pre>
+	</p>
+
+
+</div>

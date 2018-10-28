@@ -25,7 +25,6 @@
 	redirect.json		/app/redirect
 
 Модели		/models/index
-	Структура				/models/struct
 	Модели данных			/models/datamodels
 
 
@@ -119,19 +118,30 @@
 			UIElement			/xaml/abstract/uielement
 			UIElementBase		/xaml/abstract/uielementbase
 
-Контроллеры	/controller/index
-	Свойства контроллера	/controllers/props
+Программирование клиента	/client/index
+	Контроллер			/client/controller
+		$msg			/client/controller_$msg
+	Модель			/client/data
+		$ctrl			/client/data_$ctrl
+		$empty			/client/data_$empty
 
 	Шаблоны		/template/index
 		Свойства		/template/properties
 		Валидаторы		/template/validators
 		События			/template/events
+			События модели				/template/event_model
+			.construct					/template/event_construct
+			.change						/template/event_change
+			События массивов			/template/event_array
 		Команды			/template/commands
 		Делегаты		/template/delegates
-	Модули				/modules/index
 
-Стандартные модули		/modules/standard
-	std:utils			/modules/stdutils
+	Модули				/client/module
+		std:utils			/client/stdutils
+
+	Глобальные функции	/client/global
+		require			/client/global_require
+
 
 
 О справочной системе	/help/about
