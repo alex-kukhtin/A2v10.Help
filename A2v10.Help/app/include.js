@@ -49,7 +49,7 @@
 	}
 
 	Vue.component('a2-include', {
-		template: '<div class="content-view"></div>',
+		template: '<div class="help-content-view"></div>',
 		props: {
 			source: String
 		},

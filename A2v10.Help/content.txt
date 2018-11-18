@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Ноябрь 2018				/whatsnew/w201811
 		Октябрь 2018			/whatsnew/w201810
 		Сентябрь 2018			/whatsnew/w201809
 		Август 2018				/whatsnew/w201808
@@ -31,9 +32,11 @@
 Представления	/views/index
 	Xaml			/xaml/index
 		Элементы управления	/xaml/controls/index
+			Alert				/xaml/controls/alert
 			Attachments			/xaml/controls/attachments
 			Button				/xaml/controls/button
 			Checkbox			/xaml/controls/checkbox
+			ComboBox			/xaml/controls/combobox
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
@@ -51,6 +54,8 @@
 			TableMarkCell		/xaml/controls/tablemarkcell
 			TableRow			/xaml/controls/tablerow
 			TextBox				/xaml/controls/textbox
+			TreeView			/xaml/controls/treeview
+			UpoloadFile			/xaml/controls/uploadfile
 
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
@@ -61,6 +66,8 @@
 			GridGroup			/xaml/containers/gridgroup
 			IFrame				/xaml/containers/iframe
 			Include				/xaml/containers/include
+			Page				/xaml/containers/page
+			Panel				/xaml/containers/panel
 			Partial				/xaml/containers/partial
 			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
@@ -100,12 +107,15 @@
 			ButtonStyle			/xaml/enums/buttonstyle
 			ColumnControlType	/xaml/enums/columncontroltype
 			ControlSize			/xaml/enums/controlsize
+			FloatMode			/xaml/enums/floatmode
 			Icon				/xaml/enums/icon
 			IconAlign			/xaml/enums/iconalign
 			ListStyle			/xaml/enums/liststyle
 			Orientation			/xaml/enums/orientation
+			ShadowStyle			/xaml/enums/shadowstyle
 			StackPanelAlignItems		/xaml/enums/stackpanelalignitems
-			TextAlign				/xaml/enums/textalign
+			TextAlign			/xaml/enums/textalign
+			TextColor			/xaml/enums/textcolor
 			VerticalAlign		/xaml/enums/verticalalign
 			WrapMode			/xaml/enums/wrapmode
 
@@ -126,13 +136,14 @@
 		$empty			/client/data_$empty
 
 	Шаблоны		/template/index
-		Свойства		/template/properties
-		Валидаторы		/template/validators
 		События			/template/events
 			События модели				/template/event_model
 			.construct					/template/event_construct
 			.change						/template/event_change
+			.changing					/template/event_changing
 			События массивов			/template/event_array
+		Свойства		/template/properties
+		Валидаторы		/template/validators
 		Команды			/template/commands
 		Делегаты		/template/delegates
 

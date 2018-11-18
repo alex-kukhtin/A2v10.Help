@@ -1,6 +1,6 @@
 ﻿[
   {
-    "outputFile": "css/site.css",
-    "inputFile": "Less/Site.less"
+    "outputFile": "css/Site.Help.css",
+    "inputFile": "Less/Site.Help.less"
   }
 ]

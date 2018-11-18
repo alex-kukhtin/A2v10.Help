@@ -61,6 +61,10 @@
     <Content Include="css\fonts\A2v10.woff" />
     <Content Include="css\fonts\A2v10.woff2" />
     <None Include="html\index .htmlx" />
+    <Content Include="css\site.help.css" />
+    <Content Include="css\site.help.min.css">
+      <DependentUpon>site.help.css</DependentUpon>
+    </Content>
     <Content Include="html\app\commands.html" />
     <Content Include="html\app\uploads.html" />
     <Content Include="html\app\reports.html" />
@@ -84,6 +88,7 @@
     <Content Include="html\app\index.html" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\template\event_changing.html" />
     <Content Include="html\template\event_model.html" />
     <Content Include="html\template\event_change.html" />
     <Content Include="html\template\event_array.html" />
@@ -93,16 +98,25 @@
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\whatsnew\w201810.html" />
+    <Content Include="html\whatsnew\w201811.html" />
     <Content Include="html\xaml\abstract\contentcontrol.html" />
     <Content Include="html\xaml\abstract\index.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
+    <Content Include="html\xaml\containers\panel.html" />
+    <Content Include="html\xaml\containers\page.html" />
     <Content Include="html\xaml\containers\tabpanel.html" />
     <Content Include="html\xaml\containers\tab.html" />
     <Content Include="html\xaml\containers\toolbar.html" />
     <Content Include="html\xaml\abstract\commandcontrol.html" />
+    <Content Include="html\xaml\controls\combobox.html" />
     <Content Include="html\xaml\controls\attachments.html" />
+    <Content Include="html\xaml\controls\alert.html" />
     <Content Include="html\xaml\controls\statecard.html" />
+    <Content Include="html\xaml\controls\treeview.html" />
+    <Content Include="html\xaml\controls\uploadfile.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
+    <Content Include="html\xaml\enums\textcolor.html" />
+    <Content Include="html\xaml\enums\floatmode.html" />
     <Content Include="html\xaml\enums\iconalign.html" />
     <Content Include="html\xaml\enums\columncontroltype.html" />
     <Content Include="html\xaml\enums\buttonstyle.html" />
@@ -110,6 +124,7 @@
     <Content Include="html\xaml\enums\liststyle.html" />
     <Content Include="html\xaml\enums\stackpanelalignitems.html" />
     <Content Include="html\xaml\enums\orientation.html" />
+    <Content Include="html\xaml\enums\shadowstyle.html" />
     <Content Include="html\xaml\enums\textalign.html" />
     <Content Include="html\xaml\enums\verticalalign.html" />
     <Content Include="html\xaml\enums\autoselectmode.html" />
@@ -191,15 +206,12 @@
     <Content Include="html\xaml\text\break.html" />
     <Content Include="html\xaml\text\span.html" />
     <Content Include="html\xaml\text\text.html" />
-    <Content Include="Less\Site.less" />
-    <Content Include="Less\Variables.Local.less" />
+    <Content Include="Less\Site.Help.less" />
     <Content Include="content.txt" />
-    <Content Include="Less\TreeView.less" />
     <Content Include="Less\IndexView.less" />
     <Content Include="Less\MainView.less" />
     <Content Include="Less\Variables.less" />
     <Content Include="Less\Text.less" />
-    <Content Include="Less\A2v10Font.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
   </ItemGroup>

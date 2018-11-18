@@ -1,9 +1,122 @@
 ﻿<div>
-    <!--title:Шаблоны. Команды-->
-    <!--keywords:commands;Команды;-->
-    <div class="title">
-        <h1>
-            Шаблоны. Команды
-        </h1>
-    </div>
+	<!--title:Шаблоны. Команды-->
+	<!--keywords:commands;Команды;-->
+	<div class="title">
+		<h1>
+			Шаблоны. Команды
+		</h1>
+	</div>
+
+	<p>
+		Объект, описывающий команды в шаблоне, является обычным объектом javascript.
+		Имена свойств этого объекта являются именами команд, а значения - функциями или объектами.
+	</p>
+
+	<p>
+		Команды в представлениях задаются с помощью привязки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> со значением
+		свойства <code>Command</code> равным <code>Execute</code> или <code>ExecuteSelected</code>.
+		Имя команды задается свойством <code>CommandName</code>.
+	</p>
+
+	<h3>Синтаксис</h3>
+<pre>commands: {
+  Command1: Function,
+  Command2: {
+   exec: Function
+   canExec: Function,
+   saveRequired: Boolean,
+   validRequired: Boolean,
+   checkReadOnly: Boolean,
+   confirm: String | Object
+  }
+  ...
+}
+</pre>
+
+
+	<p>
+		Если значением является функция, то она просто вызывается при выполнении команды.
+	</p>
+
+	<h3>Свойства объекта команды</h3>
+	<ul class="params">
+		<li><code>{Function} exec</code> - функция, выполняющая команду.</li>
+		<li>
+			<code>{Function} canExec</code> - функция, определяюшщая можно ли выполнить команду. Возвращает признак того, можно
+			ли выполнить команду. Значение приводится к типу <code>Boolean</code>.
+		</li>
+		<li>
+			<code>{Boolean} saveRequired</code> - нужно ли сохранять модель перед выполнением команды. Также может быть
+			установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> с помощью свойства <code>SaveRequired</code>.
+		</li>
+		<li>
+			<code>{Boolean} validRequired</code> - выполнять команду только для модели, прошедшей проверку (свойство $valid корневого объекта = <code>true</code>.
+			Также может быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			с помощью свойства <code>ValidRequired</code>.
+		</li>
+		<li>
+			<code>{Boolean} checkReadOnly</code> - запрещать команду для модели в состоянии "только чтение",
+			Также может быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			с помощью свойства <code>CheckReadOnly</code>.
+		</li>
+		<li>
+			<code>{String|Object} confirm</code> - запрашивать подтверждение пользователя перед выполнением команды.
+			Также может быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			с помощью свойства <code>Confirm</code>. Если значение - строка, то она считается текстом подтверждения. Если это объект,
+			то он имеет структуру, приведенную ниже.
+		</li>
+	</ul>
+
+	<h3>Свойства объекта confirm</h3>
+	<ul class="params">
+		<li><code>{String} message</code> - текст сообщения.</li>
+		<li><code>{String} title</code> - заголовок окна сообщения.</li>
+		<li><code>{String} okText</code> - текст на кнопке подтверждения.</li>
+		<li><code>{String} cancelText</code> - текст на кнопке отмены.</li>
+	</ul>
+
+	<h3>Аргументы функций exec и canExec</h3>
+	<ul class="params">
+		<li><code>this</code> - корневой объект (TRoot).</li>
+		<li>
+			<code>...</code> - все аргументы, переданные в команду. Если команда задается в разметке, то аргумент будет
+			только один, тот который задан свойством (или привязкой) <code>Argument</code> объекта
+			<a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>.
+		</li>
+	</ul>
+
+	<p class="tip warning">
+		<b>Обратите внимание!</b> Элементы пользовательского интерфейса, связанные с командами (например кнопки) будут
+		автоматически запрещаться или разрешаться в зависимости от возможности выполнить команду.
+		Использовать свойтсво <code>Disabled</code> не нужно.
+	</p>
+
+
+	<h3>Пример</h3>
+	
+	<p>
+		XAML:
+		<pre class="xaml">&lt;<span class="tag">Button</span> <span class="attr">Command</span>={BindCmd Execute, CommandName=MyCommand, Argument={Bind Document}&gt;Выполнить команду&lt;/<span class="tag">Button</span>&gt;</pre>
+
+		Javascript:
+		<pre class="js"><span class="kw">const</span> template = {
+commands: {
+    MyCommand: {
+      exec(doc) {alert(doc.Id); },          <span class="cm">// просто вывести сообщение</span>
+      canExec(doc) {<span class="kw">return</span> doc.$isNew; }    // только для новых документов
+      validRequired: <span class="kw">true</span>,                  <span class="cm">// без ошибок</span>
+      confirm: {
+        message: <span class="str">'Точно выполнить?'</span>,
+        title: <span class="str">'Подтвердите'</span>,
+        okText: <span class="str">'Да, выполнить'</span>
+        cancelText: <span class="str">'Нет, не выполнять'</span>
+      }
+    }
+  }
+}
+</pre>
+	</p>
+	
+
+
 </div>

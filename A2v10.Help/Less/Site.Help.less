@@ -1,44 +1,10 @@
 ﻿@import "Variables.less";
-@import "Variables.Local.less";
 
-@side-bar-width: 290px;
-
-html {
-	font-family: @font-family;
-	font-size: @font-size;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-	color: @text-color;
-	box-sizing: border-box;
+input, select {
+	height:auto;
 }
 
-body {
-	overflow: hidden;
-	background-color: white;
-}
-
-.not-supported {
-	width: 400px;
-	margin: 20px auto;
-	padding: 20px;
-	text-align: center;
-	background-color: @danger-bg-color;
-	color: @danger-txt-color;
-	border: 1px solid @danger-brd-color;
-}
-
-html, body {
-	height: 100%;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-}
-
-[v-cloak] {
-	display: none;
-}
-
-.main-view {
+.help-main-view {
 	display: grid;
 	grid-gap: 0;
 	grid-template-columns: auto 1fr;
@@ -47,9 +13,14 @@ html, body {
 	height: 100%;
 }
 
-@import "A2v10Font.less";
+/*
+.ico-search:before {
+	content: "\e986";
+}
+*/
 
-header, .header {
+header, .help-header {
+	position:static;
 	grid-row: 1;
 	grid-column: 1 / span 2;
 	background-color: @brand-bk-color;
@@ -58,10 +29,10 @@ header, .header {
 	padding: .1rem;
 
 	a {
-		padding: 0 0.3rem;
+		padding: 0 .3rem 0 .3rem;
 		color: inherit;
 
-		&:hover {
+		&:hover, &:focus {
 			color: white;
 			background-color: @brand-hover-bk-color;
 		}
@@ -75,15 +46,19 @@ header, .header {
 	}
 }
 
-footer, .footer {
+footer, .help-footer {
+	position:static;
 	grid-row: 4;
 	display: flex;
 	grid-column: 1 / span 2;
 	background-color: @lightgray-bg-color;
 	font-size: .95rem;
 	padding: .2rem .4rem;
-	border-top: 1px solid @defaut-brd-color;
+	border-top: 1px solid @default-brd-color;
 	align-items: stretch;
+	text-transform:none;
+	line-height:normal;
+	height:auto;
 
 	.divider {
 		flex-grow: 2;
@@ -116,7 +91,7 @@ a {
 	}
 }
 
-.side-bar {
+.help-side-bar {
 	grid-row: 3;
 	grid-column: 1;
 	width: @side-bar-width;
@@ -135,14 +110,14 @@ a {
 	padding: 0;
 	margin: 0;
 	display: flex;
-	border-bottom: 1px solid @defaut-brd-color;
+	border-bottom: 1px solid @default-brd-color;
 
 	li {
 		display: block;
 		flex-grow: 1;
 		padding: .3em 0 .5em 0;
 		border-top: 3px solid transparent;
-		border-left: 1px solid @defaut-brd-color;
+		border-left: 1px solid @default-brd-color;
 		text-align: center;
 		cursor: pointer;
 		margin-bottom: -1px;
@@ -155,7 +130,7 @@ a {
 
 		&:hover {
 			background-color: darken(@lightgray-bg-color, 3%);
-			border-bottom-color: @defaut-brd-color;
+			border-bottom-color: @default-brd-color;
 		}
 
 		&.active {
@@ -169,12 +144,16 @@ a {
 	}
 }
 
-.content-view {
+.help-content-view {
 	grid-row: 2 / span 2;
 	grid-column: 2;
 	padding: 0 .8rem;
-	border-left: 1px solid @defaut-brd-color;
+	border-left: 1px solid @default-brd-color;
 	overflow: auto;
+}
+
+.help-side-bar .tree-view {
+	padding:6px;
 }
 
 code, pre {
@@ -185,13 +164,41 @@ code, pre {
 
 pre {
 	padding: .6rem;
-	line-height: 1.2rem;
+	line-height: 1.3rem;
+	font-size:1rem;
+	white-space:pre;
+	overflow:auto;
+}
+
+// TODO: highlight
+pre.js2 { 
+	.kw {
+		color:blue;
+	}
+	.str {
+		color:firebrick;
+	}
+	.cm {
+		color:forestgreen;
+	}
+}
+
+// TODO: highlight
+pre.xaml2 {
+	color:blue;
+	.tag {
+		color:firebrick;
+	}
+	.attr {
+		color:red;
+	}
 }
 
 code {
 	background-color: @shadow-bg-color;
 	padding: 2px;
 	color: @code-txt-color;
+
 	&.string {
 		color: @string-txt-color;
 	}
@@ -207,8 +214,12 @@ code {
 	background-color: #f3faff;
 }
 
-.content-view ul.params {
+.help-content-view ul.params {
 	margin-left:1rem;
+	li {
+		line-height:normal;
+		margin:10px 0;
+	}
 }
 
 a.disabled {
@@ -217,9 +228,9 @@ a.disabled {
 	pointer-events: none;
 }
 
-@import "TreeView.less";
 @import "IndexView.less";
 @import "MainView.less";
+@import "Text.less";
 
 p {
 	margin: 0.8rem 0;
@@ -229,10 +240,8 @@ p {
 	background-color: #f6f9ff;
 	padding: 6px;
 	display: block;
-	height: 1.3rem;
 
 	.os-title {
-		float: left;
 	}
 
 	.os-lic {
@@ -293,4 +302,14 @@ p {
 	}
 }
 
-@import "Text.less";
+.icons-content {
+	columns:4;
+	.one-item {
+		padding:5px;
+		user-select:text;
+		.ico {
+			font-size:18px;
+			margin-right:5px
+		}
+	}
+}

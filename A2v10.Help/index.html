@@ -10,10 +10,11 @@
 	<meta name="description" content="A2v10:SDK Help" />
 	<title>A2v10:SDK version 10</title>
 	<link rel="stylesheet" href="/css/site.min.css?v=10.0.7334" />
+	<link rel="stylesheet" href="/css/site.help.min.css?v=10.0.7334" />
 </head>
 <body>
-	<div id="app" class="main-view">
-		<header class="header">
+	<div id="app" class="help-main-view">
+		<header class="help-header">
 			<a href="/index">
 				<span class="h-title">A2v10:SDK</span>
 				<span class="h-sub-title">справочная система</span>
@@ -24,13 +25,13 @@
 			<li @click.prevent="tab('index')" :class="{active: isActive('index')}">Индекс</li>
 			<li @click.prevent="tab('fts')" :class="{active: isActive('fts')}">Поиск</li>
 		</ul>
-		<aside class="side-bar">
+		<aside class="help-side-bar">
 			<a2-content-view v-show="isActive('content')"></a2-content-view>
 			<a2-index-view v-show="isActive('index')"></a2-index-view>
 			<a2-search-view v-show="isActive('fts')"></a2-search-view>
 		</aside>
 		<a2-include :source="content"></a2-include>
-		<footer class="footer">
+		<footer class="help-footer">
 			<span>Copyright &copy; 2017-2018 А. Кухтин</span>
 			<span class="divider"></span>
 			<a href="/help/about">о справочной системе...</a>

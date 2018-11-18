@@ -62,7 +62,7 @@
 				return this.isFolder && !this.item.open;
 			},
 			iconClass: function () {
-				return "ico ico-" + (this.isFolder ? "node" : "leaf");
+				return "ico ico-" + (this.isFolder ? "folder" : "file");
 			},
 			dataHref() {
 				return this.getHref ? this.getHref(this.item) : '';
