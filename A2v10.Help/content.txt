@@ -142,6 +142,7 @@
 			.change						/template/event_change
 			.changing					/template/event_changing
 			События массивов			/template/event_array
+		Опции			/template/options
 		Свойства		/template/properties
 		Валидаторы		/template/validators
 		Команды			/template/commands

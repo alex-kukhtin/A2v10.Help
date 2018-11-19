@@ -30,7 +30,9 @@
 	
 	<p>
 		Например:
-<pre>const tempate = {
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+const tempate = {
   events: {
     'Model.load': modelLoad,              // функция modelLoad вызовется после загрузки модели
     'TDocument.construct': docConstruct,  // функция docConstruct вызовется после создания объекта типа TDocument
@@ -38,6 +40,7 @@
     'Document.Rows[].change': rowsAdd     // функция rowsAdd вызовется при добавлении строки в массив Rows объекта Document
   }
 }
+</script>
 </pre>
 	</p>
 

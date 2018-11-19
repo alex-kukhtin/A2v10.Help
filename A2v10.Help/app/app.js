@@ -28,12 +28,12 @@
 		},
 		methods: {
 			navigate(url) {
-                url = makeUrl(url);
-                if (this.content === url)
-                    return;
+				url = makeUrl(url);
+				if (this.content === url)
+					return;
 				window.history.pushState(null, null, url);
-                this.content = url;
-                this.$emit('navigated', this.content);
+				this.content = url;
+				this.$emit('navigated', this.content);
 			},
 			tab(name) {
 				this.activeTab = name;
@@ -44,17 +44,17 @@
 		},
 		created() {
 			let me = this;
-            window.vm = this;
+			window.vm = this;
 			window.addEventListener('popstate', function () {
-                me.content = window.location.pathname;
-                me.$emit('navigated', me.content);
+				me.content = window.location.pathname;
+				me.$emit('navigated', me.content);
 			}, false);
 
 			this.$on('navigate', function (url) {
 				me.navigate(url);
 			});
 
-            this.$on('navigateFile', function (index) {
+			this.$on('navigateFile', function (index) {
 				let files = window.app.files;
 				let file = files[index];
 				me.navigate(file.url);
@@ -66,5 +66,5 @@
 				url = '/index';
 			this.navigate(url);
 		}
-    });
+	});
 })();

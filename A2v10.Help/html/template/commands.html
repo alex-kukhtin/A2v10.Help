@@ -96,24 +96,35 @@
 	
 	<p>
 		XAML:
-		<pre class="xaml">&lt;<span class="tag">Button</span> <span class="attr">Command</span>={BindCmd Execute, CommandName=MyCommand, Argument={Bind Document}&gt;Выполнить команду&lt;/<span class="tag">Button</span>&gt;</pre>
+<pre class="code-highlight xml">
+<script type="text/template">
+<!--Кнопка, связанная с командой-->
+<Button 
+	Command="{BindCmd Execute, CommandName='MyCommand', Argument={Bind Document}}">
+	Выполнить команду
+</Button>
+</script>
+</pre>
 
 		Javascript:
-		<pre class="js"><span class="kw">const</span> template = {
-commands: {
-    MyCommand: {
-      exec(doc) {alert(doc.Id); },          <span class="cm">// просто вывести сообщение</span>
-      canExec(doc) {<span class="kw">return</span> doc.$isNew; }    // только для новых документов
-      validRequired: <span class="kw">true</span>,                  <span class="cm">// без ошибок</span>
-      confirm: {
-        message: <span class="str">'Точно выполнить?'</span>,
-        title: <span class="str">'Подтвердите'</span>,
-        okText: <span class="str">'Да, выполнить'</span>
-        cancelText: <span class="str">'Нет, не выполнять'</span>
-      }
-    }
-  }
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+const template = {
+	commands: {
+		MyCommand: {
+			exec(doc) {alert(doc.Id); },         // просто вывести сообщение
+			canExec(doc) {return doc.$isNew; },  // только для новых документов
+			validRequired: true,                 // без ошибок
+			confirm: {
+				message: 'Точно выполнить?',
+				title: 'Подтвердите',
+				okText: 'Да, выполнить'
+				cancelText: 'Нет, не выполнять'
+			}
+		}
+	}
 }
+</script>
 </pre>
 	</p>
 	

@@ -150,31 +150,13 @@ pre {
   white-space: pre;
   overflow: auto;
 }
-pre.js2 .kw {
-  color: blue;
-}
-pre.js2 .str {
-  color: firebrick;
-}
-pre.js2 .cm {
-  color: forestgreen;
-}
-pre.xaml2 {
-  color: blue;
-}
-pre.xaml2 .tag {
-  color: firebrick;
-}
-pre.xaml2 .attr {
-  color: red;
-}
 code {
   background-color: #f8f8f8;
   padding: 2px;
   color: brown;
 }
 code.string {
-  color: #42b983;
+  color: forestgreen;
 }
 .syntax {
   font-family: Consolas, 'Courier New', Courier, monospace;
@@ -402,6 +384,29 @@ a.code-link {
   padding: 10px 20px;
   margin: 20px;
   display: inline-block;
+}
+pre.js .comment {
+  color: forestgreen;
+  font-style: italic;
+}
+pre.js .keyword {
+  color: blue;
+}
+pre.js .string {
+  color: #900;
+}
+pre.xml .comment {
+  color: forestgreen;
+  font-style: italic;
+}
+pre.xml .tag {
+  color: #900;
+}
+pre.xml .attrname {
+  color: red;
+}
+pre.xml .attrval {
+  color: blue;
 }
 p {
   margin: 0.8rem 0;

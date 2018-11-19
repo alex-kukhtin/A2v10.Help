@@ -10,15 +10,19 @@
 	<p>Шаблон представляет собой объект javascript, который определяет поведение модели данных. Общая структура шаблона:</p>
 
 	<p>
-		<pre>const template = {
-  "properties": {},
-  "validators": {},
-  "events":     {},
-  "commands":   {},
-  "delegates":  {}
+<pre class="code-highlight js">
+<script type="text/template">
+const template = {
+  'options':    {}
+  'properties': {},
+  'validators': {},
+  'events':     {},
+  'commands':   {},
+  'delegates':  {}
 }
 
 module.exports = template; /*экспорт шаблона из текущего модуля*/
+</script>
 </pre>
 	</p>
 
@@ -33,6 +37,11 @@ module.exports = template; /*экспорт шаблона из текущего
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td class="prop-name">options</td>
+				<td><a href="options">options</a></td>
+				<td>Объект, описывающий опции настройки шаблона</td>
+			</tr>
 			<tr>
 				<td class="prop-name">properties</td>
 				<td><a href="properties">properties</a></td>

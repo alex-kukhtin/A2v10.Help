@@ -88,6 +88,7 @@
     <Content Include="html\app\index.html" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\template\options.html" />
     <Content Include="html\template\event_changing.html" />
     <Content Include="html\template\event_model.html" />
     <Content Include="html\template\event_change.html" />

@@ -28,14 +28,17 @@
 	<h3>Дополнительные свойства корневого объекта</h3>
 	<p>Корневой объект (TRoot) кроме основных свойств, расширяется следующимии дополнительными служебными свойствами и методами:</p>
 	<p>
-		<pre>{
-  // свойства
-  $template: Object,
-  // методы
-  $setDirty: Function
-  $defer: Function,
-  $forceValidate: Function
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	// свойства
+	$template: Object,
+	// методы
+	$setDirty: Function
+	$defer: Function,
+	$forceValidate: Function
 }
+</script>
 </pre>
 	</p>
 
@@ -43,13 +46,13 @@
 	<h3>Свойства массива</h3>
 	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
 	<p>
-		<pre>{
-  // свойства
+		<pre class="js">{
+  <span class="comment">// свойства</span>
   $root: Object,
   $parent: Object,
   <a href="data_$ctrl">$ctrl</a>: Object,
   $isEmpty: Boolean,
-  // методы
+  <span class="comment">// методы</span>
   <a href="data_$empty">$empty</a>: Function,   // очищает объект
   $remove: Function,
   $select: Function,
