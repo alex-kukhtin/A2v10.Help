@@ -6,4 +6,94 @@
 			Шаблоны. Делегаты
 		</h1>
 	</div>
+
+	<p>
+		Делегат это функция "обратного вызова" (callback funciton). Она будет вызываться в тот момент,
+		когда нужно выполнить какое-либо действие.
+		Например в элементе управления <a href="/xaml/controls/selector">Selector</a>,
+		делегат будет вызываться при вводе фрагмента текста для того чтобы получить список вариантов выбора.
+	</p>
+
+	<p>
+		Объект, описывающий делегаты в шаблоне, является обычным объектом JavaScript.
+		Имена свойств этого объекта являются именами делегатов, а значения - функциями.
+	</p>
+
+	<p>
+		Делегаты в представлениях задаются с помощью свойства
+		<code>Delegate</code> соответствующего элемента управления.
+	</p>
+
+	<h3>Синтаксис</h3>
+<pre class="code-highlight js">
+<script>
+	/* делегаты */
+	delegates: {
+		Delegate1: Function,
+			Delegate2: Function,
+	...
+	}
+</script>
+</pre>
+
+	<h3>Аргументы делегатов</h3>
+	<ul class="params">
+		<li><code>this</code> - корневой объект (TRoot).</li>
+		<li>
+			<code>...</code> - остальные аргументы зависят от конкретного делегата.
+		</li>
+	</ul>
+
+	<h3>Возвращаемое значение</h3>
+	<ul class="params">
+		<li>
+			Возвращаемое значение зависит от конкретного делегата.
+		</li>
+	</ul>
+
+
+	<h3>Пример</h3>
+
+	<p>
+		XAML:
+<pre class="code-highlight xml">
+<script type="text/template">
+<!--селектор-->
+<Selector Delegate="FetchAgent" Value="{Bind Document.Agent}"
+		  DisplayProperty="Name"
+		  Label="Выберите контрагента">
+</Selector>
+</script>
+</pre>
+
+		Javascript:
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+
+const template = {
+	delegates: {
+		FetchAgent: fetchAgent
+	}
+};
+
+function fetchAgent(agent, text) {
+	/*
+		agent - корреспондет, выбранный в селекторе 
+		text - фрагмент текста, введенный пользователем
+	*/
+
+	const ctrl = this.$ctrl;
+
+	/* 
+		Выполнить на сервере команду 'fetchCustomer', которая вернет список подходящих клиентов. 
+		В данном случае функция должна вернуть Promise, который будет обрабатываться селектором.
+	*/
+	return ctrl.$invoke('fetchCustomer', { Text: text, Kind: 'Customer' });
+
+}
+
+</script>
+</pre>
+	</p>
+
 </div>

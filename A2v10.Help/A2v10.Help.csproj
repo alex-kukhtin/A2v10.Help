@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".htaccess" />
+    <Content Include="bower.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -215,6 +216,7 @@
     <Content Include="Less\Text.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
+    <Content Include="visio\mvc1vsdx.vsdx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />

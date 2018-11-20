@@ -19,7 +19,7 @@
 
 		const TAB_REPLACE = '  '; /* 2 spaces */
 		let xml = opts && opts.lang === 'xml';
-		console.dir(opts.lang);
+		/*console.dir(opts.lang);*/
 
 		function nextChar() {
 			if (pos >= len)
@@ -248,7 +248,7 @@
 
 	function highlight(body) {
 
-		console.dir(body);
+		/*console.dir(body);*/
 		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
 		const jsKeywords = /^(a(wait|sync|rguments)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val)|f(or|unction|alse|inally)|i(f|n)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|return|w(hile|ith)|yield)$/;
 
@@ -277,7 +277,7 @@
 			}
 			let text = tag.textContent.trim();
 			tag.innerHTML = '';
-			console.dir(text);
+			/*console.dir(text);*/
 			if (lang === 'js') {
 				tokenize(text, jsOpts, function (type, text) {
 					let textNode = document.createTextNode(text);
