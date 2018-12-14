@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Декабрь 2018			/whatsnew/w201812
 		Ноябрь 2018				/whatsnew/w201811
 		Октябрь 2018			/whatsnew/w201810
 		Сентябрь 2018			/whatsnew/w201809
@@ -69,6 +70,7 @@
 			Page				/xaml/containers/page
 			Panel				/xaml/containers/panel
 			Partial				/xaml/containers/partial
+			Popup				/xaml/containers/popup
 			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
 			Tab					/xaml/containers/tab
@@ -91,6 +93,7 @@
 		Привязки					/xaml/bind/index
 			Bind					/xaml/bind/bind
 			BindCmd					/xaml/bind/bindcmd
+			StyleResource			/xaml/bind/styleresource
 
 		Компоненты					/xaml/components/index
 			CollectionView			/xaml/components/collectionview
@@ -125,6 +128,7 @@
 			Container			/xaml/abstract/container
 			ContentControl		/xaml/abstract/contentcontrol
 			Inline				/xaml/abstract/inline
+			RootContainer		/xaml/abstract/rootcontainer
 			UIElement			/xaml/abstract/uielement
 			UIElementBase		/xaml/abstract/uielementbase
 
@@ -157,3 +161,4 @@
 
 
 О справочной системе	/help/about
+

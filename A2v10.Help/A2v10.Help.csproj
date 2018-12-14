@@ -80,7 +80,6 @@
     <Content Include="html\client\global.html" />
     <Content Include="html\client\stdutils.html" />
     <Content Include="html\client\module.html" />
-    <Content Include="html\common\index - Copy.html" />
     <Content Include="html\common\platform.html" />
     <Content Include="html\common\index.html" />
     <Content Include="html\app\redirect.html" />
@@ -100,10 +99,14 @@
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\whatsnew\w201810.html" />
+    <Content Include="html\whatsnew\w201812.html" />
     <Content Include="html\whatsnew\w201811.html" />
+    <Content Include="html\xaml\abstract\rootcontainer.html" />
     <Content Include="html\xaml\abstract\contentcontrol.html" />
     <Content Include="html\xaml\abstract\index.html" />
+    <Content Include="html\xaml\bind\styleresource.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
+    <Content Include="html\xaml\containers\popup.html" />
     <Content Include="html\xaml\containers\panel.html" />
     <Content Include="html\xaml\containers\page.html" />
     <Content Include="html\xaml\containers\tabpanel.html" />

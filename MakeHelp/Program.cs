@@ -7,12 +7,12 @@ namespace MakeHelp
 {
 	class Program
 	{
-		static void Main(String[] args)
+		static Int32 Main(String[] args)
 		{
 			if (args.Length == 0)
 			{
 				Console.WriteLine("Usage: makehelp [directory]");
-				return;
+				return -1;
 			}
 			String dir = args[0].ToLowerInvariant();
 			Console.WriteLine($"Processing: {dir}");
@@ -39,6 +39,7 @@ namespace MakeHelp
 				Console.WriteLine($"Generating zip file: {zp.FileName}");
 				Console.WriteLine();
 			}
+			return 0;
 		}
 	}
 }
