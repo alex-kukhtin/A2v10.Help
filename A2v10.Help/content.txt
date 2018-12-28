@@ -90,6 +90,10 @@
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
 
+		Таблицы			/xaml/sheet/index
+			SheetCell	/xaml/sheet/sheetcell
+			SheetRow	/xaml/sheet/sheetrow
+
 		Привязки					/xaml/bind/index
 			Bind					/xaml/bind/bind
 			BindCmd					/xaml/bind/bindcmd
