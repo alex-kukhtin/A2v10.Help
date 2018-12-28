@@ -9,4 +9,112 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+
+	<p>Представляет собой поле для ввода текста.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> : <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Свойства</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Multiline</td>
+				<td>Boolean</td>
+				<td>
+					Многострочный элемент.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AutoSize</td>
+				<td>Boolean</td>
+				<td>
+					Автоматически устанавливать высоту элемента в зависимости от содержимого. Только для многострочных элементов.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Rows</td>
+				<td>Int32?</td>
+				<td>
+					Количество строк. Только для многострочных элементов.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>Выравнивание текста</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Password</td>
+				<td>Boolean</td>
+				<td>
+					Поле ввода пароля. Вместо текста отображаются заполнители. Копирование текста из поля невозможно.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Placeholder</td>
+				<td>String</td>
+				<td>
+					Подсказка. Отображается в пустом поле ввода. Исчезает при получении полем фокуса ввода.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SpellCheck</td>
+				<td>Boolean?</td>
+				<td>
+					Проверять ли орфографические ошибки. По умолчанию - зависит от настроек браузера.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">UpdateTrigger</td>
+				<td><a class="code-link" href="/xaml/enums/updatetrigger">UpdateTrigger</a></td>
+				<td>Способ обновления значения модели данных, связанных с этим элементом.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/valuedcontrol">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<!-- простое поле ввода -->
+<TextBox Placeholder="введите сюда текст"
+		Label="Простое поле" />
+
+<!-- многострочное поле ввода -->
+<TextBox Multiline="True" Rows="3"
+		Label="Многострочное поле" />
+
+
+</script>
+</pre>
+	<p>
+		Результат
+		<div style="width:300px;border:1px solid #ccc;padding:16px">
+			<div class="control-group">
+				<label>Простое поле</label>
+				<div class="input-group">
+					<input placeholder="введите сюда текст" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label>Многострочное поле</label>
+				<div class="input-group">
+					<textarea rows="3"></textarea>
+				</div>
+			</div>
+		</div>
+	</p>
 </div>

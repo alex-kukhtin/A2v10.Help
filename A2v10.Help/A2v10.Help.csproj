@@ -101,6 +101,7 @@
     <Content Include="html\whatsnew\w201810.html" />
     <Content Include="html\whatsnew\w201812.html" />
     <Content Include="html\whatsnew\w201811.html" />
+    <Content Include="html\xaml\abstract\valuedcontrol.html" />
     <Content Include="html\xaml\abstract\rootcontainer.html" />
     <Content Include="html\xaml\abstract\contentcontrol.html" />
     <Content Include="html\xaml\abstract\index.html" />
@@ -120,6 +121,7 @@
     <Content Include="html\xaml\controls\treeview.html" />
     <Content Include="html\xaml\controls\uploadfile.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
+    <Content Include="html\xaml\enums\updatetrigger.html" />
     <Content Include="html\xaml\enums\textcolor.html" />
     <Content Include="html\xaml\enums\floatmode.html" />
     <Content Include="html\xaml\enums\iconalign.html" />

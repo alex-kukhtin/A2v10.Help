@@ -123,6 +123,7 @@
 			StackPanelAlignItems		/xaml/enums/stackpanelalignitems
 			TextAlign			/xaml/enums/textalign
 			TextColor			/xaml/enums/textcolor
+			UpdateTrigger		/xaml/enums/updatetrigger
 			VerticalAlign		/xaml/enums/verticalalign
 			WrapMode			/xaml/enums/wrapmode
 
@@ -133,6 +134,7 @@
 			ContentControl		/xaml/abstract/contentcontrol
 			Inline				/xaml/abstract/inline
 			RootContainer		/xaml/abstract/rootcontainer
+			ValuedControl		/xaml/abstract/valuedcontrol
 			UIElement			/xaml/abstract/uielement
 			UIElementBase		/xaml/abstract/uielementbase
 
