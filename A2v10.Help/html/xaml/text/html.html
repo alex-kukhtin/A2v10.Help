@@ -46,9 +46,32 @@
 	<p>
 		Использовать разметку html при непсредственной работе с xaml неудобно. Приходится экранировать все html-теги.
 		Например, если нужно отобразить текст полужирным шрифтом, приходится писать такой код:
-		<pre>&lt;Html&gt;Это &amp;lt;b&amp;gt;полужирный&amp;lt;/b&amp;gt; текст&lt;/Html&gt;</pre>
+<pre class="code-highlight xml">
+<script type="text/template">
+<Html>Это &lt;b&gt;полужирный&lt;/b&gt; текст</Html>
+</script>
+</pre>
+
 		Вместо этого значительно удобнее использовать элементы xaml:
-		<pre>&lt;Text&gt;Это &lt;Span Bold="True"&gt;полужирный&lt;/Span&gt; текст&lt;/Text&gt;</pre>
+
+<pre class="code-highlight xml">
+<script type="text/template">
+<Text>Это <Span Bold="True">полужирный</Span> текст</Text>
+</script>
+</pre>
+
+		Либо использовать элемент CDATA:
+
+<pre class="code-highlight xml">
+	<script type="text/template">
+<Html>
+	<![CDATA[
+	Это <b>полужирный</b> шрифт
+	]]>
+</Html>
+	</script>
+</pre>
+
 		Чаще всего этот элемент используется для отображения html-текста, полученного, например, из базы данных.
 	</p>
 

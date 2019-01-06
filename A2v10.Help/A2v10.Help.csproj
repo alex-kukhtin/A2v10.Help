@@ -121,6 +121,7 @@
     <Content Include="html\xaml\controls\statecard.html" />
     <Content Include="html\xaml\controls\treeview.html" />
     <Content Include="html\xaml\controls\uploadfile.html" />
+    <Content Include="html\xaml\enums\autoflowmode.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
     <Content Include="html\xaml\enums\updatetrigger.html" />
     <Content Include="html\xaml\enums\textcolor.html" />
@@ -134,6 +135,7 @@
     <Content Include="html\xaml\enums\orientation.html" />
     <Content Include="html\xaml\enums\shadowstyle.html" />
     <Content Include="html\xaml\enums\textalign.html" />
+    <Content Include="html\xaml\enums\alignitem.html" />
     <Content Include="html\xaml\enums\verticalalign.html" />
     <Content Include="html\xaml\enums\autoselectmode.html" />
     <Content Include="html\xaml\enums\icon.html" />

@@ -110,6 +110,8 @@
 			UIElementCollection			/xaml/simple/uielementcollection
 
 		Перечисления	/xaml/enums/index
+			AlignItem			/xaml/enums/alignitem
+			AutoFlowMode		/xaml/enums/autoflowmode
 			AutoSelectMode		/xaml/enums/autoselectmode
 			BackgroundStyle		/xaml/enums/backgroundstyle
 			ButtonStyle			/xaml/enums/buttonstyle
