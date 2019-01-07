@@ -20,13 +20,14 @@ input, select {
 */
 
 header, .help-header {
-	position:static;
+	position: static;
 	grid-row: 1;
 	grid-column: 1 / span 2;
 	background-color: @brand-bk-color;
 	color: white;
 	font-size: 1.5rem;
 	padding: .1rem;
+	display: flex;
 
 	a {
 		padding: 0 .3rem 0 .3rem;
@@ -43,6 +44,26 @@ header, .help-header {
 
 	.h-sub-title {
 		font-size: 0.8em;
+	}
+
+	.divider {
+		flex-grow: 1;
+	}
+
+	.search {
+		font-size: 13px;
+		margin: 0 6px;
+		border: 1px solid #999;
+		border-radius: 15px;
+		padding: 0 10px;
+		background-color: #6178a1;
+
+		input {
+			padding: 3px 5px;
+			margin-left: 5px;
+			background-color: #6178a1;
+			color:white;
+		}
 	}
 }
 

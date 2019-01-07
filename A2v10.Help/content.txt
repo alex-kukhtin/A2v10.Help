@@ -42,6 +42,7 @@
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
+			FlexList			/xaml/controls/flexlist
 			List				/xaml/controls/list
 			ListItem			/xaml/controls/listitem
 			MenuItem			/xaml/controls/menuitem
@@ -63,6 +64,7 @@
 			Block				/xaml/containers/block
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
+			FlexPanel			/xaml/containers/flexpanel
 			FullHeightPanel		/xaml/containers/fullheightpanel
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup
@@ -102,6 +104,8 @@
 
 		Компоненты					/xaml/components/index
 			CollectionView			/xaml/components/collectionview
+			Switch					/xaml/components/switch
+			Validator				/xaml/components/validator
 
 		Простые элементы	/xaml/simple/index
 			Length			/xaml/simple/length
@@ -117,6 +121,7 @@
 			ButtonStyle			/xaml/enums/buttonstyle
 			ColumnControlType	/xaml/enums/columncontroltype
 			ControlSize			/xaml/enums/controlsize
+			DataGridStyle		/xaml/enums/datagridstyle
 			FloatMode			/xaml/enums/floatmode
 			Icon				/xaml/enums/icon
 			IconAlign			/xaml/enums/iconalign
@@ -140,6 +145,10 @@
 			ValuedControl		/xaml/abstract/valuedcontrol
 			UIElement			/xaml/abstract/uielement
 			UIElementBase		/xaml/abstract/uielementbase
+		Диаграммы				/xaml/diagram/index
+			Diagram				/xaml/diagram/diagram
+			Group				/xaml/diagram/group
+			Path				/xaml/diagram/path
 
 Программирование клиента	/client/index
 	Контроллер			/client/controller

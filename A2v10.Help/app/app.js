@@ -24,7 +24,8 @@
 		el: '#app',
 		data: {
 			content: '',
-			activeTab: 'content'
+			activeTab: 'content',
+			searchText: ''
 		},
 		methods: {
 			navigate(url) {
@@ -41,6 +42,12 @@
 			},
 			isActive(name) {
 				return name === this.activeTab;
+			},
+			doSearch() {
+				if (!this.searchText) return;
+				this.tab('fts');
+				this.$emit('doSearch', this.searchText);
+				this.searchText = '';
 			}
 		},
 		created() {

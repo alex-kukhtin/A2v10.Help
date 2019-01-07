@@ -9,8 +9,8 @@
 	<meta name="google" content="notranslate" />
 	<meta name="description" content="A2v10:SDK Help" />
 	<title>A2v10:SDK version 10</title>
-	<link rel="stylesheet" href="/css/site.min.css?v=10.0.7402" />
-	<link rel="stylesheet" href="/css/site.help.min.css?v=10.0.7402" />
+	<link rel="stylesheet" href="/css/site.min.css?v=10.0.7404" />
+	<link rel="stylesheet" href="/css/site.help.min.css?v=10.0.7404" />
 </head>
 <body>
 	<div id="app" class="help-main-view">
@@ -19,6 +19,11 @@
 				<span class="h-title">A2v10:SDK</span>
 				<span class="h-sub-title">справочная система</span>
 			</a>
+			<div class="divider"></div>
+			<div class="search">
+				<label><a href="" v-on:click.stop.prevent="doSearch"><i class="ico ico-search"></i></a></label>
+				<input style="width:130px" v-model="searchText" v-on:keyup.enter="doSearch"/>
+			</div>
 		</header>
 		<ul class="tab-header">
 			<li @click.prevent="tab('content')" :class="{active: isActive('content')}">Содержание</li>
@@ -36,7 +41,7 @@
 			<span class="divider"></span>
 			<a href="/help/about">о справочной системе...</a>
 			<span class="divider"></span>
-			<span>A2v10:SDK версия 10.0.7402</span>
+			<span>A2v10:SDK версия 10.0.7404</span>
 		</footer>
 	</div>
 	<script type="text/javascript">

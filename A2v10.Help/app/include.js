@@ -352,7 +352,7 @@
 		let a = body.querySelectorAll('a');
 		a.forEach(function (an) {
 			let href = an.getAttribute('href');
-			if (href.startsWith('http')) return; /* external link */
+			if (!href || href.startsWith('http')) return; /* external link */
 			an.setAttribute('href', '');
 			an.setAttribute('data-route', href);
 			an.addEventListener('click', doNavigate);

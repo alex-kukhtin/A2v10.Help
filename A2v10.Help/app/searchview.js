@@ -13,7 +13,7 @@
 	<div class="index-view">
 		<div class="search-block">
 			<label>Введите слово для поиска:</label>
-			<input class="input-search" v-model.lazy="searchText">
+			<input class="input-search" v-model.lazy="searchText" ref="input">
 			<a v-if="debugMode" @click="showDebug">debug</a>
 		</div>
 		<ul class="debug-list" v-if="debugVisible">
@@ -86,6 +86,15 @@
 				if (this.debugMode)
 					this.debugVisible = true;
 			}
+		},
+		created() {
+			let this_ = this;
+			this.$root.$on('doSearch', function (text) {
+				this_.searchText = text;
+				setTimeout(function () {
+					this_.$refs['input'].focus();
+				}, 2);
+			});
 		}
 	});
 })();

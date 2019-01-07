@@ -25,6 +25,7 @@ header,
   color: white;
   font-size: 1.5rem;
   padding: 0.1rem;
+  display: flex;
 }
 header a,
 .help-header a {
@@ -41,6 +42,26 @@ header a:focus,
 header .h-sub-title,
 .help-header .h-sub-title {
   font-size: 0.8em;
+}
+header .divider,
+.help-header .divider {
+  flex-grow: 1;
+}
+header .search,
+.help-header .search {
+  font-size: 13px;
+  margin: 0 6px;
+  border: 1px solid #999;
+  border-radius: 15px;
+  padding: 0 10px;
+  background-color: #6178a1;
+}
+header .search input,
+.help-header .search input {
+  padding: 3px 5px;
+  margin-left: 5px;
+  background-color: #6178a1;
+  color: white;
 }
 footer,
 .help-footer {
@@ -290,7 +311,7 @@ h4 {
 }
 .help-content-view table td {
   background-color: #f8f8f8;
-  padding: 2px 4px;
+  padding: 2px 6px;
 }
 .help-content-view table td.prop-name {
   font-family: Consolas, 'Courier New', Courier, monospace;
