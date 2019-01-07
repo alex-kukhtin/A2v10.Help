@@ -2,11 +2,31 @@
 
 (function () {
 
+	function scrollIntoViewCheck(el) {
+		let elRect = el.getBoundingClientRect();
+		let pElem = el.parentElement;
+		while (pElem) {
+			if (pElem.classList.contains('tree-view'))
+				break;
+			pElem = pElem.parentElement;
+		}
+		if (!pElem)
+			return;
+		let parentRect = pElem.getBoundingClientRect();
+		if (!parentRect.height) return;
+		if (elRect.top < parentRect.top) {
+			el.scrollIntoView(true);
+		}
+		else if (elRect.bottom > parentRect.bottom) {
+			el.scrollIntoView(false);
+		}
+	}
+
 	const treeItemComponent = {
 		name: 'tree-item',
 		template: `
 <li :title="item.title" @click.stop.prevent="doClick(item)"
-		:class="{expanded: isExpanded, collapsed:isCollapsed, active:isActive(item)}" >
+		:class="{expanded: isExpanded, collapsed:isCollapsed, active:isItemSelected}" >
 	<div class="overlay">
 		<a class="toggle" v-if="isFolder" href @click.stop.prevent="toggle"></a>
 		<span v-else class="toggle"/>
@@ -48,6 +68,12 @@
 					if (t.open) Vue.set(t, 'open', false);
 					this.closeInner(t);
 				});
+			},
+			fit() {
+				let el = this.$el;
+				setTimeout(function () {
+					scrollIntoViewCheck(el);
+				}, 10);
 			}
 		},
 		computed: {
@@ -66,7 +92,25 @@
 			},
 			dataHref() {
 				return this.getHref ? this.getHref(this.item) : '';
+			},
+			isItemSelected() {
+				return this.isActive(this.item);
 			}
+		},
+		watch: {
+			isItemSelected: function (newVal) {
+				if (newVal && this.$el) {
+					this.fit();
+				}
+			}
+		},
+		created() {
+			let this_ = this;
+			this.$root.$on('activateTab', function (name) {
+				if (name === 'content' && this_.isItemSelected) {
+					this_.fit();
+				}
+			});
 		}
 	};
 
@@ -127,11 +171,13 @@
 			},
 			findActive(url) {
 
+				let this_ = this;
 				function findOne(item) {
 					let active = item.url.toLowerCase() === url.toLowerCase();
 					Vue.set(item, 'active', active);
-					if (active)
+					if (active) {
 						document.title = item.title;
+					}
 					if (!item.items) return;
 					item.items.forEach(findOne);
 					if (item.items.some(itm => itm.active || itm.open)) {

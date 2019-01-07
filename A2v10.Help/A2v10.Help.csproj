@@ -80,6 +80,7 @@
     <Content Include="html\client\global.html" />
     <Content Include="html\client\stdutils.html" />
     <Content Include="html\client\module.html" />
+    <Content Include="html\client\localization.html" />
     <Content Include="html\common\platform.html" />
     <Content Include="html\common\index.html" />
     <Content Include="html\app\redirect.html" />

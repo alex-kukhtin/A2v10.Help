@@ -26,13 +26,13 @@
 
 	<h3>Синтаксис</h3>
 <pre class="code-highlight js">
-<script>
-	/* делегаты */
-	delegates: {
-		Delegate1: Function,
-			Delegate2: Function,
+<script type="text/template">
+/* делегаты */
+delegates: {
+	Delegate1: Function,
+	Delegate2: Function,
 	...
-	}
+}
 </script>
 </pre>
 
@@ -78,15 +78,15 @@ const template = {
 
 function fetchAgent(agent, text) {
 	/*
-		agent - корреспондет, выбранный в селекторе 
-		text - фрагмент текста, введенный пользователем
+	agent - корреспондет, выбранный в селекторе 
+	text - фрагмент текста, введенный пользователем
 	*/
 
 	const ctrl = this.$ctrl;
 
 	/* 
-		Выполнить на сервере команду 'fetchCustomer', которая вернет список подходящих клиентов. 
-		В данном случае функция должна вернуть Promise, который будет обрабатываться селектором.
+	Выполнить на сервере команду 'fetchCustomer', которая вернет список подходящих клиентов. 
+	В данном случае функция должна вернуть Promise, который будет обрабатываться селектором.
 	*/
 	return ctrl.$invoke('fetchCustomer', { Text: text, Kind: 'Customer' });
 

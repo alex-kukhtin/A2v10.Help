@@ -1,4 +1,4 @@
-﻿/* Copyright © 2017-2018 Alex Kukhtin. All rights reserved.*/
+﻿/* Copyright © 2017-2019 Alex Kukhtin. All rights reserved.*/
 
 (function () {
 
@@ -15,11 +15,11 @@
 			delims = opts.delims,
 			keywords = opts.keywords,
 			numbers = /^[-+]?\d*\.?\d*([eE][-+]\d*)?$/,
+			instr = opts.instr,
 			token = '';
 
 		const TAB_REPLACE = '  '; /* 2 spaces */
 		let xml = opts && opts.lang === 'xml';
-		/*console.dir(opts.lang);*/
 
 		function nextChar() {
 			if (pos >= len)
@@ -29,7 +29,7 @@
 			return ch;
 		}
 
-		const backChar = () => { if (pos <= len) pos--; };
+		const backChar = (ch) => { if (ch && (pos <= len)) pos--; };
 		const normalizeTab = ch => ch === '\t' ? TAB_REPLACE : ch;
 		const isDelimiter = ch => delims.indexOf(ch) !== -1;
 		const isStartString = ch => ch === '"' || ch === '`' || ch === "'";
@@ -59,7 +59,7 @@
 						return addToken('comment');
 					}
 					else {
-						backChar();
+						backChar(nnch);
 					}
 				} else {
 					token += normalizeTab(nch);
@@ -74,7 +74,7 @@
 				ch = nextChar();
 			}
 			addToken('comment');
-			backChar();
+			backChar(ch);
 		}
 
 		function readWhiteSpace(ch) {
@@ -83,7 +83,7 @@
 				ch = nextChar();
 			} while (ch && isWhiteSpace(ch));
 			addToken('ws');
-			backChar();
+			backChar(ch);
 		}
 
 		function skipWhiteSpace(ch) {
@@ -95,13 +95,20 @@
 			return ch;
 		}
 
+		function nextChars(n) {
+			let str = '';
+			for (let i = 0; i < n; i++)
+				str += nextChar();
+			return str;
+		}
+
 		function readName(ch, toktype) {
 			do {
 				token += ch;
 				ch = nextChar();
 			} while (ch && !isWhiteSpace(ch) && !isDelimiter(ch));
 			addToken(toktype || 'name');
-			backChar();
+			backChar(ch);
 		}
 
 		function addToken(type) {
@@ -112,6 +119,8 @@
 					type = 'keyword';
 				} else if (numbers && numbers.test(token)) {
 					type = 'number';
+				} else if (instr && instr.test(token)) {
+					type = 'instr';
 				}
 			}
 			callback(type, token);
@@ -134,6 +143,7 @@
 				if (ch === '"') {
 					readString(ch, 'attrval');
 					ch = nextChar();
+					ch = skipWhiteSpace(ch);
 				}
 			}
 			ch = skipWhiteSpace(ch);
@@ -143,9 +153,10 @@
 					token = '/>';
 					addToken('tag');
 					close = true;
+					return close;
 				}
 				else
-					backChar();
+					backChar(ch);
 			} else if (ch === '>') {
 				token = ch;
 				addToken('tag');
@@ -153,7 +164,7 @@
 				close = true;
 			}
 			ch = skipWhiteSpace(ch);
-			backChar();
+			backChar(ch);
 			return close;
 		}
 
@@ -186,7 +197,7 @@
 			while (ch) {
 				if (ch === '-') {
 					let savePos = pos;
-					let tail = nextChar() + nextChar();
+					let tail = nextChars(2);
 					if (tail === '->') {
 						token += '-->';
 						addToken('comment');
@@ -199,6 +210,26 @@
 				ch = nextChar();
 			}
 			addToken('comment');
+		}
+
+		function readCData(ch) {
+			token = '<![CDATA[';
+			while (ch) {
+				if (ch === ']') {
+					let savePos = pos;
+					let tail = nextChars(2);
+					if (tail === ']>') {
+						token += ']]>';
+						addToken('cdata');
+						return;
+					} else {
+						pos = savePos;
+					}
+				}
+				token += normalizeTab(ch);
+				ch = nextChar();
+			}
+			addToken('cdata');
 		}
 
 		while (ch) {
@@ -221,17 +252,24 @@
 					continue;
 				}
 				else {
-					backChar();
+					backChar(ch);
 				}
 				token = ch;
 				addToken('delim');
 			} else if (xml && ch === '<') {
 				let savePos = pos;
-				let nstr = nextChar() + nextChar() + nextChar();
+				let nstr = nextChars(3);
 				if (nstr === '!--') {
 					readXmlComment(nextChar(ch));
 					ch = nextChar();
 					ch = skipWhiteSpace(ch);
+				} else if (nstr === '![C') {
+					let tail = nextChars(5);
+					if (tail === 'DATA[') {
+						readCData(nextChar(ch));
+						ch = nextChar();
+						ch = skipWhiteSpace(ch);
+					}
 				} else {
 					pos = savePos;
 				}
@@ -251,11 +289,13 @@
 		/*console.dir(body);*/
 		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
 		const jsKeywords = /^(a(wait|sync|rguments)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val)|f(or|unction|alse|inally)|i(f|n)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|return|w(hile|ith)|yield)$/;
+		const instr = /^(Array|Boolean|Date|Infinity|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		let jsOpts = {
 			lang: 'js',
 			delims: jsDelims,
-			keywords: jsKeywords
+			keywords: jsKeywords,
+			instr: instr
 		};
 
 		const xmlOpts = {
@@ -293,7 +333,7 @@
 			} else if (lang === 'xml') {
 				tokenize(text, xmlOpts, function (type, text) {
 					let textNode = document.createTextNode(text);
-					if (type !== 'tag' && type !== 'attrname' && type !== 'attrval' && type !== 'comment')
+					if (type !== 'tag' && type !== 'attrname' && type !== 'attrval' && type !== 'comment' && type !== 'cdata')
 						tag.appendChild(textNode);
 					else {
 						let node = document.createElement('span');

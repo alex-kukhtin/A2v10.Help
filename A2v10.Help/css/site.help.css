@@ -85,7 +85,7 @@ a:active {
 .help-side-bar {
   grid-row: 3;
   grid-column: 1;
-  width: 290px;
+  width: 320px;
   overflow: auto;
 }
 .help-side-bar .sub-side {
@@ -136,6 +136,7 @@ a:active {
 }
 .help-side-bar .tree-view {
   padding: 6px;
+  height: 100%;
 }
 code,
 pre {
@@ -393,7 +394,10 @@ pre.js .keyword {
   color: blue;
 }
 pre.js .string {
-  color: #900;
+  color: firebrick;
+}
+pre.js .instr {
+  color: blueviolet;
 }
 pre.xml .comment {
   color: forestgreen;
@@ -407,6 +411,9 @@ pre.xml .attrname {
 }
 pre.xml .attrval {
   color: blue;
+}
+pre.xml .cdata {
+  color: #999;
 }
 p {
   margin: 0.8rem 0;

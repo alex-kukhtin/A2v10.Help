@@ -277,8 +277,7 @@ namespace MakeHelp
 			};
 
 			StringBuilder sb = new StringBuilder();
-			//var re = new Regex(@"[\t|\n|\r]", RegexOptions.Compiled|RegexOptions.Multiline);
-			var re = new Regex("[\\t\\n\\r]", RegexOptions.Compiled | RegexOptions.Multiline);
+			var re = new Regex("[\\t\\r\\n]", RegexOptions.Compiled | RegexOptions.Multiline);
 			foreach (var f in files)
 			{
 				var fp = Path.Combine(dirName, f);

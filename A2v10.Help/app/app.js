@@ -37,6 +37,7 @@
 			},
 			tab(name) {
 				this.activeTab = name;
+				this.$emit('activateTab', name);
 			},
 			isActive(name) {
 				return name === this.activeTab;
