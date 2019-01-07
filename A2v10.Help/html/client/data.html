@@ -9,19 +9,22 @@
 	<h3>Свойства объекта</h3>
 	<p>Каждый объект расширяется следующимии служебными свойствами и методами:</p>
 	<p>
-<pre>{
-  // свойства
-  $root: Object,
-  $parent: Object,
-  <a href="data_$ctrl">$ctrl</a>: Object,
-  $id: Object,
-  $name: Object,
-  $isNew: Boolean,
-  $isEmpty: Boolean,
-  // методы
-  <a href="data_$empty">$empty</a>: Function,   // очищает объект
-  $merge: Function
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	// свойства
+	$root: Object,
+	$parent: Object,
+	$ctrl: Object,
+	$id: Object,
+	$name: Object,
+	$isNew: Boolean,
+	$isEmpty: Boolean,
+	// методы
+	$empty: Function,   // очищает объект
+	$merge: Function
 }
+</script>
 </pre>
 	</p>
 
@@ -46,22 +49,26 @@
 	<h3>Свойства массива</h3>
 	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
 	<p>
-		<pre class="js">{
-  <span class="comment">// свойства</span>
-  $root: Object,
-  $parent: Object,
-  <a href="data_$ctrl">$ctrl</a>: Object,
-  $isEmpty: Boolean,
-  <span class="comment">// методы</span>
-  <a href="data_$empty">$empty</a>: Function,   // очищает объект
-  $remove: Function,
-  $select: Function,
-  $clearSelected: Function,
-  $append: Function,
-  $prepend: Function,
-  $insert: Function
-  $copy: Function,
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	// свойства
+	$root: Object,
+	$parent: Object,
+	$ctrl: Object,
+	$isEmpty: Boolean,
+	$selectedIndex,     // индекс выбранного элемента
+	// методы
+	$empty: Function,   // очищает объект
+	$remove: Function,  // удаляет элемент из массива
+	$select: Function,
+	$clearSelected: Function,
+	$append: Function,
+	$prepend: Function,
+	$insert: Function
+	$copy: Function
 }
+</script>
 </pre>
 	</p>
 

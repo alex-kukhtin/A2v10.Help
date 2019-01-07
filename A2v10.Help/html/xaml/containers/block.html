@@ -14,5 +14,71 @@
 		управления или другие контейнеры.
 	</p>
 
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Children</code></p>
+
 	<h3>Свойства</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>Свойство содержимого. Коллекция дочерних элементов.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание содержимого контейнера.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Color</td>
+				<td><a class="code-link" href="/xaml/enums/textcolor">TextColor</a></td>
+				<td>
+					Цвет текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Высота блока.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Ширина блока. По умолчанию блок занимает 100% ширины родительского элемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Border</td>
+				<td>Boolean</td>
+				<td>
+					Отображать рамку для блока.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Scroll</td>
+				<td>Boolean</td>
+				<td>
+					Допускает ли блок прокрутку. Не имеет смысла устанавливать это свойство, если не установлена высота блока.
+					По умолчанию высота блока будет такой, чтобы включать все вложенные элементы.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
