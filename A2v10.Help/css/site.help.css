@@ -304,28 +304,28 @@ h4 {
   line-height: 1.5rem;
   list-style-type: disc;
 }
-.help-content-view table {
+.help-content-view table.table-props {
   border-collapse: separate;
   border-spacing: 2px;
   width: 100%;
 }
-.help-content-view table td {
+.help-content-view table.table-props td {
   background-color: #f8f8f8;
   padding: 2px 6px;
 }
-.help-content-view table td.prop-name {
+.help-content-view table.table-props td.prop-name {
   font-family: Consolas, 'Courier New', Courier, monospace;
   width: 1%;
   font-weight: bold;
 }
-.help-content-view table td.prop-image {
+.help-content-view table.table-props td.prop-image {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMvvhp8YAAACtSURBVDhPpZDBDcQgDARTG38K4E8tVEGdfH23ltbZEBA6HdJExHjWJJeZ/cW9WSzUxxg2Ef3bANYglFIspeS01h4h7sVGRIBGiqDWGrKGhKABaNDJs9x793f3KM0BOl2u7nvUfgpgCGVwDMg5PwIUfN4rgOBAJ61AzxfvP8p6E538CljJeEd9gv13AA52Ms4JJMJ/dpRVIlwRsJMZsFsRwBusrn3CH5CIHp6x6wMQ8ZH6L0gAuQAAAABJRU5ErkJggg==") no-repeat;
   background-position: center;
   width: 20px;
   padding: 0;
   background-color: #f8f8f8;
 }
-.help-content-view table th {
+.help-content-view table.table-props th {
   padding: 4px 6px;
   background-color: #e0e0e0;
   font-weight: normal;

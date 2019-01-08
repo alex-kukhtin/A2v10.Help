@@ -1,12 +1,33 @@
-﻿<div>
-	<!--title:Xaml.DatePicker-->
-	<!--keywords:DatePicker-->
-	<div class="title">
-		<h1>
-			Элемент DatePicker
-		</h1>
-		<div class="breadcrumb">
-			<a href="index">Все элементы управления</a>
+﻿<div xmlns:v-bind="v-bind">
+	<div id="xaml-datepicker">
+		<!--title:Xaml.DatePicker-->
+		<!--keywords:DatePicker-->
+		<div class="title">
+			<h1>
+				Элемент DatePicker
+			</h1>
+			<div class="breadcrumb">
+				<a href="index">Все элементы управления</a>
+			</div>
+		</div>
+
+		<div class="xaml-sample">
+			<a2-date-picker label="Введите дату" v-bind:item="Document" prop="Date"></a2-date-picker>
 		</div>
 	</div>
+	<script type="text/javascript">
+(function () {
+			var du = require('std:utils').date;
+			var vm = new Vue({
+				el: "#xaml-datepicker",
+				data: {
+					Document: {
+						Date: du.today()
+					}
+				},
+				created: function () {
+				}
+			});
+		})();
+	</script>
 </div>

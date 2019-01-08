@@ -373,14 +373,22 @@
 					let elem = document.createElement("div");
 					body.appendChild(elem);
 					elem.innerText = 'Not found';
-					resolve(body);
+					resolve({ body });
 				}
 				else {
 					let prs = new DOMParser();
 					let doc = prs.parseFromString(xhr.responseText, 'text/html');
 					let body = doc.body;
 					setHrefs(body);
-					resolve(body);
+					let script = null;
+					for (let i = 0; i < doc.scripts.length; i++) {
+						let s = doc.scripts[i];
+						if (s.type === 'text/javascript') {
+							script = s.text;
+							break;
+						}
+					}
+					resolve({ body, script});
 				}
 			};
 			xhr.open('GET', url, true);
@@ -404,7 +412,9 @@
 				if (url === '/')
 					url += 'index';
 				/*console.warn(url);*/
-				loadHtml('/html' + url + '.html').then(function (elem) {
+				loadHtml('/html' + url + '.html').then(function (el) {
+					let elem = el.body;
+					let scripts = el.scripts;
 					me.$el.innerHTML = '';
 					let div = document.createElement('div');
 					let ch = elem.children;
@@ -417,6 +427,11 @@
 					for (ch of cha)
 						me.$el.appendChild(ch);
 					highlight(div);
+					if (el.script) {
+						let newScript = document.createElement("script");
+						newScript.text = el.script;
+						document.body.appendChild(newScript).parentNode.removeChild(newScript);
+					}
 				});
 			}
 		}

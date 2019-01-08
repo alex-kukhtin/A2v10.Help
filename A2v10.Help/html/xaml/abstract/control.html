@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div xmlns:v-bind="v-bind">
 	<!--title:Xaml.Control-->
 	<!--keywords:Control-->
 	<div class="title">
@@ -26,7 +26,7 @@
 	</p>
 
 	<h3>Свойства</h3>
-	<table>
+	<table class="table-props">
 		<thead>
 			<tr>
 				<th>Имя</th>
@@ -116,9 +116,10 @@
 <pre class="code-highlight xml">
 <script type="text/template">
 <!-- пример элемента -->
-<TextBox Label="Метка элемента" Description="Описание элемента">
+<TextBox Label="Метка элемента" Description="Описание элемента" 
+		Hint="Текст всплывающей подсказки для редактора">
 	<TextBox.AddOns>
-		<Hyperlink Icon="Search"/>
+		<Hyperlink Icon="Search" />
 	</TextBox.AddOns>
 </TextBox>
 
@@ -127,18 +128,28 @@
 	</p>
 	<p>
 		Результат
-		<div class="xaml-sample">
-			<div class="control-group">
-				<label>
-					<span>Метка элемента</span>
-				</label>
-				<div class="input-group">
-					<input />
-					<a class="a2-hyperlink add-on a2-inline"><i class="ico ico-search"></i></a>
-				</div>
-				<span class="descr">Описание элемента</span>
-
-			</div>
+		<div class="xaml-sample" id="xaml-control">
+			<textbox label="Метка элемента" description="Описание элемента" v-bind:item="Agent" prop="Name">
+				<template slot="hint">
+					<popover class="a2-inline hint po-top-right" icon="help"><span>Текст всплывающей подсказки для редактора</span></popover>
+				</template>
+				<a class="a2-hyperlink add-on a2-inline"><i class="ico ico-search"></i> </a>
+			</textbox>
 		</div>
 	</p>
+
+
+	<script type="text/javascript">
+(function () {
+			var du = require('std:utils').date;
+			var vm = new Vue({
+				el: "#xaml-control",
+				data: {
+					Agent: {
+						Name: ''
+					}
+				}
+			});
+		})();
+	</script>
 </div>

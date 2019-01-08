@@ -259,7 +259,7 @@ namespace MakeHelp
 				.Append(";")
 				.AppendLine();
 
-			sb.AppendLine("window.app = {content: content, files: files, index: index, fts: fts};");
+			sb.AppendLine("window.helpapp = {content: content, files: files, index: index, fts: fts};");
 			sb.Append("})();");
 			return sb.ToString();
 		}
@@ -283,6 +283,7 @@ namespace MakeHelp
 				var fp = Path.Combine(dirName, f);
 				var txt = File.ReadAllText(fp);
 				sb.Append(re.Replace(txt, ""));
+				//sb.Append(txt);
 				Console.WriteLine($"\tfile: {fp}");
 			}
 			var outFile = Path.Combine(dirName, "scripts/main.js");

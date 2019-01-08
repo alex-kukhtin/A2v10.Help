@@ -2,6 +2,9 @@
 
 (function () {
 
+	const popup = require('std:popup');
+	const eventBus = require('std:eventBus');
+
 	function makeUrl(url) {
 		if (url.startsWith('/'))
 			return url; /* root-based */
@@ -63,10 +66,12 @@
 			});
 
 			this.$on('navigateFile', function (index) {
-				let files = window.app.files;
+				let files = window.helpapp.files;
 				let file = files[index];
 				me.navigate(file.url);
 			});
+			popup.startService();
+			eventBus.$on('closeAllPopups', popup.closeAll);
 		},
 		mounted() {
 			let url = window.location.pathname;

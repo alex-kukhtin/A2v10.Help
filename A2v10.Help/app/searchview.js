@@ -53,11 +53,11 @@
 		},
 		computed: {
 			words() {
-				let fts = window.app.fts;
+				let fts = window.helpapp.fts;
 				return Object.keys(fts);
 			},
 			searchResult() {
-				let fts = window.app.fts;
+				let fts = window.helpapp.fts;
 				let r = {};
 				if (!this.searchText) return r;
 				let st = this.searchText.toUpperCase();
@@ -70,7 +70,7 @@
 		},
 		methods: {
 			file(ix) {
-				let file = window.app.files[ix];
+				let file = window.helpapp.files[ix];
 				return file ? file.title : '#ERR';
 			},
 			isActive(ix, key) {

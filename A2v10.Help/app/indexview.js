@@ -33,8 +33,8 @@
 		*/
 		data() {
 			return {
-				root: window.app.index,
-				files: window.app.files,
+				root: window.helpapp.index,
+				files: window.helpapp.files,
 				active: null,
 				fragment: ''
 			};

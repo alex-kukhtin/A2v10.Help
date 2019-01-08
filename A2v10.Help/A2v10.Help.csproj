@@ -111,7 +111,7 @@
     <Content Include="html\xaml\components\switch.html" />
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
-    <Content Include="html\xaml\containers\flexpanel.html" />
+    <Content Include="html\xaml\containers\card.html" />
     <Content Include="html\xaml\containers\popup.html" />
     <Content Include="html\xaml\containers\panel.html" />
     <Content Include="html\xaml\containers\page.html" />
@@ -237,6 +237,8 @@
     <Content Include="Less\Text.less" />
     <None Include="packages.config" />
     <Content Include="README.md" />
+    <Content Include="scripts\a2v10.js" />
+    <Content Include="scripts\locale-ru.min.js" />
     <Content Include="visio\mvc1vsdx.vsdx" />
   </ItemGroup>
   <ItemGroup>

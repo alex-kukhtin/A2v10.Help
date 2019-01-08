@@ -149,7 +149,7 @@
 		template: '<div class="sub-side"><tree-view ref="treeView" :items="root.items" :click="navigate" :is-active="isActive" :get-href="getHRef"></tree-view></div>',
 		data() {
 			return {
-				root: window.app.content
+				root: window.helpapp.content
 			};
 		},
 		computed: {

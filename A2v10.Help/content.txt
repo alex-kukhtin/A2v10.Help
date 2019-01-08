@@ -62,9 +62,9 @@
 
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
+			Card				/xaml/containers/card
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
-			FlexPanel			/xaml/containers/flexpanel
 			FullHeightPanel		/xaml/containers/fullheightpanel
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup
