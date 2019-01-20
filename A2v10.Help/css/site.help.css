@@ -308,6 +308,7 @@ h4 {
   border-collapse: separate;
   border-spacing: 2px;
   width: 100%;
+  font-size: 13px;
 }
 .help-content-view table.table-props td {
   background-color: #f8f8f8;
@@ -449,6 +450,7 @@ p {
   background-color: #f6f9ff;
   padding: 6px;
   display: block;
+  margin: 2px 0;
 }
 .os-product .os-lic {
   float: right;
@@ -507,4 +509,9 @@ p {
 .icons-content .one-item .ico {
   font-size: 18px;
   margin-right: 5px;
+}
+.not-supported {
+  position: absolute;
+  top: 20%;
+  left: 40%;
 }

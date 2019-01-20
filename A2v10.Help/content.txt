@@ -74,6 +74,7 @@
 			Panel				/xaml/containers/panel
 			Partial				/xaml/containers/partial
 			Popup				/xaml/containers/popup
+			Repeater			/xaml/containers/repeater
 			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
 			Tab					/xaml/containers/tab
@@ -94,7 +95,9 @@
 			Text				/xaml/text/text
 
 		Таблицы			/xaml/sheet/index
+			Sheet		/xaml/sheet/sheet
 			SheetCell	/xaml/sheet/sheetcell
+			SheetPage	/xaml/sheet/sheetpage
 			SheetRow	/xaml/sheet/sheetrow
 
 		Привязки					/xaml/bind/index

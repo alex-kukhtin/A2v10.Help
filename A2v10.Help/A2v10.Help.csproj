@@ -43,6 +43,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".htaccess" />
@@ -112,6 +113,7 @@
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
     <Content Include="html\xaml\containers\card.html" />
+    <Content Include="html\xaml\containers\repeater.html" />
     <Content Include="html\xaml\containers\popup.html" />
     <Content Include="html\xaml\containers\panel.html" />
     <Content Include="html\xaml\containers\page.html" />
@@ -150,6 +152,8 @@
     <Content Include="html\xaml\enums\autoselectmode.html" />
     <Content Include="html\xaml\enums\icon.html" />
     <Content Include="html\xaml\sheet\index.html" />
+    <Content Include="html\xaml\sheet\sheetpage.html" />
+    <Content Include="html\xaml\sheet\sheet.html" />
     <Content Include="html\xaml\sheet\sheetrow.html" />
     <Content Include="html\xaml\sheet\sheetcell.html" />
     <Content Include="html\xaml\simple\index.html" />
@@ -229,6 +233,7 @@
     <Content Include="html\xaml\text\break.html" />
     <Content Include="html\xaml\text\span.html" />
     <Content Include="html\xaml\text\text.html" />
+    <Content Include="root.php" />
     <Content Include="Less\Site.Help.less" />
     <Content Include="content.txt" />
     <Content Include="Less\IndexView.less" />
@@ -239,6 +244,7 @@
     <Content Include="README.md" />
     <Content Include="scripts\a2v10.js" />
     <Content Include="scripts\locale-ru.min.js" />
+    <Content Include="sitemap.txt" />
     <Content Include="visio\mvc1vsdx.vsdx" />
   </ItemGroup>
   <ItemGroup>

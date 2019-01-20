@@ -213,14 +213,23 @@ namespace MakeHelp
 
 		public void MakeContent(String fileName)
 		{
+			StringBuilder sitemap = new StringBuilder();
+			var host = ConfigurationManager.AppSettings["host"];
+			if (host == null)
+				throw new InvalidOperationException("appSettings/host not defined");
 			try
 			{
 				foreach (var ln in File.ReadAllLines(fileName))
 				{
 					if (String.IsNullOrEmpty(ln))
 						continue;
-					_content.Add(ln);
+					var url =  _content.Add(ln);
+					if (url != null)
+						sitemap.AppendLine($"{host}{url}");
 				}
+
+				String sitemapFile = fileName.Replace("content.txt", "sitemap.txt");
+				File.WriteAllText(sitemapFile, sitemap.ToString(), Encoding.UTF8);
 			}
 			catch (Exception ex)
 			{

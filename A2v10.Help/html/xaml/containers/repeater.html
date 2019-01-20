@@ -1,0 +1,54 @@
+﻿<div>
+	<!--title:Xaml.Repeater-->
+	<!--keywords:Repeater-->
+	<div class="title">
+		<h1>
+			Элемент Repeater
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Не имеет внешнего представления и обрамляющего тега. Используется для вывода повторяющегося содержимого. Другими словами, в разметку
+		просто включается несколько элементов в соответствии с источником данных.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>Элемент, который будет повторен для каждого значения из <code>ItemsSource</code>.
+				Обратите внимание, что привязки внутри содержимого будут относительнми. Корень привязки будет представлять собой 
+				один элемент из массива <code>ItemsSource</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Источник данных для отображения элементов.
+				</td>
+			</tr>
+		</tbody>
+		<tr>
+			<td colspan="3">
+				<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+			</td>
+		</tr>
+	</table>
+</div>

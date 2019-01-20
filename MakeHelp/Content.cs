@@ -28,7 +28,7 @@ namespace MakeHelp
 			_stack.Push(this);
 		}
 
-		public void Add(String text)
+		public String Add(String text)
 		{
 			String title = null;
 			String url = null;
@@ -50,7 +50,7 @@ namespace MakeHelp
 				throw new ArgumentException($"Invalid value for '{text}'. Expected: [\t*] title \t url");
 			}
 			if (String.IsNullOrEmpty(title) && String.IsNullOrEmpty(url))
-				return;
+				return null;
 			while (lev < _currentLevel)
 			{
 				_stack.Pop();
@@ -73,6 +73,7 @@ namespace MakeHelp
 				Url = url.Trim()
 			};
 			elem.Items.Add(newElem);
+			return url.Trim();
 		}
 	}
 }
