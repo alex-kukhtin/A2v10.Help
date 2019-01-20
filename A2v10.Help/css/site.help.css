@@ -3,6 +3,9 @@ input,
 select {
   height: auto;
 }
+a2-include {
+  display: block;
+}
 .help-main-view {
   display: grid;
   grid-gap: 0;
@@ -121,6 +124,7 @@ a:active {
   margin: 0;
   display: flex;
   border-bottom: 1px solid #ddd;
+  max-height: 32px;
 }
 .tab-header li {
   display: block;

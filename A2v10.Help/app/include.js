@@ -397,7 +397,7 @@
 	}
 
 	Vue.component('a2-include', {
-		template: '<div class="help-content-view"></div>',
+		template: '<div></div>',
 		props: {
 			source: String
 		},

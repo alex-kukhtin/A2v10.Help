@@ -1,7 +1,7 @@
 <?php
 
 $url = "./html" . $_SERVER['REQUEST_URI'] . ".html";
-$content_start = "<a2-include :source=\"content\">";
+$content_start = "<a2-include class=\"help-content-view\" :source=\"content\">";
 $content_end = "</a2-include>";
 $title_tag = "<title>A2v10:SDK version 10</title>";
 $title_regex = "/^\s*<!--title:(.+)-->\s*$/m";
