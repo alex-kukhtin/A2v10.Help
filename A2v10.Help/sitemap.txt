@@ -23,6 +23,7 @@ http://sdk.a2.dn.ua/app/commands
 http://sdk.a2.dn.ua/app/reports
 http://sdk.a2.dn.ua/app/uploads
 http://sdk.a2.dn.ua/app/redirect
+http://sdk.a2.dn.ua/app/folders
 http://sdk.a2.dn.ua/models/index
 http://sdk.a2.dn.ua/models/datamodels
 http://sdk.a2.dn.ua/views/index
@@ -44,6 +45,7 @@ http://sdk.a2.dn.ua/xaml/controls/image
 http://sdk.a2.dn.ua/xaml/controls/radio
 http://sdk.a2.dn.ua/xaml/controls/periodpicker
 http://sdk.a2.dn.ua/xaml/controls/selector
+http://sdk.a2.dn.ua/xaml/controls/separator
 http://sdk.a2.dn.ua/xaml/controls/statecard
 http://sdk.a2.dn.ua/xaml/controls/table
 http://sdk.a2.dn.ua/xaml/controls/tablecell
@@ -83,6 +85,7 @@ http://sdk.a2.dn.ua/xaml/text/line
 http://sdk.a2.dn.ua/xaml/text/popover
 http://sdk.a2.dn.ua/xaml/text/span
 http://sdk.a2.dn.ua/xaml/text/spanicon
+http://sdk.a2.dn.ua/xaml/text/staticimage
 http://sdk.a2.dn.ua/xaml/text/taglabel
 http://sdk.a2.dn.ua/xaml/text/text
 http://sdk.a2.dn.ua/xaml/sheet/index

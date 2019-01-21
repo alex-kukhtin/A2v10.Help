@@ -158,6 +158,7 @@ a:active {
   padding: 0 0.8rem;
   border-left: 1px solid #ddd;
   overflow: auto;
+  user-select: text;
 }
 .help-side-bar .tree-view {
   padding: 6px;
@@ -198,7 +199,8 @@ code.string {
 }
 .help-content-view ul.params li {
   line-height: normal;
-  margin: 10px 0;
+  margin: 0.2rem 0;
+  list-style-type: circle;
 }
 a.disabled {
   color: #999;

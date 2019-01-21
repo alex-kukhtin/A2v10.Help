@@ -50,4 +50,41 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<h3>Разделители</h3>
+	<p>
+		Дочерние элементы панели могут включать разделитель <a class="code-link" href="/xaml/controls/separator">Separator</a>.
+	</p>
+	<p>
+		Вставка разделителя приведет к тому, что содержимое разделится на два блока. 
+		Все что будет до разделителя выровняется по левой (или верхней) стороне панели, а
+		то что после разделителя - по правой (или нижней).
+	</p>
+	Например:
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+		<StackPanel Orientation="Horizontal">
+		<Button>Кнопка 1</Button>
+		<Button>Кнопка 2</Button>
+		<Separator />
+		<Button>Кнопка 3</Button>
+	</StackPanel>
+</script>
+</pre>
+	</p>
+
+	<p>
+		Результат
+		<div class="xaml-sample" style="width:400px">
+			<div class="stack-panel horizontal">
+				<button class="btn a2-inline">Кнопка 1</button>
+				<button class="btn a2-inline">Кнопка 2</button>
+				<div role="separator" class="divider"></div>
+				<button class="btn a2-inline">Кнопка 3</button>
+			</div>
+		</div>
+	</p>
+
 </div>

@@ -1,13 +1,15 @@
 <?php
 
-$url = "./html" . $_SERVER['REQUEST_URI'] . ".html";
+$raw_url = $_SERVER['REQUEST_URI'];
+if (empty($raw_url) || $raw_url == "/")
+  $raw_url = "/index";
+$url = "./html" . $raw_url . ".html";
 $content_start = "<a2-include class=\"help-content-view\" :source=\"content\">";
 $content_end = "</a2-include>";
 $title_tag = "<title>A2v10:SDK version 10</title>";
 $title_regex = "/^\s*<!--title:(.+)-->\s*$/m";
 
 $page = file_get_contents("./index.html");
-
 
 $content = file_get_contents($url);
 if (substr($content, 0, 3) == "\xEF\xBB\xBF") {

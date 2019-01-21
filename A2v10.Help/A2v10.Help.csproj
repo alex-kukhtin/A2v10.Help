@@ -68,6 +68,7 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="html\app\commands.html" />
+    <Content Include="html\app\folders.html" />
     <Content Include="html\app\uploads.html" />
     <Content Include="html\app\reports.html" />
     <Content Include="html\app\popups.html" />
@@ -125,6 +126,7 @@
     <Content Include="html\xaml\controls\attachments.html" />
     <Content Include="html\xaml\controls\alert.html" />
     <Content Include="html\xaml\controls\flexlist.html" />
+    <Content Include="html\xaml\controls\separator.html" />
     <Content Include="html\xaml\controls\statecard.html" />
     <Content Include="html\xaml\controls\treeview.html" />
     <Content Include="html\xaml\controls\uploadfile.html" />
@@ -226,6 +228,7 @@
     <Content Include="html\xaml\text\popover.html" />
     <Content Include="html\xaml\text\hyperlink.html" />
     <Content Include="html\xaml\text\html.html" />
+    <Content Include="html\xaml\text\staticimage.html" />
     <Content Include="html\xaml\text\spanicon.html" />
     <Content Include="html\xaml\text\taglabel.html" />
     <Content Include="html\xaml\text\line.html" />

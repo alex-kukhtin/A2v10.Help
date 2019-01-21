@@ -26,6 +26,7 @@
 		uploads			/app/uploads
 
 	redirect.json		/app/redirect
+	Специальные папки		/app/folders
 
 Модели		/models/index
 	Модели данных			/models/datamodels
@@ -50,6 +51,7 @@
 			Radio				/xaml/controls/radio
 			PeriodPicker		/xaml/controls/periodpicker
 			Selector			/xaml/controls/selector
+			Separator			/xaml/controls/separator
 			StateCard			/xaml/controls/statecard
 			Table				/xaml/controls/table
 			TableCell			/xaml/controls/tablecell
@@ -91,6 +93,7 @@
 			Popover				/xaml/text/popover
 			Span				/xaml/text/span
 			SpanIcon			/xaml/text/spanicon
+			StaticImage			/xaml/text/staticimage
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
 
