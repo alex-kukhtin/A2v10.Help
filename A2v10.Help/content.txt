@@ -25,8 +25,10 @@
 		reports			/app/reports
 		uploads			/app/uploads
 
+	Специальные папки		/app/folders/index
+		_assets				/app/folders/assets
+
 	redirect.json		/app/redirect
-	Специальные папки		/app/folders
 
 Модели		/models/index
 	Модели данных			/models/datamodels
@@ -38,7 +40,7 @@
 			Alert				/xaml/controls/alert
 			Attachments			/xaml/controls/attachments
 			Button				/xaml/controls/button
-			Checkbox			/xaml/controls/checkbox
+			CheckBox			/xaml/controls/checkbox
 			ComboBox			/xaml/controls/combobox
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
@@ -67,6 +69,7 @@
 			Card				/xaml/containers/card
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
+			FieldSet			/xaml/containers/fieldset
 			FullHeightPanel		/xaml/containers/fullheightpanel
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup
@@ -133,6 +136,7 @@
 			IconAlign			/xaml/enums/iconalign
 			ListStyle			/xaml/enums/liststyle
 			Orientation			/xaml/enums/orientation
+			RadioButtonStyle	/xaml/enums/radiobuttonstyle
 			ShadowStyle			/xaml/enums/shadowstyle
 			StackPanelAlignItems		/xaml/enums/stackpanelalignitems
 			TextAlign			/xaml/enums/textalign
@@ -142,6 +146,7 @@
 			WrapMode			/xaml/enums/wrapmode
 
 		Абстрактные элементы	/xaml/abstract/index
+			CheckBoxBase		/xaml/abstract/checkboxbase
 			Control				/xaml/abstract/control
 			CommandControl		/xaml/abstract/commandcontrol
 			Container			/xaml/abstract/container
@@ -165,11 +170,6 @@
 
 	Шаблоны		/template/index
 		События			/template/events
-			События модели				/template/event_model
-			.construct					/template/event_construct
-			.change						/template/event_change
-			.changing					/template/event_changing
-			События массивов			/template/event_array
 		Опции			/template/options
 		Свойства		/template/properties
 		Валидаторы		/template/validators

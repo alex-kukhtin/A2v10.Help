@@ -300,7 +300,7 @@ h2 {
 h3,
 h4 {
   font-size: 1rem;
-  margin: 0.75rem 0 0.15rem 0;
+  margin: 1.5rem 0 0.15rem 0;
 }
 .help-content-view ul {
   padding-left: 20px;
@@ -416,7 +416,7 @@ a.code-link {
 }
 .xaml-sample {
   background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  border: 1px solid #eee;
   padding: 16px;
   width: 300px;
 }

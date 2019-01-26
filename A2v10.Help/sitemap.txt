@@ -22,8 +22,9 @@ http://sdk.a2.dn.ua/app/popups
 http://sdk.a2.dn.ua/app/commands
 http://sdk.a2.dn.ua/app/reports
 http://sdk.a2.dn.ua/app/uploads
+http://sdk.a2.dn.ua/app/folders/index
+http://sdk.a2.dn.ua/app/folders/assets
 http://sdk.a2.dn.ua/app/redirect
-http://sdk.a2.dn.ua/app/folders
 http://sdk.a2.dn.ua/models/index
 http://sdk.a2.dn.ua/models/datamodels
 http://sdk.a2.dn.ua/views/index
@@ -60,6 +61,7 @@ http://sdk.a2.dn.ua/xaml/containers/block
 http://sdk.a2.dn.ua/xaml/containers/card
 http://sdk.a2.dn.ua/xaml/containers/dialog
 http://sdk.a2.dn.ua/xaml/containers/dropdownmenu
+http://sdk.a2.dn.ua/xaml/containers/fieldset
 http://sdk.a2.dn.ua/xaml/containers/fullheightpanel
 http://sdk.a2.dn.ua/xaml/containers/grid
 http://sdk.a2.dn.ua/xaml/containers/gridgroup
@@ -120,6 +122,7 @@ http://sdk.a2.dn.ua/xaml/enums/icon
 http://sdk.a2.dn.ua/xaml/enums/iconalign
 http://sdk.a2.dn.ua/xaml/enums/liststyle
 http://sdk.a2.dn.ua/xaml/enums/orientation
+http://sdk.a2.dn.ua/xaml/enums/radiobuttonstyle
 http://sdk.a2.dn.ua/xaml/enums/shadowstyle
 http://sdk.a2.dn.ua/xaml/enums/stackpanelalignitems
 http://sdk.a2.dn.ua/xaml/enums/textalign
@@ -128,6 +131,7 @@ http://sdk.a2.dn.ua/xaml/enums/updatetrigger
 http://sdk.a2.dn.ua/xaml/enums/verticalalign
 http://sdk.a2.dn.ua/xaml/enums/wrapmode
 http://sdk.a2.dn.ua/xaml/abstract/index
+http://sdk.a2.dn.ua/xaml/abstract/checkboxbase
 http://sdk.a2.dn.ua/xaml/abstract/control
 http://sdk.a2.dn.ua/xaml/abstract/commandcontrol
 http://sdk.a2.dn.ua/xaml/abstract/container
@@ -149,11 +153,6 @@ http://sdk.a2.dn.ua/client/data_$ctrl
 http://sdk.a2.dn.ua/client/data_$empty
 http://sdk.a2.dn.ua/template/index
 http://sdk.a2.dn.ua/template/events
-http://sdk.a2.dn.ua/template/event_model
-http://sdk.a2.dn.ua/template/event_construct
-http://sdk.a2.dn.ua/template/event_change
-http://sdk.a2.dn.ua/template/event_changing
-http://sdk.a2.dn.ua/template/event_array
 http://sdk.a2.dn.ua/template/options
 http://sdk.a2.dn.ua/template/properties
 http://sdk.a2.dn.ua/template/validators
