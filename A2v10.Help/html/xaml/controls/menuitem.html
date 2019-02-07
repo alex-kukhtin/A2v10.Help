@@ -1,12 +1,101 @@
-﻿<div>
-    <!--title:Xaml.MenuItem-->
-    <!--keywords:MenuItem-->
-    <div class="title">
-        <h1>
-            Элемент MenuItem
-        </h1>
-        <div class="breadcrumb">
-            <a href="index">Все элементы управления</a>
-        </div>
-    </div>
+﻿<div xmlns:v-on="v-on">
+	<div>
+		<!--title:Xaml.MenuItem-->
+		<!--keywords:MenuItem-->
+		<div class="title">
+			<h1>
+				Элемент MenuItem
+			</h1>
+			<div class="breadcrumb">
+				<a href="index">Все элементы управления</a>
+			</div>
+		</div>
+
+		<p>Представляет собой элемент меню. Обычно находится в контейнере <a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a>.</p>
+
+		Наследует: <a class="code-link" href="/xaml/abstract/commandcontrol">CommandControl</a> :
+		<a class="code-link" href="/xaml/abstract/contentcontrol">ContentControl</a> :
+		<a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+		<p>Свойство содержимого: <code>Content</code></p>
+
+
+		<h3>Свойства</h3>
+		<table class="table-props">
+			<thead>
+				<tr>
+					<th>Имя</th>
+					<th>Тип</th>
+					<th>Описание</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="prop-name">Icon</td>
+					<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+					<td>
+						Иконка элемента.
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<a href="/xaml/abstract/commandcontrol">Свойства базового элемента</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<h3>Пример</h3>
+
+		<p>
+			XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Button Content="File" Style="Primary">
+	<Button.DropDown>
+		<DropDownMenu Direction="DownRight" Separate="True">
+			<MenuItem Content="File" Icon="File" />
+			<MenuItem Content="Save" Icon="Save" />
+		</DropDownMenu>
+	</Button.DropDown>
+</Button>
+</script>
+</pre>
+		</p>
+
+		<p>
+			Результат
+			<div class="xaml-sample" id="xaml-menuitem">
+				<div class="dropdown dir-down separate" dropdown-top="" v-dropdown="1">
+					<button toggle="" class="btn btn-primary">
+						File<span class="caret"></span>
+					</button>
+					<div role="menu" class="dropdown-menu menu down-right">
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-file"></i> <span>Open</span>
+						</a>
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-save"></i> <span>Save</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</p>
+	</div>
+
+	<script type="text/javascript">
+(function () {
+	var vm = new Vue({
+		el: "#xaml-menuitem",
+		methods: {
+			click() {
+
+			}
+		},
+		created: function () {
+		}
+	});
+})();
+	</script>
 </div>

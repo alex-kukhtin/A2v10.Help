@@ -1,4 +1,4 @@
-AddDefaultCharset UTF-8
+AddDefaultCharset utf-8
 
 DirectoryIndex root.php
 ErrorDocument 404 /Html/Errors/404.html

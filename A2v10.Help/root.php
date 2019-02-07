@@ -1,5 +1,6 @@
 <?php
 
+header('Content-type: text/html; charset=utf-8');
 $raw_url = $_SERVER['REQUEST_URI'];
 if (empty($raw_url) || $raw_url == "/")
   $raw_url = "/index";
