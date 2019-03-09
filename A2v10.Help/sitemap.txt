@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w201903
 http://sdk.a2.dn.ua/whatsnew/w201901
 http://sdk.a2.dn.ua/whatsnew/w201812
 http://sdk.a2.dn.ua/whatsnew/w201811
@@ -104,6 +105,7 @@ http://sdk.a2.dn.ua/xaml/components/collectionview
 http://sdk.a2.dn.ua/xaml/components/switch
 http://sdk.a2.dn.ua/xaml/components/validator
 http://sdk.a2.dn.ua/xaml/simple/index
+http://sdk.a2.dn.ua/xaml/simple/gapsize
 http://sdk.a2.dn.ua/xaml/simple/length
 http://sdk.a2.dn.ua/xaml/simple/size
 http://sdk.a2.dn.ua/xaml/simple/thickness
