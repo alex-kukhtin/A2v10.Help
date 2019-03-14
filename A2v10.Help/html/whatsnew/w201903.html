@@ -3,7 +3,7 @@
 	<!--keywords:Что нового-->
 	<div class="title">
 		<h1>
-			Выпуск 13 - версии 7441-7462 (Март 2019)
+			Выпуск 13 - версии 7441-7466 (Март 2019)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все выпуски</a>|
@@ -12,28 +12,30 @@
 		</div>
 	</div>
 
-	Selector.ShowCaret, 
-	CheckBox.Color, 
-	NavBar,
 	BindCmd Report - Url, Data,
-	BindCmd.Format for Number, Currency
 	BindCmd.Dialog New
-	
+
+	Bind.Format for Number, Currency
+
+	NavBar,
+
 	Dialog.AlwaysOk, CanCloseDelegate, Taskpad
 
-	List.MarkerStyle, List.Style = Chat, List.Flush, List.MaxHeight
+	List.MarkerStyle, List.Flush, List.MaxHeight
 
 	Button.Style = Outline, Button.Rounded
 	Pager.Style=Rounded
-	
+
 	Card.Width+Height
 	Panel.Cut style
 	Popover.Badge, Background - White
 
-	.construct (prop)
-	Model.load (requery)
+	Slot!
+
+	Selector.ShowCaret, Selector.PanePlacement: TopLeft, TopRight
+
+
 	Map.$setProperty
-	$ctrl.$saveModified
 	utils.format('#.00')
 
 	<h3>Xaml</h3>
@@ -52,9 +54,27 @@
 		<li>
 			В элемент <a class="code-link" href="/xaml/containers/grid">Grid</a> добавлено свойство <code>Gap</code>.
 		</li>
-		<li>В перечисление <a class="code-link" href="/xaml/emums/autoselectmode">AutoSelectMode</a> добавлено значение <code>LastItem</code>.</li>
+		<li>В перечисление <a class="code-link" href="/xaml/enums/autoselectmode">AutoSelectMode</a> добавлено значение <code>LastItem</code>.</li>
+		<li>
+			В элемент <a class="code-link" href="/xaml/abstract/checkboxbase">CheckBoxBase</a> добавлено свойство <code>Color</code>.
+		</li>
+		<li>Добавлен новый стиль <a class="code-link" href="/xaml/enums/liststyle">Chat</a> для объекта <a class="code-link" href="/xaml/controls/list">List</a>.</li>
+		<li>Добавлен элемент <a class="code-link" href="/xaml/controls/chatitem">ChatItem</a>.</li>
+	</ul>
+
+	<h3>Шаблоны</h3>
+	<ul>
+		<li>В обработчик события <a class="code-link" href="/template/events">.construct</a> добавлен аргумент <code>prop</code>.</li>
+		<li>В обработчик события <a class="code-link" href="/template/events">Model.load</a> добавлен аргумент <code>requery</code>.</li>
+	</ul>
+
+	<h3>Программирование клиента</h3>
+	<ul>
+		<li>В контроллер <a class="code-link" href="/client/controller">$ctrl</a> добавлен метод <code>$saveModified</code>.</li>
 	</ul>
 
 	<h3>Справка</h3>
-	<ul></ul>
+	<ul>
+		<li>Добавлено описание привязки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>.</li>
+	</ul>
 </div>

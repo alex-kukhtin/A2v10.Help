@@ -41,6 +41,7 @@
 			Alert				/xaml/controls/alert
 			Attachments			/xaml/controls/attachments
 			Button				/xaml/controls/button
+			ChatItem			/xaml/controls/chatitem
 			CheckBox			/xaml/controls/checkbox
 			ComboBox			/xaml/controls/combobox
 			DataGrid			/xaml/controls/datagrid
@@ -164,8 +165,7 @@
 			Path				/xaml/diagram/path
 
 Программирование клиента	/client/index
-	Контроллер			/client/controller
-		$msg			/client/controller_$msg
+	Контроллер		/client/controller
 	Модель			/client/data
 		$ctrl			/client/data_$ctrl
 		$empty			/client/data_$empty

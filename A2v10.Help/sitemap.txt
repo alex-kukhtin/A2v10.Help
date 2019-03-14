@@ -34,6 +34,7 @@ http://sdk.a2.dn.ua/xaml/controls/index
 http://sdk.a2.dn.ua/xaml/controls/alert
 http://sdk.a2.dn.ua/xaml/controls/attachments
 http://sdk.a2.dn.ua/xaml/controls/button
+http://sdk.a2.dn.ua/xaml/controls/chatitem
 http://sdk.a2.dn.ua/xaml/controls/checkbox
 http://sdk.a2.dn.ua/xaml/controls/combobox
 http://sdk.a2.dn.ua/xaml/controls/datagrid
@@ -149,7 +150,6 @@ http://sdk.a2.dn.ua/xaml/diagram/group
 http://sdk.a2.dn.ua/xaml/diagram/path
 http://sdk.a2.dn.ua/client/index
 http://sdk.a2.dn.ua/client/controller
-http://sdk.a2.dn.ua/client/controller_$msg
 http://sdk.a2.dn.ua/client/data
 http://sdk.a2.dn.ua/client/data_$ctrl
 http://sdk.a2.dn.ua/client/data_$empty

@@ -78,7 +78,6 @@
     <Content Include="html\client\data_%24ctrl.html" />
     <Content Include="html\client\global_require.html" />
     <Content Include="html\client\data_%24empty.html" />
-    <Content Include="html\client\controller_%24msg.html" />
     <Content Include="html\client\data.html" />
     <Content Include="html\client\global.html" />
     <Content Include="html\client\stdutils.html" />
@@ -124,6 +123,7 @@
     <Content Include="html\xaml\controls\combobox.html" />
     <Content Include="html\xaml\controls\attachments.html" />
     <Content Include="html\xaml\controls\alert.html" />
+    <Content Include="html\xaml\controls\chatitem.html" />
     <Content Include="html\xaml\controls\flexlist.html" />
     <Content Include="html\xaml\controls\separator.html" />
     <Content Include="html\xaml\controls\statecard.html" />

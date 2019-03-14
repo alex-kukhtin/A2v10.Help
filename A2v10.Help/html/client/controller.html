@@ -1,8 +1,8 @@
 ﻿<div>
-	<!--title:Контроллеры-->
+	<!--title:Контроллер-->
 	<div class="title">
 		<h1>
-			Контроллеры
+			Контроллер
 		</h1>
 	</div>
 
@@ -13,21 +13,77 @@
 	</p>
 
 	<p>
-		<pre>{
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
   // свойства
-  "$isDirty": Boolean,
-  "$isPristine": Boolean,
+  $isDirty: Boolean,
+  $isPristine: Boolean,
   // методы
   $invoke: Function,
   $close: Function,
   $modalClose: Function, // закрывает модальное окно
-  <a href="controller_$msg">$msg</a>: Function,        // выводит сообщение
+  $msg: Function,        // выводит сообщение
   $alert: Function,      // выводит сообщение об ошибке
   $toast: Function,
   $showDialog: Function,
   $asyncValid: Function
+  $saveModified: Function
 }
+</script>
 </pre>
-</p>
+	</p>
+	<h3>Методы контроллера</h3>
+
+	<div class="method">
+		<div class="syntax">$msg(msg, [title], [style])</div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>{String} msg</code> - текст сообщения. Может включать html-разметку.</li>
+			<li><code>{String} title</code> - заголовок окна сообщения. По умолчанию: строка <b>"Сообщение"</b> (в текущей локализации).</li>
+			<li><code>{Enum:['info', 'alert', 'confirm']} style</code>  - стиль. По умолчанию: <code class="string">'info'</code>.</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>Promise</code>, который будет выполнен после закрытия окна.</li>
+		</ul>
+		<h4>Описание:</h4>
+		<p>
+			Метод выводит сообщение в модальном окне.
+		</p>
+		<p>
+			Кнопки, которые будут размещены в окне зависят от стиля сообщения.
+		</p>
+	</div>
+
+	
+	<div class="method">
+		<div class="syntax">$saveModified([message], [title])</div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>message</code> - сообщение. Если не указано (<code>undefined</code>), будет использовано стандартное сообщение
+				<b>"Элемент был изменен. Сохранить изменения?"</b> (в текущей локализации).
+			</li>
+			<li>
+				<code>title</code> - заголовок окна сообщения. Если не указано (<code>undefined</code>), будет использован
+				стандартный заголовок <b>"Подтверждение закрытия"</b> (в текущей локализации).
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>true</code> - если объект не был изменен (<code>$isDirty = false</code>), <code>false</code> в противном случае.</li>
+		</ul>
+		<h4>Описание:</h4>
+		<p>
+			Если модель данных не изменялась, то метод просто возвращает <code>true</code>, если изменялась - показывает диалог
+			подтверждения закрытия с тремя кнопками: <b>"Сохранить"</b>, <b>"Не сохранять"</b> и <b>"Отменить"</b>
+			(в текущей локализации) и возвращает <code>false</code>.
+		</p>
+		<p>
+			После того, как пользователь сделает выбор, контроллер выполнит нужное действие (например сохранит модель) и закроет текущее окно.
+		</p>
+		<p>Чаще всего метод используется в делегате <code>CanCloseDelegate</code> объекта <a href="/xaml/containers/dialog">Dialog</a>.</p>
+	</div>
 
 </div>
