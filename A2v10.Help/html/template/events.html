@@ -50,6 +50,7 @@ const tempate = {
 	<ul>
 		<li><code>Model.load</code> - модель загружена.</li>
 		<li><code>Model.saved</code> - модель сохранена.</li>
+		<li><code>Model.beforeSave</code> - перед сохранением.</li>
 	</ul>
 
 	<p>
@@ -58,12 +59,13 @@ const tempate = {
 			<li><code>this</code> - корень модели данных (TRoot).</li>
 			<li><code>model</code> - корень модели данных (TRoot).</li>
 			<li>
-				<code>caller</code> - ссылка на корень модели данных (TRoot) вызывающего объекта. 
+				<code>caller</code> - ссылка на корень модели данных (TRoot) вызывающего объекта.
 				Например, если это модель диалога, то
 				<code>caller</code> будет ссылкой на модель, из которой этот диалог был вызван.
 				Может использоваться для взаимодействия с вызывающим элементом.
+				Для событий <code>Model.saved</code>, <code>Model.save</code> значение всегда будет
+				<code>undefined</code>.
 			</li>
-			<li><code>requery</code> - <code>true</code>, если выполняется операция <code>requery</code>.</li>
 		</ul>
 	</p>
 

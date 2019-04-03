@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Апрель 2019				/whatsnew/w201904
 		Март 2019				/whatsnew/w201903
 		Январь 2019				/whatsnew/w201901
 		Декабрь 2018			/whatsnew/w201812
