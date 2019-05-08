@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w201905
 http://sdk.a2.dn.ua/whatsnew/w201904
 http://sdk.a2.dn.ua/whatsnew/w201903
 http://sdk.a2.dn.ua/whatsnew/w201901
@@ -38,6 +39,7 @@ http://sdk.a2.dn.ua/xaml/controls/button
 http://sdk.a2.dn.ua/xaml/controls/chatitem
 http://sdk.a2.dn.ua/xaml/controls/checkbox
 http://sdk.a2.dn.ua/xaml/controls/combobox
+http://sdk.a2.dn.ua/xaml/controls/comboboxitem
 http://sdk.a2.dn.ua/xaml/controls/datagrid
 http://sdk.a2.dn.ua/xaml/controls/datagridcolumn
 http://sdk.a2.dn.ua/xaml/controls/datepicker
@@ -51,6 +53,7 @@ http://sdk.a2.dn.ua/xaml/controls/periodpicker
 http://sdk.a2.dn.ua/xaml/controls/selector
 http://sdk.a2.dn.ua/xaml/controls/separator
 http://sdk.a2.dn.ua/xaml/controls/statecard
+http://sdk.a2.dn.ua/xaml/controls/static
 http://sdk.a2.dn.ua/xaml/controls/table
 http://sdk.a2.dn.ua/xaml/controls/tablecell
 http://sdk.a2.dn.ua/xaml/controls/tablecolumn

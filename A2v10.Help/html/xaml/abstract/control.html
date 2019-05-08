@@ -103,6 +103,12 @@
 				<td>Дополнительные элементы управления. Обычно это гиперссылки, которые выполняют какие-то дополнительные команды.</td>
 			</tr>
 			<tr>
+				<td class="prop-name">Link</td>
+				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
+				<td>Дополнительная ссылка, связанная с элементом. Отображается в правом верхнем углу элемента.
+				Обычно это гиперссылка.</td>
+			</tr>
+			<tr>
 				<td colspan="3">
 					<a href="uielement">Свойства базового элемента</a>
 				</td>
@@ -121,6 +127,9 @@
 	<TextBox.AddOns>
 		<Hyperlink Icon="Search" />
 	</TextBox.AddOns>
+	<TextBox.Link>
+		<Hyperlink Content="дополнительно..."/>
+	</TextBox.Link>
 </TextBox>
 
 </script>
@@ -132,6 +141,9 @@
 			<textbox label="Метка элемента" description="Описание элемента" v-bind:item="Agent" prop="Name">
 				<template slot="hint">
 					<popover class="a2-inline hint po-top-right" icon="help"><span>Текст всплывающей подсказки для редактора</span></popover>
+				</template>
+				<template slot="link">
+					<a class="a2-hyperlink control-link">дополнительно...</a>
 				</template>
 				<a class="a2-hyperlink add-on a2-inline"><i class="ico ico-search"></i> </a>
 			</textbox>

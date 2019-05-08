@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Май 2019				/whatsnew/w201905
 		Апрель 2019				/whatsnew/w201904
 		Март 2019				/whatsnew/w201903
 		Январь 2019				/whatsnew/w201901
@@ -45,6 +46,7 @@
 			ChatItem			/xaml/controls/chatitem
 			CheckBox			/xaml/controls/checkbox
 			ComboBox			/xaml/controls/combobox
+			ComboBoxItem		/xaml/controls/comboboxitem
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
@@ -58,6 +60,7 @@
 			Selector			/xaml/controls/selector
 			Separator			/xaml/controls/separator
 			StateCard			/xaml/controls/statecard
+			Static				/xaml/controls/static
 			Table				/xaml/controls/table
 			TableCell			/xaml/controls/tablecell
 			TableColumn			/xaml/controls/tablecolumn

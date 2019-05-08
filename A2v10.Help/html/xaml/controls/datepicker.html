@@ -1,5 +1,5 @@
 ﻿<div xmlns:v-bind="v-bind">
-	<div id="xaml-datepicker">
+	<div>
 		<!--title:Xaml.DatePicker-->
 		<!--keywords:DatePicker-->
 		<div class="title">
@@ -11,8 +11,68 @@
 			</div>
 		</div>
 
-		<div class="xaml-sample">
+
+
+		<p>Представляет собой селектор даты.</p>
+
+		Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+		<a class="code-link" href="/xaml/abstract/control">Control</a> :
+		<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+		<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+
+		<h3>Свойства</h3>
+		<table class="table-props">
+			<thead>
+				<tr>
+					<th>Имя</th>
+					<th>Тип</th>
+					<th>Описание</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="prop-name">Align</td>
+					<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+					<td>Выравнивание текста.</td>
+				</tr>
+				<tr>
+					<td class="prop-name">View</td>
+					<td>DatePickerView</td>
+					<td>
+						Вид селектора. Возможные значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">Day</span> - (по умолчанию) выбор даты.</li>
+							<li><span class="prop-name">Month</span> - выбор месяца и года.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="prop-name">Placement</td>
+					<td>DatePickerDropDownPlacement</td>
+					<td>
+						Направление "выпадения" селектора. Возможные значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">BottomLeft</span> - (по умолчанию) вниз с привязкой левого края.</li>
+							<li><span class="prop-name">BottomRight</span> - вниз с привязкой правого края.</li>
+							<li><span class="prop-name">TopLeft</span> - верх с привязкой левого края.</li>
+							<li><span class="prop-name">TopRight</span> - вверх с привязкой правого края.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<a href="/xaml/abstract/valuedcontrol">Свойства базового элемента</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<h3>Пример</h3>
+		<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-datepicker">
 			<a2-date-picker label="Введите дату" v-bind:item="Document" prop="Date"></a2-date-picker>
+			<a2-date-picker label="Выберите период" v-bind:item="Document" prop="Date" view="month"></a2-date-picker>
 		</div>
 	</div>
 	<script type="text/javascript">
