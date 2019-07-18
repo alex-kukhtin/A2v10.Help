@@ -121,7 +121,8 @@
 					type = 'number';
 				} else if (instr && instr.test(token)) {
 					type = 'instr';
-				}
+				} else if (token.length && token.charAt(0) === 'I')
+					type = 'interface';
 			}
 			callback(type, token);
 			token = '';
@@ -288,7 +289,7 @@
 
 		/*console.dir(body);*/
 		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
-		const jsKeywords = /^(a(wait|sync|rguments)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val)|f(or|unction|alse|inally)|i(f|n)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|return|w(hile|ith)|yield)$/;
+		const jsKeywords = /^(a(wait|sync|rguments)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val)|f(or|unction|alse|inally)|i(f|n)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|return|w(hile|ith)|yield|string|number|boolean)$/;
 		const instr = /^(Array|Boolean|Date|Infinity|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		let jsOpts = {

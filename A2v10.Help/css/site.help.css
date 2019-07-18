@@ -443,6 +443,9 @@ pre.js .string {
 pre.js .instr {
   color: blueviolet;
 }
+pre.js .interface {
+  color: darkcyan;
+}
 pre.xml .comment {
   color: forestgreen;
   font-style: italic;

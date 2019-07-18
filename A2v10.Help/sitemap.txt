@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w201907
 http://sdk.a2.dn.ua/whatsnew/w201905
 http://sdk.a2.dn.ua/whatsnew/w201904
 http://sdk.a2.dn.ua/whatsnew/w201903

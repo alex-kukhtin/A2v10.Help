@@ -20,7 +20,7 @@
   font-family: 'A2v10';
   font-display: fallback;
   src: url('/css/fonts/A2v10.eot');
-  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7463') format('woff'), url('/css/fonts/A2v10.ttf?v=7463') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
+  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7506') format('woff'), url('/css/fonts/A2v10.ttf?v=7506') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -93,6 +93,12 @@
 }
 .ico-ban:before {
   content: "\ea0a";
+}
+.ico-circle:before {
+  content: "\ea0b";
+}
+.ico-circle-small:before {
+  content: "\ea0c";
 }
 .ico-ban-red:before {
   content: "\ea0a";
@@ -182,6 +188,12 @@
 }
 .ico-check-bold:before {
   content: "\e977";
+}
+.ico-checkbox:before {
+  content: "\e979";
+}
+.ico-checkbox-checked:before {
+  content: "\e97a";
 }
 .ico-chevron-down:before {
   content: "\e9a4";
@@ -1436,15 +1448,15 @@ header .user-name .person-name,
   text-align: center;
   font-size: 0.95rem;
 }
-.a2-attachments .file-upload {
+.a2-file-upload .file-upload {
   height: 5rem;
 }
-.a2-attachments .file-upload .ico {
+.a2-file-upload .file-upload .ico {
   font-size: 1.5rem;
   top: 1rem;
   left: calc(50% - 1rem);
 }
-.a2-attachments .file-upload .upload-tip {
+.a2-file-upload .file-upload .upload-tip {
   padding-bottom: 0.2rem;
 }
 .a2-simple-upload {
@@ -5223,6 +5235,9 @@ TODO:
   height: 100%;
 }
 .a2-include.full-height {
+  height: 100%;
+}
+.a2-include.full-height .partial {
   height: 100%;
 }
 .scrollable-pane {

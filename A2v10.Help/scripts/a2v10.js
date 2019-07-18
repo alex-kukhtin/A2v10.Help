@@ -16,6 +16,9 @@
 	window.require = require;
 	window.component = component;
 
+	// amd typescript support
+	window.define = define;
+
 	let rootElem = document.querySelector('meta[name=rootUrl]');
 	window.$$rootUrl = rootElem ? rootElem.content || '' : '';
 
@@ -46,6 +49,15 @@
 	function nextToken() {
 		return '' + currentToken++;
 	}
+
+	function define(args, factory) {
+		let exports = {
+			default: undefined
+		};
+		factory(require, exports);
+		return exports.default;
+	}
+
 })();
 // Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
 
@@ -137,7 +149,28 @@ app.modules['std:locale'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190414-7485
+/*20190704-7504*/
+/* services/const.js */
+
+app.modules['std:const'] = function () {
+
+	return {
+		SEVERITY: {
+			ERROR: 'error',
+			WARNING: 'warning',
+			INFO: 'info'
+		}
+	};
+};
+
+
+
+
+
+
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+
+// 20190717-7506
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -591,7 +624,6 @@ app.modules['std:utils'] = function () {
 				let du = 1000 * 60 * 60 * 24;
 				return Math.floor((d2 - d1) / du);
 			case "year":
-			case 'year':
 				var dd = new Date(d1.getFullYear(), d2.getMonth(), d2.getDate(), d2.getHours(), d2.getMinutes(), d2.getSeconds(), d2.getMilliseconds());
 				return d2.getFullYear() - d1.getFullYear() + (dd < d1 ? (d2 > d1 ? -1 : 0) : (d2 < d1 ? 1 : 0));
 		}
@@ -1299,7 +1331,7 @@ app.modules['std:modelInfo'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190221-7439
+// 20190620-7501
 /* services/http.js */
 
 app.modules['std:http'] = function () {
@@ -1429,7 +1461,10 @@ app.modules['std:http'] = function () {
 						let s = rdoc.scripts[i];
 						if (s.type === 'text/javascript') {
 							let newScript = document.createElement("script");
-							newScript.text = s.text;
+							if (s.src)
+								newScript.src = s.src;
+							else
+								newScript.text = s.text;
 							document.body.appendChild(newScript).parentNode.removeChild(newScript);
 						}
 					}
@@ -1900,7 +1935,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2019 Alex Kukhtin. All rights reserved.*/
 
-// 20190412-7483
+// 20190718-7506
 // services/datamodel.js
 
 (function () {
@@ -2260,6 +2295,9 @@ app.modules['std:validators'] = function () {
 					elem.$emit('Model.load', elem, _lastCaller, isRequery);
 					elem._root_.$setDirty(false);
 				});
+			};
+			elem._fireUnload_ = () => {
+				elem.$emit('Model.unload', elem);
 			};
 			defHiddenGet(elem, '$readOnly', isReadOnly);
 			defHiddenGet(elem, '$stateReadOnly', isStateReadOnly);
@@ -2763,7 +2801,7 @@ app.modules['std:validators'] = function () {
 			return null;
 		}
 		if (name in tml.delegates) {
-			return tml.delegates[name];
+			return tml.delegates[name].bind(this.$root);
 		}
 		console.error(`Delegate "${name}" not found in the template`);
 	}
@@ -3725,8 +3763,8 @@ app.modules['std:tools'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190226-7444
-/* services/http.js */
+// 20190405-7498
+/* services/html.js */
 
 app.modules['std:html'] = function () {
 
@@ -3736,6 +3774,7 @@ app.modules['std:html'] = function () {
 		getColumnsWidth,
 		getRowHeight,
 		downloadBlob,
+		downloadUrl,
 		printDirect,
 		removePrintFrame,
 		updateDocTitle
@@ -3757,6 +3796,16 @@ app.modules['std:html'] = function () {
 			let h = rows[r].offsetHeight - 12; /* padding !!!*/
 			rows[r].setAttribute('data-row-height', h);
 		}
+	}
+
+	function downloadUrl(url) {
+		let link = document.createElement('a');
+		link.style = "display:none";
+		document.body.appendChild(link);
+		link.href = url;
+		link.setAttribute('download', '');
+		link.click();
+		document.body.removeChild(link);
 	}
 
 	function downloadBlob(blob, fileName, format) {
@@ -3787,16 +3836,22 @@ app.modules['std:html'] = function () {
 		document.body.appendChild(frame);
 		if (document.activeElement)
 			document.activeElement.blur();
+		//let emb = document.createElement('embed');
+		//emb.setAttribute('src', url);
+		//frame.appendChild(emb);
 		frame.setAttribute('src', url);
 
 
 		frame.onload = function (ev) {
 			let cw = frame.contentWindow;
-			let finp = cw.document.createElement('input');
-			finp.setAttribute("id", "dummy-focus");
-			finp.cssText = "width:0;height:0;border:none;position:absolute;left:-10000,top:-100000";
-			cw.document.body.appendChild(finp);
-			finp.focus();
+			if (cw.document.body) {
+				let finp = cw.document.createElement('input');
+				finp.setAttribute("id", "dummy-focus");
+				finp.cssText = "width:0;height:0;border:none;position:absolute;left:-10000,top:-100000";
+				cw.document.body.appendChild(finp);
+				finp.focus();
+				cw.document.body.removeChild(finp);
+			}
 			document.body.classList.remove('waiting');
 			cw.print();
 		};
@@ -4216,7 +4271,7 @@ Vue.component('validator-control', {
 */
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190403-7478*/
+/*20190717-7506*/
 /*components/textbox.js*/
 
 (function () {
@@ -4228,8 +4283,8 @@ Vue.component('validator-control', {
 `<div :class="cssClass()">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group">
-		<input v-if="password" type="password" style="display:none" autocomplete="off"/>
-		<input ref="input" :type="controlType" v-focus autocomplete="off" :id="testId"
+		<input v-if="password" type="password" style="display:none" autocomplete="new-password"/>
+		<input ref="input" :type="controlType" v-focus :autocomplete="autocompleteText" :id="testId"
 			v-bind:value="modelValue" 
 				v-on:change="onChange($event.target.value)" 
 				v-on:input="onInput($event.target.value)"
@@ -4301,6 +4356,9 @@ Vue.component('validator-control', {
 		computed: {
 			controlType() {
 				return this.password ? 'password' : 'text';
+			},
+			autocompleteText() {
+				return this.password ? 'new-password' : 'off';
 			}
 		},
 		methods: {
@@ -6617,7 +6675,7 @@ Vue.component('popover', {
 
 // Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
 
-// 20181117-7359
+// 20190527-7495
 // components/collectionview.js
 
 /*
@@ -6631,6 +6689,7 @@ TODO:
 	const log = require('std:log', true);
 	const utils = require('std:utils');
 	const period = require('std:period');
+	const eventBus = require('std:eventBus');
 
 	const DEFAULT_PAGE_SIZE = 20;
 
@@ -6960,6 +7019,10 @@ TODO:
 				this.$nextTick(() => {
 					this.lockChange = false;
 				});
+			},
+			__setFilter(props) {
+				if (this.ItemsSource !== props.source) return;
+				this.filter[props.prop] = props.value;
 			}
 		},
 		created() {
@@ -6973,9 +7036,13 @@ TODO:
 			});
 			// from datagrid, etc
 			this.$on('sort', this.doSort);
+			eventBus.$on('setFilter', this.__setFilter);
 		},
 		updated() {
 			this.updateFilter();
+		},
+		beforeDestroy() {
+			eventBus.$off('setFilter', this.__setFilter);
 		}
 	});
 
@@ -7089,6 +7156,10 @@ TODO:
 				if (!nq.order) nq.dir = undefined;
 				//console.warn('filter changed');
 				this.commit(nq);
+			},
+			__setFilter(props) {
+				if (this.ItemsSource !== props.source) return;
+				this.Filter[props.prop] = props.value;
 			}
 		},
 		created() {
@@ -7109,6 +7180,11 @@ TODO:
 			});
 
 			this.$on('sort', this.doSort);
+
+			eventBus.$on('setFilter', this.__setFilter);
+		},
+		beforeDestroy() {
+			eventBus.$off('setFilter', this.__setFilter);
 		}
 	});
 
@@ -7956,7 +8032,7 @@ TODO:
 	</div>
 	<div class="modal-footer">
 		<template v-if="helpLink">
-			<a class="btn-help" :href="helpLink" @click.prevent="$showHelp()"><i class="ico ico-help"/><span v-text="$locale.$Help"/></a>
+			<a class="btn-help" rel="help" :href="helpLink" @click.prevent="$showHelp()"><i class="ico ico-help"/><span v-text="$locale.$Help"/></a>
 			<div class="aligner"/>
 		</template>
 		<button class="btn a2-inline" :disabled="backDisabled" @click.stop="back"><i class="ico ico-chevron-left"/> <span v-text="$locale.$Back"/></button>
@@ -8153,9 +8229,9 @@ TODO:
 	});
 
 })();
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20180416-7158
+// 20190610-7499
 // components/toastr.js
 
 
@@ -8174,7 +8250,7 @@ TODO:
 	const toastrTemplate = `
 <div class="toastr-stack" >
 	<transition-group name="list" tag="ul">
-		<a2-toast v-for="(t,k) in items" :key="k" :toast="t"></a2-toast>
+		<a2-toast v-for="(t, k) in items":toast="t" :key="t.$index"></a2-toast>
 	</transition-group>
 </div>
 `;
@@ -8364,6 +8440,30 @@ TODO:
 			}
 		}
 	});
+
+	Vue.component('a2-file-image', {
+		template: '<img :src="href" :style="cssStyle" />',
+		props: {
+			url: String,
+			width: String,
+			height: String,
+			value: [String, Number]
+		},
+		computed: {
+			href: function () {
+				let root = window.$$rootUrl;
+				return url.combine(root, '_file', this.url, this.value);
+			},
+			cssStyle() {
+				let r = {};
+				if (this.width)
+					r.maxWidth = this.width;
+				if (this.height)
+					r.maxHeight = this.height;
+				return r;
+			}
+		}
+	});
 })();
 // Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
 
@@ -8387,14 +8487,16 @@ TODO:
 	const locale = window.$$locale;
 	const tools = require('std:tools');
 
-	const uploadAttachment = {
+	Vue.component('a2-file-upload', {
 		template: `
+<div class="a2-file-upload">
 <label :class="cssClass" @dragover.prevent="dragOver" @dragleave.prevent="dragLeave">
 	<input v-if='canUpload' type="file" @change="uploadFile" v-bind:multiple="isMultiple" :accept="accept" ref="inputFile"/>
 	<i class="ico ico-upload"></i>
 	<span class="upload-tip" v-text="tip" v-if="tip"></span>
 </label>
-		`,
+</div>
+`,
 		data() {
 			return {
 				hover: false
@@ -8402,7 +8504,6 @@ TODO:
 		},
 		props: {
 			accept: String,
-			tip: String,
 			url: String,
 			source: Object,
 			delegate: Function,
@@ -8418,7 +8519,11 @@ TODO:
 			},
 			isMultiple() {
 				return false;
-			}
+			},
+			tip() {
+				if (this.readOnly) return '';
+				return locale.$ClickToDownloadFile;
+			},
 		},
 		methods: {
 			dragOver(ev) {
@@ -8430,8 +8535,8 @@ TODO:
 			uploadFile(ev) {
 				let root = window.$$rootUrl;
 
-				let id = 1; //%%%%this.item[this.prop];
-				let uploadUrl = url.combine(root, '_upload', this.url);
+				let id = 1;
+				let uploadUrl = url.combine(root, '_file', this.url);
 				let na = this.argument ? Object.assign({}, this.argument) : { Id: id };
 				uploadUrl = url.createUrlForNavigate(uploadUrl, na);
 				var fd = new FormData();
@@ -8442,66 +8547,16 @@ TODO:
 				http.upload(uploadUrl, fd).then((result) => {
 					ev.target.value = ''; // clear current selected files
 					if (this.delegate)
-						this.delegate.call(this.source, result);
-					//this.source.$merge(result);
+						this.delegate(result);
 				}).catch(msg => {
 					if (this.errorDelegate)
-						this.errorDelegate.call(this.source, msg);
+						this.errorDelegate(msg);
 					else if (msg.indexOf('UI:') === 0)
 						tools.alert(msg.substring(3).replace('\\n', '\n'));
 					else
 						alert(msg);
 				});
 			}
-		}
-	};
-
-	/*
-	<ul>
-		<li><a @click.prevent="clickFile">filename</a></li>
-	</ul>
-	*/
-
-	Vue.component('a2-attachments', {
-		template: `
-<div class="a2-attachments">
-	<a2-upload-attachment v-if="isUploadVisible" :source="source" :delegate="delegate" :error-delegate="errorDelegate"
-		:url="url" :tip="tip" :read-only='readOnly' :accept="accept" :argument="argument"/>
-</div>
-`,
-		components: {
-			'a2-upload-attachment': uploadAttachment
-		},
-		props: {
-			url: String,
-			source: Object,
-			readOnly: Boolean,
-			accept: String,
-			delegate: Function,
-			errorDelegate: Function,
-			argument: [Object, String, Number]
-		},
-		computed: {
-			tip() {
-				if (this.readOnly) return '';
-				return locale.$ClickToDownloadFile;
-			},
-			isUploadVisible: function () {
-				return true;
-			}
-		},
-		methods: {
-			removeFile: function () {
-				if (this.inArray)
-					this.item.$remove();
-				else
-					this.item[this.prop] = undefined;
-			},
-			clickFile() {
-				alert('click file here');
-			}
-		},
-		created() {
 		}
 	});
 })();
@@ -9707,7 +9762,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190403-7477
+// 20190718-7506
 // controllers/base.js
 
 (function () {
@@ -9817,21 +9872,6 @@ Vue.directive('resize', {
 				if (this.$isLoading) return;
 				const root = this.$data;
 				return root._exec_(cmd, arg, confirm, opts);
-                /*
-                const doExec = () => {
-                    let root = this.$data;
-                    if (!confirm)
-                        root._exec_(cmd, arg, confirm, opts);
-                    else
-                        this.$confirm(confirm).then(() => root._exec_(cmd, arg));
-                }
-
-                if (opts && opts.saveRequired && this.$isDirty) {
-                    this.$save().then(() => doExec());
-                } else {
-                    doExec();
-                }
-                */
 			},
 
 			$toJson(data) {
@@ -10116,6 +10156,24 @@ Vue.directive('resize', {
 				window.location = root + url;
 			},
 
+			$file(url, arg, opts) {
+				const root = window.$$rootUrl;
+				let id = arg;
+				if (arg && utils.isObject(arg))
+					id = utils.getStringId(arg);
+				let fileUrl = urltools.combine(root, '_file', url, id);
+				switch ((opts || {}).action) {
+					case 'download':
+						htmlTools.downloadUrl(fileUrl + '?export=1');
+						break;
+					case 'print':
+						htmlTools.printDirect(fileUrl);
+						break;
+					default:
+						window.open(fileUrl, '_blank');
+				}
+			},
+
 			$attachment(url, arg, opts) {
 				const root = window.$$rootUrl;
 				let cmd = opts && opts.export ? 'export' : 'show';
@@ -10123,7 +10181,7 @@ Vue.directive('resize', {
 				if (arg && utils.isObject(arg))
 					id = utils.getStringId(arg);
 				let attUrl = urltools.combine(root, 'attachment', cmd, id);
-				let qry = { base: url};
+				let qry = { base: url };
 				attUrl = attUrl + urltools.makeQueryString(qry);
 				if (opts && opts.newWindow)
 					window.open(attUrl, '_blank');
@@ -10239,6 +10297,7 @@ Vue.directive('resize', {
 			},
 
 			$confirm(prms) {
+				// TODO: tools
 				if (utils.isString(prms))
 					prms = { message: prms };
 				prms.style = prms.style || 'confirm';
@@ -10255,6 +10314,12 @@ Vue.directive('resize', {
 
 			$alert(msg, title, list) {
 				// TODO: tools
+				if (utils.isObject(msg) && !title && !list) {
+					let prms = msg;
+					msg = prms.message || prms.msg;
+					title = prms.title;
+					list = prms.list;
+				}
 				let dlgData = {
 					promise: null, data: {
 						message: msg, title: title, style: 'alert', list: list
@@ -10494,6 +10559,10 @@ Vue.directive('resize', {
 				eventBus.$emit('modalClose', result);
 			},
 
+			$setFilter(obj, prop, val) {
+				eventBus.$emit('setFilter', { source: obj, prop: prop, value: val });
+			},
+
 			$modalSelect(array, opts) {
 				if (!('$selected' in array)) {
 					console.error('Invalid array for $modalSelect');
@@ -10701,6 +10770,33 @@ Vue.directive('resize', {
 				return '';
 			},
 
+			$getErrors(severity) {
+				let errs = this.$data.$forceValidate();
+				if (!errs || !errs.length)
+					return null;
+
+				if (severity && !utils.isArray(severity))
+					severity = [severity];
+
+				function isInclude(sev) {
+					if (!severity)
+						return true; // include
+					if (severity.indexOf(sev) !== -1)
+						return true;
+					return false;
+				}
+
+				let result = [];
+				for (let x of errs) {
+					for (let ix = 0; ix < x.e.length; ix++) {
+						let y = x.e[ix];
+						if (isInclude(y.severity))
+							result.push({ path: x, msg: y.msg, severity: y.severity, index:ix });
+					}
+				}
+				return result.length ? result : null;
+			},
+
 			__beginRequest() {
 				this.$data.__requestsCount__ += 1;
 			},
@@ -10759,7 +10855,8 @@ Vue.directive('resize', {
 					$reload: this.$reload,
 					$notifyOwner: this.$notifyOwner,
 					$navigate: this.$navigate,
-					$defer: platform.defer
+					$defer: platform.defer,
+					$setFilter: this.$setFilter
 				};
 				Object.defineProperty(ctrl, "$isDirty", {
 					enumerable: true,
@@ -10824,6 +10921,7 @@ Vue.directive('resize', {
 				log.time('create time:', __createStartTime, false);
 		},
 		beforeDestroy() {
+			this.$data._fireUnload_();
 		},
 		destroyed() {
 			//console.dir('base.js has been destroyed');
@@ -10943,7 +11041,7 @@ Vue.directive('resize', {
 		<a :href="itemHref(item)" tabindex="-1" v-text="item.Name" @click.prevent="navigate(item)"></a>
 	</li>
 	<li class="aligner"></li>
-	<li v-if="hasHelp()" :title="locale.$Help"><a :href="helpHref()" class="btn-help" aria-label="Help" @click.prevent="showHelp()"><i class="ico ico-help"></i></a></li>
+	<li v-if="hasHelp()" :title="locale.$Help"><a :href="helpHref()" class="btn-help" rel="help" aria-label="Help" @click.prevent="showHelp()"><i class="ico ico-help"></i></a></li>
 </ul>
 `,
 		props: {
@@ -11574,4 +11672,4 @@ Vue.directive('resize', {
 	});
 
 	app.components['std:shellController'] = shell;
-})();	
+})();

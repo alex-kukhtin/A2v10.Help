@@ -30,15 +30,16 @@
 	</p>
 
 	<p>
-		Например:
+		Синтаксис:
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 const tempate = {
   events: {
-    'Model.load': modelLoad,              // функция modelLoad вызовется после загрузки модели
-    'TDocument.construct': docConstruct,  // функция docConstruct вызовется после создания объекта типа TDocument
-    'Document.Name.change': nameChange    // функция nameChange вызовется при изменении свойства Name объекта Document
-    'Document.Rows[].change': rowsAdd     // функция rowsAdd вызовется при добавлении строки в массив Rows объекта Document
+    'Model.load': (this: IRoot, root: IRoot, caller?: IRoot): void,
+    'Model.unload': (this: IRoot, root: IRoot): void,
+    '{Type}.construct': (this: IRoot, elem: IElement, prop?: string): void,  // функция docConstruct вызовется после создания объекта типа TDocument
+    '{PropertyName}.change': (this: IRoot, elem?: IElement, newVal?: any, oldVal?: any, prop?:string): void,
+    'Document.Rows[].add': (this: IRoot, array?: IArrayElement, elem?:IElement>): void  // функция rowsAdd вызовется при добавлении строки в массив Rows объекта Document
   }
 }
 </script>
@@ -56,10 +57,10 @@ const tempate = {
 	<p>
 		Аргументы для событий модели:
 		<ul class="params">
-			<li><code>this</code> - корень модели данных (TRoot).</li>
-			<li><code>model</code> - корень модели данных (TRoot).</li>
+			<li><code>this</code> - корень модели данных (IRoot).</li>
+			<li><code>model</code> - корень модели данных (IRoot).</li>
 			<li>
-				<code>caller</code> - ссылка на корень модели данных (TRoot) вызывающего объекта.
+				<code>caller</code> - ссылка на корень модели данных (IRoot) вызывающего объекта.
 				Например, если это модель диалога, то
 				<code>caller</code> будет ссылкой на модель, из которой этот диалог был вызван.
 				Может использоваться для взаимодействия с вызывающим элементом.
@@ -90,7 +91,7 @@ const tempate = {
 	<p>
 		Аргументы для события <code>.construct</code>:
 		<ul class="params">
-			<li><code>this</code> - корень модели данных (TRoot).</li>
+			<li><code>this</code> - корень модели данных (IRoot).</li>
 			<li><code>elem</code> - созданный элемент.</li>
 			<li><code>prop</code> - имя свойства родительского элемента, которому будет присвоен созданный объект. Имеет 
 			смысл для обработчиков создания элементов в <code>MapObject</code>.</li>
@@ -98,7 +99,7 @@ const tempate = {
 
 		Аргументы для событий <code>.changing</code>, <code>.change</code>:
 		<ul class="params">
-			<li><code>this</code> - корень модели данных (TRoot).</li>
+			<li><code>this</code> - корень модели данных (IRoot).</li>
 			<li><code>elem</code> - элемент.</li>
 			<li><code>newValue</code> - новое значение свойства.</li>
 			<li><code>oldValue</code> - старое значение свойства.</li>
@@ -137,7 +138,7 @@ const tempate = {
 	<p>
 		Аргументы для событий массивов:
 		<ul class="params">
-			<li><code>this</code> - корень модели данных (TRoot).</li>
+			<li><code>this</code> - корень модели данных (IRoot).</li>
 			<li><code>arr</code> - изменяемый массив.</li>
 			<li><code>elem</code> - новый или удаленный элемент.</li>
 		</ul>
@@ -152,7 +153,7 @@ const tempate = {
 	<p>Описанные выше события являются встроенными. Однако, никто не запрещает использовать собственные события, которые могут более 
 	точно описывать бизнес-логику приложения.</p>
 	<p>
-		Такие события генерируются методом <a class="code-link" href="/client/data">$emit</a> корневого объекта (TRoot) и могут иметь 
+		Такие события генерируются методом <a class="code-link" href="/client/data">$emit</a> корневого объекта (IRoot) и могут иметь 
 		произвольное имя (конечно не пересекающееся с системными именами). Методом <code>$emit</code> также можно генерировать 
 		и системные события.
 	</p>
