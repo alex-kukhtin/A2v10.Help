@@ -17,18 +17,19 @@
 <script type="text/template">
 {
   // свойства
-  $isDirty: Boolean,
-  $isPristine: Boolean,
+  $isDirty: boolean,
+  $isPristine: boolean,
   // методы
   $invoke: Function,
-  $close: Function,
-  $modalClose: Function, // закрывает модальное окно
+  $close: ():void,
+  $requery: ():void,
+  $modalClose: (result?:any):void, // закрывает модальное окно
   $msg: Function,        // выводит сообщение
   $alert: Function,      // выводит сообщение об ошибке
   $toast: Function,
   $showDialog: Function,
-  $asyncValid: Function
-  $saveModified: Function
+  $asyncValid: Function,
+  $saveModified: (message?:string, title?:string): boolean
 }
 </script>
 </pre>
@@ -36,16 +37,16 @@
 	<h3>Методы контроллера</h3>
 
 	<div class="method">
-		<div class="syntax">$msg(msg, [title], [style])</div>
+		<div class="syntax">$msg(msg:string, title?:string, style?:string): Promise&lt;any&gt;</div>
 		<h4>Аргументы:</h4>
 		<ul class="params">
-			<li><code>{String} msg</code> - текст сообщения. Может включать html-разметку.</li>
-			<li><code>{String} title</code> - заголовок окна сообщения. По умолчанию: строка <b>"Сообщение"</b> (в текущей локализации).</li>
+			<li><code>msg</code> - текст сообщения. Может включать html-разметку.</li>
+			<li><code>title</code> - заголовок окна сообщения. По умолчанию: строка <b>"Сообщение"</b> (в текущей локализации).</li>
 			<li><code>{Enum:['info', 'alert', 'confirm']} style</code>  - стиль. По умолчанию: <code class="string">'info'</code>.</li>
 		</ul>
 		<h4>Возвращает:</h4>
 		<ul class="params">
-			<li><code>Promise</code>, который будет выполнен после закрытия окна.</li>
+			<li><code>Promise&lt;any&gt;</code>, который будет выполнен после закрытия окна.</li>
 		</ul>
 		<h4>Описание:</h4>
 		<p>
@@ -58,15 +59,15 @@
 
 	
 	<div class="method">
-		<div class="syntax">$saveModified([message], [title])</div>
+		<div class="syntax">$saveModified(message?:string, title?:string):boolean</div>
 		<h4>Аргументы:</h4>
 		<ul class="params">
 			<li>
-				<code>message</code> - сообщение. Если не указано (<code>undefined</code>), будет использовано стандартное сообщение
+				<code>message:string</code> - сообщение. Если не указано (<code>undefined</code>), будет использовано стандартное сообщение
 				<b>"Элемент был изменен. Сохранить изменения?"</b> (в текущей локализации).
 			</li>
 			<li>
-				<code>title</code> - заголовок окна сообщения. Если не указано (<code>undefined</code>), будет использован
+				<code>title:string</code> - заголовок окна сообщения. Если не указано (<code>undefined</code>), будет использован
 				стандартный заголовок <b>"Подтверждение закрытия"</b> (в текущей локализации).
 			</li>
 		</ul>

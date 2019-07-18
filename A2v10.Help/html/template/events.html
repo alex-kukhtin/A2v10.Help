@@ -37,9 +37,10 @@ const tempate = {
   events: {
     'Model.load': (this: IRoot, root: IRoot, caller?: IRoot): void,
     'Model.unload': (this: IRoot, root: IRoot): void,
-    '{Type}.construct': (this: IRoot, elem: IElement, prop?: string): void,  // функция docConstruct вызовется после создания объекта типа TDocument
+    '{Type}.construct': (this: IRoot, elem: IElement, prop?: string): void,
     '{PropertyName}.change': (this: IRoot, elem?: IElement, newVal?: any, oldVal?: any, prop?:string): void,
-    'Document.Rows[].add': (this: IRoot, array?: IArrayElement, elem?:IElement>): void  // функция rowsAdd вызовется при добавлении строки в массив Rows объекта Document
+    '{PropertyName}.changing': (this: IRoot, elem?: IElement, newVal?: any, oldVal?: any, prop?:string): boolean,
+    '{ArrayName}.add': (this: IRoot, array?: IArrayElement, elem?:IElement>): void 
   }
 }
 </script>
@@ -50,6 +51,8 @@ const tempate = {
 	<p>Эти события имеют фиксированные имена.</p>
 	<ul>
 		<li><code>Model.load</code> - модель загружена.</li>
+		<li><code>Model.unload</code> - модель выгружена. Никакие действия уже невозможны. Чаще всего используюется для отписки 
+		от событий глобальной шины событий.</li>
 		<li><code>Model.saved</code> - модель сохранена.</li>
 		<li><code>Model.beforeSave</code> - перед сохранением.</li>
 	</ul>
@@ -84,7 +87,8 @@ const tempate = {
 		</li>
 		<li>
 			<code>.changing</code> - значение свойства будет изменено.
-			Префикс имени события представляет собой полный путь к свойству в модели данных. Имеется возможность отменить изменения.
+			Префикс имени события представляет собой полный путь к свойству в модели данных. 
+			Имеется возможность отменить изменения.
 		</li>
 	</ul>
 
