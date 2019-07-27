@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div xmlns:v-bind="v-bind">
 	<!--title:Xaml.Popover-->
 	<!--keywords:Popover-->
 	<div class="title">
@@ -9,4 +9,184 @@
 			<a href="index">Все текстовые элементы</a>
 		</div>
 	</div>
+
+
+	<p>
+		Представляет собой ссылку, при щелчке (или наведении курсора мыши) на которой показывается всплывающее окно.
+		Всплывающее окно может содержать как простой текст или другой элемент, так и ссылаться на другой <code>url</code>.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/inline">Inline</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+	<p>Конвертер: поддерживается преобразование из строки текста и из любого элемента, наследующего <a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.</p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>Object</td>
+				<td>Свойство содержимого. Может быть простым тестом или любым элементом.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Url</td>
+				<td>String</td>
+				<td>
+					Url для получения содержимого с сервера. В этом случае всплывающее окно будет содержать собственную модель данных,
+					собственный шаблон и, конечно саму разметку.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Text</td>
+				<td>String</td>
+				<td>Текст ссылки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Icon</td>
+				<td><a href="/xaml/enums/icon">Icon</a></td>
+				<td>Иконка для ссылки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ShowOnHover</td>
+				<td>Boolean</td>
+				<td>Показывать подсказку не по щелчку, а по наведению курсора мыши. Не совместимо с внешним содержимым.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Badge</td>
+				<td>String</td>
+				<td>Текстовый бейджик на элементе. Обычно показывается на иконке.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a href="/xaml/simple/length">Length</a></td>
+				<td>Ширина всплывающего окна.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Placement</td>
+				<td>PopupPlacement</td>
+				<td>
+					Положение всплывающего окна. Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">TopRight</span> - (по умолчанию) сверху, разворачивается вправо.</li>
+						<li><span class="prop-name">TopLeft</span> - сверху, разворачивается влево.</li>
+						<li><span class="prop-name">RightBottom</span> - справа, разворачивается вниз.</li>
+						<li><span class="prop-name">RightTop</span> - справа, разворачивается вверх.</li>
+						<li><span class="prop-name">BottomRight</span> - снизу, разворачивается вправо.</li>
+						<li><span class="prop-name">BottomLeft</span> - снизу, разворачивается влево.</li>
+						<li><span class="prop-name">LeftBottom</span> - слева, разворачивается вниз.</li>
+						<li><span class="prop-name">LeftTop</span> - слева, разворачивается вверх.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Underline</td>
+				<td>PopoverUnderlineMode</td>
+				<td>
+					Стиль подчеркивания ссылки при наведении мыши. Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Enable</span> - (по умолчанию) подчеркивать.</li>
+						<li><span class="prop-name">Disable</span> - не подчеркивать.</li>
+						<li><span class="prop-name">Hover</span> - подчеркивать при наведении мыши.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td>PopoverBackgroundStyle</td>
+				<td>
+					Цвет фона всплывающего окна. Возможные значения (обратите внимание, что конкретные цвета зависят от текущей 
+					темы пользовательского интерфейса_:
+					<ul class="enum-vals">
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Default</span> - по умолчанию.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Yellow</span> - желтый.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#edfcfe">#edfcfe</span> Cyan</span> - голубой.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#f4ffd8">#f4ffd8</span> Green</span> - зеленый.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fedbdb">#fedbdb</span> Red</span> - красный.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#e5f1fe">#e5f1fe</span> Blue</span> - синий.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#ffffff">#ffffff</span> White</span> - белый.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/inline">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		Обратите внимание! Если установлено свойство <b>ShowOnHover</b>, то размещать в элементе другие органы управления
+		не имеет смысла. Все равно к ним нельзя будет получить доступ. Ведь, как только вы уберете курсор мыши с текста,
+		всплывающее окно исчезнет.
+		<br />
+		<br />
+		Кроме того, свойство <b>ShowOnHover</b> не совместимо с возможностью получать содержимое окна с сервера (внешний Url)
+		Это сделано из соображений производительности, чтобы не обращаться к серверу при каждом движении мышью.
+	</p>
+
+
+	<h3>Пример</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<FlexList>
+	<Popover Text="TopRight..." Icon="Help">Сверху, разворачивается вправо</Popover>
+	<Popover Text="TopLeft..." Underline="Hover" Background="Cyan">Сверху, разворачивается влево</Popover>
+	<Popover Text="RightBottom..." Underline="Disable" Background="Red" Icon="HelpOutline">Справа, разворачивается вниз</Popover>
+	<Popover Text="LeftTop..." Background="Green" Hover="True" Icon="Report">Слева, разворачивается вверх</Popover>
+</FlexList>
+</script>
+</pre>
+	</p>
+
+	<p>
+		Результат
+		<div class="xaml-sample" style="width:400px" id="popover-control">
+			<ul class="flex-list horizontal">
+				<li class="flex-list-item">
+					<popover class="po-top-right" content="TopRight..." icon="help">
+						Сверху, разворачивается вправо
+					</popover>
+				</li>
+				<li class="flex-list-item">
+					<popover class="po-top-left underline-hover po-cyan" content="TopLeft...">
+						Сверху, разворачивается влево
+					</popover>
+				</li>
+				<li class="flex-list-item">
+					<popover class="po-right-bottom underline-disable po-red" content="RightBottom..." icon="help-outline">
+						Справа, разворачивается вниз
+					</popover>
+				</li>
+				<li class="flex-list-item">
+					<popover class="po-top-left po-green" v-bind:hover="true" content="LeftTop..." icon="report">
+						Слева, разворачивается вверх
+					</popover>
+				</li>
+			</ul>
+		</div>
+	</p>
+
+	<script type="text/javascript">
+		(function () {
+			var vm = new Vue({
+				el: "#popover-control",
+				data: {
+				}
+			});
+		})();
+	</script>
+
 </div>

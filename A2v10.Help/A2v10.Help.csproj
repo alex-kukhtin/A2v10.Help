@@ -133,6 +133,7 @@
     <Content Include="html\xaml\controls\flexlist.html" />
     <Content Include="html\xaml\controls\separator.html" />
     <Content Include="html\xaml\controls\statecard.html" />
+    <Content Include="html\xaml\controls\graphics.html" />
     <Content Include="html\xaml\controls\treeview.html" />
     <Content Include="html\xaml\controls\uploadfile.html" />
     <Content Include="html\xaml\diagram\path.html" />

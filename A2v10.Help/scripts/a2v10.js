@@ -170,7 +170,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190717-7506
+// 20190721-7507
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -625,7 +625,10 @@ app.modules['std:utils'] = function () {
 				return Math.floor((d2 - d1) / du);
 			case "year":
 				var dd = new Date(d1.getFullYear(), d2.getMonth(), d2.getDate(), d2.getHours(), d2.getMinutes(), d2.getSeconds(), d2.getMilliseconds());
-				return d2.getFullYear() - d1.getFullYear() + (dd < d1 ? (d2 > d1 ? -1 : 0) : (d2 < d1 ? 1 : 0));
+				let dy = dd < d1 ?
+					d2 > d1 ? -1 : 0 :
+					d2 < d1 ? 1  : 0;
+				return d2.getFullYear() - d1.getFullYear() + dy;
 		}
 		throw new Error('Invalid unit value for utils.date.diff');
 	}
@@ -6365,15 +6368,15 @@ Vue.component('a2-pager', {
 });
 
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-//20180729-7259
+//20190727-7509
 /*components/popover.js*/
 
 Vue.component('popover', {
 	template: `
-<div v-dropdown class="popover-wrapper" :style="{top: top}">
-	<span toggle class="popover-title"><i v-if="hasIcon" :class="iconClass"></i> <span :title="title" v-text="content"></span><slot name="badge"></slot></span>
+<div v-dropdown class="popover-wrapper" :style="{top: top}" :class="{show: isShowHover}">
+	<span toggle class="popover-title" v-on:mouseover="mouseover" v-on:mouseout="mouseout"><i v-if="hasIcon" :class="iconClass"></i> <span :title="title" v-text="content"></span><slot name="badge"></slot></span>
 	<div class="popup-body" :style="{width: width}">
 		<div class="arrow" />
 		<div v-if="visible">
@@ -6384,14 +6387,16 @@ Vue.component('popover', {
 </div>
 `,
 	/*
-	1. Если добавить tabindex="-1" для toggle, то можно сделать закрытие по blur
-	2. можно добавить кнопку закрытия. Любой элемент с атрибутом close-dropdown
-	<span class="close" close-dropdown style="float:right">x</span >
+	1. If you add tabindex = "- 1" for 'toggle', then you can close it by 'blur'
+
+	2. You can add a close button. It can be any element with a 'close-dropdown' attribute.
+		For expample: <span class="close" close-dropdown style="float:right">x</span >
 	*/
 
 	data() {
 		return {
 			state: 'hidden',
+			hoverstate : false,
 			popoverUrl: ''
 		};
 	},
@@ -6401,7 +6406,8 @@ Vue.component('popover', {
 		content: String,
 		title: String,
 		width: String,
-		top: String
+		top: String,
+		hover: Boolean
 	},
 	computed: {
 		hasIcon() {
@@ -6415,6 +6421,25 @@ Vue.component('popover', {
 		},
 		visible() {
 			return this.url && this.state === 'shown';
+		},
+		isShowHover() {
+			return this.hover && this.hoverstate ? 'show' : undefined;
+		}
+	},
+	methods: {
+		mouseover() {
+			if (this.hover)
+				this.hoverstate = true;
+		},
+		mouseout() {
+			if (this.hover) {
+				this.hoverstate = false;
+				/*
+				setTimeout(x => {
+					this.hoverstate = false;
+				}, 250);
+				*/
+			}
 		}
 	},
 	mounted() {
@@ -6427,7 +6452,6 @@ Vue.component('popover', {
 			this.state = 'hidden';
 			this.popoverUrl = '';
 		};
-		//this.state = 'shown';
 	}
 });
 
@@ -8523,7 +8547,7 @@ TODO:
 			tip() {
 				if (this.readOnly) return '';
 				return locale.$ClickToDownloadFile;
-			},
+			}
 		},
 		methods: {
 			dragOver(ev) {
@@ -8894,9 +8918,9 @@ Vue.component('a2-panel', {
 		}
 	});
 })();
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20180206-7105
+// 20190725-7508
 // components/graphics.js
 
 /* TODO:
@@ -8904,25 +8928,50 @@ Vue.component('a2-panel', {
 
 (function () {
 
-    Vue.component("a2-graphics", {
-        template:
-        `<div :id="id" class="a2-graphics"></div>`,
-        props: {
-            id: String,
-            render: Function
-        },
-        computed: {
-            controller() {
-                return this.$root;
-            }
-        },
-        methods: {
-        },
-        mounted() {
-            const chart = d3.select('#' + this.id);
-            this.render.call(this.controller.$data, chart);
-        }
-    });
+	let graphId = 1237;
+
+	function nextGraphicsId() {
+		graphId += 1;
+		return 'el-gr-' + graphId;
+	}
+
+	Vue.component("a2-graphics", {
+		template:
+			`<div :id="id" class="a2-graphics"></div>`,
+		props: {
+			render: Function,
+			arg: [Object, String, Number, Array],
+			watchmode: String
+		},
+		data() {
+			return {
+				unwatch: null,
+				id: nextGraphicsId()
+			};
+		},
+		computed: {
+			controller() {
+				return this.$root;
+			}
+		},
+		methods: {
+			draw() {
+				const chart = d3.select('#' + this.id);
+				chart.selectAll('*').remove();
+				this.render.call(this.controller.$data, chart, this.arg);
+			}
+		},
+		mounted() {
+			this.draw();
+			if (this.watchmode === 'none') return;
+			let deep = this.watchmode === 'deep';
+			this.unwatch = this.$watch('arg', () => this.draw(), { deep: deep });
+		},
+		beforeDestroy() {
+			if (this.unwatch)
+				this.unwatch();
+		}
+	});
 })();
 
 // Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
@@ -9342,7 +9391,7 @@ Vue.component('a2-panel', {
 			};
 		},
 		computed: {
-			visible() { return !!this.iFrameUrl; },
+			visible() { return !!this.iFrameUrl; }
 		},
 		created() {
 			eventBus.$on('openframe', (url) => {
@@ -9487,42 +9536,49 @@ Vue.directive('dropdown', {
 });
 
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20180114-7091*/
+/*20190721-7507*/
 /* directives/focus.js */
 
 Vue.directive('focus', {
+
 	bind(el, binding, vnode) {
 
-		function doSelect(event) {
-			let t = event.target;
-			if (t._selectDone)
-				return;
+		// selects all text on focus
+
+		function doSelect(t) {
+			if (!t.select) return;
+			if (t._selectDone) return;
+			t.select();
 			t._selectDone = true;
-			if (t.select) t.select();
 		}
 
 		el.addEventListener("focus", function (event) {
+			// focus occurs before click!
 			event.target.parentElement.classList.add('focus');
 			if (el.__opts && el.__opts.mask) return;
+			let target = event.target;
+			target._selectDone = false;
 			setTimeout(() => {
-				doSelect(event);
+				doSelect(target);
 			}, 0);
 		}, false);
 
 		el.addEventListener("blur", function (event) {
 			let t = event.target;
-			t._selectDone = false;
-			event.target.parentElement.classList.remove('focus');
+			t._selectDone = true;
+			t.parentElement.classList.remove('focus');
 		}, false);
 
 		el.addEventListener("click", function (event) {
 			if (el.__opts && el.__opts.mask) return;
-			doSelect(event);
+			doSelect(event.target);
 		}, false);
 	},
+
 	inserted(el) {
+		el._selectDone = false;
 		if (el.tabIndex === 1) {
 			setTimeout(() => {
 				if (el.focus) el.focus();

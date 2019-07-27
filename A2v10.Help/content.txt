@@ -52,12 +52,13 @@
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
 			FlexList			/xaml/controls/flexlist
+			Graphics			/xaml/controls/graphics
+			Image				/xaml/controls/image
 			List				/xaml/controls/list
 			ListItem			/xaml/controls/listitem
 			MenuItem			/xaml/controls/menuitem
-			Image				/xaml/controls/image
-			Radio				/xaml/controls/radio
 			PeriodPicker		/xaml/controls/periodpicker
+			Radio				/xaml/controls/radio
 			Selector			/xaml/controls/selector
 			Separator			/xaml/controls/separator
 			StateCard			/xaml/controls/statecard

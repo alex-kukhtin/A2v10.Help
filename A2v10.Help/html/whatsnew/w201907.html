@@ -3,7 +3,7 @@
 	<!--keywords:Что нового-->
 	<div class="title">
 		<h1>
-			Выпуск 16 - версии 7492-7506 (Июль 2019)
+			Выпуск 16 - версии 7492-7509 (Июль 2019)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все выпуски</a>|
@@ -13,8 +13,8 @@
 	</div>
 
 	<!--
-	 
- 
+	Graphics Argument, Watch
+
 	vm.$setCurrentUrl
 	(vm|ctrl).$setFilter
 	Map.$setProperty
@@ -35,7 +35,6 @@
 
 	Card.Width+Height
 	Panel.Cut style
-	Popover.Badge, Background - White
 	GridDivider
 
 	Slot!
@@ -52,8 +51,12 @@
 
 	<h3>Xaml</h3>
 	<ul>
-		<li>В перечисление <a href="/xaml/enums/icon">Icon</a> добавлены элементы <code>Circle</code>,
-		<code>CircleSmall</code>, <code>Checkbox</code>, <code>CheckboxChecked</code>.</li>
+		<li>
+			В перечисление <a href="/xaml/enums/icon"  class="code-link" >Icon</a> добавлены элементы <code>Circle</code>,
+			<code>CircleSmall</code>, <code>Checkbox</code>, <code>CheckboxChecked</code>, <code>FileFailure</code>,
+			<code>FileSuccess</code>, <code>FileWarning</code>.
+		</li>
+		<li>В элемент <a class="code-link" href="/xaml/text/popover">Popover</a> добавлены свойства <code>Badge</code> и <code>ShowOnHover</code>.</li>
 	</ul>
 
 	<h3>Шаблоны</h3>
@@ -64,5 +67,12 @@
 
 	<h3>Справка</h3>
 	<ul>
+		<li>Добавлено полное описание элемента <a class="code-link" href="/xaml/text/popover">Popover</a>.</li>
+	</ul>
+
+	<h3>Исправлено</h3>
+	<ul>
+		<li>Исправлена ошибка, из-за которой не работал элемент <a href="/xaml/controls/graphics">Graphics</a> в том случае, если 
+		он помещался внутрь контейнера, связанного с коллекцией (напирмер <a href="/xaml/controls/datagrid">DataGrid</a>).</li>
 	</ul>
 </div>
