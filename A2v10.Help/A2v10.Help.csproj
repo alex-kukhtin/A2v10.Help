@@ -233,6 +233,7 @@
     <Content Include="html\whatsnew\index.html" />
     <Content Include="html\xaml\text\badge.html" />
     <Content Include="html\xaml\abstract\inline.html" />
+    <Content Include="html\xaml\text\paragraph.html" />
     <Content Include="html\xaml\text\popover.html" />
     <Content Include="html\xaml\text\hyperlink.html" />
     <Content Include="html\xaml\text\html.html" />

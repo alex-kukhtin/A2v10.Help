@@ -101,6 +101,7 @@
 			Hyperlink			/xaml/text/hyperlink
 			Html				/xaml/text/html
 			Line				/xaml/text/line
+			Paragraph			/xaml/text/paragraph
 			Popover				/xaml/text/popover
 			Span				/xaml/text/span
 			SpanIcon			/xaml/text/spanicon

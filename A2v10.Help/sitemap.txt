@@ -92,6 +92,7 @@ http://sdk.a2.dn.ua/xaml/text/break
 http://sdk.a2.dn.ua/xaml/text/hyperlink
 http://sdk.a2.dn.ua/xaml/text/html
 http://sdk.a2.dn.ua/xaml/text/line
+http://sdk.a2.dn.ua/xaml/text/paragraph
 http://sdk.a2.dn.ua/xaml/text/popover
 http://sdk.a2.dn.ua/xaml/text/span
 http://sdk.a2.dn.ua/xaml/text/spanicon
