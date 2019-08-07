@@ -98,10 +98,16 @@ app.modules['std:locale'] = function () {
 		if (!pElem)
 			return;
 		let parentRect = pElem.getBoundingClientRect();
-		if (elRect.top < parentRect.top)
-			el.scrollIntoView(true);
-		else if (elRect.bottom > parentRect.bottom)
-			el.scrollIntoView(false);
+		if (elRect.top < parentRect.top) {
+			//pElem.scrollTop -= parentRect.top - elRect.top + 1;
+			//el.scrollIntoView(true);
+			el.scrollIntoView({ block: 'nearest' });
+		}
+		else if (elRect.bottom > parentRect.bottom) {
+			//pElem.scrollTop += elRect.bottom - parentRect.bottom + 1;
+			el.scrollIntoView({ block: 'nearest' });
+			//el.scrollIntoView(false);
+		}
 	};
 
 
@@ -1387,6 +1393,11 @@ app.modules['std:http'] = function () {
 					}
 					else
 						reject(xhr.responseText || xhr.statusText);
+				} else if (xhr.status === 473 /*non standard */) {
+					if (xhr.statusText === 'Unauthorized') {
+						// go to login page
+						window.location.assign('/');
+					}
 				}
 				else
 					reject(xhr.statusText);
@@ -1938,7 +1949,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2019 Alex Kukhtin. All rights reserved.*/
 
-// 20190718-7506
+// 20190802-7511
 // services/datamodel.js
 
 (function () {
@@ -2396,7 +2407,7 @@ app.modules['std:validators'] = function () {
 			return arr;
 		for (let i = 0; i < source.length; i++) {
 			arr[i] = new arr._elem_(source[i], dotPath, arr);
-			arr[i].$checked = false;
+			arr[i].__checked = false;
 		}
 		return arr;
 	}
@@ -2415,7 +2426,7 @@ app.modules['std:validators'] = function () {
 
 		arr.$new = function (src) {
 			let newElem = new this._elem_(src || null, this._path_ + '[]', this);
-			newElem.$checked = false;
+			newElem.__checked = false;
 			return newElem;
 		};
 
@@ -2773,6 +2784,19 @@ app.modules['std:validators'] = function () {
 				}
 			}
 		};
+		Object.defineProperty(elem.prototype, '$checked', {
+			enumerable: true,
+			configurable: true, /* needed */
+			get() {
+				return this.__checked;
+			},
+			set(val) {
+				this.__checked = val;
+				let arr = this.$parent;
+				let checkEvent = arr._path_ + '[].check';
+				arr._root_.$emit(checkEvent, arr/*array*/, this);
+			}
+		});
 	}
 
 	function emit(event, ...arr) {
@@ -4060,7 +4084,7 @@ app.modules['std:routing'] = function () {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190221-7438
+// 20190805-7512
 // components/control.js
 
 (function () {
@@ -4100,6 +4124,11 @@ app.modules['std:routing'] = function () {
 					return mask.getMasked(this.mask, val);
 				return val;
 			},
+			modelValueRaw() {
+				if (!this.item) return null;
+				let val = this.item[this.prop];
+				return val;
+			},
 			errors() {
 				if (!this.item) return null;
 				let root = this.item._root_;
@@ -4110,7 +4139,7 @@ app.modules['std:routing'] = function () {
 				if (this.itemToValidate)
 					err = root._validate_(this.itemToValidate, this.pathToValidate, this.itemToValidate[this.propToValidate], this.deferUpdate);
 				else
-					err = root._validate_(this.item, this.path, this.modelValue, this.deferUpdate);
+					err = root._validate_(this.item, this.path, this.modelValueRaw, this.deferUpdate);
 				return err;
 			},
 			inputClass() {
@@ -4237,6 +4266,45 @@ Vue.component('validator', {
 	}
 });
 
+
+Vue.component('a2-static-validator', {
+	props: {
+		item: {
+			type: Object, default() {
+				return {};
+			}
+		},
+		prop: String
+	},
+	template: '<div v-if="invalid()" class="static-validator"><span v-for="err in errors" v-text="err.msg" :class="err.severity"></span></div>',
+	computed: {
+		path() {
+			return this.item._path_ + '.' + this.prop;
+		},
+		modelValue() {
+			if (!this.item) return null;
+			return this.item[this.prop];
+		},
+		errors() {
+			if (!this.item) return null;
+			let root = this.item._root_;
+			if (!root) return null;
+			if (!root._validate_)
+				return null;
+			let err;
+			err = root._validate_(this.item, this.path, this.modelValue, this.deferUpdate);
+			return err;
+		}
+	},
+	methods: {
+		invalid(out) {
+			// method! no cache!
+			let err = this.errors;
+			if (!err) return false;
+			return err.length > 0;
+		}
+	}
+});
 
 /*
 TODO: нужно, чтобы добавлялся invalid для родительского элемента.
@@ -4480,7 +4548,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190403-7478*/
+/*20190729-7510*/
 /*components/combobox.js*/
 
 (function () {
@@ -4777,7 +4845,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190414-7485
+// 20190806-7514
 // components/datepicker.js
 
 
@@ -4824,6 +4892,7 @@ Vue.component('validator-control', {
 		},
 		methods: {
 			toggle(ev) {
+				if (this.disabled) return;
 				if (!this.isOpen) {
 					// close other popups
 					eventBus.$emit('closeAllPopups');
@@ -6457,7 +6526,7 @@ Vue.component('popover', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190215-7431*/
+/*20190804-7511*/
 // components/treeview.js
 
 
@@ -6575,7 +6644,11 @@ Vue.component('popover', {
 				return this.isActive && this.isActive(this.item);
 			},
 			isItemGroup() {
-				return this.isGroup && this.isGroup(this.item);
+				let gp = this.options ? this.options.isGroup : undefined;
+				if (gp)
+					return utils.eval(this.item, gp);
+				else
+					return this.isGroup && this.isGroup(this.item);
 			},
 			iconClass: function () {
 				let icons = this.options.staticIcons;
@@ -6697,9 +6770,9 @@ Vue.component('popover', {
 	});
 })();
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190527-7495
+// 20190729-7510
 // components/collectionview.js
 
 /*
@@ -6770,6 +6843,8 @@ TODO:
 				}
 				else if (utils.isObjectExact(iv)) 
 					iv.Id = q[x];
+				else if (utils.isNumber(iv))
+					filter[x] = +q[x];
 				else {
 					filter[x] = q[x];
 				}
@@ -8920,6 +8995,48 @@ Vue.component('a2-panel', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
+/*20190807-7516*/
+/*components/newbutton.js*/
+
+(function () {
+
+
+	const companyButtonTemplate =
+`<div class="a2-company-btn"><div class="dropdown dir-down" v-dropdown v-if="isVisible">
+	<button class="btn" :class="btnClass" toggle aria-label="Company">
+		<i class="ico" :class="iconClass"></i>
+		<span>Название компании</span>
+		<span class="caret"/>
+	</button>
+	<div class="dropdown-menu menu down-left separate">
+	</div>
+</div></div>
+`;
+
+	Vue.component('a2-company-button', {
+		template: companyButtonTemplate,
+		props: {
+		},
+		computed: {
+			isVisible() {
+				return true;
+			},
+			iconClass() {
+				return 'ico-company'; // this.icon ? 'ico-' + this.icon : '';
+			},
+			btnClass() {
+				return "btn-companyname"; //this.btnStyle ? 'btn-' + this.btnStyle : '';
+			}
+		},
+		created() {
+		},
+		methods: {
+		}
+	});
+
+})();
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+
 // 20190725-7508
 // components/graphics.js
 
@@ -8962,7 +9079,7 @@ Vue.component('a2-panel', {
 			}
 		},
 		mounted() {
-			this.draw();
+			this.$nextTick(() => this.draw());
 			if (this.watchmode === 'none') return;
 			let deep = this.watchmode === 'deep';
 			this.unwatch = this.$watch('arg', () => this.draw(), { deep: deep });
