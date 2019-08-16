@@ -20,7 +20,7 @@
   font-family: 'A2v10';
   font-display: fallback;
   src: url('/css/fonts/A2v10.eot');
-  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7506') format('woff'), url('/css/fonts/A2v10.ttf?v=7506') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
+  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7525') format('woff'), url('/css/fonts/A2v10.ttf?v=7525') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -70,6 +70,9 @@
 }
 .ico-arrow-right:before {
   content: "\e903";
+}
+.ico-arrow-left-right:before {
+  content: "\e906";
 }
 .ico-arrow-export:before {
   content: "\e908";
@@ -144,8 +147,11 @@
 .ico-approve:before {
   content: "\e936";
 }
-.ico-send:before {
+.ico-send-outline:before {
   content: "\e950";
+}
+.ico-send:before {
+  content: "\e951";
 }
 .ico-attach:before {
   content: "\e954";
@@ -659,6 +665,9 @@
 .ico-external:before {
   content: "\e9d0";
 }
+.ico-bell:before {
+  content: "\e9d1";
+}
 .ico-log:before {
   content: "\ea25";
 }
@@ -1161,7 +1170,9 @@ header .btn:hover,
   background-color: #7186ab;
 }
 header .user-name .person-name,
-.header .user-name .person-name {
+.header .user-name .person-name,
+header .company-name,
+.header .company-name {
   display: inline-block;
   vertical-align: bottom;
   overflow: hidden;
@@ -2612,6 +2623,9 @@ pre.a2-code {
   padding-right: 8px;
   padding-top: 0 !important;
 }
+.input-group a.selector-clear {
+  padding-right: 8px;
+}
 .input-group > .selector-pane {
   border: 1px solid #208cf8;
   position: absolute;
@@ -3880,6 +3894,20 @@ ul.news-list > li {
 .modal-header .btnclose:active,
 .modal-header .btnclose:focus {
   color: #555;
+  background-color: #fff9d0;
+  border-color: #e5c365;
+}
+.modal-header .btn-help {
+  float: right;
+  color: #999;
+  line-height: 1.6rem;
+  /* ? */
+  padding: 0 4px;
+  margin-right: 0.2rem;
+  border: 1px solid  transparent;
+}
+.modal-header .btn-help:hover {
+  /*color: @link-hover-color-dark;*/
   background-color: #fff9d0;
   border-color: #e5c365;
 }
