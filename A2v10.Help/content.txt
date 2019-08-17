@@ -41,6 +41,8 @@
 
 Представления	/views/index
 	Xaml			/xaml/index
+		Общие сведения		/xaml/overview/index
+			Раширения разметки	/xaml/overview/extensions
 		Элементы управления	/xaml/controls/index
 			Alert				/xaml/controls/alert
 			Attachments			/xaml/controls/attachments
@@ -123,6 +125,8 @@
 
 		Компоненты					/xaml/components/index
 			CollectionView			/xaml/components/collectionview
+			Confirm					/xaml/components/confirm
+			Slot					/xaml/components/slot
 			Switch					/xaml/components/switch
 			Validator				/xaml/components/validator
 
@@ -142,6 +146,7 @@
 			ColumnControlType	/xaml/enums/columncontroltype
 			ControlSize			/xaml/enums/controlsize
 			DataGridStyle		/xaml/enums/datagridstyle
+			DataType			/xaml/enums/datatype
 			FloatMode			/xaml/enums/floatmode
 			Icon				/xaml/enums/icon
 			IconAlign			/xaml/enums/iconalign

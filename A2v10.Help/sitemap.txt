@@ -34,6 +34,8 @@ http://sdk.a2.dn.ua/models/index
 http://sdk.a2.dn.ua/models/datamodels
 http://sdk.a2.dn.ua/views/index
 http://sdk.a2.dn.ua/xaml/index
+http://sdk.a2.dn.ua/xaml/overview/index
+http://sdk.a2.dn.ua/xaml/overview/extensions
 http://sdk.a2.dn.ua/xaml/controls/index
 http://sdk.a2.dn.ua/xaml/controls/alert
 http://sdk.a2.dn.ua/xaml/controls/attachments
@@ -111,6 +113,8 @@ http://sdk.a2.dn.ua/xaml/bind/bindcmd
 http://sdk.a2.dn.ua/xaml/bind/styleresource
 http://sdk.a2.dn.ua/xaml/components/index
 http://sdk.a2.dn.ua/xaml/components/collectionview
+http://sdk.a2.dn.ua/xaml/components/confirm
+http://sdk.a2.dn.ua/xaml/components/slot
 http://sdk.a2.dn.ua/xaml/components/switch
 http://sdk.a2.dn.ua/xaml/components/validator
 http://sdk.a2.dn.ua/xaml/simple/index
@@ -128,6 +132,7 @@ http://sdk.a2.dn.ua/xaml/enums/buttonstyle
 http://sdk.a2.dn.ua/xaml/enums/columncontroltype
 http://sdk.a2.dn.ua/xaml/enums/controlsize
 http://sdk.a2.dn.ua/xaml/enums/datagridstyle
+http://sdk.a2.dn.ua/xaml/enums/datatype
 http://sdk.a2.dn.ua/xaml/enums/floatmode
 http://sdk.a2.dn.ua/xaml/enums/icon
 http://sdk.a2.dn.ua/xaml/enums/iconalign

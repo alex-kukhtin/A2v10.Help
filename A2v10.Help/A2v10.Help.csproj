@@ -112,6 +112,8 @@
     <Content Include="html\xaml\abstract\contentcontrol.html" />
     <Content Include="html\xaml\abstract\index.html" />
     <Content Include="html\xaml\bind\styleresource.html" />
+    <Content Include="html\xaml\components\confirm.html" />
+    <Content Include="html\xaml\components\slot.html" />
     <Content Include="html\xaml\components\switch.html" />
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
@@ -145,6 +147,7 @@
     <Content Include="html\xaml\enums\autoflowmode.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
     <Content Include="html\xaml\enums\datagridstyle.html" />
+    <Content Include="html\xaml\enums\datatype.html" />
     <Content Include="html\xaml\enums\updatetrigger.html" />
     <Content Include="html\xaml\enums\textcolor.html" />
     <Content Include="html\xaml\enums\floatmode.html" />
@@ -161,6 +164,8 @@
     <Content Include="html\xaml\enums\verticalalign.html" />
     <Content Include="html\xaml\enums\autoselectmode.html" />
     <Content Include="html\xaml\enums\icon.html" />
+    <Content Include="html\xaml\overview\index.html" />
+    <Content Include="html\xaml\overview\extensions.html" />
     <Content Include="html\xaml\sheet\index.html" />
     <Content Include="html\xaml\sheet\sheetpage.html" />
     <Content Include="html\xaml\sheet\sheet.html" />

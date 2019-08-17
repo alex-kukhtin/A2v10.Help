@@ -3,7 +3,91 @@
 	<!--keywords:Bind-->
 	<div class="title">
 		<h1>
-			Bind
+			Привязка Bind
 		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все привязки</a>
+		</div>
 	</div>
+
+	<p>
+		Представляет собой специальный объект, описывающий связь свойства с элементом данных.
+		Практически всегда задается как <a href="/xaml/overview/extensions">расширение разметки</a>.
+	</p>
+
+	<p>
+		Привязка всегда является двухсторонней.
+		Это означает, что при изменении значения в модели, связанное свойство меняется автоматически и наоборот.
+	</p>
+
+	<p>
+		Привязывать можно практически любые свойства любых элементов. 
+		Обратите внимание, что свойства привязки в свою очередь тоже могут быть привязками.
+	</p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Path</td>
+				<td>String</td>
+				<td>По умолчанию. Выражение, описывающее путь к свойству модели.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DataType</td>
+				<td><a class="code-link" href="/xaml/enums/datatype">DataType</a></td>
+				<td>Тип данных.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Format</td>
+				<td>String</td>
+				<td>Формат отображения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mask</td>
+				<td>String</td>
+				<td>Маска отображения значения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">HideZeros</td>
+				<td>Boolean</td>
+				<td>Прятать нулевые значения. Имеет смысл только для числовых форматов.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">NegativeRed</td>
+				<td>Boolean</td>
+				<td>Показывать отрицательные значения красным цветом. Имеет смысл только для числовых форматов.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+	<p>
+		Привязка элемента <code>Document.Sum</code> модели к текстовому полю и отображение его как суммы (с разделителями тысяч)
+	</p>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<!-- привязка через расширение разметки -->
+<TextBox Value="{Bind Document.Sum, DataType=Currency}" />
+
+<!-- привязка объекта -->
+<TextBox>
+	<TextBox.Value>
+		<Bind Path="Document.Sum" DataType="Currency"/>
+	</TextBox.Value>
+</TextBox>
+</script>
+</pre>
+	</p>
+
+
 </div>
