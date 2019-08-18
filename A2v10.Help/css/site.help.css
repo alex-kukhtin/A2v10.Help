@@ -321,6 +321,9 @@ h4 {
   font-family: Consolas, 'Courier New', Courier, monospace;
   font-weight: bold;
 }
+tr.top > td {
+  vertical-align: top;
+}
 .help-content-view ul {
   padding-left: 20px;
   margin: 0.8rem 0;
@@ -528,6 +531,12 @@ p {
 }
 .tip.warning:before {
   background-color: gold;
+}
+.tip.info {
+  border-left: 4px solid #57a8fa;
+}
+.tip.info:before {
+  background-color: #57a8fa;
 }
 .icons-content {
   columns: 4;

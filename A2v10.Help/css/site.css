@@ -1180,6 +1180,12 @@ header .company-name,
   text-overflow: ellipsis;
   user-select: text;
 }
+header .company-menu-name,
+.header .company-menu-name {
+  max-width: 20rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .content-view {
   position: absolute;
   left: 0;
@@ -2109,13 +2115,17 @@ pre.a2-code {
 .normal {
   font-size: 1rem;
 }
-.a2-hyperlink.highlight:not([disabled]) .ico {
-  background-color: #208cf8;
-  border-radius: 50%;
-  padding: 3px 2px 3px 4px;
+.a2-hyperlink.highlight {
+  /*special behaviour for icon 'send' */
+}
+.a2-hyperlink.highlight .ico.ico-send:before {
+  content: "\e950";
 }
 .a2-hyperlink.highlight:not([disabled]) .ico:before {
-  color: white !important;
+  color: #208cf8 !important;
+}
+.a2-hyperlink.highlight:not([disabled]) .ico.ico-send:before {
+  content: "\e951";
 }
 .a2-hyperlink.small i.ico {
   font-size: 12px;
@@ -3560,6 +3570,9 @@ tr:hover .commandbar.visible-hover {
 .a2-tab-button.active {
   border-bottom-color: #208cf8;
   color: #999;
+}
+.a2-tab-button .content {
+  white-space: nowrap;
 }
 .a2-tab-description {
   color: #999;
@@ -5677,6 +5690,27 @@ table.sheet .group-cell.collapsed > div .ico:before {
 }
 table.sheet.striped > tbody > tr:nth-child(even) {
   background-color: rgba(240, 240, 240, 0.25);
+}
+table.sheet tr.success,
+table.sheet tr.green {
+  background-color: rgba(216, 255, 216, 0.5) !important;
+}
+table.sheet tr.danger,
+table.sheet tr.red,
+table.sheet tr.error {
+  background-color: rgba(254, 220, 220, 0.5) !important;
+  color: #a94442;
+}
+table.sheet tr.warning,
+table.sheet tr.orange {
+  background-color: rgba(255, 216, 0, 0.15) !important;
+}
+table.sheet tr.info,
+table.sheet tr.cyan {
+  background-color: rgba(114, 234, 234, 0.15) !important;
+}
+table.sheet tr.gray {
+  background-color: rgba(208, 208, 208, 0.15) !important;
 }
 table > colgroup col.yellow {
   background-color: rgba(255, 255, 164, 0.25);

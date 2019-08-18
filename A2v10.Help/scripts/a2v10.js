@@ -1951,7 +1951,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2019 Alex Kukhtin. All rights reserved.*/
 
-// 20190811-7518
+// 20190818-7528
 // services/datamodel.js
 
 (function () {
@@ -2020,9 +2020,10 @@ app.modules['std:validators'] = function () {
 	function ensureType(type, val) {
 		if (!utils.isDefined(val))
 			val = utils.defaultValue(type);
-		if (type === Number) {
+		if (type === Number)
 			return utils.toNumber(val);
-		}
+		else if (type === Date && !utils.isDate(val))
+			return utils.date.parse('' + val);
 		return val;
 	}
 
@@ -2105,7 +2106,7 @@ app.modules['std:validators'] = function () {
 					this._src_[prop] = val;
 				}
 				if (!skipDirty) // skip special properties
-					this._root_.$setDirty(true, this._path_);
+					this._root_.$setDirty(true, this._path_, prop);
 				if (this._lockEvents_) return; // events locked
 				if (eventWasFired) return; // was fired
 				let eventName = (this._path_ || 'Root') + '.' + prop + '.change';
@@ -2311,7 +2312,7 @@ app.modules['std:validators'] = function () {
 				platform.defer(() => {
 					let isRequery = elem.$vm.__isModalRequery();
 					elem.$emit('Model.load', elem, _lastCaller, isRequery);
-					elem._root_.$setDirty(false);
+					elem._root_.$setDirty(elem._root_.$isCopy ? true : false);
 				});
 			};
 			elem._fireUnload_ = () => {
@@ -3082,14 +3083,15 @@ app.modules['std:validators'] = function () {
 		//console.dir(allerrs);
 	}
 
-	function setDirty(val, path) {
+	function setDirty(val, path, prop) {
 		if (this.$root.$readOnly)
 			return;
 		if (path && path.toLowerCase().startsWith('query'))
 			return;
 		if (isNoDirty(this.$root))
 			return;
-		// TODO: template.options.skipDirty
+		if (path && prop && isSkipDirty(this.$root, `${path}.${prop}`))
+			return;
 		this.$dirty = val;
 	}
 
@@ -3125,6 +3127,15 @@ app.modules['std:validators'] = function () {
 		let t = root.$template;
 		let opts = t && t.options;
 		return opts && opts.noDirty;
+	}
+
+	function isSkipDirty(root, path) {
+		let t = root.$template;
+		const opts = t && t.options;
+		if (!opts) return false;
+		const sd = opts.skipDirty;
+		if (!sd || !utils.isArray(sd)) return false;
+		return sd.indexOf(path) !== -1;
 	}
 
 	function saveSelections() {
@@ -3214,6 +3225,7 @@ app.modules['std:validators'] = function () {
 			let eventName = this._path_ + '.change';
 			this._root_.$emit(eventName, this.$parent, this, this, propFromPath(this._path_));
 		}
+		return this;
 	}
 
 	function implementRoot(root, template, ctors) {
@@ -4722,7 +4734,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190414-7485
+// 20190818-7528
 // components/calendar.js
 
 (function () {
@@ -4831,7 +4843,7 @@ Vue.component('validator-control', {
 			nextMonth() {
 				let dt = new Date(this.model);
 				if (this.isDayView)
-					dt.setMonth(dt.getMonth() + 1);
+					dt = utils.date.add(dt, 1, 'month');
 				else
 					dt.setFullYear(dt.getFullYear() + 1);
 				this.setMonth(dt, this.pos);
@@ -4839,7 +4851,7 @@ Vue.component('validator-control', {
 			prevMonth() {
 				let dt = new Date(this.model);
 				if (this.isDayView)
-					dt.setMonth(dt.getMonth() - 1);
+					dt = utils.date.add(dt, -1, 'month');
 				else
 					dt.setFullYear(dt.getFullYear() - 1);
 				this.setMonth(dt, this.pos);
@@ -5542,7 +5554,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190814-7522
+// 20190818-7528
 // components/datagrid.js*/
 
 (function () {
@@ -5896,7 +5908,10 @@ Vue.component('validator-control', {
 						},
 						eval: utils.eval,
 						getHref() {
-							if (col.command && col.command.isDialog)
+							if (!col.command) return null;
+							if (col.command.isDialog)
+								return null;
+							if (col.command.cmd.name.indexOf('$exec') !== -1)
 								return null;
 							let id = arg2;
 							if (utils.isObjectExact(arg2))
@@ -7929,7 +7944,7 @@ TODO:
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190305-7456
+// 20190816-7525
 // components/modal.js
 
 
@@ -8148,13 +8163,9 @@ TODO:
 				if (this.dialog.buttons)
 					return this.dialog.buttons;
 				else if (this.dialog.style === 'alert')
-					return [{ text: okText, result: false, tabindex: 1 }];
-				else if (this.dialog.style === 'alert-ok') {
-					this.dialog.style = 'alert';
 					return [{ text: okText, result: true, tabindex: 1 }];
-				}
 				else if (this.dialog.style === 'info')
-					return [{ text: okText, result: false, tabindex:1 }];
+					return [{ text: okText, result: true, tabindex:1 }];
 				return [
 					{ text: okText, result: true, tabindex:2 },
 					{ text: cancelText, result: false, tabindex:1 }
@@ -8965,9 +8976,9 @@ Vue.component('a2-panel', {
 		}
 	});
 })();
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20181211-7384*/
+/*20190816-7525*/
 /*components/newbutton.js*/
 
 (function () {
@@ -8977,7 +8988,7 @@ Vue.component('a2-panel', {
 	const eventBus = require('std:eventBus');
 
 	const newButtonTemplate =
-`<div class="dropdown dir-down a2-new-btn" v-dropdown v-if="isVisible">
+`<div class="dropdown dir-down a2-new-btn separate" v-dropdown v-if="isVisible">
 	<button class="btn btn-icon" :class="btnClass" toggle aria-label="New"><i class="ico" :class="iconClass"></i></button>
 	<div class="dropdown-menu menu down-left">
 		<div class="super-menu" :class="cssClass">
@@ -9071,20 +9082,27 @@ Vue.component('a2-panel', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190807-7516*/
+/*20190816-7525*/
 /*components/newbutton.js*/
 
 (function () {
 
 
 	const companyButtonTemplate =
-`<div class="a2-company-btn"><div class="dropdown dir-down" v-dropdown v-if="isVisible">
+		`<div class="a2-company-btn"><div class="dropdown dir-down separate" v-dropdown v-if="isVisible">
 	<button class="btn" :class="btnClass" toggle aria-label="Company">
-		<i class="ico" :class="iconClass"></i>
-		<span class="company-name">Название компании с очень очень длинным текстом</span>
+		<i class="ico ico-home"></i>
+		<span class="company-name" v-text=companyName></span>
 		<span class="caret"/>
 	</button>
-	<div class="dropdown-menu menu down-left separate">
+	<div class="dropdown-menu menu down-left">
+		<a v-for="comp in source" @click.prevent="selectCompany(comp)" href="" tabindex="-1" class="dropdown-item">
+			<i class="ico" :class="icoClass(comp)"/><span class="company-menu-name" v-text="comp.Name"/>
+		</a>
+		<div class="divider" v-if="hasLinks"/>
+		<a v-for="link in links" @click.prevent="gotoLink(link)" href="" tabindex="-1">
+			<i class="ico ico-none"/><span v-text="link.Name" />
+		</a>
 	</div>
 </div></div>
 `;
@@ -9092,13 +9110,21 @@ Vue.component('a2-panel', {
 	Vue.component('a2-company-button', {
 		template: companyButtonTemplate,
 		props: {
+			source: Array,
+			links: Array
 		},
 		computed: {
+			hasLinks() {
+				return this.links && this.links.length;
+			},
+			companyName() {
+				let comp = this.source.find(x => x.Current);
+				if (comp)
+					return comp.Name;
+				return "*** UNSELECTED ***";
+			},
 			isVisible() {
 				return true;
-			},
-			iconClass() {
-				return 'ico-home'; // this.icon ? 'ico-' + this.icon : '';
 			},
 			btnClass() {
 				return "btn-companyname"; //this.btnStyle ? 'btn-' + this.btnStyle : '';
@@ -9107,6 +9133,21 @@ Vue.component('a2-panel', {
 		created() {
 		},
 		methods: {
+			selectCompany(comp) {
+				const http = require("std:http");
+				const urlTools = require("std:url");
+				const rootUrl = window.$$rootUrl;
+				const data = JSON.stringify({ company: comp.Id });
+				http.post(urlTools.combine(rootUrl, 'account/switchtocompany'), data)
+					.then(x => {
+						window.location.assign(rootUrl); // reload
+					}).catch(err => {
+						alert(err);
+					});
+			},
+			icoClass(cmp) {
+				return cmp.Current ? 'ico-check' : 'ico-none';
+			}
 		}
 	});
 
@@ -11744,7 +11785,7 @@ Vue.directive('resize', {
 			if (!this.menu) {
 				let dlgData = {
 					promise: null, data: {
-						message: locale.$AccessDenied, title: locale.$Error, style: 'alert-ok'
+						message: locale.$AccessDenied, title: locale.$Error, style: 'alert'
 					}
 				};
 				eventBus.$emit('confirm', dlgData);
