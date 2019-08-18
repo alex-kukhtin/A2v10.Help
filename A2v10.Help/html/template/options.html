@@ -16,7 +16,8 @@
 options: {
 	noDirty?: boolean,
 	bindOnce?: string[],
-	persistSelect?: string[]
+	persistSelect?: string[],
+	skipDirty?: string[]
 }
 </script>
 </pre>
@@ -30,6 +31,10 @@ options: {
 		<li>
 			<code>persistSelect</code> - массив строк, определяющий массивы модели, для которых нужно сохранять
 			позицию выделенного элемента в процессе сохранения или перезагрузки модели.
+		</li>
+		<li>
+			<code>skipDirty</code> - массив строк, определяющий пути к свойствам модели, при изменении которых не нужно взводить 
+			флаг изменений <code>$isDirty</code>.
 		</li>
 	</ul>
 
