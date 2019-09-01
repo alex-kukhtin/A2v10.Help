@@ -1004,7 +1004,7 @@ app.modules['std:url'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190223-7441
+/*20180831-7549*/
 // services/period.js
 
 app.modules['std:period'] = function () {
@@ -1133,6 +1133,9 @@ app.modules['std:period'] = function () {
 		return this.normalize();
 	};
 
+	TPeriod.prototype.toJson = function () {
+		return JSON.stringify(this);
+	};
 
 	
 	return {
@@ -1951,7 +1954,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2019 Alex Kukhtin. All rights reserved.*/
 
-// 20190818-7528
+/*20180831-7549*/
 // services/datamodel.js
 
 (function () {
@@ -1971,6 +1974,7 @@ app.modules['std:validators'] = function () {
 	const FLAG_EDIT = 2;
 	const FLAG_DELETE = 4;
 	const FLAG_APPLY = 8;
+	const FLAG_UNAPPLY = 16;
 
 	const DEFAULT_PAGE_SIZE = 20;
 
@@ -2322,6 +2326,10 @@ app.modules['std:validators'] = function () {
 			defHiddenGet(elem, '$stateReadOnly', isStateReadOnly);
 			defHiddenGet(elem, '$isCopy', isModelIsCopy);
 			elem._seal_ = seal;
+
+			elem._fireGlobalPeriodChanged_ = (period) => {
+				elem.$emit('GlobalPeriod.change', elem, period);
+			};
 		}
 		if (startTime) {
 			logtime('create root time:', startTime, false);
@@ -2763,12 +2771,18 @@ app.modules['std:validators'] = function () {
 				let permName = this._meta_.$permissions;
 				if (!permName) return undefined;
 				var perm = this[permName];
-				return {
+				if (this.$isNew && perm === 0) {
+					let mi = this.$ModelInfo;
+					if (mi && utils.isDefined(mi.Permissions))
+						perm = mi.Permissions;
+				}
+				return Object.freeze({
 					canView: !!(perm & FLAG_VIEW),
 					canEdit: !!(perm & FLAG_EDIT),
 					canDelete: !!(perm & FLAG_DELETE),
-					canApply: !!(perm & FLAG_APPLY)
-				};
+					canApply: !!(perm & FLAG_APPLY),
+					canUnapply: !!(perm & FLAG_UNAPPLY)
+				});
 			});
 		}
 	}
@@ -5026,7 +5040,7 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190217-7432
+// 20190831-7549
 // components/periodpicker.js
 
 
@@ -5077,7 +5091,8 @@ Vue.component('validator-control', {
 				type: Boolean,
 				default: true
 			},
-			display: String
+			display: String,
+			callback: Function
 		},
 		data() {
 			return {
@@ -5104,6 +5119,8 @@ Vue.component('validator-control', {
 				return this.period.format('Date');
 			},
 			period() {
+				if (!this.item)
+					return this.currentPeriod;
 				let period = this.item[this.prop];
 				if (!uPeriod.isPeriod(period))
 					console.error('PeriodPicker. Value is not a Period');
@@ -5168,6 +5185,8 @@ Vue.component('validator-control', {
 				this.isOpen = false;
 			},
 			fireEvent() {
+				if (this.callback)
+					this.callback(this.period);
 				let root = this.item.$root;
 				if (!root) return;
 				let eventName = this.item._path_ + '.' + this.prop + '.change';
@@ -9082,15 +9101,15 @@ Vue.component('a2-panel', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190816-7525*/
+/*20190821-7534*/
 /*components/newbutton.js*/
 
 (function () {
 
 
 	const companyButtonTemplate =
-		`<div class="a2-company-btn"><div class="dropdown dir-down separate" v-dropdown v-if="isVisible">
-	<button class="btn" :class="btnClass" toggle aria-label="Company">
+`<div class="a2-company-btn"><div class="dropdown dir-down separate" v-dropdown>
+	<button class="btn btn-companyname" toggle aria-label="Company">
 		<i class="ico ico-home"></i>
 		<span class="company-name" v-text=companyName></span>
 		<span class="caret"/>
@@ -9099,10 +9118,12 @@ Vue.component('a2-panel', {
 		<a v-for="comp in source" @click.prevent="selectCompany(comp)" href="" tabindex="-1" class="dropdown-item">
 			<i class="ico" :class="icoClass(comp)"/><span class="company-menu-name" v-text="comp.Name"/>
 		</a>
-		<div class="divider" v-if="hasLinks"/>
-		<a v-for="link in links" @click.prevent="gotoLink(link)" href="" tabindex="-1">
-			<i class="ico ico-none"/><span v-text="link.Name" />
-		</a>
+		<template v-if="hasLinks">
+			<div class="divider"/>
+			<a v-for="link in links" @click.prevent="gotoLink(link)" href="" tabindex="-1" class="dropdown-item">
+				<i class="ico" :class="linkClass(link)"/><span v-text="link.Name" />
+			</a>
+		</template>
 	</div>
 </div></div>
 `;
@@ -9122,15 +9143,7 @@ Vue.component('a2-panel', {
 				if (comp)
 					return comp.Name;
 				return "*** UNSELECTED ***";
-			},
-			isVisible() {
-				return true;
-			},
-			btnClass() {
-				return "btn-companyname"; //this.btnStyle ? 'btn-' + this.btnStyle : '';
 			}
-		},
-		created() {
 		},
 		methods: {
 			selectCompany(comp) {
@@ -9140,13 +9153,21 @@ Vue.component('a2-panel', {
 				const data = JSON.stringify({ company: comp.Id });
 				http.post(urlTools.combine(rootUrl, 'account/switchtocompany'), data)
 					.then(x => {
-						window.location.assign(rootUrl); // reload
+						window.location.assign(urlTools.combine(rootUrl, '/') /*always root */);
 					}).catch(err => {
 						alert(err);
 					});
 			},
+			gotoLink(link) {
+				const store = component('std:store');
+				if (store)
+					store.commit('navigate', { url: link.Url});
+			},
 			icoClass(cmp) {
 				return cmp.Current ? 'ico-check' : 'ico-none';
+			},
+			linkClass(link) {
+				return `ico-${link.Icon || 'none'}`;
 			}
 		}
 	});
@@ -9208,9 +9229,9 @@ Vue.component('a2-panel', {
 	});
 })();
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20181027-7333
+// 20190821-7533
 // components/debug.js*/
 
 (function () {
@@ -9236,7 +9257,7 @@ Vue.component('a2-panel', {
 		'$host': null,
 		'$root': null,
 		'$parent': null,
-		'$items':null
+		'$items': null
 	};
 
 	function toJsonDebug(data) {
@@ -9254,15 +9275,13 @@ Vue.component('a2-panel', {
 		name: 'a2-trace-item',
 		template: `
 <div v-if="hasElem" class="trace-item-body">
-    <span class="title" v-text="name"/><span class="badge" v-text="elem.length"/>
-    <ul class="a2-debug-trace-item">
-        <li v-for="itm in elem">
-            
-            <div class="rq-title"><span class="elapsed" v-text="itm.elapsed + ' ms'"/> <span v-text="itm.text"/></div>
-        </li>
-    </ul>
-</div>
-`,
+	<span class="title" v-text="name"/><span class="badge" v-text="elem.length"/>
+	<ul class="a2-debug-trace-item">
+		<li v-for="itm in elem">
+			<div class="rq-title"><span class="elapsed" v-text="itm.elapsed + ' ms'"/> <span v-text="itm.text"/></div>
+		</li>
+	</ul>
+</div>`,
 		props: {
 			name: String,
 			elem: Array
@@ -10043,7 +10062,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190814-7522
+/*20180831-7549*/
 // controllers/base.js
 
 (function () {
@@ -10087,6 +10106,24 @@ Vue.directive('resize', {
 			}
 		}
 		return ra.length ? ra : null;
+	}
+
+	function isPermissionsDisabled(opts, arg) {
+		if (opts && opts.checkPermission) {
+			if (utils.isObjectExact(arg)) {
+				if (arg.$permissions) {
+					let perm = arg.$permissions;
+					let prop = opts.checkPermission;
+					if (prop in perm) {
+						if (!perm[prop])
+							return true;
+					} else {
+						console.error(`invalid permssion name: '${prop}'`);
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	const base = Vue.extend({
@@ -10152,6 +10189,11 @@ Vue.directive('resize', {
 			$exec(cmd, arg, confirm, opts) {
 				if (this.$isReadOnly(opts)) return;
 				if (this.$isLoading) return;
+
+				if (isPermissionsDisabled(opts, arg)) {
+					this.$alert(locale.$PermissionDenied);
+					return;
+				}
 				const root = this.$data;
 				return root._exec_(cmd, arg, confirm, opts);
 			},
@@ -10492,9 +10534,14 @@ Vue.directive('resize', {
 				});
 			},
 
-			$dbRemove(elem, confirm) {
+			$dbRemove(elem, confirm, opts) {
 				if (!elem)
 					return;
+
+				if (isPermissionsDisabled(opts, elem)) {
+					this.$alert(locale.$PermissionDenied);
+					return;
+				}
 				if (this.$isLoading) return;
 				let id = elem.$id;
 				let lazy = elem.$parent.$isLazy ? elem.$parent.$isLazy() : false;
@@ -10530,12 +10577,12 @@ Vue.directive('resize', {
 				}
 			},
 
-			$dbRemoveSelected(arr, confirm) {
+			$dbRemoveSelected(arr, confirm, opts) {
 				if (this.$isLoading) return;
 				let sel = arr.$selected;
 				if (!sel)
 					return;
-				this.$dbRemove(sel, confirm);
+				this.$dbRemove(sel, confirm, opts);
 			},
 
 			$openSelectedFrame(url, arr) {
@@ -10664,6 +10711,10 @@ Vue.directive('resize', {
 
 				function doDialog() {
 					// result always is raw data
+					if (isPermissionsDisabled(opts, arg)) {
+						that.$alert(locale.$PermissionDenied);
+						return;
+					}
 					switch (command) {
 						case 'new':
 							if (argIsNotAnArray()) return;
@@ -11073,7 +11124,7 @@ Vue.directive('resize', {
 					for (let ix = 0; ix < x.e.length; ix++) {
 						let y = x.e[ix];
 						if (isInclude(y.severity))
-							result.push({ path: x, msg: y.msg, severity: y.severity, index:ix });
+							result.push({ path: x, msg: y.msg, severity: y.severity, index: ix });
 					}
 				}
 				return result.length ? result : null;
@@ -11195,6 +11246,9 @@ Vue.directive('resize', {
 						args.result = utils.eval(root, args.path);
 						break;
 				}
+			},
+			__global_period_changed__(period) {
+				this.$data._fireGlobalPeriodChanged_(period);
 			}
 		},
 		created() {
@@ -11207,6 +11261,7 @@ Vue.directive('resize', {
 			eventBus.$on('queryChange', this.__queryChange);
 			eventBus.$on('childrenSaved', this.__notified);
 			eventBus.$on('invokeTest', this.__invoke__test__);
+			eventBus.$on('globalPeriodChanged', this.__global_period_changed__);
 
 			// TODO: delete this.__queryChange
 			this.$on('localQueryChange', this.__queryChange);
@@ -11227,6 +11282,7 @@ Vue.directive('resize', {
 			eventBus.$off('queryChange', this.__queryChange);
 			eventBus.$off('childrenSaved', this.__notified);
 			eventBus.$off('invokeTest', this.__invoke__test__);
+			eventBus.$off('globalPeriodChanged', this.__global_period_changed__);
 
 			this.$off('localQueryChange', this.__queryChange);
 			this.$off('cwChange', this.__cwChange);
@@ -11254,7 +11310,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20180813-7521*/
+/*20180831-7549*/
 /* controllers/shell.js */
 
 (function () {
@@ -11265,11 +11321,13 @@ Vue.directive('resize', {
 	const toastr = component('std:toastr');
 	const popup = require('std:popup');
 	const urlTools = require('std:url');
+	const period = require('std:period');
 	const log = require('std:log');
 	const utils = require('std:utils');
 	const locale = window.$$locale;
 	const platform = require('std:platform');
 	const htmlTools = require('std:html');
+	const http = require('std:http');
 
 	const UNKNOWN_TITLE = 'unknown title';
 
@@ -11342,17 +11400,24 @@ Vue.directive('resize', {
 	<li v-for="(item, index) in menu" :key="index" :class="{active : isActive(item)}">
 		<a :href="itemHref(item)" tabindex="-1" v-text="item.Name" @click.prevent="navigate(item)"></a>
 	</li>
-	<li class="aligner"></li>
+	<li class="aligner"/>
+	<div class="nav-global-period" v-if="hasPeriod">
+		<a2-period-picker class="drop-bottom-right pp-hyperlink pp-navbar" 
+			display="namedate" :callback="periodChanged" prop="period" :item="that"/>
+	</div>
 	<li v-if="hasHelp()" :title="locale.$Help"><a :href="helpHref()" class="btn-help" rel="help" aria-label="Help" @click.prevent="showHelp()"><i class="ico ico-help"></i></a></li>
 </ul>
 `,
 		props: {
-			menu: Array
+			menu: Array,
+			period: period.constructor
 		},
 		computed: {
 			seg0: () => store.getters.seg0,
 			seg1: () => store.getters.seg1,
-			locale() { return locale; }
+			locale() { return locale; },
+			hasPeriod() { return !!this.period; },
+			that() { return this; }
 		},
 		methods: {
 			isActive(item) {
@@ -11393,6 +11458,16 @@ Vue.directive('resize', {
 				if (!this.menu) return false;
 				let am = this.menu.find(x => this.isActive(x));
 				return am && am.Help;
+			},
+			periodChanged(period) {
+				// post to shell
+				http.post('/_application/setperiod', period.toJson())
+					.then(() => {
+						eventBus.$emit('globalPeriodChanged', period);
+					})
+					.catch((err) => {
+						alert(err);
+					});
 			}
 		}
 	};
@@ -11571,7 +11646,7 @@ Vue.directive('resize', {
 		store,
 		template: `
 <div :class="cssClass" class="main-view">
-	<a2-nav-bar :menu="menu" v-show="navBarVisible"></a2-nav-bar>
+	<a2-nav-bar :menu="menu" v-show="navBarVisible" :period="period"></a2-nav-bar>
 	<a2-side-bar :menu="menu" v-show="sideBarVisible" :compact='isSideBarCompact'></a2-side-bar>
 	<a2-content-view></a2-content-view>
 	<div class="load-indicator" v-show="pendingRequest"></div>
@@ -11591,7 +11666,8 @@ Vue.directive('resize', {
 		},
 		props: {
 			menu: Array,
-			sideBarMode: String
+			sideBarMode: String,
+			period: period.constructor
 		},
 		data() {
 			return {
@@ -11643,7 +11719,6 @@ Vue.directive('resize', {
 		},
 		created() {
 			let me = this;
-
 			eventBus.$on('beginRequest', function () {
 				//if (me.hasModals)
 					//return;
@@ -11838,6 +11913,7 @@ Vue.directive('resize', {
 				debugShowTrace: false,
 				debugShowModel: false,
 				feedbackVisible: false,
+				globalPeriod: null,
 				dataCounter: 0,
 				traceEnabled: log.traceEnabled()
 			};
@@ -11934,6 +12010,9 @@ Vue.directive('resize', {
 		},
 		created() {
 			let me = this;
+			if (this.initialPeriod) {
+				this.globalPeriod = new period.constructor(this.initialPeriod);
+			}
 
 			me.__dataStack__ = [];
 

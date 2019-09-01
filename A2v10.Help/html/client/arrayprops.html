@@ -1,0 +1,52 @@
+﻿<div>
+	<!--title:Массивы-->
+	<div class="title">
+		<h1>
+			Свойства массивов
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IElementArray<T> extends Array<T> {
+	[index: number]: T;
+	// properties
+	readonly $root: IRoot;
+	readonly $parent: IElement;
+	readonly $ctrl: IController;
+	readonly $isEmpty: boolean;
+	readonly $hasSelected: boolean;
+	readonly $selectedIndex: number;
+	// methods
+	$empty(): IElementArray<T>;
+	$remove(elem: T): IElementArray<T>;
+	$clearSelected(): void;
+	$append(src?: object): T;
+	$prepend(src?: object): T;
+	$insert(src:object, to: InsertTo, ref?: T): T;
+	$copy(src: any[]): IElementArray<T>;
+}
+]]>
+</script>
+</pre>
+	</p>
+
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$empty(): IElementArray<T>]]></script>
+		</pre></div>
+		<h4>Описание</h4>
+		<p>Очищает массив. Удаляет все элементы.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на сам массив.</li>
+		</ul>
+	</div>
+</div>

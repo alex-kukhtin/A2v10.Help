@@ -289,8 +289,8 @@
 
 		/*console.dir(body);*/
 		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
-		const jsKeywords = /^(a(wait|sync|rguments)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val)|f(or|unction|alse|inally)|i(f|n)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|return|w(hile|ith)|yield|string|number|boolean)$/;
-		const instr = /^(Array|Boolean|Date|Infinity|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
+		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val|xtends)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
+		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		let jsOpts = {
 			lang: 'js',
@@ -317,6 +317,9 @@
 					lang = 'xml';
 			}
 			let text = tag.textContent.trim();
+			if (text.startsWith('<![CDATA[') && text.endsWith(']]>')) {
+				text = text.substring(9, text.length - 3).trim();
+			}
 			tag.innerHTML = '';
 			/*console.dir(text);*/
 			if (lang === 'js') {

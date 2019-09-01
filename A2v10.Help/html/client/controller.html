@@ -8,36 +8,44 @@
 
 	<p>
 		Контроллер отвечает за взаимодействие модели и представления. Любой объект данных имеет свойство
-		<code>$ctrl</code>, который возвращает ссылку на текущий контроллер. Контроллер это обычный объект JavaScript, имеющий
-		следующую структуру:
+		<code>$ctrl</code>, который возвращает ссылку на текущий контроллер. Контроллер это обычный объект JavaScript, реализующий
+		следующую интерфейс:
 	</p>
 
 	<p>
 		<pre class="code-highlight js" data-lang="js">
 <script type="text/template">
-{
+<![CDATA[
+interface IController {
   // свойства
-  $isDirty: boolean,
-  $isPristine: boolean,
+  readonly $isDirty: boolean;
+  readonly $isPristine: boolean;
   // методы
-  $invoke: Function,
-  $close: ():void,
-  $requery: ():void,
-  $modalClose: (result?:any):void, // закрывает модальное окно
-  $msg: Function,        // выводит сообщение
-  $alert: Function,      // выводит сообщение об ошибке
-  $toast: Function,
-  $showDialog: Function,
-  $asyncValid: Function,
-  $saveModified: (message?:string, title?:string): boolean
+  $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
+  $requery():void;
+  $reload(args?: any): void;
+  $modalClose: (result?: any):void;   // закрывает модальное окно
+  $msg: Function;                     // выводит сообщение
+  $alert: Function;                   // выводит сообщение об ошибке
+  $toast: Function;
+  $defer(func: () => void): void;
+  $showDialog(url: string, data?: object, query?: object): Promise<object>;
+  $asyncValid: Function;
+  $saveModified(message?:string, title?:string): boolean;
+  $setFilter(target:object, prop:string, value:any): void;
 }
+]]>
 </script>
 </pre>
 	</p>
 	<h3>Методы контроллера</h3>
 
 	<div class="method">
-		<div class="syntax">$msg(msg:string, title?:string, style?:string): Promise&lt;any&gt;</div>
+		<div class="syntax">$msg(msg:string, title?:string, style?:string): Promise&lt;object&gt;</div>
+		<h4>Описание:</h4>
+		<p>
+			Метод выводит сообщение в модальном окне.
+		</p>
 		<h4>Аргументы:</h4>
 		<ul class="params">
 			<li><code>msg</code> - текст сообщения. Может включать html-разметку.</li>
@@ -48,26 +56,22 @@
 		<ul class="params">
 			<li><code>Promise&lt;any&gt;</code>, который будет выполнен после закрытия окна.</li>
 		</ul>
-		<h4>Описание:</h4>
-		<p>
-			Метод выводит сообщение в модальном окне.
-		</p>
 		<p>
 			Кнопки, которые будут размещены в окне зависят от стиля сообщения.
 		</p>
 	</div>
 
-	
+
 	<div class="method">
-		<div class="syntax">$saveModified(message?:string, title?:string):boolean</div>
+		<div class="syntax"><pre class="code-highlight js">$saveModified(message?:string, title?:string):boolean</pre></div>
 		<h4>Аргументы:</h4>
 		<ul class="params">
 			<li>
-				<code>message:string</code> - сообщение. Если не указано (<code>undefined</code>), будет использовано стандартное сообщение
+				<code>message</code> - сообщение. Если не указано (<code>undefined</code>), будет использовано стандартное сообщение
 				<b>"Элемент был изменен. Сохранить изменения?"</b> (в текущей локализации).
 			</li>
 			<li>
-				<code>title:string</code> - заголовок окна сообщения. Если не указано (<code>undefined</code>), будет использован
+				<code>title</code> - заголовок окна сообщения. Если не указано (<code>undefined</code>), будет использован
 				стандартный заголовок <b>"Подтверждение закрытия"</b> (в текущей локализации).
 			</li>
 		</ul>
@@ -87,4 +91,26 @@
 		<p>Чаще всего метод используется в делегате <code>CanCloseDelegate</code> объекта <a href="/xaml/containers/dialog">Dialog</a>.</p>
 	</div>
 
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$setFilter(target:object, prop:string, value:any): void</pre></div>
+		<h4>Описание</h4>
+		<p>Поскольку фильтры очень плотно взаимодействуют с разметкой и поведением системы, нельзя просто установить значение фильтра из кода.
+		Для этого нужно использовать метод <code>$setFilter</code>.
+		После установки значения система выполнит все необходимые действия, обновит интерфейс, выполнит серверные запросы и т.д.
+		</p>
+
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>target</code> - Объект, фильтр для которого нужно установить фильтр.
+			</li>
+			<li>
+				<code>prop</code> - имя свойства элемента фильтра.
+			</li>
+			<li>
+				<code>value</code> - новое значение.
+			</li>
+		</ul>
+	</div>
 </div>

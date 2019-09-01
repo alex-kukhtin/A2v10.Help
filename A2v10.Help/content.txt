@@ -180,8 +180,9 @@
 Программирование клиента	/client/index
 	Контроллер		/client/controller
 	Модель			/client/data
-		$ctrl			/client/data_$ctrl
-		$empty			/client/data_$empty
+		Свойства объектов			/client/elemprops
+		Свойства корневого объекта	/client/rootprops
+		Свойства массивов			/client/arrayprops
 
 	Шаблоны		/template/index
 		События			/template/events

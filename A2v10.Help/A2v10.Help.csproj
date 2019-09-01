@@ -75,11 +75,12 @@
     <Content Include="html\app\popups.html" />
     <Content Include="html\app\dialogs.html" />
     <Content Include="html\app\actions.html" />
-    <Content Include="html\client\data_%24ctrl.html" />
+    <Content Include="html\client\elemprops.html" />
+    <Content Include="html\client\rootprops.html" />
     <Content Include="html\client\global_require.html" />
-    <Content Include="html\client\data_%24empty.html" />
     <Content Include="html\client\data.html" />
     <Content Include="html\client\global.html" />
+    <Content Include="html\client\arrayprops.html" />
     <Content Include="html\client\stdutils.html" />
     <Content Include="html\client\module.html" />
     <Content Include="html\client\localization.html" />

@@ -198,11 +198,15 @@ code.string {
 }
 .syntax {
   font-family: Consolas, 'Courier New', Courier, monospace;
-  font-weight: bold;
   margin: 1rem 0;
   padding: 6px;
   border-left: 4px solid #7598d8;
   background-color: #f3faff;
+}
+.syntax pre {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
 }
 .help-content-view ul.params {
   margin-left: 1rem;

@@ -164,8 +164,9 @@ http://sdk.a2.dn.ua/xaml/diagram/path
 http://sdk.a2.dn.ua/client/index
 http://sdk.a2.dn.ua/client/controller
 http://sdk.a2.dn.ua/client/data
-http://sdk.a2.dn.ua/client/data_$ctrl
-http://sdk.a2.dn.ua/client/data_$empty
+http://sdk.a2.dn.ua/client/elemprops
+http://sdk.a2.dn.ua/client/rootprops
+http://sdk.a2.dn.ua/client/arrayprops
 http://sdk.a2.dn.ua/template/index
 http://sdk.a2.dn.ua/template/events
 http://sdk.a2.dn.ua/template/options
