@@ -9,4 +9,80 @@
 			<a href="index">Все текстовые элементы</a>
 		</div>
 	</div>
+
+	<p>
+		Представляет собой фрагмент текста. Поддерживает возможность вставки дополнительных строчных элементов
+		(например <a class="code-link" href="span">Span</a>) непосредственно в текст.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Inlines</code></p>
+
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Inlines</td>
+				<td>InlineCollection</td>
+				<td>Свойство содержимого. Текстовое содержимое. Строка текста, которая может включать другие строчные элементы.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Small</td>
+				<td>Boolean</td>
+				<td>
+					Уменьшенный шрифт. Конкретный размер шрифта зависит от темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Big</td>
+				<td>Boolean</td>
+				<td>
+					Увеличенный шрифт. Конкретный размер шрифта зависит от темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Size</td>
+				<td>TextSize</td>
+				<td>
+					Размер текста. Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Normal</span> - (по умолчанию) нормальный размер текста.</li>
+						<li><span class="prop-name">Small</span> - увеличенный. (то-же самое что и <code>Small="True"</code>)</li>
+						<li><span class="prop-name">Big</span> - уменьшенный. (то-же самое что и <code>Big="True"</code>)</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Gray</td>
+				<td>Boolean</td>
+				<td>
+					Серый цвет текста. Конкретный цвет зависит от темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Color</td>
+				<td><a class="code-link" href="/xaml/enums/textcolor">TextColor</a></td>
+				<td>
+					Цвет текста.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>

@@ -133,6 +133,7 @@
     <Content Include="html\xaml\controls\alert.html" />
     <Content Include="html\xaml\controls\chatitem.html" />
     <Content Include="html\xaml\controls\comboboxitem.html" />
+    <Content Include="html\xaml\controls\code.html" />
     <Content Include="html\xaml\controls\static.html" />
     <Content Include="html\xaml\controls\flexlist.html" />
     <Content Include="html\xaml\controls\separator.html" />

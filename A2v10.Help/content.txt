@@ -49,6 +49,7 @@
 			Button				/xaml/controls/button
 			ChatItem			/xaml/controls/chatitem
 			CheckBox			/xaml/controls/checkbox
+			Code				/xaml/controls/code
 			ComboBox			/xaml/controls/combobox
 			ComboBoxItem		/xaml/controls/comboboxitem
 			DataGrid			/xaml/controls/datagrid

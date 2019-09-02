@@ -42,6 +42,7 @@ http://sdk.a2.dn.ua/xaml/controls/attachments
 http://sdk.a2.dn.ua/xaml/controls/button
 http://sdk.a2.dn.ua/xaml/controls/chatitem
 http://sdk.a2.dn.ua/xaml/controls/checkbox
+http://sdk.a2.dn.ua/xaml/controls/code
 http://sdk.a2.dn.ua/xaml/controls/combobox
 http://sdk.a2.dn.ua/xaml/controls/comboboxitem
 http://sdk.a2.dn.ua/xaml/controls/datagrid

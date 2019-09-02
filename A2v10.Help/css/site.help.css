@@ -202,6 +202,7 @@ code.string {
   padding: 6px;
   border-left: 4px solid #7598d8;
   background-color: #f3faff;
+  font-weight: 500;
 }
 .syntax pre {
   margin: 0;
