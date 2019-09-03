@@ -326,6 +326,9 @@ h4 {
   font-family: Consolas, 'Courier New', Courier, monospace;
   font-weight: bold;
 }
+.fit {
+  width: 1px;
+}
 tr.top > td {
   vertical-align: top;
 }
@@ -442,6 +445,13 @@ a.code-link {
   padding: 10px 20px;
   margin: 20px;
   display: inline-block;
+}
+.panel-samlpe {
+  display: flex;
+  align-items: flex-start;
+}
+.panel-samlpe > div {
+  margin: 20px;
 }
 .xaml-sample {
   background-color: #f9f9f9;

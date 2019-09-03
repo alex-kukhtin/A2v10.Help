@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w201909
 http://sdk.a2.dn.ua/whatsnew/w201908
 http://sdk.a2.dn.ua/whatsnew/w201907
 http://sdk.a2.dn.ua/whatsnew/w201905
@@ -71,6 +72,7 @@ http://sdk.a2.dn.ua/xaml/controls/uploadfile
 http://sdk.a2.dn.ua/xaml/containers/index
 http://sdk.a2.dn.ua/xaml/containers/block
 http://sdk.a2.dn.ua/xaml/containers/card
+http://sdk.a2.dn.ua/xaml/containers/cardbody
 http://sdk.a2.dn.ua/xaml/containers/dialog
 http://sdk.a2.dn.ua/xaml/containers/dropdownmenu
 http://sdk.a2.dn.ua/xaml/containers/fieldset
