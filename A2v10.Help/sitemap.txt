@@ -67,6 +67,7 @@ http://sdk.a2.dn.ua/xaml/controls/tablecolumn
 http://sdk.a2.dn.ua/xaml/controls/tablemarkcell
 http://sdk.a2.dn.ua/xaml/controls/tablerow
 http://sdk.a2.dn.ua/xaml/controls/textbox
+http://sdk.a2.dn.ua/xaml/controls/timepicker
 http://sdk.a2.dn.ua/xaml/controls/treeview
 http://sdk.a2.dn.ua/xaml/controls/uploadfile
 http://sdk.a2.dn.ua/xaml/containers/index

@@ -74,6 +74,7 @@
 			TableMarkCell		/xaml/controls/tablemarkcell
 			TableRow			/xaml/controls/tablerow
 			TextBox				/xaml/controls/textbox
+			TimePicker			/xaml/controls/timepicker
 			TreeView			/xaml/controls/treeview
 			UpoloadFile			/xaml/controls/uploadfile
 

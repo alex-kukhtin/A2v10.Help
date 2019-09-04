@@ -241,7 +241,8 @@ app.modules['std:utils'] = function () {
 			endOfMonth: endOfMonth,
 			minDate: dateCreate(1901, 1, 1),
 			maxDate: dateCreate(2999, 12, 31),
-			fromDays: fromDays
+			fromDays: fromDays,
+			parseTime: timeParse
 		},
 		text: {
 			contains: textContains,
@@ -551,6 +552,19 @@ app.modules['std:utils'] = function () {
 		} catch (err) {
 			return str;
 		}
+	}
+
+	function timeParse(str) {
+		str = str || '';
+		if (!str) return dateZero();
+		let seg = str.split(/[^\d]/).filter(x => x);
+		if (seg.length === 1) {
+			seg.push('0');
+		}
+		let h = Math.min(+seg[0], 23);
+		let m = Math.min(+seg[1], 59);
+		let td = new Date(0, 0, 1, h, m, 0, 0);
+		return td;
 	}
 
 	function dateParse(str) {
@@ -4939,7 +4953,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190806-7514
+// 20190904-7552
 // components/datepicker.js
 
 
@@ -5003,11 +5017,20 @@ Vue.component('validator-control', {
 				}
 			},
 			setMonth(dt) {
-				this.item[this.prop] = dt;
+				this.setDate(dt);
 			},
 			selectDay(day) {
-				this.item[this.prop] = day;
+				this.setDate(day);
 				this.isOpen = false;
+			},
+			setDate(d) {
+				// save time
+				let od = this.modelDate;
+				let h = od.getHours();
+				let m = od.getMinutes();
+				var nd = new Date(d);
+				nd.setHours(h, m, 0, 0);
+				this.item[this.prop] = nd;
 			},
 			dayClass(day) {
 				let cls = '';
@@ -5042,15 +5065,213 @@ Vue.component('validator-control', {
 					if (utils.date.isZero(this.modelDate))
 						return '';
 					if (this.view === 'month')
-						return utils.text.capitalize(this.modelDate.toLocaleString(locale.$Locale, { year: 'numeric', month: 'long' }));
+						return utils.text.capitalize(this.modelDate.toLocaleString(locale.$Locale, { timeZone:'UTC',  year: 'numeric', month: 'long' }));
 					else
-						return this.modelDate.toLocaleString(locale.$Locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
+						return this.modelDate.toLocaleString(locale.$Locale, { timeZone: 'UTC', year: 'numeric', month: '2-digit', day: '2-digit' });
 				},
 				set(str) {
 					let md = utils.date.parse(str);
-					this.item[this.prop] = md;
+					this.setDate(md);
 					if (utils.date.isZero(md))
 						this.isOpen = false;
+				}
+			}
+		},
+		mounted() {
+			popup.registerPopup(this.$el);
+			this.$el._close = this.__clickOutside;
+		},
+		beforeDestroy() {
+			popup.unregisterPopup(this.$el);
+		}
+	});
+})();
+
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+
+// 20190904-7552
+// components/datepicker.js
+
+
+(function () {
+
+	const popup = require('std:popup');
+
+	const utils = require('std:utils');
+	const eventBus = require('std:eventBus');
+
+	const baseControl = component('control');
+	const locale = window.$$locale;
+
+	const timesheet = {
+		props: {
+			model: Date,
+			setHour: Function,
+			setMinute: Function,
+			getHourClass: Function,
+			getMinuteClass: Function
+		},
+		template: `
+<div @click.stop.prevent="dummy" class="time-picker-pane calendar-pane">
+<table class="table-hours">
+<thead><tr><th colspan="6">Години</th></tr></thead>
+<tbody>
+	<tr v-for="row in hours">
+		<td v-for="h in row" :class="getHourClass(h)"><a @click.stop.prevent="clickHours(h)" v-text="h"/></td>
+	</tr>	
+</tbody></table>
+<div class="divider"/>
+<table class="table-minutes">
+<thead><tr><th colspan="3">Хвилини</th></tr></thead>
+<tbody>
+	<tr v-for="row in minutes">
+		<td v-for="m in row" :class="getMinuteClass(m)"><a @click.stop.prevent="clickMinutes(m)" v-text="m"/></td>
+	</tr>	
+</tbody></table>
+</div>
+`,
+		methods: {
+			clickHours(h) {
+				if (this.setHour)
+					this.setHour(+h);
+			},
+			clickMinutes(m) {
+				if (this.setMinute)
+					this.setMinute(m);
+			},
+			dummy() {
+
+			}
+		},
+		computed: {
+			hours() {
+				let a = [];
+				for (let y = 0; y < 4; y++) {
+					let r = [];
+					a.push(r);
+					for (let x = 0; x < 6; x++) {
+						var v = y * 6 + x;
+						if (v < 10)
+							v = '0' + v;
+						r.push(v);
+					}
+				}
+				return a;
+			},
+			minutes() {
+				let a = [];
+				for (let y = 0; y < 4; y++) {
+					let r = [];
+					a.push(r);
+					for (let x = 0; x < 3; x++) {
+						var v = (y * 3 + x) * 5;
+						if (v < 10)
+							v = '0' + v;
+						r.push(v);
+					}
+				}
+				return a;
+			}
+		}
+	};
+
+	/*
+			<a2-calendar :model="modelDate"
+				:set-month="setMonth" :set-day="selectDay" :get-day-class="dayClass"/>
+	 */
+	Vue.component('a2-time-picker', {
+		extends: baseControl,
+		template: `
+<div :class="cssClass2()" class="date-picker">
+	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
+	<div class="input-group">
+		<input v-focus v-model.lazy="model" :class="inputClass" :disabled="inputDisabled"/>
+		<a href @click.stop.prevent="toggle($event)"><i class="ico ico-waiting-outline"></i></a>
+		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
+		<div class="calendar" v-if="isOpen">
+			<a2-time-sheet :model="modelDate" :set-hour="setHour" :set-minute="setMinute" :get-hour-class="hourClass" :get-minute-class="minuteClass"/>
+		</div>
+	</div>
+	<span class="descr" v-if="hasDescr" v-text="description"></span>
+</div>
+`,
+		components: {
+			'a2-time-sheet': timesheet
+		},
+		props: {
+			item: Object,
+			prop: String,
+			itemToValidate: Object,
+			propToValidate: String,
+			// override control.align (default value)
+			align: { type: String, default: 'center' }
+		},
+		data() {
+			return {
+				isOpen: false
+			};
+		},
+		methods: {
+			toggle(ev) {
+				if (this.disabled) return;
+				if (!this.isOpen) {
+					// close other popups
+					eventBus.$emit('closeAllPopups');
+					if (utils.date.isZero(this.modelDate))
+						this.item[this.prop] = utils.date.today();
+				}
+				this.isOpen = !this.isOpen;
+			},
+			setHour(h) {
+				let nd = new Date(this.modelDate);
+				nd.setUTCHours(h);
+				this.item[this.prop] = nd;
+			},
+			setMinute(m) {
+				let md = new Date(this.modelDate);
+				md.setMinutes(m);
+				this.item[this.prop] = md;
+				this.isOpen = false;
+			},
+			hourClass(h) {
+				let cls = '';
+				if (this.modelDate.getUTCHours() === +h)
+					cls += ' active';
+				return cls;
+			},
+			minuteClass(m) {
+				return this.modelDate.getUTCMinutes() === +m ? 'active' : undefined;
+			},
+			cssClass2() {
+				let cx = this.cssClass();
+				if (this.isOpen)
+					cx += ' open';
+				return cx;
+			},
+			__clickOutside() {
+				this.isOpen = false;
+			}
+		},
+		computed: {
+			modelDate() {
+				return this.item[this.prop];
+			},
+			inputDisabled() {
+				return this.disabled;
+			},
+			model: {
+				get() {
+					let md = this.modelDate;
+					if (utils.date.isZero(md))
+						return '';
+					return md.toLocaleTimeString(locale.$Locale, { timeZone: 'UTC', hour: '2-digit', minute:"2-digit"});
+				},
+				set(str) {
+					let time = utils.date.parseTime(str);
+					let md = new Date(this.modelDate);
+					md.setUTCHours(time.getHours(), time.getMinutes());
+					this.item[this.prop] = md;
+					this.isOpen = false;
 				}
 			}
 		},
@@ -5265,7 +5486,7 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190814-7522
+// 20190903-7551
 
 // components/selector.js
 
@@ -5288,7 +5509,8 @@ Vue.component('validator-control', {
 <div :class="cssClass2()">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group">
-		<input v-focus v-model="query" :class="inputClass" :placeholder="placeholder" :id="testId"
+		<div v-if="isCombo" class="selector-combo" @click.stop.prevent="open"><span tabindex="-1" class="select-text" v-text="valueText" @keydown="keyDown" ref="xcombo"/></div>
+		<input v-focus v-model="query" :class="inputClass" :placeholder="placeholder" :id="testId" v-else
 			@input="debouncedUpdate" @blur.stop="blur" @keydown="keyDown" @keyup="keyUp" ref="input" 
 			:disabled="disabled" />
 		<slot></slot>
@@ -5317,6 +5539,7 @@ Vue.component('validator-control', {
 		props: {
 			item: Object,
 			prop: String,
+			itemsSource: Array,
 			textItem: Object,
 			textProp: String,
 			display: String,
@@ -5332,7 +5555,8 @@ Vue.component('validator-control', {
 			createNew: Function,
 			placement: String,
 			caret: Boolean,
-			hasClear: Boolean
+			hasClear: Boolean,
+			mode: String
 		},
 		data() {
 			return {
@@ -5353,7 +5577,12 @@ Vue.component('validator-control', {
 					if (el.$isEmpty)
 						return this.textItem[this.textProp];
 				}
-				return utils.simpleEval(this.item[this.prop], this.display);
+				let el = this.item[this.prop];
+				if (utils.isNumber(el) && this.itemsSource) {
+					el = this.itemsSource.find(x => x.$id === el);
+					if (!el) return '';
+				}
+				return utils.simpleEval(el, this.display);
 			},
 			canNew() {
 				return !!this.createNew;
@@ -5405,6 +5634,9 @@ Vue.component('validator-control', {
 					this.filter = this.query;
 					this.update();
 				}, delay);
+			},
+			isCombo() {
+				return this.mode === 'combo-box' || this.mode === 'hyperlink';
 			}
 		},
 		watch: {
@@ -5429,6 +5661,10 @@ Vue.component('validator-control', {
 				let cx = this.cssClass();
 				if (this.isOpen || this.isOpenNew)
 					cx += ' open';
+				if (this.mode === 'hyperlink')
+					cx += ' selector-hyperlink';
+				else if (this.mode === 'combo-box')
+					cx += ' selector-combobox';
 				return cx;
 			},
 			isItemActive(ix) {
@@ -5451,9 +5687,15 @@ Vue.component('validator-control', {
 				if (!this.isOpen) {
 					eventBus.$emit('closeAllPopups');
 					this.doFetch(this.valueText, true);
-					let input = this.$refs['input'];
-					if (input)
-						input.focus();
+					if (this.isCombo) {
+						let combo = this.$refs['xcombo'];
+						if (combo)
+							combo.focus();
+					} else {
+						let input = this.$refs['input'];
+						if (input)
+							input.focus();
+					}
 				}
 				this.isOpen = !this.isOpen;
 			},
@@ -5472,8 +5714,11 @@ Vue.component('validator-control', {
 				}
 			},
 			keyDown(event) {
-				if (!this.isOpen)
+				if (!this.isOpen) {
+					if (event.which === 115)
+						this.open();
 					return;
+				}
 				event.stopPropagation();
 				switch (event.which) {
 					case 27: // esc
@@ -5499,6 +5744,9 @@ Vue.component('validator-control', {
 						this.query = this.itemName(this.items[this.current]);
 						this.scrollIntoView();
 						break;
+					case 115: // F4
+						this.cancel();
+						break;
 					default:
 						return;
 				}
@@ -5513,8 +5761,10 @@ Vue.component('validator-control', {
 						this.hitfunc.call(this.item.$root, itm);
 						return;
 					}
-					if (obj.$merge)
+					if (obj && obj.$merge)
 						obj.$merge(itm, true /*fire*/);
+					else if (utils.isNumber(obj))
+						this.item[this.prop] = itm.$id;
 					else
 						platform.set(this.item, this.prop, itm);
 				});
@@ -5550,6 +5800,21 @@ Vue.component('validator-control', {
 				this.doFetch(text, false);
 			},
 			doFetch(text, all) {
+				if (this.itemsSource) {
+					if (!this.items.length)
+						this.items = this.itemsSource;
+					let fi = -1;
+					let el = this.item[this.prop];
+					if (utils.isNumber(el))
+						fi = this.items.findIndex(x => x.Id === el);
+					else
+						fi = this.items.indexOf(el);
+					if (fi !== -1) {
+						this.current = fi;
+						setTimeout(() => this.scrollIntoView(), 10);
+					}
+					return;
+				}
 				this.loading = true;
 				let fData = this.fetchData(text, all);
 				if (fData.then) {

@@ -1,10 +1,10 @@
 ﻿<div xmlns:v-bind="v-bind">
 	<div>
-		<!--title:Xaml.DatePicker-->
-		<!--keywords:DatePicker-->
+		<!--title:Xaml.TimePicker-->
+		<!--keywords:TimePicker-->
 		<div class="title">
 			<h1>
-				Элемент DatePicker
+				Элемент TimePicker
 			</h1>
 			<div class="breadcrumb">
 				<a href="index">Все элементы управления</a>
@@ -13,7 +13,7 @@
 
 
 
-		<p>Представляет собой селектор даты.</p>
+		<p>Представляет собой селектор времени.</p>
 
 		Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
 		<a class="code-link" href="/xaml/abstract/control">Control</a> :
@@ -35,17 +35,6 @@
 					<td class="prop-name">Align</td>
 					<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
 					<td>Выравнивание текста.</td>
-				</tr>
-				<tr class="top">
-					<td class="prop-name">View</td>
-					<td>DatePickerView</td>
-					<td>
-						Вид селектора. Возможные значения:
-						<ul class="enum-vals">
-							<li><span class="prop-name">Day</span> - (по умолчанию) выбор даты.</li>
-							<li><span class="prop-name">Month</span> - выбор месяца и года.</li>
-						</ul>
-					</td>
 				</tr>
 				<tr class="top">
 					<td class="prop-name">Placement</td>
@@ -70,16 +59,15 @@
 
 
 		<h3>Пример</h3>
-		<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-datepicker">
-			<a2-date-picker label="Введите дату" v-bind:item="Document" prop="Date"></a2-date-picker>
-			<a2-date-picker label="Выберите период" v-bind:item="Document" prop="Date" view="month"></a2-date-picker>
+		<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-timepicker">
+			<a2-time-picker label="Введите время" v-bind:item="Document" prop="Date"></a2-time-picker>
 		</div>
 	</div>
 	<script type="text/javascript">
 (function () {
 			var du = require('std:utils').date;
 			var vm = new Vue({
-				el: "#xaml-datepicker",
+				el: "#xaml-timepicker",
 				data: {
 					Document: {
 						Date: du.today()
