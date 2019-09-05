@@ -143,6 +143,7 @@
 
 		Перечисления	/xaml/enums/index
 			AlignItem			/xaml/enums/alignitem
+			AlignItems			/xaml/enums/alignitems
 			AutoFlowMode		/xaml/enums/autoflowmode
 			AutoSelectMode		/xaml/enums/autoselectmode
 			BackgroundStyle		/xaml/enums/backgroundstyle
@@ -153,12 +154,10 @@
 			DataType			/xaml/enums/datatype
 			FloatMode			/xaml/enums/floatmode
 			Icon				/xaml/enums/icon
-			IconAlign			/xaml/enums/iconalign
 			ListStyle			/xaml/enums/liststyle
 			Orientation			/xaml/enums/orientation
 			RadioButtonStyle	/xaml/enums/radiobuttonstyle
 			ShadowStyle			/xaml/enums/shadowstyle
-			StackPanelAlignItems		/xaml/enums/stackpanelalignitems
 			TextAlign			/xaml/enums/textalign
 			TextColor			/xaml/enums/textcolor
 			UpdateTrigger		/xaml/enums/updatetrigger

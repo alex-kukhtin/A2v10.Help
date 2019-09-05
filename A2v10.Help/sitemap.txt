@@ -129,6 +129,7 @@ http://sdk.a2.dn.ua/xaml/simple/thickness
 http://sdk.a2.dn.ua/xaml/simple/uielementcollection
 http://sdk.a2.dn.ua/xaml/enums/index
 http://sdk.a2.dn.ua/xaml/enums/alignitem
+http://sdk.a2.dn.ua/xaml/enums/alignitems
 http://sdk.a2.dn.ua/xaml/enums/autoflowmode
 http://sdk.a2.dn.ua/xaml/enums/autoselectmode
 http://sdk.a2.dn.ua/xaml/enums/backgroundstyle
@@ -139,12 +140,10 @@ http://sdk.a2.dn.ua/xaml/enums/datagridstyle
 http://sdk.a2.dn.ua/xaml/enums/datatype
 http://sdk.a2.dn.ua/xaml/enums/floatmode
 http://sdk.a2.dn.ua/xaml/enums/icon
-http://sdk.a2.dn.ua/xaml/enums/iconalign
 http://sdk.a2.dn.ua/xaml/enums/liststyle
 http://sdk.a2.dn.ua/xaml/enums/orientation
 http://sdk.a2.dn.ua/xaml/enums/radiobuttonstyle
 http://sdk.a2.dn.ua/xaml/enums/shadowstyle
-http://sdk.a2.dn.ua/xaml/enums/stackpanelalignitems
 http://sdk.a2.dn.ua/xaml/enums/textalign
 http://sdk.a2.dn.ua/xaml/enums/textcolor
 http://sdk.a2.dn.ua/xaml/enums/updatetrigger

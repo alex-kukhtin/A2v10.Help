@@ -1,70 +1,77 @@
 ﻿<div xmlns:v-bind="v-bind">
-	<div>
-		<!--title:Xaml.TimePicker-->
-		<!--keywords:TimePicker-->
-		<div class="title">
-			<h1>
-				Элемент TimePicker
-			</h1>
-			<div class="breadcrumb">
-				<a href="index">Все элементы управления</a>
-			</div>
-		</div>
-
-
-
-		<p>Представляет собой селектор времени.</p>
-
-		Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
-		<a class="code-link" href="/xaml/abstract/control">Control</a> :
-		<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
-		<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
-
-
-		<h3>Свойства</h3>
-		<table class="table-props">
-			<thead>
-				<tr>
-					<th>Имя</th>
-					<th>Тип</th>
-					<th>Описание</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="prop-name">Align</td>
-					<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
-					<td>Выравнивание текста.</td>
-				</tr>
-				<tr class="top">
-					<td class="prop-name">Placement</td>
-					<td class="fit">DropDownPlacement</td>
-					<td>
-						Направление "выпадения" селектора. Возможные значения:
-						<ul class="enum-vals">
-							<li><span class="prop-name">BottomLeft</span> - (по умолчанию) вниз с привязкой левого края.</li>
-							<li><span class="prop-name">BottomRight</span> - вниз с привязкой правого края.</li>
-							<li><span class="prop-name">TopLeft</span> - верх с привязкой левого края.</li>
-							<li><span class="prop-name">TopRight</span> - вверх с привязкой правого края.</li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<a href="/xaml/abstract/valuedcontrol">Свойства базового элемента</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
-
-		<h3>Пример</h3>
-		<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-timepicker">
-			<a2-time-picker label="Введите время" v-bind:item="Document" prop="Date"></a2-time-picker>
+	<!--title:Xaml.TimePicker-->
+	<!--keywords:TimePicker-->
+	<div class="title">
+		<h1>
+			Элемент TimePicker
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+
+
+
+	<p>Представляет собой селектор времени.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>Выравнивание текста.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Placement</td>
+				<td class="fit">DropDownPlacement</td>
+				<td>
+					Направление "выпадения" селектора. Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">BottomLeft</span> - (по умолчанию) вниз с привязкой левого края.</li>
+						<li><span class="prop-name">BottomRight</span> - вниз с привязкой правого края.</li>
+						<li><span class="prop-name">TopLeft</span> - верх с привязкой левого края.</li>
+						<li><span class="prop-name">TopRight</span> - вверх с привязкой правого края.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/valuedcontrol">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Пример</h3>
+	<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-timepicker">
+		<a2-time-picker label="Введите время" v-bind:item="Document" prop="Date"></a2-time-picker>
+	</div>
+
+
+	<p class="tip info">
+		<b>Обратите внимание!</b> При изменении времени, дата меняться не будет. Это позволяет вводить дату и время с
+		помощью двух элементов управления - <a class="code" href="datepicker">DatePicker</a> и <code>TimePicker</code>.
+	</p>
+
+
+
 	<script type="text/javascript">
-(function () {
+		(function () {
 			var du = require('std:utils').date;
 			var vm = new Vue({
 				el: "#xaml-timepicker",
