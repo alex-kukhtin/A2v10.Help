@@ -152,7 +152,6 @@
 			ControlSize			/xaml/enums/controlsize
 			DataGridStyle		/xaml/enums/datagridstyle
 			DataType			/xaml/enums/datatype
-			FloatMode			/xaml/enums/floatmode
 			Icon				/xaml/enums/icon
 			ListStyle			/xaml/enums/liststyle
 			Orientation			/xaml/enums/orientation

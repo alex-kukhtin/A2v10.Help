@@ -138,7 +138,6 @@ http://sdk.a2.dn.ua/xaml/enums/columncontroltype
 http://sdk.a2.dn.ua/xaml/enums/controlsize
 http://sdk.a2.dn.ua/xaml/enums/datagridstyle
 http://sdk.a2.dn.ua/xaml/enums/datatype
-http://sdk.a2.dn.ua/xaml/enums/floatmode
 http://sdk.a2.dn.ua/xaml/enums/icon
 http://sdk.a2.dn.ua/xaml/enums/liststyle
 http://sdk.a2.dn.ua/xaml/enums/orientation

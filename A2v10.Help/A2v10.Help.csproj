@@ -155,7 +155,6 @@
     <Content Include="html\xaml\enums\datatype.html" />
     <Content Include="html\xaml\enums\updatetrigger.html" />
     <Content Include="html\xaml\enums\textcolor.html" />
-    <Content Include="html\xaml\enums\floatmode.html" />
     <Content Include="html\xaml\enums\columncontroltype.html" />
     <Content Include="html\xaml\enums\buttonstyle.html" />
     <Content Include="html\xaml\enums\controlsize.html" />
