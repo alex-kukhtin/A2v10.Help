@@ -74,12 +74,17 @@ http://sdk.a2.dn.ua/xaml/containers/index
 http://sdk.a2.dn.ua/xaml/containers/block
 http://sdk.a2.dn.ua/xaml/containers/card
 http://sdk.a2.dn.ua/xaml/containers/cardbody
+http://sdk.a2.dn.ua/xaml/containers/case
+http://sdk.a2.dn.ua/xaml/containers/commandbar
 http://sdk.a2.dn.ua/xaml/containers/dialog
 http://sdk.a2.dn.ua/xaml/containers/dropdownmenu
+http://sdk.a2.dn.ua/xaml/containers/dropdownmegamenu
 http://sdk.a2.dn.ua/xaml/containers/fieldset
+http://sdk.a2.dn.ua/xaml/containers/flex
 http://sdk.a2.dn.ua/xaml/containers/fullheightpanel
 http://sdk.a2.dn.ua/xaml/containers/grid
 http://sdk.a2.dn.ua/xaml/containers/gridgroup
+http://sdk.a2.dn.ua/xaml/containers/group
 http://sdk.a2.dn.ua/xaml/containers/iframe
 http://sdk.a2.dn.ua/xaml/containers/include
 http://sdk.a2.dn.ua/xaml/containers/page

@@ -1,17 +1,105 @@
 ﻿<div>
-	<!--title:Xaml.FieldSet-->
-	<!--keywords:FieldSet-->
-	<div class="title">
-		<h1>
-			Элемент FieldSet
-		</h1>
-		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
-		</div>
-	</div>
-	<p>
-		Представляет собой контейнер для элементов
-	</p>
+    <!--title:Xaml.FieldSet-->
+    <!--keywords:FieldSet-->
+    <div class="title">
+        <h1>
+            Элемент FieldSet
+        </h1>
+        <div class="breadcrumb">
+            <a href="index">Все контейнеры</a>
+        </div>
+    </div>
+    <p>
+        Представляет собой контейнер (рамку) для элементов.
+    </p>
 
-	<h3>Свойства</h3>
+    <p>
+        Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+    </p>
+
+    <h3>Свойства</h3>
+    <table class="table-props">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th class="fit">Тип</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="prop-name">Orientation</td>
+                <td><a class="code-link" href="/xaml/enums/orientation">Orientation</a></td>
+                <td>Ориентация элементов в панели.</td>
+            </tr>
+            <tr>
+                <td class="prop-name">Title</td>
+                <td>String</td>
+                <td>Заголовок панели.</td>
+            </tr>
+            <tr>
+                <td class="prop-name">Hint</td>
+                <td><a class="code-link" href="/xaml/text/popover">Popover</a></td>
+                <td>Всплывающая подсказка для рамки. Выводится в виде <i class="ico po-ico ico-help" style="color:#999"></i> после текста заголовка.</td>
+            </tr>
+            <tr>
+                <td class="prop-name">Disabled</td>
+                <td>Boolean</td>
+                <td>Все элементы управления внутри панели будут недоступны для ввода. 
+                Для управления этим полем обычно используется привязка <a class="code-link" href="/xaml/bind/bind">Bind</a>.</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="/xaml/abstract/container">Свойства базового элемента</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h3>Пример</h3>
+
+    <p>
+        XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Grid Columns="1*" AlignItems="Top">
+        <FieldSet Title="Отметьте нужные флажки">
+        <CheckBox Label="Option 1" Value="{Bind Element.Option1}" />
+
+        <CheckBox Label="Option 2" Value="{Bind Element.Option2}" />
+
+        <CheckBox Label="Option 3" Value="{Bind Element.Option3}" />
+
+	</FieldSet>
+</Grid>
+</script>
+</pre>
+    </p>
+
+    <div id="xaml-filedset">
+        <p>
+            Результат
+            <div class="xaml-sample" style="padding:0;width:200px">
+                <div class="grid" style="grid-template-columns:1fr;align-items:start">
+                    <fieldset class="field-set vertical">
+                        <legend>Отметьте нужные флажки</legend>
+                        <label class="checkbox field-set-item">
+                            <input type="checkbox" value="1" />
+                            <span>Option 1</span>
+                        </label>
+                        <label class="checkbox field-set-item">
+                            <input type="checkbox" value="2" />
+                            <span>Option 2</span>
+                        </label>
+                        <label class="checkbox field-set-item">
+                            <input type="checkbox" value="3" />
+                            <span>Option 3</span>
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+        </p>
+    </div>
+
 </div>

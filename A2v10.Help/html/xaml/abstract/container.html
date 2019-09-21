@@ -1,49 +1,73 @@
 ﻿<div>
-	<!--title:Xaml.Container-->
-	<!--keywords:Container-->
-	<div class="title">
-		<h1>
-			Абстрактный элемент Container
-		</h1>
-		<div class="breadcrumb">
-			<a href="index">Все абстрактные элементы</a>
-		</div>
-	</div>
-	<p>
-		Элемент <code>Container</code> представляет собой абстрактный контейнер. Свойство <code>Children</code> задает список дочерних элементов.
-	</p>
+    <!--title:Xaml.Container-->
+    <!--keywords:Container-->
+    <div class="title">
+        <h1>
+            Абстрактный элемент Container
+        </h1>
+        <div class="breadcrumb">
+            <a href="index">Все абстрактные элементы</a>
+        </div>
+    </div>
+    <p>
+        Элемент <code>Container</code> представляет собой абстрактный контейнер. Свойство <code>Children</code> задает список дочерних элементов.
+    </p>
 
-	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
-	</p>
+    <p>
+        Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+    </p>
 
-	<p>Свойство содержимого: <code>Children</code></p>
+    <p>
+        Производные элементы:
+        <a class="code-link" href="/xaml/containers/cardbody">CardBody</a>
+        <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>,
+        <a class="code-link" href="/xaml/containers/stackpanel">StackPanel</a>,
+        <a class="code-link" href="/xaml/containers/splitter">Splitter</a>,
+        <a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a>,
+        <a class="code-link" href="/xaml/containers/dropdownmegamenu">DropDownMegaMenu</a>,
+        <a class="code-link" href="/xaml/containers/fieldset">FieldSet</a>,
+        <a class="code-link" href="/xaml/containers/flex">Flex</a>,
+        <a class="code-link" href="/xaml/containers/case">Case</a>,
+        <a class="code-link" href="/xaml/containers/taskpad">TaskPad</a>,
+        <a class="code-link" href="/xaml/containers/group">Group</a>,
+        <a class="code-link" href="/xaml/containers/gridgroup">GridGroup</a>,
+        <a class="code-link" href="/xaml/containers/tab">Tab</a>,
+        <a class="code-link" href="/xaml/containers/fullheightpanel">FullHeightPanel</a>,
+        <a class="code-link" href="/xaml/containers/commandbar">CommandBar</a>,
+        <a class="code-link" href="/xaml/controls/flexlist">FlexList</a>,
+        <a class="code-link" href="/xaml/containers/panel">Panel</a>,
+        <a class="code-link" href="/xaml/containers/grid">Grid</a>,
+        <a class="code-link" href="/xaml/containers/card">Card</a>,
+        <a class="code-link" href="/xaml/sheet/sheetpage">SheetPage</a>
+    </p>
 
-	<h3>Свойства</h3>
-	<table class="table-props">
-		<thead>
-			<tr>
-				<th>Имя</th>
-				<th>Тип</th>
-				<th>Описание</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="prop-name">Children</td>
-				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
-				<td>Свойство содержимого. Коллекция дочерних элементов</td>
-			</tr>
-			<tr>
-				<td class="prop-name">ItemsSource</td>
-				<td>Array</td>
-				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>) Источник данных для получения дочерних элементов</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+    <p>Свойство содержимого: <code>Children</code></p>
+
+    <h3>Свойства</h3>
+    <table class="table-props">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Тип</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="prop-name">Children</td>
+                <td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+                <td>Свойство содержимого. Коллекция дочерних элементов</td>
+            </tr>
+            <tr>
+                <td class="prop-name">ItemsSource</td>
+                <td>Array</td>
+                <td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>) Источник данных для получения дочерних элементов</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

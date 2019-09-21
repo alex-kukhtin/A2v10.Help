@@ -82,12 +82,17 @@
 			Block				/xaml/containers/block
 			Card				/xaml/containers/card
 			CardBody			/xaml/containers/cardbody
+			Case				/xaml/containers/case
+			CommandBar			/xaml/containers/commandbar
 			Dialog				/xaml/containers/dialog
 			DropDownMenu		/xaml/containers/dropdownmenu
+			DropDownMegaMenu	/xaml/containers/dropdownmegamenu
 			FieldSet			/xaml/containers/fieldset
+			Flex				/xaml/containers/flex
 			FullHeightPanel		/xaml/containers/fullheightpanel
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup
+			Group				/xaml/containers/group
 			IFrame				/xaml/containers/iframe
 			Include				/xaml/containers/include
 			Page				/xaml/containers/page
