@@ -11,18 +11,24 @@
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
-{
-	// свойства
-	$root: Object,
-	$parent: Object,
-	$ctrl: Object,
-	$id: Object,
-	$name: Object,
-	$isNew: Boolean,
-	$isEmpty: Boolean,
-	// методы
-	$empty: Function,   // очищает объект
-	$merge: Function
+interface IElement {
+	// properties
+	readonly $root: IRoot;
+	readonly $parent: IElement | IElementArray<IElement>;
+
+	readonly $id: any;
+	readonly $name: any;
+
+	readonly $isNew: boolean;
+	readonly $isEmpty: boolean;
+	readonly $valid: boolean;
+	readonly $invalid: boolean;
+
+	readonly $ctrl: IController;
+
+	// methods
+	$empty(): IElement;
+	$merge(src:Object) : IElement;
 }
 </script>
 </pre>
@@ -34,14 +40,20 @@
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
-{
-	// свойства
-	$template: Object,
-	// методы
-	$setDirty: Function
-	$defer: Function,
-	$forceValidate: Function
-	$emit: Function
+interface IRoot extends IElement {
+	// properties
+	readonly $readOnly: boolean;
+	readonly $stateReadOnly: boolean;
+	readonly $isCopy: boolean;
+	readonly $ready: boolean;
+
+	readonly $template: Template;
+
+	// methods
+	$defer(handler:()=>any): void;
+	$emit(event: string, ...params: any[]): void;
+	$forceValidate(): void;
+	$setDirty(dirty:boolean, path?:string): void;
 }
 </script>
 </pre>

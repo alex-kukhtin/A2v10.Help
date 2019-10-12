@@ -9,5 +9,50 @@
 		</div>
 	</div>
 	<p>
+		Корневой объект расширяется следующимии служебными свойствами и методами:
 	</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+interface IRoot extends IElement {
+	// properties
+	readonly $readOnly: boolean;
+	readonly $stateReadOnly: boolean;
+	readonly $isCopy: boolean;
+	readonly $ready: boolean;
+
+	readonly $template: Template;
+
+	// methods
+	$defer(handler:()=>any): void;
+	$emit(event: string, ...params: any[]): void;
+	$forceValidate(): void;
+	$setDirty(dirty:boolean, path?:string): void;
+}
+</script>
+</pre>
+	</p>
+
+	<h2>Свойства</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $ready: boolean</pre></div>
+		<p>
+			<code>true</code>, если в данный момент НЕ выполняется никаких запросов к серверу. Может
+			использоваться для запрета/разрешения элементов интерфейса при выполнении серверных команд.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $template: Template</pre></div>
+		<p>
+			Ссылка на объект <a class="code-link" href="/template/index">шаблона (Template)</a>.
+		</p>
+	</div>
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$defer(handler:()=>any): void</pre></div>
+		<p>
+			Выполняет функцию (handler) после завершения текущего цикла событий.
+		</p>
+	</div>
 </div>

@@ -16,15 +16,21 @@
 interface IElement {
 	// properties
 	readonly $root: IRoot;
-	readonly $parent: Object;
+	readonly $parent: IElement | IElementArray<IElement>;
+
 	readonly $id: any;
 	readonly $name: any;
+
 	readonly $isNew: boolean;
 	readonly $isEmpty: boolean;
+	readonly $valid: boolean;
+	readonly $invalid: boolean;
+
 	readonly $ctrl: IController;
+
 	// methods
 	$empty(): IElement;
-	$merge: Function;
+	$merge(src:Object) : IElement;
 }
 </script>
 </pre>
@@ -32,11 +38,16 @@ interface IElement {
 
 	<h2>Свойства</h2>
 	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $root: IRoot</pre></div>
+		<p>
+			Ссылка на корневой объект <a class="code-link" href="rootprops">(IRoot)</a>.
+		</p>
+	</div>
+	<div class="method">
 		<div class="syntax"><pre class="code-highlight js">readonly $ctrl: IController</pre></div>
-		<h4>Возвращает:</h4>
-		<ul class="params">
-			<li>Ссылку на объект <a class="code-link" href="controller">контроллера (IController)</a>.</li>
-		</ul>
+		<p>
+			Ссылка на объект <a class="code-link" href="controller">контроллера (IController)</a>.
+		</p>
 	</div>
 
 	<h2>Методы</h2>
@@ -44,7 +55,7 @@ interface IElement {
 		<div class="syntax"><pre class="code-highlight js">$empty(): IElement</pre></div>
 		<h4>Описание</h4>
 		<p>
-			Очистка объекта означает установку всех его свойств в значения по умолчанию. Очистка рекурсивная. Это значит,
+			Очищает объект. Очистка объекта означает установку всех его свойств в значения по умолчанию. Очистка рекурсивная. Это значит,
 			что все вложенные объекты будут также очищены.
 		</p>
 		<h4>Возвращает:</h4>

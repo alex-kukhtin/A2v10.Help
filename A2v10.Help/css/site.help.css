@@ -198,7 +198,7 @@ code.string {
 }
 .syntax {
   font-family: Consolas, 'Courier New', Courier, monospace;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   padding: 6px;
   border-left: 4px solid #7598d8;
   background-color: #f3faff;
@@ -424,8 +424,12 @@ a.code-link {
   border-left: 1px solid #ddd;
 }
 .method {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   border-bottom: 1px solid #ddd;
+}
+.method p {
+  margin: 0.5rem;
+  margin-left: 1rem;
 }
 .bkstyle-sample {
   border: 1px solid #ccc;
