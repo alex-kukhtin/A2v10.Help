@@ -59,6 +59,7 @@
 			DatePicker			/xaml/controls/datepicker
 			FlexList			/xaml/controls/flexlist
 			Graphics			/xaml/controls/graphics
+			Header				/xaml/controls/header
 			Image				/xaml/controls/image
 			List				/xaml/controls/list
 			ListItem			/xaml/controls/listitem

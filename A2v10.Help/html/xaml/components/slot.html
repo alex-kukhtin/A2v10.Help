@@ -9,4 +9,72 @@
 			<a href="index">Все компоненты</a>
 		</div>
 	</div>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Представляет собой элемент, который устанавливает контекст данных и область видимости для вложенных компонентов.</p>
+
+	<p>Свойство содержимого: <code>Children</code></p>
+
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>Свойство содержимого. Коллекция дочерних элементов.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Scope</td>
+				<td>Object</td>
+				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>) Контекст данных.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Fallback</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>Элемент, который будет отображаться в случае, если контекст данных пустой.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+
+	<p>
+		XAML:
+<pre class="code-highlight xml">
+<script type="text/template">
+<![CDATA[
+<!--Привязка к выделенному элементу коллекции -->
+<List ItemsSource="{Bind Agents}">
+	...
+</List>
+<Slot Scope="{Bind Agents.$selected}">
+	<!--фактически: Agents.$selected.Documents-->
+	<DataGrid ItemsSource="{Bind Documents}">
+		...
+	</DataGrid>
+	<Slot.Fallback>
+		<Text>Нет выделенных элементов</Text>
+	</Slot.Fallback>
+</Slot>
+]]>
+</script>
+</pre>
+		</p>
+
 </div>

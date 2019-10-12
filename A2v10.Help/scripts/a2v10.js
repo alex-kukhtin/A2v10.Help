@@ -176,7 +176,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190721-7507
+// 20190907-7555
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -195,6 +195,8 @@ app.modules['std:utils'] = function () {
 
 	const currencyFormat = new Intl.NumberFormat(numLocale, { minimumFractionDigits: 2, maximumFractionDigits: 6, useGrouping: true }).format;
 	const numberFormat = new Intl.NumberFormat(numLocale, { minimumFractionDigits: 0, maximumFractionDigits: 6, useGrouping: true }).format;
+
+	const utcdatRegEx = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
 
 	let numFormatCache = {};
 
@@ -446,6 +448,8 @@ app.modules['std:utils'] = function () {
 			case "DateUrl":
 				if (dateIsZero(obj))
 					return '';
+				if (dateHasTime(obj))
+					return obj.toISOString();
 				return '' + obj.getFullYear() + pad2(obj.getMonth() + 1) + pad2(obj.getDate());
 			case "Time":
 				if (!isDate(obj)) {
@@ -569,6 +573,9 @@ app.modules['std:utils'] = function () {
 
 	function dateParse(str) {
 		str = str || '';
+		if (utcdatRegEx.test(str)) {
+			return new Date(str);
+		}
 		if (!str) return dateZero();
 		let today = dateToday();
 		let seg = str.split(/[^\d]/).filter(x => x);
@@ -603,6 +610,11 @@ app.modules['std:utils'] = function () {
 	function dateIsZero(d1) {
 		if (!isDate(d1)) return false;
 		return dateEqual(d1, dateZero());
+	}
+
+	function dateHasTime(d1) {
+		if (!isDate(d1)) return false;
+		return d1.getUTCHours() !== 0 || d1.getUTCMinutes() !== 0 && d1.getUTCSeconds() !== 0;
 	}
 
 	function endOfMonth(dt) {
@@ -1968,7 +1980,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2019 Alex Kukhtin. All rights reserved.*/
 
-/*20180902-7550*/
+/*20181010-7567*/
 // services/datamodel.js
 
 (function () {
@@ -2351,6 +2363,8 @@ app.modules['std:validators'] = function () {
 			defHiddenGet(elem, '$readOnly', isReadOnly);
 			defHiddenGet(elem, '$stateReadOnly', isStateReadOnly);
 			defHiddenGet(elem, '$isCopy', isModelIsCopy);
+			defHiddenGet(elem, '$mainObject', mainObject);
+
 			elem._seal_ = seal;
 
 			elem._fireGlobalPeriodChanged_ = (period) => {
@@ -2406,6 +2420,14 @@ app.modules['std:validators'] = function () {
 				return true;
 		}
 		return false;
+	}
+
+	function mainObject() {
+		if ('$main' in this._meta_) {
+			let mainProp = this._meta_.$main;
+			return this[mainProp];
+		}
+		return null;
 	}
 
 	function isModelIsCopy() {
@@ -2729,6 +2751,11 @@ app.modules['std:validators'] = function () {
 			if (this._root_ && this._root_._host_)
 				return this._root_._host_.$ctrl;
 			return null;
+		});
+
+		defHiddenGet(obj, "$ready", function () {
+			if (!this.$vm) return true;
+			return !this.$vm.$isLoading;
 		});
 
 		obj.$isValid = function (props) {
@@ -4788,7 +4815,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190818-7528
+// 20191003-7562
 // components/calendar.js
 
 (function () {
@@ -4942,7 +4969,8 @@ Vue.component('validator-control', {
 				return cls;
 			},
 			dayTitle(day) {
-				return day.toLocaleString(locale.$Locale, { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+				return day.toString();
+				//return day.toLocaleString(locale.$Locale, { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 			},
 			mouseOver(day) {
 				if (this.hover)
@@ -4953,7 +4981,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190904-7552
+// 20191003-7562
 // components/datepicker.js
 
 
@@ -5020,16 +5048,18 @@ Vue.component('validator-control', {
 				this.setDate(dt);
 			},
 			selectDay(day) {
-				this.setDate(day);
+				var dt = new Date(day);
+				dt.setHours(0, -dt.getTimezoneOffset(), 0, 0);
+				this.setDate(dt);
 				this.isOpen = false;
 			},
 			setDate(d) {
 				// save time
-				let od = this.modelDate;
-				let h = od.getHours();
-				let m = od.getMinutes();
+				let od = new Date(this.modelDate);
+				let h = od.getUTCHours();
+				let m = od.getUTCMinutes();
 				var nd = new Date(d);
-				nd.setHours(h, m, 0, 0);
+				nd.setUTCHours(h, m, 0, 0);
 				this.item[this.prop] = nd;
 			},
 			dayClass(day) {
@@ -5837,7 +5867,7 @@ Vue.component('validator-control', {
 				let elem = this.item[this.prop];
 				if (!('$vm' in elem))
 					elem.$vm = this.$root; // plain object hack
-				return this.fetch.call(elem, elem, text, all);
+				return this.fetch.call(this.item.$root, elem, text, all);
 			},
 			doNew() {
 				//console.dir(this.createNew);
@@ -6840,7 +6870,7 @@ Vue.component('a2-pager', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-//20190727-7509
+//20190906-7554
 /*components/popover.js*/
 
 Vue.component('popover', {
@@ -6873,7 +6903,7 @@ Vue.component('popover', {
 	props: {
 		icon: String,
 		url: String,
-		content: String,
+		content: [String, Number],
 		title: String,
 		width: String,
 		top: String,
@@ -8260,7 +8290,7 @@ TODO:
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190816-7525
+// 20190905-7553
 // components/modal.js
 
 
@@ -8307,6 +8337,8 @@ TODO:
 						mw.style.width = '300px'; // from less
 						break;
 				}
+				if (binding.value.minWidth)
+					mw.style.minWidth = binding.value.minWidth;
 			}
 		}
 	};
@@ -8504,6 +8536,27 @@ TODO:
 	};
 
 	app.components['std:modal'] = modalComponent;
+})();
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+
+// 20191010-7567
+// components/waitcursor.js
+
+
+(function () {
+	const waitCursor = {
+		template: `<div class="wait-cursor" v-if="visible"><div class="spinner"/></div>`,
+		props: {
+			ready: Boolean
+		},
+		computed: {
+			visible() {
+				return !this.ready;
+			}
+		}
+	};
+
+	Vue.component("wait-cursor", waitCursor);
 })();
 // Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
 
@@ -9528,16 +9581,12 @@ Vue.component('a2-panel', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190821-7533
+// 20191011-7568
 // components/debug.js*/
 
 (function () {
 
     /**
-     * TODO
-    1. Trace window
-    2. Dock right/left
-    6.
      */
 
 	const dataService = require('std:dataservice');
@@ -9593,29 +9642,30 @@ Vue.component('a2-panel', {
 	Vue.component('a2-debug', {
 		template: `
 <div class="debug-panel" v-if="paneVisible" :class="panelClass">
-    <div class="debug-pane-header">
-        <span class="debug-pane-title" v-text="title"></span>
-        <a class="btn btn-close" @click.prevent="close">&#x2715</a>
-    </div>
-    <div class="toolbar">
-        <button class="btn btn-tb" @click.prevent="refresh"><i class="ico ico-reload"></i> {{text('$Refresh')}}</button>
+	<div class="debug-pane-header">
+		<span class="debug-pane-title" v-text="title"></span>
+		<a class="btn btn-close" @click.prevent="close">&#x2715</a>
+	</div>
+	<div class="toolbar">
+		<button class="btn btn-tb" @click.prevent="refresh"><i class="ico ico-reload"></i> {{text('$Refresh')}}</button>
 		<div class="aligner"></div>
-        <button class="btn btn-tb" @click.prevent="toggle"><i class="ico" :class="toggleIcon"></i></button>
-    </div>
-    <div class="debug-model debug-body" v-if="modelVisible">
-        <pre class="a2-code" v-text="modelJson()"></pre>
-    </div>
-    <div class="debug-trace debug-body" v-if="traceVisible">
-        <ul class="a2-debug-trace">
-            <li v-for="r in trace">
-                <div class="rq-title"><span class="elapsed" v-text="r.elapsed + ' ms'"/> <span v-text="r.url" /></div>
-                <a2-trace-item name="Sql" :elem="r.items.Sql"></a2-trace-item>
-                <a2-trace-item name="Render" :elem="r.items.Render"></a2-trace-item>
-                <a2-trace-item name="Workflow" :elem="r.items.Workflow"></a2-trace-item>
-                <a2-trace-item class="exception" name="Exceptions" :elem="r.items.Exception"></a2-trace-item>
-            </li>
-        </ul>
-    </div>
+		<button class="btn btn-tb" @click.prevent="toggle"><i class="ico" :class="toggleIcon"></i></button>
+	</div>
+	<div class="debug-model debug-body" v-if="modelVisible">
+		<pre class="a2-code" v-text="modelJson()"></pre>
+	</div>
+	<div class="debug-trace debug-body" v-if="traceVisible">
+		<ul class="a2-debug-trace">
+			<li v-for="r in trace">
+				<div class="rq-title"><span class="elapsed" v-text="r.elapsed + ' ms'"/> <span v-text="r.url" /></div>
+				<a2-trace-item name="Sql" :elem="r.items.Sql"></a2-trace-item>
+				<a2-trace-item name="Render" :elem="r.items.Render"></a2-trace-item>
+				<a2-trace-item name="Report" :elem="r.items.Report"></a2-trace-item>
+				<a2-trace-item name="Workflow" :elem="r.items.Workflow"></a2-trace-item>
+				<a2-trace-item class="exception" name="Exceptions" :elem="r.items.Exception"></a2-trace-item>
+			</li>
+		</ul>
+	</div>
 </div>
 `,
 		components: {
@@ -10359,7 +10409,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20180831-7549*/
+/*20181009-7565*/
 // controllers/base.js
 
 (function () {
@@ -10747,8 +10797,9 @@ Vue.directive('resize', {
 				eventBus.$emit('closeAllPopups');
 				let urlToNavigate = urltools.createUrlForNavigate(url, data);
 				if (newWindow === true) {
-					let nwin = window.open(urlToNavigate, "_blank");
-					nwin.$$token = { token: this.__currentToken__, update: update };
+                    let nwin = window.open(urlToNavigate, "_blank");
+                    if (nwin)
+                        nwin.$$token = { token: this.__currentToken__, update: update };
 				}
 				else
 					this.$store.commit('navigate', { url: urlToNavigate });
@@ -10756,8 +10807,9 @@ Vue.directive('resize', {
 
 			$navigateSimple(url, newWindow, update) {
 				if (newWindow === true) {
-					let nwin = window.open(url, "_blank");
-					nwin.$$token = { token: this.__currentToken__, update: update };
+                    let nwin = window.open(url, "_blank");
+                    if (nwin)
+                        nwin.$$token = { token: this.__currentToken__, update: update };
 				}
 				else
 					this.$store.commit('navigate', { url: url });
@@ -10765,7 +10817,7 @@ Vue.directive('resize', {
 
 			$navigateExternal(url, newWindow) {
 				if (newWindow === true) {
-					let nwin = window.open(url, "_blank");
+					window.open(url, "_blank");
 				}
 				else
 					window.location.assign(url);
@@ -11012,6 +11064,9 @@ Vue.directive('resize', {
 						that.$alert(locale.$PermissionDenied);
 						return;
 					}
+					if (utils.isFunction(query)) {
+						query = query();
+					}
 					switch (command) {
 						case 'new':
 							if (argIsNotAnArray()) return;
@@ -11072,7 +11127,8 @@ Vue.directive('resize', {
 					return;
 				}
 
-				if (opts && opts.saveRequired && this.$isDirty) {
+				let mo = this.$data.$mainObject;
+				if (opts && opts.saveRequired && (this.$isDirty || mo && mo.$isNew)) {
 					let dlgResult = null;
 					this.$save().then(() => { dlgResult = doDialog(); });
 					return dlgResult;
@@ -11080,13 +11136,17 @@ Vue.directive('resize', {
 				return doDialog();
 			},
 
-			$export() {
+			$export(arg, url, dat) {
 				if (this.$isLoading) return;
+
+				let id = arg || '0';
+				if (arg && utils.isObject(arg))
+					id = utils.getStringId(arg);
 				const self = this;
 				const root = window.$$rootUrl;
-				let url = self.$baseUrl;
-				url = url.replace('/_page/', '/_export/');
-				window.location = root + url;
+				let newurl = url ? urltools.combine('/_export', url, id) : self.$baseUrl.replace('/_page/', '/_export/');
+				newurl = urltools.combine(root, newurl) + urltools.makeQueryString(dat);
+				window.location = newurl; // to display errors
 			},
 
 			$exportTo(format, fileName) {

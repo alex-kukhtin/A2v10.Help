@@ -11,6 +11,7 @@
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
+<![CDATA[
 interface IElement {
 	// properties
 	readonly $root: IRoot;
@@ -30,6 +31,7 @@ interface IElement {
 	$empty(): IElement;
 	$merge(src:Object) : IElement;
 }
+]]>
 </script>
 </pre>
 		<a href="/client/elemprops">Подробнее об объектах</a>
@@ -40,6 +42,7 @@ interface IElement {
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
+<![CDATA[
 interface IRoot extends IElement {
 	// properties
 	readonly $readOnly: boolean;
@@ -55,6 +58,7 @@ interface IRoot extends IElement {
 	$forceValidate(): void;
 	$setDirty(dirty:boolean, path?:string): void;
 }
+]]>
 </script>
 </pre>
 		<a href="/client/rootprops">Подробнее о корневом объекте</a>
