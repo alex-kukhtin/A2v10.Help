@@ -9,4 +9,71 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>Представляет собой ячейку таблицы.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uicontentelement">UIContentElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>) Источник данных для вывода нескольких ячеек в строке.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ColSpan</td>
+				<td>Int32?</td>
+				<td>Объединение колонок.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowSpan</td>
+				<td>Int32?</td>
+				<td>Объединение строк.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bold</td>
+				<td>Boolean?</td>
+				<td>Полужирный шрифт. Еслие не указан, наследуется от родительской строки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Gray</td>
+				<td>Boolean</td>
+				<td>Серый текст. Конкретный цвет текста зависит от темы пользовательского интерфейса</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Italic</td>
+				<td>Boolean?</td>
+				<td>Курсивный шрифт. Еслие не указан, наследуется от родительской строки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">VAlign</td>
+				<td><a class="code-link" href="/xaml/enums/verticalalign">VerticalAlign</a></td>
+				<td>
+					Вертикальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uicontentelement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>

@@ -178,6 +178,8 @@
     <Content Include="html\xaml\overview\index.html" />
     <Content Include="html\xaml\overview\extensions.html" />
     <Content Include="html\xaml\sheet\index.html" />
+    <Content Include="html\xaml\sheet\sheetsection.html" />
+    <Content Include="html\xaml\sheet\sheettreesection.html" />
     <Content Include="html\xaml\sheet\sheetpage.html" />
     <Content Include="html\xaml\sheet\sheet.html" />
     <Content Include="html\xaml\sheet\sheetrow.html" />

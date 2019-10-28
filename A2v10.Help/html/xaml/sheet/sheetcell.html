@@ -9,4 +9,83 @@
 			<a href="index">Все элементы таблиц</a>
 		</div>
 	</div>
+
+	<p>Представляет собой ячейку таблицы.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uicontentelement">UIContentElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">ColSpan</td>
+				<td>Int32?</td>
+				<td>Объединение колонок.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowSpan</td>
+				<td>Int32?</td>
+				<td>Объединение строк.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bold</td>
+				<td>Boolean?</td>
+				<td>Полужирный шрифт. Еслие не указан, наследуется от родительской строки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Italic</td>
+				<td>Boolean?</td>
+				<td>Курсивный шрифт. Еслие не указан, наследуется от родительской строки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Underline</td>
+				<td>Boolean</td>
+				<td>Подчеркнутый текст.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Vertical</td>
+				<td>Boolean</td>
+				<td>
+					Вертикальная ориентация текста в ячейке. Автоматический перенос не поддерживается.
+					Для переноса на другую строку включите в текст "\n".
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">VAlign</td>
+				<td><a class="code-link" href="/xaml/enums/verticalalign">VerticalAlign</a></td>
+				<td>
+					Вертикальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">GroupIndent</td>
+				<td>Boolean</td>
+				<td>
+					Отступ для иерархических элементов. Используется в случае, если ячейка находится в секции
+					<a href="sheettreesection">SheetTreeSection</a>.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uicontentelement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>

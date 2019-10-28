@@ -118,6 +118,8 @@ http://sdk.a2.dn.ua/xaml/sheet/sheet
 http://sdk.a2.dn.ua/xaml/sheet/sheetcell
 http://sdk.a2.dn.ua/xaml/sheet/sheetpage
 http://sdk.a2.dn.ua/xaml/sheet/sheetrow
+http://sdk.a2.dn.ua/xaml/sheet/sheetsection
+http://sdk.a2.dn.ua/xaml/sheet/sheettreesection
 http://sdk.a2.dn.ua/xaml/bind/index
 http://sdk.a2.dn.ua/xaml/bind/bind
 http://sdk.a2.dn.ua/xaml/bind/bindcmd
