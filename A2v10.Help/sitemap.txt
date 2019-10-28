@@ -164,6 +164,7 @@ http://sdk.a2.dn.ua/xaml/abstract/contentcontrol
 http://sdk.a2.dn.ua/xaml/abstract/inline
 http://sdk.a2.dn.ua/xaml/abstract/rootcontainer
 http://sdk.a2.dn.ua/xaml/abstract/valuedcontrol
+http://sdk.a2.dn.ua/xaml/abstract/uicontentelement
 http://sdk.a2.dn.ua/xaml/abstract/uielement
 http://sdk.a2.dn.ua/xaml/abstract/uielementbase
 http://sdk.a2.dn.ua/xaml/diagram/index

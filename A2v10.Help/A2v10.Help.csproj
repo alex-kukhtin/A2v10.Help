@@ -110,6 +110,7 @@
     <Content Include="html\whatsnew\w201812.html" />
     <Content Include="html\whatsnew\w201811.html" />
     <Content Include="html\xaml\abstract\checkboxbase.html" />
+    <Content Include="html\xaml\abstract\uicontentelement.html" />
     <Content Include="html\xaml\abstract\valuedcontrol.html" />
     <Content Include="html\xaml\abstract\rootcontainer.html" />
     <Content Include="html\xaml\abstract\contentcontrol.html" />

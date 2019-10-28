@@ -179,6 +179,7 @@
 			Inline				/xaml/abstract/inline
 			RootContainer		/xaml/abstract/rootcontainer
 			ValuedControl		/xaml/abstract/valuedcontrol
+			UIContentElement	/xaml/abstract/uicontentelement
 			UIElement			/xaml/abstract/uielement
 			UIElementBase		/xaml/abstract/uielementbase
 		Диаграммы				/xaml/diagram/index

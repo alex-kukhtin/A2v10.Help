@@ -85,6 +85,9 @@ footer .divider,
 .help-footer .divider {
   flex-grow: 2;
 }
+li {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 a {
   color: #57a8fa;
   text-decoration: none;
