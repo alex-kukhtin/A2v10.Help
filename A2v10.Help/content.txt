@@ -212,6 +212,9 @@
 		require			/client/global_require
 
 
+Бизнес-процессы		/workflow/index
+
+Тестирование		/tests/index
 
 О справочной системе	/help/about
 

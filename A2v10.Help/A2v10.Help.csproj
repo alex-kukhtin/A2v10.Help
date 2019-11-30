@@ -95,6 +95,7 @@
     <Content Include="html\images\property16.png" />
     <Content Include="html\template\options.html" />
     <Content Include="html\template\delegates.html" />
+    <Content Include="html\tests\index.html" />
     <Content Include="html\whatsnew\w201809.html" />
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
@@ -110,6 +111,7 @@
     <Content Include="html\whatsnew\w201901.html" />
     <Content Include="html\whatsnew\w201812.html" />
     <Content Include="html\whatsnew\w201811.html" />
+    <Content Include="html\workflow\index.html" />
     <Content Include="html\xaml\abstract\checkboxbase.html" />
     <Content Include="html\xaml\abstract\uicontentelement.html" />
     <Content Include="html\xaml\abstract\valuedcontrol.html" />

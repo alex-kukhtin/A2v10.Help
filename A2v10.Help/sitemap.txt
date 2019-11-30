@@ -191,4 +191,6 @@ http://sdk.a2.dn.ua/client/module
 http://sdk.a2.dn.ua/client/stdutils
 http://sdk.a2.dn.ua/client/global
 http://sdk.a2.dn.ua/client/global_require
+http://sdk.a2.dn.ua/workflow/index
+http://sdk.a2.dn.ua/tests/index
 http://sdk.a2.dn.ua/help/about
