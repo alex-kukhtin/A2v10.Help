@@ -289,7 +289,7 @@
 
 		/*console.dir(body);*/
 		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
-		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault)|e(lse|val|xtends)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
+		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault|clare)|e(lse|val|xtends|num)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue|ype)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		let jsOpts = {
@@ -324,6 +324,10 @@
 			/*console.dir(text);*/
 			if (lang === 'js') {
 				tokenize(text, jsOpts, function (type, text) {
+					if (text.indexOf('~') === 0) {
+						type = 'interface';
+						text = text.substring(1); /* interface! */
+					}
 					let textNode = document.createTextNode(text);
 					if (type === 'ws' || type === 'delim' || type === 'name')
 						tag.appendChild(textNode);
@@ -392,7 +396,7 @@
 							break;
 						}
 					}
-					resolve({ body, script});
+					resolve({ body, script });
 				}
 			};
 			xhr.open('GET', url, true);

@@ -67,6 +67,7 @@
     <Content Include="css\site.help.min.css">
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
+    <Content Include="favicon.ico" />
     <Content Include="html\app\commands.html" />
     <Content Include="html\app\folders\assets.html" />
     <Content Include="html\app\folders\index.html" />

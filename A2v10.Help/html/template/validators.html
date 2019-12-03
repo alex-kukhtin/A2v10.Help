@@ -6,4 +6,56 @@
 			Шаблоны. Валидаторы
 		</h1>
 	</div>
+	<p>
+		Валидаторы - механизм, обеспечивающий проверку достоверности модели. Обратите внимание,
+		что валидаторы, как и все остальное в шаблонах связываются с данными, а не с пользовательским интерфейсом.
+		Элементы управления сами отслеживают правильность данных и выводят соответствующие сообщения об ошибках.
+	</p>
+	<p>
+		Объект, описывающий валидаторы представляет собой обычный объект JavaScript. Имена свойств представляют
+		собой путь к элементу данных в модели (к тому объекту, проверку которого нужно выполнить). Если в пути к
+		данным встречается массив, то соответствующее свойство отмечается суффиксом <code>[]</code>. Например,
+		валидатор к свойству <code>Sum</code> строки документа будет иметь имя <code>Document.Rows[].Qty</code>.
+	</p>
+
+	<h3>Синтаксис</h3>
+<pre class="code-highlight js">
+<script type="text/template">
+<![CDATA[
+/* валидаторы */
+
+declare const enum ~Severity {
+	error = 'error',
+	warning = 'warning',
+	info = 'info'
+}
+
+declare const enum ~StdValidator {
+	notBlank = 'notBlank',
+	email = 'email',
+	url = 'url',
+	isTrue = 'isTrue',
+	regExp = 'regExp'
+}
+
+interface ~tempateValidatorFunc { (elem: IElement, value?: any): boolean | string | Promise<any>; }
+
+interface ~templateValidatorObj {
+	valid: ~tempateValidatorFunc | ~StdValidator,
+	async?: boolean,
+	msg?: string,
+	regExp?: RegExp,
+	severity?: ~Severity
+}
+
+declare type ~templateValidator = String | ~tempateValidatorFunc | ~templateValidatorObj;
+
+validators: {
+  [prop: string]: ~templateValidator | ~templateValidator[]
+}
+]]>
+</script>
+</pre>
+
+
 </div>
