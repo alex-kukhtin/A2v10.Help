@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Декабрь 2019			/whatsnew/w201912
 		Ноябрь 2019				/whatsnew/w201911
 		Октябрь 2019			/whatsnew/w201910
 		Сентябрь 2019			/whatsnew/w201909
@@ -60,6 +61,7 @@
 			DatePicker			/xaml/controls/datepicker
 			FlexList			/xaml/controls/flexlist
 			Graphics			/xaml/controls/graphics
+			GridDivider			/xaml/controls/griddivider
 			Header				/xaml/controls/header
 			Image				/xaml/controls/image
 			List				/xaml/controls/list

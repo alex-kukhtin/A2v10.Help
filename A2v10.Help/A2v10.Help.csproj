@@ -101,6 +101,7 @@
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\whatsnew\w201810.html" />
+    <Content Include="html\whatsnew\w201912.html" />
     <Content Include="html\whatsnew\w201911.html" />
     <Content Include="html\whatsnew\w201910.html" />
     <Content Include="html\whatsnew\w201909.html" />
@@ -141,6 +142,7 @@
     <Content Include="html\xaml\containers\commandbar.html" />
     <Content Include="html\xaml\containers\toolbar.html" />
     <Content Include="html\xaml\abstract\commandcontrol.html" />
+    <Content Include="html\xaml\controls\griddivider.html" />
     <Content Include="html\xaml\controls\combobox.html" />
     <Content Include="html\xaml\controls\attachments.html" />
     <Content Include="html\xaml\controls\alert.html" />

@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w201912
 http://sdk.a2.dn.ua/whatsnew/w201911
 http://sdk.a2.dn.ua/whatsnew/w201910
 http://sdk.a2.dn.ua/whatsnew/w201909
@@ -53,6 +54,7 @@ http://sdk.a2.dn.ua/xaml/controls/datagridcolumn
 http://sdk.a2.dn.ua/xaml/controls/datepicker
 http://sdk.a2.dn.ua/xaml/controls/flexlist
 http://sdk.a2.dn.ua/xaml/controls/graphics
+http://sdk.a2.dn.ua/xaml/controls/griddivider
 http://sdk.a2.dn.ua/xaml/controls/header
 http://sdk.a2.dn.ua/xaml/controls/image
 http://sdk.a2.dn.ua/xaml/controls/list
