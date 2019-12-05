@@ -25,7 +25,7 @@
 				<input style="width:130px" v-model="searchText" v-on:keyup.enter="doSearch" />
 			</div>
 		</header>
-		<ul class="tab-header">
+		<ul class="menu-tab-header">
 			<li @click.prevent="tab('content')" :class="{active: isActive('content')}">Содержание</li>
 			<li @click.prevent="tab('index')" :class="{active: isActive('index')}">Индекс</li>
 			<li @click.prevent="tab('fts')" :class="{active: isActive('fts')}">Поиск</li>

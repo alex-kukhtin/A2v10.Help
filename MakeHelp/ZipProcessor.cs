@@ -31,7 +31,7 @@ namespace MakeHelp
 			if (File.Exists(_fileName))
 				File.Delete(_fileName);
 
-			String[] rootFiles = { "index.html", "404.html", "robots.txt", ".htaccess", "root.php", "sitemap.txt" };
+			String[] rootFiles = { "index.html", "404.html", "robots.txt", ".htaccess", "root.php", "sitemap.txt", "favicon.ico" };
 
 			using (var za = ZipFile.Open(_fileName, ZipArchiveMode.Create))
 			{

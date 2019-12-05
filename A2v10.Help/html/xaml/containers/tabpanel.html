@@ -10,8 +10,129 @@
 		</div>
 	</div>
 	<p>
-		Представляет собой элемент с закладками. Содержимое представлено элементами <a class="code-link" href="tab">Tab</a>.
+		Представляет собой панель с закладками. Содержимое представлено элементами <a class="code-link" href="tab">Tab</a>.
 	</p>
 
+	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Свойство содержимого: <code>Tabs</code></p>
+
 	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Tabs</td>
+				<td class="fit"><code>TabCollection</code></td>
+				<td>
+					Набор закладок (элементы <a class="code-link" href="tab">Tab</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Источник данных для закладок.
+					Содержимое элемента будет повторяться в соответствии с содержимым <code>ItemsSource</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td><code>Object</code></td>
+				<td>
+					Заголовок панели. Выводится в правой части панели с закладками. Может быть строкой, привязкой или
+					объектом <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Border</td>
+				<td>Boolean</td>
+				<td>
+					Выводить ли рамку вокруг панели.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">FullPage</td>
+				<td>Boolean</td>
+				<td>
+					Панель будет занимать всю страницу (является корневым элементом).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinHeight</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Минимальная высота панели.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<TabPanel Header="Заголовок панели" Border="True">
+	<Tab Header="Tab 1">
+		<Grid>
+			<Text>Содержимое первой закладки</Text>
+		</Grid>
+	</Tab>
+	<Tab Header="Tab 2">
+		<Grid>
+			<Text>Содержимое второй закладки</Text>
+		</Grid>
+	</Tab>
+</TabPanel>
+</script>
+</pre>
+	</p>
+	<p>
+		Результат
+
+		<div class="grid xaml-sample" style="width:500px" id="xaml-tabpanel">
+			<a2-tab-panel class="bordered" >
+				<template slot="title">
+					<div class="pane-header">Заголовок панели</div>
+				</template>
+				<a2-tab-item header="Tab 1">
+					<template>
+						<div class="grid">Содержимое первой закладки</div>
+					</template>
+				</a2-tab-item>
+				<a2-tab-item header="Tab 2">
+					<template>
+						<div class="grid">Содержимое второй закладки</div>
+					</template>
+				</a2-tab-item>
+			</a2-tab-panel>
+		</div>
+	</p>
+
+		<script type="text/javascript">
+			(function () {
+				var vm = new Vue({
+					el: "#xaml-tabpanel",
+					data: {
+					},
+					created: function () {
+						console.dir('created');
+					}
+				});
+			})();
+		</script>
 </div>

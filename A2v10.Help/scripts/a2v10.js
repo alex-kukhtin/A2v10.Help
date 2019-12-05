@@ -176,7 +176,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190907-7555
+// 20191017-7568
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -325,7 +325,7 @@ app.modules['std:utils'] = function () {
 			return '';
 		else if (isObject(obj))
 			return toJson(obj);
-		return obj + '';
+		return '' + obj;
 	}
 
 	function defaultValue(type) {
@@ -445,13 +445,13 @@ app.modules['std:utils'] = function () {
 				if (dateIsZero(obj))
 					return '';
 				return formatDate(obj);
-			case "DateUrl":
+			case 'DateUrl':
 				if (dateIsZero(obj))
 					return '';
 				if (dateHasTime(obj))
 					return obj.toISOString();
 				return '' + obj.getFullYear() + pad2(obj.getMonth() + 1) + pad2(obj.getDate());
-			case "Time":
+			case 'Time':
 				if (!isDate(obj)) {
 					console.error(`Invalid Date for utils.format (${obj})`);
 					return obj;
@@ -459,13 +459,13 @@ app.modules['std:utils'] = function () {
 				if (dateIsZero(obj))
 					return '';
 				return formatTime(obj);
-			case "Period":
+			case 'Period':
 				if (!obj.format) {
 					console.error(`Invalid Period for utils.format (${obj})`);
 					return obj;
 				}
 				return obj.format('Date');
-			case "Currency":
+			case 'Currency':
 				if (!isNumber(obj)) {
 					obj = toNumber(obj);
 					//TODO:check console.error(`Invalid Currency for utils.format (${obj})`);
@@ -476,7 +476,7 @@ app.modules['std:utils'] = function () {
 				if (opts.format)
 					return formatNumber(obj, opts.format);
 				return currencyFormat(obj);
-			case "Number":
+			case 'Number':
 				if (!isNumber(obj)) {
 					obj = toNumber(obj);
 					//TODO:check console.error(`Invalid Number for utils.format (${obj})`);
@@ -1030,7 +1030,7 @@ app.modules['std:url'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20180831-7549*/
+/*20191101-7575*/
 // services/period.js
 
 app.modules['std:period'] = function () {
@@ -1134,7 +1134,7 @@ app.modules['std:period'] = function () {
 			}
 		}
 		if (showCustom)
-			return 'Довільно';
+			return locale.$CustomPeriod;
 		let from = this.From;
 		let to = this.To;
 		return utils.format(from, 'Date') + ' - ' + (utils.format(to, 'Date') || '???');
@@ -1801,9 +1801,9 @@ app.modules['std:log'] = function () {
 	}
 };
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20180705-7241*/
+/*20191122-7587*/
 /*validators.js*/
 
 app.modules['std:validators'] = function () {
@@ -1824,15 +1824,21 @@ app.modules['std:validators'] = function () {
 	};
 
 	function validateStd(rule, val) {
-		switch (rule) {
+		switch (rule.valid) {
 			case 'notBlank':
 				return utils.notBlank(val);
 			case "email":
-				return validEmail(val);
+				return val === '' || EMAIL_REGEXP.test(val);
 			case "url":
-				return validUrl(val);
+				return val === '' || URL_REGEXP.test(val);
 			case "isTrue":
 				return val === true;
+			case "regExp":
+				if (!(rule.regExp instanceof RegExp)) {
+					console.error('rule.regExp is undefined or is not an regular expression');
+					return false;
+				}
+				return val === '' || rule.regExp.test(val);
 		}
 		console.error(`invalid std rule: '${rule}'`);
 		return true;
@@ -1874,7 +1880,7 @@ app.modules['std:validators'] = function () {
 				if (!rule.applyIf(item, val)) return;
 			}
 			if (utils.isString(rule)) {
-				if (!validateStd('notBlank', val))
+				if (!validateStd({ valid: 'notBlank' }, val))
 					retval.push({ msg: rule, severity: ERROR });
 			} else if (utils.isFunction(rule)) {
 				let vr = rule(item, val);
@@ -1884,7 +1890,7 @@ app.modules['std:validators'] = function () {
 					retval.push({ msg: vr.msg, severity: vr.severity || sev });
 				}
 			} else if (utils.isString(rule.valid)) {
-				if (!validateStd(rule.valid, val))
+				if (!validateStd(rule, val))
 					retval.push({ msg: rule.msg, severity: sev });
 			} else if (utils.isFunction(rule.valid)) {
 				if (rule.async) {
@@ -1965,22 +1971,13 @@ app.modules['std:validators'] = function () {
 		let err = validateImpl(arr, item, val, du);
 		return err; // always array. may be defer
 	}
-
-
-	function validEmail(addr) {
-		return addr === '' || EMAIL_REGEXP.test(addr);
-	}
-
-	function validUrl(url) {
-		return url === '' || URL_REGEXP.test(url);
-	}
 };
 
 
 
 /* Copyright © 2015-2019 Alex Kukhtin. All rights reserved.*/
 
-/*20181010-7567*/
+/*20181101-7576*/
 // services/datamodel.js
 
 (function () {
@@ -2052,6 +2049,8 @@ app.modules['std:validators'] = function () {
 			val = utils.defaultValue(type);
 		if (type === Number)
 			return utils.toNumber(val);
+		else if (type === String)
+			return utils.toString(val);
 		else if (type === Date && !utils.isDate(val))
 			return utils.date.parse('' + val);
 		return val;
@@ -2117,8 +2116,14 @@ app.modules['std:validators'] = function () {
 				let eventWasFired = false;
 				let skipDirty = prop.startsWith('$$');
 				let ctor = this._meta_.props[prop];
-				if (ctor.type) ctor = ctor.type;
-				val = ensureType(ctor, val);
+				let isjson = false;
+				if (ctor.type) {
+					isjson = !!ctor.json;
+					ctor = ctor.type;
+				}
+				if (!isjson) {
+					val = ensureType(ctor, val);
+				}
 				if (val === this._src_[prop])
 					return;
 				let oldVal = this._src_[prop];
@@ -3900,7 +3905,7 @@ app.modules['std:tools'] = function () {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190405-7498
+// 20191028-7574
 /* services/html.js */
 
 app.modules['std:html'] = function () {
@@ -3965,6 +3970,11 @@ app.modules['std:html'] = function () {
 
 	function printDirect(url) {
 
+
+		if (window.cefHost || navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+			window.open(url);
+			return;
+		}
 		removePrintFrame();
 		let frame = document.createElement("iframe");
 		document.body.classList.add('waiting');
@@ -4219,7 +4229,7 @@ app.modules['std:routing'] = function () {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190805-7512
+// 20191115-7578
 // components/control.js
 
 (function () {
@@ -4477,7 +4487,7 @@ Vue.component('validator-control', {
 */
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190717-7506*/
+/*20191115-7578*/
 /*components/textbox.js*/
 
 (function () {
@@ -4486,11 +4496,11 @@ Vue.component('validator-control', {
 	const mask = require('std:mask');
 
 	let textBoxTemplate =
-`<div :class="cssClass()">
+`<div :class="cssClass()" :test-id="testId">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group">
 		<input v-if="password" type="password" style="display:none" autocomplete="new-password"/>
-		<input ref="input" :type="controlType" v-focus :autocomplete="autocompleteText" :id="testId"
+		<input ref="input" :type="controlType" v-focus :autocomplete="autocompleteText"
 			v-bind:value="modelValue" 
 				v-on:change="onChange($event.target.value)" 
 				v-on:input="onInput($event.target.value)"
@@ -4505,10 +4515,10 @@ Vue.component('validator-control', {
 `;
 
 	let textAreaTemplate =
-`<div :class="cssClass()">
+`<div :class="cssClass()" :test-id="testId">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group">
-		<textarea ref="input" v-focus v-auto-size="autoSize" v-bind:value="modelValue2" :id="testId"
+		<textarea ref="input" v-focus v-auto-size="autoSize" v-bind:value="modelValue2"
 			v-on:change="onChange($event.target.value)" 
 			v-on:input="onInput($event.target.value)"
 			v-on:keypress="onKey($event)"
@@ -4522,10 +4532,10 @@ Vue.component('validator-control', {
 `;
 
 	let staticTemplate =
-`<div :class="cssClass()">
+`<div :class="cssClass()" :test-id="testId">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group static">
-		<span v-focus v-text="textProp" :class="inputClass" :tabindex="tabIndex" :id="testId"/>
+		<span v-focus v-text="textProp" :class="inputClass" :tabindex="tabIndex" />
 		<slot></slot>
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 	</div>
@@ -4683,7 +4693,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190729-7510*/
+/*20191115-7578*/
 /*components/combobox.js*/
 
 (function () {
@@ -4692,14 +4702,14 @@ Vue.component('validator-control', {
 	const utils = require('std:utils');
 
 	let comboBoxTemplate =
-`<div :class="cssClass()" v-lazy="itemsSource">
+`<div :class="cssClass()" v-lazy="itemsSource" :test-id="testId">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group">
 		<div class="select-wrapper">
 			<div v-text="getWrapText()" class="select-text" ref="wrap" :class="wrapClass"/>
 			<span class="caret"/>
 		</div>
-		<select v-focus v-model="cmbValue" :disabled="disabled" :tabindex="tabIndex" ref="sel" :title="getWrapText()" :id="testId">
+		<select v-focus v-model="cmbValue" :disabled="disabled" :tabindex="tabIndex" ref="sel" :title="getWrapText()">
 			<slot>
 				<option v-for="(cmb, cmbIndex) in itemsSource" :key="cmbIndex" 
 					v-text="getName(cmb, true)" :value="getValue(cmb)"></option>
@@ -4981,7 +4991,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20191003-7562
+// 20191017-7568
 // components/datepicker.js
 
 
@@ -5059,7 +5069,7 @@ Vue.component('validator-control', {
 				let h = od.getUTCHours();
 				let m = od.getUTCMinutes();
 				var nd = new Date(d);
-				nd.setUTCHours(h, m, 0, 0);
+				nd.setUTCHours(h, m);
 				this.item[this.prop] = nd;
 			},
 			dayClass(day) {
@@ -5101,9 +5111,12 @@ Vue.component('validator-control', {
 				},
 				set(str) {
 					let md = utils.date.parse(str);
-					this.setDate(md);
-					if (utils.date.isZero(md))
+					if (utils.date.isZero(md)) {
+						this.item[this.prop] = md;
 						this.isOpen = false;
+					} else {
+						this.setDate(md);
+					}
 				}
 			}
 		},
@@ -5119,7 +5132,7 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190904-7552
+// 20191017-7568
 // components/datepicker.js
 
 
@@ -5297,9 +5310,13 @@ Vue.component('validator-control', {
 					return md.toLocaleTimeString(locale.$Locale, { timeZone: 'UTC', hour: '2-digit', minute:"2-digit"});
 				},
 				set(str) {
-					let time = utils.date.parseTime(str);
 					let md = new Date(this.modelDate);
-					md.setUTCHours(time.getHours(), time.getMinutes());
+					if (str) {
+						let time = utils.date.parseTime(str);
+						md.setUTCHours(time.getHours(), time.getMinutes());
+					} else {
+						md.setUTCHours(0, 0);
+					}
 					this.item[this.prop] = md;
 					this.isOpen = false;
 				}
@@ -5516,8 +5533,7 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190903-7551
-
+/*20191123-7587*/
 // components/selector.js
 
 /*TODO*/
@@ -5536,13 +5552,13 @@ Vue.component('validator-control', {
 	Vue.component('a2-selector', {
 		extends: baseControl,
 		template: `
-<div :class="cssClass2()">
+<div :class="cssClass2()"  :test-id="testId">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group">
 		<div v-if="isCombo" class="selector-combo" @click.stop.prevent="open"><span tabindex="-1" class="select-text" v-text="valueText" @keydown="keyDown" ref="xcombo"/></div>
-		<input v-focus v-model="query" :class="inputClass" :placeholder="placeholder" :id="testId" v-else
+		<input v-focus v-model="query" :class="inputClass" :placeholder="placeholder" v-else
 			@input="debouncedUpdate" @blur.stop="blur" @keydown="keyDown" @keyup="keyUp" ref="input" 
-			:disabled="disabled" />
+			:disabled="disabled" @click="clickInput($event)"/>
 		<slot></slot>
 		<a class="selector-open" href="" @click.stop.prevent="open" v-if="caret"><span class="caret"></span></a>
 		<a class="selector-clear" href="" @click.stop.prevent="clear" v-if="clearVisible">&#x2715</a>
@@ -5743,6 +5759,13 @@ Vue.component('validator-control', {
 						this.blur();
 				}
 			},
+			clickInput(event) {
+				if (this.caret && !this.isOpen) {
+					event.stopPropagation();
+					event.preventDefault();
+					this.open();
+				}
+			},
 			keyDown(event) {
 				if (!this.isOpen) {
 					if (event.which === 115)
@@ -5894,7 +5917,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190818-7528
+// 20191202-7591
 // components/datagrid.js*/
 
 (function () {
@@ -6567,6 +6590,8 @@ Vue.component('validator-control', {
 					if (this.itemsSource.length)
 						return false;
 					return mi.HasRows === false;
+				} else {
+					return this.itemsSource.length === 0;
 				}
 				return false;
 			}
@@ -6870,15 +6895,15 @@ Vue.component('a2-pager', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-//20190906-7554
+//20191202-7591
 /*components/popover.js*/
 
 Vue.component('popover', {
 	template: `
 <div v-dropdown class="popover-wrapper" :style="{top: top}" :class="{show: isShowHover}">
 	<span toggle class="popover-title" v-on:mouseover="mouseover" v-on:mouseout="mouseout"><i v-if="hasIcon" :class="iconClass"></i> <span :title="title" v-text="content"></span><slot name="badge"></slot></span>
-	<div class="popup-body" :style="{width: width}">
-		<div class="arrow" />
+	<div class="popup-body" :style="{width: width, left:offsetLeft}">
+		<div class="arrow" :style="{left:offsetArrowLeft}"/>
 		<div v-if="visible">
 			<include :src="popoverUrl"/>
 		</div>
@@ -6907,11 +6932,20 @@ Vue.component('popover', {
 		title: String,
 		width: String,
 		top: String,
-		hover: Boolean
+		hover: Boolean,
+		offsetX: String
 	},
 	computed: {
 		hasIcon() {
 			return !!this.icon;
+		},
+		offsetLeft() {
+			return this.offsetX || undefined;
+		},
+		offsetArrowLeft() {
+			if (this.offsetX && this.offsetX.indexOf('-') === 0)
+				return `calc(${this.offsetX.substring(1)} + 6px)`;
+			return undefined;
 		},
 		iconClass() {
 			let cls = "ico po-ico";
@@ -9172,24 +9206,25 @@ Vue.component("a2-taskpad", {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-// 20190309-7462
+// 20190309-7488
 // components/panel.js
 
 Vue.component('a2-panel', {
 	template:
-		`<div :class="cssClass">
-    <div class="panel-header" @click.prevent="toggle" v-if="!noHeader">
-        <slot name='header'></slot>
-	    <span v-if="collapsible" class="ico panel-collapse-handle"></span>
-    </div>
-    <slot v-if="expanded"></slot>
+`<div :class="cssClass" :test-id="testId">
+	<div class="panel-header" @click.prevent="toggle" v-if="!noHeader">
+		<slot name='header'></slot>
+		<span v-if="collapsible" class="ico panel-collapse-handle"></span>
+	</div>
+	<slot v-if="expanded"></slot>
 </div>
 `,
 	props: {
 		initialCollapsed: Boolean,
 		collapsible: Boolean,
 		panelStyle: String,
-		noHeader: Boolean
+		noHeader: Boolean,
+		testId: String
 	},
 	data() {
 		return {
@@ -9451,7 +9486,7 @@ Vue.component('a2-panel', {
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20190821-7534*/
+/*20190821-7575*/
 /*components/newbutton.js*/
 
 (function () {
@@ -9501,7 +9536,7 @@ Vue.component('a2-panel', {
 				const urlTools = require("std:url");
 				const rootUrl = window.$$rootUrl;
 				const data = JSON.stringify({ company: comp.Id });
-				http.post(urlTools.combine(rootUrl, 'account/switchtocompany'), data)
+				http.post(urlTools.combine(rootUrl, '_application/switchtocompany'), data)
 					.then(x => {
 						window.location.assign(urlTools.combine(rootUrl, '/') /*always root */);
 					}).catch(err => {
@@ -10409,7 +10444,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20181009-7565*/
+/*20191204-7592*/
 // controllers/base.js
 
 (function () {
@@ -11595,8 +11630,11 @@ Vue.directive('resize', {
 				args = args || {};
 				if (args.target !== 'controller')
 					return;
-				if (args.testId !== this.__testId__)
-					return;
+				if (this.inDialog) {
+					// testId for dialogs only
+					if (args.testId !== this.__testId__)
+						return;
+				}
 				const root = this.$data;
 				switch (args.action) {
 					case 'eval':
@@ -12431,7 +12469,7 @@ Vue.directive('resize', {
 })();	
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
-/*20180815-7523*/
+/*20181115-7578*/
 
 (function () {
 
@@ -12443,7 +12481,7 @@ Vue.directive('resize', {
 	window.__tests__ = {
 		$navigate: navigate,
 		$isReady: function () {
-			console.dir('from isReady:' + window.__requestsCount__);
+			//console.dir('from isReady:' + window.__requestsCount__);
 			return document.readyState === 'complete' &&
 				window.__requestsCount__ + window.__loadsCount__ === 0;
 		},
