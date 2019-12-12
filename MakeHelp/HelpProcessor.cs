@@ -221,9 +221,10 @@ namespace MakeHelp
 			{
 				foreach (var ln in File.ReadAllLines(fileName))
 				{
-					if (String.IsNullOrEmpty(ln))
+					var lne = ln.TrimEnd();
+					if (String.IsNullOrEmpty(lne))
 						continue;
-					var url =  _content.Add(ln);
+					var url =  _content.Add(lne);
 					if (url != null)
 						sitemap.AppendLine($"{host}{url}");
 				}
