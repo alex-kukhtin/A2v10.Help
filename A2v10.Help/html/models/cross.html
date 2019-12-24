@@ -18,7 +18,7 @@
 			<li>Все перекрестные массивы во всех записях будут иметь одинаковый размер.</li>
 			<li>Порядок элементов будет определяться ключом (<code>Key</code>) перекрестного элемента.</li>
 			<li>
-				Основной набор будет иметь дополнительное свойство <code>$headers</code>, в котором будут представлены
+				Основной набор будет иметь дополнительное свойство <code>$crossKeys</code>, в котором будут представлены
 				массивы ключей для каждого из перекрестных массивов.
 			</li>
 		</ul>
@@ -31,7 +31,7 @@
 select [RepData!TData!Array] = null, [Id!!Id] = Id, Prop1, Prop2, [Cross1!TCross!Cross] = null;
 
 /*перекрестный набор */
-select [!TCross!Array] = null, [Header!!Key] = Key, Data1, Data2, [!TData.Cross1!ParentId] = Id;
+select [!TCross!Array] = null, [!!Key] = Key, Data1, Data2, [!TData.Cross1!ParentId] = Id;
 </script>
 </pre>
 	</p>
@@ -58,7 +58,7 @@ RepData: [
 			{Key: 'K2', Data1: 40, Data2: 50 },
 		]
 	},
-	$headers: {
+	$crossKeys: {
 		Cross1: ['K1', 'K2']
 	}
 ]
