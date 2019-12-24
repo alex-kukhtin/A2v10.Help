@@ -94,6 +94,7 @@
     <Content Include="html\images\client1.svg" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\models\cross.html" />
     <Content Include="html\template\options.html" />
     <Content Include="html\template\delegates.html" />
     <Content Include="html\tests\index.html" />
@@ -204,7 +205,7 @@
     <Content Include="html\client\index.html" />
     <Content Include="html\images\demo.png" />
     <Content Include="html\app\model.html" />
-    <Content Include="html\models\datamodels.html" />
+    <Content Include="html\models\general.html" />
     <Content Include="html\models\index.html" />
     <Content Include="html\template\commands.html" />
     <Content Include="html\template\validators.html" />

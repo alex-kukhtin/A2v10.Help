@@ -39,8 +39,9 @@
 
 	redirect.json		/app/redirect
 
-Модели		/models/index
-	Модели данных			/models/datamodels
+Модели данных		/models/index
+	Общая информация			/models/general
+	Перекрестные модели			/models/cross
 
 
 Представления	/views/index

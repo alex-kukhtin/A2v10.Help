@@ -292,6 +292,10 @@
 		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault|clare)|e(lse|val|xtends|num)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue|ype)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
+		const sqlDelims = ' ,[]+-*/:;<>';
+		const sqlKeywords = /^(b(egin|y)|select|from|update|i(f|nsert)|delete|inner|outer|join|where|group|order|left|right|e(nd|lse))$/;
+		const sqlInstr = /^(null)$/;
+
 		let jsOpts = {
 			lang: 'js',
 			delims: jsDelims,
@@ -305,6 +309,13 @@
 			jsKeywords: null
 		};
 
+		const sqlOpts = {
+			lang: 'sql',
+			delims: sqlDelims,
+			keywords: sqlKeywords,
+			instr: sqlInstr
+		};
+
 		let elems = document.getElementsByClassName('code-highlight');
 
 
@@ -315,12 +326,15 @@
 					lang = 'js';
 				else if (tag.classList.contains('xml'))
 					lang = 'xml';
+				else if (tag.classList.contains('sql'))
+					lang = 'sql';
 			}
 			let text = tag.textContent.trim();
 			if (text.startsWith('<![CDATA[') && text.endsWith(']]>')) {
 				text = text.substring(9, text.length - 3).trim();
 			}
 			tag.innerHTML = '';
+			console.dir(lang);
 			/*console.dir(text);*/
 			if (lang === 'js') {
 				tokenize(text, jsOpts, function (type, text) {
@@ -342,6 +356,18 @@
 				tokenize(text, xmlOpts, function (type, text) {
 					let textNode = document.createTextNode(text);
 					if (type !== 'tag' && type !== 'attrname' && type !== 'attrval' && type !== 'comment' && type !== 'cdata')
+						tag.appendChild(textNode);
+					else {
+						let node = document.createElement('span');
+						node.appendChild(textNode);
+						node.classList.add(type);
+						tag.appendChild(node);
+					}
+				});
+			} else if (lang === 'sql') {
+				tokenize(text, sqlOpts, function (type, text) {
+					let textNode = document.createTextNode(text);
+					if (type === 'ws' || type === 'delim' || type === 'name')
 						tag.appendChild(textNode);
 					else {
 						let node = document.createElement('span');

@@ -35,7 +35,8 @@ http://sdk.a2.dn.ua/app/folders/index
 http://sdk.a2.dn.ua/app/folders/assets
 http://sdk.a2.dn.ua/app/redirect
 http://sdk.a2.dn.ua/models/index
-http://sdk.a2.dn.ua/models/datamodels
+http://sdk.a2.dn.ua/models/general
+http://sdk.a2.dn.ua/models/cross
 http://sdk.a2.dn.ua/views/index
 http://sdk.a2.dn.ua/xaml/index
 http://sdk.a2.dn.ua/xaml/overview/index
