@@ -8,57 +8,131 @@
 	</div>
 	<p>
 		Перекрестная модель данных включает одно или несколько полей,
-		которые будут развернуты в горизонтальный массив элементов. Чаще всего такие модели используются для 
+		которые будут развернуты либо в горизонтальный массив элементов (тип <code>CrossArray</code>), либо в объект с ключами (тип <code>CrossObject</code>).
+		Чаще всего такие модели используются для
 		построения перекрестных отчетов, в которых количество колонок переменное и определяется полученными данными.
+		Это похоже на sql-оператор <b>pivot</b>, но, в отличие от него, не требуется заранее знать какие колонки будут включены в результирующий набор.
 	</p>
 
 	<p>
-		Отличия от простых вложенных массивов заключаются в следующем:
+		Для перекрестных массивов отличия от простых вложенных массивов заключаются в следующем:
 		<ul>
 			<li>Все перекрестные массивы во всех записях будут иметь одинаковый размер.</li>
 			<li>Порядок элементов будет определяться ключом (<code>Key</code>) перекрестного элемента.</li>
 			<li>
-				Основной набор будет иметь дополнительное свойство <code>$crossKeys</code>, в котором будут представлены
+				Основной объект (тот, в котором содержится перекрестный массив) будет иметь дополнительное свойство <code>$cross</code>, в котором будут представлены
 				массивы ключей для каждого из перекрестных массивов.
 			</li>
 		</ul>
 	</p>
 
 	<p>
+		Для перекрестных объектов логика следующая:
+		<ul>
+			<li>Все перекрестные объекты во всех записях будут иметь одинаковую структуру.</li>
+			<li>
+				Основной объект (тот, в котором содержится перекрестный объект) будет иметь дополнительное свойство <code>$cross</code>, в котором будут представлены
+				массивы ключей для каждого из перекрестных массивов.
+			</li>
+		</ul>
+	</p>
+
+	<p>
+		<h3>Пример перекрестного массива</h3>
+	<p>
+		Пусть имеется фрагмент кода SQL:
 <pre class="code-highlight js" data-lang="sql">
 <script type="text/template">
 /* основной набор */
-select [RepData!TData!Array] = null, [Id!!Id] = Id, Prop1, Prop2, [Cross1!TCross!Cross] = null;
+select [RepData!TData!Array] = null, [Id!!Id] = Id, S1, N1, [Cross1!TCross!CrossArray] = null
+from ...;
 
 /*перекрестный набор */
-select [!TCross!Array] = null, [!!Key] = Key, Data1, Data2, [!TData.Cross1!ParentId] = Id;
+select [!TCross!CrossArray] = null, [!!Key] = Key, Val, [!TData.Cross1!ParentId] = Id;
+from ...;
 </script>
 </pre>
 	</p>
 
 	<p>
+		И он возвращает следующие данные:
+		<table class="sql-table">
+			<thead>
+				<tr>
+					<th>RepData!TData!Array</th>
+					<th>Id!!Id</th>
+					<th>S1</th>
+					<th>N1</th>
+					<th>Cross1!TCross!CrossArray</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>null</td>
+					<td>10</td>
+					<td>Str1</td>
+					<td>100</td>
+					<td>null</td>
+				</tr>
+				<tr>
+					<td>null</td>
+					<td>20</td>
+					<td>Str2</td>
+					<td>200</td>
+					<td>null</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="sql-table">
+			<thead>
+				<tr>
+					<th>!TCross!CrossArray</th>
+					<th>Key!!Key</th>
+					<th>Val</th>
+					<th>!TData.Cross1!ParentId</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>null</td>
+					<td>K1</td>
+					<td>111</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>null</td>
+					<td>K2</td>
+					<td>222</td>
+					<td>20</td>
+				</tr>
+			</tbody>
+		</table>
+	</p>
+
+	<p>Результирующая модель будет такой:
+
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 RepData: [
 	{
-		Id:1,
-		Prop1: "P1_1",
-		Prop2: "P2_1",
+		Id:10,
+		S1: "Str1",
+		N1: 100,
 		Cross1: [
-			{Key: 'K1', Data1: 10, Data2: 20 },
-			{Key: 'K2', Data1: 0,  Data2: 0  }
+			{Key: 'K1', Val: 111},
+			{Key: 'K2', Val: 0 }
 		]
 	},
 	{
-		Id: 2,
-		Prop1: "P1_2",
-		Prop2: "P2_2",
+		Id: 20,
+		S1: "Str2",
+		N1: 200,
 		Cross1: [
-			{Key: 'K1', Data1: 0,  Data2: 0  }
-			{Key: 'K2', Data1: 40, Data2: 50 },
+			{Key: 'K1', Val: 0 }
+			{Key: 'K2', Val: 222},
 		]
 	},
-	$crossKeys: {
+	$cross: {
 		Cross1: ['K1', 'K2']
 	}
 ]

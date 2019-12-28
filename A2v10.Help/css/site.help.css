@@ -434,6 +434,20 @@ a.code-link {
   margin: 0.5rem;
   margin-left: 1rem;
 }
+table.sql-table {
+  border-collapse: collapse;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-size: 12px;
+  margin: 1rem 0;
+}
+table.sql-table td,
+table.sql-table th {
+  border: 1px solid #ddd;
+  padding: 2px 4px;
+}
+table.sql-table th {
+  background-color: #f8f8f8;
+}
 .bkstyle-sample {
   border: 1px solid #ccc;
   display: inline-block;
