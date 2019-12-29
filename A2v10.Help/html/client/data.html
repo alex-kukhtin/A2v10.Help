@@ -65,13 +65,33 @@ interface IRoot extends IElement {
 	</p>
 
 
+	<h3>Дополнительные свойства элемента массива</h3>
+	<p>Любой объект, который является элементом масссива расширяется следующимии дополнительными служебными свойствами и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IArrayElement extends IElement {
+	// properties
+	readonly $parent: IElementArray<IElement>;
+	$selected: boolean;
+	$checked: boolean;
+	// methods
+	$remove(): void;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/arrayelemprops">Подробнее об элементах массивов</a>
+	</p>
+
 	<h3>Свойства массива</h3>
 	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 {
-	// свойства
+	// properties
 	$root: Object,
 	$parent: Object,
 	$ctrl: Object,
@@ -89,8 +109,8 @@ interface IRoot extends IElement {
 }
 </script>
 </pre>
-	<a href="/client/arrayprops">Подробнее о массивах</a>
-</p>
+		<a href="/client/arrayprops">Подробнее о массивах</a>
+	</p>
 
 
 </div>

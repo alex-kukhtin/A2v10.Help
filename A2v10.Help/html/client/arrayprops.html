@@ -9,7 +9,14 @@
 			<a href="data">Модель на клиенте</a>
 		</div>
 	</div>
-	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
+	<p>
+		Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:
+	</p>
+
+	<p>
+		Каждый элемент в массиве реализует интерфейс <a class="code-link" href="arrayelemprops">IArrayElement</a> и содержит
+		некоторые дополнительные свойства и методы.
+	</p>
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
@@ -23,19 +30,68 @@ interface IElementArray<T> extends Array<T> {
 	readonly $isEmpty: boolean;
 	readonly $hasSelected: boolean;
 	readonly $selectedIndex: number;
+	readonly $checked: IElementArray<T>;
+	readonly $cross: { [prop: string]: string[] };
 	// methods
-	$empty(): IElementArray<T>;
-	$remove(elem: T): IElementArray<T>;
-	$clearSelected(): void;
+	$empty(): this;
+	$remove(elem: T): this;
+	$clearSelected(): this;
 	$append(src?: object): T;
 	$prepend(src?: object): T;
 	$insert(src:object, to: InsertTo, ref?: T): T;
-	$copy(src: any[]): IElementArray<T>;
+	$copy(src: any[]): this;
 }
 ]]>
 </script>
 </pre>
 	</p>
+
+	<h2>Свойства</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $root: IRoot</pre></div>
+		<p>
+			Ссылка на корневой объект модели (<a class="code-link" href="rootprops">IRoot</a>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $parent: IElement</pre></div>
+		<p>
+			Ссылка на родительский объект массива (<a class="code-link" href="elemprops">IElement</a>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $ctrl: IController</pre></div>
+		<p>
+			Ссылка на объект <a class="code-link" href="controller">контроллера (IController)</a>.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $hasSelected: boolean</pre></div>
+		<p>
+			Есть ли в массиве выделенный элемент (тот, у которого свойство <code>$selected</code> установлено в <code>true</code>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $selectedIndex: number</pre></div>
+		<p>
+			Индекс выделенного элемента или <b>-1</b>, если нет выделенного элемента.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $checked: IElementArray&lt;T&gt;</pre></div>
+		<p>
+			Массив отмеченных (<code>$checked = true</code>) элементов текущего массива.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $cross: { [prop: string]: string[] }</pre></div>
+		<p>
+			Объект ключей для <a href="/models/cross">перекрестных моделей данных</a>. Возвращает объект с именами свойств, соответствующими перекрестным полям.
+			Значениями является массив строк - перекрестных ключей.
+		</p>
+	</div>
 
 
 	<h2>Методы</h2>

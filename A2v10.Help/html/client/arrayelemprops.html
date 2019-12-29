@@ -1,0 +1,59 @@
+﻿<div>
+	<!--title:Элементы массивов-->
+	<div class="title">
+		<h1>
+			Свойства элементов массива
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+	<p>
+		Каждый элемент массива расширяется следующимии служебными свойствами и методами:
+	</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IArrayElement extends IElement {
+	// properties
+	readonly $parent: IElementArray<IElement>;
+	$selected: boolean;
+	$checked: boolean;
+	// methods
+	$remove(): void;
+}
+]]>
+</script>
+</pre>
+	</p>
+
+	<h2>Свойства</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $parent: IElementArray</pre></div>
+		<p>
+			Ссылка на родительский массив <a class="code-link" href="arrayprops">(IElementArray)</a>.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$selected: boolean</pre></div>
+		<p>
+			Элемент выделен.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$checked: boolean</pre></div>
+		<p>
+			Элемент отмечен. Коллекцию отмеченных элементов можно получить с помощью свойства <code>$checked</code> родительского массива.
+		</p>
+	</div>
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$remove(): void</pre></div>
+		<p>
+			Удаляет элемент из родительского массива.
+		</p>
+	</div>
+</div>

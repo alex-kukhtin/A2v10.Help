@@ -10,17 +10,7 @@
 		Апрель 2019				/whatsnew/w201904
 		Март 2019				/whatsnew/w201903
 		Январь 2019				/whatsnew/w201901
-		Декабрь 2018			/whatsnew/w201812
-		Ноябрь 2018				/whatsnew/w201811
-		Октябрь 2018			/whatsnew/w201810
-		Сентябрь 2018			/whatsnew/w201809
-		Август 2018				/whatsnew/w201808
-		Июль 2018				/whatsnew/w201807
-		Июнь 2018				/whatsnew/w201806
-		Май 2018				/whatsnew/w201805
-		Апрель 2018				/whatsnew/w201804
-		Март 2018				/whatsnew/w201803
-		Февраль 2018			/whatsnew/w201802
+		Предыдущие выпуски		/whatsnew/prev
 	
 Общая информация		/common/index
 	Платформа		/common/platform
@@ -127,11 +117,12 @@
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
 
-		Таблицы			/xaml/sheet/index
-			Sheet		/xaml/sheet/sheet
-			SheetCell	/xaml/sheet/sheetcell
-			SheetPage	/xaml/sheet/sheetpage
-			SheetRow	/xaml/sheet/sheetrow
+		Таблицы				/xaml/sheet/index
+			Sheet			/xaml/sheet/sheet
+			SheetCell		/xaml/sheet/sheetcell
+			SheetCellGroup	/xaml/sheet/sheetcellgroup
+			SheetPage		/xaml/sheet/sheetpage
+			SheetRow		/xaml/sheet/sheetrow
 			SheetSection		/xaml/sheet/sheetsection
 			SheetTreeSection	/xaml/sheet/sheettreesection
 
@@ -198,6 +189,7 @@
 	Модель			/client/data
 		Свойства объектов			/client/elemprops
 		Свойства корневого объекта	/client/rootprops
+		Свойства элементов массива	/client/arrayelemprops
 		Свойства массивов			/client/arrayprops
 
 	Шаблоны		/template/index

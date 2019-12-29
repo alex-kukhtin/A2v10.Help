@@ -31,10 +31,22 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td class="prop-name">Icon</td>
-					<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+					<td class="prop-name fit">Icon</td>
+					<td class="fit"><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
 					<td>
 						Иконка элемента.
+					</td>
+				</tr>
+				<tr class="top">
+					<td class="prop-name">Separator</td>
+					<td><code>SeparatorMode</code></td>
+					<td>
+						Связанный разделитель. Возможные значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">None</span> - (по умолчанию) нет.</li>
+							<li><span class="prop-name">Before</span> - добавить разделитель перед элементом меню.</li>
+							<li><span class="prop-name">After</span> - добавить разделитель после элемента меню.</li>
+						</ul>
 					</td>
 				</tr>
 				<tr>
@@ -57,6 +69,7 @@
 		<DropDownMenu Direction="DownRight" Separate="True">
 			<MenuItem Content="File" Icon="File" />
 			<MenuItem Content="Save" Icon="Save" />
+			<MenuItem Content="Exit" Icon="Exit" Separator="Before"/>
 		</DropDownMenu>
 	</Button.DropDown>
 </Button>
@@ -77,6 +90,10 @@
 						</a>
 						<a href="" class="dropdown-item" v-on:click.prevent="click">
 							<i class="ico ico-save"></i> <span>Save</span>
+						</a>
+						<div class="divider"></div>
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-exit"></i> <span>Exit</span>
 						</a>
 					</div>
 				</div>

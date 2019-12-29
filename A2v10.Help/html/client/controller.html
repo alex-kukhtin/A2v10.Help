@@ -18,18 +18,19 @@
 <script type="text/template">
 <![CDATA[
 interface IController {
-  // свойства
+  // properties
   readonly $isDirty: boolean;
   readonly $isPristine: boolean;
-  // методы
+  // methods
   $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
-  $requery():void;
+  $requery(): void;
   $reload(args?: any): void;
-  $modalClose: (result?: any):void;   // закрывает модальное окно
+  $modalClose(result?: any): void;
   $msg(msg: string, title?: string, style?:~CommonStyle): Promise<boolean>;
-  $alert(msg: string | IMessage):: Promise<boolean>;
-  $confirm(msg: string | IMessage): Promise<boolean>;
-  $toast: Function;
+  $alert(msg: string | IMessage): Promise<boolean>;
+  $confirm(msg: string | IConfirm): Promise<boolean>;
+  $toast(text: string, style?: ~CommonStyle): void;
+  $toast(toast: { text: string, style?: ~CommonStyle }): void;
   $defer(func: () => void): void;
   $showDialog(url: string, data?: object, query?: object): Promise<object>;
   $asyncValid(cmd: string, arg: object): any | Promise<any>;
@@ -37,24 +38,28 @@ interface IController {
   $setFilter(target:object, prop:string, value:any): void;
 }
 
-declare const enum CommonStyle {
+declare const enum ~CommonStyle {
   error = 'error',
   warning = 'warning',
   info = 'info',
   success = 'success'
 }
 
-declare const enum MessageStyle {
+declare const enum ~MessageStyle {
   confirm = 'confirm',
   alert = 'alert',
   info = 'info'
 }
 
-
 interface IMessage {
   msg: string;
-  style?: MessageStyle;
+  style?: ~MessageStyle;
   list?: any;
+}
+
+interface IConfirm {
+	msg: string;
+	style?: ~MessageStyle;
 }
 
 ]]>
@@ -81,7 +86,7 @@ interface IMessage {
 				<code>opts</code> - объект опций. В текущей версии содержит единственное свойство - <code>catchError</code>.
 				Если оно установлено, то при возникновении ошибок промис будет отменен и ошибку можно будет
 				перехватить в коде с помощью метода <code>catch</code>
-				(или в операторе <code>try... catch</code> для <code>async ... await</code>) обращения). По умолчанию
+				(или в операторе <code>try... catch</code> для <code>async ... await</code>) промиса). По умолчанию
 				система просто выводит сообщение об ошибке и не выполняет промис.
 			</li>
 		</ul>
@@ -109,6 +114,28 @@ interface IMessage {
 		<p>
 			Кнопки, которые будут размещены в окне зависят от стиля сообщения.
 		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$asyncValid(command: string, arg: object): any | Promise</pre></div>
+		<p>
+			Выполняет асинхронную проверку. Для этого вызывает команду на сервере, передавая ей заданные аргументы.
+			Команда всегда выполняется в текущей конечной точке.
+		</p>
+		<p>Обратите внимание, что результаты выполнения этой команды могут кешироватся, чтобы предотвратить лишние обращения к серверу.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>command</code> - имя серверной команды (из раздела <a href="/app/commands">commands</a> файла <a href="/app/model">model.json</a>.
+			</li>
+			<li>
+				<code>arg</code> - произвольный объект аргумента. Свойства этого объекта будут аргументами команды.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>Promise</code>. Обычно является возвращемым значением для <a href="/template/validators">асинхронного валидатора</a>.</li>
+		</ul>
 	</div>
 
 	<div class="method">
@@ -143,28 +170,6 @@ interface IMessage {
 		<p>Чаще всего метод используется в делегате <code>CanCloseDelegate</code> объекта <a href="/xaml/containers/dialog">Dialog</a>.</p>
 	</div>
 
-
-	<div class="method">
-		<div class="syntax"><pre class="code-highlight js">$asyncValid(command: string, arg: object): any | Promise</pre></div>
-		<p>
-			Выполняет асинхронную проверку. Для этого вызывает команду на сервере, передавая ей заданные аргументы.
-			Команда всегда выполняется в текущей конечной точке.
-		</p>
-		<p>Обратите внимание, что результаты выполнения этой команды могут кешироватся, чтобы предотвратить лишние обращения к серверу.</p>
-		<h4>Аргументы:</h4>
-		<ul class="params">
-			<li>
-				<code>command</code> - имя серверной команды (из раздела <a href="/app/commands">commands</a> файла <a href="/app/model">model.json</a>.
-			</li>
-			<li>
-				<code>arg</code> - произвольный объект аргумента. Свойства этого объекта будут аргументами команды.
-			</li>
-		</ul>
-		<h4>Возвращает:</h4>
-		<ul class="params">
-			<li><code>Promise</code>. Обычно является возвращемым значением для <a href="/template/validators">асинхронного валидатора</a>.</li>
-		</ul>
-	</div>
 
 	<div class="method">
 		<div class="syntax"><pre class="code-highlight js">$setFilter(target:object, prop:string, value:any): void</pre></div>

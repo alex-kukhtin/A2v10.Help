@@ -9,4 +9,78 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>
+		Представляет собой заголовок.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uicontentelement">UIContentElement</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Bold</td>
+				<td>Boolean?</td>
+				<td>Полужирный шрифт.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Size</td>
+				<td class="fit"><a class="code-link" href="/xaml/enums/controlsize">ControlSize</a></td>
+				<td>
+					Размер заголовка.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Badge</td>
+				<td>String</td>
+				<td>Текстовый бейджик на заголовке. Разумеется может быть привязкой.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uicontentelement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+	<script type="text/template">
+<Header Content="Large header" Size="Large" Badge="42"/>
+<Header Content="Medium header" Size="Normal" />
+<Header Content="Small header" Size="Small" />
+<Header Content="Mini header" Size="Mini" />
+	</script>
+</pre>
+	</p>
+	<p>
+		Результат
+		<div class="xaml-sample" id="xaml-control">
+			<h2 class="a2-header h2"><span>Large header</span><span class="badge">42</span></h2>
+			<h3 class="a2-header h3">Medium header</h3>
+			<h4 class="a2-header h4">Small header</h4>
+			<h5 class="a2-header h5">Mini header</h5>
+		</div>
+	</p>
+
 </div>

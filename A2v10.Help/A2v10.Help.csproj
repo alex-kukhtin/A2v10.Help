@@ -77,6 +77,7 @@
     <Content Include="html\app\dialogs.html" />
     <Content Include="html\app\actions.html" />
     <Content Include="html\client\elemprops.html" />
+    <Content Include="html\client\arrayelemprops.html" />
     <Content Include="html\client\rootprops.html" />
     <Content Include="html\client\global_require.html" />
     <Content Include="html\client\data.html" />
@@ -98,6 +99,7 @@
     <Content Include="html\template\options.html" />
     <Content Include="html\template\delegates.html" />
     <Content Include="html\tests\index.html" />
+    <Content Include="html\whatsnew\prev.html" />
     <Content Include="html\whatsnew\w201809.html" />
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
@@ -185,6 +187,7 @@
     <Content Include="html\xaml\overview\index.html" />
     <Content Include="html\xaml\overview\extensions.html" />
     <Content Include="html\xaml\sheet\index.html" />
+    <Content Include="html\xaml\sheet\sheetcellgroup.html" />
     <Content Include="html\xaml\sheet\sheetsection.html" />
     <Content Include="html\xaml\sheet\sheettreesection.html" />
     <Content Include="html\xaml\sheet\sheetpage.html" />

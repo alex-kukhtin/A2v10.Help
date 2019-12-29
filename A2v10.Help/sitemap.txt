@@ -10,17 +10,7 @@ http://sdk.a2.dn.ua/whatsnew/w201905
 http://sdk.a2.dn.ua/whatsnew/w201904
 http://sdk.a2.dn.ua/whatsnew/w201903
 http://sdk.a2.dn.ua/whatsnew/w201901
-http://sdk.a2.dn.ua/whatsnew/w201812
-http://sdk.a2.dn.ua/whatsnew/w201811
-http://sdk.a2.dn.ua/whatsnew/w201810
-http://sdk.a2.dn.ua/whatsnew/w201809
-http://sdk.a2.dn.ua/whatsnew/w201808
-http://sdk.a2.dn.ua/whatsnew/w201807
-http://sdk.a2.dn.ua/whatsnew/w201806
-http://sdk.a2.dn.ua/whatsnew/w201805
-http://sdk.a2.dn.ua/whatsnew/w201804
-http://sdk.a2.dn.ua/whatsnew/w201803
-http://sdk.a2.dn.ua/whatsnew/w201802
+http://sdk.a2.dn.ua/whatsnew/prev
 http://sdk.a2.dn.ua/common/index
 http://sdk.a2.dn.ua/common/platform
 http://sdk.a2.dn.ua/app/index
@@ -120,6 +110,7 @@ http://sdk.a2.dn.ua/xaml/text/text
 http://sdk.a2.dn.ua/xaml/sheet/index
 http://sdk.a2.dn.ua/xaml/sheet/sheet
 http://sdk.a2.dn.ua/xaml/sheet/sheetcell
+http://sdk.a2.dn.ua/xaml/sheet/sheetcellgroup
 http://sdk.a2.dn.ua/xaml/sheet/sheetpage
 http://sdk.a2.dn.ua/xaml/sheet/sheetrow
 http://sdk.a2.dn.ua/xaml/sheet/sheetsection
@@ -182,6 +173,7 @@ http://sdk.a2.dn.ua/client/controller
 http://sdk.a2.dn.ua/client/data
 http://sdk.a2.dn.ua/client/elemprops
 http://sdk.a2.dn.ua/client/rootprops
+http://sdk.a2.dn.ua/client/arrayelemprops
 http://sdk.a2.dn.ua/client/arrayprops
 http://sdk.a2.dn.ua/template/index
 http://sdk.a2.dn.ua/template/events

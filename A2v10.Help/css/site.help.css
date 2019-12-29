@@ -448,6 +448,23 @@ table.sql-table th {
 table.sql-table th {
   background-color: #f8f8f8;
 }
+table.sheet-table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+table.sheet-table td,
+table.sheet-table th {
+  border: 1px solid #ddd;
+  padding: 2px 4px;
+  vertical-align: baseline;
+}
+table.sheet-table th {
+  background-color: rgba(231, 231, 231, 0.4);
+}
+table.sheet-table tr.total th {
+  background-color: rgba(255, 239, 135, 0.4);
+  font-weight: 600;
+}
 .bkstyle-sample {
   border: 1px solid #ccc;
   display: inline-block;
