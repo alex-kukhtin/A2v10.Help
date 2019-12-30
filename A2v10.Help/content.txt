@@ -187,10 +187,10 @@
 Программирование клиента	/client/index
 	Контроллер		/client/controller
 	Модель			/client/data
-		Свойства объектов			/client/elemprops
+		Свойства объекта			/client/elemprops
 		Свойства корневого объекта	/client/rootprops
-		Свойства элементов массива	/client/arrayelemprops
-		Свойства массивов			/client/arrayprops
+		Свойства элемента массива	/client/arrayelemprops
+		Свойства массива			/client/arrayprops
 
 	Шаблоны		/template/index
 		События			/template/events
