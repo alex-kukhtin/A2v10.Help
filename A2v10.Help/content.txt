@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Январь 2020				/whatsnew/w202001
 		Декабрь 2019			/whatsnew/w201912
 		Ноябрь 2019				/whatsnew/w201911
 		Октябрь 2019			/whatsnew/w201910
@@ -72,7 +73,7 @@
 			TextBox				/xaml/controls/textbox
 			TimePicker			/xaml/controls/timepicker
 			TreeView			/xaml/controls/treeview
-			UpoloadFile			/xaml/controls/uploadfile
+			UploadFile			/xaml/controls/uploadfile
 
 		Контейнеры			/xaml/containers/index
 			Block				/xaml/containers/block
@@ -187,10 +188,10 @@
 Программирование клиента	/client/index
 	Контроллер		/client/controller
 	Модель			/client/data
-		Свойства объекта			/client/elemprops
-		Свойства корневого объекта	/client/rootprops
-		Свойства элемента массива	/client/arrayelemprops
-		Свойства массива			/client/arrayprops
+		Свойства и методы объекта			/client/elemprops
+		Свойства и методы корневого объекта	/client/rootprops
+		Свойства и методы элемента массива	/client/arrayelemprops
+		Свойства и методы массива			/client/arrayprops
 
 	Шаблоны		/template/index
 		События			/template/events

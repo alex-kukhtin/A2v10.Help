@@ -112,7 +112,7 @@ a:active {
 .help-side-bar {
   grid-row: 3;
   grid-column: 1;
-  width: 320px;
+  width: 350px;
   overflow: auto;
 }
 .help-side-bar .sub-side {

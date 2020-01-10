@@ -1,9 +1,9 @@
 ﻿<div>
-	<!--title:Свойства массива-->
+	<!--title:Свойства и методы массива-->
 	<!--keywords:$empty;$remove;$clearSelected;$append;$prepend;$insert;$copy;$root;$parent;$ctrl;$isEmpty;$hasSelected;$selectedIndex;$checked;$cross-->
 	<div class="title">
 		<h1>
-			Свойства массива
+			Свойства и методы массива
 		</h1>
 		<div class="breadcrumb">
 			<a href="data">Модель на клиенте</a>
@@ -21,6 +21,13 @@
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 <![CDATA[
+declare const enum InsertTo {
+	start = 'start',
+	end = 'end',
+	above = 'above',
+	below = 'below'
+}
+
 interface IElementArray<T> extends Array<T> {
 	[index: number]: T;
 	// properties
@@ -98,7 +105,7 @@ interface IElementArray<T> extends Array<T> {
 	<div class="method">
 		<div class="syntax">
 			<pre class="code-highlight js">
-			<script type="text/template"><![CDATA[$empty(): IElementArray<T>]]></script>
+			<script type="text/template"><![CDATA[$empty(): this]]></script>
 		</pre>
 		</div>
 		<h4>Описание</h4>
@@ -108,4 +115,128 @@ interface IElementArray<T> extends Array<T> {
 			<li>Ссылку на сам массив.</li>
 		</ul>
 	</div>
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$remove(elem: T): this]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Удаляет заданный элемент из массива.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>elem</code> - удаляемый элемент.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$clearSelected(): this]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Сбрасывает признак выделения со всех элементов массива.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$append(src: T): T]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Вставляет элемент в конец массива. Если источник указан и является объектом, то его свойства копируются во вновь вставленный элемент.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - источник для вставки. Может быть обычным (не реактивным) объектом javascript.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вставленный элемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$prepend(src: T): T]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Вставляет элемент в начало массива. Если источник указан и является объектом, то его свойства копируются во вновь вставленный элемент.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - источник для вставки. Может быть обычным (не реактивным) объектом javascript.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вставленный элемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$insert(src:object, to: InsertTo, ref?: T): T]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Вставляет в массив новый элемент.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - источник. Может быть обычным (не реактивным) объектом javascript.
+			</li>
+			<li>
+				<code>to</code> - место вставки. Возможные значения:
+				<ul class="enum-vals">
+					<li><span class="prop-name">'start'</span> - в начало массива (эквивалент <code>$prepend</code>).</li>
+					<li><span class="prop-name">'end'</span> - в конец массива (эквивалент <code>$append</code>).</li>
+					<li><span class="prop-name">'above'</span> - перед указанным (<code>ref</code>) элементом.</li>
+					<li><span class="prop-name">'below'</span> - после указанного (<code>ref</code>) элемента.</li>
+				</ul>
+			</li>
+			<li><code>ref</code>  - Элемент, относительно которого будет выполняться вставка для <code>to = 'above' | 'below'</code>.</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вставленный элемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$copy(src: any[]): this]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Копирует источник в текущий массив.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - источник для копирования. Может быть массивом обычных (не реактивных) объектов javascript.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Сам массив.</li>
+		</ul>
+	</div>
+
 </div>
