@@ -99,6 +99,7 @@
     <Content Include="html\template\options.html" />
     <Content Include="html\template\delegates.html" />
     <Content Include="html\tests\index.html" />
+    <Content Include="html\todo.txt" />
     <Content Include="html\whatsnew\prev.html" />
     <Content Include="html\whatsnew\w201809.html" />
     <Content Include="html\whatsnew\w201808.html" />
