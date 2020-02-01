@@ -38,7 +38,7 @@
 Представления	/views/index
 	Xaml			/xaml/index
 		Общие сведения		/xaml/overview/index
-			Раширения разметки	/xaml/overview/extensions
+			Расширения разметки	/xaml/overview/extensions
 		Элементы управления	/xaml/controls/index
 			Alert				/xaml/controls/alert
 			Attachments			/xaml/controls/attachments
