@@ -36,6 +36,8 @@ interface IController {
   $asyncValid(cmd: string, arg: object): any | Promise<any>;
   $saveModified(message?:string, title?:string): boolean;
   $setFilter(target:object, prop:string, value:any): void;
+  $inlineOpen(id: string): void;
+  $inlineClose(id: string, result:any): void;
 }
 
 declare const enum ~CommonStyle {
@@ -191,6 +193,31 @@ interface IConfirm {
 			<li>
 				<code>value</code> - новое значение.
 			</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">$inlineOpen(id:string): void</div>
+		<p>
+			Открывает встроенный диалог (<a class="code-link" href="/xaml/containers/inlinedialog">InlineDialog</a>).
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>id</code> - идентификатор диалога.</li>
+		</ul>
+		<p>
+			Встроенный диалог имеет полный доступ к текущей модели. Управление поведением полностью ложится на программиста.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax">$inlineClose(id:string, result: any): void</div>
+		<p>
+			Закрывает встроенный диалог (<a class="code-link" href="/xaml/containers/inlinedialog">InlineDialog</a>).
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>id</code> - идентификатор диалога.</li>
+			<li><code>result</code> - зарезервировано. В текущей версии не используется.</li>
 		</ul>
 	</div>
 </div>

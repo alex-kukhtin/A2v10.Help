@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Февраль 2020			/whatsnew/w202002
 		Январь 2020				/whatsnew/w202001
 		Декабрь 2019			/whatsnew/w201912
 		Ноябрь 2019				/whatsnew/w201911
@@ -23,7 +24,7 @@
 		popups			/app/popups
 		commands		/app/commands
 		reports			/app/reports
-		uploads			/app/uploads
+		files			/app/files
 
 	Специальные папки		/app/folders/index
 		_assets				/app/folders/assets
@@ -56,6 +57,7 @@
 			GridDivider			/xaml/controls/griddivider
 			Header				/xaml/controls/header
 			Image				/xaml/controls/image
+			Label				/xaml/controls/label
 			List				/xaml/controls/list
 			ListItem			/xaml/controls/listitem
 			MenuItem			/xaml/controls/menuitem
@@ -92,6 +94,7 @@
 			Group				/xaml/containers/group
 			IFrame				/xaml/containers/iframe
 			Include				/xaml/containers/include
+			InlineDialog		/xaml/containers/inlinedialog
 			Page				/xaml/containers/page
 			Panel				/xaml/containers/panel
 			Partial				/xaml/containers/partial
@@ -155,7 +158,6 @@
 			ButtonStyle			/xaml/enums/buttonstyle
 			ColumnControlType	/xaml/enums/columncontroltype
 			ControlSize			/xaml/enums/controlsize
-			DataGridStyle		/xaml/enums/datagridstyle
 			DataType			/xaml/enums/datatype
 			Icon				/xaml/enums/icon
 			ListStyle			/xaml/enums/liststyle

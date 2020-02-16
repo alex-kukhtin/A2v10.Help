@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w202002
 http://sdk.a2.dn.ua/whatsnew/w202001
 http://sdk.a2.dn.ua/whatsnew/w201912
 http://sdk.a2.dn.ua/whatsnew/w201911
@@ -21,7 +22,7 @@ http://sdk.a2.dn.ua/app/dialogs
 http://sdk.a2.dn.ua/app/popups
 http://sdk.a2.dn.ua/app/commands
 http://sdk.a2.dn.ua/app/reports
-http://sdk.a2.dn.ua/app/uploads
+http://sdk.a2.dn.ua/app/files
 http://sdk.a2.dn.ua/app/folders/index
 http://sdk.a2.dn.ua/app/folders/assets
 http://sdk.a2.dn.ua/app/redirect
@@ -49,6 +50,7 @@ http://sdk.a2.dn.ua/xaml/controls/graphics
 http://sdk.a2.dn.ua/xaml/controls/griddivider
 http://sdk.a2.dn.ua/xaml/controls/header
 http://sdk.a2.dn.ua/xaml/controls/image
+http://sdk.a2.dn.ua/xaml/controls/label
 http://sdk.a2.dn.ua/xaml/controls/list
 http://sdk.a2.dn.ua/xaml/controls/listitem
 http://sdk.a2.dn.ua/xaml/controls/menuitem
@@ -84,6 +86,7 @@ http://sdk.a2.dn.ua/xaml/containers/gridgroup
 http://sdk.a2.dn.ua/xaml/containers/group
 http://sdk.a2.dn.ua/xaml/containers/iframe
 http://sdk.a2.dn.ua/xaml/containers/include
+http://sdk.a2.dn.ua/xaml/containers/inlinedialog
 http://sdk.a2.dn.ua/xaml/containers/page
 http://sdk.a2.dn.ua/xaml/containers/panel
 http://sdk.a2.dn.ua/xaml/containers/partial
@@ -141,7 +144,6 @@ http://sdk.a2.dn.ua/xaml/enums/backgroundstyle
 http://sdk.a2.dn.ua/xaml/enums/buttonstyle
 http://sdk.a2.dn.ua/xaml/enums/columncontroltype
 http://sdk.a2.dn.ua/xaml/enums/controlsize
-http://sdk.a2.dn.ua/xaml/enums/datagridstyle
 http://sdk.a2.dn.ua/xaml/enums/datatype
 http://sdk.a2.dn.ua/xaml/enums/icon
 http://sdk.a2.dn.ua/xaml/enums/liststyle

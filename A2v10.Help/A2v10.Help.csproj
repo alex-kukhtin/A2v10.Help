@@ -105,6 +105,7 @@
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\whatsnew\w201810.html" />
+    <Content Include="html\whatsnew\w202002.html" />
     <Content Include="html\whatsnew\w202001.html" />
     <Content Include="html\whatsnew\w201912.html" />
     <Content Include="html\whatsnew\w201911.html" />
@@ -142,11 +143,13 @@
     <Content Include="html\xaml\containers\popup.html" />
     <Content Include="html\xaml\containers\panel.html" />
     <Content Include="html\xaml\containers\page.html" />
+    <Content Include="html\xaml\containers\inlinedialog.html" />
     <Content Include="html\xaml\containers\tabpanel.html" />
     <Content Include="html\xaml\containers\tab.html" />
     <Content Include="html\xaml\containers\commandbar.html" />
     <Content Include="html\xaml\containers\toolbar.html" />
     <Content Include="html\xaml\abstract\commandcontrol.html" />
+    <Content Include="html\xaml\controls\label.html" />
     <Content Include="html\xaml\controls\griddivider.html" />
     <Content Include="html\xaml\controls\combobox.html" />
     <Content Include="html\xaml\controls\attachments.html" />
@@ -170,7 +173,6 @@
     <Content Include="html\xaml\enums\radiobuttonstyle.html" />
     <Content Include="html\xaml\enums\autoflowmode.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
-    <Content Include="html\xaml\enums\datagridstyle.html" />
     <Content Include="html\xaml\enums\datatype.html" />
     <Content Include="html\xaml\enums\updatetrigger.html" />
     <Content Include="html\xaml\enums\textcolor.html" />
