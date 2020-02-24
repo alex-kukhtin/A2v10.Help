@@ -54,7 +54,7 @@
 		<div id="xaml-control">
 			<ul class="flex-list">
 				<li v-for="itm in sums" class="flex-list-item">
-					<a2-span-sum :content="itm.val" :dir="itm.dir" style="padding-right:20px"></a2-span-sum>
+					<a2-span-sum v-bind:content="itm.val" v-bind:dir="itm.dir" style="padding-right:20px"></a2-span-sum>
 				</li>
 			</ul>
 		</div>
