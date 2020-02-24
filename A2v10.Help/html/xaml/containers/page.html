@@ -13,5 +13,73 @@
 		Представляет собой страницу.
 	</p>
 
+	<p>Страница имеет свой Url адрес и попадает в контекст переходов бразуера.</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Children</code></p>
+
 	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th class="fit">Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Title</td>
+				<td class="fit">String</td>
+				<td>
+					Заголовок окна страницы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Taskpad</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Панель задач страницы. Чаще всего это элемент <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Toolbar</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Панель инструментов страницы. Чаще всего это элемент <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CollectionView</td>
+				<td class="fit"><a class="code-link" href="/xaml/components/collectionview">CollectionView</a></td>
+				<td>
+					Представление коллекции, которая будет отображаться на странице. Обычно это серверная коллекция.
+					Свойство необходимо чтобы
+					вынести управление коллекцией "за скобки" содержимого страницы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Pager</td>
+				<td class="fit"><a class="code-link" href="/xaml/controls/pager">Pager</a></td>
+				<td>
+					Пейджер для коллекции, которая будет отображаться на странице. Свойство необходимо чтобы 
+					вынести управление коллекцией "за скобки" содержимого страницы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td class="fit"><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона страницы.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/rootcontainer">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>

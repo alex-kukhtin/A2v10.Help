@@ -149,6 +149,7 @@
     <Content Include="html\xaml\containers\commandbar.html" />
     <Content Include="html\xaml\containers\toolbar.html" />
     <Content Include="html\xaml\abstract\commandcontrol.html" />
+    <Content Include="html\xaml\controls\pager.html" />
     <Content Include="html\xaml\controls\label.html" />
     <Content Include="html\xaml\controls\griddivider.html" />
     <Content Include="html\xaml\controls\combobox.html" />

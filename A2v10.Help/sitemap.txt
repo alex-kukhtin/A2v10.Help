@@ -54,6 +54,7 @@ http://sdk.a2.dn.ua/xaml/controls/label
 http://sdk.a2.dn.ua/xaml/controls/list
 http://sdk.a2.dn.ua/xaml/controls/listitem
 http://sdk.a2.dn.ua/xaml/controls/menuitem
+http://sdk.a2.dn.ua/xaml/controls/pager
 http://sdk.a2.dn.ua/xaml/controls/periodpicker
 http://sdk.a2.dn.ua/xaml/controls/radio
 http://sdk.a2.dn.ua/xaml/controls/selector
