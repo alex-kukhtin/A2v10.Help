@@ -108,6 +108,7 @@ http://sdk.a2.dn.ua/xaml/text/paragraph
 http://sdk.a2.dn.ua/xaml/text/popover
 http://sdk.a2.dn.ua/xaml/text/span
 http://sdk.a2.dn.ua/xaml/text/spanicon
+http://sdk.a2.dn.ua/xaml/text/spansum
 http://sdk.a2.dn.ua/xaml/text/staticimage
 http://sdk.a2.dn.ua/xaml/text/taglabel
 http://sdk.a2.dn.ua/xaml/text/text

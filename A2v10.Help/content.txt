@@ -117,6 +117,7 @@
 			Popover				/xaml/text/popover
 			Span				/xaml/text/span
 			SpanIcon			/xaml/text/spanicon
+			SpanSum				/xaml/text/spansum
 			StaticImage			/xaml/text/staticimage
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
