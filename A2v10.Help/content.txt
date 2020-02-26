@@ -52,6 +52,7 @@
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
+			EmptyPanel			/xaml/controls/emptypanel
 			FlexList			/xaml/controls/flexlist
 			Graphics			/xaml/controls/graphics
 			GridDivider			/xaml/controls/griddivider

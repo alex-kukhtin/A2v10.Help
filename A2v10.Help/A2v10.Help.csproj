@@ -159,6 +159,7 @@
     <Content Include="html\xaml\controls\comboboxitem.html" />
     <Content Include="html\xaml\controls\code.html" />
     <Content Include="html\xaml\controls\header.html" />
+    <Content Include="html\xaml\controls\emptypanel.html" />
     <Content Include="html\xaml\controls\timepicker.html" />
     <Content Include="html\xaml\controls\static.html" />
     <Content Include="html\xaml\controls\flexlist.html" />
