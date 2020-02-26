@@ -104,6 +104,20 @@
 					Подробности ниже.
 				</td>
 			</tr>
+			<tr class="top">
+				<td class="prop-name">MarkerStyle</td>
+				<td><code>RowMarkerStyle</code></td>
+				<td>
+					Стиль макрировки элемента в списке.
+					Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - (по умолчанию) нет маркировки.</li>
+						<li><span class="prop-name">Row</span> - фоновый цвет.</li>
+						<li><span class="prop-name">Marker</span> - маркер в виде полоски слева.</li>
+						<li><span class="prop-name">Both</span> - оба вида маркировки.</li>
+					</ul>
+				</td>
+			</tr>
 			<tr>
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
@@ -126,15 +140,20 @@
 		css-класс, добавляемый к элементу списка.
 
 		В теме по умолчанию поддерживаются следующие варианты маркировки элементов списка:
-		<div style="display:inline-grid;grid-template-columns:auto 90px;align-items:center;grid-gap:4px 8px;">
+		<div style="display:inline-grid;grid-template-columns:auto 90px 90px;align-items:center;grid-gap:4px 8px;">
+			<code>значение Mark</code><code>Style="Marker"</code><code>Style="Row"</code>
 			<code>"danger", "red", "error"</code>
 			<span class="markcss_sample" style="border-left-color:#fc7c7c;color:#fc7c7c">#fc7c7c</span>
+			<span class="markcss_sample" style="background-color:#fff5fa;border-width:1px">#fff5fa</span>
 			<code>"warning", "yellow"</code>
 			<span class="markcss_sample" style="border-left-color:#ffd700;color:#ffd700">#ffd700</span>
+			<span class="markcss_sample" style="background-color:#fffff0;border-width:1px">#fffff0</span>
 			<code>"success", "green"</code>
 			<span class="markcss_sample" style="border-left-color:#89e489;color:#89e489">#89e489</span>
+			<span class="markcss_sample" style="background-color:#f5fff5;border-width:1px">#f5fff5</span>
 			<code>"info", "cyan"</code>
 			<span class="markcss_sample" style="border-left-color:#72eaea;color:#72eaea">#72eaea</span>
+			<span class="markcss_sample" style="background-color:#f0ffff;border-width:1px">#f0ffff</span>
 		</div>
 	</p>
 </div>
