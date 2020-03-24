@@ -465,6 +465,9 @@ table.sheet-table tr.total th {
   background-color: rgba(255, 239, 135, 0.4);
   font-weight: 600;
 }
+.period-pane ul.period-menu li {
+  list-style: none;
+}
 .bkstyle-sample {
   border: 1px solid #ccc;
   display: inline-block;

@@ -68,10 +68,12 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="html\app\callApiCommand.html" />
     <Content Include="html\app\commands.html" />
+    <Content Include="html\app\clrCommand.html" />
     <Content Include="html\app\folders\assets.html" />
     <Content Include="html\app\folders\index.html" />
-    <Content Include="html\app\uploads.html" />
+    <Content Include="html\app\files.html" />
     <Content Include="html\app\reports.html" />
     <Content Include="html\app\popups.html" />
     <Content Include="html\app\dialogs.html" />
@@ -105,6 +107,7 @@
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\whatsnew\w201810.html" />
+    <Content Include="html\whatsnew\w202003.html" />
     <Content Include="html\whatsnew\w202002.html" />
     <Content Include="html\whatsnew\w202001.html" />
     <Content Include="html\whatsnew\w201912.html" />

@@ -9,4 +9,101 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>
+		Представляет собой элемент для постраничной навигации. Обычно используется для всей страницы
+		<a class="code-link" href="/xaml/containers/page">Page</a> и задается как свойство <code>Pager</code>.
+	</p>
+
+	<p>Сам компонент не использует никаких коллекций. Для этого всегда используется компонент работы с коллекцией <a class="code-link" href="/xaml/components/collectionview">CollectionView</a>.</p>
+
+	Наследует:
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name fit">Source</td>
+				<td>Object</td>
+				<td>
+					Исходная коллекция. Всегда привязка. Если используется совместно с
+					<a class="code-link" href="/xaml/components/collectionview">CollectionView</a>, то привязка
+					будет <code>Source="{Bind Parent.Pager}"</code>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Style</td>
+				<td><code>PagerStyle</code></td>
+				<td>
+					Стиль отображения. Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (по умолчанию) обычные кнопки.</li>
+						<li><span class="prop-name">Rounded</span> - круглые кнопки.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">EmptyText</td>
+				<td>String</td>
+				<td>
+					Текст, который будет отображаться в правой части элемента в случае, если коллекция пуста. Если не указано,
+					показывается текст <b>"нет элементов"</b> (с учетом текущей локализации).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">TemplateText</td>
+				<td>String</td>
+				<td>
+					Текст, который будет отображаться в правой части элемента. В тексте допускаются макросы:
+					<table class="sub-table">
+						<tr>
+							<td class="prop-name no-wrap">#[Start]</td>
+							<td>Номер первого элемента на странице.</td>
+						</tr>
+						<tr>
+							<td class="prop-name  no-wrap">#[End]</td>
+							<td>Номер последнего элемента на странице.</td>
+						</tr>
+						<tr>
+							<td class="prop-name no-wrap">#[Count]</td>
+							<td>Количество элементов в коллекции.</td>
+						</tr>
+					</table>
+					Если свойство не указано, выводится текст
+					<b>"элементы #[Start]-#[End] из #[Count]"</b> (с учетом текущей локализации).
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+
+	<p>Просто пример отображения (не функциональный) </p>
+
+	<div class="xaml-sample" style="width:100%">
+		<div class="rounded a2-pager" style="padding: 1rem 0px 0px;">
+			<button disabled="disabled" aria-label="Previous page">
+				<i class="ico ico-chevron-left"></i>
+			</button>
+			<button class="active">1</button>
+			<button class="">2</button>
+			<button class="">3</button><button aria-label="Next Page">
+				<i class="ico ico-chevron-right"></i>
+			</button>
+			<span class="a2-pager-divider"></span>
+			<span class="a2-pager-title">элементы: <b>1</b>-<b>20</b> из <b>50</b></span>
+		</div>
+	</div>
 </div>

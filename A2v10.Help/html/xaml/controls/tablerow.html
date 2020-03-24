@@ -9,4 +9,92 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>
+		Представляет собой строку таблицы.
+	</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Свойство содержимого: <code>Cells</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Cells</td>
+				<td>Коллекция <a class="code-link" href="tablecell">TableCell</a></td>
+				<td>Коллекция ячеек в строке.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign?</a></td>
+				<td>
+					Выравнивание по горизотали для всех ячеек строки. Может быть переопределено в каждой ячейке индивидуально.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">VAlign</td>
+				<td><a class="code-link" href="/xaml/enums/verticalalign">VerticalAlign</a></td>
+				<td>
+					Вертикальное выравнивание текста. Может быть переопределено в каждой ячейке индивидуально.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mark</td>
+				<td>Object</td>
+				<td>
+					Только привязка. Маркировка строки. Подробности ниже.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Маркировка строк</h3>
+	<p>
+		Выражение привязки для свойства <code>Mark</code> должно возвращать текстовую строку, которая представляет собой дополнительный
+		css-класс, добавляемый к строке.
+
+		В теме по умолчанию поддерживаются следующие варианты маркировки строк:
+	</p>
+	<p>
+		<table class="a2-table grid-both">
+			<tr class="danger">
+				<td><code>"danger", "error", "red"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="warning">
+				<td><code>"warning", "orange"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="success">
+				<td><code>"success", "green"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="info">
+				<td><code>"info", "cyan"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+		</table>
+	</p>
+
+	<p>Для добавления дополнительного элемента маркировки можно использовать ячейку <a class="code" href="tablemarkcell">TableMarkerCell</a>.</p>
+
+	<p class="tip info">
+		Обратите внимание! Маркировка просто добавляе css-класс к строке. Это означает, что вы не ограничены
+		только указанными вариантами. Например, если свойство привязки вернет <code>"danger bold"</code>, то строка будет
+		маркирована красным фоном и будет показываться полужирным шрифтом.
+	</p>
+
 </div>
