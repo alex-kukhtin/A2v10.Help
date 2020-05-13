@@ -1,5 +1,6 @@
 ﻿http://sdk.a2.dn.ua/index
 http://sdk.a2.dn.ua/whatsnew/index
+http://sdk.a2.dn.ua/whatsnew/w202005
 http://sdk.a2.dn.ua/whatsnew/w202003
 http://sdk.a2.dn.ua/whatsnew/w202002
 http://sdk.a2.dn.ua/whatsnew/w202001
@@ -119,6 +120,7 @@ http://sdk.a2.dn.ua/xaml/sheet/index
 http://sdk.a2.dn.ua/xaml/sheet/sheet
 http://sdk.a2.dn.ua/xaml/sheet/sheetcell
 http://sdk.a2.dn.ua/xaml/sheet/sheetcellgroup
+http://sdk.a2.dn.ua/xaml/sheet/sheetcolumn
 http://sdk.a2.dn.ua/xaml/sheet/sheetpage
 http://sdk.a2.dn.ua/xaml/sheet/sheetrow
 http://sdk.a2.dn.ua/xaml/sheet/sheetsection
@@ -146,6 +148,7 @@ http://sdk.a2.dn.ua/xaml/enums/autoflowmode
 http://sdk.a2.dn.ua/xaml/enums/autoselectmode
 http://sdk.a2.dn.ua/xaml/enums/backgroundstyle
 http://sdk.a2.dn.ua/xaml/enums/buttonstyle
+http://sdk.a2.dn.ua/xaml/enums/columnbackgroundstyle
 http://sdk.a2.dn.ua/xaml/enums/columncontroltype
 http://sdk.a2.dn.ua/xaml/enums/controlsize
 http://sdk.a2.dn.ua/xaml/enums/datatype

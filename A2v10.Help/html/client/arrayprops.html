@@ -47,6 +47,7 @@ interface IElementArray<T> extends Array<T> {
 	$prepend(src?: object): T;
 	$insert(src:object, to: InsertTo, ref?: T): T;
 	$copy(src: any[]): this;
+	$sum(fn: (item: T) => number): number;
 }
 ]]>
 </script>
@@ -231,6 +232,7 @@ interface IElementArray<T> extends Array<T> {
 		<ul class="params">
 			<li>
 				<code>src</code> - источник для копирования. Может быть массивом обычных (не реактивных) объектов javascript.
+				Свойства источника, которых нет в элементе игнорируются.
 			</li>
 		</ul>
 		<h4>Возвращает:</h4>
@@ -239,4 +241,23 @@ interface IElementArray<T> extends Array<T> {
 		</ul>
 	</div>
 
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$sum(fn: (item: T) => number): number;]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Вычисляет сумму для элементов массива.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>fn</code> - функция обратного вызова, котрая должна вернуть свойство элемента массива для суммирования.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вычисленную сумму.</li>
+		</ul>
+	</div>
 </div>

@@ -68,9 +68,9 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
-    <Content Include="html\app\callApiCommand.html" />
+    <Content Include="html\app\callapicommand.html" />
     <Content Include="html\app\commands.html" />
-    <Content Include="html\app\clrCommand.html" />
+    <Content Include="html\app\clrcommand.html" />
     <Content Include="html\app\folders\assets.html" />
     <Content Include="html\app\folders\index.html" />
     <Content Include="html\app\files.html" />
@@ -107,6 +107,7 @@
     <Content Include="html\whatsnew\w201808.html" />
     <Content Include="html\whatsnew\w201807.html" />
     <Content Include="html\whatsnew\w201810.html" />
+    <Content Include="html\whatsnew\w202005.html" />
     <Content Include="html\whatsnew\w202003.html" />
     <Content Include="html\whatsnew\w202002.html" />
     <Content Include="html\whatsnew\w202001.html" />
@@ -175,6 +176,7 @@
     <Content Include="html\xaml\diagram\group.html" />
     <Content Include="html\xaml\diagram\index.html" />
     <Content Include="html\xaml\diagram\diagram.html" />
+    <Content Include="html\xaml\enums\columnbackgroundstyle.html" />
     <Content Include="html\xaml\enums\radiobuttonstyle.html" />
     <Content Include="html\xaml\enums\autoflowmode.html" />
     <Content Include="html\xaml\enums\backgroundstyle.html" />
@@ -197,6 +199,7 @@
     <Content Include="html\xaml\overview\extensions.html" />
     <Content Include="html\xaml\sheet\index.html" />
     <Content Include="html\xaml\sheet\sheetcellgroup.html" />
+    <Content Include="html\xaml\sheet\sheetcolumn.html" />
     <Content Include="html\xaml\sheet\sheetsection.html" />
     <Content Include="html\xaml\sheet\sheettreesection.html" />
     <Content Include="html\xaml\sheet\sheetpage.html" />

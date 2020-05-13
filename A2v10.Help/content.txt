@@ -1,5 +1,6 @@
 ﻿A2v10:SDK	/index
 	Что нового		/whatsnew/index
+		Май 2020				/whatsnew/w202005
 		Март 2020				/whatsnew/w202003
 		Февраль 2020			/whatsnew/w202002
 		Январь 2020				/whatsnew/w202001
@@ -129,6 +130,7 @@
 			Sheet			/xaml/sheet/sheet
 			SheetCell		/xaml/sheet/sheetcell
 			SheetCellGroup	/xaml/sheet/sheetcellgroup
+			SheetColumn		/xaml/sheet/sheetcolumn
 			SheetPage		/xaml/sheet/sheetpage
 			SheetRow		/xaml/sheet/sheetrow
 			SheetSection		/xaml/sheet/sheetsection
@@ -160,6 +162,7 @@
 			AutoSelectMode		/xaml/enums/autoselectmode
 			BackgroundStyle		/xaml/enums/backgroundstyle
 			ButtonStyle			/xaml/enums/buttonstyle
+			ColumnBackgroundStyle		/xaml/enums/columnbackgroundstyle
 			ColumnControlType	/xaml/enums/columncontroltype
 			ControlSize			/xaml/enums/controlsize
 			DataType			/xaml/enums/datatype

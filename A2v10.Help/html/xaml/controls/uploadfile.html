@@ -9,4 +9,81 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>
+		Представляет собой элемент управления для выбора и загрузки файлов. Поддерживает drag'n'drop.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th width="1px">Имя</th>
+				<th width="1px">Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Url</td>
+				<td class="fit">String</td>
+				<td>
+					Путь к <a href="/app/files">команде загрузки файла</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Argument</td>
+				<td class="fit">Object</td>
+				<td>
+					Объект, свойства которого будут параметрами команды загрузки файла.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Accept</td>
+				<td>String</td>
+				<td>
+					Строка фильтра для диалога выбора файла. Mime-типы принимаемых файлов.
+					Поддержка зависит от браузера. Соответствует атрибуту <code>accept</code> элемента
+					<code>&lt;input type="file"&gt;</code>. Можно указывать несколько типов через запятую.
+					Например, для выбора картинок в формате jpg или png можно указать
+					<code>Accept="image/png, image/jpeg"</code>.
+					<br />
+					Обратите внимание, что это только рекомендация бразуеру. Запретить пользователю выбирать
+					другие файлы невозможно.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Limit</td>
+				<td class="fit">Int32</td>
+				<td>
+					Максимально допустимый размер загужаемого файла (в килобайтах).
+					Если не указан, можно загружать файлы любого размера.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Delegate</td>
+				<td>String</td>
+				<td>
+					Имя <a href="/template/delegates">делегата</a>, который будет вызыван после того,
+					как файл будет загружен. Аргументом делегата будет полученный с сервера результат.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SetDelegate</td>
+				<td>String</td>
+				<td>
+					Имя <a href="/template/delegates">делегата</a>, который будет вызван при возникновении ошибок.
+					Если не указан, выводится стандартное сообщение об ошибке.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

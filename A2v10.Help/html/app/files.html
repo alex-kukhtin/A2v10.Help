@@ -6,4 +6,216 @@
 			Файлы (files)
 		</h1>
 	</div>
+
+	<p>
+		Объект <b>files</b> описывает команды работы с загружаемыми файлами, доступные в текущей конечной точке.
+		Имена свойств объекта представляют собой имена команд. Каждое свойство представляет собой объект следующей структуры:
+	</p>
+	<p>
+		Обычно используется с элементом управления <a class="code-link" href="/xaml/controls/uploadfile">UploadFile</a>.
+		Команда задается в свойстве <code>Url</code> элемента управления.
+	</p>
+
+	<p>
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">{
+  "type": "parse" | "sql" | "clr",
+  "parse": "excel" | "xlsx" | "csv" | "dbf" | "xml" | "auto",
+  "source": "",
+  "schema": "",
+  "model": "",
+  "procedure": "",
+  "async": true | false,
+  "clrType": "",
+  "parameters": {}
+}
+</script>
+</pre>
+	</p>
+	<h3>Свойства объекта</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">type</td>
+				<td>enum</td>
+				<td>
+					Обязательно. Тип операции с файлом:
+					<table class="sub-table">
+						<tr class="top">
+							<td class="prop-name">parse</td>
+							<td>
+								Разбор файла. Если указана модель, то файл сохраняется в базе данных. Если модель пуста,
+								результат разбора просто возвращается клиенту.
+								Должно быть указано свойство <code>parse</code>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">sql</td>
+							<td>Прямое сохранение в базе данных сырых данных файла. Должна быть указана модель.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">clr</td>
+							<td>
+								Вызов метода .NET объекта. Должно быть указано свойство <code>clrType</code>.
+								<a href="clrCommand">Подробнее...</a>.
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">parse</td>
+				<td>enum</td>
+				<td>
+					Обязательно для операции <code>parse</code>. Формат разбираемого файла.
+					<table class="sub-table">
+						<tr class="top">
+							<td class="prop-name no-wrap">csv, dbf, xml</td>
+							<td>Тип файла для анализа.</td>
+						</tr>
+						<tr>
+							<td class="prop-name no-wrap">xlsx, excel</td>
+							<td>Разбор файлов Microsoft Excel. Поддерживается только формат <code>.xlsx</code>.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">auto</td>
+							<td>
+								Автоматическое определение формата в зависимости от расширения файла.
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">source</td>
+				<td>string</td>
+				<td>Необязательно. Источник данных. Если не указан, берется из родительского элемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">schema</td>
+				<td>string</td>
+				<td>Необязательно. Имя sql-схемы. Если не указана, берется из родительского элемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">model</td>
+				<td>string</td>
+				<td>
+					Имя модели. Если не указано, берется из родительского элемента. Если
+					равна пустой строке, то модель не сохраняется в базе данных, а просто возвращается на клиент.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">clrType</td>
+				<td>string</td>
+				<td>Обязательно для типа <b>clr</b>. Строка, описывающая сборку и .NET тип.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">async</td>
+				<td>boolean</td>
+				<td>
+					Только для типа <b>clr</b>. Асинхронное выполнение clr-команды.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">parameters</td>
+				<td>object</td>
+				<td>
+					Объект, статические параметры, которые передаются в хранимую процедуру обновления модели.
+					Имя свойства является именем параметра,
+					значение - значением параметра.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Операция parse</h3>
+	<p>
+		Операция выполняет разбор полученного файла (в соответствии с форматом, указанным в свойстве <code>parse</code>) и представляет его в виде таблицы.
+		Если указана модель, то система пытается сохранить полученную таблицу в базе данных.
+	</p>
+	<p>
+		Сохранение модели выполняется следующим образом:
+		<ul>
+			<li>
+				Вызывается процедура получения метаданных (<code>{source}: [{schema}].[{model}.Metadata]</code>).
+				Эта процедура должна вернуть одну запись с описанием одной таблицы.
+			</li>
+			<li>Ищется соответствие полей полученного файла и таблицы метаданных и заполняется соответствующий табличный тип.</li>
+			<li>
+				Вызывается процедура обновления (<code>{source}: [{schema}].[{model}.Update]</code>). Ей передается таблица,
+				полученная на предыдущем шаге. Процедуре передаются следующие параметры:
+				<ul>
+					<li>Стандартные параметры (@TenantId, @UserId).</li>
+					<li>Параметры переданные в url.</li>
+					<li>Параметры из свойства <code>parameters</code>.</li>
+				</ul>
+			</li>
+			<li>Модель, полученная в результате выполнения хранимой процедуры просто возвращается клиенту.</li>
+		</ul>
+	</p>
+	<p>
+		Если значение свойства <code>model</code> равно пустой строке (<code>""</code>), то никаких дополнительных
+		действий с результатом разбора файла не выполняется. Полученная таблица просто возвращается клиенту в виде объекта с
+		единственным свойством <code>Rows</code> содержащим массив записей исходного файла.
+	</p>
+
+	<h3>Операция sql</h3>
+	<p>
+		Это операция просто сохраняет полученный файл в базе данных в виде байтового массива (тип <code>vabinary(max)</code>).
+		Для этого вызывается хранимая процедура <code>{source}: [{schema}].[{model}.Update]</code>.
+		Ей передаются следующие параметры (такие же как и в случае сохранения вложений):
+	</p>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr class="top">
+				<td class="prop-name no-wrap">@UserId</td>
+				<td>bigint</td>
+				<td>Id текущего пользователя.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@TenantId</td>
+				<td>bigint</td>
+				<td>Id тенанта (только в мультитенантном окружении)</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@Name</td>
+				<td>nvarchar(255)</td>
+				<td>Имя файла (без пути)</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@Mime</td>
+				<td>nvarchar(255)</td>
+				<td>MIME -тип файла</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@Stream</td>
+				<td>varbinary(max)</td>
+				<td>Данные файла (просто байты без пребразования)</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Обратите внимание, что имена праметров фиксированы!</p>
+
+	<h3>Операция clr</h3>
+	<p>
+		Операция типа <b>clr</b> вызывает метод из типа, заданного свойством <code>clrType</code>. Тип должен реализовывать
+		интерфейс <code>IInvokeTarget</code>.  <a href="clrCommand">Подробнее...</a>.
+	</p>
+	<p>В метод передается имя, MIME-тип и поток (<code>Stream</code>) полученного файла.
+	</p>
 </div>
