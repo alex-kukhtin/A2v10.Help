@@ -36,6 +36,7 @@
 Модели данных		/models/index
 	Общая информация			/models/general
 	Перекрестные модели			/models/cross
+	Иерархические модели		/models/tree
 
 
 Представления	/views/index
@@ -79,6 +80,7 @@
 			TextBox				/xaml/controls/textbox
 			TimePicker			/xaml/controls/timepicker
 			TreeView			/xaml/controls/treeview
+			TreeViewItem		/xaml/controls/treeviewitem
 			UploadFile			/xaml/controls/uploadfile
 
 		Контейнеры			/xaml/containers/index
@@ -131,6 +133,7 @@
 			SheetCell		/xaml/sheet/sheetcell
 			SheetCellGroup	/xaml/sheet/sheetcellgroup
 			SheetColumn		/xaml/sheet/sheetcolumn
+			SheetColumnGroup		/xaml/sheet/sheetcolumngroup
 			SheetPage		/xaml/sheet/sheetpage
 			SheetRow		/xaml/sheet/sheetrow
 			SheetSection		/xaml/sheet/sheetsection
@@ -216,10 +219,15 @@
 	Глобальные функции	/client/global
 		require			/client/global_require
 
+Настольные приложения			/desktop/index
+	Файл app.config.json		/desktop/config
 
-Бизнес-процессы		/workflow/index
+Бизнес-процессы			/workflow/index
+	Активности			/workflow/activities/index
+		Request			/workflow/activities/request
 
 Тестирование		/tests/index
+	Инструменты		/tests/tools
 
 О справочной системе	/help/about
 

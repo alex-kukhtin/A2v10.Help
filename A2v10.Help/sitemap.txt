@@ -31,6 +31,7 @@ http://sdk.a2.dn.ua/app/redirect
 http://sdk.a2.dn.ua/models/index
 http://sdk.a2.dn.ua/models/general
 http://sdk.a2.dn.ua/models/cross
+http://sdk.a2.dn.ua/models/tree
 http://sdk.a2.dn.ua/views/index
 http://sdk.a2.dn.ua/xaml/index
 http://sdk.a2.dn.ua/xaml/overview/index
@@ -72,6 +73,7 @@ http://sdk.a2.dn.ua/xaml/controls/tablerow
 http://sdk.a2.dn.ua/xaml/controls/textbox
 http://sdk.a2.dn.ua/xaml/controls/timepicker
 http://sdk.a2.dn.ua/xaml/controls/treeview
+http://sdk.a2.dn.ua/xaml/controls/treeviewitem
 http://sdk.a2.dn.ua/xaml/controls/uploadfile
 http://sdk.a2.dn.ua/xaml/containers/index
 http://sdk.a2.dn.ua/xaml/containers/block
@@ -121,6 +123,7 @@ http://sdk.a2.dn.ua/xaml/sheet/sheet
 http://sdk.a2.dn.ua/xaml/sheet/sheetcell
 http://sdk.a2.dn.ua/xaml/sheet/sheetcellgroup
 http://sdk.a2.dn.ua/xaml/sheet/sheetcolumn
+http://sdk.a2.dn.ua/xaml/sheet/sheetcolumngroup
 http://sdk.a2.dn.ua/xaml/sheet/sheetpage
 http://sdk.a2.dn.ua/xaml/sheet/sheetrow
 http://sdk.a2.dn.ua/xaml/sheet/sheetsection
@@ -196,6 +199,11 @@ http://sdk.a2.dn.ua/client/module
 http://sdk.a2.dn.ua/client/stdutils
 http://sdk.a2.dn.ua/client/global
 http://sdk.a2.dn.ua/client/global_require
+http://sdk.a2.dn.ua/desktop/index
+http://sdk.a2.dn.ua/desktop/config
 http://sdk.a2.dn.ua/workflow/index
+http://sdk.a2.dn.ua/workflow/activities/index
+http://sdk.a2.dn.ua/workflow/activities/request
 http://sdk.a2.dn.ua/tests/index
+http://sdk.a2.dn.ua/tests/tools
 http://sdk.a2.dn.ua/help/about

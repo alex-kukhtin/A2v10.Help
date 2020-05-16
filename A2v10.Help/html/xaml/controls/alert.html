@@ -9,4 +9,97 @@
 			<a href="index">Все элементы управления</a>
 		</div>
 	</div>
+	<p>
+		Представляет собой панель сообщения.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>Object</td>
+				<td>Свойство содержимого. Содержимое панели. Может быть как простым текстом, так и 
+				элементом управления (<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Style</td>
+				<td><code>AlertStyle</code></td>
+				<td>
+					Стиль отображения. Возможные значения (конкретный вид зависит от темы пользовательского интерфейса):
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (по умолчанию) Обычная панель.</li>
+						<li><span class="prop-name">Success</span> - Успех (зеленая).</li>
+						<li><span class="prop-name">Warning</span> - Предупреждение (оранжевая).</li>
+						<li><span class="prop-name">Info</span> - Информация (голубая).</li>
+						<li><span class="prop-name">Danger</span> - Ошибка (красная).</li>
+						<li><span class="prop-name">Dark</span> - Темная.</li>
+						<li><span class="prop-name">Light</span> - Светлая.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Icon</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка, которая будет отображаться перед содержимым.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">DropShadow</td>
+				<td class="fit"><a class="code-link" href="/xaml/enums/shadowstyle">ShadowStyle</a></td>
+				<td>Вид тени.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+		<script type="text/template">
+<Alert Content="Произошла ошибка" Style="Danger" DropShadow="Shadow1" Icon="ErrorOutline"/>
+
+<Alert Content="Внимание! Что-то случилось" Style="Warning" DropShadow="Shadow1" Icon="WarningOutline"/>
+
+<Alert Content="Операция завершена успешно" Style="Success" DropShadow="Shadow1" Icon="SuccessOutline"/>
+
+<Alert Style="Info" DropShadow="Shadow1" Icon="InfoOutline">
+	<Text>
+		<Span>Дополнительная информация о проблеме</Span>
+		<Hyperlink Block="True">Подробнее...</Hyperlink>
+	</Text>
+</Alert>
+
+	</script>
+</pre>
+	</p>
+	<p>
+		Результат
+		<div class="xaml-sample" id="xaml-control" style="width:500px">
+			<div class="a2-alert danger drop-shadow shadow1"><i class="ico ico-error-outline"></i><span>Произошла ошибка</span></div>
+			<div class="a2-alert warning drop-shadow shadow1"><i class="ico ico-warning-outline"></i><span>Внимание! Что-то случилось</span></div>
+			<div class="a2-alert success drop-shadow shadow1"><i class="ico ico-success-outline"></i><span>Операция завершена успешно</span></div>
+			<div class="a2-alert info drop-shadow shadow1"><i class="ico ico-info-outline"></i><span>Дополнительная информация о проблеме <a class="a2-hyperlink block" href="">Подробнее...</a></span></div>
+		</div>
+	</p>
 </div>

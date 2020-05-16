@@ -10,5 +10,76 @@
 		</div>
 	</div>
 
+	<p>
+		Представляет собой один элемент списка. Обычно используется внутри контейнера <a href="list" class="code-link">List</a>.
+	</p>
 
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Content</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th width="1px">Имя</th>
+				<th width="1px">Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>Object</td>
+				<td>
+					Свойство содержимого. Текст элемента списка. Может быть как простым текстом, так и
+					элементом управления (<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td>Object</td>
+				<td>
+					Заголовок элемента списка. Может быть как простым текстом, так и
+					элементом управления (<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Footer</td>
+				<td>Object</td>
+				<td>
+					Футер элемента списка. Может быть как простым текстом, так и
+					элементом управления (<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Icon</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка, которая будет отображаться в элементе списка.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CommandBar</td>
+				<td><a class="code-link" href="/xaml/containers/commandbar">CommandBar</a></td>
+				<td>Панель команд, связанная с элементом списка.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Command</td>
+				<td><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
+				<td>
+					Команда для элемента списка. Она будет выполнена при нажатии на элемент списка.
+					Обратите внимание, что использование команды вместе с <code>CommandBar</code> не имеет смысла.
+					Нажать кнопку внутри панели команд будет невозможно.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

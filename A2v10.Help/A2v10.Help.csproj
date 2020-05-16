@@ -92,14 +92,18 @@
     <Content Include="html\common\index.html" />
     <Content Include="html\app\redirect.html" />
     <Content Include="html\client\controller.html" />
+    <Content Include="html\desktop\config.html" />
+    <Content Include="html\desktop\index.html" />
     <Content Include="html\help\about.html" />
     <Content Include="html\app\index.html" />
     <Content Include="html\images\client1.svg" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
     <Content Include="html\models\cross.html" />
+    <Content Include="html\models\tree.html" />
     <Content Include="html\template\options.html" />
     <Content Include="html\template\delegates.html" />
+    <Content Include="html\tests\tools.html" />
     <Content Include="html\tests\index.html" />
     <Content Include="html\todo.txt" />
     <Content Include="html\whatsnew\prev.html" />
@@ -123,6 +127,8 @@
     <Content Include="html\whatsnew\w201901.html" />
     <Content Include="html\whatsnew\w201812.html" />
     <Content Include="html\whatsnew\w201811.html" />
+    <Content Include="html\workflow\activities\request.html" />
+    <Content Include="html\workflow\activities\index.html" />
     <Content Include="html\workflow\index.html" />
     <Content Include="html\xaml\abstract\checkboxbase.html" />
     <Content Include="html\xaml\abstract\uicontentelement.html" />
@@ -170,6 +176,7 @@
     <Content Include="html\xaml\controls\separator.html" />
     <Content Include="html\xaml\controls\statecard.html" />
     <Content Include="html\xaml\controls\graphics.html" />
+    <Content Include="html\xaml\controls\treeviewitem.html" />
     <Content Include="html\xaml\controls\treeview.html" />
     <Content Include="html\xaml\controls\uploadfile.html" />
     <Content Include="html\xaml\diagram\path.html" />
@@ -198,6 +205,7 @@
     <Content Include="html\xaml\overview\index.html" />
     <Content Include="html\xaml\overview\extensions.html" />
     <Content Include="html\xaml\sheet\index.html" />
+    <Content Include="html\xaml\sheet\sheetcolumngroup.html" />
     <Content Include="html\xaml\sheet\sheetcellgroup.html" />
     <Content Include="html\xaml\sheet\sheetcolumn.html" />
     <Content Include="html\xaml\sheet\sheetsection.html" />

@@ -1,0 +1,72 @@
+﻿<div>
+	<!--title:Xaml.TreeViewItem-->
+	<!--keywords:TreeViewItem-->
+	<div class="title">
+		<h1>
+			Элемент TreeViewItem
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все элементы управления</a>
+		</div>
+	</div>
+
+	<p>
+		Представляет собой один элемент иерархического списка (дерева) <a class="code-link" href="treeview">TreeView</a>.
+	</p>
+
+	<p>Обратите внимание, что элемент используется для работы с <a href="/models/tree">иерархическими источниками данных</a>.</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Свойство содержимого: <code>Label</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>) Источник данных для получения дочерних элементов.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Label</td>
+				<td>String</td>
+				<td>
+					Свойство содержимого. Текст элемента.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Icon</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка, которая будет отображаться перед содержимым.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">IsFolder</td>
+				<td>Boolean?</td>
+				<td>Всегда привязка. Является ли элемент папкой. Используется для работы с динамически заполняемыми деревьями.</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">IsGroup</td>
+				<td>Boolean?</td>
+				<td>Всегда привязка. Является ли элемент группой. Используется для работы с динамически заполняемыми деревьями.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
