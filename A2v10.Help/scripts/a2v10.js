@@ -174,9 +174,9 @@ app.modules['std:const'] = function () {
 
 
 
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20191213-7599
+// 20200505-7564
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -252,7 +252,8 @@ app.modules['std:utils'] = function () {
 			sanitize,
 			splitPath,
 			capitalize,
-			maxChars
+			maxChars,
+			equalNoCase: stringEqualNoCase
 		},
 		currency: {
 			round: currencyRound,
@@ -738,6 +739,10 @@ app.modules['std:utils'] = function () {
 		if (text.length < length)
 			return text;
 		return text.substring(0, length - 1) + '\u2026' /*ellipsis*/;
+	}
+
+	function stringEqualNoCase(s1, s2) {
+		return (s1 || '').toLowerCase() === (s2 || '').toLowerCase();
 	}
 
 	function textContains(text, probe) {
@@ -1323,9 +1328,9 @@ app.modules['std:period'] = function () {
 };
 
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20181019-7323
+// 20200509-7655
 /* services/modelinfo.js */
 
 app.modules['std:modelInfo'] = function () {
@@ -1337,6 +1342,7 @@ app.modules['std:modelInfo'] = function () {
 	};
 
 	function copyFromQuery(mi, q) {
+		if (!mi) return;
 		let psq = { PageSize: q.pageSize, Offset: q.offset, SortDir: q.dir, SortOrder: q.order, GroupBy: q.group };
 		for (let p in psq) {
 			mi[p] = psq[p];
@@ -1993,7 +1999,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2020 Alex Kukhtin. All rights reserved.*/
 
-/*20200214-7632*/
+/*20200510-7655*/
 // services/datamodel.js
 
 (function () {
@@ -2748,6 +2754,10 @@ app.modules['std:validators'] = function () {
 				}
 			}
 			return this;
+		};
+
+		arr.$sum = function (fn) {
+			return this.reduce((a, c) => a + fn(c), 0);
 		};
 
 		arr.__fireChange__ = function (opts) {
@@ -3937,7 +3947,7 @@ app.modules['std:tools'] = function () {
 
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200109-7610
+// 20200322-7643
 /* services/html.js */
 
 app.modules['std:html'] = function () {
@@ -3949,6 +3959,7 @@ app.modules['std:html'] = function () {
 		getRowHeight,
 		downloadBlob,
 		downloadUrl,
+		openUrl,
 		printDirect,
 		removePrintFrame,
 		updateDocTitle
@@ -3974,6 +3985,16 @@ app.modules['std:html'] = function () {
 			let h = rows[r].offsetHeight - 12; /* padding !!!*/
 			rows[r].setAttribute('data-row-height', h);
 		}
+	}
+
+	function openUrl(url) {
+		let link = document.createElement('a');
+		link.style = "display:none";
+		document.body.appendChild(link);
+		link.href = url;
+		link.setAttribute('target', '_blank');
+		link.click();
+		document.body.removeChild(link);
 	}
 
 	function downloadUrl(url) {
@@ -4320,7 +4341,7 @@ app.modules['std:accel'] = function () {
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200206-7625
+// 20200206-7653
 // components/control.js
 
 (function () {
@@ -4348,7 +4369,10 @@ app.modules['std:accel'] = function () {
 		},
 		computed: {
 			path() {
-				return this.item._path_ + '.' + this.prop;
+				if (this.item._path_)
+					return this.item._path_ + '.' + this.prop;
+				else
+					return this.prop;
 			},
 			pathToValidate() {
 				return this.itemToValidate._path_ + '.' + this.propToValidate;
@@ -6023,7 +6047,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200206-7625
+// 20200505-7654
 // components/datagrid.js*/
 
 (function () {
@@ -6043,6 +6067,8 @@ Vue.component('validator-control', {
 	const log = require('std:log');
 	const eventBus = require('std:eventBus');
 	const locale = window.$$locale;
+
+	const eqlower = utils.text.equalNoCase;
 
 	/* group marker
 				<th v-if="isGrouping" class="group-cell" style="display:none">
@@ -6740,8 +6766,8 @@ Vue.component('validator-control', {
 			doSort(order) {
 				// TODO: // collectionView || locally
 				if (this.isLocal) {
-					if (this.localSort.order === order)
-						this.localSort.dir = this.localSort.dir === 'asc' ? 'desc' : 'asc';
+					if (eqlower(this.localSort.order, order))
+						this.localSort.dir = eqlower(this.localSort.dir, 'asc') ? 'desc' : 'asc';
 					else {
 						this.localSort = { order: order, dir: 'asc' };
 					}
@@ -6752,7 +6778,7 @@ Vue.component('validator-control', {
 			sortDir(order) {
 				// TODO: 
 				if (this.isLocal)
-					return this.localSort.order === order ? this.localSort.dir : undefined;
+					return eqlower(this.localSort.order, order) ? this.localSort.dir : undefined;
 				else
 					return this.$parent.sortDir(order);
 			},
@@ -6863,7 +6889,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200106-7607
+// 20200511-7656
 /*components/pager.js*/
 
 
@@ -6976,23 +7002,32 @@ template: `
 			// first
 			if (this.pages > 0)
 				children.push(renderBtn(1));
-			if (this.pages > 1)
-				children.push(renderBtn(2));
 			// middle
-			let ms = Math.max(this.currentPage - 2, 3);
-			let me = Math.min(ms + 5, this.pages - 1);
-			if (me - ms < 5)
-				ms = Math.max(me - 5, 3);
-			if (ms > 3)
-				children.push(h('span', dotsClass, '...'));
-			for (let mi = ms; mi < me; ++mi) {
-				children.push(renderBtn(mi));
+			let ms = 2;
+			let me = this.pages - 1;
+			let sd = false, ed = false, cp = this.currentPage;
+			let len = me - ms;
+			if (len > 4) {
+				if (cp > 4)
+					sd = true;
+				if (cp < this.pages - 3)
+					ed = true;
+				if (sd && !ed)
+					ms = me - 3;
+				else if (!sd && ed)
+					me = ms + 3;
+				 else if (sd && ed) {
+					ms = cp - 1;
+					me = cp + 1;
+				}
 			}
-			if (me < this.pages - 1)
+			if (sd)
+				children.push(h('span', dotsClass, '...'));
+			for (let mi = ms; mi <= me; ++mi)
+				children.push(renderBtn(mi));
+			if (ed)
 				children.push(h('span', dotsClass, '...'));
 			// last
-			if (this.pages > 3)
-				children.push(renderBtn(this.pages - 1));
 			if (this.pages > 2)
 				children.push(renderBtn(this.pages));
 			// next
@@ -7353,9 +7388,9 @@ Vue.component('popover', {
 	});
 })();
 
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20190902-7550
+// 20200505-7654
 // components/collectionview.js
 
 /*
@@ -7372,6 +7407,8 @@ TODO:
 	const eventBus = require('std:eventBus');
 
 	const DEFAULT_PAGE_SIZE = 20;
+
+	const eqlower = utils.text.equalNoCase;
 
 	function getModelInfoProp(src, propName) {
 		if (!src) return undefined;
@@ -7491,7 +7528,7 @@ TODO:
 				// sort
 				if (this.order && this.dir) {
 					let p = this.order;
-					let d = this.dir === 'asc';
+					let d = eqlower(this.dir, 'asc');
 					arr.sort((a, b) => {
 						if (a[p] === b[p])
 							return 0;
@@ -7529,12 +7566,12 @@ TODO:
 				this.localQuery.offset = offset;
 			},
 			sortDir(order) {
-				return order === this.order ? this.dir : undefined;
+				return eqlower(order, this.order) ? this.dir : undefined;
 			},
 			doSort(order) {
 				let nq = this.makeNewQuery();
-				if (nq.order === order)
-					nq.dir = nq.dir === 'asc' ? 'desc' : 'asc';
+				if (eqlower(nq.order, order))
+					nq.dir = eqlower(nq.dir, 'asc') ? 'desc' : 'asc';
 				else {
 					nq.order = order;
 					nq.dir = 'asc';
@@ -7641,11 +7678,11 @@ TODO:
 				this.reload();
 			},
 			sortDir(order) {
-				return order === this.order ? this.dir : undefined;
+				return eqlower(order, this.order) ? this.dir : undefined;
 			},
 			doSort(order) {
-				if (order === this.order) {
-					let dir = this.dir === 'asc' ? 'desc' : 'asc';
+				if (eqlower(order, this.order)) {
+					let dir = eqlower(this.dir, 'asc') ? 'desc' : 'asc';
 					setModelInfoProp(this.ItemsSource, 'SortDir', dir);
 				} else {
 					setModelInfoProp(this.ItemsSource, 'SortOrder', order);
@@ -7810,7 +7847,7 @@ TODO:
 				this.$store.commit('setquery', query);
 			},
 			sortDir(order) {
-				return order === this.order ? this.dir : undefined;
+				return eqlower(order, this.order) ? this.dir : undefined;
 			},
 			$setOffset(offset) {
 				if (this.offset === offset)
@@ -7820,8 +7857,8 @@ TODO:
 			},
 			doSort(order) {
 				let nq = this.makeNewQuery();
-				if (nq.order === order)
-					nq.dir = nq.dir === 'asc' ? 'desc' : 'asc';
+				if (eqlower(nq.order, order))
+					nq.dir = eqlower(nq.dir ,'asc') ? 'desc' : 'asc';
 				else {
 					nq.order = order;
 					nq.dir = 'asc';

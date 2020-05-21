@@ -305,6 +305,7 @@
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="scripts\a2v10.js" />
+    <Content Include="scripts\a2v10.min.js" />
     <Content Include="scripts\locale-ru.min.js" />
     <Content Include="sitemap.txt" />
     <Content Include="visio\mvc1vsdx.vsdx" />
