@@ -35,8 +35,9 @@
 
 Модели данных		/models/index
 	Общая информация			/models/general
-	Перекрестные модели			/models/cross
+	Простые модели				/models/simple
 	Иерархические модели		/models/tree
+	Перекрестные модели			/models/cross
 
 
 Представления	/views/index
