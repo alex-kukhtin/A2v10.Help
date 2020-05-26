@@ -55,7 +55,7 @@ tr.top > td {
 }
 
 .help-content-view {
-	ul {
+	ul:not(.tree-view):not(.tree-sub-view) {
 		padding-left: 20px;
 		margin: 1rem 0;
 
@@ -65,11 +65,12 @@ tr.top > td {
 		}
 	}
 
+
 	table.table-props {
 		border-collapse: separate;
 		border-spacing: 2px;
 		width: 100%;
-		font-size:13px;
+		font-size:16px;
 
 		td {
 			background-color: @table-td-bk-color;
@@ -132,8 +133,8 @@ a.code-link {
 
 	h1 {
 		margin: 0;
-		padding: .25rem 1rem;
-		height: 30px; // like tab
+		padding: .5rem 1rem;
+		height: @tab-height; // like tab
 		color: #777;
 		line-height:normal;
 	}
@@ -141,7 +142,7 @@ a.code-link {
 	.breadcrumb {
 		border-top: 1px solid @default-brd-color;
 		background-color: #f3faff;
-		padding: .3rem 1rem .3rem .3rem;
+		padding: .3rem 1rem .3rem .5rem;
 		font-size: .9rem;
 		color: @default-brd-color;
 

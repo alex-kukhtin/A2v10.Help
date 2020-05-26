@@ -1468,6 +1468,7 @@ header .dropdown.separate.show .btn.btn-success,
   padding: 8px 6px 8px 0;
 }
 .page.page-grid .page-content {
+  position: relative;
   grid-row: 2;
   grid-column: 1;
   overflow: auto;
@@ -2087,10 +2088,6 @@ pre.a2-code {
 .control-group .input-group .a2-inline {
   margin-left: 0 !important;
 }
-.control-group .input-group .ico-clear {
-  font-size: 90%;
-  margin: 0.1em;
-}
 .control-group .input-group input.fake-pwd-field {
   width: 0;
   height: 0;
@@ -2109,6 +2106,12 @@ pre.a2-code {
 }
 .control-group.lg label {
   font-size: 1rem;
+}
+.control-group.lg .input-group > a {
+  line-height: 2.4rem;
+}
+.control-group.lg .input-group > a > i.ico {
+  font-size: 17px;
 }
 .control-group.with-width .input-group {
   width: 100%;
@@ -2451,7 +2454,7 @@ pre.a2-code {
   vertical-align: 2px;
 }
 .btn.icon-top {
-  display: inline-grid;
+  display: inline-grid !important;
 }
 .btn.btn-primary {
   background-color: #3470b4;
@@ -3019,8 +3022,6 @@ table.data-grid tr.row-details td.details-cell {
 }
 table.data-grid tr.row-details .details-wrapper {
   padding: 4px 6px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
 }
 table.data-grid td.danger,
 table.data-grid td.error,
@@ -4392,7 +4393,8 @@ ul.news-list > li {
 .toastr-stack li.toast.success {
   background-color: #5db750;
 }
-.toastr-stack li.toast.danger {
+.toastr-stack li.toast.danger,
+.toastr-stack li.toast.error {
   background-color: #da533f;
 }
 .toastr-stack li.toast.info {
@@ -4913,11 +4915,14 @@ label.checkbox.small span:after {
 .a2-pager > .a2-pager-title {
   font-size: 0.9em;
   color: #777;
+  white-space: nowrap;
+  padding-left: 4px;
 }
 .a2-pager .a2-pager-dots {
   display: inline-block;
   width: 25.5px;
   text-align: center;
+  margin-right: -1px;
 }
 .a2-pager.rounded {
   padding: 1rem 0 0 0;

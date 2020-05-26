@@ -1,7 +1,21 @@
 ﻿@import "Variables.less";
 
+html {
+	font-size:16px;
+	color:#141414;
+}
+
+.tree-view li > .overlay i.ico {
+	font-size:16px;
+	width:24px;
+}
+
+.ico-a2v10:before {
+	content: "\ea10";
+}
+
 input, select {
-	height:auto;
+	height: auto;
 }
 
 a2-include {
@@ -32,6 +46,7 @@ header, .help-header {
 	font-size: 1.5rem;
 	padding: .1rem;
 	display: flex;
+	height:@header-height;
 
 	a {
 		padding: 0 .3rem 0 .3rem;
@@ -47,7 +62,12 @@ header, .help-header {
 	}
 
 	.h-sub-title {
-		font-size: 0.8em;
+		font-size: 0.7em;
+	}
+
+	.h-logo {
+		font-size:32px;
+		margin-right:8px;
 	}
 
 	.divider {
@@ -77,8 +97,8 @@ footer, .help-footer {
 	display: flex;
 	grid-column: 1 / span 2;
 	background-color: @lightgray-bg-color;
-	font-size: .95rem;
-	padding: .2rem .4rem;
+	font-size: .9rem;
+	padding: .3rem .4rem;
 	border-top: 1px solid @default-brd-color;
 	align-items: stretch;
 	text-transform:none;
@@ -140,12 +160,13 @@ a {
 	margin: 0;
 	display: flex;
 	border-bottom: 1px solid @default-brd-color;
-	max-height:32px;
+	height:@tab-height + 1;
+	max-height:@tab-height + 1;
 
 	li {
 		display: block;
 		flex-grow: 1;
-		padding: .3em 0 .5em 0;
+		padding: .5em 0;
 		border-top: 3px solid transparent;
 		border-left: 1px solid @default-brd-color;
 		text-align: center;
@@ -177,7 +198,7 @@ a {
 .help-content-view {
 	grid-row: 2 / span 2;
 	grid-column: 2;
-	padding: 0 1em;
+	padding: 0 1em 1em 1em;
 	border-left: 1px solid @default-brd-color;
 	overflow: auto;
 	user-select:text;

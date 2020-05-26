@@ -1,4 +1,4 @@
-﻿/* Copyright © 2017-2019 Alex Kukhtin. All rights reserved.*/
+﻿/* Copyright © 2017-2020 Alex Kukhtin. All rights reserved.*/
 
 (function () {
 
@@ -334,7 +334,7 @@
 				text = text.substring(9, text.length - 3).trim();
 			}
 			tag.innerHTML = '';
-			console.dir(lang);
+			/*console.dir(lang);*/
 			/*console.dir(text);*/
 			if (lang === 'js') {
 				tokenize(text, jsOpts, function (type, text) {
