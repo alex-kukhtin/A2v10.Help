@@ -1,7 +1,9 @@
 ﻿/* side bar */
 html {
-  font-size: 16px;
   color: #141414;
+}
+body {
+  font-size: 16px;
 }
 .tree-view li > .overlay i.ico {
   font-size: 16px;
@@ -37,14 +39,14 @@ header,
   grid-column: 1 / span 2;
   background-color: #4d6082;
   color: white;
-  font-size: 1.5rem;
-  padding: 0.1rem;
+  font-size: 1.5em;
+  padding: 0.1em;
   display: flex;
   height: 45px;
 }
 header a,
 .help-header a {
-  padding: 0 0.3rem 0 0.3rem;
+  padding: 0 0.3em 0 0.3em;
   color: inherit;
 }
 header a:hover,
@@ -90,8 +92,8 @@ footer,
   display: flex;
   grid-column: 1 / span 2;
   background-color: #f2f3f9;
-  font-size: 0.9rem;
-  padding: 0.3rem 0.4rem;
+  font-size: 0.9em;
+  padding: 0.3em 0.4em;
   border-top: 1px solid #ddd;
   align-items: stretch;
   text-transform: none;
@@ -188,13 +190,13 @@ a:active {
 code,
 pre {
   font-family: Consolas, 'Courier New', Courier, monospace;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   background-color: #f8f8f8;
 }
 pre {
-  padding: 0.6rem;
-  line-height: 1.3rem;
-  font-size: 1rem;
+  padding: 0.6em;
+  line-height: 1.2em;
+  font-size: 1em;
   white-space: pre;
   overflow: auto;
 }
@@ -207,7 +209,7 @@ code.string {
   color: forestgreen;
 }
 .command {
-  margin: 1rem 0;
+  margin: 1em 0;
   padding: 6px;
   border-left: 4px solid #7598d8;
   background-color: #f3faff;
@@ -219,7 +221,7 @@ code.string {
 }
 .syntax {
   font-family: Consolas, 'Courier New', Courier, monospace;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
   padding: 6px;
   border-left: 4px solid #7598d8;
   background-color: #f3faff;
@@ -231,11 +233,11 @@ code.string {
   background-color: transparent;
 }
 .help-content-view ul.params {
-  margin-left: 1rem;
+  margin-left: 1em;
 }
 .help-content-view ul.params li {
   line-height: normal;
-  margin: 0.2rem 0;
+  margin: 0.2em 0;
   list-style-type: circle;
 }
 a.disabled {
@@ -260,7 +262,7 @@ a.disabled {
   color: #8591a2;
   display: block;
   margin-bottom: 4px;
-  font-size: 0.96rem;
+  font-size: 0.9em;
 }
 .index-view .input-search {
   display: block;
@@ -312,7 +314,7 @@ a.disabled {
   background-color: #cde6f7;
 }
 .index-view ul.index-tree li li.file-link {
-  font-size: 0.96rem;
+  font-size: 0.9em;
 }
 h1,
 h2,
@@ -327,22 +329,22 @@ hr {
   height: 1px;
 }
 h1 {
-  font-size: 1.3rem;
+  font-size: 1.3em;
   margin: 0.5rem 0;
 }
 h2 {
-  font-size: 1.1rem;
+  font-size: 1.1em;
   margin: 0.25rem 0;
 }
 h3 {
-  font-size: 1rem;
-  margin: 1.5rem 0 0.15rem 0;
+  font-size: 1em;
+  margin: 1.5em 0 0.15em 0;
 }
 h4 {
-  font-size: 1rem;
+  font-size: 1em;
   color: #999;
   font-weight: 500;
-  margin: 1rem 0 0.15rem 0;
+  margin: 1em 0 0.15em 0;
 }
 .prop-name {
   font-family: Consolas, 'Courier New', Courier, monospace;
@@ -356,10 +358,10 @@ h4 {
 }
 .help-content-view ul.std {
   padding-left: 20px;
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 .help-content-view ul.std li {
-  line-height: 1.5rem;
+  line-height: 1.5em;
   list-style-type: disc;
 }
 .help-content-view table.table-props {
@@ -397,7 +399,7 @@ h4 {
   width: auto;
 }
 .help-content-view .enum-vals {
-  margin: 0.5rem 1rem;
+  margin: 0.5em 1em;
   padding: 0;
 }
 .help-content-view .enum-vals li {
@@ -410,14 +412,14 @@ a.code-link {
   background-color: #f8f8f8;
 }
 .title {
-  margin: 0 -1rem;
+  margin: 0 -1em;
   background-color: #e0f0ff;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 .title h1 {
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   height: 45px;
   color: #777;
   line-height: normal;
@@ -425,7 +427,7 @@ a.code-link {
 .title .breadcrumb {
   border-top: 1px solid #ddd;
   background-color: #f3faff;
-  padding: 0.3rem 1rem 0.3rem 0.5rem;
+  padding: 0.3em 1em 0.3em 0.5em;
   font-size: 0.9rem;
   color: #ddd;
 }
@@ -435,29 +437,29 @@ a.code-link {
 .default-grid {
   display: grid;
   grid-template-columns: 1fr 35%;
-  grid-gap: 1rem;
+  grid-gap: 1em;
 }
 .default-grid .grid-col1 {
   grid-column: 1;
 }
 .default-grid .grid-col2 {
   grid-column: 2;
-  padding-left: 1rem;
+  padding-left: 1em;
   border-left: 1px solid #ddd;
 }
 .method {
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
   border-bottom: 1px solid #ddd;
 }
 .method p {
   margin: 0.5rem;
-  margin-left: 1rem;
+  margin-left: 1em;
 }
 table.sql-table {
   border-collapse: collapse;
   font-family: Consolas, 'Courier New', Courier, monospace;
   font-size: 15px;
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 table.sql-table td,
 table.sql-table th {
@@ -469,7 +471,7 @@ table.sql-table th {
 }
 table.sheet-table {
   border-collapse: collapse;
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 table.sheet-table td,
 table.sheet-table th {
@@ -518,6 +520,7 @@ table.sheet-table tr.total th {
   border: 1px solid #eee;
   padding: 16px;
   width: 300px;
+  font-size: 1rem;
 }
 pre.js .comment {
   color: forestgreen;
@@ -552,7 +555,7 @@ pre.xml .cdata {
   color: #999;
 }
 p {
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 .os-product {
   background-color: #f6f9ff;
@@ -568,7 +571,7 @@ p {
   float: right;
 }
 .os-product .cr {
-  font-size: 0.86rem;
+  font-size: 0.86em;
 }
 .debug-list {
   list-style-type: none;
@@ -580,7 +583,7 @@ p {
 }
 .tip {
   padding: 12px 18px;
-  margin-left: 1rem;
+  margin-left: 1em;
   position: relative;
   background-color: #f8f8f8;
 }
@@ -615,7 +618,7 @@ p {
 }
 .icons-content {
   columns: 4;
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
 }
 .icons-content .one-item {
   padding: 5px;

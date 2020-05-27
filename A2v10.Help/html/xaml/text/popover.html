@@ -176,7 +176,7 @@
 					</popover>
 				</li>
 				<li class="flex-list-item">
-					<popover class="po-top-left po-green" v-bind:hover="true" content="LeftTop..." icon="report">
+					<popover class="po-left-top po-green" v-bind:hover="true" content="LeftTop..." icon="report">
 						Слева, разворачивается вверх
 					</popover>
 				</li>
@@ -186,7 +186,7 @@
 
 	<script type="text/javascript">
 		(function () {
-			if (!Vue) return;
+			if (!window.Vue) return;
 			var vm = new Vue({
 				el: "#popover-control",
 				data: {
