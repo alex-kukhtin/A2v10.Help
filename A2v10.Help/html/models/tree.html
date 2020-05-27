@@ -6,4 +6,86 @@
 			Иерархические модели данных
 		</h1>
 	</div>
+	<p>
+		Иерархическая (древовидная) модель данных включает набор записей
+		c соотношением родитель-потомок. Глубина вложенности не ограничена.
+	</p>
+
+	<p>
+		Иерархическая модель представлена типом объекта <code>!Tree</code>.
+		Для правильной работы дерева каждая запись должна иметь три обязательных поля:
+	</p>
+	<ul>
+		<li><code>!Id</code> - идентификтор записи</li>
+		<li><code>!ParentId</code> - идентификтор родительской записи.</li>
+		<li><code>!Items</code> - массив дочерних полей.</li>
+	</ul>
+
+	<p class="tip info">
+		<b>Обратите внимание</b>. Для формирования наборов данных
+		обычно используется механизм рекурсивных запросов T-SQL (CTE) - Common Table Expressions) и
+		оператор WITH.
+		<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ru-ru/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver15">Подробнее в документации Microsoft</a>.
+	</p>
+
+	<h3>Пример</h3>
+	<p>
+		Работу с иерархической моделью проще всего продемострировать на примере.
+		Пусть имеется таблица <code>Agents</code>следующего вида:
+	</p>
+
+	<table class="sql-table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Parent</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-right">10</td>
+				<td class="text-right">null</td>
+				<td>Agent 1</td>
+			</tr>
+			<tr>
+				<td class="text-right">20</td>
+				<td class="text-right">null</td>
+				<td>Agent 2</td>
+			</tr>
+			<tr>
+				<td class="text-right">100</td>
+				<td class="text-right">10</td>
+				<td>Subagent 1.1</td>
+			</tr>
+			<tr>
+				<td>110</td>
+				<td class="text-right">10</td>
+				<td>Subagent 1.2</td>
+			</tr>
+			<tr>
+				<td>200</td>
+				<td class="text-right">20</td>
+				<td>Subagent 2.1</td>
+			</tr>
+			<tr>
+				<td>210</td>
+				<td class="text-right">20</td>
+				<td>Subagent 2.2</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>Запрос, формирующий данные для модели дерева будет выглядеть следующим образом</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+/* основной набор */
+select [Agents!TAgent!Tree] = null, [Id!!Id] = Id, 
+	S1, N1, [Cross1!TCross!CrossArray] = null
+from ...;
+
+</script>
+</pre>
+
 </div>
