@@ -1,0 +1,39 @@
+﻿<div>
+	<!--title:Свойства и методы элемента дерева-->
+	<!--keywords:$expanded;-->
+	<div class="title">
+		<h1>
+			Свойства и методы элемента дерева
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+	<p>
+		Каждый элемент дерева расширяется следующимии служебными свойствами и методами:
+	</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface ITreeElement extends IArrayElement {
+	// properties
+	readonly $expanded: boolean;
+}
+]]>
+</script>
+</pre>
+	</p>
+
+	<h2>Свойства</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $expanded: boolean</pre></div>
+		<p>
+			Элемент развернут.
+		</p>
+	</div>
+
+	<p>
+		Более подробно работа с деревьями описана в разделе об <a href="/models/tree">иерархических моделях данных</a>.
+	</p>
+</div>

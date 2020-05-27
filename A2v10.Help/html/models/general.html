@@ -6,4 +6,46 @@
 			Общая информация
 		</h1>
 	</div>
+
+	<h3>Типы наборов данных (recordset)</h3>
+
+	<p>Тип набора описывается третим элементом (суффиксом) первого поля каждого набора данных.</p>
+
+	<table class="table-props top">
+		<thead>
+			<tr>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Object</td>
+				<td>Один элемент.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Array</td>
+				<td>
+					Массив элементов. Если этот массив дочерний, то в наборе должно присутствовать свойство,
+					определяющее родительский элемент (<code>!ParentId</code>).
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Tree</td>
+				<td>
+					Дерево элементов (статическое или динамическое). В наборе обязательно должны присутствовать
+					свойства с типами <code>!Id</code>, <code>!ParentId</code>, <code>!Items</code>.
+					<a href="/models/tree">Более подробно...</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CrossArray</td>
+				<td>
+					Перекрестный массив элементов. Всегда дочерний. В наборе должно присутствовать свойство,
+					определяющее родительский элемент (<code>!ParentId</code>) и свойство ключа <code>!Key</code>.
+					<a href="/models/cross">Более подробно...</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

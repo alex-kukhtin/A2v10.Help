@@ -78,6 +78,7 @@
     <Content Include="html\app\popups.html" />
     <Content Include="html\app\dialogs.html" />
     <Content Include="html\app\actions.html" />
+    <Content Include="html\client\treeelemprops.html" />
     <Content Include="html\client\elemprops.html" />
     <Content Include="html\client\arrayelemprops.html" />
     <Content Include="html\client\rootprops.html" />

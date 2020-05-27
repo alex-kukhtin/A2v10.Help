@@ -85,6 +85,23 @@ interface IArrayElement extends IElement {
 		<a href="/client/arrayelemprops">Подробнее об элементах массивов</a>
 	</p>
 
+	<h3>Дополнительные свойства элемента дерева</h3>
+	<p>Любой объект, который является элементом дерева расширяется следующимии дополнительными служебными свойствами и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface ITreeElement extends IArrayElement {
+	// properties
+	readonly $expanded: boolean;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/treeelemprops">Подробнее об элементах дерева</a>
+	</p>
+
+
 	<h3>Свойства массива</h3>
 	<p>Каждый массив расширяется следующимии дополнительными служебными свойствами и методами:</p>
 	<p>

@@ -20,6 +20,7 @@
 
 		const TAB_REPLACE = '  '; /* 2 spaces */
 		let xml = opts && opts.lang === 'xml';
+		let sql = opts && opts.lang === 'sql';
 
 		function nextChar() {
 			if (pos >= len)
@@ -121,7 +122,7 @@
 					type = 'number';
 				} else if (instr && instr.test(token)) {
 					type = 'instr';
-				} else if (token.length && token.charAt(0) === 'I')
+				} else if (!sql && token.length && token.charAt(0) === 'I')
 					type = 'interface';
 			}
 			callback(type, token);
@@ -293,8 +294,8 @@
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		const sqlDelims = ' ,[]+-*/:;<>';
-		const sqlKeywords = /^(b(egin|y)|select|from|update|i(f|nsert)|delete|inner|outer|join|where|group|order|left|right|e(nd|lse))$/;
-		const sqlInstr = /^(null)$/;
+		const sqlKeywords = /^(a(s|ll|lter)|b(egin|y)|se(t|lect)|from|update|i(f|nsert|nner)|delete|o(r|n|uter)|join|w(here|ith)|group|order|left|right|e(nd|lse|xists)|union|procedure|c(reate|ase)|nocount)$/;
+		const sqlInstr = /^(null|bigint)$/;
 
 		let jsOpts = {
 			lang: 'js',

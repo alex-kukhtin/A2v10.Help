@@ -204,6 +204,7 @@
 		Свойства и методы объекта			/client/elemprops
 		Свойства и методы корневого объекта	/client/rootprops
 		Свойства и методы элемента массива	/client/arrayelemprops
+		Свойства и методы элемента дерева	/client/treeelemprops
 		Свойства и методы массива			/client/arrayprops
 
 	Шаблоны		/template/index
