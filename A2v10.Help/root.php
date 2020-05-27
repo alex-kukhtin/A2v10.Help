@@ -5,6 +5,10 @@ $raw_url = $_SERVER['REQUEST_URI'];
 if (empty($raw_url) || $raw_url == "/")
   $raw_url = "/index";
 $url = "./html" . $raw_url . ".html";
+
+if (!file_exists($url))
+	$url = "./html/index.html";
+
 $content_start = "<a2-include class=\"help-content-view\" :source=\"content\">";
 $content_end = "</a2-include>";
 $title_tag = "<title>A2v10:SDK version 10</title>";
