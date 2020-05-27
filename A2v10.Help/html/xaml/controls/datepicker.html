@@ -83,17 +83,18 @@
 	</div>
 	<script type="text/javascript">
 (function () {
-			var du = require('std:utils').date;
-			var vm = new Vue({
-				el: "#xaml-datepicker",
-				data: {
-					Document: {
-						Date: du.today()
-					}
-				},
-				created: function () {
-				}
-			});
-		})();
+	if (!Vue) return;
+	var du = require('std:utils').date;
+	var vm = new Vue({
+		el: "#xaml-datepicker",
+		data: {
+			Document: {
+				Date: du.today()
+			}
+		},
+		created: function () {
+		}
+	});
+})();
 	</script>
 </div>

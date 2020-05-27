@@ -123,16 +123,17 @@
 		</div>
 	</p>
 
-		<script type="text/javascript">
-			(function () {
-				var vm = new Vue({
-					el: "#xaml-tabpanel",
-					data: {
-					},
-					created: function () {
-						console.dir('created');
-					}
-				});
-			})();
-		</script>
+<script type="text/javascript">
+	(function () {
+		if (!Vue) return;
+		var vm = new Vue({
+			el: "#xaml-tabpanel",
+			data: {
+			},
+			created: function () {
+				console.dir('created');
+			}
+		});
+	})();
+</script>
 </div>

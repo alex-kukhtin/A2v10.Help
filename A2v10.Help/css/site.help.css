@@ -354,11 +354,11 @@ h4 {
 .top td {
   vertical-align: top;
 }
-.help-content-view ul:not(.tree-view):not(.tree-sub-view) {
+.help-content-view ul.std {
   padding-left: 20px;
   margin: 1rem 0;
 }
-.help-content-view ul:not(.tree-view):not(.tree-sub-view) li {
+.help-content-view ul.std li {
   line-height: 1.5rem;
   list-style-type: disc;
 }
