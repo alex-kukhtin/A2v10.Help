@@ -1,4 +1,4 @@
-﻿A2v10:SDK	/index
+﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
 		Май 2020				/whatsnew/w202005
 		Март 2020				/whatsnew/w202003

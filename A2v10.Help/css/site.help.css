@@ -19,6 +19,9 @@ select {
 a2-include {
   display: block;
 }
+.ico {
+  font-size: 20px;
+}
 .help-main-view {
   display: grid;
   grid-gap: 0;
@@ -356,6 +359,9 @@ h4 {
 .top td {
   vertical-align: top;
 }
+.wide {
+  line-height: 1.8em !important;
+}
 .help-content-view ul.std {
   padding-left: 20px;
   margin: 1em 0;
@@ -625,7 +631,7 @@ p {
   user-select: text;
 }
 .icons-content .one-item .ico {
-  font-size: 18px;
+  font-size: 20px;
   margin-right: 5px;
 }
 .not-supported {
