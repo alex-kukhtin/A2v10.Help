@@ -9,4 +9,171 @@
 			<a href="index">Все компоненты</a>
 		</div>
 	</div>
+
+	<p>
+		Представляет собой элемент, который позволяет работать с коллекциями. Обеспечивает
+		разбиение на страницы, сортировку и фильтрацию.
+		Коллекция может обрабатываться как на сервере, так и на клиенте.
+	</p>
+
+	<p>
+		Внутри элемента обработанная коллекция доступа по ссылке <code>Parent</code>.
+		При серверной обработке требуется специальная <a href="/models/collections">поддержка на уровне модели данных</a>.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+
+	<p>Свойство содержимого: <code>Children</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>Свойство содержимого. Коллекция дочерних элементов.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Источник данных для работы с коллекцие.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">RunAt</td>
+				<td class="fit"><code>RunMode</code></td>
+				<td>
+					Режим работы с коллекцией. Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Client</span> - (по умолчанию). Коллекция обрабатывается на клиенте.</li>
+						<li><span class="prop-name">Server</span> - коллекция обрабатывается на сервере.</li>
+						<li>
+							<span class="prop-name">ServerUrl</span> - коллекция обрабатывается на сервере. Дополнительно в url
+							добавляются параметры запроса для обработки коллекции.
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Filter</td>
+				<td><a class="code-link" href="filterdescription">FilterDescription</a></td>
+				<td>
+					Определение фильтров.
+				</td>
+			</tr>
+			<!--
+			<tr>
+				<td class="prop-name">GroupBy</td>
+				<td>GroupDescription</td>
+				<td>
+					Определение группировки.
+				</td>
+			</tr>
+				-->
+			<tr>
+				<td class="prop-name">PageSize</td>
+				<td>Int32?</td>
+				<td>
+					Размер страницы. Только для работы на клиенте.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Sort</td>
+				<td><a class="code-link" href="sortdescription">SortDescription</a></td>
+				<td>
+					Определение сортировки. Только для работы на клиенте.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">FilterDelegate</td>
+				<td>String</td>
+				<td>
+					Делегат для фильтрации. Только для работы на клиенте.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Компонент имеет свойства, к котрым могут обращаться дочерние компоненты. Такое обращение осуществляется через префикс
+		<code>Parent</code>.
+	</p>
+
+	<h3>Внешние свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Часть отображаемой коллекции. Содержит данные выбранной страницы в правильно отсортированном виде.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Filter</td>
+				<td>Object</td>
+				<td>
+					Фильтр коллекции. Структура объекта соответсвует
+					определению фильтра <a class="code-link" href="filterdescription">FilterDescription</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Pager</td>
+				<td>Object</td>
+				<td>
+					Источник для связывания со свойством <code>Source</code> объекта
+					<a class="code-link" href="/xaml/controls/pager">Pager</a>.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip info">
+		<b>Обратите внимание!</b> Компонент <code>CollectionView</code> очень тесно взаимодействует с объектами, поддерживающими
+		работу с коллекциями (в частности <a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>).
+		Например, щелчок по заголовку колонки автоматически меняет сортировку в родительском компоненте. Никаих дополнительных
+		действий не требуется.
+	</p>
+
+
+	<h3>Пример</h3>
+
+	<p>
+		XAML:
+	</p>
+<pre class="code-highlight xml">
+<script type="text/template">
+<CollectionView ItemsSource="{Bind Documents}" RunAt="ServerUrl">
+	<DataGrid ItemsSource="{Bind Parent.ItemsSource}" Sort="True">
+		<DataGridColumn Content="{Bind Id}" Header="Id" />
+		<DataGridColumn Content="{Bind Name}" Header="Name" />
+	</DataGrid>
+	<Pager Source="{Bind Parent.Pager}"/>
+</CollectionView>
+</script>
+</pre>
+
 </div>

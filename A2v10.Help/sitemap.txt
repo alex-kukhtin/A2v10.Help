@@ -32,8 +32,10 @@ https://docs.a2v10.com/app/redirect
 https://docs.a2v10.com/models/index
 https://docs.a2v10.com/models/general
 https://docs.a2v10.com/models/simple
+https://docs.a2v10.com/models/collections
 https://docs.a2v10.com/models/tree
 https://docs.a2v10.com/models/cross
+https://docs.a2v10.com/models/group
 https://docs.a2v10.com/views/index
 https://docs.a2v10.com/xaml/index
 https://docs.a2v10.com/xaml/overview/index
@@ -137,7 +139,9 @@ https://docs.a2v10.com/xaml/bind/styleresource
 https://docs.a2v10.com/xaml/components/index
 https://docs.a2v10.com/xaml/components/collectionview
 https://docs.a2v10.com/xaml/components/confirm
+https://docs.a2v10.com/xaml/components/filterdescription
 https://docs.a2v10.com/xaml/components/slot
+https://docs.a2v10.com/xaml/components/sortdescription
 https://docs.a2v10.com/xaml/components/switch
 https://docs.a2v10.com/xaml/components/validator
 https://docs.a2v10.com/xaml/simple/index

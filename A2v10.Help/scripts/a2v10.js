@@ -12024,28 +12024,21 @@ Vue.directive('resize', {
 
 	app.components['baseController'] = base;
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2020 Alex Kukhtin. All rights reserved.
 
-/*20200129-7624*/
-/* controllers/shell.js */
+/*20200604-7671*/
+/* controllers/navmenu.js */
 
 (function () {
 
-	const store = component('std:store');
-	const eventBus = require('std:eventBus');
-	const modal = component('std:modal');
-	const toastr = component('std:toastr');
-	const popup = require('std:popup');
-	const urlTools = require('std:url');
-	const period = require('std:period');
-	const log = require('std:log');
-	const utils = require('std:utils');
-	const locale = window.$$locale;
 	const platform = require('std:platform');
-	const htmlTools = require('std:html');
-	const http = require('std:http');
+	const urlTools = require('std:url');
 
-	const UNKNOWN_TITLE = 'unknown title';
+
+	function isSeparatePage(pages, seg) {
+		if (!seg || !pages) return false;
+		return pages.indexOf(seg + ',') !== -1;
+	}
 
 	function findMenu(menu, func, parentMenu) {
 		if (!menu)
@@ -12065,11 +12058,6 @@ Vue.directive('resize', {
 			}
 		}
 		return null;
-	}
-
-	function isSeparatePage(pages, seg) {
-		if (!seg || !pages) return false;
-		return pages.indexOf(seg + ',') !== -1;
 	}
 
 	function makeMenuUrl(menu, url, opts) {
@@ -12118,14 +12106,207 @@ Vue.directive('resize', {
 	}
 
 
+
+	app.components['std:navmenu'] = {
+		findMenu,
+		makeMenuUrl,
+		isSeparatePage
+	};
+})();	
+// Copyright © 2020 Alex Kukhtin. All rights reserved.
+
+/*20200604-7671*/
+/* controllers/navbar.js */
+
+(function () {
+
+	const locale = window.$$locale;
+	const menu = component('std:navmenu');
+	const eventBus = require('std:eventBus');
+	const period = require('std:period');
+	const store = component('std:store');
+	const urlTools = require('std:url');
+
+	// a2-nav-bar
+	const a2NavBar = {
+		template: `
+<ul class="nav-bar">
+	<li v-for="(item, index) in menu" :key="index" :class="{active : isActive(item)}">
+		<a :href="itemHref(item)" tabindex="-1" v-text="item.Name" @click.prevent="navigate(item)"></a>
+	</li>
+	<li class="aligner"/>
+	<div class="nav-global-period" v-if="hasPeriod">
+		<a2-period-picker class="drop-bottom-right pp-hyperlink pp-navbar" 
+			display="namedate" :callback="periodChanged" prop="period" :item="that"/>
+	</div>
+	<li v-if="hasHelp()" :title="locale.$Help"><a :href="helpHref()" class="btn-help" rel="help" aria-label="Help" @click.prevent="showHelp()"><i class="ico ico-help"></i></a></li>
+</ul>
+`,
+		props: {
+			menu: Array,
+			period: period.constructor,
+			isNavbarMenu: Boolean
+		},
+		computed: {
+			seg0: () => store.getters.seg0,
+			seg1: () => store.getters.seg1,
+			locale() { return locale; },
+			hasPeriod() { return !!this.period; },
+			that() { return this; }
+		},
+		methods: {
+			isActive(item) {
+				return this.seg0 === item.Url;
+			},
+			isActive2(item) {
+				return this.seg1 === item.Url;
+			},
+			itemHref: (item) => '/' + item.Url,
+			navigate(item) {
+				if (this.isActive(item))
+					return;
+				let storageKey = 'menu:' + urlTools.combine(window.$$rootUrl, item.Url);
+				let savedUrl = localStorage.getItem(storageKey) || '';
+				if (savedUrl && !menu.findMenu(item.Menu, (mi) => mi.Url === savedUrl)) {
+					// saved segment not found in current menu
+					savedUrl = '';
+				}
+				let opts = { title: null, seg2: savedUrl };
+				let url = menu.makeMenuUrl(this.menu, item.Url, opts);
+				this.$store.commit('navigate', { url: url, title: opts.title });
+			},
+			showHelp() {
+				window.open(this.helpHref(), "_blank");
+			},
+			helpHref() {
+				let am = this.menu.find(x => this.isActive(x));
+				if (am && am.Menu) {
+					let am2 = am.Menu.find(x => this.isActive2(x));
+					if (am2 && am2.Help)
+						return urlTools.helpHref(am2.Help);
+				}
+				if (am && am.Help)
+					return urlTools.helpHref(am.Help);
+				return urlTools.helpHref('');
+			},
+			hasHelp() {
+				if (!this.menu) return false;
+				let am = this.menu.find(x => this.isActive(x));
+				return am && am.Help;
+			},
+			periodChanged(period) {
+				// post to shell
+				http.post('/_application/setperiod', period.toJson())
+					.then(() => {
+						eventBus.$emit('globalPeriodChanged', period);
+					})
+					.catch((err) => {
+						alert(err);
+					});
+			}
+		}
+	};
+
+	// a2-nav-bar-page
+	const a2NavBarPage = {
+		template: `
+<div class="menu-navbar-overlay" @click.stop.prevent=closeNavMenu>
+<div class="menu-navbar">
+<div class="menu-navbar-top">
+	<a href='' class=menu-navbar-back @click.stop.prevent=closeNavMenu><i class="ico ico-grid2"></i></a>
+	<h2>AppName here</h2>
+</div>
+<ul class=menu-navbar-list>
+	<li v-for="(item, index) in menu" :key=index>
+		<a class="menu-navbar-link" :href="itemHref(item)" @click.prevent="navigate(item)" :class="{active : isActive(item)}">
+			<i class="ico ico-file"></i>
+			<span v-text="item.Name"></span>
+		</a>
+	</li>
+</ul>
+<div class="aligner"/>
+<a>Powered by <i class="ico ico-a2logo"></i></a>
+</div>
+</div>
+`,
+		props: {
+			menu: Array,
+			isNavbarMenu: Boolean
+		},
+		computed: {
+			seg0: () => store.getters.seg0,
+			seg1: () => store.getters.seg1,
+			locale() { return locale; },
+			that() { return this; }
+		},
+		methods: {
+			isActive(item) {
+				return this.seg0 === item.Url;
+			},
+			isActive2(item) {
+				return this.seg1 === item.Url;
+			},
+			itemHref: (item) => '/' + item.Url,
+
+			navigate(item) {
+				if (this.isActive(item))
+					return;
+				this.closeNavMenu();
+				let storageKey = 'menu:' + urlTools.combine(window.$$rootUrl, item.Url);
+				let savedUrl = localStorage.getItem(storageKey) || '';
+				if (savedUrl && !menu.findMenu(item.Menu, (mi) => mi.Url === savedUrl)) {
+					// saved segment not found in current menu
+					savedUrl = '';
+				}
+				let opts = { title: null, seg2: savedUrl };
+				let url = menu.makeMenuUrl(this.menu, item.Url, opts);
+				this.$store.commit('navigate', { url: url, title: opts.title });
+			},
+			closeNavMenu() {
+				eventBus.$emit('clickNavMenu', false);
+			}
+		}
+	};
+
+	app.components['std:navbar'] = {
+		standardNavBar: a2NavBar,
+		pageNavBar: a2NavBarPage
+	};
+})();	
+// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+
+/*20200604-7671*/
+/* controllers/shell.js */
+
+(function () {
+
+	const store = component('std:store');
+	const eventBus = require('std:eventBus');
+	const modal = component('std:modal');
+	const toastr = component('std:toastr');
+	const popup = require('std:popup');
+	const urlTools = require('std:url');
+	const period = require('std:period');
+	const log = require('std:log');
+	const utils = require('std:utils');
+	const locale = window.$$locale;
+	const platform = require('std:platform');
+	const htmlTools = require('std:html');
+	const navBar = component('std:navbar');
+	const menu = component('std:navmenu');
+
+	const UNKNOWN_TITLE = 'unknown title';
+
 	const a2AppHeader = {
 		template: `
 <header class="header">
-	<div class="h-block">
+	<div class=h-menu v-if=isNavBarMenu @click.stop.prevent=clickMenu><i class="ico ico-grid2"></i></div>
+	<div class=h-block v-if='!isNavBarMenu'>
 		<!--<i class="ico-user"></i>-->
-		<a class="app-title" href='/' @click.prevent="root" v-text="title" tabindex="-1"></a>
-		<span class="app-subtitle" v-text="subtitle"></span>
+		<a class=app-title href='/' @click.prevent="root" v-text="title" tabindex="-1"></a>
+		<span class=app-subtitle v-text="subtitle"></span>
 	</div>
+	<div v-if=isNavBarMenu class=h-menu-title v-text=seg0text></div>
 	<div class="aligner"></div>
 	<span class="title-notify" v-if="notifyText" v-text="notifyText" :title="notifyText" :class="notifyClass"></span>
 	<div class="aligner"></div>
@@ -12162,7 +12343,8 @@ Vue.directive('resize', {
 			showFeedback: Function,
 			feedbackVisible: Boolean,
 			singlePage: String,
-			changePassword: Function
+			changePassword: Function,
+			navBarMode: String
 		},
 		computed: {
 			isSinglePage() {
@@ -12183,6 +12365,14 @@ Vue.directive('resize', {
 			},
 			profileItems() {
 				return this.appData ? this.appData.profileMenu : null;
+			},
+			isNavBarMenu() {
+				return this.navBarMode === 'Menu';
+			},
+			seg0text() {
+				let seg0 = this.$store.getters.seg0;
+				let mx = this.menu.find(x => x.Url === seg0);
+				return mx.Name;
 			}
 		},
 		methods: {
@@ -12197,7 +12387,7 @@ Vue.directive('resize', {
 			root() {
 				let opts = { title: null };
 				let currentUrl = this.$store.getters.url;
-				let menuUrl = this.isSinglePage ? ('/' + this.singlePage) : makeMenuUrl(this.menu, '/', opts);
+				let menuUrl = this.isSinglePage ? ('/' + this.singlePage) : menu.makeMenuUrl(this.menu, '/', opts);
 				if (currentUrl === menuUrl) {
 					return; // already in root
 				}
@@ -12205,88 +12395,13 @@ Vue.directive('resize', {
 			},
 			doProfileMenu(itm) {
 				store.commit('navigate', { url: itm.url });
+			},
+			clickMenu() {
+				if (this.isNavBarMenu)
+					eventBus.$emit('clickNavMenu', true);
 			}
 		}
 	};
-
-	const a2NavBar = {
-		template: `
-<ul class="nav-bar">
-	<li v-for="(item, index) in menu" :key="index" :class="{active : isActive(item)}">
-		<a :href="itemHref(item)" tabindex="-1" v-text="item.Name" @click.prevent="navigate(item)"></a>
-	</li>
-	<li class="aligner"/>
-	<div class="nav-global-period" v-if="hasPeriod">
-		<a2-period-picker class="drop-bottom-right pp-hyperlink pp-navbar" 
-			display="namedate" :callback="periodChanged" prop="period" :item="that"/>
-	</div>
-	<li v-if="hasHelp()" :title="locale.$Help"><a :href="helpHref()" class="btn-help" rel="help" aria-label="Help" @click.prevent="showHelp()"><i class="ico ico-help"></i></a></li>
-</ul>
-`,
-		props: {
-			menu: Array,
-			period: period.constructor
-		},
-		computed: {
-			seg0: () => store.getters.seg0,
-			seg1: () => store.getters.seg1,
-			locale() { return locale; },
-			hasPeriod() { return !!this.period; },
-			that() { return this; }
-		},
-		methods: {
-			isActive(item) {
-				return this.seg0 === item.Url;
-			},
-			isActive2(item) {
-				return this.seg1 === item.Url;
-			},
-			itemHref: (item) => '/' + item.Url,
-			navigate(item) {
-				if (this.isActive(item))
-					return;
-				let storageKey = 'menu:' + urlTools.combine(window.$$rootUrl, item.Url);
-				let savedUrl = localStorage.getItem(storageKey) || '';
-				if (savedUrl && !findMenu(item.Menu, (mi) => mi.Url === savedUrl)) {
-					// saved segment not found in current menu
-					savedUrl = '';
-				}
-				let opts = { title: null, seg2: savedUrl };
-				let url = makeMenuUrl(this.menu, item.Url, opts);
-				this.$store.commit('navigate', { url: url, title: opts.title });
-			},
-			showHelp() {
-				window.open(this.helpHref(), "_blank");
-			},
-			helpHref() {
-				let am = this.menu.find(x => this.isActive(x));
-				if (am && am.Menu) {
-					let am2 = am.Menu.find(x => this.isActive2(x));
-					if (am2 && am2.Help)
-						return urlTools.helpHref(am2.Help);
-				}
-				if (am && am.Help)
-					return urlTools.helpHref(am.Help);
-				return urlTools.helpHref('');
-			},
-			hasHelp() {
-				if (!this.menu) return false;
-				let am = this.menu.find(x => this.isActive(x));
-				return am && am.Help;
-			},
-			periodChanged(period) {
-				// post to shell
-				http.post('/_application/setperiod', period.toJson())
-					.then(() => {
-						eventBus.$emit('globalPeriodChanged', period);
-					})
-					.catch((err) => {
-						alert(err);
-					});
-			}
-		}
-	};
-
 
 	const sideBarBase = {
 		props: {
@@ -12308,7 +12423,7 @@ Vue.directive('resize', {
 			},
 			topMenu() {
 				let seg0 = this.seg0;
-				return findMenu(this.menu, (mi) => mi.Url === seg0);
+				return menu.findMenu(this.menu, (mi) => mi.Url === seg0);
 			}
 		},
 		methods: {
@@ -12396,7 +12511,7 @@ Vue.directive('resize', {
 				if (!sm)
 					return UNKNOWN_TITLE;
 				let seg1 = this.seg1;
-				let am = findMenu(sm, (mi) => mi.Url === seg1);
+				let am = menu.findMenu(sm, (mi) => mi.Url === seg1);
 				if (am)
 					return am.Name || UNKNOWN_TITLE;
 				return UNKNOWN_TITLE;
@@ -12437,7 +12552,7 @@ Vue.directive('resize', {
 				let route = this.$store.getters.route;
 				if (route.seg0 === 'app')
 					return 'full-view';
-				if (isSeparatePage(this.pages, route.seg0))
+				if (menu.isSeparatePage(this.pages, route.seg0))
 					return 'full-view';
 				return route.len === 3 ? 'partial-page' :
 					route.len === 2 ? 'full-page' : 'full-view';
@@ -12465,20 +12580,21 @@ Vue.directive('resize', {
 	const a2MainView = {
 		store,
 		template: `
-<div :class="cssClass" class="main-view">
-	<a2-nav-bar :menu="menu" v-show="navBarVisible" :period="period"></a2-nav-bar>
-	<a2-side-bar :menu="menu" v-show="sideBarVisible" :compact='isSideBarCompact'></a2-side-bar>
-	<a2-content-view :pages="pages"></a2-content-view>
-	<div class="load-indicator" v-show="pendingRequest"></div>
-	<div class="modal-stack" v-if="hasModals">
+<div :class=cssClass class=main-view>
+	<component :is=navBarComponent :menu=menu v-show=navBarVisible :period=period :is-navbar-menu=isNavBarMenu></component>
+	<a2-side-bar :menu=menu v-show=sideBarVisible :compact=isSideBarCompact></a2-side-bar>
+	<a2-content-view :pages=pages></a2-content-view>
+	<div class=load-indicator v-show=pendingRequest></div>
+	<div class=modal-stack v-if=hasModals>
 		<div class="modal-wrapper modal-animation-frame" v-for="dlg in modals" :class="{show: dlg.wrap}">
-			<a2-modal :dialog="dlg"></a2-modal>
+			<a2-modal :dialog=dlg></a2-modal>
 		</div>
 	</div>
 	<a2-toastr></a2-toastr>
 </div>`,
 		components: {
-			'a2-nav-bar': a2NavBar,
+			'a2-nav-bar': navBar.standardNavBar,
+			'a2-nav-bar-page': navBar.pageNavBar,
 			'a2-side-bar': a2SideBar,
 			'a2-content-view': contentView,
 			'a2-modal': modal,
@@ -12487,18 +12603,23 @@ Vue.directive('resize', {
 		props: {
 			menu: Array,
 			sideBarMode: String,
+			navBarMode: String,
 			period: period.constructor,
 			pages: String
 		},
 		data() {
 			return {
 				sideBarCollapsed: false,
+				showNavBar: true,
 				requestsCount: 0,
 				modals: [],
 				modalRequeryUrl: ''
 			};
 		},
 		computed: {
+			navBarComponent() {
+				return this.isNavBarMenu ? 'a2-nav-bar-page' : 'a2-nav-bar';
+			},
 			route() {
 				return this.$store.getters.route;
 			},
@@ -12515,8 +12636,9 @@ Vue.directive('resize', {
 				return false;
 			},
 			navBarVisible() {
+				if (!this.showNavBar) return false;
 				let route = this.route;
-				if (isSeparatePage(this.pages, route.seg0)) return false;
+				if (menu.isSeparatePage(this.pages, route.seg0)) return false;
 				return route.seg0 !== 'app' && (route.len === 2 || route.len === 3);
 			},
 			sideBarVisible() {
@@ -12524,11 +12646,13 @@ Vue.directive('resize', {
 				return route.seg0 !== 'app' && route.len === 3;
 			},
 			cssClass() {
-				let clpscls = this.isSideBarCompact ? 'side-bar-compact-' : 'side-bar-';
-				return clpscls + (this.sideBarCollapsed ? 'collapsed' : 'expanded');
+				return this.isNavBarMenu ? 'nav-bar-menu ' : '' +
+					(this.isSideBarCompact ? 'side-bar-compact-' : 'side-bar-') +
+					(this.sideBarCollapsed ? 'collapsed' : 'expanded');
 			},
 			pendingRequest() { return !this.hasModals && this.requestsCount > 0; },
-			hasModals() { return this.modals.length > 0; }
+			hasModals() { return this.modals.length > 0; },
+			isNavBarMenu() {return this.navBarMode === 'Menu';}
 		},
 		methods: {
 			setupWrapper(dlg) {
@@ -12537,10 +12661,15 @@ Vue.directive('resize', {
 					dlg.wrap = true;
 					//console.dir("wrap:" + dlg.wrap);
 				}, 50); // same as modal
+			},
+			showNavMenu(bShow) {
+				this.showNavBar = bShow;
 			}
 		},
 		created() {
 			let me = this;
+			if (this.isNavBarMenu)
+				this.showNavBar = false;
 			eventBus.$on('beginRequest', function () {
 				//if (me.hasModals)
 					//return;
@@ -12562,6 +12691,9 @@ Vue.directive('resize', {
 				}
 				return null;
 			}
+
+			if (this.isNavBarMenu)
+				eventBus.$on('clickNavMenu', this.showNavMenu);
 
 			eventBus.$on('modal', function (modal, prms) {
 				let id = utils.getStringId(prms ? prms.data : null);
@@ -12711,7 +12843,7 @@ Vue.directive('resize', {
 			if (menuPath === '/home' && this.menu && !this.menu.find(v => v.Url.toLowerCase() === 'home')) {
 				menuPath = '/';
 			}
-			let newUrl = makeMenuUrl(this.menu, menuPath, opts);
+			let newUrl = menu.makeMenuUrl(this.menu, menuPath, opts);
 			newUrl = newUrl + window.location.search;
 			this.$store.commit('setstate', { url: newUrl, title: opts.title });
 
@@ -12720,7 +12852,7 @@ Vue.directive('resize', {
 				title: ''
 			};
 
-			firstUrl.url = makeMenuUrl(this.menu, '/', opts);
+			firstUrl.url = menu.makeMenuUrl(this.menu, '/', opts);
 
 			firstUrl.title = opts.title;
 			urlTools.firstUrl = firstUrl;
@@ -12763,7 +12895,7 @@ Vue.directive('resize', {
 			},
 			singlePage() {
 				let seg0 = this.$store.getters.seg0;
-				if (isSeparatePage(this.pages, seg0))
+				if (menu.isSeparatePage(this.pages, seg0))
 					return seg0;
 				return undefined;
 			}
@@ -12911,7 +13043,7 @@ Vue.directive('resize', {
 	});
 
 	app.components['std:shellController'] = shell;
-})();	
+})();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
 /*20181115-7578*/

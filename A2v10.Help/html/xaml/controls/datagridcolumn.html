@@ -136,6 +136,29 @@
 					Команда для ячейки таблицы. Если команда указана, то содержимое (<code>Content</code>) будет выводится в виде гиперссылки со связанной командой.
 				</td>
 			</tr>
+			<tr>
+				<td class="prop-name">Role</td>
+				<td class="fit"><code>ColumnRole</code></td>
+				<td>
+					Роль колонки. Устанавливает определенный набор свойств для колонок предопределенных типов. 
+					Возможные значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (по умолчанию). Ничего не устанавливается.</li>
+						<li>
+							<span class="prop-name">Number</span> - Отображение идентификатора. Ширина по содержимому, выравнивание вправо, нет переноса
+							(<code>Fit="True" Align="Right" Wrap="NoWrap"</code>).
+						</li>
+						<li>
+							<span class="prop-name">Number</span> - Отображение числа. Ширина по содержимому, выравнивание вправо, нет переноса
+							(<code>Fit="True" Align="Right" Wrap="NoWrap"</code>).
+						</li>
+						<li>
+							<span class="prop-name">Date</span> - Отображение даты. Ширина по содержимому, выравнивание по центру, нет переноса
+							(<code>Fit="True" Align="Center" Wrap="NoWrap"</code>).
+						</li>
+					</ul>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 

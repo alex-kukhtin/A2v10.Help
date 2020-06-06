@@ -19,7 +19,8 @@ select {
 a2-include {
   display: block;
 }
-.ico {
+.help-side-bar .ico,
+.std .ico {
   font-size: 20px;
 }
 .help-main-view {
@@ -87,6 +88,10 @@ header .search input,
   margin-left: 5px;
   background-color: #6178a1;
   color: white;
+}
+header .search .ico,
+.help-header .search .ico {
+  font-size: 16px;
 }
 footer,
 .help-footer {
@@ -379,6 +384,7 @@ h4 {
 .help-content-view table.table-props td {
   background-color: #f8f8f8;
   padding: 2px 6px;
+  vertical-align: baseline;
 }
 .help-content-view table.table-props td.prop-name {
   width: 1%;

@@ -100,7 +100,11 @@
     <Content Include="html\images\client1.svg" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\xaml\components\sortdescription.html" />
+    <Content Include="html\xaml\components\filterdescription.html" />
     <Content Include="html\models\cross.html" />
+    <Content Include="html\models\collections.html" />
+    <Content Include="html\models\group.html" />
     <Content Include="html\models\simple.html" />
     <Content Include="html\models\tree.html" />
     <Content Include="html\template\options.html" />

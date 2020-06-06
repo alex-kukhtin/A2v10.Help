@@ -37,8 +37,10 @@
 Модели данных		/models/index
 	Общая информация			/models/general
 	Простые модели				/models/simple
+	Работа с коллекциями		/models/collections
 	Иерархические модели		/models/tree
 	Перекрестные модели			/models/cross
+	Модели с группировкой		/models/group
 
 
 Представления	/views/index
@@ -149,7 +151,9 @@
 		Компоненты					/xaml/components/index
 			CollectionView			/xaml/components/collectionview
 			Confirm					/xaml/components/confirm
+			FilterDescription		/xaml/components/filterdescription
 			Slot					/xaml/components/slot
+			SortDescription			/xaml/components/sortdescription
 			Switch					/xaml/components/switch
 			Validator				/xaml/components/validator
 
