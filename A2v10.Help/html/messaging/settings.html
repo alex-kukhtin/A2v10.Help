@@ -1,0 +1,69 @@
+﻿<div>
+	<!--title:Настройка работы с сообщениями-->
+	<div class="title">
+		<h1>
+			Настройка работы с сообщениями
+		</h1>
+	</div>
+
+
+
+	<h3>Настройка отправки e-mail</h3>
+
+	<h4>Настройка <b>smtp</b> в файле <code>web.config</code></h4>
+
+	<p>
+		Настройка может выполняться как стандартными средствами .Net 
+		(<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/network/mailsettings-element-network-settings">&lt;mailSettings&gt;</a>), 
+		так и элементом
+		 <b>mailSettings в разделе</b> <code>&lt;appSettings&gt;</code>.
+
+	</p>
+
+	<p>Формат json-текста</p>
+	<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	from: string,
+	host: string,
+	port: number,
+	userName: string,
+	password: string,
+	enableSsl:boolean,
+	deliveryMethod: 'SpecifiedPickupDirectory' | 'Network', 
+	pickupDirectoryLocation?: string
+}
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Обратите внимание!</b>, Если задан метод доставки <code>'SpecifiedPickupDirectory'</code>, то обязательно нужно задать папку, 
+		куда будут помещаться тестовые сообщения (<code>pickupDirectoryLocation</code>).
+	</p>
+
+	<h4>Пример настройки через ключ mailSettings</h4>
+	<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<appSettings>
+	<add key="mailSettings" value="{from:'from@domain.com', host:'mail.domain.com', port:'111', userName:'userName', password:'userPassword', enableSsl:'true',  deliveryMethod: 'SpecifiedPickupDirectory'}" />
+
+
+
+</appSettings>
+</script>
+</pre>
+
+	<p>Пример настройки через <b>system.net</b></p>
+	<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<system.net>
+	<mailSettings>
+		<smtp from="from@domain.com" deliveryMethod="Network" deliveryFormat="International">
+			<network host="mail.domain.com" port="111" userName="userName" password="userPassword" enableSsl="true" />
+		</smtp>
+	</mailSettings>
+</system.net>
+</script>
+</pre>
+
+</div>

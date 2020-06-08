@@ -68,6 +68,7 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="html\app\sendmessagecommand.html" />
     <Content Include="html\app\callapicommand.html" />
     <Content Include="html\app\commands.html" />
     <Content Include="html\app\clrcommand.html" />
@@ -100,6 +101,11 @@
     <Content Include="html\images\client1.svg" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\messaging\settings.html" />
+    <Content Include="html\messaging\emailmessage.html" />
+    <Content Include="html\messaging\templatedmessage.html" />
+    <Content Include="html\messaging\template.html" />
+    <Content Include="html\messaging\index.html" />
     <Content Include="html\xaml\components\sortdescription.html" />
     <Content Include="html\xaml\components\filterdescription.html" />
     <Content Include="html\models\cross.html" />

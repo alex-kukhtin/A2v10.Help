@@ -233,6 +233,12 @@
 	Активности			/workflow/activities/index
 		Request			/workflow/activities/request
 
+Работа с сообщениями	/messaging/index
+	Настройка			/messaging/settings
+	Template			/messaging/template
+	TemplatedMessage	/messaging/templatedmessage
+	EmailMessage		/messaging/emailmessage
+
 Тестирование		/tests/index
 	Инструменты		/tests/tools
 

@@ -211,6 +211,11 @@ https://docs.a2v10.com/desktop/config
 https://docs.a2v10.com/workflow/index
 https://docs.a2v10.com/workflow/activities/index
 https://docs.a2v10.com/workflow/activities/request
+https://docs.a2v10.com/messaging/index
+https://docs.a2v10.com/messaging/settings
+https://docs.a2v10.com/messaging/template
+https://docs.a2v10.com/messaging/templatedmessage
+https://docs.a2v10.com/messaging/emailmessage
 https://docs.a2v10.com/tests/index
 https://docs.a2v10.com/tests/tools
 https://docs.a2v10.com/help/about

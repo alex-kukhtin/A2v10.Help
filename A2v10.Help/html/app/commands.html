@@ -17,7 +17,7 @@
 	<p>
 		<pre class="code-highlight js" data-lang="js">
 <script type="text/template">{
-  "type": "sql" | "clr" | "callApi" | "startProcess" | "resumeProcess",
+  "type": "sql" | "clr" | "callApi" | "startProcess" | "resumeProcess" | "sendMessage",
   "source": "",
   "schema": "",
   "procedure": "",
@@ -53,7 +53,7 @@
 							<td class="prop-name">clr</td>
 							<td>
 								Вызов метода .NET объекта. Должно быть указано свойство <code>clrType</code>.
-								<a href="clrCommand">Подробнее...</a>.
+								<a href="clrсommand">Подробнее...</a>.
 							</td>
 						</tr>
 						<tr>
@@ -70,6 +70,13 @@
 						<tr>
 							<td class="prop-name">resumeProcess</td>
 							<td>Возобновление бизнес-процесса.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">sendMessage</td>
+							<td>
+								Отправка сообщения. Параметры определяются свойством <code>parameters</code>.
+								<a href="sendmessagecommand">Подробнее...</a>.
+							</td>
 						</tr>
 					</table>
 				</td>
@@ -141,5 +148,10 @@
 	<p>
 		Команда типа <b>callApi</b> вызывает внешний сервер по протоколу http. Поведение команды оперделяется параметрами.
 		<code>parameters</code>. <a href="callapicommand">Подробнее...</a>.
+	</p>
+	<h3>Команды типа sendMessage</h3>
+	<p>
+		Команда типа <b>sendMessage</b> отправляет сообщение. Поведение команды оперделяется параметрами.
+		<code>parameters</code>. <a href="sendmessagecommand">Подробнее...</a>.
 	</p>
 </div>

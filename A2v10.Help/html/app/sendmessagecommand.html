@@ -1,0 +1,97 @@
+﻿<div>
+	<!--title:Команды типа sendMessage-->
+	<!--keywords:sendMessage-->
+	<div class="title">
+		<h1>
+			Команды типа sendMessage
+		</h1>
+		<div class="breadcrumb">
+			<a href="commands">Команды</a>
+		</div>
+	</div>
+
+	<p>
+		Любая работа с сообщениями в системе выполняется с помощью подсистемы <a href="/messaging/index">работы с сообщениями</a>.
+	</p>
+
+	<p>Команды <b>sendMessage</b> отправляют сообщения email, sms или другие. Конкретный тип сообщения определяется шаблоном.</p>
+
+	<p>
+		Поведение команды определяется параметрами, которые передаются с использованием свойства <code>parameters</code>
+		команды.
+	</p>
+
+	<h3>Параметры</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">template</td>
+				<td>string</td>
+				<td>
+					Обязательно. Имя <a href="/messaging/template">файла шаблона сообщений</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">key</td>
+				<td>string</td>
+				<td>Обязательно. Ключ сообщения в файле шаблона.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip info">
+		<b>Обратите внимание!</b> Параметры команды (то, что используется привязкой [[param]])
+		это не свойство <code>parameters</code>, а параметры, с которыми команда вызвана с клиента.
+	</p>
+
+
+	<p>В случае успешной отправки возвращается статус и идентификатор сообщения из очереди в виде</p>
+
+<pre class="code-highlight js" data-lang="js">
+{
+	"status": "success",
+	"id": 1
+}
+</pre>
+
+	<p>В случае ошибки выбрасывается исключение.</p>
+
+	<h3>Пример</h3>
+	<p>
+		Пусть, например мы хотим отправить сообщение, которое определено в файле <code>messaging/message</code> c ключом <code>message1</code>.
+		В качестве идентификатора модели передаем Id пользователя.
+	</p>
+
+	<h4>Серверная команда</h4>
+
+	<pre class="code-highlight js" data-lang="js">
+"commands": {
+"sendMail": {
+	"type": "sendMessage",
+	"parameters": {
+		"template": "messaging/message",
+		"key": "message1"
+	}
+}
+</pre>
+
+	<h4>Вызов с клиента</h4>
+
+	<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+async function sendMessage(User) {
+	const ctrl = this.$ctrl;
+	let result = await ctrl.$invoke('sendMail', { Id: User.Id });
+	console.dir(result);
+}
+</script>
+</pre>
+
+</div>
