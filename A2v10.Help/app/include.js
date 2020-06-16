@@ -290,7 +290,7 @@
 
 		/*console.dir(body);*/
 		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
-		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault|clare)|e(lse|val|xtends|num)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|switch|t(his|hrow|ry|ypeof|rue|ype)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
+		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault|clare)|e(lse|val|xtends|num)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|s(witch|tatic)|t(his|hrow|ry|ypeof|rue|ype)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		const sqlDelims = ' ,[]+-*/:;<>';

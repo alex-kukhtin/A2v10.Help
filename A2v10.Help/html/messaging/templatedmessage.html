@@ -5,5 +5,46 @@
 		<h1>
 			Элемент TemplatedMessage
 		</h1>
+		<div class="breadcrumb">
+			<a href="index">Отправка сообщений</a>
+		</div>
 	</div>
+
+	<p>Представляет собой абстрактный базовый класс для сообщений.</p>
+
+	<p>
+		Производные элементы:
+		<a class="code-link" href="emailmessage">EmailMessage</a>,
+	</p>
+
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Source</td>
+				<td>String</td>
+				<td>Источник данных для загрузки модели.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Schema</td>
+				<td>String</td>
+				<td>Схема для загрузки модели.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Model</td>
+				<td>String</td>
+				<td>Имя модели. Для загрузки модели будет вызвана процедура
+				<code>[{Schema}].[{Model}.Load]</code> в источнике данных <code>{Source}</code>.</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>

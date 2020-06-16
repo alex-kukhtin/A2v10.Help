@@ -4,9 +4,10 @@
 		<h1>
 			Настройка работы с сообщениями
 		</h1>
+		<div class="breadcrumb">
+			<a href="index">Отправка сообщений</a>
+		</div>
 	</div>
-
-
 
 	<h3>Настройка отправки e-mail</h3>
 
@@ -20,7 +21,7 @@
 
 	</p>
 
-	<p>Формат json-текста</p>
+	<p>Формат json-текста для <code>&lt;appSettings&gt;</code> полностью повторяет стандартный формат настроек .NET.</p>
 	<pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 {
@@ -29,7 +30,7 @@
 	port: number,
 	userName: string,
 	password: string,
-	enableSsl:boolean,
+	enableSsl: boolean,
 	deliveryMethod: 'SpecifiedPickupDirectory' | 'Network', 
 	pickupDirectoryLocation?: string
 }
@@ -37,7 +38,8 @@
 </pre>
 
 	<p class="tip info">
-		<b>Обратите внимание!</b>, Если задан метод доставки <code>'SpecifiedPickupDirectory'</code>, то обязательно нужно задать папку, 
+		<b>Обратите внимание!</b>, Если задан метод доставки <code>'SpecifiedPickupDirectory'</code> (используется для тестирования, без реальной отправки сообщения), 
+		то обязательно нужно задать папку, 
 		куда будут помещаться тестовые сообщения (<code>pickupDirectoryLocation</code>).
 	</p>
 
@@ -45,10 +47,7 @@
 	<pre class="code-highlight xml" data-lang="xml">
 <script type="text/template">
 <appSettings>
-	<add key="mailSettings" value="{from:'from@domain.com', host:'mail.domain.com', port:'111', userName:'userName', password:'userPassword', enableSsl:'true',  deliveryMethod: 'SpecifiedPickupDirectory'}" />
-
-
-
+	<add key="mailSettings" value="{from:'from@domain.com', host:'mail.domain.com', port:'111', userName:'userName', password:'userPassword', enableSsl:'true',  deliveryMethod: 'Network'}" />
 </appSettings>
 </script>
 </pre>

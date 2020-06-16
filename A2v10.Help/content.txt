@@ -71,6 +71,8 @@
 			MenuItem			/xaml/controls/menuitem
 			Pager				/xaml/controls/pager
 			PeriodPicker		/xaml/controls/periodpicker
+			PropertyGrid		/xaml/controls/propertygrid
+			PropertyGridItem	/xaml/controls/propertygriditem
 			Radio				/xaml/controls/radio
 			Selector			/xaml/controls/selector
 			Separator			/xaml/controls/separator
@@ -232,12 +234,20 @@
 Бизнес-процессы			/workflow/index
 	Активности			/workflow/activities/index
 		Request			/workflow/activities/request
+		SendMessage		/workflow/activities/sendmessage
+	Объекты				/workflow/objects/index
+		Inbox			/workflow/objects/inbox
+		MessageInfo		/workflow/objects/messageinfo
+		ModelStateInfo	/workflow/objects/modelstateinfo
+		TrackRecord		/workflow/objects/trackrecord
 
 Работа с сообщениями	/messaging/index
 	Настройка			/messaging/settings
+	Привязки			/messaging/bindings
+	EmailMessage		/messaging/emailmessage
+	MessageAddress		/messaging/messageaddress
 	Template			/messaging/template
 	TemplatedMessage	/messaging/templatedmessage
-	EmailMessage		/messaging/emailmessage
 
 Тестирование		/tests/index
 	Инструменты		/tests/tools

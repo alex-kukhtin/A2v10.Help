@@ -14,13 +14,13 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IISExpressSSLPort />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,11 +101,19 @@
     <Content Include="html\images\client1.svg" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
+    <Content Include="html\messaging\bindings.html" />
     <Content Include="html\messaging\settings.html" />
     <Content Include="html\messaging\emailmessage.html" />
+    <Content Include="html\messaging\messageaddress.html" />
     <Content Include="html\messaging\templatedmessage.html" />
     <Content Include="html\messaging\template.html" />
     <Content Include="html\messaging\index.html" />
+    <Content Include="html\workflow\activities\sendmessage.html" />
+    <Content Include="html\workflow\objects\index.html" />
+    <Content Include="html\workflow\objects\trackrecord.html" />
+    <Content Include="html\workflow\objects\modelstateinfo.html" />
+    <Content Include="html\workflow\objects\messageinfo.html" />
+    <Content Include="html\workflow\objects\inbox.html" />
     <Content Include="html\xaml\components\sortdescription.html" />
     <Content Include="html\xaml\components\filterdescription.html" />
     <Content Include="html\models\cross.html" />
@@ -156,6 +164,8 @@
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\case.html" />
     <Content Include="html\xaml\containers\dropdownmegamenu.html" />
+    <Content Include="html\xaml\controls\propertygriditem.html" />
+    <Content Include="html\xaml\controls\propertygrid.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
     <Content Include="html\xaml\containers\card.html" />
     <Content Include="html\xaml\containers\fieldset.html" />
@@ -360,6 +370,8 @@
           <DevelopmentServerPort>61941</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:61941/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:61941/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

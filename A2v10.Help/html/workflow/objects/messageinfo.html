@@ -1,0 +1,68 @@
+﻿<div>
+	<!--title:Workflow.MessageInfo-->
+	<!--keywords:MessageInfo-->
+	<div class="title">
+		<h1>
+			Объект MessageInfo
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все объекты</a>
+		</div>
+	</div>
+
+	<p>Представляет собой описание сообщения.</p>
+
+	<p>
+		Используется общая подсистема <a href="/messaging/index">работы с сообщениями</a>.
+	</p>
+
+	<p>
+		Используется в:
+		<a class="code-link" href="/workflow/activities/request">Request</a>,
+		<a class="code-link" href="/workflow/activities/sendmessage">SendMessage</a>
+	</p>
+
+	<h3>Свойства (C#)</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Template</td>
+				<td class="fit no-wrap">String</td>
+				<td>Имя файла шаблона. Имя файла задается относительно корня прикладного приложения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Key</td>
+				<td class="fit no-wrap">String</td>
+				<td>Ключ сообщения в шаблоне.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TargetId</td>
+				<td class="fit no-wrap">Int64</td>
+				<td>Идентификатор модели данных. Сама модель (если нужно) задается в шаблоне сообщения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Parameters</td>
+				<td class="fit no-wrap"><code>Dictionary&lt;String, Object&gt;</code></td>
+				<td>Параметры сообщения. Для более удобной работы есть статический метод <code>CreateParameters</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Методы (C#)</h3>
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[static ~Dictionary<string, object> CreateParameters(object prms)]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Создает словарь из произвольного объекта (в том числе анонимного). Имена свойств становятся ключами, а значения - значениями.</p>
+	</div>
+</div>

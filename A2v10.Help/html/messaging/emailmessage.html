@@ -5,5 +5,73 @@
 		<h1>
 			Элемент EmailMessage
 		</h1>
+		<div class="breadcrumb">
+			<a href="index">Отправка сообщений</a>
+		</div>
 	</div>
+
+	<p>Представляет собой сообщение электронной почты.</p>
+
+	Наследует:
+	<a class="code-link" href="templatedmessage">TemplatedMessage</a>
+
+	<p>Свойство содержимого: <code>Body</code></p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Body</td>
+				<td class="fit">String</td>
+				<td>Тело сообщения. Если задано свойство <code>BodyTemplate</code>, то значение свойства игнорируется.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Subject</td>
+				<td>String</td>
+				<td>Тема сообщения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">BodyTemplate</td>
+				<td>String</td>
+				<td>Имя файла с шаблоном сообщения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">From</td>
+				<td><a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Отправитель. Может быть пустым. Если не указано, используется из <a href="settings">настроек почты</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">To</td>
+				<td>Коллекция <a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Получатели сообщения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">СС</td>
+				<td class="no-wrap">Коллекция <a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Копия (Carbon Copy).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bcc</td>
+				<td class="no-wrap">Коллекция <a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Скрытая копия (Blind Carbon Copy).</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="templatedmessage">Свойства базового элемента</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip info">
+		<b>Обратите внимание!</b> Все текстовые свойства поддерживают <a href="bindings">привязки</a>.
+	</p>
+
 </div>
