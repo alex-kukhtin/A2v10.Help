@@ -7917,7 +7917,7 @@ TODO:
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200108-7609
+// 20200617-7674
 // components/upload.js
 
 (function () {
@@ -7944,7 +7944,8 @@ TODO:
 			tip: String,
 			readOnly: Boolean,
 			accept: String,
-			limit: Number
+			limit: Number,
+			icon: String
 		},
 		data: function () {
 			return {
@@ -7962,6 +7963,8 @@ TODO:
 				return !this.readOnly;
 			},
 			icoClass() {
+				if (this.icon)
+					return `ico-${this.icon}`;
 				return this.accept === 'image/*' ? 'ico-image' : 'ico-upload';
 			}
 		},
@@ -8543,6 +8546,14 @@ TODO:
 		}
 	};
 
+	const maximizeComponent = {
+		inserted(el, binding) {
+			let mw = el.closest('.modal-window');
+			if (mw && binding.value)
+				mw.setAttribute('maximize', 'true');
+		}
+	}
+
 	const dragDialogDirective = {
 		inserted(el, binding) {
 
@@ -8600,6 +8611,8 @@ TODO:
 	Vue.directive('drag-window', dragDialogDirective);
 
 	Vue.directive('modal-width', setWidthComponent);
+
+	Vue.directive('maximize', maximizeComponent);
 
 	const modalComponent = {
 		template: modalTemplate,
@@ -8680,7 +8693,7 @@ TODO:
 				return !!this.dialog.url;
 			},
 			mwClass() {
-				return this.modalCreated ? 'loaded' : null;
+				return this.modalCreated ? 'loaded' : '';
 			},
 			hasIcon() {
 				return !!this.dialog.style;
@@ -9083,7 +9096,7 @@ TODO:
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200108-7609
+// 20200617-7674
 // components/image.js
 
 (function () {
@@ -9106,8 +9119,8 @@ TODO:
 <div class="a2-image">
 	<img v-if="hasImage" :src="href" :style="cssStyle" @click.prevent="clickOnImage"/>
 	<a class="remove-image" v-if="hasRemove" @click.prevent="removeImage">&#x2715;</a>
-	<a2-upload v-if="isUploadVisible" :style="uploadStyle" accept="image/*"
-		:item="itemForUpload" :base="base" :prop="prop" :new-item="newItem" :tip="tip" :read-only='readOnly' :limit="limit"/>
+	<a2-upload v-if=isUploadVisible :style=uploadStyle accept="image/*"
+		:item=itemForUpload :base=base :prop=prop :new-item=newItem :tip=tip :read-only=readOnly :limit=limit :icon=icon></a2-upload>
 </div>
 `,
 		props: {
@@ -9120,7 +9133,9 @@ TODO:
 			width: String,
 			height: String,
 			readOnly: Boolean,
-			limit: Number
+			limit: Number,
+			placeholder: String,
+			icon: String
 		},
 		data() {
 			return {
@@ -9138,7 +9153,7 @@ TODO:
 			},
 			tip() {
 				if (this.readOnly) return '';
-				return locale.$ClickToDownloadPicture;
+				return this.placeholder ? this.placeholder : locale.$ClickToDownloadPicture;
 			},
 			cssStyle() {
 				return { maxWidth: this.width, maxHeight: this.height };
@@ -9477,7 +9492,8 @@ Vue.component('a2-panel', {
 		props: {
 			dialogId: String,
 			dialogTitle: String,
-			width: String
+			width: String,
+			noClose: Boolean
 		},
 		data() {
 			return {
@@ -9494,6 +9510,7 @@ Vue.component('a2-panel', {
 		},
 		methods: {
 			__keyUp(event) {
+				if (this.noClose) return;
 				if (event.which === 27) {
 					eventBus.$emit('inlineDialog', { cmd: 'close', id: this.dialogId });
 					event.stopPropagation();
@@ -10741,7 +10758,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-/*20200129-7624*/
+/*20200612-7673*/
 // controllers/base.js
 
 (function () {
@@ -12115,7 +12132,7 @@ Vue.directive('resize', {
 })();	
 // Copyright © 2020 Alex Kukhtin. All rights reserved.
 
-/*20200604-7671*/
+/*20200611-7672*/
 /* controllers/navbar.js */
 
 (function () {
@@ -12126,6 +12143,7 @@ Vue.directive('resize', {
 	const period = require('std:period');
 	const store = component('std:store');
 	const urlTools = require('std:url');
+	const http = require('std:http');
 
 	// a2-nav-bar
 	const a2NavBar = {
@@ -12210,28 +12228,33 @@ Vue.directive('resize', {
 	// a2-nav-bar-page
 	const a2NavBarPage = {
 		template: `
-<div class="menu-navbar-overlay" @click.stop.prevent=closeNavMenu>
-<div class="menu-navbar">
+<div class="menu-navbar-overlay" @click.stop=closeNavMenu>
+<div class="menu-navbar" :class="{show:visible}">
 <div class="menu-navbar-top">
 	<a href='' class=menu-navbar-back @click.stop.prevent=closeNavMenu><i class="ico ico-grid2"></i></a>
-	<h2>AppName here</h2>
+	<h2 v-text=title></h2>
 </div>
 <ul class=menu-navbar-list>
 	<li v-for="(item, index) in menu" :key=index>
 		<a class="menu-navbar-link" :href="itemHref(item)" @click.prevent="navigate(item)" :class="{active : isActive(item)}">
-			<i class="ico ico-file"></i>
+			<i class="ico" :class=icoClass(item)></i>
 			<span v-text="item.Name"></span>
 		</a>
 	</li>
 </ul>
 <div class="aligner"/>
-<a>Powered by <i class="ico ico-a2logo"></i></a>
-</div>
-</div>
+<a class=powered-by-a2v10 href="https://a2v10.com" rel=noopener target=_blank><i class="ico ico-a2logo"></i> Powered by A2v10</a>
+</div></div>
 `,
 		props: {
 			menu: Array,
-			isNavbarMenu: Boolean
+			isNavbarMenu: Boolean,
+			title:String
+		},
+		data() {
+			return {
+				visible: false
+			};
 		},
 		computed: {
 			seg0: () => store.getters.seg0,
@@ -12247,7 +12270,9 @@ Vue.directive('resize', {
 				return this.seg1 === item.Url;
 			},
 			itemHref: (item) => '/' + item.Url,
-
+			icoClass(item) {
+				return item.Icon ? 'ico-' + item.Icon : 'ico-empty';
+			},
 			navigate(item) {
 				if (this.isActive(item))
 					return;
@@ -12263,8 +12288,14 @@ Vue.directive('resize', {
 				this.$store.commit('navigate', { url: url, title: opts.title });
 			},
 			closeNavMenu() {
+				this.visible = false;
 				eventBus.$emit('clickNavMenu', false);
 			}
+		},
+		mounted() {
+			setTimeout(() => {
+				this.visible = true;
+			}, 5);
 		}
 	};
 
@@ -12273,9 +12304,172 @@ Vue.directive('resize', {
 		pageNavBar: a2NavBarPage
 	};
 })();	
+// Copyright © 2020 Alex Kukhtin. All rights reserved.
+
+/*20200611-7673*/
+/* controllers/sidebar.js */
+
+(function () {
+
+	const menu = component('std:navmenu');
+	const store = component('std:store');
+	const urlTools = require('std:url');
+	const htmlTools = require('std:html');
+
+	const UNKNOWN_TITLE = 'unknown title';
+
+	const sideBarBase = {
+		props: {
+			menu: Array,
+			mode: String
+		},
+		computed: {
+			seg0: () => store.getters.seg0,
+			seg1: () => store.getters.seg1,
+			sideMenu() {
+				let top = this.topMenu;
+				return top ? top.Menu : null;
+			},
+			topMenu() {
+				let seg0 = this.seg0;
+				return menu.findMenu(this.menu, (mi) => mi.Url === seg0);
+			}
+		},
+		methods: {
+			isActive(item) {
+				let isActive = this.seg1 === item.Url;
+				if (isActive)
+					htmlTools.updateDocTitle(item.Name);
+				return isActive;
+			},
+			isGroup(item) {
+				if (!item.Params) return false;
+				try {
+					return JSON.parse(item.Params).group || false;
+				} catch (err) {
+					return false;
+				}
+			},
+			navigate(item) {
+				if (this.isActive(item))
+					return;
+				if (!item.Url) return;
+				let top = this.topMenu;
+				if (top) {
+					let url = urlTools.combine(top.Url, item.Url);
+					if (item.Url.indexOf('/') === -1) {
+						// save only simple path
+						try {
+							// avoid EDGE error QuotaExceeded
+							localStorage.setItem('menu:' + urlTools.combine(window.$$rootUrl, top.Url), item.Url);
+						}
+						catch (e) {
+							// do nothing
+						}
+					}
+					this.$store.commit('navigate', { url: url, title: item.Name });
+				}
+				else
+					console.error('no top menu found');
+			},
+			itemHref(item) {
+				let top = this.topMenu;
+				if (top) {
+					return urlTools.combine(top.Url, item.Url);
+				}
+				return undefined;
+			},
+			toggle() {
+				this.$parent.sideBarCollapsed = !this.$parent.sideBarCollapsed;
+				try {
+					// avoid EDGE error QuotaExceeded
+					localStorage.setItem('sideBarCollapsed', this.$parent.sideBarCollapsed);
+				}
+				catch (e) {
+					// do nothing
+				}
+			}
+		}
+	};
+
+	const a2SideBar = {
+		//TODO: 
+		// 1. various menu variants
+		// 2. folderSelect as function 
+		template: `
+<div :class="cssClass">
+	<a href role="button" class="ico collapse-handle" @click.prevent="toggle"></a>
+	<div class="side-bar-body" v-if="bodyIsVisible">
+		<tree-view :items="sideMenu" :is-active="isActive" :is-group="isGroup" :click="navigate" :get-href="itemHref"
+			:options="{folderSelect: folderSelect, label: 'Name', title: 'Description',
+			subitems: 'Menu', expandAll:true,
+			icon:'Icon', wrapLabel: true, hasIcon: true}">
+		</tree-view>
+	</div>
+	<div v-else class="side-bar-title" @click.prevent="toggle">
+		<span class="side-bar-label" v-text="title"></span>
+	</div>
+</div>
+`,
+		mixins: [sideBarBase],
+		computed: {
+			bodyIsVisible() {
+				return !this.$parent.sideBarCollapsed || this.compact;
+			},
+			compact() {
+				return this.mode === 'Compact';
+			},
+			title() {
+				let sm = this.sideMenu;
+				if (!sm)
+					return UNKNOWN_TITLE;
+				let seg1 = this.seg1;
+				let am = menu.findMenu(sm, (mi) => mi.Url === seg1);
+				if (am)
+					return am.Name || UNKNOWN_TITLE;
+				return UNKNOWN_TITLE;
+			},
+			cssClass() {
+				let cls = 'side-bar';
+				if (this.compact)
+					cls += '-compact';
+				return cls + (this.$parent.sideBarCollapsed ? ' collapsed' : ' expanded');
+			}
+		},
+		methods: {
+			folderSelect(item) {
+				return !!item.Url;
+			}
+		}
+	};
+
+	const a2TabSideBar = {
+		template: `
+<div class="side-bar-top">
+	<div class="a2-tab-bar">
+		<div v-for="mi in topMenu.Menu" class="a2-tab-bar-item">
+			<a :href="itemHref(mi)" @click.stop.prevent="navigate(mi)" v-text=mi.Name class="a2-tab-button" :class="{active: isActive(mi)}"></a>
+		</div>
+	</div>
+</div>
+`,
+		mixins: [sideBarBase],
+		computed: {
+		},
+		methods: {
+		}
+	};
+
+
+	app.components['std:sidebar'] = {
+		standardSideBar: a2SideBar,
+		compactSideBar: a2SideBar,
+		tabSideBar: a2TabSideBar
+	};
+})();	
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-/*20200604-7671*/
+/*20200613-7673*/
 /* controllers/shell.js */
 
 (function () {
@@ -12291,11 +12485,9 @@ Vue.directive('resize', {
 	const utils = require('std:utils');
 	const locale = window.$$locale;
 	const platform = require('std:platform');
-	const htmlTools = require('std:html');
 	const navBar = component('std:navbar');
+	const sideBar = component('std:sidebar');
 	const menu = component('std:navmenu');
-
-	const UNKNOWN_TITLE = 'unknown title';
 
 	const a2AppHeader = {
 		template: `
@@ -12372,7 +12564,7 @@ Vue.directive('resize', {
 			seg0text() {
 				let seg0 = this.$store.getters.seg0;
 				let mx = this.menu.find(x => x.Url === seg0);
-				return mx.Name;
+				return mx ? mx.Name : '';
 			}
 		},
 		methods: {
@@ -12399,127 +12591,6 @@ Vue.directive('resize', {
 			clickMenu() {
 				if (this.isNavBarMenu)
 					eventBus.$emit('clickNavMenu', true);
-			}
-		}
-	};
-
-	const sideBarBase = {
-		props: {
-			menu: Array,
-			compact: Boolean
-		},
-		computed: {
-			seg0: () => store.getters.seg0,
-			seg1: () => store.getters.seg1,
-			cssClass() {
-				let cls = 'side-bar';
-				if (this.compact)
-					cls += '-compact';
-				return cls + (this.$parent.sideBarCollapsed ? ' collapsed' : ' expanded');
-			},
-			sideMenu() {
-				let top = this.topMenu;
-				return top ? top.Menu : null;
-			},
-			topMenu() {
-				let seg0 = this.seg0;
-				return menu.findMenu(this.menu, (mi) => mi.Url === seg0);
-			}
-		},
-		methods: {
-			isActive(item) {
-				let isActive = this.seg1 === item.Url;
-				if (isActive)
-					htmlTools.updateDocTitle(item.Name);
-				return isActive;
-			},
-			isGroup(item) {
-				if (!item.Params) return false;
-				try {
-					return JSON.parse(item.Params).group || false;
-				} catch (err) {
-					return false;
-				}
-			},
-			navigate(item) {
-				if (this.isActive(item))
-					return;
-				let top = this.topMenu;
-				if (top) {
-					let url = urlTools.combine(top.Url, item.Url);
-					if (item.Url.indexOf('/') === -1) {
-						// save only simple path
-						try {
-							// avoid EDGE error QuotaExceeded
-							localStorage.setItem('menu:' + urlTools.combine(window.$$rootUrl, top.Url), item.Url);
-						}
-						catch (e) {
-							// do nothing
-						}
-					}
-					this.$store.commit('navigate', { url: url, title: item.Name });
-				}
-				else
-					console.error('no top menu found');
-			},
-			itemHref(item) {
-				let top = this.topMenu;
-				if (top) {
-					return urlTools.combine(top.Url, item.Url);
-				}
-				return undefined;
-			},
-			toggle() {
-				this.$parent.sideBarCollapsed = !this.$parent.sideBarCollapsed;
-				try {
-					// avoid EDGE error QuotaExceeded
-					localStorage.setItem('sideBarCollapsed', this.$parent.sideBarCollapsed);
-				}
-				catch (e) {
-					// do nothing
-				}
-			}
-		}
-	};
-
-	const a2SideBar = {
-		//TODO: 
-		// 1. various menu variants
-		// 2. folderSelect as function 
-		template: `
-<div :class="cssClass">
-	<a href role="button" class="ico collapse-handle" @click.prevent="toggle"></a>
-	<div class="side-bar-body" v-if="bodyIsVisible">
-		<tree-view :items="sideMenu" :is-active="isActive" :is-group="isGroup" :click="navigate" :get-href="itemHref"
-			:options="{folderSelect: folderSelect, label: 'Name', title: 'Description',
-			subitems: 'Menu', expandAll:true,
-			icon:'Icon', wrapLabel: true, hasIcon: true}">
-		</tree-view>
-	</div>
-	<div v-else class="side-bar-title" @click.prevent="toggle">
-		<span class="side-bar-label" v-text="title"></span>
-	</div>
-</div>
-`,
-		mixins: [sideBarBase],
-		computed: {
-			bodyIsVisible() {
-				return !this.$parent.sideBarCollapsed || this.compact;
-			},
-			title() {
-				let sm = this.sideMenu;
-				if (!sm)
-					return UNKNOWN_TITLE;
-				let seg1 = this.seg1;
-				let am = menu.findMenu(sm, (mi) => mi.Url === seg1);
-				if (am)
-					return am.Name || UNKNOWN_TITLE;
-				return UNKNOWN_TITLE;
-			}
-		},
-		methods: {
-			folderSelect(item) {
-				return !!item.Url;
 			}
 		}
 	};
@@ -12581,8 +12652,9 @@ Vue.directive('resize', {
 		store,
 		template: `
 <div :class=cssClass class=main-view>
-	<component :is=navBarComponent :menu=menu v-show=navBarVisible :period=period :is-navbar-menu=isNavBarMenu></component>
-	<a2-side-bar :menu=menu v-show=sideBarVisible :compact=isSideBarCompact></a2-side-bar>
+	<component :is=navBarComponent :title=title :menu=menu v-if=isNavBarVisible 
+		:period=period :is-navbar-menu=isNavBarMenu></component>
+	<component :is=sideBarComponent v-if=sideBarVisible :menu=menu :mode=sideBarMode></component>
 	<a2-content-view :pages=pages></a2-content-view>
 	<div class=load-indicator v-show=pendingRequest></div>
 	<div class=modal-stack v-if=hasModals>
@@ -12595,7 +12667,9 @@ Vue.directive('resize', {
 		components: {
 			'a2-nav-bar': navBar.standardNavBar,
 			'a2-nav-bar-page': navBar.pageNavBar,
-			'a2-side-bar': a2SideBar,
+			'a2-side-bar': sideBar.standardSideBar,
+			'a2-side-bar-compact': sideBar.compactSideBar,
+			'a2-side-bar-tab': sideBar.tabSideBar,
 			'a2-content-view': contentView,
 			'a2-modal': modal,
 			'a2-toastr': toastr
@@ -12605,7 +12679,8 @@ Vue.directive('resize', {
 			sideBarMode: String,
 			navBarMode: String,
 			period: period.constructor,
-			pages: String
+			pages: String,
+			title: String
 		},
 		data() {
 			return {
@@ -12620,11 +12695,18 @@ Vue.directive('resize', {
 			navBarComponent() {
 				return this.isNavBarMenu ? 'a2-nav-bar-page' : 'a2-nav-bar';
 			},
-			route() {
-				return this.$store.getters.route;
+			sideBarComponent() {
+				if (this.sideBarMode === 'Compact')
+					return 'a2-side-bar-compact';
+				else if (this.sideBarMode === 'TabBar')
+					return 'a2-side-bar-tab';
+				return 'a2-side-bar';
 			},
 			isSideBarCompact() {
 				return this.sideBarMode === 'Compact';
+			},
+			route() {
+				return this.$store.getters.route;
 			},
 			sideBarInitialCollapsed() {
 				let sb = localStorage.getItem('sideBarCollapsed');
@@ -12635,20 +12717,29 @@ Vue.directive('resize', {
 					return true;
 				return false;
 			},
-			navBarVisible() {
+			isNavBarVisible() {
 				if (!this.showNavBar) return false;
+				if (this.isNavBarMenu) return true;
 				let route = this.route;
 				if (menu.isSeparatePage(this.pages, route.seg0)) return false;
+				console.dir(route.len);
 				return route.seg0 !== 'app' && (route.len === 2 || route.len === 3);
 			},
 			sideBarVisible() {
 				let route = this.route;
 				return route.seg0 !== 'app' && route.len === 3;
 			},
+			isSideBarTop() {
+				return this.sideBarMode === 'TabBar';
+			},
 			cssClass() {
-				return this.isNavBarMenu ? 'nav-bar-menu ' : '' +
-					(this.isSideBarCompact ? 'side-bar-compact-' : 'side-bar-') +
-					(this.sideBarCollapsed ? 'collapsed' : 'expanded');
+				let cls = (this.isNavBarMenu ? 'nav-bar-menu ' : '') +
+					'side-bar-position-' + (this.isSideBarTop ? 'top ' : 'left ');
+				if (this.isSideBarTop)
+					cls += !this.sideBarVisible ? 'side-bar-hidden' : '';
+				else
+					cls += this.sideBarCollapsed ? 'collapsed' : 'expanded';
+				return cls;
 			},
 			pendingRequest() { return !this.hasModals && this.requestsCount > 0; },
 			hasModals() { return this.modals.length > 0; },
