@@ -13,10 +13,26 @@
 	</div>
 
 
-	<!--
+<!--
+	NEW:
+	PropertyGrid.Style, PropertyGridItem.HideEmpty
+	Image.Icon, Image.Placeholder,
+	DatePicker.Size, TimePicker.Size
+	StackPanel.JustifyItems
+	FlexList.JustifyItems
+	datamodel.defaults
+
+ FROM PAPER:
+		1. Client localization
+		2. XAML Styles
+		3. Tokenizer - не понимает String|Number без пробелов.
+		4. Export - описание команды и шаблона Excel
+		5. Search - подсветка найденого текста.
+		6. Period
+		7. Render - описание
+		8. MakeHelp - StopWords наружу.
+		9. GroupModel - описание.
 	 
-PropertyGrid.Style, PropertyGridItem.HideEmpty
-Image.Icon, Image.Placeholder
 
  NEW
 	vm.$isDirty, $isPristine, $canSave
@@ -28,11 +44,14 @@ Image.Icon, Image.Placeholder
 	======
 	SheetColumnCollection, TableColumnCollection -> Convertor
 
+	TODO: Validator (Component)
 	TODO: Attachments/ChatItem/FlexList/Image/StateCard/TableMarkCell/FilterDescription
 	TODO: Case/DropDownMegaMenu/Flex/Include/Partial/Splitter/Tab/Toolbar
 	TODO: PropertyGrid/PropertyGridItem
 	TODO: SheetSection/SheetTreeSection
+	TODO: Lengths/Size/Thickness
 	TODO: model/collections model/grouping
+
 
 	=== MAR 2020 ====
 	DataGrid.MarkerStyle
