@@ -108,6 +108,7 @@
     <Content Include="html\messaging\templatedmessage.html" />
     <Content Include="html\messaging\template.html" />
     <Content Include="html\messaging\index.html" />
+    <Content Include="html\whatsnew\w202007.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
     <Content Include="html\workflow\objects\index.html" />
     <Content Include="html\workflow\objects\trackrecord.html" />
