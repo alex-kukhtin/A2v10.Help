@@ -3,7 +3,7 @@
 	<!--keywords:Что нового-->
 	<div class="title">
 		<h1>
-			Выпуск 26 - версии 7665-7673 (Июнь 2020)
+			Выпуск 26 - версии 7665-7675 (Июнь 2020)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все выпуски</a>|
@@ -13,85 +13,80 @@
 	</div>
 
 
-<!--
-	NEW:
-	PropertyGrid.Style, PropertyGridItem.HideEmpty
-	Image.Icon, Image.Placeholder,
-	DatePicker.Size, TimePicker.Size
-	StackPanel.JustifyItems
-	FlexList.JustifyItems
-	datamodel.defaults
+	<!--
+		NEW:
+		StackPanel.JustifyItems
+		FlexList.JustifyItems
+		PropertyGrid.Style, PropertyGridItem.HideEmpty, PropertyGrid.NoWrapName
+		Image.Icon, Image.Placeholder,
+		datamodel.defaults
+		DataGrid.MarkerStyle
 
- FROM PAPER:
-		1. Client localization
-		2. XAML Styles
-		3. Tokenizer - не понимает String|Number без пробелов.
-		4. Export - описание команды и шаблона Excel
-		5. Search - подсветка найденого текста.
-		6. Period
-		7. Render - описание
-		8. MakeHelp - StopWords наружу.
-		9. GroupModel - описание.
-	 
-
- NEW
-	vm.$isDirty, $isPristine, $canSave
-	IRoot.$dirty
-	Card - сделать пример
-	
-
-	MAY 2020
-	======
-	SheetColumnCollection, TableColumnCollection -> Convertor
-
-	TODO: Validator (Component)
-	TODO: Attachments/ChatItem/FlexList/Image/StateCard/TableMarkCell/FilterDescription
-	TODO: Case/DropDownMegaMenu/Flex/Include/Partial/Splitter/Tab/Toolbar
-	TODO: PropertyGrid/PropertyGridItem
-	TODO: SheetSection/SheetTreeSection
-	TODO: Lengths/Size/Thickness
-	TODO: model/collections model/grouping
+	 FROM PAPER:
+			1. Client localization
+			2. XAML Styles
+			3. Tokenizer - не понимает String|Number без пробелов.
+			4. Export - описание команды и шаблона Excel
+			5. Search - подсветка найденого текста.
+			6. Period
+			7. Render - описание
+			8. MakeHelp - StopWords наружу.
+			9. GroupModel - описание.
 
 
-	=== MAR 2020 ====
-	DataGrid.MarkerStyle
+	 NEW
+		vm.$isDirty, $isPristine, $canSave
+		IRoot.$dirty
+		Card - сделать пример
 
-	export.template expression {{}}
+		MAY 2020
+		======
+		SheetColumnCollection, TableColumnCollection -> Convertor
 
-	=== PREV ====
-	ValidatorLabel
+		TODO: Validator (Component)
+		TODO: Attachments/ChatItem/FlexList/Image/StateCard/TableMarkCell/FilterDescription
+		TODO: Case/DropDownMegaMenu/Flex/Include/Partial/Splitter/Tab/Toolbar
+		TODO: PropertyGrid/PropertyGridItem
+		TODO: SheetSection/SheetTreeSection
+		TODO: Lengths/Size/Thickness
+		TODO: model/collections model/grouping
 
-	List.Flush, List.BorderStyle
 
-	TextBox.Accel
+		export.template expression {{}}
 
-	Flex (new control)
-	Image.Limit
-	NavBar
+		=== PREV ====
+		ValidatorLabel
 
-	commands... method (for api) /*get/post*/
+		List.Flush, List.BorderStyle
 
-	Export - Argument,Data, Url
+		TextBox.Accel
 
-	model.json (commandTimeout) и проверить!!!
+		Flex (new control)
+		Image.Limit
+		NavBar
 
-	StateCard.MinWidth
-	FlexList.MinWidth
-	Validator Converter (Component)
-	TreeView.Height
-	TreeViewItem.IsGroup binding
-	TabBar.Style, TabButton.Description
+		commands... method (for api) /*get/post*/
 
-	// prev
-	vm.$setCurrentUrl
-	Map.$setProperty
-	utils.format('#.00')
+		Export - Argument,Data, Url
 
-	BindCmd Report - Url, Data,
-	BindCmd.Dialog New
+		model.json (commandTimeout) и проверить!!!
 
-	Bind.Format for Number, Currency
-	-->
+		StateCard.MinWidth
+		FlexList.MinWidth
+		Validator Converter (Component)
+		TreeViewItem.IsGroup binding
+		TabBar.Style, TabButton.Description
+
+		// prev
+		vm.$setCurrentUrl
+		Map.$setProperty
+		utils.format('#.00')
+
+		BindCmd Report - Url, Data,
+		BindCmd.Dialog New
+
+		Bind.Format for Number, Currency
+		-->
 
 	<h3>Xaml</h3>
 	<ul class="std">
@@ -99,17 +94,16 @@
 		<li>В элемент <a class="code-link" href="/xaml/containers/inlinedialog">InlineDialog</a> добавлено свойство <code>NoClose</code>.</li>
 		<li>В элемент <a class="code-link" href="/xaml/containers/dialog">Dialog</a> добавлены свойства <code>Maximize</code> и <code>ButtonOnTop</code>.</li>
 		<li>В пречисление <a class="code-link" href="/xaml/enums/icon">Icon</a> добавлены новые иконки <code>Camera</code>, <code>UserImage</code>, <code>DeleteRed</code>.</li>
+		<li>В элемент <a class="code-link" href="/xaml/containers/block">Block</a> добавлено свойство <code>MaxWidth</code>.</li>
+		<li>В элемент <a class="code-link" href="/xaml/controls/DatePicker">DatePicker</a> добавлено свойство <code>Size</code>.</li>
+		<li>В элемент <a class="code-link" href="/xaml/controls/TimePicker">TimePicker</a> добавлено свойство <code>Size</code>.</li>
+		<li>В элемент <a class="code-link" href="/xaml/controls/TreeView">TreeView</a> добавлено свойство <code>Height</code>.</li>
 	</ul>
 
 	<h3>Программирование сервера</h3>
 	<ul class="std">
 		<li>Добавлена новая серверная команда <a href="/app/commands" class="code-link">sendMessage</a>.</li>
 	</ul>
-
-	<h3>Программирование клиента</h3>
-	<ul class="std">
-	</ul>
-
 
 	<h3>Справка</h3>
 	<ul class="std">
