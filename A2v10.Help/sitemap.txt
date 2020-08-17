@@ -1,6 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
-https://docs.a2v10.com/whatsnew/w202007
+https://docs.a2v10.com/whatsnew/w202008
 https://docs.a2v10.com/whatsnew/w202006
 https://docs.a2v10.com/whatsnew/w202005
 https://docs.a2v10.com/whatsnew/w202003
@@ -37,6 +37,7 @@ https://docs.a2v10.com/models/collections
 https://docs.a2v10.com/models/tree
 https://docs.a2v10.com/models/cross
 https://docs.a2v10.com/models/group
+https://docs.a2v10.com/models/image
 https://docs.a2v10.com/views/index
 https://docs.a2v10.com/xaml/index
 https://docs.a2v10.com/xaml/overview/index
@@ -135,6 +136,7 @@ https://docs.a2v10.com/xaml/sheet/sheetpage
 https://docs.a2v10.com/xaml/sheet/sheetrow
 https://docs.a2v10.com/xaml/sheet/sheetsection
 https://docs.a2v10.com/xaml/sheet/sheettreesection
+https://docs.a2v10.com/xaml/sheet/sheetautogenerate
 https://docs.a2v10.com/xaml/bind/index
 https://docs.a2v10.com/xaml/bind/bind
 https://docs.a2v10.com/xaml/bind/bindcmd
@@ -152,6 +154,7 @@ https://docs.a2v10.com/xaml/simple/gapsize
 https://docs.a2v10.com/xaml/simple/length
 https://docs.a2v10.com/xaml/simple/size
 https://docs.a2v10.com/xaml/simple/thickness
+https://docs.a2v10.com/xaml/simple/printpage
 https://docs.a2v10.com/xaml/simple/uielementcollection
 https://docs.a2v10.com/xaml/enums/index
 https://docs.a2v10.com/xaml/enums/alignitem

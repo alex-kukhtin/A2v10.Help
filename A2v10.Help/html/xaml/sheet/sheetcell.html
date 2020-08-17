@@ -81,6 +81,45 @@
 				</td>
 			</tr>
 			<tr>
+				<td class="prop-name">DataType</td>
+				<td><a class="code-link" href="/xaml/enums/datatype">DataType</a></td>
+				<td>
+					Тип данных. Используется в случае, если в ячейке нет привязки, а при экспорте нужно установить
+					заданный тип данных.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinWidth</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Минимальная ширина ячейки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CssClass</td>
+				<td>String</td>
+				<td>Классы css, которые нужно добавить к ячейке.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Fill</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Всегда привязка. Цвет для заливки фона ячейки. Используется для заливки фоном, цвет которого
+					зависит от данных. Использует css-свойство <code>background-color</code>.
+					Не совместимо со свойством <code>CssStyle</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CssStyle</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Всегда привязка. Правила css для ячейки. Свойство должно вернуть объект. Имя свойства - свойтсво css,
+					значение - соответствующее значение. В именах свойств можно использовать camelCase нотацию, например свойство
+					<code>background-color</code> можно представить как <code>backgroundColor</code>.
+					Не совместимо со свойством <code>Fill</code>.
+				</td>
+			</tr>
+			<tr>
 				<td colspan="3">
 					<a href="/xaml/abstract/uicontentelement">Свойства базового элемента</a>
 				</td>

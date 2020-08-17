@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
-		Июль 2020				/whatsnew/w202007
+		Август 2020				/whatsnew/w202008
 		Июнь 2020				/whatsnew/w202006
 		Май 2020				/whatsnew/w202005
 		Март 2020				/whatsnew/w202003
@@ -42,6 +42,7 @@
 	Иерархические модели		/models/tree
 	Перекрестные модели			/models/cross
 	Модели с группировкой		/models/group
+	Работа с изображениями		/models/image
 
 
 Представления	/views/index
@@ -145,7 +146,7 @@
 			SheetRow		/xaml/sheet/sheetrow
 			SheetSection		/xaml/sheet/sheetsection
 			SheetTreeSection	/xaml/sheet/sheettreesection
-
+			SheetAutoGenerate	/xaml/sheet/sheetautogenerate
 		Привязки					/xaml/bind/index
 			Bind					/xaml/bind/bind
 			BindCmd					/xaml/bind/bindcmd
@@ -165,6 +166,7 @@
 			Length			/xaml/simple/length
 			Size			/xaml/simple/size
 			Thickness		/xaml/simple/thickness
+			PrintPage		/xaml/simple/printpage
 			UIElementCollection			/xaml/simple/uielementcollection
 
 		Перечисления	/xaml/enums/index

@@ -108,7 +108,8 @@
     <Content Include="html\messaging\templatedmessage.html" />
     <Content Include="html\messaging\template.html" />
     <Content Include="html\messaging\index.html" />
-    <Content Include="html\whatsnew\w202007.html" />
+    <Content Include="html\models\image.html" />
+    <Content Include="html\whatsnew\w202008.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
     <Content Include="html\workflow\objects\index.html" />
     <Content Include="html\workflow\objects\trackrecord.html" />
@@ -232,6 +233,7 @@
     <Content Include="html\xaml\sheet\sheetcolumngroup.html" />
     <Content Include="html\xaml\sheet\sheetcellgroup.html" />
     <Content Include="html\xaml\sheet\sheetcolumn.html" />
+    <Content Include="html\xaml\sheet\sheetautogenerate.html" />
     <Content Include="html\xaml\sheet\sheetsection.html" />
     <Content Include="html\xaml\sheet\sheettreesection.html" />
     <Content Include="html\xaml\sheet\sheetpage.html" />
@@ -240,6 +242,7 @@
     <Content Include="html\xaml\sheet\sheetcell.html" />
     <Content Include="html\xaml\simple\index.html" />
     <Content Include="html\xaml\simple\gapsize.html" />
+    <Content Include="html\xaml\simple\printpage.html" />
     <Content Include="html\xaml\simple\uielementcollection.html" />
     <Content Include="html\xaml\simple\length.html" />
     <Content Include="html\xaml\simple\size.html" />
