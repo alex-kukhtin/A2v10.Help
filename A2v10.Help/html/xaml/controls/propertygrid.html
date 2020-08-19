@@ -99,4 +99,35 @@
 		</tr>
 	</table>
 
+
+	<h3>Пример</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<PropertyGrid GridLines="Horizontal" NoWrapName="True">
+	<PropertyGridItem Name="Identifier" Content="{Bind Document.Id}" />
+	<PropertyGridItem Name="Date Modified" Content="{Bind Document.Date, DataType=DateTime}" />
+	<PropertyGridItem Name="User Modified" Content="{Bind Document.User.Name}" />
+</PropertyGrid>
+</script>
+</pre>
+	</p>
+	<p>
+		Результат:
+		<div class="xaml-sample">
+			<table class="prop-grid grid-horizontal no-wrap-name">
+				<colgroup>
+					<col class="prop-name"/>
+					<col class="prop-value"/>
+				</colgroup>
+				<tbody>
+					<tr><td class="prop-name">Identifier</td><td class="prop-value">95053</td></tr>
+					<tr><td class="prop-name">Date Modified</td><td class="prop-value">17.08.2020 15:33</td></tr>
+					<tr><td class="prop-name">User Modified</td><td class="prop-value">System administrator</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</p>
+
 </div>

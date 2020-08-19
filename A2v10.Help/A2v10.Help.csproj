@@ -166,6 +166,8 @@
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\case.html" />
     <Content Include="html\xaml\containers\dropdownmegamenu.html" />
+    <Content Include="html\xaml\containers\wizardPage.html" />
+    <Content Include="html\xaml\containers\wizard.html" />
     <Content Include="html\xaml\controls\propertygriditem.html" />
     <Content Include="html\xaml\controls\propertygrid.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />

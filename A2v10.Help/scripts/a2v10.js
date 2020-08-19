@@ -126,9 +126,9 @@ app.modules['std:locale'] = function () {
 
 
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-/*20181204-7382*/
+/*20200722-7691*/
 /* platform/webvue.js */
 
 (function () {
@@ -141,10 +141,15 @@ app.modules['std:locale'] = function () {
 		Vue.nextTick(func);
 	}
 
+	function print() {
+		window.print();
+	}
+
 
 	app.modules['std:platform'] = {
 		set: set,
 		defer: defer,
+		print: print,
 		File: File, /*file ctor*/
 		performance: performance
 	};
@@ -176,7 +181,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200505-7564
+// 20200714-7688
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -422,6 +427,19 @@ app.modules['std:utils'] = function () {
 		return formatFunc(num);
 	}
 
+	function formatDateWithFormat(date, format) {
+		if (!format)
+			return formatDate(date);
+		switch (format) {
+			case 'MMMM yyyy':
+				return capitalize(date.toLocaleDateString(locale.$Locale, { month: 'long', year: 'numeric' }));
+			default:
+				console.error('invalid date format: ' + format);
+		}
+		return formatDate(date);
+	}
+
+
 	function format(obj, dataType, opts) {
 		opts = opts || {};
 		if (!dataType)
@@ -436,6 +454,8 @@ app.modules['std:utils'] = function () {
 				}
 				if (dateIsZero(obj))
 					return '';
+				if (opts.format)
+					return formatDateWithFormat(obj, opts.format);
 				return formatDate(obj) + ' ' + formatTime(obj);
 			case "Date":
 				if (isString(obj))
@@ -446,6 +466,8 @@ app.modules['std:utils'] = function () {
 				}
 				if (dateIsZero(obj))
 					return '';
+				if (opts.format)
+					return formatDateWithFormat(obj, opts.format);
 				return formatDate(obj);
 			case 'DateUrl':
 				if (dateIsZero(obj))
@@ -956,7 +978,7 @@ app.modules['std:url'] = function () {
 	function parseUrlAndQuery(url, querySrc) {
 		let query = {};
 		for (let p in querySrc) {
-			if (p.startsWith('_')) continue;
+			if (p.startsWith('_') || p.startsWith('$')) continue;
 			query[p] = toUrl(querySrc[p]); // all values are string
 		}
 		let rv = { url: url, query: query };
@@ -1330,7 +1352,7 @@ app.modules['std:period'] = function () {
 
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200509-7655
+// 20200725-7693
 /* services/modelinfo.js */
 
 app.modules['std:modelInfo'] = function () {
@@ -1338,7 +1360,8 @@ app.modules['std:modelInfo'] = function () {
 	return {
 		copyfromQuery: copyFromQuery,
 		get: getPagerInfo,
-		reconcile: reconcile
+		reconcile,
+		reconcileAll
 	};
 
 	function copyFromQuery(mi, q) {
@@ -1375,6 +1398,13 @@ app.modules['std:modelInfo'] = function () {
 				mi.Filter[p] = dx;
 				//console.dir(mi.Filter[p]);
 			}
+		}
+	}
+
+	function reconcileAll(m) {
+		if (!m) return;
+		for (let p in m) {
+			reconcile(m[p]);
 		}
 	}
 };
@@ -1999,7 +2029,7 @@ app.modules['std:validators'] = function () {
 
 /* Copyright © 2015-2020 Alex Kukhtin. All rights reserved.*/
 
-/*20200510-7655*/
+/*20200817-7702*/
 // services/datamodel.js
 
 (function () {
@@ -2028,6 +2058,7 @@ app.modules['std:validators'] = function () {
 	const utils = require('std:utils');
 	const log = require('std:log', true);
 	const period = require('std:period');
+	const modelInfoTool = require('std:modelInfo');
 
 	let __initialized__ = false;
 
@@ -2352,6 +2383,29 @@ app.modules['std:validators'] = function () {
 			};
 		}
 
+		function setDefaults(root) {
+			if (!root.$template || !root.$template.defaults)
+				return;
+			for (let p in root.$template.defaults) {
+				let px = p.lastIndexOf('.');
+				if (px === -1)
+					continue;
+				let path = p.substring(0, px);
+				let prop = p.substring(px + 1);
+				if (prop.endsWith('[]'))
+					continue;
+				let def = root.$template.defaults[p];
+				let obj = utils.simpleEval(root, path);
+				if (obj.$isNew) {
+					console.dir('set default');
+					if (utils.isFunction(def))
+						obj[prop] = def(obj);
+					else
+						obj[prop] = def;
+				}
+			}
+		}
+
 		let constructEvent = ctorname + '.construct';
 		let _lastCaller = null;
 		let propForConstruct = path ? propFromPath(path) : '';
@@ -2370,6 +2424,7 @@ app.modules['std:validators'] = function () {
 				}
 			}
 			elem._setModelInfo_ = setRootModelInfo;
+			elem._setRuntimeInfo_ = setRootRuntimeInfo;
 			elem._findRootModelInfo = findRootModelInfo;
 			elem._saveSelections = saveSelections;
 			elem._restoreSelections = restoreSelections;
@@ -2377,6 +2432,7 @@ app.modules['std:validators'] = function () {
 			elem._needValidate_ = false;
 			elem._modelLoad_ = (caller) => {
 				_lastCaller = caller;
+				setDefaults(elem);
 				elem._fireLoad_();
 				__initialized__ = true;
 			};
@@ -2597,6 +2653,8 @@ app.modules['std:validators'] = function () {
 		};
 
 		arr.$loadLazy = function () {
+			if (!this.$isLazy())
+				return;
 			return new Promise((resolve, reject) => {
 				if (!this.$vm) return;
 				if (this.$loaded) { resolve(this); return; }
@@ -2604,7 +2662,7 @@ app.modules['std:validators'] = function () {
 				const meta = this.$parent._meta_;
 				if (!meta.$lazy) { resolve(this); return; }
 				let prop = propFromPath(this._path_);
-				if (!meta.$lazy.indexOf(prop) === -1) { resolve(this); return; }
+				if (meta.$lazy.indexOf(prop) === -1) { resolve(this); return; }
 				this.$vm.$loadLazy(this.$parent, prop).then(() => resolve(this));
 			});
 		};
@@ -3283,7 +3341,7 @@ app.modules['std:validators'] = function () {
 		}
 	}
 
-	function merge(src, afterSave, existsOnly) {
+	function merge(src, checkBindOnce, existsOnly) {
 		let oldId = this.$id__;
 		try {
 			if (src === null)
@@ -3292,7 +3350,7 @@ app.modules['std:validators'] = function () {
 			this._lockEvents_ += 1;
 			for (var prop in this._meta_.props) {
 				if (prop.startsWith('$$')) continue; // always skip
-				if (afterSave && isSkipMerge(this._root_, prop)) continue;
+				if (checkBindOnce && isSkipMerge(this._root_, prop)) continue;
 				let ctor = this._meta_.props[prop];
 				if (ctor.type) ctor = ctor.type;
 				let trg = this[prop];
@@ -3409,6 +3467,31 @@ app.modules['std:validators'] = function () {
 		}
 	}
 
+	function setRootRuntimeInfo(runtime) {
+		if (!runtime) return;
+		if (runtime.$cross) {
+			for (let p in this) {
+				if (p.startsWith("$") || p.startsWith('_')) continue;
+				let ta = this[p];
+				if (ta._elem_ && ta.$cross) {
+					for (let x in runtime.$cross) {
+						if (ta._elem_.name != x) continue;
+						let t = ta.$cross;
+						let s = runtime.$cross[x];
+						for (let p in t) {
+							let ta = t[p];
+							let sa = s[p];
+							if (ta && sa)
+								ta.splice(0, ta.length, ...sa);
+							else if (ta && !sa)
+								ta.splice(0, ta.length);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	function setModelInfo(root, info, rawData) {
 		// may be default
 		root.__modelInfo = info ? info : {
@@ -3416,6 +3499,7 @@ app.modules['std:validators'] = function () {
 		};
 		let mi = rawData.$ModelInfo;
 		if (!mi) return;
+		modelInfoTool.reconcileAll(mi);
 		for (let p in mi) {
 			root[p].$ModelInfo = checkPeriod(mi[p]);
 		}
@@ -3948,7 +4032,7 @@ app.modules['std:tools'] = function () {
 
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200322-7643
+// 20200713-7685
 /* services/html.js */
 
 app.modules['std:html'] = function () {
@@ -3980,10 +4064,10 @@ app.modules['std:html'] = function () {
 		body.style.display = "none";
 	}
 
-	function getRowHeight(elem) {
+	function getRowHeight(elem, padding) {
 		let rows = elem.getElementsByTagName('tr');
 		for (let r = 0; r < rows.length; r++) {
-			let h = rows[r].offsetHeight - 12; /* padding !!!*/
+			let h = rows[r].offsetHeight - (padding || 12); /* padding from css */
 			rows[r].setAttribute('data-row-height', h);
 		}
 	}
@@ -6049,7 +6133,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200505-7654
+// 20200624-7675
 // components/datagrid.js*/
 
 (function () {
@@ -6756,7 +6840,7 @@ Vue.component('validator-control', {
 				let cls = '';
 				if (column.fit || column.controlType === 'validator')
 					cls += 'fit';
-				if (utils.isDefined(column.dir))
+				if (this.sort && column.isSortable && utils.isDefined(column.dir))
 					cls += ' sorted';
 				return cls;
 			},
@@ -6891,7 +6975,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-// 20200511-7656
+// 20200625-7676
 /*components/pager.js*/
 
 
@@ -7007,6 +7091,8 @@ template: `
 			// middle
 			let ms = 2;
 			let me = this.pages - 1;
+			if (this.pages == 2)
+				me = 2;
 			let sd = false, ed = false, cp = this.currentPage;
 			let len = me - ms;
 			if (len > 4) {
@@ -10573,9 +10659,9 @@ Vue.directive('settabindex', {
 })();
 
 
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2018-2020 Alex Kukhtin. All rights reserved.
 
-/*20190114-7412/
+/*20200725-7693/
 /* directives/pageorient.js */
 
 
@@ -10583,8 +10669,13 @@ Vue.directive('settabindex', {
 
 	const pageStyle = Symbol();
 
+	let bindVal = null;
+	let elemStyle = null;
+
 	Vue.directive('page-orientation', {
 		bind(el, binding) {
+			bindVal = null;
+			elemStyle = null;
 			let style = document.createElement('style');
 			style.innerHTML = `@page {size: A4 ${binding.value}; margin:1cm;}`;
 			document.head.appendChild(style);
@@ -10598,6 +10689,82 @@ Vue.directive('settabindex', {
 			}
 		}
 	});
+
+	function resetScroll() {
+		let el = document.getElementsByClassName("with-wrapper");
+		if (el && el.length) {
+			let spw = el[0];
+			spw.scrollTo(0, 0);
+		}
+	}
+
+	function createStyleText(zoom) {
+		if (!bindVal) return null;
+		let stv = `@media print {@page {size: ${bindVal.pageSize || 'A4'} ${bindVal.orientation}; margin:${bindVal.margin};}`;
+		zoom = zoom || bindVal.zoom;
+		if (zoom)
+			stv += `.sheet-page > .sheet { zoom: ${zoom}; width: 1px;} .print-target {zoom: ${zoom}}`;
+		stv += '}';
+		return stv;
+	}
+
+	function calcPrintArea() {
+		let div = document.createElement('div');
+		div.classList.add('mm-100-100')
+		document.body.appendChild(div);
+		let rv = {
+			w: (div.clientWidth - 5) / 100.0,
+			h: (div.clientHeight - 5) / 100.0
+		};
+		document.body.removeChild(div);
+		return rv;
+	}
+
+	function printEvent(ev) {
+		// margin: 2cm;
+		resetScroll();
+		if (!bindVal) return;
+		if (bindVal.zoom != 'auto') return;
+		let ecls = document.getElementsByClassName('sheet');
+		if (!ecls || !ecls.length) return;
+		let tbl = ecls[0];
+		let pageSize = { w: 210, h: 297 }; // A4
+		let margin = { t: 10, r: 10, b: 10, l: 10 };
+		if (bindVal.orientation === 'landscape')
+			[pageSize.w, pageSize.h] = [pageSize.h, pageSize.w];
+		let k = calcPrintArea();
+		let wx = tbl.clientWidth / k.w;
+		let hy = tbl.clientHeight / k.h;
+		let zx = (pageSize.w - margin.l - margin.r - 5) / wx;
+		let zy = (pageSize.h - margin.t - margin.b - 5) / hy;
+		let z = Math.round(Math.min(zx, zy) * 1000) / 1000;
+		elemStyle.innerHTML = createStyleText(z);
+	}
+
+
+	Vue.directive('print-page', {
+		bind(el, binding) {
+			let val = binding.value;
+			bindVal = val;
+			let stv = createStyleText();
+			if (stv) {
+				let style = document.createElement('style');
+				style.innerHTML = stv;
+				elemStyle = document.head.appendChild(style);
+				el[pageStyle] = style;
+			}
+			window.addEventListener('beforeprint', printEvent);
+		},
+
+		unbind(el) {
+			let style = el[pageStyle];
+			if (style) {
+				document.head.removeChild(style);
+			}
+			window.removeEventListener('beforeprint', printEvent);
+		}
+	});
+
 })();
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
@@ -10759,7 +10926,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-/*20200612-7673*/
+/*20200817-7702*/
 // controllers/base.js
 
 (function () {
@@ -11099,8 +11266,10 @@ Vue.directive('resize', {
 					dataservice.post(url, jsonData).then(function (data) {
 						if (self.__destroyed__) return;
 						if (utils.isObject(data)) {
-							dat.$merge(data);
+							dat.$merge(data, true/*checkBindOnce*/);
+							modelInfo.reconcileAll(data.$ModelInfo);
 							dat._setModelInfo_(undefined, data);
+							dat._setRuntimeInfo_(data.$runtime);
 							dat._fireLoad_();
 							dat._restoreSelections(saveSels);
 							resolve(dat);
@@ -11523,7 +11692,10 @@ Vue.directive('resize', {
 				let table = elem[0];
 				if (htmlTools) {
 					htmlTools.getColumnsWidth(table);
-					htmlTools.getRowHeight(table);
+					var tbl = table.getElementsByTagName('table');
+					// attention! from css!
+					let padding = tbl && tbl.length && tbl[0].classList.contains('compact') ? 4 : 12;
+					htmlTools.getRowHeight(table, padding);
 				}
 				let html = table.innerHTML;
 				let data = { format, html, fileName, zoom: +(window.devicePixelRatio).toFixed(2) };
@@ -11714,6 +11886,8 @@ Vue.directive('resize', {
 					return utils.format(value, opts.dataType, { hideZeros: opts.hideZeros, format: opts.format });
 				if (opts.format && opts.format.indexOf('{0}') !== -1)
 					return opts.format.replace('{0}', value);
+				if (utils.isDate(value) && opts.format)
+					return utils.format(value, 'DateTime', { format: opts.format });
 				return value;
 			},
 
@@ -11807,6 +11981,7 @@ Vue.directive('resize', {
 			},
 
 			$defer: platform.defer,
+			$print: platform.print,
 
 			$hasError(path) {
 				let ps = utils.text.splitPath(path);
@@ -12470,7 +12645,7 @@ Vue.directive('resize', {
 })();	
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
-/*20200613-7673*/
+/*20200624-7676*/
 /* controllers/shell.js */
 
 (function () {
@@ -12723,7 +12898,6 @@ Vue.directive('resize', {
 				if (this.isNavBarMenu) return true;
 				let route = this.route;
 				if (menu.isSeparatePage(this.pages, route.seg0)) return false;
-				console.dir(route.len);
 				return route.seg0 !== 'app' && (route.len === 2 || route.len === 3);
 			},
 			sideBarVisible() {

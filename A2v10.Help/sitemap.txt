@@ -112,6 +112,8 @@ https://docs.a2v10.com/xaml/containers/tab
 https://docs.a2v10.com/xaml/containers/tabpanel
 https://docs.a2v10.com/xaml/containers/taskpad
 https://docs.a2v10.com/xaml/containers/toolbar
+https://docs.a2v10.com/xaml/containers/wizard
+https://docs.a2v10.com/xaml/containers/wizardpage
 https://docs.a2v10.com/xaml/text/index
 https://docs.a2v10.com/xaml/text/badge
 https://docs.a2v10.com/xaml/text/break

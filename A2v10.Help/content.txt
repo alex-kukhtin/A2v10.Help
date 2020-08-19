@@ -120,6 +120,8 @@
 			TabPanel			/xaml/containers/tabpanel
 			Taskpad				/xaml/containers/taskpad
 			Toolbar				/xaml/containers/toolbar
+			Wizard				/xaml/containers/wizard
+			WizardPage			/xaml/containers/wizardpage
 
 		Текстовые элементы			/xaml/text/index
 			Badge				/xaml/text/badge
