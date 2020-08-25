@@ -38,7 +38,8 @@
 Модели данных		/models/index
 	Общая информация			/models/general
 	Простые модели				/models/simple
-	Работа с коллекциями		/models/collections
+	Работа с массивами			/models/array
+	Разбиение на страницы		/models/paging
 	Иерархические модели		/models/tree
 	Перекрестные модели			/models/cross
 	Модели с группировкой		/models/group
@@ -144,6 +145,7 @@
 			SheetCellGroup	/xaml/sheet/sheetcellgroup
 			SheetColumn		/xaml/sheet/sheetcolumn
 			SheetColumnGroup		/xaml/sheet/sheetcolumngroup
+			SheetGroupCell			/xaml/sheet/sheetgroupcell
 			SheetPage		/xaml/sheet/sheetpage
 			SheetRow		/xaml/sheet/sheetrow
 			SheetSection		/xaml/sheet/sheetsection

@@ -99,6 +99,22 @@ interface IConfirm {
 	</div>
 
 	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$reload(array?:object[]): void</pre></div>
+		<p>
+			Обновляет модель или ее часть.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>array</code> - не обязательно. Обновляемый <a href="/models/array">"ленивый массив"</a>.</li>
+		</ul>
+		<p>
+			Если указан аргумент, то обновляются данные ленивого массива, в противном случае - 
+			обновляются данные всей модели. Некоторые свойства модели можно "защитить" от обновления с помощью 
+			опции шаблона <a class="code-link" href="/template/options">bindOnce</a>.
+		</p>
+	</div>
+
+	<div class="method">
 		<div class="syntax"><pre class="code-highlight js">$msg(msg:string, title?:string, style?:string): Promise&lt;object&gt;</pre></div>
 		<p>
 			Метод выводит сообщение в модальном окне.

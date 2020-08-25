@@ -108,6 +108,7 @@
     <Content Include="html\messaging\templatedmessage.html" />
     <Content Include="html\messaging\template.html" />
     <Content Include="html\messaging\index.html" />
+    <Content Include="html\models\paging.html" />
     <Content Include="html\models\image.html" />
     <Content Include="html\whatsnew\w202008.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
@@ -119,7 +120,7 @@
     <Content Include="html\xaml\components\sortdescription.html" />
     <Content Include="html\xaml\components\filterdescription.html" />
     <Content Include="html\models\cross.html" />
-    <Content Include="html\models\collections.html" />
+    <Content Include="html\models\array.html" />
     <Content Include="html\models\group.html" />
     <Content Include="html\models\simple.html" />
     <Content Include="html\models\tree.html" />
@@ -237,6 +238,7 @@
     <Content Include="html\xaml\sheet\sheetcolumn.html" />
     <Content Include="html\xaml\sheet\sheetautogenerate.html" />
     <Content Include="html\xaml\sheet\sheetsection.html" />
+    <Content Include="html\xaml\sheet\sheetgroupcell.html" />
     <Content Include="html\xaml\sheet\sheettreesection.html" />
     <Content Include="html\xaml\sheet\sheetpage.html" />
     <Content Include="html\xaml\sheet\sheet.html" />

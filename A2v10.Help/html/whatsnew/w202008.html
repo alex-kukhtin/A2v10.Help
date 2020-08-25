@@ -20,17 +20,24 @@
 
 		NEW:
 		Wizard - описать
-		LazyArray - описать
 		GroupModel - описание.
 		Bind, DataType=Date, Format='MMMM yyyy';
 		model.json - events/afterSave
 		datamodel.defaults
 		Messaging. Написать, что TargetId берется с Data или PageId.
+		<li>
+			%%%events.AfterSave - data after save!
+		</li>
+		<li>
+			%%%%Добавлено описание работы с <a href="/models/image">изображениями в моделях данных</a>.
+		</li>
+		<li>
+			%%%%Добавлено описание <a href="/models/paging">разбиения на страницы, сортировки и фильтрации</a> в моделях данных.
+		</li>
 
 	 FROM PAPER:
 			1. Client localization
 			2. XAML Styles
-			3. Tokenizer - не понимает String|Number без пробелов.
 			4. Export - описание команды и шаблона Excel
 			5. Search - подсветка найденого текста.
 			6. Period
@@ -85,9 +92,6 @@
 		BindCmd.Dialog New
 
 		Bind.Format for Number, Currency
-		-->
-	<!--
-		   TODO: SheetSection/SheetTreeSection
 	-->
 
 	<h3>Xaml</h3>
@@ -137,24 +141,20 @@
 	<h3>Программирование сервера</h3>
 	<ul class="std">
 		<li>
-			%%%В серверную команду 		callApi.model
-		</li>
-		<li>
-			%%%events.AfterSave - data after save!
+			В серверную команду <a href="/app/callapicommand">callApi</a> добавлена возможность
+			загрузки модели данных и привязки свойств модели перед обращением к внешнему API.
 		</li>
 	</ul>
 
 	<h3>Справка</h3>
 	<ul class="std">
 		<li>
-			%%%Добавлено описание элементов <a class="code-link" href="/xaml/sheet/sheetsection">SheetSection</a>,
-			<a class="code-link" href="/xaml/sheet/sheettreesection">SheetTreeSection</a>.
+			Добавлено описание элементов <a class="code-link" href="/xaml/sheet/sheetsection">SheetSection</a>,
+			<a class="code-link" href="/xaml/sheet/sheettreesection">SheetTreeSection</a>,
+			<a class="code-link" href="/xaml/sheet/sheetgroupcell">SheetGroupCell</a>.
 		</li>
 		<li>
-			%%%Добавлено описание работы с <a href="/models/collections">коллекциями в моделях данных</a>.
-		</li>
-		<li>
-			%%%%Добавлено описание работы с <a href="/models/image">изображениями в моделях данных</a>.
+			Добавлено описание работы с <a href="/models/array">массивами в моделях данных</a>.
 		</li>
 	</ul>
 </div>

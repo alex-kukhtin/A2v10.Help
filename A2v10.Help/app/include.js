@@ -289,12 +289,12 @@
 	function highlight(body) {
 
 		/*console.dir(body);*/
-		const jsDelims = ' ,()[]{}\\/*:=;,+-<>';
+		const jsDelims = ' ,()[]{}\\/*:=;,+-<>|';
 		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault|clare)|e(lse|val|xtends|num)|f(or|unction|alse|inally)|i(f|n|nterface)|n(ew|ull)|v(ar|oid)|let|s(witch|tatic)|t(his|hrow|ry|ypeof|rue|ype)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		const sqlDelims = ' ,[]+-*/:;<>';
-		const sqlKeywords = /^(a(s|ll|lter)|b(egin|y)|se(t|lect)|from|update|i(f|nsert|nner)|delete|o(r|n|uter)|join|w(here|ith)|group|order|left|right|e(nd|lse|xists)|union|procedure|c(reate|ase)|nocount)$/;
+		const sqlKeywords = /^(a(s|ll|lter)|b(egin|y)|se(t|lect)|from|update|i(f|nsert|nner)|delete|o(r|n|uter)|join|w(here|ith)|g(o|roup)|order|left|right|e(nd|lse|xists)|union|procedure|c(reate|ase)|nocount)$/;
 		const sqlInstr = /^(null|bigint)$/;
 
 		let jsOpts = {
