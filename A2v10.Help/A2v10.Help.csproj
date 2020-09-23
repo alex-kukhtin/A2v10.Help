@@ -110,6 +110,7 @@
     <Content Include="html\messaging\index.html" />
     <Content Include="html\models\paging.html" />
     <Content Include="html\models\image.html" />
+    <Content Include="html\whatsnew\w202009.html" />
     <Content Include="html\whatsnew\w202008.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
     <Content Include="html\workflow\objects\index.html" />
