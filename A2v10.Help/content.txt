@@ -225,6 +225,7 @@
 	Шаблоны		/template/index
 		События			/template/events
 		Опции			/template/options
+		Начальные значения		/template/defaults
 		Свойства		/template/properties
 		Валидаторы		/template/validators
 		Команды			/template/commands
