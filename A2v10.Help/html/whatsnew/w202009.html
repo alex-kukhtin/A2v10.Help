@@ -3,7 +3,7 @@
 	<!--keywords:Что нового-->
 	<div class="title">
 		<h1>
-			Выпуск 28 - версии 7703-7707 (Сентябрь 2020)
+			Выпуск 28 - версии 7703-7709 (Сентябрь 2020)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все выпуски</a>|
@@ -15,7 +15,6 @@
 
 	<!--
 
-		DropDownMegaMenu.Separate
 		redirect.json
 
 		template.validator - applyIf описать
@@ -57,13 +56,11 @@
 		IRoot.$dirty
 		Card - сделать пример
 
-		MAY 2020
-		======
 		SheetColumnCollection, TableColumnCollection -> Convertor
 
 		TODO: Validator (Component)
 		TODO: Attachments/ChatItem/FlexList/StateCard/TableMarkCell/FilterDescription
-		TODO: Case/DropDownMegaMenu/Flex/Include/Partial/Splitter/Tab/Toolbar
+		TODO: Case/Flex/Include/Partial/Splitter/Tab/Toolbar
 		TODO: Lengths/Size/Thickness
 
 		export.template expression {{}}
@@ -98,11 +95,13 @@
 	<h3>Xaml</h3>
 	<ul class="std">
 		<li>
-			В элемент <a class="code-link" href="/xaml/containers/tabpanel">TabPanel</a> добавлено
-			свойство <code>Overflow</code>.
+			В элемент <a class="code-link" href="/xaml/containers/tabpanel">TabPanel</a> добавлены
+			свойства <code>Overflow</code>, <code>TabPosition</code>.
 		</li>
-		<li>Теперь свойство <code>CheckedValue</code> элемента управления <a class="code-link" href="/xaml/controls/radio">Radio</a>
-		поддерживает привязки.</li>
+		<li>
+			Теперь свойство <code>CheckedValue</code> элемента управления <a class="code-link" href="/xaml/controls/radio">Radio</a>
+			поддерживает привязки.
+		</li>
 	</ul>
 
 
@@ -111,10 +110,22 @@
 		<li>В <a href="/template/index">шаблоны</a> добавлен раздел <a href="/template/defaults">defaults</a>.</li>
 	</ul>
 
-	<h3>Программирование сервера</h3>
-	<ul class="std"></ul>
+	<h3>Программирование клиента</h3>
+	<ul class="std">
+		<li>В <a href="/template/index">шаблоны</a> добавлен раздел <a href="/template/defaults">defaults</a>.</li>
+	</ul>
+
+	<h3>Прикладные приложения</h3>
+	<ul class="std">
+		<li>В разделы <a class="code-link" href="/app/actions">actions</a> и <a class="code-link" href="/app/dialogs">dialogs</a> 
+			добавлена возможность задавать ссылку на файл описания типов TypeScript для динамической <a href="/tests/checktypes">проверки типов</a> во время выполнения.
+		</li>
+	</ul>
 
 	<h3>Справка</h3>
 	<ul class="std">
+		<li>
+			Добавлено описание элемента <a class="code-link" href="/xaml/containers/dropdownmegamenu">DropDownMegaMenu</a>.
+		</li>
 	</ul>
 </div>

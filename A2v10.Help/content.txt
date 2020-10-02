@@ -259,6 +259,7 @@
 	TemplatedMessage	/messaging/templatedmessage
 
 Тестирование		/tests/index
+	Проверка типов	/tests/checktypes
 	Инструменты		/tests/tools
 
 О справочной системе	/help/about

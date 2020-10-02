@@ -111,6 +111,7 @@
     <Content Include="html\models\paging.html" />
     <Content Include="html\models\image.html" />
     <Content Include="html\template\defaults.html" />
+    <Content Include="html\tests\checktypes.html" />
     <Content Include="html\whatsnew\w202009.html" />
     <Content Include="html\whatsnew\w202008.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />

@@ -237,5 +237,6 @@ https://docs.a2v10.com/messaging/messageaddress
 https://docs.a2v10.com/messaging/template
 https://docs.a2v10.com/messaging/templatedmessage
 https://docs.a2v10.com/tests/index
+https://docs.a2v10.com/tests/checktypes
 https://docs.a2v10.com/tests/tools
 https://docs.a2v10.com/help/about

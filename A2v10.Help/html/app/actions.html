@@ -30,6 +30,7 @@
   "copy": true | false,
   "template": "",
   "view": "",
+  "checkTypes": "",
   "indirect": true | false,
   "parameters": {}
   "export": {
@@ -72,7 +73,7 @@
 				<td>object</td>
 				<td>
 					Необязательно. Дополнительная модель, которая будет объединена с основной. Можно задать другую
-					схему и другой источник данных. Если схема или источник не указаны, они берутся 
+					схему и другой источник данных. Если схема или источник не указаны, они берутся
 					из родительского элемента.
 				</td>
 			</tr>
@@ -101,6 +102,11 @@
 				<td class="prop-name">view</td>
 				<td>string</td>
 				<td>Путь к файлу представления для действия.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">checkTypes</td>
+				<td>string</td>
+				<td>Имя файла *.d.ts для динамической <a href="/tests/checktypes">проверки типов</a>.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">indirect</td>
