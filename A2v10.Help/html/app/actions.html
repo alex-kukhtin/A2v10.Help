@@ -36,7 +36,8 @@
   "export": {
      "fileName": "",
      "template": "",
-     "format":"xlsx" | "unknown"
+     "format":"xlsx" | "dbf" | "csv" | "unknown",
+     "encoding": "utf8" | "1251" | "866"
 	}
 }
 </script>
@@ -129,17 +130,34 @@
 					<table class="sub-table">
 						<tr>
 							<td class="prop-name">fileName</td>
-							<td>Строка. Имя сохраняемого файла, которое будет предложено пользователю;</td>
-						</tr>
-						<tr>
-							<td class="prop-name">template</td>
-							<td>Строка. Имя файла шаблона, на основании которого будет выполняться экспорт;</td>
+							<td>Строка. Имя сохраняемого файла, которое будет предложено пользователю.</td>
 						</tr>
 						<tr>
 							<td class="prop-name">format</td>
-							<td>Перечисление "xlsx"|unknown". В текущей реализации поддерживается только экспорт в формат <code>*.xlsx</code>.</td>
+							<td>
+								Перечисление <code>xlsx</code> | <code>dbf</code> | <code>csv</code>.
+								Формат файла для экспорта.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">template</td>
+							<td>
+								Строка. Имя файла шаблона, на основании которого будет выполняться экспорт.
+								Обязательно для экспорта в формат <code>xlsx</code>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">encoding</td>
+							<td>
+								Кодовая страница файла экспорта.
+								Обязательно для экспорта в форматы <code>dbf</code> и <code>csv</code>.
+								Перечисление: <code>utf8</code> | <code>1251</code> | <code>866</code>.
+							</td>
 						</tr>
 					</table>
+
+					При загрузке модели для экспорта будет вызываться хранимая процедура
+					с суффиксом <code>.Export</code>.
 				</td>
 			</tr>
 		</tbody>
