@@ -541,6 +541,12 @@ table.sheet-table tr.total th {
   width: 300px;
   font-size: 1rem;
 }
+.xaml-block {
+  border: 1px solid #ccc;
+  background-color: #fffff3;
+  padding: 1rem;
+  width: 100px;
+}
 pre.js .comment {
   color: forestgreen;
   font-style: italic;

@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
+		Декабрь 2020			/whatsnew/w202012
 		Октябрь 2020			/whatsnew/w202010
 		Сентябрь 2020			/whatsnew/w202009
 		Август 2020				/whatsnew/w202008
@@ -83,6 +84,7 @@
 			Separator			/xaml/controls/separator
 			StateCard			/xaml/controls/statecard
 			Static				/xaml/controls/static
+			TabButton			/xaml/controls/tabbutton
 			Table				/xaml/controls/table
 			TableCell			/xaml/controls/tablecell
 			TableColumn			/xaml/controls/tablecolumn
@@ -120,6 +122,7 @@
 			Splitter			/xaml/containers/splitter
 			StackPanel			/xaml/containers/stackpanel
 			Tab					/xaml/containers/tab
+			TabBar				/xaml/containers/tabbar
 			TabPanel			/xaml/containers/tabpanel
 			Taskpad				/xaml/containers/taskpad
 			Toolbar				/xaml/containers/toolbar

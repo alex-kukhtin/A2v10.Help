@@ -112,6 +112,7 @@
     <Content Include="html\models\image.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
+    <Content Include="html\whatsnew\w202012.html" />
     <Content Include="html\whatsnew\w202010.html" />
     <Content Include="html\whatsnew\w202009.html" />
     <Content Include="html\whatsnew\w202008.html" />
@@ -171,6 +172,7 @@
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\case.html" />
     <Content Include="html\xaml\containers\dropdownmegamenu.html" />
+    <Content Include="html\xaml\containers\tabbar.html" />
     <Content Include="html\xaml\containers\wizardPage.html" />
     <Content Include="html\xaml\containers\wizard.html" />
     <Content Include="html\xaml\controls\propertygriditem.html" />
@@ -202,6 +204,7 @@
     <Content Include="html\xaml\controls\code.html" />
     <Content Include="html\xaml\controls\header.html" />
     <Content Include="html\xaml\controls\emptypanel.html" />
+    <Content Include="html\xaml\controls\tabbutton.html" />
     <Content Include="html\xaml\controls\timepicker.html" />
     <Content Include="html\xaml\controls\static.html" />
     <Content Include="html\xaml\controls\flexlist.html" />
@@ -215,6 +218,7 @@
     <Content Include="html\xaml\diagram\group.html" />
     <Content Include="html\xaml\diagram\index.html" />
     <Content Include="html\xaml\diagram\diagram.html" />
+    <Content Include="html\xaml\enums\justifyitems.html" />
     <Content Include="html\xaml\enums\columnbackgroundstyle.html" />
     <Content Include="html\xaml\enums\radiobuttonstyle.html" />
     <Content Include="html\xaml\enums\autoflowmode.html" />

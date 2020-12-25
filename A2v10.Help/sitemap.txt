@@ -1,5 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
+https://docs.a2v10.com/whatsnew/w202012
 https://docs.a2v10.com/whatsnew/w202010
 https://docs.a2v10.com/whatsnew/w202009
 https://docs.a2v10.com/whatsnew/w202008
@@ -76,6 +77,7 @@ https://docs.a2v10.com/xaml/controls/selector
 https://docs.a2v10.com/xaml/controls/separator
 https://docs.a2v10.com/xaml/controls/statecard
 https://docs.a2v10.com/xaml/controls/static
+https://docs.a2v10.com/xaml/controls/tabbutton
 https://docs.a2v10.com/xaml/controls/table
 https://docs.a2v10.com/xaml/controls/tablecell
 https://docs.a2v10.com/xaml/controls/tablecolumn
@@ -112,6 +114,7 @@ https://docs.a2v10.com/xaml/containers/repeater
 https://docs.a2v10.com/xaml/containers/splitter
 https://docs.a2v10.com/xaml/containers/stackpanel
 https://docs.a2v10.com/xaml/containers/tab
+https://docs.a2v10.com/xaml/containers/tabbar
 https://docs.a2v10.com/xaml/containers/tabpanel
 https://docs.a2v10.com/xaml/containers/taskpad
 https://docs.a2v10.com/xaml/containers/toolbar

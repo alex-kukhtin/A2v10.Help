@@ -1,0 +1,98 @@
+﻿<div>
+	<!--title:Xaml.JustifyItems-->
+	<!--keywords:JustifyItems-->
+	<div class="title">
+		<h1>
+			Перечисление JustifyItems
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все перечисления</a>
+		</div>
+	</div>
+
+	<p>Задает распределение элементов.</p>
+
+	<p>
+		Используется:
+		<a class="code-link" href="/xaml/containers/stackpanel">StackPanel</a>,
+		<a class="code-link" href="/xaml/controls/flexlist">FlexList</a>.
+	</p>
+
+	<h3>Значения</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Значение</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Default</td>
+				<td>По умолчанию. Start.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Start</td>
+				<td>С начала.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Center</td>
+				<td>По центру.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">End</td>
+				<td>С конца</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SpaceAround</td>
+				<td>
+					Равномерно по ширине блока (пространство перед первым и после последнего элемента будет равно
+					половине расстояния между элементами).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SpaceEvenly</td>
+				<td>Равномерно по ширине блока (все элементы получают одинаковое пространство вокруг).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SpaceBetween</td>
+				<td>Равномерно по ширине блока (первый в начале, последний в конце).</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Пример</h3>
+
+	<p>
+		<div class="xaml-sample" id="xaml-justifyitems" style="width:600px">
+			<select v-model="value" style="padding:5px;margin-bottom:10px">
+				<option value="justify-start">Start</option>
+				<option value="justify-center">Center</option>
+				<option value="justify-end">End</option>
+				<option value="justify-space-around">SpaceAround</option>
+				<option value="justify-space-evenly">SpaceEvenly</option>
+				<option value="justify-space-between">SpaceBetween</option>
+			</select>
+			<div :class="value" class="stack-panel horizontal" style="border:1px solid #ccc;padding:6px;background-color:white">
+				<div class="xaml-block">Элемент 1</div>
+				<div class="xaml-block">Элемент 2</div>
+				<div class="xaml-block">Элемент 3</div>
+			</div>
+		</div>
+	</p>
+
+	<script type="text/javascript">
+		(function () {
+			if (!window.Vue) return;
+			var vm = new Vue({
+				el: "#xaml-justifyitems",
+				data() {
+					return {
+						value: 'justify-start'
+					};
+				}
+			});
+		})();
+	</script>
+
+</div>

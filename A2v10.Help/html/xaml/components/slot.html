@@ -66,10 +66,10 @@
 </List>
 <Slot Scope="{Bind Agents.$selected}">
 	<!--фактически: Agents.$selected.Documents-->
-		<DataGrid ItemsSource="{Bind Documents}">
-		...
+	<DataGrid ItemsSource="{Bind Documents}">
+	...
 	</DataGrid>
-		<Slot.Fallback>
+	<Slot.Fallback>
 		<Text>Нет выделенных элементов</Text>
 	</Slot.Fallback>
 </Slot>
