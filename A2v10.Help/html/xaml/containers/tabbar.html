@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div xmlns:v-bind="v-bind" xmlns:v-on="v-on">
 	<!--title:Xaml.TabBar-->
 	<!--keywords:TabBar-->
 	<div class="title">
@@ -116,10 +116,10 @@
 		<div class="grid xaml-sample" style="width:500px" id="xaml-tabbar">
 			<div class="a2-tab-bar">
 				<div class="a2-tab-bar-item">
-					<a :class="{active: isActive('1')}" class="a2-tab-button" href="" @click.stop.prevent="click('1')">Первая кнопка</a>
+					<a v-bind:class="{active: isActive('1')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('1')">Первая кнопка</a>
 				</div>
 				<div class="a2-tab-bar-item">
-					<a :class="{active: isActive('2')}" class="a2-tab-button" href="" @click.stop.prevent="click('2')">Вторая кнопка</a>
+					<a v-bind:class="{active: isActive('2')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('2')">Вторая кнопка</a>
 				</div>
 				<div class="divider" role="separator"></div>
 				<div class="a2-tab-description">

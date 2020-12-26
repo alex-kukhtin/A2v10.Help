@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div xmlns:v-bind="v-bind">
 	<!--title:Xaml.JustifyItems-->
 	<!--keywords:JustifyItems-->
 	<div class="title">
@@ -73,7 +73,7 @@
 				<option value="justify-space-evenly">SpaceEvenly</option>
 				<option value="justify-space-between">SpaceBetween</option>
 			</select>
-			<div :class="value" class="stack-panel horizontal" style="border:1px solid #ccc;padding:6px;background-color:white">
+			<div v-bind:class="value" class="stack-panel horizontal" style="border:1px solid #ccc;padding:6px;background-color:white">
 				<div class="xaml-block">Элемент 1</div>
 				<div class="xaml-block">Элемент 2</div>
 				<div class="xaml-block">Элемент 3</div>
