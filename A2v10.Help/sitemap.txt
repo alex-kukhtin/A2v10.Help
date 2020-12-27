@@ -38,6 +38,7 @@ https://docs.a2v10.com/models/general
 https://docs.a2v10.com/models/simple
 https://docs.a2v10.com/models/array
 https://docs.a2v10.com/models/paging
+https://docs.a2v10.com/models/update
 https://docs.a2v10.com/models/tree
 https://docs.a2v10.com/models/cross
 https://docs.a2v10.com/models/group

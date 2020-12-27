@@ -24,7 +24,7 @@ interface IController {
   // methods
   $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
   $requery(): void;
-  $reload(args?: any): void;
+  $reload(args?: any): Promise<void>;
   $modalClose(result?: any): void;
   $msg(msg: string, title?: string, style?:~CommonStyle): Promise<boolean>;
   $alert(msg: string | IMessage): Promise<boolean>;
@@ -99,7 +99,7 @@ interface IConfirm {
 	</div>
 
 	<div class="method">
-		<div class="syntax"><pre class="code-highlight js">$reload(array?:object[]): void</pre></div>
+		<div class="syntax"><pre class="code-highlight js">$reload(array?:object[]): Promise&lt;void&gt;</pre></div>
 		<p>
 			Обновляет модель или ее часть.
 		</p>

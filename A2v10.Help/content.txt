@@ -43,6 +43,7 @@
 	Простые модели				/models/simple
 	Работа с массивами			/models/array
 	Разбиение на страницы		/models/paging
+	Обновление моделей			/models/update
 	Иерархические модели		/models/tree
 	Перекрестные модели			/models/cross
 	Модели с группировкой		/models/group

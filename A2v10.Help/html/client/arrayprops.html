@@ -23,7 +23,7 @@
 <![CDATA[
 declare const enum InsertTo {
 	start = 'start',
-	end = 'end',
+	end   = 'end',
 	above = 'above',
 	below = 'below'
 }
@@ -38,7 +38,7 @@ interface IElementArray<T> extends Array<T> {
 	readonly $hasSelected: boolean;
 	readonly $selectedIndex: number;
 	readonly $checked: IElementArray<T>;
-	readonly $cross: { [prop: string]: string[] };
+	readonly $cross: {[prop: string]: string[]};
 	// methods
 	$empty(): this;
 	$remove(elem: T): this;
@@ -48,6 +48,7 @@ interface IElementArray<T> extends Array<T> {
 	$insert(src:object, to: InsertTo, ref?: T): T;
 	$copy(src: any[]): this;
 	$sum(fn: (item: T) => number): number;
+	$find(fn: (this: any, item:T, index?: number, array?: IElementArray<T>): boolean, thisArg:any): T
 }
 ]]>
 </script>
@@ -252,12 +253,46 @@ interface IElementArray<T> extends Array<T> {
 		<h4>Аргументы:</h4>
 		<ul class="params">
 			<li>
-				<code>fn</code> - функция обратного вызова, котрая должна вернуть свойство элемента массива для суммирования.
+				<code>fn</code> - функция обратного вызова, которая должна вернуть свойство элемента массива для суммирования.
 			</li>
 		</ul>
 		<h4>Возвращает:</h4>
 		<ul class="params">
 			<li>Вычисленную сумму.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$find(fn: (this: any, item:T, index?: number, array?: IElementArray<T>): boolean, thisArg?:any): T]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Ищет в массиве первый подходящий элемент. Функция отличается от обычного поиска в массиве тем, что 
+		для иерархических массивов она выполняет рекурсивный поиск по дереву.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>fn</code> - функция обратного вызова, которая должна вернуть <code>true</code>, 
+				если элемент подходит по критериям выборки.
+				Аргументы функции:
+				<ul>
+					<li>
+						<code>this?</code> - значение аргумента <code>thisArg</code>.
+					</li>
+					<li><code>item</code> - элемент массива.</li>
+					<li><code>index?</code> - индекс элемента.</li>
+					<li><code>array?</code> - массив, в которором выполняется поиск.</li>
+				</ul>
+			</li>
+			<li>
+				<code>thisArg</code> - значение аргумента <code>this</code> для функции обратного вызова
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Найденный элемент.</li>
 		</ul>
 	</div>
 </div>

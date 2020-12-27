@@ -16,16 +16,15 @@
 	<!--
 		List.Flush, List.BorderStyle
 		DatePicker.YearCutOff
-		array.$find .....
-		Include.Data
 		Messaging. Написать, что TargetId берется с Data или PageId.
 
 		TODO: Validator (Component)
-		TODO: /Case/Flex/Include/Partial/Splitter/Tab/UIElementCollection
+		TODO: /Case/Flex/Include/Partial/Splitter/Tab/UIElementCollection/Wizard/WizardPage
 		TODO: /Attachments/ChatItem/FlexList/StateCard/TableMarkCell/FilterDescription
 		TODO: /Lengths/Size/Thickness
 
 		TextBox.Accel
+		TreeViewItem.IsGroup binding
 
 		Mobile RegEx
 		redirect.json
@@ -33,21 +32,43 @@
 		template.validator - applyIf описать
 		dateutils.now();
 		datedeff('second', 'minute')
+		utils.format('#.00')
+
+		array.$isLazy, $load, $loadLazy, $resetLazy, $renumberRows, $ModelInfo
+		vm.$isDirty, $isPristine, $canSave
+		IRoot.$dirty
+		vm.$setCurrentUrl
+		Map.$setProperty
 
 		NEW:
-		Wizard - описать
 		GroupModel - описание.
 		Bind, DataType=Date, Format='MMMM yyyy';
+
 		model.json - events/afterSave
 		<li>
 			%%%events.AfterSave - data after save!
 		</li>
 		<li>
 			%%%%Добавлено описание работы с <a href="/models/image">изображениями в моделях данных</a>.
-		</li>
-		<li>
 			%%%%Добавлено описание <a href="/models/paging">разбиения на страницы, сортировки и фильтрации</a> в моделях данных.
 		</li>
+
+		Card - сделать пример
+		SheetColumnCollection, TableColumnCollection -> Convertor
+
+	export.template expression {{}}
+
+	ValidatorLabel
+	Validator Converter (Component)
+
+	commands... method (for api) /*get/post*/
+
+	Export - Argument,Data, Url
+	model.json (commandTimeout) и проверить!!!
+
+	BindCmd Report - Url, Data,
+	BindCmd.Dialog New
+	Bind.Format for Number, Currency
 
 	 FROM PAPER:
 	1. Client localization
@@ -57,37 +78,6 @@
 	6. Period
 	7. Render - описание
 	8. MakeHelp - StopWords наружу.
-
-
-	 NEW
-		vm.$isDirty, $isPristine, $canSave
-		IRoot.$dirty
-		Card - сделать пример
-
-		SheetColumnCollection, TableColumnCollection -> Convertor
-
-		export.template expression {{}}
-
-		=== PREV ====
-		ValidatorLabel
-		Flex (new control)
-		NavBar
-		Validator Converter (Component)
-		TreeViewItem.IsGroup binding
-
-		commands... method (for api) /*get/post*/
-
-		Export - Argument,Data, Url
-		model.json (commandTimeout) и проверить!!!
-
-		// prev
-		vm.$setCurrentUrl
-		Map.$setProperty
-		utils.format('#.00')
-
-		BindCmd Report - Url, Data,
-		BindCmd.Dialog New
-		Bind.Format for Number, Currency
 	-->
 
 	<h3>Xaml</h3>
@@ -106,10 +96,15 @@
 		</li>
 	</ul>
 
+	<h3>Программирование клиента</h3>
+	<ul class="std">
+		<li>В <a href="/client/arrayprops">методы массивов</a> добавлен метод <code>$find</code>.</li>
+	</ul>
 
 
 	<h3>Прикладные приложения</h3>
 	<ul class="std"></ul>
+
 
 	<h3>Справка</h3>
 	<ul class="std">
