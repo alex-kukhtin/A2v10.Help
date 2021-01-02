@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
+		Январь 2021			/whatsnew/w202101
 		Декабрь 2020			/whatsnew/w202012
 		Октябрь 2020			/whatsnew/w202010
 		Сентябрь 2020			/whatsnew/w202009

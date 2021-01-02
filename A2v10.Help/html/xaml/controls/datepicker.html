@@ -73,6 +73,14 @@
 					</td>
 				</tr>
 				<tr>
+					<td class="prop-name">YearCutOff</td>
+					<td><code>String</code></td>
+					<td>Только для ручного ввода. Предел для двухзначных значений года. Двузначное число. Если начинается с "+" или "-", 
+					то число рассматривается относительно текущего года. 
+					Если введенное значение меньше или равно пределу, то это 21-й век, иначе 20-й.
+					</td>
+				</tr>
+				<tr>
 					<td colspan="3">
 						<a href="/xaml/abstract/valuedcontrol">Свойства базового элемента</a>
 					</td>
@@ -83,8 +91,8 @@
 
 		<h3>Пример</h3>
 		<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-datepicker">
-			<a2-date-picker label="Введите дату" v-bind:item="Document" prop="Date"></a2-date-picker>
-			<a2-date-picker label="Выберите период" v-bind:item="Document" prop="Date" view="month"></a2-date-picker>
+			<a2-date-picker label="Введите дату" v-bind:item="Document" prop="Date" class="drop-top-left"></a2-date-picker>
+			<a2-date-picker label="Выберите период" v-bind:item="Document" prop="Date" view="month" class="drop-top-left"></a2-date-picker>
 		</div>
 
 		<p class="tip info">
