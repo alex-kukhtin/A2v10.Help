@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
-		Январь 2021			/whatsnew/w202101
+		Февраль 2021			/whatsnew/w202102
 		Декабрь 2020			/whatsnew/w202012
 		Октябрь 2020			/whatsnew/w202010
 		Сентябрь 2020			/whatsnew/w202009
@@ -23,7 +23,7 @@
 		Предыдущие выпуски		/whatsnew/prev
 	
 Общая информация		/common/index
-	Платформа		/common/platform
+	Платформа			/common/platform
 
 Прикладные приложения		/app/index
 	model.json			/app/model
