@@ -18,16 +18,22 @@
 
 	<p>
 		<pre class="code-highlight js" data-lang="js">
-<script type="text/template">{
-  "type": "parse" | "sql" | "clr",
+<script type="text/template">
+{
+  "type": "parse" | "sql" | "azureBlob" | "clr",
   "parse": "excel" | "xlsx" | "csv" | "dbf" | "xml" | "auto",
   "source": "",
   "schema": "",
   "model": "",
-  "procedure": "",
+  "container": "",
+  "azureSource": "",
   "async": true | false,
   "clrType": "",
-  "parameters": {}
+  "parameters": {},
+  "imageCompress": {
+    "quality": 0..100,
+    "threshold": size
+  }
 }
 </script>
 </pre>
@@ -59,6 +65,15 @@
 						<tr>
 							<td class="prop-name">sql</td>
 							<td>Прямое сохранение в базе данных сырых данных файла. Должна быть указана модель.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">azureBlob</td>
+							<td>
+								Сохранение файла в Azure Storage. Должно быть обязательно указано свойство
+								<code>container</code>. Имя источника (строки подключения) указывается
+								в свойстве <code>azureSource</code>. Если не указано, то равно
+								<b>"AzureStorage"</b>.
+							</td>
 						</tr>
 						<tr>
 							<td class="prop-name">clr</td>
@@ -112,6 +127,19 @@
 				</td>
 			</tr>
 			<tr>
+				<td class="prop-name">container</td>
+				<td>string</td>
+				<td>Обязательно для типа <code>azureBlob</code>. Имя контейнера в Azure Storage.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">azureSource</td>
+				<td>string</td>
+				<td>
+					Только для типа <code>azureBlob</code>. Источник (имя строки подключения) для Azure Storage.
+					Если не указано, то равно <b>"AzureStorage"</b>.
+				</td>
+			</tr>
+			<tr>
 				<td class="prop-name">clrType</td>
 				<td>string</td>
 				<td>Обязательно для типа <b>clr</b>. Строка, описывающая сборку и .NET тип.</td>
@@ -130,6 +158,29 @@
 					Объект, статические параметры, которые передаются в хранимую процедуру обновления модели.
 					Имя свойства является именем параметра,
 					значение - значением параметра.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">imageCompress</td>
+				<td>object</td>
+				<td>
+					Управляет сжатием картинок при загрузке на сервер. Только для файлов JPEG.
+					<table class="sub-table">
+						<tr class="top">
+							<td class="prop-name">quality</td>
+							<td>
+								Качество файла (0..100). 0-минимальное, 100-максимальное.
+								Реальное значение 40-50 не приводит к видимому ухудшению качества изображения.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">threshold</td>
+							<td>
+								Минимальное значение размера файла (в мегабайтах), для которого будет
+								применяться сжатие. Если размер файла меньше, он записывается "как есть".
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</tbody>
@@ -170,6 +221,7 @@
 	<h3>Операция sql</h3>
 	<p>
 		Это операция просто сохраняет полученный файл в базе данных в виде байтового массива (тип <code>vabinary(max)</code>).
+		Если задан параметр <code>imageCompress</code>, то файл (возможно) будет предварительно сжат.
 		Для этого вызывается хранимая процедура <code>{source}: [{schema}].[{model}.Update]</code>.
 		Ей передаются следующие параметры (такие же как и в случае сохранения вложений):
 	</p>

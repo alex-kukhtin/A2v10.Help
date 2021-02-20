@@ -91,15 +91,25 @@
 	<h3>Программирование клиента</h3>
 	<ul class="std">
 		<li>%%%ITreeElement $expand, $selectPath</li>
-		<li>TRoot.$createModelInfo</li>
-		<li>IElementArray.$reload</li>
-		<li>IElementArray.$lockUpdate</li>
-		<li>Graphics deletage - 3-rd param = domElement</li>
+		<li>%%%TRoot.$createModelInfo</li>
+		<li>Для <a href="/client/arrayprops">массивов модели</a> добавлен метод <code>$reload</code></li>
+		<li>%%%IElementArray.$lockUpdate</li>
+		<li>В делегат для элемента <a class="code-link" href="/xaml/controls/graphics">Graphics</a> 
+		добавлен еще один параметр - cсылка на узел дерева DOM.</li>
 	</ul>
 
 
 	<h3>Прикладные приложения</h3>
-	<ul class="std"></ul>
+	<ul class="std">
+		<li>
+			В <a href="/app/files">работу с файлами</a> добавлена возможность сжатия изображений перед загрузкой в базу данных.
+			Управляется свойством <code>imageCompress</code>.
+		</li>
+		<li>
+			В <a href="/app/files">работу с файлами</a> добавлена возможность сохранения изображений в Azure Storage.
+			Тип действия <code>azureBlob</code>.
+		</li>
+	</ul>
 
 
 	<h3>Справка</h3>

@@ -1,5 +1,6 @@
 ﻿<div>
 	<!--title:Модель на клиенте-->
+	<!--keywords:IElement;IElementArray;IArrayElement;ITreeElement;IRoot;-->
 	<div class="title">
 		<h1>
 			Модель на клиенте
@@ -107,23 +108,49 @@ interface ITreeElement extends IArrayElement {
 	<p>
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
-{
-	// properties
-	$root: Object,
-	$parent: Object,
-	$ctrl: Object,
-	$isEmpty: Boolean,
-	$selectedIndex,     // индекс выбранного элемента
-	// методы
-	$empty: Function,   // очищает объект
-	$remove: Function,  // удаляет элемент из массива
-	$select: Function,
-	$clearSelected: Function,
-	$append: Function,
-	$prepend: Function,
-	$insert: Function
-	$copy: Function
+<![CDATA[
+interface IElementArray<T> extends Array<T> {
+
+	readonly Count: number;
+
+	readonly $parent: IElement;
+	readonly $vm: IViewModel;
+	readonly $root: IRoot;
+	readonly $ctrl: IController;
+
+	readonly $isEmpty: boolean;
+	readonly $hasSelected: boolean;
+	readonly $checked: IElementArray<T>;
+	readonly $selected: T;
+	readonly $selectedIndex: number;
+	readonly $cross: { [prop: string]: string[] };
+	readonly $ModelInfo: IModelInfo;
+	readonly $loaded: boolean;
+
+	Selected(prop: string): IElementArray<T>;
+
+	$new(src?: object): T;
+	$append(src?: object): T;
+	$prepend(src?: object): T;
+	$insert(src: object, to: InsertTo, ref?: T): T;
+
+	$clearSelected(): IElementArray<T>;
+	$reload(): Promise<IElementArray<T>>;
+	$load(): void;
+	$loadLazy(): Promise<IElementArray<T>>;
+	$resetLazy(): IElementArray<T>;
+	$lockUpdate(lock: boolean): void;
+
+	$isLazy(): boolean;
+
+	$find(callback: (this: any, elem: T, index?: number, array?: IElementArray<T>) => boolean, thisArg?: any): T;
+	$remove(elem: T): IElementArray<T>;
+	$empty(): IElementArray<T>;
+	$renumberRows(): IElementArray<T>;
+	$copy(src: any[]): IElementArray<T>;
+	$sum(fn: (item: T) => number): number;
 }
+]]>
 </script>
 </pre>
 		<a href="/client/arrayprops">Подробнее о массивах</a>

@@ -41,6 +41,7 @@ interface IElementArray<T> extends Array<T> {
 	readonly $cross: {[prop: string]: string[]};
 	// methods
 	$empty(): this;
+	$reload(): Promise<IElementArray<T>>;
 	$remove(elem: T): this;
 	$clearSelected(): this;
 	$append(src?: object): T;
@@ -117,6 +118,22 @@ interface IElementArray<T> extends Array<T> {
 			<li>Ссылку на сам массив.</li>
 		</ul>
 	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$reload(): Promise<IElementArray<T>>
+				]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Перезагружает массив из базы данных. Имеет смысл только для дочерних и "ленивых" массивов.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Промис со ссылкой на сам массив.</li>
+		</ul>
+	</div>
+
 	<div class="method">
 		<div class="syntax">
 			<pre class="code-highlight js">
@@ -269,12 +286,14 @@ interface IElementArray<T> extends Array<T> {
 		</pre>
 		</div>
 		<h4>Описание</h4>
-		<p>Ищет в массиве первый подходящий элемент. Функция отличается от обычного поиска в массиве тем, что 
-		для иерархических массивов она выполняет рекурсивный поиск по дереву.</p>
+		<p>
+			Ищет в массиве первый подходящий элемент. Функция отличается от обычного поиска в массиве тем, что
+			для иерархических массивов она выполняет рекурсивный поиск по дереву.
+		</p>
 		<h4>Аргументы:</h4>
 		<ul class="params">
 			<li>
-				<code>fn</code> - функция обратного вызова, которая должна вернуть <code>true</code>, 
+				<code>fn</code> - функция обратного вызова, которая должна вернуть <code>true</code>,
 				если элемент подходит по критериям выборки.
 				Аргументы функции:
 				<ul>
