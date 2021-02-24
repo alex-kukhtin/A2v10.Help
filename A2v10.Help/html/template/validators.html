@@ -38,7 +38,9 @@ declare const enum ~StdValidator {
 	regExp   = 'regExp'
 }
 
-interface ~tempateValidatorFunc { (elem: IElement, value?: any): boolean | string | Promise<any>; }
+declare type templateValidatorResult = { msg: string, severity: Severity };
+
+interface ~tempateValidatorFunc { (elem: IElement, value?: any): boolean | string | templateValidatorResult | Promise<any>; }
 
 interface ~templateValidatorObj {
 	valid: ~tempateValidatorFunc | ~StdValidator,
@@ -145,6 +147,8 @@ validators: {
 				<code>string</code> - сообщение об ошибке, если значение неправильное. Эта строка будет замещать значение свойства <code>'msg'</code>.
 				Если валидатор объявлен как функция, то она всегда должна возвращать строку (значения <code>msg</code> в этом случае просто нет).
 			</li>
+			<li><code>объект templateValidatorResult</code> - объект, определяющий сообщение об ошибке (<code>msg</code>) 
+			и степень ее серьезности (<code>severity</code>).</li>
 			<li><code>Promise</code> - для асинхронного валидатора. Промис должен вернуть булево значение или строку.</li>
 		</ul>
 	</div>

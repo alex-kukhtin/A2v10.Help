@@ -14,6 +14,9 @@
 
 
 	<!--
+		<li>%%%TRoot добавлен метод <code>$createModelInfo</code>.</li>
+		<li>%%%IElementArray добавлен метод <code>$lockUpdate</code>.</li>
+
 		List.Flush, List.BorderStyle
 		Messaging. Написать, что TargetId берется с Data или PageId.
 
@@ -90,12 +93,14 @@
 
 	<h3>Программирование клиента</h3>
 	<ul class="std">
-		<li>%%%ITreeElement $expand, $selectPath</li>
-		<li>%%%TRoot.$createModelInfo</li>
+		<li>В элемент дерева <a class="code-link" href="/client/treeelemprops">ITreeElement</a> добавлены методы <code>$expand</code>, <code>$selectPath</code>.</li>
 		<li>Для <a href="/client/arrayprops">массивов модели</a> добавлен метод <code>$reload</code></li>
-		<li>%%%IElementArray.$lockUpdate</li>
-		<li>В делегат для элемента <a class="code-link" href="/xaml/controls/graphics">Graphics</a> 
-		добавлен еще один параметр - cсылка на узел дерева DOM.</li>
+		<li>
+			В делегат для элемента <a class="code-link" href="/xaml/controls/graphics">Graphics</a>
+			добавлен еще один параметр - cсылка на узел дерева DOM.
+		</li>
+		<li>В функцию валидатора <a class="code-link" href="/template/validators">tempateValidatorFunc</a> добавлена 
+		возможность дополнительно возвращать тип ошибки <code>severity</code>.</li>
 	</ul>
 
 
