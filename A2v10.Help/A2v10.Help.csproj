@@ -113,6 +113,7 @@
     <Content Include="html\models\image.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
+    <Content Include="html\whatsnew\w202103.html" />
     <Content Include="html\whatsnew\w202102.html" />
     <Content Include="html\whatsnew\w202012.html" />
     <Content Include="html\whatsnew\w202010.html" />
