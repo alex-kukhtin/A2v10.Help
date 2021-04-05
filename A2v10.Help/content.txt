@@ -69,7 +69,6 @@
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
 			EmptyPanel			/xaml/controls/emptypanel
-			FlexList			/xaml/controls/flexlist
 			Graphics			/xaml/controls/graphics
 			GridDivider			/xaml/controls/griddivider
 			Header				/xaml/controls/header
@@ -110,6 +109,7 @@
 			DropDownMegaMenu	/xaml/containers/dropdownmegamenu
 			FieldSet			/xaml/containers/fieldset
 			Flex				/xaml/containers/flex
+			FlexList			/xaml/containers/flexlist
 			FullHeightPanel		/xaml/containers/fullheightpanel
 			Grid				/xaml/containers/grid
 			GridGroup			/xaml/containers/gridgroup

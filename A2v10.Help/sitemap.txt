@@ -62,7 +62,6 @@ https://docs.a2v10.com/xaml/controls/datagrid
 https://docs.a2v10.com/xaml/controls/datagridcolumn
 https://docs.a2v10.com/xaml/controls/datepicker
 https://docs.a2v10.com/xaml/controls/emptypanel
-https://docs.a2v10.com/xaml/controls/flexlist
 https://docs.a2v10.com/xaml/controls/graphics
 https://docs.a2v10.com/xaml/controls/griddivider
 https://docs.a2v10.com/xaml/controls/header
@@ -102,6 +101,7 @@ https://docs.a2v10.com/xaml/containers/dropdownmenu
 https://docs.a2v10.com/xaml/containers/dropdownmegamenu
 https://docs.a2v10.com/xaml/containers/fieldset
 https://docs.a2v10.com/xaml/containers/flex
+https://docs.a2v10.com/xaml/containers/flexlist
 https://docs.a2v10.com/xaml/containers/fullheightpanel
 https://docs.a2v10.com/xaml/containers/grid
 https://docs.a2v10.com/xaml/containers/gridgroup

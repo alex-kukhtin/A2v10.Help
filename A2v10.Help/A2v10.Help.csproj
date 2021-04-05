@@ -210,7 +210,7 @@
     <Content Include="html\xaml\controls\tabbutton.html" />
     <Content Include="html\xaml\controls\timepicker.html" />
     <Content Include="html\xaml\controls\static.html" />
-    <Content Include="html\xaml\controls\flexlist.html" />
+    <Content Include="html\xaml\containers\flexlist.html" />
     <Content Include="html\xaml\controls\separator.html" />
     <Content Include="html\xaml\controls\statecard.html" />
     <Content Include="html\xaml\controls\graphics.html" />

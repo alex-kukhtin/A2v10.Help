@@ -12,6 +12,12 @@
 
 	<p>Задает автоматическое выделение элементов в контейнере после загрузки/обновления.</p>
 
+	<p>
+		Используется:
+		<a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>,
+		<a class="code-link" href="/xaml/controls/list">List</a>,
+		<a class="code-link" href="/xaml/controls/treeview">TreeView</a>.
+	</p>
 
 	<h3>Значения</h3>
 	<table class="table-props">
@@ -36,7 +42,11 @@
 			</tr>
 			<tr>
 				<td class="prop-name">ItemId</td>
-				<td>Выделять элемент с заданным идентификатором (идентификатор берется из url страницы).</td>
+				<td>
+					Выделять элемент с заданным идентификатором (идентификатор берется из url страницы).
+					Не поддерживается для <a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>.
+				</td>
+
 			</tr>
 		</tbody>
 	</table>
