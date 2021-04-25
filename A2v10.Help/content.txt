@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
-		Март 2021				/whatsnew/w202103
+		Апрель 2021				/whatsnew/w202104
 		Февраль 2021			/whatsnew/w202102
 		Декабрь 2020			/whatsnew/w202012
 		Октябрь 2020			/whatsnew/w202010
@@ -69,6 +69,7 @@
 			DataGridColumn		/xaml/controls/datagridcolumn
 			DatePicker			/xaml/controls/datepicker
 			EmptyPanel			/xaml/controls/emptypanel
+			FileImage			/xaml/controls/fileimage
 			Graphics			/xaml/controls/graphics
 			GridDivider			/xaml/controls/griddivider
 			Header				/xaml/controls/header
@@ -188,6 +189,7 @@
 			AutoSelectMode		/xaml/enums/autoselectmode
 			BackgroundStyle		/xaml/enums/backgroundstyle
 			ButtonStyle			/xaml/enums/buttonstyle
+			BorderStyle			/xaml/enums/borderstyle
 			ColumnBackgroundStyle		/xaml/enums/columnbackgroundstyle
 			ColumnControlType	/xaml/enums/columncontroltype
 			ControlSize			/xaml/enums/controlsize

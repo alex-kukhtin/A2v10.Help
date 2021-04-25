@@ -113,7 +113,7 @@
     <Content Include="html\models\image.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
-    <Content Include="html\whatsnew\w202103.html" />
+    <Content Include="html\whatsnew\w202104.html" />
     <Content Include="html\whatsnew\w202102.html" />
     <Content Include="html\whatsnew\w202012.html" />
     <Content Include="html\whatsnew\w202010.html" />
@@ -178,6 +178,7 @@
     <Content Include="html\xaml\containers\tabbar.html" />
     <Content Include="html\xaml\containers\wizardPage.html" />
     <Content Include="html\xaml\containers\wizard.html" />
+    <Content Include="html\xaml\controls\fileimage.html" />
     <Content Include="html\xaml\controls\propertygriditem.html" />
     <Content Include="html\xaml\controls\propertygrid.html" />
     <Content Include="html\xaml\containers\fullheightpanel.html" />
@@ -221,6 +222,7 @@
     <Content Include="html\xaml\diagram\group.html" />
     <Content Include="html\xaml\diagram\index.html" />
     <Content Include="html\xaml\diagram\diagram.html" />
+    <Content Include="html\xaml\enums\borderstyle.html" />
     <Content Include="html\xaml\enums\justifyitems.html" />
     <Content Include="html\xaml\enums\columnbackgroundstyle.html" />
     <Content Include="html\xaml\enums\radiobuttonstyle.html" />

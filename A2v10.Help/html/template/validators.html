@@ -38,7 +38,7 @@ declare const enum ~StdValidator {
 	regExp   = 'regExp'
 }
 
-declare type templateValidatorResult = { msg: string, severity: Severity };
+declare type templateValidatorResult = { msg: string, severity: ~Severity };
 
 interface ~tempateValidatorFunc { (elem: IElement, value?: any): boolean | string | templateValidatorResult | Promise<any>; }
 
@@ -47,7 +47,8 @@ interface ~templateValidatorObj {
 	async?: boolean,
 	msg?: string,
 	regExp?: RegExp,
-	severity?: ~Severity
+	severity?: ~Severity,
+	applyIf?: (elem: IElement, value?: any) => boolean
 }
 
 declare type ~templateValidator = String | ~tempateValidatorFunc | ~templateValidatorObj;
@@ -86,6 +87,9 @@ validators: {
 		<li>
 			<code>regExp</code> - регулярное выражение для стандартного валидатора типа <code>'regExp'</code>.
 		</li>
+		<li>
+			<code>applyIf</code> - функция, определяющая нужно ли применять валидатор.
+		</li>
 	</ul>
 
 	<h3>Стандартные валидаторы</h3>
@@ -113,7 +117,7 @@ validators: {
 		объекта
 		<pre class="code-highlight js">
 <script type="text/template">
-{valid:'notBlank', msg:'заданная строка', severity='error'}
+{valid:'notBlank', msg:'заданная строка', severity=~Severity.error}
 </script>
 </pre>
 	</p>
@@ -122,7 +126,7 @@ validators: {
 		Если валидатор - функция, то это эквивалент объекта
 <pre class="code-highlight js">
 <script type="text/template">
-{valid:func, severity='error'}
+{valid:func, severity=~Severity.error'}
 </script>
 </pre>
 	</p>
@@ -147,21 +151,45 @@ validators: {
 				<code>string</code> - сообщение об ошибке, если значение неправильное. Эта строка будет замещать значение свойства <code>'msg'</code>.
 				Если валидатор объявлен как функция, то она всегда должна возвращать строку (значения <code>msg</code> в этом случае просто нет).
 			</li>
-			<li><code>объект templateValidatorResult</code> - объект, определяющий сообщение об ошибке (<code>msg</code>) 
-			и степень ее серьезности (<code>severity</code>).</li>
+			<li>
+				<code>объект templateValidatorResult</code> - объект, определяющий сообщение об ошибке (<code>msg</code>)
+				и степень ее серьезности (<code>severity</code>).
+			</li>
 			<li><code>Promise</code> - для асинхронного валидатора. Промис должен вернуть булево значение или строку.</li>
 		</ul>
 	</div>
 
+	<h3>Формат функции <code>applyIf</code></h3>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">applyIf?: (elem: IElement, value?: any): boolean</pre></div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>elem</code> - элемент, к которому применяется валидатор.
+			</li>
+			<li>
+				<code>val</code> - проверяемое значение.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>true</code> - если валидатор активен и его нужно применять. </li>
+		</ul>
+	</div>
+
 	<h3>Асинхронные валидаторы</h3>
-	<p>Асинхронные валидаторы используются в случае, когда для проверки правильности нужно обратиться к серверу. Такой валидатор 
-	отмечается свойством <code>async: true</code>.</p>
-	<p>Функция валидации для асинхронного валидатора должна вернуть <code>Promise</code>, значением которого будет либо булево значение, 
-	либо строка (как и в обычной функции валидации).</p>
+	<p>
+		Асинхронные валидаторы используются в случае, когда для проверки правильности нужно обратиться к серверу. Такой валидатор
+		отмечается свойством <code>async: true</code>.
+	</p>
+	<p>
+		Функция валидации для асинхронного валидатора должна вернуть <code>Promise</code>, значением которого будет либо булево значение,
+		либо строка (как и в обычной функции валидации).
+	</p>
 	<p>Асинхронный валидатор обычно использует метод контроллера <a href="/client/controller">$asyncValid</a>.</p>
-	
+
 	<p class="tip warning">
-		<b>Обратите внимание!</b> Возвращаемые значения для асинхронных валидаторов кешируются для предотвращения 
+		<b>Обратите внимание!</b> Возвращаемые значения для асинхронных валидаторов кешируются для предотвращения
 		слишком частых обращений к серверу. Фактически валидатор вызывается только один раз при каждом изменении связанных с ним значений.
 	</p>
 

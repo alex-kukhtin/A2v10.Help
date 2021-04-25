@@ -778,6 +778,11 @@
 }
 .ico-a2logo:before {
   content: "\ea10";
+  color: #dd2c5e;
+}
+.a2logo-layout {
+  font-size: 125%;
+  margin-right: 3px;
 }
 .ico-logo-github:before {
   content: "\ead1";
@@ -1262,12 +1267,17 @@ html {
   padding: 0;
   height: 100%;
   width: 100%;
+  caret-color: transparent;
 }
 input,
 textarea,
 select,
 button {
   font-family: system, 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+input,
+textarea {
+  caret-color: auto;
 }
 body {
   overflow: hidden;
@@ -2043,6 +2053,10 @@ pre.a2-code {
   box-shadow: 1px 4px 10px rgba(169, 68, 66, 0.3);
   white-space: pre;
 }
+.a2-hyperlink:focus,
+.a2-hyperlink:active {
+  outline: thin dotted #ccc;
+}
 .control-group {
   display: block;
   font-size: 1em;
@@ -2113,13 +2127,17 @@ pre.a2-code {
   border-bottom: 7px solid #f2dede;
   border-top-width: 0;
 }
-.control-group .validator .error {
+.control-group .validator .error,
+.control-group .validator .warning,
+.control-group .validator .info {
   display: list-item;
   list-style-type: none;
   padding-left: 6px;
   white-space: nowrap;
 }
-.control-group .validator .error:before {
+.control-group .validator .error:before,
+.control-group .validator .warning:before,
+.control-group .validator .info:before {
   content: '\2022';
   position: absolute;
   left: 3px;
@@ -6222,6 +6240,9 @@ iframe.eusign-iframe {
 }
 .flex-list .flex-list-item {
   display: block;
+}
+.flex-list.wrap {
+  flex-wrap: wrap;
 }
 .flex-list.horizontal {
   flex-flow: row wrap;

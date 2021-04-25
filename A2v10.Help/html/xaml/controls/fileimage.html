@@ -1,9 +1,9 @@
 ﻿<div>
-	<!--title:Xaml.Image-->
-	<!--keywords:Image-->
+	<!--title:Xaml.FileImage-->
+	<!--keywords:FileImage-->
 	<div class="title">
 		<h1>
-			Элемент Image
+			Элемент FileImage
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все элементы управления</a>
@@ -29,16 +29,16 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="prop-name">Base</td>
+				<td class="prop-name">Url</td>
 				<td>String</td>
 				<td>
-					URL модели, из которой будет получено изображение.
+					URL изображения. Должен ссылаться на раздел <a class="code-link" href="/app/files">files</a> файла описания модели.
 				</td>
 			</tr>
 			<tr>
-				<td class="prop-name">Source</td>
+				<td class="prop-name">Value</td>
 				<td><a class="code-link" href="/xaml/bind/Bind">Bind</a></td>
-				<td>Всегда привязка. Связывается с полем, которой определяет идентификатор картинки.</td>
+				<td>Связывается с полем, которой определяет идентификатор картинки.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Width</td>
@@ -55,34 +55,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="prop-name">ReadOnly</td>
-				<td>Boolean</td>
-				<td>
-					Запретить загрузку изображения.
-				</td>
-			</tr>
-			<tr>
-				<td class="prop-name">Limit</td>
-				<td>Int32</td>
-				<td>
-					Максимальный размер загружаемого изображения (в KB).
-				</td>
-			</tr>
-			<tr>
-				<td class="prop-name">Placeholder</td>
-				<td>String</td>
-				<td>
-					Подсказка. Отображается, если изображение не выбрано.
-				</td>
-			</tr>
-			<tr>
-				<td class="prop-name">Icon</td>
-				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
-				<td>
-					Иконка. . Отображается вместе с заполнителем <code>Placeholder</code>, если изображение не выбрано.
-				</td>
-			</tr>
-			<tr>
 				<td colspan="3">
 					<a href="/xaml/abstract/uielementbase">Свойства базового элемента</a>
 				</td>
@@ -92,7 +64,7 @@
 
 	<h3>Особенности</h3>
 	<p>
-		Чаще всего задается только одно из свойств <code>Width</code> или <code>Height</code>. В этом случает 
+		Чаще всего задается только одно из свойств <code>Width</code> или <code>Height</code>. В этом случает
 		картинка будет сохранять пропорции.
 	</p>
 

@@ -1,6 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
-https://docs.a2v10.com/whatsnew/w202103
+https://docs.a2v10.com/whatsnew/w202104
 https://docs.a2v10.com/whatsnew/w202102
 https://docs.a2v10.com/whatsnew/w202012
 https://docs.a2v10.com/whatsnew/w202010
@@ -62,6 +62,7 @@ https://docs.a2v10.com/xaml/controls/datagrid
 https://docs.a2v10.com/xaml/controls/datagridcolumn
 https://docs.a2v10.com/xaml/controls/datepicker
 https://docs.a2v10.com/xaml/controls/emptypanel
+https://docs.a2v10.com/xaml/controls/fileimage
 https://docs.a2v10.com/xaml/controls/graphics
 https://docs.a2v10.com/xaml/controls/griddivider
 https://docs.a2v10.com/xaml/controls/header
@@ -175,6 +176,7 @@ https://docs.a2v10.com/xaml/enums/autoflowmode
 https://docs.a2v10.com/xaml/enums/autoselectmode
 https://docs.a2v10.com/xaml/enums/backgroundstyle
 https://docs.a2v10.com/xaml/enums/buttonstyle
+https://docs.a2v10.com/xaml/enums/borderstyle
 https://docs.a2v10.com/xaml/enums/columnbackgroundstyle
 https://docs.a2v10.com/xaml/enums/columncontroltype
 https://docs.a2v10.com/xaml/enums/controlsize

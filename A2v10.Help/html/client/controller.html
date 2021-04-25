@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Контроллер-->
-	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;-->
+	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;-->
 	<div class="title">
 		<h1>
 			Контроллер
@@ -38,6 +38,7 @@ interface IController {
   $setFilter(target:object, prop:string, value:any): void;
   $inlineOpen(id: string): void;
   $inlineClose(id: string, result:any): void;
+  $focus(htmlid: string): void;
 }
 
 declare const enum ~CommonStyle {
@@ -108,8 +109,8 @@ interface IConfirm {
 			<li><code>array</code> - не обязательно. Обновляемый <a href="/models/array">"ленивый массив"</a>.</li>
 		</ul>
 		<p>
-			Если указан аргумент, то обновляются данные ленивого массива, в противном случае - 
-			обновляются данные всей модели. Некоторые свойства модели можно "защитить" от обновления с помощью 
+			Если указан аргумент, то обновляются данные ленивого массива, в противном случае -
+			обновляются данные всей модели. Некоторые свойства модели можно "защитить" от обновления с помощью
 			опции шаблона <a class="code-link" href="/template/options">bindOnce</a>.
 		</p>
 	</div>
@@ -234,6 +235,17 @@ interface IConfirm {
 		<ul class="params">
 			<li><code>id</code> - идентификатор диалога.</li>
 			<li><code>result</code> - зарезервировано. В текущей версии не используется.</li>
+		</ul>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$focus(htmlid: string): void</pre></div>
+		<p>
+			Устанавливает курсор на элемент с заданным htmlid.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>htmlid</code> - идентификатор элемента 
+			(можно установить с помощью свойства <code>HtmlId</code> объекта <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).</li>
 		</ul>
 	</div>
 </div>
