@@ -49,7 +49,7 @@
 	Иерархические модели		/models/tree
 	Перекрестные модели			/models/cross
 	Модели с группировкой		/models/group
-	Работа с изображениями		/models/image
+	Работа с двоичными объектами		/models/blob
 
 
 Представления	/views/index

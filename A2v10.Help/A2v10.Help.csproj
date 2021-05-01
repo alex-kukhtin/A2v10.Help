@@ -110,7 +110,7 @@
     <Content Include="html\messaging\index.html" />
     <Content Include="html\models\update.html" />
     <Content Include="html\models\paging.html" />
-    <Content Include="html\models\image.html" />
+    <Content Include="html\models\blob.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
     <Content Include="html\whatsnew\w202104.html" />
@@ -201,7 +201,6 @@
     <Content Include="html\xaml\controls\label.html" />
     <Content Include="html\xaml\controls\griddivider.html" />
     <Content Include="html\xaml\controls\combobox.html" />
-    <Content Include="html\xaml\controls\attachments.html" />
     <Content Include="html\xaml\controls\alert.html" />
     <Content Include="html\xaml\controls\chatitem.html" />
     <Content Include="html\xaml\controls\comboboxitem.html" />

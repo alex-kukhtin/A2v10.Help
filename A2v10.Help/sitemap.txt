@@ -44,7 +44,7 @@ https://docs.a2v10.com/models/update
 https://docs.a2v10.com/models/tree
 https://docs.a2v10.com/models/cross
 https://docs.a2v10.com/models/group
-https://docs.a2v10.com/models/image
+https://docs.a2v10.com/models/blob
 https://docs.a2v10.com/views/index
 https://docs.a2v10.com/xaml/index
 https://docs.a2v10.com/xaml/overview/index

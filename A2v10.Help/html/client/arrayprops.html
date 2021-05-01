@@ -49,7 +49,11 @@ interface IElementArray<T> extends Array<T> {
 	$insert(src:object, to: InsertTo, ref?: T): T;
 	$copy(src: any[]): this;
 	$sum(fn: (item: T) => number): number;
-	$find(fn: (this: any, item:T, index?: number, array?: IElementArray<T>): boolean, thisArg:any): T
+	$find(fn: (this: any, item:T, index?: number, array?: IElementArray<T>): boolean, thisArg:any): T;
+	$isLazy(): boolean;
+	$loadLazy(): Promise<IElementArray<T>>;
+	$load(): void;
+	$resetLazy(): void;
 }
 ]]>
 </script>
@@ -313,5 +317,30 @@ interface IElementArray<T> extends Array<T> {
 		<ul class="params">
 			<li>Найденный элемент.</li>
 		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$isLazy(): boolean]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Является ли массив <a href="/models/array">"ленивым"</a>.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>true, если массив "ленивый" (с отложенной загрузкой).</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$resetLazy(): void]]></script>
+		</pre>
+		</div>
+		<h4>Описание</h4>
+		<p>Сбрасывает признак загрузки <a href="/models/array">"ленивого"</a> массива. 
+		При следующем обращении массив заново будет загружен с сервера.</p>
 	</div>
 </div>

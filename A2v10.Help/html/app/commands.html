@@ -72,6 +72,10 @@
 							<td>Возобновление бизнес-процесса.</td>
 						</tr>
 						<tr>
+							<td class="prop-name">file</td>
+							<td>Получение файла.</td>
+						</tr>
+						<tr>
 							<td class="prop-name">sendMessage</td>
 							<td>
 								Отправка сообщения. Параметры определяются свойством <code>parameters</code>.
@@ -118,6 +122,12 @@
 					Для типа <b>callApi</b> определяют поведение команды. <a href="callapicommand">Подробнее...</a>.
 
 				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">debugOnly</td>
+				<td>boolean</td>
+				<td>Команда будет выполняться только в отладочной конфигурации (
+				ключ <code>configuration</code> раздела <code>appSettings</code> имеет значение <b>"debug"</b>).</td>
 			</tr>
 		</tbody>
 	</table>

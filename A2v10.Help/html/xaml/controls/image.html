@@ -11,7 +11,7 @@
 	</div>
 
 	<p>Представляет собой изображение в возможностью привязки к данным.</p>
-	<p><a href="/models/image">Подробнее о работе с картинками...</a></p>
+	<p><a href="/models/blob">Подробнее о работе с двоичными объектами...</a></p>
 
 	<p>
 		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
@@ -92,8 +92,83 @@
 
 	<h3>Особенности</h3>
 	<p>
-		Чаще всего задается только одно из свойств <code>Width</code> или <code>Height</code>. В этом случает 
+		Чаще всего задается только одно из свойств <code>Width</code> или <code>Height</code>. В этом случает
 		картинка будет сохранять пропорции.
 	</p>
 
+
+	<h3>Пример</h3>
+
+	<p>
+		Элемент управления <code>Image</code> используется для одноременного показа и загрузки картинки
+		с использованием упрощенного подхода.
+	</p>
+
+	<p>
+		Свойство <code>Source</code> должно ссылаться на свойство модели,
+		которое представляет собой объект с двумя полями (<code>Id!!Id</code> и <code>Token!!Token</code>).
+		Имя этого свойства будеть определять суффикс для хранимых процедур,
+		которые будут вызываться для получения или записи реальных байтов изображения.
+	</p>
+
+	<p>
+		Свойство <code>Base</code> должно ссылаться на полную модель
+		(ту, которая указана в корне файла <code>model.json</code>).
+	</p>
+
+
+	<p>
+		Пример разметки XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Image Base="/catalog/product" Source="{Bind Product.Image}" Height="200px" />
+
+</script>
+</pre>
+	</p>
+
+	<p>
+		Фрагмент файла <code>/catalog/product/model.json</code>
+<pre class="code-highlight js">
+<script type="text/template">
+{
+  "schema": "a2",
+  "model": "Product"
+}
+</script>
+</pre>
+	</p>
+
+	<p>
+		Фрагмент модели данных
+<pre class="code-highlight js">
+<script type="text/template">
+{
+	"Product": {
+		"Id": 42,
+		"Image": {
+			"Id": 112233,
+			"Token": "hXFVVdnZRnZ5HKwNStO2qSSip_ziQ-IEnjVVQzyKzC8"
+		}
+	}
+}
+</script>
+</pre>
+	</p>
+
+
+	<h4>Получение изображения</h4>
+	<p>
+		Для получения изображения система вызовет хранимую процедуру
+		<code>a2.[Product.Image.Load]</code>, передав ей в качестве параметра содержимое поля
+		идентификатор обїекта <code>Image</code> объекта <code>Product</code>.
+		Имя <b>Image</b> в наименовании процедуры соответствует имени свойства.
+	</p>
+
+	<h4>Загрузка изображения</h4>
+	<p>
+		При загрузке изображения на сервер, система вызовет хранимую процедуру
+		<code>a2.[Product.Image.Update]</code>. Процедура вернет идентификатор изображения и токен досупа,
+		которые будут обновлены в модели.
+	</p>
 </div>

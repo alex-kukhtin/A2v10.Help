@@ -74,6 +74,21 @@
 				<td>Object</td>
 				<td>Всегда привязка. Объект или массив, который нужно обновить после выполнения как-либо действий.</td>
 			</tr>
+			<tr>
+				<td class="prop-name">Export</td>
+				<td>Boolean</td>
+				<td>Выполнять ли экспорт вместо отображения. Не совместима с <code>Print</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Print</td>
+				<td>Boolean</td>
+				<td>Выполнять ли экспорт вместо отображения</td>
+			</tr>
+			<tr>
+				<td class="prop-name">FileAction</td>
+				<td>Enum</td>
+				<td>Действие для команды <code>File</code>.</td>
+			</tr>
 		</tbody>
 	</table>
 
@@ -146,10 +161,37 @@
 	<div class="method">
 		<div class="command"><b>Print</b> - напечатать</div>
 		<p>
-			Печать текущей страницы. Команда не имеет аргументов. Обратите внимание, что фактически 
-			печатается текущее изображение страницы. Некоторые элементы (например Taskpad) на печать не выводятся.
+			Печать текущей страницы. Команда не имеет аргументов. Обратите внимание, что фактически
+			печатается текущее изображение страницы. Некоторые элементы (например <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>) на печать не выводятся.
 			Более тонко управлять видимостью элементов при печати можно с помощью свойства <code>Print</code> объекта
 			<a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.
 		</p>
+	</div>
+	<div class="method">
+		<div class="command"><b>Dialog</b> - диалог</div>
+		<p>
+			Показывает диалог и выполняет указанное действие.
+		</p>
+	</div>
+	<div class="method">
+		<div class="command"><b>File</b> - работа с файлами (двоичными объектами)</div>
+		<p>
+			Выполняет отображение, загрузку или печать вложения (двоичного объекта). Это может
+			быть картика, файл и т.д.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>FileAction</code> - действие с файлом. Возможные значения:
+				<ul class="enum-vals">
+					<li><span class="prop-name">Show</span> - Показать данные на странице.</li>
+					<li><span class="prop-name">Download</span> - Загрузить данные как файл.</li>
+					<li><span class="prop-name">Print</span> - Печать данных файла.</li>
+				</ul>
+			</li>
+			<li><code>Argument</code> - Привязка к свойству, которое будет задавать идентификатор двоичного объекта.</li>
+			<li><code>URL</code> - URL на действие из раздела <a class="code-link" href="app/files">files</a> 
+			файла описания модели <code>model.json</code>.</li>
+		</ul>
 	</div>
 </div>

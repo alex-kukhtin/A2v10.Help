@@ -136,12 +136,12 @@ interface IElementArray<T> extends Array<T> {
 
 	$clearSelected(): IElementArray<T>;
 	$reload(): Promise<IElementArray<T>>;
-	$load(): void;
-	$loadLazy(): Promise<IElementArray<T>>;
-	$resetLazy(): IElementArray<T>;
 	$lockUpdate(lock: boolean): void;
 
 	$isLazy(): boolean;
+	$load(): void;
+	$loadLazy(): Promise<IElementArray<T>>;
+	$resetLazy(): IElementArray<T>;
 
 	$find(callback: (this: any, elem: T, index?: number, array?: IElementArray<T>) => boolean, thisArg?: any): T;
 	$remove(elem: T): IElementArray<T>;

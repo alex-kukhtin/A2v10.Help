@@ -12,13 +12,12 @@
 		</div>
 	</div>
 
-
 	<!--
-
+	 
+		models/group,paging,update,simple 
+	 
 		IController.$report
-		AlignItems.Stretch (added)
 		FileImage - сделать подробное описание (files/sql - load/save, azureStorage)
-		%%%%Добавлено описание работы с <a href="/models/image">изображениями в моделях данных</a>.
 
 		api v2 - описание.
 		<li>%%%TRoot добавлен метод <code>$createModelInfo</code>.</li>
@@ -27,8 +26,8 @@
 		Messaging. Написать, что TargetId берется с Data или PageId.
 
 		TODO: Validator (Component)
-		TODO: Case/Flex/Splitter/Tab/UIElementCollection/Wizard/WizardPage
-		TODO: /Attachments/ChatItem/StateCard/TableMarkCell/FilterDescription
+		TODO: Case/Flex/Splitter/UIElementCollection/DataGridRowDetails
+		TODO: /ChatItem/StateCard/TableMarkCell/FilterDescription/UploadFile
 		TODO: /Lengths/Size/Thickness
 
 		TextBox.Accel
@@ -41,7 +40,8 @@
 		datedeff('second', 'minute')
 		utils.format('#.00')
 
-		array.$isLazy, $load, $loadLazy, $resetLazy, $renumberRows, $ModelInfo
+		array.$load, $loadLazy, $renumberRows, $ModelInfo
+
 		vm.$isDirty, $isPristine, $canSave
 		IRoot.$dirty
 		vm.$setCurrentUrl
@@ -54,9 +54,6 @@
 		model.json - events/afterSave
 		<li>
 			%%%events.AfterSave - data after save!
-		</li>
-		<li>
-			%%%%Добавлено описание <a href="/models/paging">разбиения на страницы, сортировки и фильтрации</a> в моделях данных.
 		</li>
 
 		Card - сделать пример
@@ -117,6 +114,9 @@
 			В <a href="/app/files">работу с файлами</a> добавлена возможность указания локали разбираемого файла.
 			Управляется свойством <code>locale</code>.
 		</li>
+		<li>
+			В <a href="/app/commands">команды</a> добавлено свойство <code>debugOnly</code>.
+		</li>
 		<li>В контроллер <a class="code-link" href="/client/controller">IController</a> добавлен метод <code>$focus</code>.</li>
 	</ul>
 
@@ -127,10 +127,13 @@
 			Добавлено описание элементов
 			<a class="code-link" href="/xaml/containers/partial">Partial</a>,
 			<a class="code-link" href="/xaml/containers/flexlist">FlexList</a>,
-			<a class="code-link" href="/xaml/controls/fileimage">FileImage</a>.
+			<a class="code-link" href="/xaml/controls/fileimage">FileImage</a>,
+			<a class="code-link" href="/xaml/containers/tab">Tab</a>,
+			<a class="code-link" href="/xaml/containers/wizardpage">Wizard</a>,
+			<a class="code-link" href="/xaml/containers/wizardpage">WizardPage</a>.
 		</li>
 		<li>
-			Добавлено описание работы с <a href="/models/image">изображениями в моделях данных</a>.
+			Добавлено описание работы с <a href="/models/blob">двоичными объектами (картинками, вложениями) в моделях данных</a>.
 		</li>
 	</ul>
 </div>
