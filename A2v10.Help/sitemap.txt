@@ -1,5 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
+https://docs.a2v10.com/whatsnew/w202105
 https://docs.a2v10.com/whatsnew/w202104
 https://docs.a2v10.com/whatsnew/w202102
 https://docs.a2v10.com/whatsnew/w202012
@@ -18,9 +19,6 @@ https://docs.a2v10.com/whatsnew/w201909
 https://docs.a2v10.com/whatsnew/w201908
 https://docs.a2v10.com/whatsnew/w201907
 https://docs.a2v10.com/whatsnew/w201905
-https://docs.a2v10.com/whatsnew/w201904
-https://docs.a2v10.com/whatsnew/w201903
-https://docs.a2v10.com/whatsnew/w201901
 https://docs.a2v10.com/whatsnew/prev
 https://docs.a2v10.com/common/index
 https://docs.a2v10.com/common/platform

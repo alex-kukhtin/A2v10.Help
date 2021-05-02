@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
+		Май 2021				/whatsnew/w202105
 		Апрель 2021				/whatsnew/w202104
 		Февраль 2021			/whatsnew/w202102
 		Декабрь 2020			/whatsnew/w202012
@@ -18,9 +19,6 @@
 		Август 2019				/whatsnew/w201908
 		Июль 2019				/whatsnew/w201907
 		Май 2019				/whatsnew/w201905
-		Апрель 2019				/whatsnew/w201904
-		Март 2019				/whatsnew/w201903
-		Январь 2019				/whatsnew/w201901
 		Предыдущие выпуски		/whatsnew/prev
 	
 Общая информация		/common/index
