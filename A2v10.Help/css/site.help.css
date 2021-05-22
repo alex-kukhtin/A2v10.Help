@@ -204,7 +204,7 @@ a:active {
 }
 code,
 pre {
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   font-size: 0.9em;
   background-color: #f8f8f8;
 }
@@ -230,12 +230,12 @@ code.string {
   background-color: #f3faff;
 }
 .command b {
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   font-weight: bold;
   font-size: 110%;
 }
 .syntax {
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   margin: 0.5em 0;
   padding: 6px;
   border-left: 4px solid #7598d8;
@@ -362,7 +362,7 @@ h4 {
   margin: 1em 0 0.15em 0;
 }
 .table-props .prop-name {
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   font-weight: bold;
 }
 .fit {
@@ -426,7 +426,7 @@ h4 {
   line-height: normal;
 }
 a.code-link {
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   padding: 2px;
   background-color: #f8f8f8;
 }
@@ -476,7 +476,7 @@ a.code-link {
 }
 table.sql-table {
   border-collapse: collapse;
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   font-size: 15px;
   margin: 1em 0;
 }
@@ -512,11 +512,11 @@ table.sheet-table tr.total th {
   border: 1px solid #ccc;
   display: inline-block;
   padding: 2px 8px;
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
 }
 .markcss_sample {
   display: inline-block;
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
   border: 1px solid #f5f5f5;
   padding: 4px 0;
   border-left-width: 5px;
