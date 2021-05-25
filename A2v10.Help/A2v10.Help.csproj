@@ -257,9 +257,13 @@
     <Content Include="html\xaml\sheet\sheet.html" />
     <Content Include="html\xaml\sheet\sheetrow.html" />
     <Content Include="html\xaml\sheet\sheetcell.html" />
+    <Content Include="html\xaml\simple\accel.html" />
+    <Content Include="html\xaml\simple\accelcommand.html" />
     <Content Include="html\xaml\simple\index.html" />
     <Content Include="html\xaml\simple\gapsize.html" />
     <Content Include="html\xaml\simple\printpage.html" />
+    <Content Include="html\xaml\simple\accelcommandcollection.html" />
+    <Content Include="html\xaml\simple\resourcedictionary.html" />
     <Content Include="html\xaml\simple\uielementcollection.html" />
     <Content Include="html\xaml\simple\length.html" />
     <Content Include="html\xaml\simple\size.html" />

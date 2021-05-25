@@ -173,12 +173,16 @@
 			Validator				/xaml/components/validator
 
 		Простые элементы	/xaml/simple/index
+			Accel			/xaml/simple/accel
+			AccelCommand	/xaml/simple/accelcommand
 			GapSize			/xaml/simple/gapsize
 			Length			/xaml/simple/length
 			Size			/xaml/simple/size
 			Thickness		/xaml/simple/thickness
 			PrintPage		/xaml/simple/printpage
+			AccelCommandCollection		/xaml/simple/accelcommandcollection
 			UIElementCollection			/xaml/simple/uielementcollection
+			ResourceDictionary			/xaml/simple/resourcedictionary
 
 		Перечисления	/xaml/enums/index
 			AlignItem			/xaml/enums/alignitem

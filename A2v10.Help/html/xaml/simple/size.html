@@ -9,4 +9,63 @@
 			<a href="index">Все простые элементы</a>
 		</div>
 	</div>
+	<p>
+		Задает размер по горизонтали (Width) и вертикали (Height).
+		Хотя элемент представляет собой объект, чаше всего значение задается с помошью конвертора из текстовой строки.
+	</p>
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td class="fit"><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Ширина.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Высота.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Конвертор</h3>
+	<p>
+		Поддерживается преобразование из текстовой строки. Значения ширины и высоты указываются через запятую.
+		Если указано только одно значение, то оно будет использовано и как ширина и как высота.
+	</p>
+
+
+	<h3>Пример</h3>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<![CDATA[
+<!--Использование конвертора-->
+<Selector ListSize="25rem,10rem">
+	...
+</Selector>
+
+<!--прямое задание свойства-->
+<Selector>
+	<Selector.ListSize>
+		<Size Width="25rem" Height="10rem" />
+	</Selector.ListSize>
+</Selector>
+]]>
+
+</script>
+</pre>
+	</p>
+
 </div>

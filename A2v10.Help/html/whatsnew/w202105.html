@@ -3,7 +3,7 @@
 	<!--keywords:Что нового-->
 	<div class="title">
 		<h1>
-			Выпуск 33 - версии 7771-7772 (Май 2021)
+			Выпуск 33 - версии 7771-7775 (Май 2021)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Все выпуски</a>|
@@ -13,11 +13,8 @@
 	</div>
 
 	<!--
-	 
-		StackPanel.Inline
-		Span Space.Both
-		RootContainer.AccelCommands
-		TextBox.Accel
+
+		Расширения разметки
 		IIS: appSettings
 
 		models/group,paging,update,simple
@@ -32,9 +29,9 @@
 		Messaging. Написать, что TargetId берется с Data или PageId.
 
 		TODO: Validator (Component)
-		TODO: Case/Flex/Splitter/UIElementCollection/DataGridRowDetails
-		TODO: /ChatItem/StateCard/TableMarkCell/FilterDescription/UploadFile
-		TODO: /Lengths/Size/Thickness
+		TODO: /Case/Flex/Splitter/DataGridRowDetails/StaticResource
+		TODO: /ChatItem/StateCard/TableMarkCell/FilterDescription
+		TODO: /Thickness/GapSize/ResourceDictionary/Confirm
 
 		TreeViewItem.IsGroup binding
 
@@ -78,17 +75,22 @@
 	1. Client localization
 	2. XAML Styles
 	4. Export - описание команды и шаблона Excel
-	5. Search - подсветка найденого текста.
 	6. Period
 	7. Render - описание
+	5. Search - подсветка найденого текста.
 	8. MakeHelp - StopWords наружу.
 	-->
 
 	<h3>Xaml</h3>
 	<ul class="std">
 		<li>В пречисление <a class="code-link" href="/xaml/enums/icon">Icon</a> добавлены новые иконки <code>Smile</code>, <code>SmileSad</code>.</li>
+		<li>В объект <a class="code-link" href="/xaml/text/span">Span</a> добавлено новое значение <code>Both</code> для свойства <code>Space</code>.</li>
+		<li>В объект <a class="code-link" href="/xaml/containers/stackpanel">StackPanel</a> добавлено новое свойство <code>Inline</code>.</li>
+		<li>В объект <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> добавлено свойство <code>AccelCommands</code>.</li>
+		<li>В объект <a class="code-link" href="/xaml/controls/textbox">TextBox</a> добавлено свойство <code>Accel</code>.</li>
 	</ul>
 
+	<!--
 	<h3>Программирование клиента</h3>
 	<ul class="std">
 		<li>
@@ -101,11 +103,16 @@
 		<li>
 		</li>
 	</ul>
+		-->
 
 
 	<h3>Справка</h3>
 	<ul class="std">
 		<li>
+			Добавлено описание элементов
+			<a class="code-link" href="/xaml/simple/length">Length</a>,
+			<a class="code-link" href="/xaml/simple/size">Size</a>,
+			<a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a>.
 		</li>
 	</ul>
 </div>

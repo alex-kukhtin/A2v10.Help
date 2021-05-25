@@ -161,12 +161,16 @@ https://docs.a2v10.com/xaml/components/sortdescription
 https://docs.a2v10.com/xaml/components/switch
 https://docs.a2v10.com/xaml/components/validator
 https://docs.a2v10.com/xaml/simple/index
+https://docs.a2v10.com/xaml/simple/accel
+https://docs.a2v10.com/xaml/simple/accelcommand
 https://docs.a2v10.com/xaml/simple/gapsize
 https://docs.a2v10.com/xaml/simple/length
 https://docs.a2v10.com/xaml/simple/size
 https://docs.a2v10.com/xaml/simple/thickness
 https://docs.a2v10.com/xaml/simple/printpage
+https://docs.a2v10.com/xaml/simple/accelcommandcollection
 https://docs.a2v10.com/xaml/simple/uielementcollection
+https://docs.a2v10.com/xaml/simple/resourcedictionary
 https://docs.a2v10.com/xaml/enums/index
 https://docs.a2v10.com/xaml/enums/alignitem
 https://docs.a2v10.com/xaml/enums/alignitems
