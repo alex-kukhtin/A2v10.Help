@@ -6,4 +6,357 @@
 			Модели с группировкой
 		</h1>
 	</div>
+
+	<p>
+		Модель данных с групировкой включает набор записей
+		c соотношением родитель-потомок. Глубина вложенности не ограничена.
+	</p>
+	<p>
+		В отличие от <a href="tree">иерерхических (древовидных) моделей</a>, в которых
+		отношения родитель-потомок определяются с помощью идентификатора родительской записи,
+		в моделях с группировкой отношения определяются на основе повторяющихся занчений.
+	</p>
+
+	<p class="tip info">
+		<b>Обратите внимание</b>. Для формирования наборов данных с группировкой
+		обычно используется оператор <code>GROUP BY ROLLUP</code> языка T-SQL.
+		<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ru-ru/sql/t-sql/queries/select-group-by-transact-sql?view=sql-server-ver15">Подробнее в документации Microsoft</a>.
+	</p>
+
+	<p>
+		Модель с группировкой представлена типом объекта <code>!Group</code>.
+		Для правильной каждая запись должна иметь два дополнительных обязательных поля:
+	</p>
+	<ul class="std">
+		<li>
+			<code>!GroupMarker</code> - маркеры группировки. Их будет столько, сколько уровней группировки будет использовано.
+			Фактически представляют собой просто значение T-SQL функции <code>grouping</code> для соответствующего поля.
+			Таких полей будет столько же, сколько указано в операторе <code>groupby rollup</code>
+		</li>
+		<li>
+			<code>!Items</code> - массив дочерних записей.
+			В наборе данных это значение всегда будет равно null. Поле необходимо для того, чтобы система смогла
+			построить иерархию исходя из полученных данных.
+			Обратите внимание, что тип данных элементов всегда должен совпадать с типом данных корневого объекта (с модификатором <code>!Group</code>).
+		</li>
+	</ul>
+
+	<p>
+		Из за особенностей обработки моделей НЕОБХОДИМО сначала отсортировать
+		набор данных по маркерам группировки в обратном порядке, так чтобы сначала выдавались группы.
+	</p>
+
+
+	<p class="tip info">
+		<b>Обратите внимание</b>. Если для модели задан только один уровень группировки, то фактически это
+		означает что вы просто подсчитаете итоги для определенных полей (тех, которые выводятся с помощью функции <code>sum</code>).
+	</p>
+
+	<h3>Пример</h3>
+	<p>
+		Работу с моделями с группировкой проще всего продемострировать на примере.
+		Пусть имееются таблица <code>Documents</code> следующего вида:
+	</p>
+
+	<table class="sql-table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Date</th>
+				<th>Agent</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-right">10</td>
+				<td>2021-05-01</td>
+				<td>10</td>
+				<td>150.00</td>
+			</tr>
+			<tr>
+				<td class="text-right">11</td>
+				<td>2021-05-02</td>
+				<td>10</td>
+				<td>300.00</td>
+			</tr>
+			<tr>
+				<td class="text-right">12</td>
+				<td>2021-05-01</td>
+				<td>20</td>
+				<td>320.00</td>
+			</tr>
+			<tr>
+				<td class="text-right">13</td>
+				<td>2021-05-02</td>
+				<td>20</td>
+				<td>270.00</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		И таблица <code>Agents</code> следующего вида:
+	</p>
+
+	<table class="sql-table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-right">10</td>
+				<td>Agent 1</td>
+			</tr>
+			<tr>
+				<td class="text-right">20</td>
+				<td>Agent 2</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Построим набор данных с группировкой по дате и контрагенту.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure dbo.[Report.Documents.Load]
+@UserId bigint
+as
+begin
+	set nocount on;
+	set transaction isolation level read uncommitted;
+
+	select [ReportData!TData!Group] = null,
+		[Agent] = a.[Name],
+		[Date] = convert(nvarchar, d.[Date], 104),
+		Amount = sum(d.Amount),
+		[Agent!!GroupMarker] = grouping(a.[Name]),
+		[Date!!GroupMarker] = grouping(d.[Date]),
+		[Items!TData!Items] = null
+	from dbo.Documents d inner join dbo.Agents a on d.Agent = a.Id
+	group by rollup (a.[Name], d.[Date])
+	order by [Agent!!GroupMarker] desc, [Date!!GroupMarker] desc, a.[Name], d.[Date];
+end
+go
+</script>
+</pre>
+
+	<p>В результате работы этой процедуры сформируется такой набор данных:</p>
+
+	<table class="sql-table">
+		<thead>
+			<tr>
+				<th>ReportData!TData!Group</th>
+				<th>Agent</th>
+				<th>Date</th>
+				<th>Amount</th>
+				<th>Agent!!GroupMarker</th>
+				<th>Date!!GroupMarker</th>
+				<th>Items!TData!Items</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>null</td>
+				<td>null</td>
+				<td>null</td>
+				<td>1040.00</td>
+				<td>1</td>
+				<td>1</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>null</td>
+				<td>Agent 1</td>
+				<td>null</td>
+				<td>450.00</td>
+				<td>0</td>
+				<td>1</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>null</td>
+				<td>Agent 2</td>
+				<td>null</td>
+				<td>590.00</td>
+				<td>0</td>
+				<td>1</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>null</td>
+				<td>Agent 1</td>
+				<td>01.05.2020</td>
+				<td>150.00</td>
+				<td>0</td>
+				<td>0</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>null</td>
+				<td>Agent 1</td>
+				<td>02.05.2020</td>
+				<td>300.00</td>
+				<td>0</td>
+				<td>0</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>null</td>
+				<td>Agent 2</td>
+				<td>01.05.2020</td>
+				<td>320.00</td>
+				<td>0</td>
+				<td>0</td>
+				<td>null</td>
+			</tr>
+			<tr>
+				<td>null</td>
+				<td>Agent 2</td>
+				<td>02.05.2020</td>
+				<td>270.00</td>
+				<td>0</td>
+				<td>0</td>
+				<td>null</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Первые три строки набора представляют собой итоги по всему отчету (первая строка) и по каждому из контрагентов (вторая и третья строки).
+		Маркеры группировки показывают для какого поля этот итог.
+	</p>
+
+	<p>После обработки этого набора сформируется такая модель (служебные свойства для простоты не показаны).</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+  "ReportData": {
+    "Agent": "",
+    "Date": "",
+    "Amount": 1040,
+    "Items": [
+      {
+        "Agent": "Agent 1",
+        "Date": "",
+        "Amount": 450,
+        "Items": [
+          {
+            "Agent": "Agent 1",
+            "Date": "01.05.2020",
+            "Amount": 150,
+            "Items": [],
+            "$level": 2,
+            "$groupName": "01.05.2020"
+          },
+          {
+            "Agent": "Agent 1",
+            "Date": "02.05.2020",
+            "Amount": 300,
+            "Items": [],
+            "$level": 2,
+            "$groupName": "02.05.2020"
+          }
+        ],
+        "$level": 1,
+        "$groupName": "Agent 1"
+      },
+      {
+        "Agent": "Agent 2",
+        "Date": "",
+        "Amount": 590,
+        "Items": [
+          {
+            "Agent": "Agent 2",
+            "Date": "01.05.2020",
+            "Amount": 320,
+            "Items": [],
+            "$level": 2,
+            "$groupName": "01.05.2020"
+          },
+          {
+            "Agent": "Agent 2",
+            "Date": "02.05.2020",
+            "Amount": 270,
+            "Items": [],
+            "$level": 2,
+            "$groupName": "02.05.2020"
+          }
+        ],
+        "$level": 1,
+        "$groupName": "Agent 2"
+      }
+    ],
+    "$level": 0,
+  }
+}</script>
+</pre>
+	<p>
+		Обратите внимание на свойства <code>$level</code> и <code>$groupName</code>.
+		Свойство <code>$level</code> - определяет уровень в дереве (с 0), а <code>$groupName</code> -
+		имя группы - фактически просто выбирается одно из значений набора в зависимости от уровня.
+	</p>
+
+	<p>
+		Отобразить такую модель можно, например, с помощью объекта <a class="code-link" href="/xaml/sheet/sheet">Sheet</a>.
+	</p>
+
+<pre class="code-highlight xml">
+	<script type="text/template">
+<![CDATA[
+<Sheet GridLines="Both" Columns="Fit,Auto,Auto">
+	<Sheet.Header>
+		<SheetRow Style="Header">
+			<SheetCell />
+			<SheetCell Content="Agent/Date"/>
+			<SheetCell Content="Amount"/>
+		</SheetRow>
+		<SheetRow Style="Total">
+			<SheetCell ColSpan="2" Content="Total"/>
+			<SheetCell Content="{Bind ReportData.Amount, DataType=Currency}" Align="Right"/>
+		</SheetRow>
+	</Sheet.Header>
+	<SheetTreeSection ItemsSource="{Bind ReportData.Items}">
+		<SheetRow>
+			<SheetGroupCell/>
+			<SheetCell GroupIndent="True" Content="{Bind $groupName}"/>
+			<SheetCell Content="{Bind Amount, DataType=Currency}" Align="Right"/>
+		</SheetRow>
+	</SheetTreeSection>
+</Sheet>
+]]>
+	</script>
+</pre>
+
+<p>Результат (только отображение, свертка групп не работает)
+</p>
+
+	<table class="sheet grid-both" style="width:300px">
+		<colgroup>
+			<col class="fit"></col>
+			<col style="width: auto;"></col>
+			<col style="width: auto;"></col>
+		</colgroup> 
+		<thead>
+			<tr class="row-header"><td></td><td>Agent/Date</td><td>Amount</td></tr>
+			<tr class="row-total"><td colspan="2">Total</td><td data-type="currency" class="text-right">1 040,00</td></tr></thead>
+		<tbody class="col-shadow">
+			<tr><td></td><td></td><td></td></tr>
+		</tbody>
+		<tbody>
+			<tr class=" group"><td class="group-cell has-children lev-1"><div><i class="ico"></i></div></td><td class="indent lev-1">Agent 1</td><td data-type="currency" class="text-right">450,00</td></tr>
+			<tr class=""><td class="group-cell  lev-2"><!----></td><td class="indent lev-2">01.05.2020</td><td data-type="currency" class="text-right">150,00</td></tr>
+			<tr class=""><td class="group-cell  lev-2"><!----></td><td class="indent lev-2">02.05.2020</td><td data-type="currency" class="text-right">300,00</td></tr>
+			<tr class=" group"><td class="group-cell has-children lev-1"><div><i class="ico"></i></div></td><td class="indent lev-1">Agent 2</td><td data-type="currency" class="text-right">590,00</td></tr>
+			<tr class=""><td class="group-cell  lev-2"><!----></td><td class="indent lev-2">01.05.2020</td><td data-type="currency" class="text-right">320,00</td></tr>
+			<tr class=""><td class="group-cell  lev-2"><!----></td><td class="indent lev-2">02.05.2020</td><td data-type="currency" class="text-right">270,00</td></tr>
+		</tbody>
+		<tfoot></tfoot>
+	</table>
 </div>

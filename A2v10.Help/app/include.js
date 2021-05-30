@@ -1,4 +1,4 @@
-﻿/* Copyright © 2017-2020 Alex Kukhtin. All rights reserved.*/
+﻿/* Copyright © 2017-2021 Alex Kukhtin. All rights reserved.*/
 
 (function () {
 
@@ -293,9 +293,9 @@
 		const jsKeywords = /^(a(wait|sync|rguments|ny)|b(reak)|c(onst|ase|atch|lass|ontinue)|do|de(lete|bugger|fault|clare)|e(lse|val|xtends|num|xport)|f(or|unction|alse|inally|rom)|i(f|n|nterface|mport)|n(ew|ull)|v(ar|oid)|let|s(witch|tatic)|t(his|hrow|ry|ypeof|rue|ype)|r(eturn|eadonly)|w(hile|ith)|yield|string|number|boolean|object)$/;
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
-		const sqlDelims = ' ,[]+-*/:;<>';
-		const sqlKeywords = /^(a(s|ll|lter)|b(egin|y)|se(t|lect)|from|update|i(f|nsert|nner)|delete|o(r|n|uter)|join|w(here|ith)|g(o|roup)|order|left|right|e(nd|lse|xists)|union|procedure|c(reate|ase)|nocount)$/;
-		const sqlInstr = /^(null|bigint)$/;
+		const sqlDelims = ' ,[]+-*/:;<>()';
+		const sqlKeywords = /^(a(s|ll|lter|sc)|b(egin|y)|se(t|lect)|from|u(pdate|ncommitted)|i(f|nsert|nner|solation)|d(elete|esc)|o(r|n|uter)|join|w(here|ith)|g(o|roup)|order|le(ft|vel)|r(ight|ead|ollup)|e(nd|lse|xists)|union|procedure|c(reate|ase)|nocount|transaction)$/;
+		const sqlInstr = /^(null|bigint|int|grouping|sum|nvarchar)$/;
 
 		let jsOpts = {
 			lang: 'js',
