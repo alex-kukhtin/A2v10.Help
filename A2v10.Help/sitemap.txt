@@ -58,6 +58,7 @@ https://docs.a2v10.com/xaml/controls/combobox
 https://docs.a2v10.com/xaml/controls/comboboxitem
 https://docs.a2v10.com/xaml/controls/datagrid
 https://docs.a2v10.com/xaml/controls/datagridcolumn
+https://docs.a2v10.com/xaml/controls/datagridrowdetails
 https://docs.a2v10.com/xaml/controls/datepicker
 https://docs.a2v10.com/xaml/controls/emptypanel
 https://docs.a2v10.com/xaml/controls/fileimage

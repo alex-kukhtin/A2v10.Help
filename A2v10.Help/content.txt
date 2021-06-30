@@ -65,6 +65,7 @@
 			ComboBoxItem		/xaml/controls/comboboxitem
 			DataGrid			/xaml/controls/datagrid
 			DataGridColumn		/xaml/controls/datagridcolumn
+			DataGridRowDetails	/xaml/controls/datagridrowdetails
 			DatePicker			/xaml/controls/datepicker
 			EmptyPanel			/xaml/controls/emptypanel
 			FileImage			/xaml/controls/fileimage

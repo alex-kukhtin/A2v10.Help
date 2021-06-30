@@ -180,6 +180,7 @@
     <Content Include="html\xaml\containers\tabbar.html" />
     <Content Include="html\xaml\containers\wizardPage.html" />
     <Content Include="html\xaml\containers\wizard.html" />
+    <Content Include="html\xaml\controls\datagridrowdetails.html" />
     <Content Include="html\xaml\controls\fileimage.html" />
     <Content Include="html\xaml\controls\propertygriditem.html" />
     <Content Include="html\xaml\controls\propertygrid.html" />
