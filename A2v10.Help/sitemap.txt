@@ -1,5 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
+https://docs.a2v10.com/whatsnew/w202107
 https://docs.a2v10.com/whatsnew/w202106
 https://docs.a2v10.com/whatsnew/w202105
 https://docs.a2v10.com/whatsnew/w202104
@@ -49,7 +50,6 @@ https://docs.a2v10.com/xaml/overview/index
 https://docs.a2v10.com/xaml/overview/extensions
 https://docs.a2v10.com/xaml/controls/index
 https://docs.a2v10.com/xaml/controls/alert
-https://docs.a2v10.com/xaml/controls/attachments
 https://docs.a2v10.com/xaml/controls/button
 https://docs.a2v10.com/xaml/controls/chatitem
 https://docs.a2v10.com/xaml/controls/checkbox
