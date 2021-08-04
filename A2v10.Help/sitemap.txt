@@ -1,6 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
-https://docs.a2v10.com/whatsnew/w202107
+https://docs.a2v10.com/whatsnew/w202108
 https://docs.a2v10.com/whatsnew/w202106
 https://docs.a2v10.com/whatsnew/w202105
 https://docs.a2v10.com/whatsnew/w202104
@@ -33,6 +33,8 @@ https://docs.a2v10.com/app/reports
 https://docs.a2v10.com/app/files
 https://docs.a2v10.com/app/folders/index
 https://docs.a2v10.com/app/folders/assets
+https://docs.a2v10.com/app/folders/layout
+https://docs.a2v10.com/app/folders/emails
 https://docs.a2v10.com/app/redirect
 https://docs.a2v10.com/models/index
 https://docs.a2v10.com/models/general

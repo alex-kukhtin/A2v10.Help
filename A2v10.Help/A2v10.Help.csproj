@@ -68,6 +68,8 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="html\app\folders\emails.html" />
+    <Content Include="html\app\folders\layout.html" />
     <Content Include="html\app\sendmessagecommand.html" />
     <Content Include="html\app\callapicommand.html" />
     <Content Include="html\app\commands.html" />
@@ -113,7 +115,7 @@
     <Content Include="html\models\blob.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
-    <Content Include="html\whatsnew\w202107.html" />
+    <Content Include="html\whatsnew\w202108.html" />
     <Content Include="html\whatsnew\w202106.html" />
     <Content Include="html\whatsnew\w202105.html" />
     <Content Include="html\whatsnew\w202104.html" />
@@ -264,6 +266,7 @@
     <Content Include="html\xaml\simple\accelcommand.html" />
     <Content Include="html\xaml\simple\index.html" />
     <Content Include="html\xaml\simple\gapsize.html" />
+    <Content Include="html\xaml\simple\gridlength.html" />
     <Content Include="html\xaml\simple\printpage.html" />
     <Content Include="html\xaml\simple\accelcommandcollection.html" />
     <Content Include="html\xaml\simple\resourcedictionary.html" />

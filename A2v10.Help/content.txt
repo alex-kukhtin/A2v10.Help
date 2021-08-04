@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
-		Июль 2021				/whatsnew/w202107
+		Август 2021				/whatsnew/w202108
 		Июнь 2021				/whatsnew/w202106
 		Май 2021				/whatsnew/w202105
 		Апрель 2021				/whatsnew/w202104
@@ -36,6 +36,8 @@
 
 	Специальные папки		/app/folders/index
 		_assets				/app/folders/assets
+		_layout				/app/folders/layout
+		_emails				/app/folders/emails
 
 	redirect.json		/app/redirect
 

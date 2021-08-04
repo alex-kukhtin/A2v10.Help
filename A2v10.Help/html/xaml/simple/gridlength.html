@@ -1,0 +1,52 @@
+﻿<div>
+	<!--title:Xaml.GridLength-->
+	<!--keywords:GridLength-->
+	<div class="title">
+		<h1>
+			Элемент GridLength
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все простые элементы</a>
+		</div>
+	</div>
+	<p>
+		Задает размер. Задается в виде числа с необязательным указанием единиц измерения 
+		либо в виде нескольких буквальных значений.
+		Единицы измерения соответствуют единицам в css.
+	</p>
+
+	<p>Поддерживаются все возможные единицы измерения для <a class="code-link" href="/xaml/simple/length">Length</a>.</p>
+
+	<h3>Дополнительные значения</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Единица</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Auto</td>
+				<td>Размер определяется содержимым</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinMax</td>
+				<td>
+					Минимальное и максимальное значение. Задается в виде формулы
+					<code>MinMax( MinValue; MaxValue)</code>, где <b>MinValue</b> и
+					<b>MaxValue</b> имеют тип <a class="code-link" href="/xaml/simple/length">Length</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">&lt;value&gt;*</td>
+				<td>Значение со звездочкой определяет долю размера, который остается 
+				после размещения всех элементов без звездочек. 
+				Обратите внимание, что это не доля в прямом смысле (1/x), а скорее 
+				коэффицент пропроциональности. Так, например два значения - 1* и 2* дадут 
+				такой же результат как и 2* и 4*. В результате второй размер будет вдвое больше первого.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
