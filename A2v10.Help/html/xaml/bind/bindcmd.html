@@ -40,6 +40,11 @@
 				<td>Аргумент команды. Практически всегда привязка (<a class="code-link" href="bind">Bind</a>).</td>
 			</tr>
 			<tr>
+				<td class="prop-name">Data</td>
+				<td>Object</td>
+				<td>Дополнительные данные для команды. Практически всегда привязка (<a class="code-link" href="bind">Bind</a>).</td>
+			</tr>
+			<tr>
 				<td class="prop-name">Url</td>
 				<td>String</td>
 				<td>Url для внешней команды.</td>
@@ -75,6 +80,11 @@
 				<td>Всегда привязка. Объект или массив, который нужно обновить после выполнения как-либо действий.</td>
 			</tr>
 			<tr>
+				<td class="prop-name">ReloadAfter</td>
+				<td>Boolean</td>
+				<td>Обновить модель после выполнения команды.</td>
+			</tr>
+			<tr>
 				<td class="prop-name">Export</td>
 				<td>Boolean</td>
 				<td>Выполнять ли экспорт вместо отображения. Не совместима с <code>Print</code>.</td>
@@ -82,12 +92,17 @@
 			<tr>
 				<td class="prop-name">Print</td>
 				<td>Boolean</td>
-				<td>Выполнять ли экспорт вместо отображения</td>
+				<td>Выполнять ли печать вместо отображения.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">FileAction</td>
 				<td>Enum</td>
 				<td>Действие для команды <code>File</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Action</td>
+				<td>Enum</td>
+				<td>Действие для команды <code>Dialog</code>.</td>
 			</tr>
 		</tbody>
 	</table>
@@ -172,6 +187,39 @@
 		<p>
 			Показывает диалог и выполняет указанное действие.
 		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>Action</code> - действие. Возможные значения:
+				<ul class="enum-vals">
+					<li>
+						<span class="prop-name">Edit</span> - редактировать элемент, указанный аргументом.
+						После закрытия диалога элемент будет обновлен.
+					</li>
+					<li>
+						<span class="prop-name">EditSelected</span> - редактировать выбраный элемент коллекции.
+						Коллекция задается аргументом команды. После закрытия диалога выделенный элемент будет обновлен.
+					</li>
+					<li><span class="prop-name">Show</span> - показать элемент, заданный аргументом.</li>
+					<li>
+						<span class="prop-name">ShowSelected</span> - показать выбранный элемент коллекции.
+						Коллекция задается аргументом команды.
+					</li>
+					<li><span class="prop-name">Browse</span> - выбрать элемент, заданный аргументом. Элемент заменяется выбранным в диалоге.</li>
+					<li><span class="prop-name">Append</span> - создать новый элемент и добавить его в коллекцию. Коллекция задается аргументом.</li>
+					<li><span class="prop-name">New</span> - создать новый элемент.</li>
+					<li><span class="prop-name">Copy</span> - создать копию заданного элемента. Элемент задается аргументом.</li>
+				</ul>
+			</li>
+			<li><code>Argument</code> - Привязка к элементу или коллекции.</li>
+			<li><code>Data</code> - Дополнительные данные для вызова диалога. Будут параметрами процедуры загрузки модели диалога.</li>
+			<li>
+				<code>URL</code> - URL на диалог из раздела <a class="code-link" href="/app/dialogs">dialogs</a>
+				файла описания модели <code>model.json</code>.
+			</li>
+			<li><code>SaveRequired</code>, <code>ValidRequired</code>, <code>ReloadAfter</code> - 
+			дополнительные условия команды.</li>
+		</ul>
 	</div>
 	<div class="method">
 		<div class="command"><b>File</b> - работа с файлами (двоичными объектами)</div>

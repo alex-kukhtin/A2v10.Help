@@ -250,7 +250,7 @@ code.string {
 .help-content-view ul.params {
   margin-left: 1em;
 }
-.help-content-view ul.params li {
+.help-content-view ul.params > li {
   line-height: normal;
   margin: 0.2em 0;
   list-style-type: circle;
@@ -424,6 +424,11 @@ h4 {
 .help-content-view .enum-vals li {
   list-style: none;
   line-height: normal;
+  text-indent: -16px;
+}
+.help-content-view .enum-vals li .prop-name {
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 a.code-link {
   font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
