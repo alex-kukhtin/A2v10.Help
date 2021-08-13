@@ -1,0 +1,47 @@
+﻿<div>
+	<!--title:MessageAttachment-->
+	<!--keywords:MessageAttachment-->
+	<div class="title">
+		<h1>
+			Элемент MessageAttachment
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Отправка сообщений</a>
+		</div>
+	</div>
+
+	<p>Представляет собой вложение в сообщение электронной почты.</p>
+
+
+	<h3>Свойства</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Data</td>
+				<td>Stream</td>
+				<td>Всегда привязка из модели данных. Поле модели, к которому привязывается это свойство 
+				должно быть типа массив байтов (vabinary).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Name</td>
+				<td>String</td>
+				<td>Имя вложения. Чтобы клиент смог правильно распознать тип файла вложения, 
+				добавьте к имени расширение (например .pdf).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mime</td>
+				<td>String</td>
+				<td>
+					Mime-тип содержимого вложения.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

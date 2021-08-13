@@ -104,6 +104,7 @@
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />
     <Content Include="html\messaging\bindings.html" />
+    <Content Include="html\messaging\messageattachment.html" />
     <Content Include="html\messaging\settings.html" />
     <Content Include="html\messaging\emailmessage.html" />
     <Content Include="html\messaging\messageaddress.html" />
