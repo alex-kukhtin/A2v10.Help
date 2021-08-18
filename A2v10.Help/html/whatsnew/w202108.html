@@ -14,6 +14,7 @@
 
 	<!--
 
+	BindCmd: CheckReadOnly
 	messaging - пример xaml-файла.
 
 	javascript command. fetch, executeSql, loadModel
@@ -21,7 +22,7 @@
 
 	IIS: appSettings
 
-	models: paging, update, simple
+	models: paging, update, simple, system recordset
 
 	IController.$report
 	FileImage - сделать подробное описание (files/sql - load/save, azureStorage)
@@ -58,7 +59,7 @@
 	array.$load, $loadLazy, $renumberRows, $ModelInfo
 
 	vm.$isDirty, $isPristine, $canSave
-	IRoot.$dirty
+	IRoot.$dirty, $readOnly, $stateReadOnly
 	vm.$setCurrentUrl
 	Map.$setProperty
 
