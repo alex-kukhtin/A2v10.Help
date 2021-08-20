@@ -20,7 +20,7 @@
   font-family: 'A2v10';
   font-display: fallback;
   src: url('/css/fonts/A2v10.eot');
-  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7712') format('woff'), url('/css/fonts/A2v10.ttf?v=7674') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
+  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7800') format('woff'), url('/css/fonts/A2v10.ttf?v=7674') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -326,6 +326,9 @@
 }
 .ico-devices:before {
   content: "\e958";
+}
+.ico-ellipsis-bottom:before {
+  content: "\e9b3";
 }
 .ico-ellipsis:before {
   content: "\e9b4";
@@ -1328,26 +1331,31 @@ header .h-menu-title,
 }
 header .h-block,
 .header .h-block {
+  display: flex;
+  align-items: center;
   white-space: nowrap;
-}
-header .h-block a.app-title,
-.header .h-block a.app-title {
   color: inherit;
-  font-size: 18px;
 }
-header .h-block a.app-title .ico,
-.header .h-block a.app-title .ico {
-  font-size: inherit;
-  margin-right: 6px;
-}
-header .h-block a.app-title:hover,
-.header .h-block a.app-title:hover {
+header .h-block:hover,
+.header .h-block:hover {
   text-decoration: none;
   color: inherit;
 }
+header .h-block .app-title,
+.header .h-block .app-title {
+  font-size: 18px;
+}
+header .h-block .app-logo,
+.header .h-block .app-logo {
+  padding-right: 12px;
+}
+header .h-block .app-logo > img,
+.header .h-block .app-logo > img {
+  display: block;
+}
 header .h-block .app-subtitle,
 .header .h-block .app-subtitle {
-  padding-left: 6px;
+  padding-left: 12px;
 }
 header .h-menu,
 .header .h-menu {
@@ -1450,6 +1458,9 @@ header .dropdown.separate.show .btn.btn-success,
   top: 40px;
 }
 .side-bar-position-left.collapsed .content-view.partial-page {
+  left: 42px;
+}
+.side-bar-position-left.compact-side-bar.collapsed .content-view.partial-page {
   left: 62px;
 }
 .side-bar-position-top .content-view.partial-page,
@@ -1729,6 +1740,13 @@ header .dropdown.separate.show .btn.btn-success,
 .center-page .initial-form button {
   width: 60%;
   margin-top: 2em;
+}
+.center-page .initial-form .summary div {
+  white-space: pre-line;
+  line-height: 1.5;
+}
+.center-page .initial-form p {
+  margin-bottom: 2rem;
 }
 .splitter {
   display: grid;
@@ -2447,15 +2465,14 @@ pre.a2-code {
 .control-group.disabled .input-group {
   background-color: #fafafa;
 }
-.control-group.disabled a {
+.control-group.disabled a:not(.rendershow) {
   pointer-events: none;
   opacity: 0.5;
 }
 .data-grid .control-group {
   margin: 0;
 }
-.hlink-dd-wrapper + .hlink-dd-wrapper,
-.a2-inline + .a2-inline {
+.hlink-dd-wrapper + .hlink-dd-wrapper {
   margin-left: 0.4rem;
 }
 .hlink-dd-wrapper.popover .a2-hyperlink {
@@ -2953,10 +2970,26 @@ pre.a2-code {
 }
 .period-picker .current-period {
   font-weight: 500;
-  color: #555;
+  border-bottom: 1px dotted currentColor;
 }
 .period-picker .current-period.processing {
   animation: blink 0.5s infinite alternate ease-in-out;
+}
+.period-picker .custom-period {
+  display: inline-flex;
+  align-items: baseline;
+  padding-right: 0.8em;
+}
+.period-picker .custom-period span {
+  padding: 0 0.3em;
+}
+.period-picker .custom-period input {
+  padding: 0.3em;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.period-picker .custom-period .focus input {
+  border-color: #208cf8;
 }
 .period-picker .period-footer {
   display: flex;
@@ -3989,9 +4022,6 @@ tr:hover .commandbar.visible-hover {
 .tab-panel .tab-item.full-height {
   height: 100%;
 }
-.tab-panel .tab-item.full-height > div {
-  height: 100%;
-}
 .tab-panel .pane-header {
   grid-row: 1;
   grid-column: 2;
@@ -4391,10 +4421,11 @@ ul.news-list > li {
   bottom: 0;
   z-index: 1050;
   overflow: auto;
+  display: flex;
 }
 .modal-stack .modal-wrapper .modal-window {
   position: relative;
-  margin: 70px auto 35px auto;
+  margin: auto;
   width: 500px;
   height: auto;
   background-color: white;
@@ -4412,27 +4443,10 @@ ul.news-list > li {
 }
 .modal-stack .modal-wrapper .modal-window[maximize] {
   width: 98vw;
-  margin: 10px auto;
   height: calc(100vh - 1.8rem - 20px);
 }
 .modal-stack .modal-wrapper .modal-window[maximize] .modal-header {
   cursor: default;
-}
-.modal-stack .modal-wrapper .modal-window[maximize] .tab-content {
-  overflow: hidden;
-}
-.modal-stack .modal-wrapper .modal-window[maximize] .tab-content .tab-item {
-  height: 100%;
-}
-.modal-stack .modal-wrapper .modal-window[maximize] .dialog-grid-content {
-  overflow: hidden;
-}
-.modal-stack .modal-wrapper .modal-window[maximize] .taskpad {
-  overflow: hidden;
-  padding: 0;
-}
-.modal-stack .modal-wrapper .modal-window[maximize] .taskpad .taskpad-collapse-handle {
-  display: none;
 }
 .modal-stack .modal-wrapper .modal-window.modal-small {
   width: 300px;
@@ -4449,7 +4463,7 @@ ul.news-list > li {
   display: none;
 }
 .modal-stack .modal-body .app-exception {
-  width: 498px;
+  margin: 0;
 }
 .debug .modal-animation-frame {
   bottom: 1.8rem;
@@ -4459,14 +4473,16 @@ ul.news-list > li {
   left: 0;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0!important;
   z-index: 1050;
   overflow: auto;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .inline-modal-wrapper .modal-window {
   position: relative;
-  margin: 70px auto 35px auto;
   width: 500px;
   height: auto;
   background-color: white;
@@ -4530,7 +4546,9 @@ ul.news-list > li {
 .modal-footer .btn {
   min-width: 6rem;
 }
-.modal-footer .btn + .btn {
+.modal-footer .btn + .btn,
+.modal-footer .btn + .dropdown,
+.modal-footer .dropdown + .btn {
   margin-left: 0.75rem;
 }
 .modal-footer .btn-help {
@@ -4563,7 +4581,7 @@ ul.news-list > li {
 .modal-body.confirm > div,
 .modal-body.alert > div,
 .modal-body.info > div {
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 .modal-content.content-iframe {
   display: flex;
@@ -5376,6 +5394,13 @@ TODO:
 .dropdown-menu > .checkbox > span {
   padding-left: 26px;
 }
+.contextmenu {
+  position: absolute;
+  display: block;
+}
+.contextmenu.show .dropdown-menu {
+  display: block;
+}
 .dropdown {
   position: relative;
   overflow: visible;
@@ -5904,6 +5929,9 @@ TODO:
   display: flex!important;
   flex-direction: column;
 }
+.stack-panel.inline {
+  display: inline-flex !important;
+}
 .stack-panel.horizontal {
   flex-direction: row;
   align-items: baseline;
@@ -6253,10 +6281,11 @@ iframe.eusign-iframe {
   flex-direction: row;
 }
 .flex-list {
-  display: flex!important;
+  display: flex !important;
   margin: 0;
   padding: 0;
   list-style: none;
+  gap: 1.25rem;
 }
 .flex-list .flex-list-item {
   display: block;
@@ -6269,12 +6298,6 @@ iframe.eusign-iframe {
 }
 .flex-list.horizontal.no-wrap {
   flex-wrap: nowrap;
-}
-.flex-list.horizontal .flex-list-item {
-  margin-right: 1.25rem;
-}
-.flex-list.horizontal .flex-list-item:last-child {
-  margin-right: 0;
 }
 .flex-list.border-top {
   padding-top: 1.25rem;
@@ -6916,7 +6939,7 @@ table > colgroup col.blue {
 }
 .debug-panel {
   position: absolute;
-  top: 40px;
+  top: 0;
   bottom: 1.8rem;
   right: 0;
   z-index: 110;
