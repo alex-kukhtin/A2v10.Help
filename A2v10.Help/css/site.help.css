@@ -208,6 +208,9 @@ pre {
   font-size: 0.9em;
   background-color: #f8f8f8;
 }
+.file-name {
+  font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
+}
 pre {
   padding: 0.6em;
   line-height: 1.2em;

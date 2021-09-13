@@ -69,6 +69,7 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="html\app\folders\emails.html" />
+    <Content Include="html\app\folders\files.html" />
     <Content Include="html\app\folders\layout.html" />
     <Content Include="html\app\sendmessagecommand.html" />
     <Content Include="html\app\callapicommand.html" />
@@ -100,6 +101,8 @@
     <Content Include="html\desktop\index.html" />
     <Content Include="html\help\about.html" />
     <Content Include="html\app\index.html" />
+    <Content Include="html\howto\importexcel.html" />
+    <Content Include="html\howto\index.html" />
     <Content Include="html\images\client1.svg" />
     <Content Include="html\images\mvc1.svg" />
     <Content Include="html\images\property16.png" />

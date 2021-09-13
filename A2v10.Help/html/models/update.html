@@ -5,5 +5,238 @@
 		<h1>
 			Обновление моделей
 		</h1>
+		<div class="breadcrumb">
+			<a href="index">Модели данных</a>
+		</div>
 	</div>
+	<p>
+		Обратите внимание, что модель обновляется целиком за один вызов хранимой процедуры.
+		Для передчи данных широко используются
+		<a target="_blank" href="https://docs.microsoft.com/en-us/sql/relational-databases/tables/use-table-valued-parameters-database-engine?view=sql-server-ver15">табличные параметры</a> SQL-сервер.
+	</p>
+	<p>Обновление моделей выполняется следующим образом.</p>
+	<p>Сначала клиент отправляет всю модель на сервер.</p>
+	<p>
+		Система находит имя модели для соответствующего действия и вызывает хранимую процедуру
+		с суффиксом <b>.Metadata</b>. Эта процедура возвращает несколько наборов с пустым содержимым.
+		Имена полей в этих наборах определяют правила, каким образом пребразовывать
+		содержимое полученной с клиента модели в параметры хранимой процедуры обновления модели.
+	</p>
+	<p>Система преобразовывает полученые сырые данные в набор таблиц используя полученные метаданные.</p>
+	<p>Вызывается процедура с суффиксом <b>.Update</b> и ей передаются преобразованные таблицы.</p>
+
+	<h3>Правила интерпретации наборов .Metadata</h3>
+	<p>Имя первого поля каждого набора всегда состоит из трех элементов, разделенных символом '!'.</p>
+	<ul>
+		<li>Первый элемент - имя параметра в процедуре <b>.Update</b>.</li>
+		<li>
+			Второй элемент - путь к данным из модели данных. Не смотря на то, что некоторые
+			значения могут являться массивами, путь все равно задается через точку.
+		</li>
+		<li>Третий элемент - всегда значение <b>Metadata</b>.</li>
+	</ul>
+	<p>
+		Остальные поля набора представляют собой свойства в модели и соответственно поля в табличной переменной.
+	</p>
+	<p>
+		Количество табличных параметров в процедуре <b>.Update</b> (не считая предопределенных) всегда будет
+		равно количеству наборов, которые вернула процедура <b>.Metadata</b>.
+	</p>
+
+	<h3>Пример</h3>
+	<p>Рассмотрим процедуру обновления документа. Работающий пример <a target="_blank" href="https://github.com/alex-kukhtin/A2v10.Web.Sample/blob/master/App_application/sample/document/model.sql">таблиц и хранмых процедур</a> можно найти на GitHub</p>
+
+	<p>Определим табличные типы</p>
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create type a2v10sample.[Document.TableType] as table(
+	Id bigint,
+	Kind nvarchar(32),
+	[Date] date,
+	[No] nvarchar(255),
+	[Sum] money,
+	[Agent] bigint,
+	Memo nvarchar(255)
+)
+go
+create type a2v10sample.[DocDetails.TableType]
+as table(
+	Id bigint null,
+	ParentId bigint null,
+	RowNumber int,
+	[Qty] float,
+	[Price] float,
+	[Sum] money,
+	Product bigint,
+	[Memo] nvarchar(255)
+)
+go
+</script>
+</pre>
+	<p>
+		Первый тип будет соответствовать таблице <b>a2v10sample.Documents</b>, а второй таблице
+		<b>a2v10sample.DocDetails</b>.
+	</p>
+
+	<p>Процедура получения метаданных будет иметь следующий вид:</p>
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure a2v10sample.[Document.Metadata]
+as
+begin
+	set nocount on;
+
+	declare @Document a2v10sample.[Document.TableType];
+	declare @Rows a2v10sample.[DocDetails.TableType];
+
+	select [Document!Document!Metadata] = null, * from @Document;
+	select [Rows!Document.Rows!Metadata]=null, * from @Rows;
+end
+go</script>
+</pre>
+	<p>
+		Она возвращает два набора. Первый набор описывает сам документ (в таблице будет всегда одна запись) со всеми нужными полями.
+		Эта таблица буде передана в параметр с именем <b>@Document</b>. Обатите внимание, что в имени
+		<b>[Document!Document!Metadata]</b> первое слово <b>Document</b> это имя параметра, а второе <b>Document</b> -
+		путь в модели, откуда надо получить данные.
+	</p>
+	<p>
+		Второй набор описывает таблицу строк. В этой таблице будет столько же строк, сколько и в массиве
+		<b>Document.Rows</b> исходной модели. Имя параметра - <b>@Rows</b>.
+	</p>
+
+	<p>Процедура обновления будет иметь следующий вид:</p>
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure a2v10sample.[Document.Update]
+@TenantId int = 1,
+@UserId bigint,
+@Document a2v10sample.[Document.TableType] readonly,
+@Rows a2v10sample.[DocDetails.TableType] readonly,
+@Kind nvarchar(32)
+as
+begin
+	set nocount on;
+
+	declare @RetId bigint;
+	declare @output table(op sysname, id bigint);
+
+	merge a2v10sample.Documents as target
+	using @Document as source
+	on (target.Id = source.Id)
+	when matched then update set 
+		target.[Date] = source.[Date],
+		target.[No] = source.[No],
+		target.Agent = source.Agent,
+		target.[Sum] = source.[Sum],
+		target.Memo = source.Memo,
+		target.DateModified = getdate()
+	when not matched by target then
+	insert(Kind, [Date], [No], Agent, [Sum], Memo) 
+	values (@Kind, [Date], [No], Agent, [Sum], Memo)
+	output 
+		$action op,
+		inserted.Id id
+	into @output(op, id);
+	select top(1) @RetId = id from @output;
+
+	merge a2v10sample.DocDetails as target
+	using @Rows as source
+	on (target.Id = source.Id and target.Document = @RetId)
+	when matched then update set
+			target.RowNo = source.RowNumber,
+			target.Product = source.Product,
+			target.Qty = source.Qty,
+			target.Price = source.Price,
+			target.[Sum] = source.[Sum],
+			target.Memo = source.Memo
+	when not matched by target then insert 
+		(Document, RowNo, Qty, Price, [Sum], Product, Memo) values
+		(@RetId, RowNumber, Qty, Price, [Sum], Product, Memo)
+	when not matched by source and target.Document = @RetId then delete;
+
+	exec a2v10sample.[Document.Load] @UserId, @RetId;
+end
+go</script>
+</pre>
+
+	<p>
+		Процедура просто обновляет (или вставляет) документ и его строки используя оператор <b>merge</b>.
+		Обратите внимание, что для получения идентификатора документа (который нужен для вставки строк)
+		используется псевдотаблица <b>inserted</b>
+	</p>
+
+	<h3>Дополнительные служебные поля в наборах данных </h3>
+	<p>
+		При заполнении таблиц данных из моделей в таблицы добавляются следующие служебные поля. Если они будут
+		объявлены в табличных типах, то их значения будут заполнены.
+		Эти поля используются для связывания дочерних записей (ведь они могут быть новыми и их идентификаторов пока может не быть).
+	</p>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Имя</th>
+				<th>Тип</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">GUID</td>
+				<td>uniqueidentifier</td>
+				<td>
+					Уникальное значение. Используется совместно с <b>ParentGUID</b>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowNumber</td>
+				<td>int</td>
+				<td>
+					Номер строки в таблице (начиная с 1).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CurrentKey</td>
+				<td>Разные типы</td>
+				<td>
+					Текущий ключ в таблицах типа <b>Map</b>. Используется вместе с полем 
+					<b>ParentKey</b> дочерней таблицы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentId</td>
+				<td>Разные типы</td>
+				<td>Идентификатор родительской записи. Идентификатор - всегда свойство с именем <b>Id</b>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentGUID</td>
+				<td>uniqueidentifier</td>
+				<td>Уникальный идентификатор родительской записи (свойство с именем <b>GUID</b> из родительской таблицы).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentKey</td>
+				<td>Разные типы</td>
+				<td>Ключ родительской записи (<b>CurrentKey</b>). Используется для заполнения таблиц типа <b>Map</b>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentRowNumber</td>
+				<td>int</td>
+				<td>Номер строки родительской записи (свойство с именем <b>RowNumber</b> из родительской таблицы).</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Совет</h3>
+	<p>Для того, чтобы посмотреть какие данные приходят в хранимую процедуру можно использовать следующий фрагмент кода
+	(где @Rows - имя табличного параметра):</p>
+
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+declare @xml nvarchar(max);
+set @xml = (select * from @Rows for xml auto);
+throw 60000, @xml, 0;
+</script>
+</pre>
+
 </div>

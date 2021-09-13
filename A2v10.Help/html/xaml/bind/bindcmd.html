@@ -217,8 +217,10 @@
 				<code>URL</code> - URL на диалог из раздела <a class="code-link" href="/app/dialogs">dialogs</a>
 				файла описания модели <code>model.json</code>.
 			</li>
-			<li><code>SaveRequired</code>, <code>ValidRequired</code>, <code>ReloadAfter</code> - 
-			дополнительные условия команды.</li>
+			<li>
+				<code>SaveRequired</code>, <code>ValidRequired</code>, <code>ReloadAfter</code> -
+				дополнительные условия команды.
+			</li>
 		</ul>
 	</div>
 	<div class="method">
@@ -239,8 +241,25 @@
 				</ul>
 			</li>
 			<li><code>Argument</code> - Привязка к свойству, которое будет задавать идентификатор двоичного объекта.</li>
-			<li><code>URL</code> - URL на действие из раздела <a class="code-link" href="/app/files">files</a> 
-			файла описания модели <code>model.json</code>.</li>
+			<li>
+				<code>URL</code> - URL на действие из раздела <a class="code-link" href="/app/files">files</a>
+				файла описания модели <code>model.json</code>.
+			</li>
+		</ul>
+	</div>
+	<div class="method">
+		<a href="#download"></a>
+		<div class="command"><b>Download</b> - загрузить</div>
+		<p>
+			Позволяет пользователю загрузить статический файл. Статические файлы, 
+			связанные с приложением должны быть размещены в специальной папке <a class="code-link" href="/app/folders/files">_files</a>.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>Url</code> - путь к статическому файлу. Путь указывается 
+				относительно папки <b>_files</b>.
+			</li>
 		</ul>
 	</div>
 </div>

@@ -1,0 +1,29 @@
+﻿<div>
+	<!--title:_files-->
+	<!--keywords:_files-->
+	<div class="title">
+		<h1>
+			Специальная папка _files
+		</h1>
+	</div>
+
+	<p>
+		Специальная папка <code>_files</code> содержит произвольные файлы для загрузки пользователями.
+	</p>
+	<p>Обычно для загрузки используется комада <a class="code-link" href="/xaml/bind/bindcmd">Download</a>.
+	</p>
+
+	<h4>Пример загрузки файла</h4>
+	<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Hyperlink Content="Образец файла для загрузки"
+			Command="{BindCmd Command=Download, Url='/entity_import_sample.xlsx'}" />
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Обратите внимание!</b> Папка <span class="file-name">_files</span> может 
+		содержать вложенные папки. В команде пусть указывается относительно этой папки.
+	</p>
+
+</div>

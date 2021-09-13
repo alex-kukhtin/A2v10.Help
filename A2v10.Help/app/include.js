@@ -294,8 +294,8 @@
 		const instr = /^(Array|Boolean|Date|Infinity|Promise|Error|Symbol|Function|String|RegExp|N(umber|aN)|Object|Math|is(Finite|PrototypeOf|NaN)|toString|undefined|valueOf|hasOwnProperty)$/;
 
 		const sqlDelims = ' ,[]+-*/:;<>()';
-		const sqlKeywords = /^(a(s|ll|lter|sc)|b(egin|y)|se(t|lect)|from|u(pdate|ncommitted)|i(f|nsert|nner|solation)|d(elete|esc)|o(r|n|uter)|join|w(here|ith)|g(o|roup)|order|le(ft|vel)|r(ight|ead|ollup)|e(nd|lse|xists)|union|procedure|c(reate|ase)|nocount|transaction)$/;
-		const sqlInstr = /^(null|bigint|int|grouping|sum|nvarchar)$/;
+		const sqlKeywords = /^(a(s|ll|lter|sc|uto|nd)|b(egin|y)|se(t|lect)|f(rom|or)|u(sing|pdate|ncommitted|nion)|i(f|nsert|nner|solation|nto)|d(elete|esc|eclare)|o(r|n|uter|utput)|join|w(here|ith)|g(o|roup)|order|le(ft|vel)|r(ight|ead|ollup)|e(nd|lse|xists|xec)|procedure|w(hen|ehre|ith)|c(reate|ase)|n(ot|ocount)|m(erge|atched)|t(hen|hrow|ransaction)|values|xml)$/;
+		const sqlInstr = /^(null|bigint|int|grouping|sum|nvarchar|readonly)$/;
 
 		let jsOpts = {
 			lang: 'js',

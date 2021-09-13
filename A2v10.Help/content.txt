@@ -37,6 +37,7 @@
 		_assets				/app/folders/assets
 		_layout				/app/folders/layout
 		_emails				/app/folders/emails
+		_files				/app/folders/files
 
 	redirect.json		/app/redirect
 
@@ -270,6 +271,9 @@
 	MessageAddress		/messaging/messageaddress
 	Template			/messaging/template
 	TemplatedMessage	/messaging/templatedmessage
+
+Как сделать			/howto/index
+	Импорт данных из Excel		/howto/importexcel
 
 Тестирование		/tests/index
 	Проверка типов	/tests/checktypes

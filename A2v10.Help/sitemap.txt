@@ -34,6 +34,7 @@ https://docs.a2v10.com/app/folders/index
 https://docs.a2v10.com/app/folders/assets
 https://docs.a2v10.com/app/folders/layout
 https://docs.a2v10.com/app/folders/emails
+https://docs.a2v10.com/app/folders/files
 https://docs.a2v10.com/app/redirect
 https://docs.a2v10.com/models/index
 https://docs.a2v10.com/models/general
@@ -249,6 +250,8 @@ https://docs.a2v10.com/messaging/emailmessage
 https://docs.a2v10.com/messaging/messageaddress
 https://docs.a2v10.com/messaging/template
 https://docs.a2v10.com/messaging/templatedmessage
+https://docs.a2v10.com/howto/index
+https://docs.a2v10.com/howto/importexcel
 https://docs.a2v10.com/tests/index
 https://docs.a2v10.com/tests/checktypes
 https://docs.a2v10.com/tests/tools
