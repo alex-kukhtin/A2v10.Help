@@ -1,5 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
+https://docs.a2v10.com/whatsnew/w202111
 https://docs.a2v10.com/whatsnew/w202109
 https://docs.a2v10.com/whatsnew/w202108
 https://docs.a2v10.com/whatsnew/w202106
@@ -248,6 +249,10 @@ https://docs.a2v10.com/messaging/settings
 https://docs.a2v10.com/messaging/bindings
 https://docs.a2v10.com/messaging/emailmessage
 https://docs.a2v10.com/messaging/messageaddress
+https://docs.a2v10.com/messaging/messageattachment
+https://docs.a2v10.com/messaging/messagereport
+https://docs.a2v10.com/messaging/messagereportmodel
+https://docs.a2v10.com/messaging/messagereportparam
 https://docs.a2v10.com/messaging/template
 https://docs.a2v10.com/messaging/templatedmessage
 https://docs.a2v10.com/howto/index

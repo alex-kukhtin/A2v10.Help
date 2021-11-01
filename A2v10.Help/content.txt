@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Что нового		/whatsnew/index
+		Ноябрь 2021				/whatsnew/w202111
 		Сентябрь 2021			/whatsnew/w202109
 		Август 2021				/whatsnew/w202108
 		Июнь 2021				/whatsnew/w202106
@@ -269,6 +270,10 @@
 	Привязки			/messaging/bindings
 	EmailMessage		/messaging/emailmessage
 	MessageAddress		/messaging/messageaddress
+	MessageAttachemnt	/messaging/messageattachment
+	MessageReport		/messaging/messagereport
+	MessageReportModel		/messaging/messagereportmodel
+	MessageReportParam		/messaging/messagereportparam
 	Template			/messaging/template
 	TemplatedMessage	/messaging/templatedmessage
 
