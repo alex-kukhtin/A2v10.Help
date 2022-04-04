@@ -1,0 +1,90 @@
+﻿<div>
+	<!--title:Властивості и методы елементу дерева-->
+	<!--keywords:ITreeElement;$expanded;$selectPath;$expand;-->
+	<div class="title">
+		<h1>
+			Властивості и методы елементу дерева
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+	<p>
+		Каждый елемент дерева расширяется следующими служебными властивостіми и методами:
+	</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface ITreeElement extends IArrayElement {
+	// properties
+	readonly $expanded: boolean;
+	// methods
+	$expand<T>(this: T): Promise<IElementArray<T>>;
+	$selectPath<T>(this: T, path: Array<any>, predicate: (item: T, val: any) => boolean): Promise<T>;
+}
+]]>
+</script>
+</pre>
+	</p>
+
+	<h2>Властивості</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $expanded: boolean</pre></div>
+		<p>
+			Елемент развернут.
+		</p>
+	</div>
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$expand<T>(this: T): Promise<IElementArray<T>>]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Разворачивает елемент дерева (якщо он был свернут). Роботает как для статических, так и для динамических деревьев.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Промис со ссылкой на массив развернутых дочерних елементів.</li>
+		</ul>
+	</div>
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$selectPath<T>(this:T, path:Array<any>, predicate:(item:T, val:any) => boolean): Promise<T>]]></script>
+		</pre>
+		</div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>path</code> - массив, который определяет путь в дереве, начиная с корня. Массив може содержать любые елементи.
+			</li>
+			<li>
+				<code>predicate</code> - функция, яка буде викликатися для поиска заданного елементу в дереве. Должна повернути <code>true</code>,
+				якщо елемент дерева <code>item</code> соответствует елементу в массиве <code>val</code>.
+				Аргументы предиката:
+				<ul>
+					<li><code>item: ITreeElement</code> - елемент дерева.</li>
+					<li><code>val: any</code> - елемент з масива <code>path</code>.</li>
+				</ul>
+			</li>
+		</ul>
+		<h4>Опис</h4>
+		<p>
+			Выделяет в дереве елемент по заданному пути. Має сенс тільки для динамических деревьев.
+			В процессе роботи метод разворачивает все промежуточные узлы.
+		</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Промис со ссылкой на выделенный елемент дерева.</li>
+		</ul>
+	</div>
+
+	<p>
+		Более подробно работа с деревьями описана в разделе об <a href="/models/tree">иерархических моделях даних</a>.
+	</p>
+</div>

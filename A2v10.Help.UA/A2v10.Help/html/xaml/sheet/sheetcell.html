@@ -1,0 +1,130 @@
+﻿<div>
+	<!--title:Xaml.SheetCell-->
+	<!--keywords:SheetCell-->
+	<div class="title">
+		<h1>
+			Елемент SheetCell
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи таблиц</a>
+		</div>
+	</div>
+
+	<p>Представляет собой ячейку таблиці.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uicontentelement">UIContentElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">ColSpan</td>
+				<td>Int32?</td>
+				<td>Объединение колонок.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowSpan</td>
+				<td>Int32?</td>
+				<td>Объединение строк.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bold</td>
+				<td>Boolean?</td>
+				<td>Полужирный шрифт. Якщо не указан, наследуется від родительской строки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Italic</td>
+				<td>Boolean?</td>
+				<td>Курсивный шрифт. Якщо не указан, наследуется від родительской строки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Underline</td>
+				<td>Boolean</td>
+				<td>Подчеркнутый текст.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Vertical</td>
+				<td>Boolean</td>
+				<td>
+					Вертикальная ориентация текста в ячейке. Автоматический перенос не підтримується.
+					Для переноса на іншу строку включите в текст "\n".
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">VAlign</td>
+				<td><a class="code-link" href="/xaml/enums/verticalalign">VerticalAlign</a></td>
+				<td>
+					Вертикальное выравнивание текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">GroupIndent</td>
+				<td>Boolean</td>
+				<td>
+					Отступ для иерархических елементів. Використовується у випадку, якщо ячейка находится в секции
+					<a href="sheettreesection">SheetTreeSection</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DataType</td>
+				<td><a class="code-link" href="/xaml/enums/datatype">DataType</a></td>
+				<td>
+					Тип даних. Використовується у випадку, якщо в ячейке нет привязки, а при експорте потрібно установить
+					заданный тип даних.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinWidth</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Минимальная ширина ячейки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CssClass</td>
+				<td>String</td>
+				<td>Классы css, які потрібно добавить к ячейке.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Fill</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Всегда привязка. Цвет для заливки фона ячейки. Використовується для заливки фоном, цвет якого
+					зависит від даних. Использует css-властивість <code>background-color</code>.
+					Не совместимо со властивістю <code>CssStyle</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CssStyle</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Всегда привязка. Правила css для ячейки. Властивість должно повернути об'єкт. Им'я властивості - свойтсво css,
+					значення - соответствующее значення. В іменах властивостей можна використовувати camelCase нотацию, наприклад властивість
+					<code>background-color</code> можна представить как <code>backgroundColor</code>.
+					Не совместимо со властивістю <code>Fill</code>.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uicontentelement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

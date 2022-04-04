@@ -1,0 +1,247 @@
+﻿<div>
+	<!--title:Иерархические моделі даних-->
+	<!--keywords:Иерархические моделі даних;-->
+	<div class="title">
+		<h1>
+			Иерархические моделі даних
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Модели даних</a>
+		</div>
+	</div>
+	<p>
+		Иерархическая (древовидная) модель даних включает набор записей
+		c соотношением родитель-потомок. Глубина вложенности не ограничена.
+	</p>
+
+	<p>
+		Иерархическая модель представлена типом об'єкта <code>!Tree</code>.
+		Для правильной роботи дерева каждая запись повинна иметь три обязательных поля:
+	</p>
+	<ul class="std">
+		<li><code>!Id</code> - идентификтор записи</li>
+		<li><code>!ParentId</code> - идентификтор родительской записи.</li>
+		<li><code>!Items</code> - массив дочерних полей.</li>
+	</ul>
+
+	<p class="tip info">
+		<b>Зверніть увагу</b>. Для формирования наборов даних
+		обычно використовується механизм рекурсивных запитов T-SQL (CTE) - Common Table Expressions) и
+		оператор WITH.
+		<a target="_blank" rel="noopener" href="https://docs.microsoft.com/ru-ru/sql/t-sql/queries/with-common-table-expression-transact-sql?view=sql-server-ver15">Подробнее в документации Microsoft</a>.
+	</p>
+
+	<p>
+		Деревья могут загружаться как статически (все дерево за однин запит), так и динамически (lazy loading), когда ветви
+		дерева заполняются з базы даних тільки в том случае, якщо пользователь (или программа) раскрывает эту ветку.
+	</p>
+
+	<h3>Приклад</h3>
+	<p>
+		Работу с иерархической моделью проще всього продемострировать на примере.
+		Нехай маєся таблиця <code>Agents</code>следующйого вида:
+	</p>
+
+	<table class="sql-table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Parent</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-right">10</td>
+				<td class="text-right">null</td>
+				<td>Agent 1</td>
+			</tr>
+			<tr>
+				<td class="text-right">20</td>
+				<td class="text-right">null</td>
+				<td>Agent 2</td>
+			</tr>
+			<tr>
+				<td class="text-right">100</td>
+				<td class="text-right">10</td>
+				<td>Subagent 1.1</td>
+			</tr>
+			<tr>
+				<td>110</td>
+				<td class="text-right">10</td>
+				<td>Subagent 1.2</td>
+			</tr>
+			<tr>
+				<td>200</td>
+				<td class="text-right">20</td>
+				<td>Subagent 2.1</td>
+			</tr>
+			<tr>
+				<td>210</td>
+				<td class="text-right">20</td>
+				<td>Subagent 2.2</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Статическое дерево</h3>
+	<p>
+		Статическое дерево заповнюється сразу полностью за одно обращение к БД.
+		Запрос, формирующий данные для моделі дерева буде выглядеть наступним чином
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure dbo.[Agent.Index.Load]
+@UserId bigint
+as
+begin
+set nocount on;
+with T(Id, Parent, [Level])
+as (
+	select Id, Parent, 0 from dbo.Agents a where a.Parent is null
+	union all
+	select a.Id, a.Parent, T.[Level] + 1
+	from dbo.Agents a inner join T on T.Id = a.Parent
+)
+select [Agents!TAgent!Tree] = null, [Id!!Id] = a.Id, [Name!!Name] = a.[Name],
+	[!TAgent.Items!ParentId]=T.Parent, [Items!TAgent!Items] = null, [Level] = T.[Level]
+from dbo.Agents a inner join T on  a.Id = T.Id
+order by [Level], [Id!!Id];
+end
+</script>
+</pre>
+
+	<p>
+		При обработке этого набора создается простой массив <code>Agents</code>елементів типа <code>TAgent</code>.
+		В каждом елементе этого масива буде массив <code>Items</code>, который буде заполнен дочерними елементуми.
+		Родительский елементу визначається властивістю c модификатором <code>ParentId</code>. Зверніть увагу, что
+		это поле не має имени властивості, поэтому оно не попадет в результирующую модель.
+	</p>
+
+	<p>В результате обработки получится вот такая модель (служебные властивості для простоты не показаны):</p>
+<pre class="code-highlight js" data-lang="js">
+	<script type="text/template">{
+  "Agents": [
+    {
+      "Id": 10,
+      "Name": "Agent1",
+      "Items": [
+        {
+          "Id": 100,
+          "Name": "Subagent 1.1",
+          "Items": [],
+          "Level": 1,
+        },
+        {
+          "Id": 101,
+          "Name": "Subagent 1.2",
+          "Items": [],
+          "Level": 1,
+        }
+      ],
+      "Level": 0,
+    },
+    {
+      "Id": 20,
+      "Name": "Agent2",
+      "Items": [
+        {
+          "Id": 200,
+          "Name": "Subagent 2.1",
+          "Items": [],
+          "Level": 1,
+        },
+        {
+          "Id": 201,
+          "Name": "Subagent 2.2",
+          "Items": [],
+          "Level": 1,
+        }
+      ],
+      "Level": 0,
+    }
+  ]
+}</script>
+</pre>
+
+	<p>
+		Для роботи с такой моделью чаще всього використовується елемент
+		керування <a href="/xaml/controls/treeview">TreeView</a>.
+	</p>
+
+	<p>Например (XAML):</p>
+<pre class="code-highlight xml">
+	<script type="text/template">
+<![CDATA[
+<TreeView ItemsSource="{Bind Agents}" IconFolder="Folder" IconItem="File">
+	<TreeViewItem ItemsSource="{Bind Items}" Label="{Bind Name}" />
+</TreeView>
+]]>
+	</script>
+</pre>
+
+	<h3>Динамическое дерево</h3>
+	<p>Динамическое дерево заповнюється по мере того, как пользователь открывает определенные ветви дерева.</p>
+	<p>
+		При работе с динамическим деревом достаточно повернути з процедури завантаження тільки верхний уровень дерева.
+		Однако для того, щоб система знала, какие елементи можна раскрыть, потрібно иметь в моделі еще одно служебное
+		властивість с специальным типом <code>!HasChildren</code>. Якщо такое властивість установлено, то система считает, що цет
+		елемент має дочерние и показывает соответствующие елементи пользовательского интерфейса.
+	</p>
+	<p>
+		Зверніть увагу,
+		что такое властивість, несмотря на то, что оно служебное, обов'язково должно иметь имя, поскольку работа с ним ведется на
+		клиентской стороне.
+	</p>
+
+	<p>
+		Когда пользователь намагається раскрыть такой елемент дерева, викликаєся збережена процедура з суфіксом
+		<code>.Expand</code>, яка повинна повернути дочерние елементи для этого узла.
+		Далее процесс повторяется рекурсивно.
+	</p>
+
+	<p>Процедура верхнйого уровня може повернути такой набор:</p>
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure dbo.[Agent.Index.Load]
+@UserId bigint
+as
+begin
+set nocount on;
+	select [Agents!TAgent!Tree] = null, [Id!!Id] = a.Id, [Name!!Name] = a.[Name],
+		[Items!TAgent!Items] = null,
+		[HasChildren!!HasChildren] = case when exists(select * from dbo.Agents c where c.Parent = a.Id) then 1 else 0 end
+	from dbo.Agents a where Parent is null
+	order by [Id!!Id];
+end
+</script>
+</pre>
+
+	<p>
+		Тогда при попытке раскрытия дерева вызовется процедура <code>.Expand</code>, яка повинна повернути
+		елементи следующйого уровня дерева.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure dbo.[Agent.Index.Expand]
+@UserId bigint,
+@Id bigint
+as
+begin
+set nocount on;
+/*обратите внимание, что теперь дерево має ім'яItems (такое-же как и дочерние елементи верхнйого уровня) */
+select [Items!TAgent!Tree] = null, [Id!!Id] = a.Id, [Name!!Name] = a.[Name],
+	[Items!TAgent!Items] = null,
+	[HasChildren!!HasChildren] = case when exists(select * from dbo.Agents c where c.Parent = a.Id) then 1 else 0 end
+from dbo.Agents a where Parent = @Id
+order by [Id!!Id];
+end
+</script>
+</pre>
+
+	<p>Елементы дерева в моделі даних реализуют інтерфейс <code>ITreeElement</code> и 
+	имеют неякі додаткові властивості. <a href="/client/treeelemprops">Детальніше...</a>.</p>
+
+</div>

@@ -1,0 +1,171 @@
+﻿<div xmlns:v-bind="v-bind">
+	<!--title:Xaml.Control-->
+	<!--keywords:Control-->
+	<div class="title">
+		<h1>
+			Абстрактный елемент Control
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все абстрактные елементи</a>
+		</div>
+	</div>
+
+	<p>Представляет собой абстрактный елемент керування. </p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>
+		Производные елементи: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a>,
+		<a class="code-link" href="/xaml/abstract/contentcontrol">ContentControl</a>,
+		<a class="code-link" href="/xaml/controls/list">List</a>,
+		<a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>,
+		<a class="code-link" href="/xaml/controls/treeview">TreeView</a>,
+		<a class="code-link" href="/xaml/controls/table">Table</a>
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Block</td>
+				<td>Boolean</td>
+				<td>Выводить елемент керування у вигляді блочного, а не строчного елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Label</td>
+				<td>String</td>
+				<td>Текстовая метка для елементу керування. Зазвичай выводится сверху або слева від поля ввода.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Description</td>
+				<td>String</td>
+				<td>Опис для елементу керування. Зазвичай выводится под полем ввода.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Required</td>
+				<td>Boolean</td>
+				<td>
+					Обов'язковое значення для ввода. Зверніть увагу, що це тільки визуальное представление обов'язкового ввода
+					в поле ввода (конкретный вид зависит від темы пользовательского интерфейса). Для керування проверками используйте
+					<a href="/template/validators">валидаторы шаблонов</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Disabled</td>
+				<td>Boolean</td>
+				<td>Елемент керування недоступен для ввода. Для керування этим полем обычно використовується привязка <a class="code-link" href="/xaml/bind/bind">Bind</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Ширина елементу керування. За замовчанням елемент занимает 100% ширины батьківського елементу.
+					Для некоторых контейнеров (наприклад <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>) ширина вложенных елементів буде установлена в некоторое значення за замовчанням.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TabIndex</td>
+				<td>Int32</td>
+				<td>Порядковый номер елементу в цепочке переходов по клавише <kbd>Tab</kbd>. Значення "-1" исключает елемент з цепочки переходов.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TestId</td>
+				<td>String</td>
+				<td>Идентификатор елементу для инструментов тестирования.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Popover</td>
+				<td><a class="code-link" href="/xaml/text/popover">Popover</a></td>
+				<td>Всплывающая подсказка для елементу. Выводится у вигляді ссылки <a class="a2-hyperlink a2-inline"><i class="ico ico-help-outline"></i></a> справа від елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Hint</td>
+				<td><a class="code-link" href="/xaml/text/popover">Popover</a></td>
+				<td>
+				Всплывающая подсказка для елементу. Выводится у вигляді <i class="ico po-ico ico-help" style="color:#999"></i> после метки.
+				Иконку можна заменить, указав властивість <code>Icon</code> об'єкта <code>Popover</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Validator</td>
+				<td><a class="code-link" href="/xaml/components/validator">Validator</a></td>
+				<td>Позволяет задать властивості валидатора елементу, такі как положение або ширину.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AddOns</td>
+				<td><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>Дополнительные елементи керування. Зазвичай це гиперссылки, які выполняют якісь додаткові команди.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Link</td>
+				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
+				<td>Додаткова ссылка, связанная с елементом. Отображается в правом верхнем углу елементу.
+				Зазвичай це гиперссылка.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<!-- пример елементу -->
+<TextBox Label="Метка елементу" Description="Опис елементу" 
+		Hint="Текст всплывающей подсказки для редактора">
+	<TextBox.AddOns>
+		<Hyperlink Icon="Search" />
+	</TextBox.AddOns>
+	<TextBox.Link>
+		<Hyperlink Content="додатково..."/>
+	</TextBox.Link>
+</TextBox>
+
+</script>
+</pre>
+	</p>
+	<p>
+		Результат
+		<div class="xaml-sample" id="xaml-control">
+			<textbox label="Метка елементу" description="Опис елементу" v-bind:item="Agent" prop="Name">
+				<template slot="hint">
+					<popover class="a2-inline hint po-top-right" icon="help"><span>Текст всплывающей подсказки для редактора</span></popover>
+				</template>
+				<template slot="link">
+					<a class="a2-hyperlink control-link">додатково...</a>
+				</template>
+				<a class="a2-hyperlink add-on a2-inline"><i class="ico ico-search"></i> </a>
+			</textbox>
+		</div>
+	</p>
+
+
+	<script type="text/javascript">
+	(function () {
+		if (!window.Vue) return;
+		var du = require('std:utils').date;
+		var vm = new Vue({
+			el: "#xaml-control",
+			data: {
+				Agent: {
+					Name: ''
+				}
+			}
+		});
+	})();
+	</script>
+</div>

@@ -1,0 +1,120 @@
+﻿<div xmlns:v-bind="v-bind">
+	<div>
+		<!--title:Xaml.DatePicker-->
+		<!--keywords:DatePicker-->
+		<div class="title">
+			<h1>
+				Елемент DatePicker
+			</h1>
+			<div class="breadcrumb">
+				<a href="index">Все елементи керування</a>
+			</div>
+		</div>
+
+
+
+		<p>Представляет собой селектор даты.</p>
+
+		Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+		<a class="code-link" href="/xaml/abstract/control">Control</a> :
+		<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+		<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+
+		<h3>Властивості</h3>
+		<table class="table-props">
+			<thead>
+				<tr>
+					<th>Им'я</th>
+					<th>Тип</th>
+					<th>Опис</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="prop-name">Align</td>
+					<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+					<td>Выравнивание текста.</td>
+				</tr>
+				<tr class="top">
+					<td class="prop-name">View</td>
+					<td><code>DatePickerView</code></td>
+					<td>
+						Вид селектора. Можливі значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">Day</span> - (за замовчанням) выбор даты.</li>
+							<li><span class="prop-name">Month</span> - выбор месяца и года.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="top">
+					<td class="prop-name">Placement</td>
+					<td class="fit"><code>DropDownPlacement</code></td>
+					<td>
+						Направление "выпадения" селектора. Можливі значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">BottomLeft</span> - (за замовчанням) внз с привязкой левого края.</li>
+							<li><span class="prop-name">BottomRight</span> - внз с привязкой правого края.</li>
+							<li><span class="prop-name">TopLeft</span> - верх с привязкой левого края.</li>
+							<li><span class="prop-name">TopRight</span> - вверх с привязкой правого края.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="top">
+					<td class="prop-name">Size</td>
+					<td><code>ControlSize</code></td>
+					<td>
+						Размер елементу. Можливі значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">Default, Normal</span> - (за замовчанням) елемент обычного розміру.</li>
+							<li><span class="prop-name">Large</span> - увеличенный размер елементу.</li>
+						</ul>
+						(остальные значення перечисления <code>ControlSize</code> не поддерживаются).
+					</td>
+				</tr>
+				<tr>
+					<td class="prop-name">YearCutOff</td>
+					<td><code>String</code></td>
+					<td>Тільки для ручного ввода. Предел для двухзначных значений года. Двузначное число. Якщо начинается с "+" або "-", 
+					то число рассматривается відносно поточного года. 
+					Якщо введенное значення меньше або дорівнює пределу, то це 21-й век, иначе 20-й.
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<a href="/xaml/abstract/valuedcontrol">Властивості базового елементу</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<h3>Приклад</h3>
+		<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-datepicker">
+			<a2-date-picker label="Введите дату" v-bind:item="Document" prop="Date" class="drop-top-left"></a2-date-picker>
+			<a2-date-picker label="Выберите период" v-bind:item="Document" prop="Date" view="month" class="drop-top-left"></a2-date-picker>
+		</div>
+
+		<p class="tip info">
+			<b>Зверніть увагу!</b> При изменении даты, время меняться не буде. Это дозволяє вводить дату и время с
+			помощью двух елементів керування - <a class="code" href="timepicker">TimePicker</a> и <code>DatePicker</code>.
+		</p>
+
+	</div>
+	<script type="text/javascript">
+(function () {
+	if (!window.Vue) return;
+	var du = require('std:utils').date;
+	var vm = new Vue({
+		el: "#xaml-datepicker",
+		data: {
+			Document: {
+				Date: du.today()
+			}
+		},
+		created: function () {
+		}
+	});
+})();
+	</script>
+</div>

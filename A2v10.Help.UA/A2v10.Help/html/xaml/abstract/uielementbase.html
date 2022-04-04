@@ -1,0 +1,92 @@
+﻿<div>
+	<!--title:Xaml.UIElementBase-->
+	<!--keywords:UIElementBase-->
+	<div class="title">
+		<h1>
+			Абстрактный елемент UIElementBase
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все абстрактные елементи</a>
+		</div>
+	</div>
+
+	<p>
+		Представляет собой базовый елемент пользовательского интерфейса.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">If</td>
+				<td>Boolean?</td>
+				<td>Включать елемент в поток рендеринга.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Show</td>
+				<td>Boolean?</td>
+				<td>Показывать елемент. Инверсия властивості <code>Hide</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Hide</td>
+				<td>Boolean?</td>
+				<td>Скрывать елемент. Инверсия властивості <code>Show</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Margin</td>
+				<td><a class="code-link" href="/xaml/simple/thickness">Thickness</a></td>
+				<td>Отступы для елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Padding</td>
+				<td><a class="code-link" href="/xaml/simple/thickness">Thickness</a></td>
+				<td>Поля для елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Wrap</td>
+				<td><a href="/xaml/enums/wrapmode">WrapMode</a></td>
+				<td>Перенос текста.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Absolute</td>
+				<td><a class="code-link" href="/xaml/simple/thickness">Thickness</a></td>
+				<td>Абсолютное позиционирование елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Tip</td>
+				<td>String</td>
+				<td>Всплывающая подсказка для елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Render</td>
+				<td>RenderMode?</td>
+				<td>
+					Включать ли елемент в итоговую разметку и как именно це делать. <br />В отличие від властивості <code>If</code>, це властивість работает
+					на сервере в момент формирования розмітки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">HtmlId</td>
+				<td>String</td>
+				<td>Идентификатор (html атрибут <code>id</code>) для елементу. 
+				Зазвичай використовується для тестирования або для навигации по елементум с 
+				помощью метода <code>$focus</code> контроллера <a class="code-link" href="/client/controller">IController</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">XamlStyle</td>
+				<td>StyleDescriptor</td>
+				<td>
+					Стиль елементу. Всегда повинен быть привязкой <a class="code-link" href="/xaml/bind/styleresource">StyleResource</a>.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

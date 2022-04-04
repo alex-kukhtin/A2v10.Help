@@ -1,0 +1,91 @@
+﻿<div>
+	<!--title:popups (model.json)-->
+	<!--keywords:popups-->
+	<div class="title">
+		<h1>
+			Спливаючі вікна (popups)
+		</h1>
+		<div class="breadcrumb">
+			<a href="model">model.json</a>
+		</div>
+	</div>
+
+	<p>
+		Спливаюче вікно може як вбудовуватися в розмітку, так і мати зовнішній вміст, що завантажується.
+		В останньому випадку воно має власну модель і власний шаблон.
+	</p>
+	<p>
+		Об'єкт <b>popups</b> описує спливаючі вікна, можливі в поточній кінцевій точці.
+		Імена властивостей об'єкта являють собою імена вікон. Кожна властивість являє собою об`єкт наступної структури:
+	</p>
+
+	<p>
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">{
+  "source": "",
+  "schema": "",
+  "model": "",
+  "index": true | false,
+  "template": "",
+  "view": "",
+  "parameters": {}
+}
+</script>
+</pre>
+	</p>
+
+	<h3>Властивості об'єкта для спливаючого вікна</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">source</td>
+				<td>string</td>
+				<td>Не обов'язково. Джерело даних. Якщо не указан, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">schema</td>
+				<td>string</td>
+				<td>Не обов'язково. Им'я sql-схеми. Якщо не указана, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">model</td>
+				<td>string</td>
+				<td>Им'я моделі. Якщо не вказано, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">index</td>
+				<td>boolean</td>
+				<td>
+					Чи показує окно індексну модель. Для індексних моделей виконується збережена процедура з суфіксом <code>'.Index'</code>,
+					для звичайних - з суфіксом <code>'.Load'.</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">template</td>
+				<td>string</td>
+				<td>Шлях до файлу шаблона для окна. <a href="/template/index">Детальніше про шаблони</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">view</td>
+				<td>string</td>
+				<td>Шлях до файлу виду для спливаючого вікна. Як правило, кореневим елементом розмітки окна буде
+				елемент <a class="code-link" href="/xaml/containers/popup">Popup</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">parameters</td>
+				<td>object</td>
+				<td>
+					Об'єкт, статичні параметри, які передаються в збережену процедуру завантаження моделі. Им'я властивості є ім'ям параметра,
+					значення - значенням параметра.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

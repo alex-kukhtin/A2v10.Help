@@ -1,0 +1,160 @@
+﻿<div>
+	<!--title:Модель на клиенте-->
+	<!--keywords:IElement;IElementArray;IArrayElement;ITreeElement;IRoot;-->
+	<div class="title">
+		<h1>
+			Модель на клиенте
+		</h1>
+	</div>
+
+	<h3>Властивості об'єкта</h3>
+	<p>Каждый об`єкт расширяется следующими служебными властивостіми и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IElement {
+	// properties
+	readonly $root: IRoot;
+	readonly $parent: IElement | IElementArray<IElement>;
+
+	readonly $id: any;
+	readonly $name: any;
+
+	readonly $isNew: boolean;
+	readonly $isEmpty: boolean;
+	readonly $valid: boolean;
+	readonly $invalid: boolean;
+
+	readonly $ctrl: IController;
+
+	// methods
+	$empty(): IElement;
+	$merge(src:Object) : IElement;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/elemprops">Детальніше проб об'єктах</a>
+	</p>
+
+	<h3>Дополнительные властивості кореневого об'єкта</h3>
+	<p>Корневой об`єкт (TRoot) кроме основных властивостей, расширяется следующими дополнительными служебными властивостіми и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IRoot extends IElement {
+	// properties
+	readonly $readOnly: boolean;
+	readonly $stateReadOnly: boolean;
+	readonly $isCopy: boolean;
+	readonly $ready: boolean;
+
+	readonly $template: Template;
+
+	// methods
+	$defer(handler:()=>any): void;
+	$emit(event: string, ...params: any[]): void;
+	$forceValidate(): void;
+	$setDirty(dirty:boolean, path?:string): void;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/rootprops">Детальніше про корневом об'єкте</a>
+	</p>
+
+
+	<h3>Дополнительные властивості елементу масива</h3>
+	<p>Любой об'єкт, который является елементом масссива, расширяется следующими дополнительными служебными властивостіми и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IArrayElement extends IElement {
+	// properties
+	readonly $parent: IElementArray<IElement>;
+	$selected: boolean;
+	$checked: boolean;
+	// methods
+	$remove(): void;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/arrayelemprops">Детальніше проб елементух массивов</a>
+	</p>
+
+	<h3>Дополнительные властивості елементу дерева</h3>
+	<p>Любой об'єкт, который является елементом дерева расширяется следующими дополнительными служебными властивостіми и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface ITreeElement extends IArrayElement {
+	// properties
+	readonly $expanded: boolean;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/treeelemprops">Детальніше проб елементух дерева</a>
+	</p>
+
+
+	<h3>Властивості масива</h3>
+	<p>Каждый массив расширяется следующими дополнительными служебными властивостіми и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IElementArray<T> extends Array<T> {
+
+	readonly Count: number;
+
+	readonly $parent: IElement;
+	readonly $vm: IViewModel;
+	readonly $root: IRoot;
+	readonly $ctrl: IController;
+
+	readonly $isEmpty: boolean;
+	readonly $hasSelected: boolean;
+	readonly $checked: IElementArray<T>;
+	readonly $selected: T;
+	readonly $selectedIndex: number;
+	readonly $cross: { [prop: string]: string[] };
+	readonly $ModelInfo: IModelInfo;
+	readonly $loaded: boolean;
+
+	Selected(prop: string): IElementArray<T>;
+
+	$new(src?: object): T;
+	$append(src?: object): T;
+	$prepend(src?: object): T;
+	$insert(src: object, to: InsertTo, ref?: T): T;
+
+	$clearSelected(): IElementArray<T>;
+	$reload(): Promise<IElementArray<T>>;
+	$lockUpdate(lock: boolean): void;
+
+	$isLazy(): boolean;
+	$load(): void;
+	$loadLazy(): Promise<IElementArray<T>>;
+	$resetLazy(): IElementArray<T>;
+
+	$find(callback: (this: any, elem: T, index?: number, array?: IElementArray<T>) => boolean, thisArg?: any): T;
+	$remove(elem: T): IElementArray<T>;
+	$empty(): IElementArray<T>;
+	$renumberRows(): IElementArray<T>;
+	$copy(src: any[]): IElementArray<T>;
+	$sum(fn: (item: T) => number): number;
+}
+]]>
+</script>
+</pre>
+		<a href="/client/arrayprops">Детальніше про масивах</a>
+	</p>
+
+
+</div>

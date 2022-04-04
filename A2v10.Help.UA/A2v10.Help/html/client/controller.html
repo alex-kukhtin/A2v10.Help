@@ -1,0 +1,251 @@
+﻿<div>
+	<!--title:Контролер-->
+	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;-->
+	<div class="title">
+		<h1>
+			Контролер
+		</h1>
+	</div>
+
+	<p>
+		Контролер відповідає за взаимодействие моделі и виду. Любой об`єкт даних має властивість
+		<code>$ctrl</code>, который возвращает ссылку на текущий контроллер. Контролер це обычный об`єкт JavaScript, реализующий
+		следующий интерфейс:
+	</p>
+
+	<p>
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IController {
+  // properties
+  readonly $isDirty: boolean;
+  readonly $isPristine: boolean;
+  // methods
+  $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
+  $requery(): void;
+  $reload(args?: any): Promise<void>;
+  $modalClose(result?: any): void;
+  $msg(msg: string, title?: string, style?:~CommonStyle): Promise<boolean>;
+  $alert(msg: string | IMessage): Promise<boolean>;
+  $confirm(msg: string | IConfirm): Promise<boolean>;
+  $toast(text: string, style?: ~CommonStyle): void;
+  $toast(toast: { text: string, style?: ~CommonStyle }): void;
+  $defer(func: () => void): void;
+  $showDialog(url: string, data?: object, query?: object): Promise<object>;
+  $asyncValid(cmd: string, arg: object): any | Promise<any>;
+  $saveModified(message?:string, title?:string): boolean;
+  $setFilter(target:object, prop:string, value:any): void;
+  $inlineOpen(id: string): void;
+  $inlineClose(id: string, result:any): void;
+  $focus(htmlid: string): void;
+}
+
+declare const enum ~CommonStyle {
+  error = 'error',
+  warning = 'warning',
+  info = 'info',
+  success = 'success'
+}
+
+declare const enum ~MessageStyle {
+  confirm = 'confirm',
+  alert = 'alert',
+  info = 'info'
+}
+
+interface IMessage {
+  msg: string;
+  style?: ~MessageStyle;
+  list?: any;
+}
+
+interface IConfirm {
+	msg: string;
+	style?: ~MessageStyle;
+}
+
+]]>
+</script>
+</pre>
+	</p>
+	<h3>Методы контроллера</h3>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise</pre></div>
+		<p>Вызывает серверную команду.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>command</code> - ім'ясерверной команди (з розділу <a href="/app/commands">commands</a> файла <a href="/app/model">model.json</a>).
+			</li>
+			<li>
+				<code>arg</code> - произвольный об`єкт аргумента. Властивості этого об'єкта будуть аргументами команди.
+			</li>
+			<li>
+				<code>path?</code> - необов'язково. URL для кінцевої точки. Якщо не указан, буде выполнен в поточній кінцевій точці.
+			</li>
+			<li>
+				<code>opts</code> - об`єкт опций. В поточної версії містить единственное властивість - <code>catchError</code>.
+				Якщо оно установлено, то при возникновении ошибок промис буде отменен и ошибку можна буде
+				перехватить в коде за допомогою метода <code>catch</code>
+				(или в операторе <code>try... catch</code> для <code>async ... await</code>) промиса). За замовчанням
+				система просто выводит сообщение об ошибке и не виконує промис.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>Promise</code>.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$reload(array?:object[]): Promise&lt;void&gt;</pre></div>
+		<p>
+			Обновляет модель або ее часть.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>array</code> - не обов'язково. Обновляемый <a href="/models/array">"ленивый массив"</a>.</li>
+		</ul>
+		<p>
+			Якщо указан аргумент, то обновляются данные ленивого масива, в противном случае -
+			обновляются данные всей моделі. Неякі властивості моделі можна "защитить" від оновлення за допомогою
+			опции шаблона <a class="code-link" href="/template/options">bindOnce</a>.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$msg(msg:string, title?:string, style?:string): Promise&lt;object&gt;</pre></div>
+		<p>
+			Метод выводит сообщение в модальном окне.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>msg</code> - текст повідомлення. Может включать html-разметку.</li>
+			<li><code>title</code> - заголовок окна повідомлення. За замовчанням: строка <b>"Сообщение"</b> (в поточній локализации).</li>
+			<li><code>{Enum:['info', 'alert', 'confirm']} style</code>  - стиль. За замовчанням: <code class="string">'info'</code>.</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>Promise&lt;any&gt;</code>, который буде выполнен после закрытия окна.</li>
+		</ul>
+		<p>
+			Кнопки, які будуть размещены в окне, зависят від стиля повідомлення.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$asyncValid(command: string, arg: object): any | Promise</pre></div>
+		<p>
+			Выполняет асинхронную проверку. Для цього викликає команду на сервере, передавая ей заданные аргументы.
+			Команда всегда виконується в поточній кінцевій точці.
+		</p>
+		<p>Зверніть увагу, что результаты виконання этой команди могут кэшироваться, щоб предотвратить лишние обращения к серверу.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>command</code> - ім'ясерверной команди (з розділу <a href="/app/commands">commands</a> файла <a href="/app/model">model.json</a>.
+			</li>
+			<li>
+				<code>arg</code> - произвольный об`єкт аргумента. Властивості этого об'єкта будуть аргументами команди.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>Promise</code>. Зазвичай является возвращаемым значенням для <a href="/template/validators">асинхронного валидатора</a>.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$saveModified(message?:string, title?:string):boolean</pre></div>
+		<p>
+			Проверяет, изменилась ли модель, и выводит сообщение о необходимости сохранения моделі.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>message</code> - сообщение. Якщо не вказано (<code>undefined</code>), буде использовано стандартное сообщение
+				<b>"Елемент был изменен. Сохранить изменения?"</b> (в поточній локализации).
+			</li>
+			<li>
+				<code>title</code> - заголовок окна повідомлення. Якщо не вказано (<code>undefined</code>), буде использован
+				стандартный заголовок <b>"Подтверждение закрытия"</b> (в поточній локализации).
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>true</code> - якщо об`єкт не был изменен (<code>$isDirty = false</code>), <code>false</code> в противном случае.</li>
+		</ul>
+		<h4>Опис:</h4>
+		<p>
+			Якщо модель даних не изменялась, то метод просто возвращает <code>true</code>, якщо изменялась - показывает діалог
+			подтверждения закрытия с тремя кнопками: <b>"Сохранить"</b>, <b>"Не сохранять"</b> и <b>"Отменить"</b>
+			(в поточній локализации) и возвращает <code>false</code>.
+		</p>
+		<p>
+			После того, как пользователь сделает выбор, контроллер выполнит потрібное действие (наприклад сохранит модель) и закроет текущее окно.
+		</p>
+		<p>Частіше за все метод використовується в делегате <code>CanCloseDelegate</code> об'єкта <a href="/xaml/containers/dialog">Dialog</a>.</p>
+	</div>
+
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$setFilter(target:object, prop:string, value:any): void</pre></div>
+		<h4>Опис</h4>
+		<p>
+			Поскольку фильтры очень плотно взаимодействуют с разметкой и поведением системы, нельзя просто установить значення фильтра з кода.
+			Для цього потрібно використовувати метод <code>$setFilter</code>.
+			После установки значення система выполнит все необходимые дії, обновит интерфейс, выполнит серверные запиты и т.д.
+		</p>
+
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>target</code> - об'єкт, для якого потрібно установить фильтр.
+			</li>
+			<li>
+				<code>prop</code> - ім'я властивості елементу фильтра.
+			</li>
+			<li>
+				<code>value</code> - новое значення.
+			</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$inlineOpen(id:string): void</pre></div>
+		<p>
+			Открывает встроенный діалог (<a class="code-link" href="/xaml/containers/inlinedialog">InlineDialog</a>).
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>id</code> - идентификатор діалога.</li>
+		</ul>
+		<p>
+			Встроенный діалог має полный доступ к поточної моделі. Управление поведением полностью ложится на программиста.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$inlineClose(id:string, result: any): void</pre></div>
+		<p>
+			Закрывает встроенный діалог (<a class="code-link" href="/xaml/containers/inlinedialog">InlineDialog</a>).
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>id</code> - идентификатор діалога.</li>
+			<li><code>result</code> - зарезервировано. В поточної версії не використовується.</li>
+		</ul>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$focus(htmlid: string): void</pre></div>
+		<p>
+			Устанавливает курсор на елемент с заданным htmlid.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li><code>htmlid</code> - идентификатор елементу 
+			(можна установить за допомогою властивості <code>HtmlId</code> об'єкта <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).</li>
+		</ul>
+	</div>
+</div>

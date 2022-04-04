@@ -1,0 +1,137 @@
+﻿<div>
+	<!--title:Шаблони. Команди-->
+	<!--keywords:commands;Команди;-->
+	<div class="title">
+		<h1>
+			Шаблони. Команди
+		</h1>
+	</div>
+
+	<p>
+		Об'єкт, що описує команди в шаблоне, является обычным об'єктом JavaScript.
+		Імена властивостей этого об'єкта являются іменами команд, а значення - функциями або об'єктами.
+	</p>
+
+	<p>
+		Команди в видух задаются за допомогою привязки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> со значенням
+		властивості <code>Command</code> равным <code>Execute</code> або <code>ExecuteSelected</code>.
+		Им'я команди задається властивістю <code>CommandName</code>.
+	</p>
+
+	<h3>Синтаксис</h3>
+<pre class="code-highlight js">
+<script type="text/template">
+/* команди */
+commands: {
+  Command1: Function,
+  Command2: {
+   exec: Function
+   canExec: Function,
+   saveRequired: Boolean,
+   validRequired: Boolean,
+   checkReadOnly: Boolean,
+   confirm: String | Object
+  }
+  ...
+}
+</script>
+</pre>
+
+
+	<p>
+		Якщо значенням является функция, то она просто викликаєся при выполнении команди.
+	</p>
+
+	<h3>Властивості об'єкта команди</h3>
+	<ul class="params">
+		<li><code>{Function} exec</code> - функция, выполняющая команду.</li>
+		<li>
+			<code>{Function} canExec</code> - функция, определяющая можна ли выполнить команду. Возвращает признак того, можна
+			ли выполнить команду. Значення приводится к типу <code>Boolean</code>.
+		</li>
+		<li>
+			<code>{Boolean} saveRequired</code> - потрібно ли сохранять модель перед виконанням команди. Также може быть
+			установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> за допомогою властивості <code>SaveRequired</code>.
+		</li>
+		<li>
+			<code>{Boolean} validRequired</code> - виконувати команду тільки для моделі, прошедшей проверку (властивість $valid кореневого об'єкта = <code>true</code>.
+			Также може быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			за допомогою властивості <code>ValidRequired</code>.
+		</li>
+		<li>
+			<code>{Boolean} checkReadOnly</code> - запрещать команду для моделі в состоянии "тільки чтение",
+			Также може быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			за допомогою властивості <code>CheckReadOnly</code>.
+		</li>
+		<li>
+			<code>{String|Object} confirm</code> - запрашивать подтверждение користувача перед виконанням команди.
+			Также може быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			за допомогою властивості <code>Confirm</code>. Якщо значення - строка, то она вважається текстом подтверждения. Якщо це об'єкт,
+			то он має структуру, приведенную ниже.
+		</li>
+	</ul>
+
+	<h3>Властивості об'єкта confirm</h3>
+	<ul class="params">
+		<li><code>{String} message</code> - текст повідомлення.</li>
+		<li><code>{String} title</code> - заголовок окна повідомлення. Якщо не указан, буде равен <a href="/client/localization">locale.$Confirm</a>.</li>
+		<li><code>{String} okText</code> - текст на кнопке подтверждения. Якщо не указан, буде равен <a href="/client/localization">locale.$Ok</a>.</li>
+		<li><code>{String} cancelText</code> - текст на кнопке отмены. Якщо не указан, буде равен <a href="/client/localization">locale.$Cancel</a>.</li>
+	</ul>
+
+	<h3>Аргументы функций exec и canExec</h3>
+	<ul class="params">
+		<li><code>this</code> - корневой об`єкт (TRoot).</li>
+		<li>
+			<code>arg</code> -аргумент, переданный в команду. Якщо команда задається в разметке, то аргумент задається
+			властивістю (или привязкой) <code>Argument</code> об'єкта
+			<a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>.
+		</li>
+	</ul>
+
+	<p class="tip warning">
+		<b>Зверніть увагу!</b> Елементы пользовательского интерфейса, пов'язані с командами (наприклад кнопки) будуть
+		автоматически запрещаться або разрешаться в залежності від возможнасти выполнить команду.
+		Использовать властивість <code>Disabled</code> не потрібно.
+	</p>
+
+
+	<h3>Приклад</h3>
+	
+	<p>
+		XAML:
+<pre class="code-highlight xml">
+<script type="text/template">
+<!--Кнопка, связанная с командой-->
+<Button 
+	Command="{BindCmd Execute, CommandName='MyCommand', Argument={Bind Document}}">
+	Выполнить команду
+</Button>
+</script>
+</pre>
+
+		Javascript:
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+const template = {
+	commands: {
+		MyCommand: {
+			exec(doc) {alert(doc.Id); },         // просто вывести сообщение
+			canExec(doc) {return doc.$isNew; },  // тільки для новых документов
+			validRequired: true,                 // без ошибок
+			confirm: {
+				message: 'Точно выполнить?',
+				title: 'Подтвердите',
+				okText: 'Да, выполнить'
+				cancelText: 'Нет, не виконувати'
+			}
+		}
+	}
+}
+</script>
+</pre>
+	</p>
+	
+
+
+</div>

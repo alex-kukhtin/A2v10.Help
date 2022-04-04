@@ -1,0 +1,53 @@
+﻿<div>
+	<!--title:Xaml.SheetSection-->
+	<!--keywords:SheetSection-->
+	<div class="title">
+		<h1>
+			Елемент SheetSection
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи таблиц</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой секцию таблиці.
+	</p>
+	<p>Секция використовується у випадку, якщо потрібно связывать данные с джерелоом даних. 
+	Джерело задається привязкой <code>ItemsSource</code>. Строки секции будуть повторены для каждого елементу масива - джерела.
+	</p>
+
+	<p>Якщо в теле таблице непосредственно задаются строки, 
+	то вони попадают в секцию, яка создается неявно. Джерело даних для такой секции задать невозможна.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit no-wrap">Коллекция <a class="code-link" href="sheetrow">SheetRow</a></td>
+				<td>Коллекция строк в секции.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Джерело даних для отримання дочерних елементів.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

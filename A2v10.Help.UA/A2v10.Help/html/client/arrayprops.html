@@ -1,0 +1,346 @@
+﻿<div>
+	<!--title:Властивості и методы масива-->
+	<!--keywords:$empty;$remove;$clearSelected;$append;$prepend;$insert;$copy;$root;$parent;$ctrl;$isEmpty;$hasSelected;$selectedIndex;$checked;$cross;$isLazy;$resetLazy-->
+	<div class="title">
+		<h1>
+			Властивості и методы масива
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+	<p>
+		Каждый массив расширяется следующими дополнительными служебными властивостіми и методами:
+	</p>
+
+	<p>
+		Каждый елемент в массиве реализует інтерфейс <a class="code-link" href="arrayelemprops">IArrayElement</a> и містить
+		неякі додаткові властивості и методы.
+	</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+declare const enum InsertTo {
+	start = 'start',
+	end   = 'end',
+	above = 'above',
+	below = 'below'
+}
+
+interface IElementArray<T> extends Array<T> {
+	[index: number]: T;
+	// properties
+	readonly $root: IRoot;
+	readonly $parent: IElement;
+	readonly $ctrl: IController;
+	readonly $isEmpty: boolean;
+	readonly $hasSelected: boolean;
+	readonly $selectedIndex: number;
+	readonly $checked: IElementArray<T>;
+	readonly $cross: {[prop: string]: string[]};
+	// methods
+	$empty(): this;
+	$reload(): Promise<IElementArray<T>>;
+	$remove(elem: T): this;
+	$clearSelected(): this;
+	$append(src?: object): T;
+	$prepend(src?: object): T;
+	$insert(src:object, to: InsertTo, ref?: T): T;
+	$copy(src: any[]): this;
+	$sum(fn: (item: T) => number): number;
+	$find(fn: (this: any, item:T, index?: number, array?: IElementArray<T>): boolean, thisArg:any): T;
+	$isLazy(): boolean;
+	$loadLazy(): Promise<IElementArray<T>>;
+	$load(): void;
+	$resetLazy(): void;
+}
+]]>
+</script>
+</pre>
+	</p>
+
+	<h2>Властивості</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $root: IRoot</pre></div>
+		<p>
+			Ссылка на корневой об`єкт моделі (<a class="code-link" href="rootprops">IRoot</a>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $parent: IElement</pre></div>
+		<p>
+			Ссылка на родительский об`єкт масива (<a class="code-link" href="elemprops">IElement</a>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $ctrl: IController</pre></div>
+		<p>
+			Ссылка на об`єкт <a class="code-link" href="controller">контроллера (IController)</a>.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $hasSelected: boolean</pre></div>
+		<p>
+			Есть ли в массиве выделенный елемент (тот, у якого властивість <code>$selected</code> установлено в <code>true</code>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $selectedIndex: number</pre></div>
+		<p>
+			Индекс выделенного елементу або <b>-1</b>, якщо нет выделенного елементу.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $checked: IElementArray&lt;T&gt;</pre></div>
+		<p>
+			Массив отмеченных (<code>$checked = true</code>) елементів поточного масива.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $cross: { [prop: string]: string[] }</pre></div>
+		<p>
+			Об'єкт ключей для <a href="/models/cross">перекрестных моделей даних</a>. Возвращает об`єкт с іменами властивостей, соответствующими перекрестным полям.
+			Значеннями является массив строк - перекрестных ключей.
+		</p>
+	</div>
+
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$empty(): this]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Очищает массив. Удаляет все елементи.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$reload(): Promise<IElementArray<T>>
+				]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Перезагружает массив з базы даних. Має сенс тільки для дочерних и "ленивых" массивов.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Промис со ссылкой на сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$remove(elem: T): this]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Удаляет заданный елемент з масива.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>elem</code> - удаляемый елемент.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$clearSelected(): this]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Сбрасывает признак выделения со всех елементів масива.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$append(src: T): T]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Вставляет елемент в конец масива. Якщо джерело указан и является об'єктом, то його властивості копируются во вновь вставленный елемент.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - джерело для вставки. Може бути обычным (не реактивным) об'єктом javascript.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вставленный елемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$prepend(src: T): T]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Вставляет елемент в начало масива. Якщо джерело указан и является об'єктом, то його властивості копируются во вновь вставленный елемент.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - джерело для вставки. Може бути обычным (не реактивным) об'єктом javascript.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вставленный елемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$insert(src:object, to: InsertTo, ref?: T): T]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Вставляет в массив новый елемент.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - джерело. Може бути обычным (не реактивным) об'єктом javascript.
+			</li>
+			<li>
+				<code>to</code> - место вставки. Можливі значения:
+				<ul class="enum-vals">
+					<li><span class="prop-name">'start'</span> - в начало масива (эквивалент <code>$prepend</code>).</li>
+					<li><span class="prop-name">'end'</span> - в конец масива (эквивалент <code>$append</code>).</li>
+					<li><span class="prop-name">'above'</span> - перед указанным (<code>ref</code>) елементом.</li>
+					<li><span class="prop-name">'below'</span> - после указанного (<code>ref</code>) елементу.</li>
+				</ul>
+			</li>
+			<li><code>ref</code>  - Елемент, відносно якого буде виконуватися вставка для <code>to = 'above' | 'below'</code>.</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вставленный елемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$copy(src: any[]): this]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Копирует джерело в текущий массив.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>src</code> - джерело для копіювання. Може бути массивом обычных (не реактивных) об'єктов javascript.
+				Властивості джерела, которых нет в елементе игнорируются.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Сам массив.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$sum(fn: (item: T) => number): number;]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Вычисляет сумму для елементів масива.</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>fn</code> - функция обратного вызова, яка повинна повернути властивість елементу масива для суммирования.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Вычисленную сумму.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$find(fn: (this: any, item:T, index?: number, array?: IElementArray<T>): boolean, thisArg?:any): T]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>
+			Ищет в массиве первый подходящий елемент. Функция отличается від обычного поиска в массиве тем, что
+			для иерархических массивов она виконує рекурсивный поиск по дереву.
+		</p>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>fn</code> - функция обратного вызова, яка повинна повернути <code>true</code>,
+				якщо елемент подходит по критериям выборки.
+				Аргументы функции:
+				<ul>
+					<li>
+						<code>this?</code> - значення аргумента <code>thisArg</code>.
+					</li>
+					<li><code>item</code> - елемент масива.</li>
+					<li><code>index?</code> - индекс елементу.</li>
+					<li><code>array?</code> - массив, в которором виконується поиск.</li>
+				</ul>
+			</li>
+			<li>
+				<code>thisArg</code> - значення аргумента <code>this</code> для функции обратного вызова
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Найденный елемент.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$isLazy(): boolean]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Чи є массив <a href="/models/array">"ленивым"</a>.</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>true, якщо массив "ленивый" (с отложенной загрузкой).</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="syntax">
+			<pre class="code-highlight js">
+			<script type="text/template"><![CDATA[$resetLazy(): void]]></script>
+		</pre>
+		</div>
+		<h4>Опис</h4>
+		<p>Сбрасывает признак завантаження <a href="/models/array">"ленивого"</a> масива. 
+		При следующем обращении массив заново буде загружен с сервера.</p>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+﻿<div>
+	<!--title:MessageReportModel-->
+	<!--keywords:MessageReportModel-->
+	<div class="title">
+		<h1>
+			Елемент MessageReportModel
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Надсилання сообщений</a>
+		</div>
+	</div>
+
+	<p>Представляет описание моделі даних для построения звіта для отправки с сообщением.</p>
+
+	<p>Властивість содержимого: <code>Parameters</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Source</td>
+				<td>String</td>
+				<td>Джерело даних для завантаження моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Schema</td>
+				<td>String</td>
+				<td>Схема для завантаження моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Model</td>
+				<td>String</td>
+				<td>
+					Им'я моделі. Для завантаження моделі буде викликана процедура
+					<code>[{Schema}].[{Model}.Load]</code> в джерелі даних <code>{Source}</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Parameters</td>
+				<td class="no-wrap">Словарь <a href="messagereportparam" class="code-link">MessageReportParam</a></td>
+				<td>Параметри для моделі звіта.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

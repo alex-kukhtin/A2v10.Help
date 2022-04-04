@@ -1,0 +1,92 @@
+﻿<div>
+	<!--title:Xaml.UploadFile-->
+	<!--keywords:UploadFile-->
+	<div class="title">
+		<h1>
+			Елемент UploadFile
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой елемент керування для выбора и завантаження файлів. Поддерживает drag'n'drop.
+	</p>
+
+	<p><a href="/models/blob">Детальніше про работе с двоичными об'єктами...</a></p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th width="1px">Им'я</th>
+				<th width="1px">Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Url</td>
+				<td class="fit">String</td>
+				<td>
+					Путь к <a href="/app/files">команде завантаження файла</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Argument</td>
+				<td class="fit">Object</td>
+				<td>
+					Об'єкт, властивості якого будуть параметрами команди завантаження файла.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Accept</td>
+				<td>String</td>
+				<td>
+					Рядок фильтра для діалога выбора файла. 
+					<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types" target="_blank">Mime-типы</a> принимаемых файлів.
+					Поддержка зависит від браузера. Соответствует атрибуту <code>accept</code> елементу
+					<code>&lt;input type="file"&gt;</code>. Можна указывать несколько типов через запятую.
+					Например, для выбора зображень в форматі jpg або png можна вказати
+					<code>Accept="image/png, image/jpeg"</code>.
+					<br />
+					Зверніть увагу, що це тільки рекомендация браузеру. Запретить користувачу выбирать
+					другие файли невозможна.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Limit</td>
+				<td class="fit">Int32</td>
+				<td>
+					Максимально допустимый размер загружаемого файла (в килобайтах).
+					Якщо не указан, можна загружать файли любого розміру.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Delegate</td>
+				<td>String</td>
+				<td>
+					Им'я <a href="/template/delegates">делегата</a>, который буде вызван после того,
+					как файл буде загружен. Аргументом делегата буде полученный с сервера результат.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ErrorDelegate</td>
+				<td>String</td>
+				<td>
+					Им'я <a href="/template/delegates">делегата</a>, который буде вызван при возникновении ошибок.
+					Якщо не указан, выводится стандартное сообщение об ошибке.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,72 @@
+﻿<div>
+	<!--title:Xaml.Include-->
+	<!--keywords:Include-->
+	<div class="title">
+		<h1>
+			Елемент Include
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой контейнер, в якому отображается полная независимая сторінка.
+		Частіше за все використовується для динамического выбора страницы в залежності від властивостей какого-либо об'єкта.
+		
+		Корневым елементом такой страницы обычно буде елемент <a href="/xaml/containers/partial" class="code-link">Partial</a>.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Source</td>
+				<td>String</td>
+				<td>
+					URL содержимого страницы. Може бути привязкой.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Argument</td>
+				<td>Object</td>
+				<td>
+					Аргумент (обычно це привязка <a class="code-link" href="/xaml/bind/bind">Bind</a>)
+					для формирования идентификатора об'єкта в Url.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Data</td>
+				<td>Object</td>
+				<td>
+					Об'єкт, властивості якого будуть переданы в Url в качестве параметров.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">FullHeight</td>
+				<td>Boolean</td>
+				<td>
+					Якщо властивість установлено в <code>True</code>, то контейнер буде занимать всю 
+					родительскую страницу по высоте.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

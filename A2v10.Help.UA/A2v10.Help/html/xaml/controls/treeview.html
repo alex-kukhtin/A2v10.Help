@@ -1,0 +1,218 @@
+﻿<div xmlns:v-on="v-on">
+	<!--title:Xaml.TreeView-->
+	<!--keywords:TreeView-->
+	<div class="title">
+		<h1>
+			Елемент TreeView
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		Представляет собой иерархический список (дерево). Поддерживает "ленивую" загрузку елементів.
+	</p>
+
+	<p>Зверніть увагу, что елемент використовується для роботи с <a href="/models/tree">иерархическими моделями даних</a>.</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Children</td>
+				<td class="no-wrap">Коллекция <a class="code-link" href="treeviewitem">TreeViewItem</a></td>
+				<td>
+					Властивість содержимого. Как правило состоит з одного елементу, властивості якого задают привязки к елементум дерева.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Джерело даних для отримання елементів
+					дерева первого уровня. Прив'язка остальных уровней визначається в дочернем елементе <a href="treeviewitem">TreeViewItem</a>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name fit">Style</td>
+				<td><code>TreeViewStyle</code></td>
+				<td>
+					Стиль отображения дерева. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Normal</span> - за замовчанням.</li>
+						<li><span class="prop-name">SideBarMenu</span> - выглядит как боковое меню.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name fit">AutoSelect</td>
+				<td><code>AutoSelectMode</code></td>
+				<td>
+					Автоматический выбор елементу при завантаженні. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - за замовчанням. Не выбирать ничйого</li>
+						<li><span class="prop-name">FirstItem</span> - первый елемент.</li>
+						<li><span class="prop-name">LastItem</span> - последний елемент.</li>
+						<li>
+							<span class="prop-name">ItemId</span> - елемент с заданным идентификатором.
+							Это идентификатор основного об'єкта моделі и, как правило, является последним елементом url страницы.
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">IconFolder</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка для папки. Зверніть увагу, що це иконка "за замовчанням". Она може быть переопределена
+					в елементе <a href="treeviewitem">TreeViewItem</a>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">IconItem</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка для елементу. Зверніть увагу, що це иконка "за замовчанням". Она може быть переопределена
+					в елементе <a href="treeviewitem">TreeViewItem</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">WrapLabel</td>
+				<td>Boolean</td>
+				<td>Разрешен ли перенос текста метки дерева. За замовчанням - <code>False</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">FolderSelect</td>
+				<td>Boolean</td>
+				<td>Разрешено ли выбирать папки. Якщо дорівнює <code>False</code>, то выбрать можна тільки елемент дерева.</td>
+			</tr>
+			<tr>
+				<td class="prop-name fit">ExpandFirstItem</td>
+				<td>Boolean</td>
+				<td>Автоматически раскрывать первый елемент дерева после завантаження.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Высота елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Indent</td>
+				<td>Boolean?</td>
+				<td>Отступы для вложенных елементів. За замовчанням - <code>True</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DoubleClick</td>
+				<td width="1px"><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
+				<td>
+					Команда, яка буде выполнена при двойном щелчке на елементе дерева.
+					Не забудьте передать в команду аргумент.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ContextMenu</td>
+				<td width="1px"><a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a></td>
+				<td>
+					Контекстное меню, которое буде показыватьcя по правой кнопке мыши.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/control">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<p>
+	Более подробное описание роботи с деревьями (в том числе и с "ленивой" загрузкой) описано в разделе <a href="/models/tree">роботи с иерархическими моделями даних</a>.
+	</p>
+
+	<h3>Приклад</h3>
+
+	<div class="xaml-sample" id="tree-view-sample" style="min-height:196px">
+		<ul class="tree-view">
+			<li class="expanded folder" id="f1">
+				<div class="overlay" v-on:click.stop.prevent="toggle('f1')">
+					<a class="toggle" href=""></a>
+					<i class="ico ico-folder-outline"></i>
+					<span class="tv-folder no-wrap">Folder 1</span>
+				</div>
+				<ul class="tree-sub-view">
+					<li>
+						<div class="overlay">
+							<span class="toggle"></span> <i class="ico ico-file"></i>
+							<a href="" tabindex="-1" class="no-wrap" v-on:click.stop.prevent="dummy">Item 1.1</a>
+						</div>
+					</li>
+					<li>
+						<div class="overlay">
+							<span class="toggle"></span> <i class="ico ico-file"></i>
+							<a href="" tabindex="-1" class="no-wrap" v-on:click.stop.prevent="dummy">Item 1.2</a>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li class="collapsed folder" id="f2">
+				<div class="overlay" v-on:click.stop.prevent="toggle('f2')">
+					<a class="toggle" href=""></a>
+					<i class="ico ico-folder-outline"></i>
+					<span class="tv-folder no-wrap">Folder 2</span>
+				</div>
+				<ul class="tree-sub-view">
+					<li>
+						<div class="overlay">
+							<span class="toggle"></span> <i class="ico ico-file"></i>
+							<a href="" tabindex="-1" class="no-wrap" v-on:click.stop.prevent="dummy">Item 2.1</a>
+						</div>
+					</li>
+					<li>
+						<div class="overlay">
+							<span class="toggle"></span> <i class="ico ico-file"></i>
+							<a href="" tabindex="-1" class="no-wrap" v-on:click.stop.prevent="dummy">Item 2.2</a>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		(function () {
+			if (!window.Vue) return;
+			var vm = new Vue({
+				el: "#tree-view-sample",
+				data: {
+				},
+				methods: {
+					dummy() {
+
+					},
+					toggle(id) {
+						let el = document.getElementById(id);
+						let cl = el.classList;
+						cl.toggle('collapsed');
+						cl.toggle('expanded');
+					}
+				}
+			});
+		})();
+	</script>
+
+</div>

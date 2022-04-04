@@ -1,0 +1,47 @@
+﻿<div>
+	<!--title:MessageAttachment-->
+	<!--keywords:MessageAttachment-->
+	<div class="title">
+		<h1>
+			Елемент MessageAttachment
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Надсилання сообщений</a>
+		</div>
+	</div>
+
+	<p>Представляет собой вложение в сообщение электронной почты.</p>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Data</td>
+				<td>Stream</td>
+				<td>Всегда привязка з моделі даних. Поле моделі, к которому привязывается це властивість 
+				повинно бути типа массив байтов (vabinary).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Name</td>
+				<td>String</td>
+				<td>Им'я вложения. Чтобы клиент смог правильно распознать тип файла вложения, 
+				добавьте к имени розширення (наприклад .pdf).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mime</td>
+				<td>String</td>
+				<td>
+					Mime-тип содержимого вложения.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

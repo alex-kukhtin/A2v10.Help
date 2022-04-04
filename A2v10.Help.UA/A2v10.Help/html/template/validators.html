@@ -1,0 +1,196 @@
+﻿<div>
+	<!--title:Шаблони. Валидаторы-->
+	<!--keywords:validators;Валидаторы;-->
+	<div class="title">
+		<h1>
+			Шаблони. Валидаторы
+		</h1>
+	</div>
+	<p>
+		Валидаторы - механизм, обеспечивающий проверку достоверности моделі. Зверніть увагу,
+		что валидаторы, как и все остальное в шаблонах связываются с данными, а не с пользовательским интерфейсом.
+		Елементы керування сами отслеживают правильность даних и выводят соответствующие повідомлення об ошибках.
+	</p>
+	<p>
+		Об'єкт, що описує валидаторы являє собою обычный об`єкт JavaScript. Імена властивостей представляют
+		собой шлях до елементу даних в моделі (к тому об'єкту, проверку якого потрібно выполнить). Якщо в пути к
+		данным встречается массив, то соответствующее властивість отмечается суфіксом <code>[]</code>. Например,
+		валидатор к властивості <code>Sum</code> строки документа буде иметь ім'я<code>Document.Rows[].Sum</code>.
+	</p>
+
+	<h3>Синтаксис</h3>
+<pre class="code-highlight js">
+<script type="text/template">
+<![CDATA[
+/* валидаторы */
+
+declare const enum ~Severity {
+	error   = 'error', /*default value*/
+	warning = 'warning',
+	info    = 'info'
+}
+
+declare const enum ~StdValidator {
+	notBlank = 'notBlank',
+	email    = 'email',
+	url      = 'url',
+	isTrue   = 'isTrue',
+	regExp   = 'regExp'
+}
+
+declare type templateValidatorResult = { msg: string, severity: ~Severity };
+
+interface ~tempateValidatorFunc { (elem: IElement, value?: any): boolean | string | templateValidatorResult | Promise<any>; }
+
+interface ~templateValidatorObj {
+	valid: ~tempateValidatorFunc | ~StdValidator,
+	async?: boolean,
+	msg?: string,
+	regExp?: RegExp,
+	severity?: ~Severity,
+	applyIf?: (elem: IElement, value?: any) => boolean
+}
+
+declare type ~templateValidator = String | ~tempateValidatorFunc | ~templateValidatorObj;
+
+validators: {
+  [prop: string]: ~templateValidator | ~templateValidator[]
+}
+]]>
+</script>
+</pre>
+
+	<h3>Опис</h3>
+	<p>
+		Значенням валидатора може быть как один валидатор, так и массив валидаторов.
+		Якщо це массив, то применяются все валидаторы з масива.
+	</p>
+	<p>
+		Каждый валидатор (единственный, або елемент масива) може быть рядком, функцией або об'єктом заданной структуры.
+		Основным видом валидатора является об'єкт. Остальные значення - просто сокращенная запись для об'єкта.
+	</p>
+
+	<h3>Властивості об'єкта валидатора</h3>
+	<ul class="params">
+		<li><code>valid</code> - строка (стандартный валидатор) або функция перевірки.</li>
+		<li>
+			<code>async</code> - необов'язково. Валидатор является асинхронным (см. ниже).
+		</li>
+		<li>
+			<code>msg</code> - сообщение об ошибке. Функция перевірки може повернути строку а не булево значення. В цьому випадку значення
+			этого властивості игнорируется.
+		</li>
+		<li>
+			<code>severity</code> - серьезность ошибки. За замовчанням - <code>'error'</code>. Влияет на зовнішній вид повідомлення и
+			може быть использовано в коде.
+		</li>
+		<li>
+			<code>regExp</code> - регулярное выражение для стандартного валидатора типа <code>'regExp'</code>.
+		</li>
+		<li>
+			<code>applyIf</code> - функция, определяющая потрібно ли применять валидатор.
+		</li>
+	</ul>
+
+	<h3>Стандартні валидаторы</h3>
+	<p>Якщо значення властивості <code>valid</code> строка, то це стандартный валидатор. Можливі значения:</p>
+	<ul class="params">
+		<li><code>'notBlank'</code> - значення не пустое.</li>
+		<li>
+			<code>'email'</code> - значення являє собою корректный (синтаксически) адрес электронной почты.
+		</li>
+		<li>
+			<code>'url'</code> -  значення являє собою корректный (синтаксически) web-адрес.
+		</li>
+		<li>
+			<code>'isTrue'</code> - значення точно дорівнює <code>true</code>.
+		</li>
+		<li>
+			<code>'regExp'</code> - значення соответствует регулярному выражению. В цьому випадку повинно бути задано властивість <code>'regExp'</code>.
+		</li>
+	</ul>
+
+
+	<h3>Валидатор - строка</h3>
+	<p>
+		Якщо валидатор - строка, то це проверка значення на пустоту. Сама строка буде сообщением об ошибке. Это эквивалент
+		об'єкта
+		<pre class="code-highlight js">
+<script type="text/template">
+{valid:'notBlank', msg:'заданная строка', severity=~Severity.error}
+</script>
+</pre>
+	</p>
+	<h3>Валидатор - функция</h3>
+	<p>
+		Якщо валидатор - функция, то це эквивалент об'єкта
+<pre class="code-highlight js">
+<script type="text/template">
+{valid:func, severity=~Severity.error'}
+</script>
+</pre>
+	</p>
+
+	<h3>Формат функции валидации</h3>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">valid(elem: IElement, value?: any): boolean | string | Promise;</pre></div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>elem</code> - елемент, к которому применяется валидатор.
+			</li>
+			<li>
+				<code>val</code> - проверяемое значення.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>true</code> - якщо значення правильное. </li>
+			<li><code>false</code> - якщо значення неправильное. </li>
+			<li>
+				<code>string</code> - сообщение об ошибке, якщо значення неправильное. Ця строка буде замещать значення властивості <code>'msg'</code>.
+				Якщо валидатор объявлен как функция, то она всегда повинна возвращать строку (значення <code>msg</code> в этом случае просто нет).
+			</li>
+			<li>
+				<code>об`єкт templateValidatorResult</code> - об'єкт, определяющий сообщение об ошибке (<code>msg</code>)
+				и степень ее серьезности (<code>severity</code>).
+			</li>
+			<li><code>Promise</code> - для асинхронного валидатора. Промис повинен повернути булево значення або строку.</li>
+		</ul>
+	</div>
+
+	<h3>Формат функции <code>applyIf</code></h3>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">applyIf?: (elem: IElement, value?: any): boolean</pre></div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>elem</code> - елемент, к которому применяется валидатор.
+			</li>
+			<li>
+				<code>val</code> - проверяемое значення.
+			</li>
+		</ul>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li><code>true</code> - якщо валидатор активен и його потрібно применять. </li>
+		</ul>
+	</div>
+
+	<h3>Асинхронные валидаторы</h3>
+	<p>
+		Асинхронные валидаторы використовуються у випадку, когда для перевірки правильности потрібно обратиться к серверу. Такой валидатор
+		отмечается властивістю <code>async: true</code>.
+	</p>
+	<p>
+		Функция валидации для асинхронного валидатора повинна повернути <code>Promise</code>, значенням якого буде або булево значення,
+		либо строка (как и в обычной функции валидации).
+	</p>
+	<p>Асинхронный валидатор обычно использует метод контроллера <a href="/client/controller">$asyncValid</a>.</p>
+
+	<p class="tip warning">
+		<b>Зверніть увагу!</b> Возвращаемые значення для асинхронных валидаторов кешируются для предотвращения
+		слишком частых обращений к серверу. Фактично валидатор викликаєся тільки один раз при каждом изменении связанных с ним значений.
+	</p>
+
+</div>

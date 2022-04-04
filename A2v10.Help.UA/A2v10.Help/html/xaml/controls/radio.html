@@ -1,0 +1,137 @@
+﻿<div>
+	<!--title:Xaml.Radio-->
+	<!--keywords:Radio-->
+	<div class="title">
+		<h1>
+			Елемент Radio
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>Представляет собой радиокнопку.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/checkboxbase">CheckBoxBase</a> :
+	<a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>
+		Набор радиокнопок связывается с одним значенням. Зазвичай такой набор располагается внутри контейнера
+		<a class="code-link" href="/xaml/containers/fieldset">FieldSet</a>, хотя це и не обов'язково.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">CheckedValue</td>
+				<td>Скалярный тип (String, Number, и т.д.)</td>
+				<td>Обов'язково. Значення, при котором кнопка буде отмечена.
+				Може бути привязкой.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Style</td>
+				<td><a class="code-link" href="/xaml/enums/radiobuttonstyle">RadioButtonStyle</a></td>
+				<td>
+					Вид кнопки. Может отображаться как стандартная радиокнопка, так и у вигляді флажка. Отображение у вигляді флажка чаще
+					всього використовується в звітах.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/checkboxbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Приклад</h3>
+
+	<p>
+		Нехай в моделі маєся елемент <code>Element</code>, у якого есть властивість <code>Option</code>.
+	</p>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Grid Columns="1*, 1*, 1*" AlignItems="Top">
+	<FieldSet>
+		<Radio Label="Option 1" Value="{Bind Element.Option}" CheckedValue="1" />
+		<Radio Label="Option 2" Value="{Bind Element.Option}" CheckedValue="2" />
+		<Radio Label="Option 3" Value="{Bind Element.Option}" CheckedValue="3" />
+	</FieldSet>
+	<FieldSet>
+		<Radio Label="Option 1" Value="{Bind Element.Option}" Style="CheckBox" CheckedValue="1" />
+		<Radio Label="Option 2" Value="{Bind Element.Option}" Style="CheckBox" CheckedValue="2" />
+		<Radio Label="Option 3" Value="{Bind Element.Option}" Style="CheckBox" CheckedValue="3" />
+	</FieldSet>
+	<Text>Выбрано: <Span Bold="True">Option 1</Span></Text>
+</Grid>
+</script>
+</pre>
+	</p>
+
+
+	<div id="xaml-radio">
+		<p>
+			Результат
+			<div class="xaml-sample" style="padding:0;width:400px">
+				<div class="grid" style="grid-template-columns:1fr 1fr 1fr;align-items:start">
+					<fieldset class="field-set vertical">
+						<label class="radio field-set-item">
+							<input type="radio" v-model="Option" value="1" />
+							<span>Option 1</span>
+						</label>
+						<label class="radio field-set-item">
+							<input type="radio" v-model="Option" value="2" />
+							<span>Option 2</span>
+						</label>
+						<label class="radio field-set-item">
+							<input type="radio" v-model="Option" value="3" />
+							<span>Option 2</span>
+						</label>
+					</fieldset>
+					<fieldset class="field-set vertical">
+						<label class="checkbox field-set-item">
+							<input type="radio" v-model="Option" value="1" />
+							<span>Option 1</span>
+						</label>
+						<label class="checkbox field-set-item">
+							<input type="radio" v-model="Option" value="2" />
+							<span>Option 2</span>
+						</label>
+						<label class="checkbox field-set-item">
+							<input type="radio" v-model="Option" value="3" />
+							<span>Option 2</span>
+						</label>
+					</fieldset>
+					<span>Выбрано: <span class="bold" v-text="Option"></span></span>
+				</div>
+			</div>
+		</p>
+	</div>
+
+<script type="text/javascript">
+	(function () {
+		if (!window.Vue) return;
+		var vm = new Vue({
+			el: "#xaml-radio",
+			data: {
+				Option: 1
+			}
+		});
+	})();
+</script>
+</div>

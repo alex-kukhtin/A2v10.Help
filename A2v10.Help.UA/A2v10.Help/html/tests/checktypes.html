@@ -1,0 +1,160 @@
+﻿<div>
+	<!--title:Проверка типов-->
+	<div class="title">
+		<h1>
+			Проверка типов
+		</h1>
+	</div>
+	<p>
+		В системе предусмотрена можливість динамической (во время виконання) перевірки соответствия типов.
+		Проверяется відповідність типов и властивостей полученных з моделі и описаных в файлі определения *.d.ts.
+		Кроме того, при рендеринге xaml-представлений проверяется відповідність привязок указанным типам.
+	</p>
+	<p>
+		Таким образом, якщо проверка типов включена, то система гарантирует, что полученная з базы даних модель соответствует описанию
+		и что в представлении використовуються тільки существующие привязки. О соответствии даних и кода шаблона заботится компилятор TypeScript.
+	</p>
+	<p>
+		Этот механизм буде работать тільки в том случае, якщо шаблвони пишутся на языке TypeScript.
+	</p>
+
+	<h3>Приклад</h3>
+	<p>
+		Нехай, наприклад, мы используем проверку типов при редактировании властивостей контрагента. Ця часть програми расположена в папке
+		<code>/catalog/agent</code>.
+	</p>
+	<p>
+		Файли в папке:
+		<table class="table-props">
+			<thead>
+				<tr>
+					<th class="fit">Файл</th>
+					<th>Опис</th>
+				</tr>
+			</thead>
+			<tr>
+				<td><code>model.json</code></td>
+				<td>файл описания моделі</td>
+			</tr>
+			<tr>
+				<td><code>model.d.ts</code></td>
+				<td>файл определения типов</td>
+			</tr>
+			<tr>
+				<td><code>edit.template.ts</code></td>
+				<td>файл шаблона (TypeScript)</td>
+			</tr>
+			<tr>
+				<td><code>edit.dialog.xaml</code></td>
+				<td>файл виду</td>
+			</tr>
+		</table>
+	</p>
+
+	<h4>Файл model.json</h4>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	"schema":"a2v10",
+	"model":"Agent",
+	"dialogs": {
+		"edit": {
+			"template":"edit.template",
+			"view":"edit.dialog",
+			"checkTypes": "model.d"
+		}
+	}
+}
+</script>
+</pre>
+	</p>
+
+	<h4>Содержимое моделі</h4>
+	<p>
+		Хранимая процедура <code>a2v10.[Agent.Load]</code>.
+
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure a2v10.[Agent.Load]
+@UserId bigint,
+@Id bigint = null
+as
+begin
+  set nocount on;
+  select [Agent!TAgent!Object] = null, [Id!!Id] = a.Id, [Name!!Name] = a.[Name], a.Code
+  from dbo.Agents a 
+  where a.Id=@Id
+end
+go
+</script>
+</pre>
+	</p>
+	<p>
+		Процедура возвращает один запис типа <code>TAgent</code> с полями
+		<code>Id</code>, <code>Name</code>, <code>Code</code>.
+	</p>
+
+	<h4>Файл model.d.ts</h4>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+export interface ~TAgent extends IElement {
+	Id: number;
+	Name: string;
+	Code: string;
+	$NameOrUnknown: string; /*властивості нет в моделі, но есть в шаблоне */
+}
+/*TRoot есть всегда и містить все властивості верхнйого уровня */
+export interface ~TRoot extends IRoot {
+	Agent: ~TAgent;
+}
+</script>
+</pre>
+	</p>
+
+	<h4>Фрагмент файла edit.template.ts</h4>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+
+import {~TAgent, ~TRoot} from 'model';
+
+const template: ~Template = {
+	properties: {
+		'TAgent.$NameOrUnknown'(this: TAgent): string {
+			return this.Id ? this.Name : 'Не выбрано'; 
+		}
+	}
+};
+
+export default template;
+
+</script>
+</pre>
+	</p>
+
+	<h3>Как це работает</h3>
+
+	<ul class="std">
+		<li>Модель загружается з БД и строятся метаданные.</li>
+		<li>В файле <code>model.json</code> проверяется наличие елементу <code>checkTypes</code>. Якщо його нет, ничйого не виконується.</li>
+		<li>Якщо файл описания даних указан, то он загружается и разбираются все описанные в нем типы.</li>
+		<li>Проверяется відповідність типов, описанных в файлі <code>model.d.ts</code> и типов, полученных з моделі даних. Должны 
+		совпадать імена типов и их властивості. Імена властивостей, які починаються с символа "$" считаются вычисляемыми и не проверяются в моделі даних. 
+		Они понадобятся на следующем шаге.
+		Якщо найдены несовпадения, генерируется исключение.</li>
+		<li>Во время рендеринга виду проверяются все привязки. При попытке привязаться к несуществующему властивості, генерируется исключение.</li>
+	</ul>
+
+
+	<p class="tip warning">
+		<b>Зверніть увагу!</b>. Динамическая проверка типов буде работать тільки в налагоджувальній конфигурації.
+		<br />
+		властивість <code>configuration</code> в разделе <code>appSettings</code> файла Web.config повинно бути установлено в
+		<code>debug</code>.
+	</p>
+
+
+</div>

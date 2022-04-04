@@ -1,0 +1,167 @@
+﻿<div>
+	<!--title:commands (model.json)-->
+	<!--keywords:commands-->
+	<div class="title">
+		<h1>
+			Команди (commands)
+		</h1>
+		<div class="breadcrumb">
+			<a href="model">model.json</a>
+		</div>
+	</div>
+	<p>
+		Об'єкт <b>commands</b> описує команди, доступні в поточній кінцевій точці.
+		Імена властивостей об'єкта являють собою імена команд. Кожна властивість являє собою об`єкт наступної структури:
+	</p>
+
+	<p>
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">{
+  "type": "sql" | "clr" | "callApi" | "startProcess" | "resumeProcess" | "sendMessage",
+  "source": "",
+  "schema": "",
+  "procedure": "",
+  "file": "",
+  "clrType": "",
+  "parameters": {}
+}
+</script>
+</pre>
+	</p>
+
+	<h3>Властивості об'єкта команди</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">type</td>
+				<td>enum</td>
+				<td>
+					Обов'язково. Тип команди:
+					<table class="sub-table">
+						<tr>
+							<td class="prop-name">sql</td>
+							<td>Виклик збереженої процедури sql. Повинно бути вказано властивість <code>procedure</code>.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">clr</td>
+							<td>
+								Виклик метода .NET об'єкта. Повинно бути вказано властивість <code>clrType</code>.
+								<a href="clrсommand">Детальніше...</a>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">callApi</td>
+							<td>
+								Виклик зовнішнього http-API. Параметри визначаються властивістю <code>parameters</code>.
+								<a href="callapicommand">Детальніше...</a>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">startProcess</td>
+							<td>Запуск бізнес-процесу.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">resumeProcess</td>
+							<td>Відновлення бізнес-процесу.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">file</td>
+							<td>Отримання файлу.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">sendMessage</td>
+							<td>
+								Надсилання повідомлення. Параметри визначаються властивістю <code>parameters</code>.
+								<a href="sendmessagecommand">Детальніше...</a>.
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">source</td>
+				<td>string</td>
+				<td>Не обов'язково. Має сенс тільки для типу <b>sql</b>. Джерело даних для збереженої процедури. Якщо не вказано, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">schema</td>
+				<td>string</td>
+				<td>Не обов'язково.  Має сенс тільки для типу <b>sql</b>. Им'я sql-схеми для збереженої процедури. Якщо не вказано, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">procedure</td>
+				<td>string</td>
+				<td>Обов'язково для типу <b>sql</b>. Им'я збереженої процедури.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">clrType</td>
+				<td>string</td>
+				<td>Обов'язково для типу <b>clr</b>. Рядок, що описує збірку и .NET тип.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">file</td>
+				<td>string</td>
+				<td>Рядок. Им'я файла для бизнес-процессов.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">parameters</td>
+				<td>object</td>
+				<td>
+					Не обов'язково.
+					<br />
+					Для типа <b>sql</b> являє собою об'єкт, властивості якого передаються в збережену процедуру как статичні параметри. Им'я властивості є ім'ям параметра,
+					значення - значенням параметра.
+					<br />
+					Для типа <b>callApi</b> визначають поведінку команди. <a href="callapicommand">Детальніше...</a>.
+
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">debugOnly</td>
+				<td>boolean</td>
+				<td>Команда буде виконуватися тільки в налагоджувальній конфигурації (
+				ключ <code>configuration</code> розділу <code>appSettings</code> має значення <b>"debug"</b>).</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Команди типу sql</h3>
+	<p>
+		Команда типу <b>sql</b> виконує збережену процедуру. Им'я процедури задається властивістю <code>procedure</code>. Sql-cхема задається властивістю
+		<code>schema</code> або береться з батьківського елементу (якщо не вказано). Процедура виконується в джерелі, яке задається властивістю
+		<code>source</code> або береться з батьківського елементу (якщо не вказано).
+	</p>
+	<p>
+		Процедурі передаються наступні параметри:
+		<ul class="std">
+			<li>Стандартні параметри (@TenantId, @UserId).</li>
+			<li>Параметри, передані в url.</li>
+			<li>Параметри з властивості <code>parameters</code>.</li>
+		</ul>
+	</p>
+
+	<h3>Команди типу clr</h3>
+	<p>
+		Команда типу <b>clr</b> викликає метод з типу, заданного властивістю <code>clrType</code>. Тип повинен реалізовувати 
+		інтерфейс <code>IInvokeTarget</code>.  <a href="clrcommand">Детальніше...</a>
+	</p>
+
+	<h3>Команди типу callApi</h3>
+	<p>
+		Команда типу <b>callApi</b> викликає зовнішній сервер по протоколу http. Поведінка команди визначається параметрами
+		<code>parameters</code>. <a href="callapicommand">Детальніше...</a>.
+	</p>
+	<h3>Команди типу sendMessage</h3>
+	<p>
+		Команда типа <b>sendMessage</b> отправляет сообщение. Поведінка команди визначається параметрами
+		<code>parameters</code>. <a href="sendmessagecommand">Детальніше...</a>.
+	</p>
+</div>

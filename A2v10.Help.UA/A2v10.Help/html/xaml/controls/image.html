@@ -1,0 +1,178 @@
+﻿<div>
+	<!--title:Xaml.Image-->
+	<!--keywords:Image-->
+	<div class="title">
+		<h1>
+			Елемент Image
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>Представляет собой изображение с можливістью привязки к данным.</p>
+	<p><a href="/models/blob">Детальніше про работе с двоичными об'єктами...</a></p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Base</td>
+				<td>String</td>
+				<td>
+					URL моделі, з которой буде получено изображение.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Source</td>
+				<td><a class="code-link" href="/xaml/bind/Bind">Bind</a></td>
+				<td>Всегда привязка. Связывается с полем, которой определяет идентификатор картинки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Ширина изображения.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Высота изображения.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ReadOnly</td>
+				<td>Boolean</td>
+				<td>
+					Запретить загрузку изображения.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Limit</td>
+				<td>Int32</td>
+				<td>
+					Максимальный размер загружаемого изображения (в KB).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Placeholder</td>
+				<td>String</td>
+				<td>
+					Подсказка. Отображается, якщо изображение не выбрано.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Icon</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка. Отображается вместе с заполнителем <code>Placeholder</code>, якщо изображение не выбрано.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Особенности</h3>
+	<p>
+		Частіше за все задається тільки одно з властивостей <code>Width</code> або <code>Height</code>. В цьому випадкут
+		картинка буде сохранять пропорции.
+	</p>
+
+
+	<h3>Приклад</h3>
+
+	<p>
+		Елемент керування <code>Image</code> використовується для одновременного показа и завантаження картинки
+		з використанням упрощенного подхода.
+	</p>
+
+	<p>
+		Властивість <code>Source</code> должно ссылаться на властивість моделі,
+		которое являє собою об`єкт с двумя полями (<code>Id!!Id</code> и <code>Token!!Token</code>).
+		Им'я этого властивості буде определять суффикс для хранимых процедур,
+		які будуть викликатися для отримання або записи реальных байтов изображения.
+	</p>
+
+	<p>
+		Властивість <code>Base</code> должно ссылаться на полную модель
+		(ту, яка указана в корне файла <code>model.json</code>).
+	</p>
+
+
+	<p>
+		Приклад розмітки XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Image Base="/catalog/product" Source="{Bind Product.Image}" Height="200px" />
+
+
+
+</script>
+</pre>
+	</p>
+
+	<p>
+		Фрагмент файла <code>/catalog/product/model.json</code>
+<pre class="code-highlight js">
+<script type="text/template">
+{
+  "schema": "a2",
+  "model": "Product"
+}
+</script>
+</pre>
+	</p>
+
+	<p>
+		Фрагмент моделі даних
+<pre class="code-highlight js">
+<script type="text/template">
+{
+	"Product": {
+		"Id": 42,
+		"Image": {
+			"Id": 112233,
+			"Token": "hXFVVdnZRnZ5HKwNStO2qSSip_ziQ-IEnjVVQzyKzC8"
+		}
+	}
+}
+</script>
+</pre>
+	</p>
+
+
+	<h4>Получение изображения</h4>
+	<p>
+		Для отримання изображения система вызовет збережену процедуру
+		<code>a2.[Product.Image.Load]</code>, передав ей в качестве параметра @Id
+		идентификатор об'єкта <code>Image</code>.
+		Им'я <b>Image</b> в наименовании процедури соответствует имени властивості.
+		Токен доступа буде проверен на сервере (в процедуру он не передається).
+		Якщо он не соответствует правилам, то процедура вообще не вызовется.
+	</p>
+
+	<h4>Загрузка изображения</h4>
+	<p>
+		При завантаженні изображения на сервер, система вызовет збережену процедуру
+		<code>a2.[Product.Image.Update]</code>. Процедура вернет идентификатор изображения и новый токен досупа,
+		які будуть обновлены в моделі.
+	</p>
+</div>

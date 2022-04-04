@@ -1,0 +1,155 @@
+﻿<div xmlns:v-bind="v-bind" xmlns:v-on="v-on">
+	<!--title:Xaml.TabBar-->
+	<!--keywords:TabBar-->
+	<div class="title">
+		<h1>
+			Елемент TabBar
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой панель для выбора елементу. Фактично це просто контейнер с кнопками
+		<a class="code-link" href="/xaml/controls/tabbutton">TabButton</a>, в якому текущая выделенная кнопка
+		связывается со значенням. При нажатии кнопок, связанное значення изменяется и наоборот, при изменении значения, 
+		выбирается нужная кнопка.
+	</p>
+	<p>
+		Для того, щоб управлять, наприклад, видимостью панелей можна використовувати елемент
+		<a class="code-link" href="/xaml/components/switch">Switch</a>.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Buttons</code></p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Buttons</td>
+				<td class="fit"><code>TabButtonCollection</code></td>
+				<td>
+					Коллекция кнопок (елементи <a class="code-link" href="/xaml/controls/tabbutton">TabButton</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для кнопок.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Value</td>
+				<td><code>Object</code></td>
+				<td>
+					Значення, определяющее активную кнопку.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Style</td>
+				<td class="fit"><code>TabBarStyle</code></td>
+				<td>
+					Стиль отображения панели. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчанням) Стандартное отображение.</li>
+						<li><span class="prop-name">MainMenu</span> - В виде основного меню системы.</li>
+						<li><span class="prop-name">Tab</span> - В виде панели закладок.</li>
+						<li><span class="prop-name">Wizard</span> - В виде мастера.</li>
+						<li><span class="prop-name">ButtonGroup</span> - В виде группы кнопок.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DropShadow</td>
+				<td><a class="code-link" href="/xaml/enums/shadowstyle">ShadowStyle</a></td>
+				<td>Вид тени.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Description</td>
+				<td class="no-wrap">String | <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Текст (или елемент) который буде выводиться справа від кнопок. Для некоторых стилей не має смысла,
+					поэтому отображаться не буде.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<TabBar Value="{Bind Root.Value}">
+	<TabBar.Description>
+		Выбрано: <Span Content="{Bind Root.Value}"/>
+	</TabBar.Description>
+	<TabButton ActiveValue="1" Content="Первая кнопка"/>
+	<TabButton ActiveValue="2" Content="Вторая кнопка"/>
+</TabBar>
+</script>
+</pre>
+	</p>
+	<p>
+		Результат
+
+		<div class="grid xaml-sample" style="width:500px" id="xaml-tabbar">
+			<div class="a2-tab-bar">
+				<div class="a2-tab-bar-item">
+					<a v-bind:class="{active: isActive('1')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('1')">Первая кнопка</a>
+				</div>
+				<div class="a2-tab-bar-item">
+					<a v-bind:class="{active: isActive('2')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('2')">Вторая кнопка</a>
+				</div>
+				<div class="divider" role="separator"></div>
+				<div class="a2-tab-description">
+					Выбрано: <span v-text="value"></span>
+				</div>
+			</div>
+		</div>
+	</p>
+
+	<script type="text/javascript">
+	(function () {
+		if (!window.Vue) return;
+		var vm = new Vue({
+			el: "#xaml-tabbar",
+			data: {
+				value: '1'
+			},
+			methods: {
+				click(val) {
+					this.value = val;
+				},
+				isActive(val) {
+					return this.value == val;
+				}
+			},
+			created: function () {
+				console.dir('created');
+			}
+		});
+	})();
+	</script>
+
+</div>

@@ -1,0 +1,52 @@
+﻿<div>
+	<!--title:Активность Request-->
+	<div class="title">
+		<h1>
+			Активность Request
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все активности</a>
+		</div>
+	</div>
+
+	<p>Останавливает процесс и устанавливает закладку. Им'я закладки (задається в об'єкте <code>Inbox</code>) 
+	використовується для продолжения процесса з цією точки останова.</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Inbox</td>
+				<td class="fit no-wrap"><code>InArgument&lt;<a href="/workflow/objects/inbox">Inbox</a>&gt;</code></td>
+				<td>Опис задачи.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TrackBefore</td>
+				<td class="fit no-wrap"><code>InArgument&lt;<a href="/workflow/objects/trackrecord">TrackRecord</a>&gt;</code></td>
+				<td>Запись в протокол процесса перед приостановкой процесса.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TrackAfter</td>
+				<td class="fit no-wrap"><code>InArgument&lt;<a href="/workflow/objects/trackrecord">TrackRecord</a>&gt;</code></td>
+				<td>Запись в протокол процесса после возоновлення процесса.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SendBefore</td>
+				<td class="fit no-wrap"><code>InArgument&lt;<a href="/workflow/objects/messageinfo">MessageInfo</a>&gt;</code></td>
+				<td>Сообщение перед приостановкой процесса.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SendAfter</td>
+				<td class="fit no-wrap"><code>InArgument&lt;<a href="/workflow/objects/messageinfo">MessageInfo</a>&gt;</code></td>
+				<td>Сообщение после возоновлення процесса.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

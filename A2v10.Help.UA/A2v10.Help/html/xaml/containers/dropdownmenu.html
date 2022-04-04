@@ -1,0 +1,124 @@
+﻿<div xmlns:v-on="v-on">
+	<!--title:Xaml.DropDownMenu-->
+	<!--keywords:DropDownMenu-->
+	<div class="title">
+		<h1>
+			Елемент DropDownMenu
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой выпадающее меню. Содержимое обычно являє собою коллекцию елементів
+		<a class="code-link" href="/xaml/controls/menuitem">MenuItem</a>.
+	</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Direction</td>
+				<td class="fit"><code>DropDownDirection</code></td>
+				<td>
+					Направление "выпадения" меню. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">DownRight</span> - (за замовчанням) вниз, разворачивается вправо. Прив'язка левого края.</li>
+						<li><span class="prop-name">DownLeft</span> - вниз, разворачивается влево. Прив'язка правого края.</li>
+						<li><span class="prop-name">UpRight</span> - вверх, разворачивается вправо. Прив'язка левого края.</li>
+						<li><span class="prop-name">UpLeft</span> - вверх, разворачивается влево. Прив'язка правого края.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Separate</td>
+				<td>Boolean</td>
+				<td>
+					Показывать меню раздельно від родительской кнопки. В цьому випадку фон елементу буде белым.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/container">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Toolbar>
+	<Button Content="Open" Icon="File">
+		<Button.DropDown>
+			<DropDownMenu>
+				<MenuItem Content="Text" Icon="FileContent" />
+				<MenuItem Content="Image" Icon="FileImage" />
+			</DropDownMenu>
+		</Button.DropDown>
+	</Button>
+	<Button Icon="Save" Content="Save" />
+</Toolbar>
+</script>
+</pre>
+	</p>
+
+	<p>
+		Результат
+		<div class="xaml-sample" id="xaml-menuitem">
+			<div class="toolbar">
+				<div class="dropdown dir-down" dropdown-top="" v-dropdown="1">
+					<button toggle="" class="btn btn-tb">
+						<i class="ico ico-file"></i>  Open<span class="caret"></span>
+					</button>
+					<div role="menu" class="dropdown-menu menu down-right">
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-file-content"></i> <span>Text</span>
+						</a>
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-file-image"></i> <span>Image</span>
+						</a>
+					</div>
+				</div>
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-save"></i> Save
+				</button>
+			</div>
+		</div>
+	</p>
+
+	<script type="text/javascript">
+		(function () {
+			if (!window.Vue) return;
+			var vm = new Vue({
+				el: "#xaml-menuitem",
+				methods: {
+					click() {
+
+					}
+				},
+				created: function () {
+				}
+			});
+		})();
+	</script>
+</div>

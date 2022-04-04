@@ -1,0 +1,160 @@
+﻿<div>
+	<!--title:Xaml.TabPanel-->
+	<!--keywords:TabPanel-->
+	<div class="title">
+		<h1>
+			Елемент TabPanel
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой панель с закладками. Содержимое представлено елементуми <a class="code-link" href="tab">Tab</a>.
+	</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Властивість содержимого: <code>Tabs</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Tabs</td>
+				<td class="fit"><code>TabCollection</code></td>
+				<td>
+					Набор закладок (елементи <a class="code-link" href="tab">Tab</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для закладок.
+					Содержимое елементу буде повторяться у відповідності до содержимым <code>ItemsSource</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td><code>Object</code></td>
+				<td>
+					Заголовок панели. Выводится в правой части панели с закладками. Може бути рядком, привязкой или
+					об'єктом <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Border</td>
+				<td>Boolean</td>
+				<td>
+					Выводить ли рамку вокруг панели.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">FullPage</td>
+				<td>Boolean</td>
+				<td>
+					Панель буде занимать всю страницу (является корневым елементом).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinHeight</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Минимальная высота панели.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Overflow</td>
+				<td>Boolean</td>
+				<td>
+					Может ли появляться скролл-бар в панели. Установите це властивість,
+					якщо потрібно щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли выходить за границы елементу.
+					В цьому випадку потрібно внимательно следить за тем, щоб основное содержимое не вышло за границы.
+					Скролл-бар отображаться не буде.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">TabPosition</td>
+				<td class="fit"><code>TabPosition</code></td>
+				<td>
+					Положение панели закладок. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Top</span> - (за замовчанням) Сверху.</li>
+						<li><span class="prop-name">Bottom</span> - Снизу.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<TabPanel Header="Заголовок панели" Border="True">
+	<Tab Header="Tab 1">
+		<Grid>
+			<Text>Содержимое первой закладки</Text>
+		</Grid>
+	</Tab>
+	<Tab Header="Tab 2">
+		<Grid>
+			<Text>Содержимое другої закладки</Text>
+		</Grid>
+	</Tab>
+</TabPanel>
+</script>
+</pre>
+	</p>
+	<p>
+		Результат
+
+		<div class="grid xaml-sample" style="width:500px" id="xaml-tabpanel">
+			<a2-tab-panel class="bordered tab-pos-top" >
+				<template slot="title">
+					<div class="pane-header">Заголовок панели</div>
+				</template>
+				<a2-tab-item header="Tab 1">
+					<template>
+						<div class="grid">Содержимое первой закладки</div>
+					</template>
+				</a2-tab-item>
+				<a2-tab-item header="Tab 2">
+					<template>
+						<div class="grid">Содержимое другої закладки</div>
+					</template>
+				</a2-tab-item>
+			</a2-tab-panel>
+		</div>
+	</p>
+
+<script type="text/javascript">
+	(function () {
+		if (!window.Vue) return;
+		var vm = new Vue({
+			el: "#xaml-tabpanel",
+			data: {
+			},
+			created: function () {
+				console.dir('created');
+			}
+		});
+	})();
+</script>
+</div>

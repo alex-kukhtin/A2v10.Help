@@ -1,0 +1,69 @@
+﻿<div>
+	<!--title:Властивості и методы об'єкта-->
+	<!--keywords:$empty;$merge;$root;$parent;$id;$name;$isNew;$isEmpty;$valid;$invalid;$ctrl;-->
+	<div class="title">
+		<h1>
+			Властивості и методы об'єкта
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+
+	<p>Каждый об`єкт расширяется следующими служебными властивостіми и методами:</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+interface IElement {
+	// properties
+	readonly $root: IRoot;
+	readonly $parent: IElement | IElementArray<IElement>;
+
+	readonly $id: any;
+	readonly $name: any;
+
+	readonly $isNew: boolean;
+	readonly $isEmpty: boolean;
+	readonly $valid: boolean;
+	readonly $invalid: boolean;
+
+	readonly $ctrl: IController;
+
+	// methods
+	$empty(): IElement;
+	$merge(src:Object) : IElement;
+}
+]]>
+</script>
+</pre>
+	</p>
+
+	<h2>Властивості</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $root: IRoot</pre></div>
+		<p>
+			Ссылка на корневой об`єкт <a class="code-link" href="rootprops">(IRoot)</a>.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $ctrl: IController</pre></div>
+		<p>
+			Ссылка на <a class="code-link" href="controller">об`єкт контроллера (IController)</a>.
+		</p>
+	</div>
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$empty(): IElement</pre></div>
+		<h4>Опис</h4>
+		<p>
+			Очищает об'єкт. Очистка об'єкта означает установку всех його властивостей в значення за замовчанням. Очистка рекурсивная. Это значит,
+			что все вложенные об'єкты будуть также очищены.
+		</p>
+		<h4>Возвращает:</h4>
+		<ul class="params">
+			<li>Ссылку на самого себя.</li>
+		</ul>
+	</div>
+</div>

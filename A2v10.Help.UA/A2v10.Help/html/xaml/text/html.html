@@ -1,0 +1,83 @@
+﻿<div>
+	<!--title:Xaml.Html-->
+	<!--keywords:Html-->
+	<div class="title">
+		<h1>
+			Елемент Html
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все текстовые елементи</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой фрагмент текста, які отображает html-разметку.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/inline">Inline</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Content</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>String</td>
+				<td>Властивість содержимого. Текстовое содержимое. Допустимы html-теги</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/inline">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Опис</h3>
+	<p>
+		Использовать разметку html при непосредственной работе с xaml неудобно. Приходится экранировать все html-теги.
+		Например, якщо потрібно отобразить текст полужирным шрифтом, приходится писать такой код:
+<pre class="code-highlight xml">
+<script type="text/template">
+<Html>Это &lt;b&gt;полужирный&lt;/b&gt; текст</Html>
+</script>
+</pre>
+
+		Вместо этого значительно удобнее використовувати елементи xaml:
+
+<pre class="code-highlight xml">
+<script type="text/template">
+<Text>Это <Span Bold="True">полужирный</Span> текст</Text>
+</script>
+</pre>
+
+		Либо використовувати елемент CDATA:
+
+<pre class="code-highlight xml">
+	<script type="text/template">
+<Html>
+	<![CDATA[
+	Это <b>полужирный</b> шрифт
+	]]>
+</Html>
+	</script>
+</pre>
+
+		Частіше за все этот елемент використовується для отображения html-текста, отриманого, наприклад, з базы даних.
+	</p>
+
+	<p class="tip alert">
+		Зверніть увагу! <b>Никогда</b> не пытайтесь отобразить html-код, введенный пользователем або полученный з зовнішнього джерела.
+		Хотя система и исключает з такого кода потенциально опасные фрагменты типа скриптов або фреймов, разметка може быть необратимо испорчена.
+	</p>
+
+</div>

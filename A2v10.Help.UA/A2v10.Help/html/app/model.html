@@ -1,0 +1,95 @@
+﻿<div>
+	<!--title:Файл model.json-->
+	<!--keywords:model.json-->
+	<div class="title">
+		<h1>
+			Файл model.json
+		</h1>
+	</div>
+
+	<p>Кожна папка прикладної програми, що описує кінцеву точку, повинна містити файл опису <code>model.json</code>. 
+	В цьому файлі описуються всі можливі дії, допустимі з цією кінцевої точкою.</p>
+	
+	<p>
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">{
+	"source": "",
+	"schema": "",
+	"model": "",
+	"actions":  {},
+	"dialogs":  {},
+	"popups":   {},
+	"commands": {},
+	"reports":  {},
+	"files":  {}
+}
+</script>
+</pre>
+	</p>
+	<p>
+		Все об'єктні властивості представлені об'єктами, в яких ім'я властивості визначає назву дії, а її вміст - об'єкт,
+		що описує цю дію.
+	</p>
+
+	<h3>Властивості об'єкта кінцевої точки</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">source</td>
+				<td>String</td>
+				<td>
+					Джерело даних. Фактично це ім'я рядку підключення (connectionString) з файлу конфігурації програми.
+					Якщо не вказано - вважається рівним рядку "Default". Якщо рядок підключення не знайдений - виникає виключення.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">schema</td>
+				<td>String</td>
+				<td>Им'я sql-схеми для моделі даних. Може перевизначатися в конкретних діях. Якщо не вказано - то <b>dbo</b></td>
+			</tr>
+			<tr>
+				<td class="prop-name">model</td>
+				<td>String</td>
+				<td>Им'я моделі. Може перевизначатися в конкретных діях</td>
+			</tr>
+			<tr>
+				<td class="prop-name">actions</td>
+				<td><a href="actions">actions</a></td>
+				<td>Об'єкт, що описує можливі дії з цією кінцевої точкою</td>
+			</tr>
+			<tr>
+				<td class="prop-name">dialogs</td>
+				<td><a href="dialogs">dialogs</a></td>
+				<td>Об'єкт, що описує діалоги, які можна викликати для цієї кінцевої точки</td>
+			</tr>
+			<tr>
+				<td class="prop-name">popups</td>
+				<td><a href="popups">popups</a></td>
+				<td>Об'єкт, що описує спливаючі вікна, які можна викликати для цієї кінцевої точки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">commands</td>
+				<td><a href="commands">commands</a></td>
+				<td>Об'єкт, що описує команди, які можна виконувати для цієї кінцевої точки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">reports</td>
+				<td><a href="reports">reports</a></td>
+				<td>Об'єкт, що описує звіти, пов'язані з цією кінцевої точкой.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">files</td>
+				<td><a href="files">files</a></td>
+				<td>Об'єкт, що описує роботу з файлами, що завантажуються.</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

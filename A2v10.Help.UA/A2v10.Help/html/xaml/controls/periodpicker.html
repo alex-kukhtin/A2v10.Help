@@ -1,0 +1,121 @@
+﻿<div xmlns:v-bind="v-bind">
+	<!--title:Xaml.PeriodPicker-->
+	<!--keywords:PeriodPicker-->
+	<div class="title">
+		<h1>
+			Елемент PeriodPicker
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>Представляет собой селектор периода.</p>
+
+	<p>Властивість <code>Value</code> всегда повинно бути связано с экземпляром класса <code>TPeriod</code>.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>Выравнивание текста.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Placement</td>
+				<td class="fit"><code>DropDownPlacement</code></td>
+				<td>
+					Направление "выпадения" селектора. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">BottomLeft</span> - (за замовчанням) внз с привязкой левого края.</li>
+						<li><span class="prop-name">BottomRight</span> - внз с привязкой правого края.</li>
+						<li><span class="prop-name">TopLeft</span> - вверх с привязкой левого края.</li>
+						<li><span class="prop-name">TopRight</span> - вверх с привязкой правого края.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Style</td>
+				<td><code>PeriodPickerStyle</code></td>
+				<td>
+					Вид селектора. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчанням) обычный селектор.</li>
+						<li><span class="prop-name">Hyperlink</span> - отображение у вигляді гиперссылки.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Display</td>
+				<td><code>DisplayMode</code></td>
+				<td>
+					Отображение периода в заголовке селектора. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Date</span> - (за замовчанням) тільки даты.</li>
+						<li><span class="prop-name">Name</span> - название периода.</li>
+						<li><span class="prop-name">NameDate</span> - название периода и даты.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ShowAllData</td>
+				<td>Boolean</td>
+				<td>Показывать ли елемент меню "За все время".</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Size</td>
+				<td><code>ControlSize</code></td>
+				<td>
+					Размер елементу. В поточної версії підтримуєся тільки для стиля <code>Hyperlink</code> Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчанням) гиперссылка обычного розміру.</li>
+						<li><span class="prop-name">Large</span> - увеличенный размер гиперссылки.</li>
+					</ul>
+					(остальные значення перечисления <code>ControlSize</code> не поддерживаются).
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/valuedcontrol">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+	<div class="grid xaml-sample" style="grid-template-columns:1fr 300px;width:500px" id="xaml-periodpicker">
+		<a2-period-picker label="Выберите период" v-bind:item="Document" prop="Period" class="drop-top-left"></a2-period-picker>
+		<static label="Выбрано" v-bind:text="Document.Period.Name"></static>
+	</div>
+
+	<script type="text/javascript">
+		(function () {
+			var p = require('std:period');
+			var vm = new Vue({
+				el: "#xaml-periodpicker",
+				data: {
+					Document: {
+						Period: p.create('today')
+					}
+				},
+				created: function () {
+				}
+			});
+		})();
+	</script>
+</div>

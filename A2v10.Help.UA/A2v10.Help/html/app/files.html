@@ -1,0 +1,288 @@
+﻿<div>
+	<!--title:files (model.json)-->
+	<!--keywords:files-->
+	<div class="title">
+		<h1>
+			Файли (files)
+		</h1>
+	</div>
+
+	<p>
+		Об'єкт <b>files</b> описує команди роботи з файлами, що завантажуються, доступні в поточній кінцевій точці.
+		Імена властивостей об'єкта являють собою імена команд. Кожна властивість являє собою об`єкт наступної структури:
+	</p>
+	<p>
+		Зазвичай використовується с елементом керування <a class="code-link" href="/xaml/controls/uploadfile">UploadFile</a>.
+		Команда задається у властивості <code>Url</code> елементу керування.
+	</p>
+
+	<p>
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+  "type": "parse" | "sql" | "azureBlob" | "clr",
+  "parse": "excel" | "xlsx" | "csv" | "dbf" | "xml" | "auto",
+  "source": "",
+  "schema": "",
+  "model": "",
+  "locale": "",
+  "container": "",
+  "azureSource": "",
+  "async": true | false,
+  "clrType": "",
+  "parameters": {},
+  "imageCompress": {
+    "quality": 0..100,
+    "threshold": size
+  }
+}
+</script>
+</pre>
+	</p>
+	<h3>Властивості об'єкта</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">type</td>
+				<td>enum</td>
+				<td>
+					Обов'язково. Тип операції з файлом:
+					<table class="sub-table">
+						<tr class="top">
+							<td class="prop-name">parse</td>
+							<td>
+								Розбір файла. Якщо вказана модель, то файл зберігається в базі даних. Якщо модель пуста,
+								результат розбору просто повертається клиенту.
+								Повинно бути вказано властивість <code>parse</code>.
+								Для текстових файлів можна додатково вказати властивість <code>locale</code>.
+								<br/>
+								Приклад <a href="/howto/importexcel">імпорту даних</a>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">sql</td>
+							<td>Пряме зберігання в базі даних сирих даних файлу. Повинна бути вказана модель.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">azureBlob</td>
+							<td>
+								Зберігання файлу в Azure Storage. Повинно бути обов'язково указано властивість
+								<code>container</code>. Им'я джерела (рядку підключення) зазначається
+								у властивості <code>azureSource</code>. Якщо не вказано, то дорівнює
+								<b>"AzureStorage"</b>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">clr</td>
+							<td>
+								Виклик методу .NET об'єкта. Повинно бути вказано властивість <code>clrType</code>.
+								<a href="clrcommand">Детальніше...</a>.
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">parse</td>
+				<td>enum</td>
+				<td>
+					Обов'язково для операції <code>parse</code>. Формат файлу, що разбирається.
+					<table class="sub-table">
+						<tr class="top">
+							<td class="prop-name no-wrap">csv, dbf, xml</td>
+							<td>Тип файлу для анализу.</td>
+						</tr>
+						<tr>
+							<td class="prop-name no-wrap">xlsx, excel</td>
+							<td>Розбір файлів Microsoft Excel. Підтримується тільки формат <code>.xlsx</code>.</td>
+						</tr>
+						<tr>
+							<td class="prop-name">auto</td>
+							<td>
+								Автоматичне визначення формату в залежності від розширення файлу.
+							</td>
+						</tr>
+					</table>
+					Приклад <a href="/howto/importexcel">імпорту даних</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">locale</td>
+				<td>string</td>
+				<td>Не обов'язково. Локаль для розбору файлів. Текстовий рядок, що представляє мову і, опціонально, країну. 
+				Наприклад: "uk", "uk-UA" для України.
+				Використовується зокрема для розбору чисел 
+				(десятичний роздільник, роздільник тисяч). Якщо не вказана, використовується стандартний вид 
+				(крапка в якості десятичного роздільника).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">source</td>
+				<td>string</td>
+				<td>Не обов'язково. Джерело даних. Якщо не вказано, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">schema</td>
+				<td>string</td>
+				<td>Не обов'язково. Им'я sql-схеми. Якщо не указано, береться з батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">model</td>
+				<td>string</td>
+				<td>
+					Им'я моделі. Якщо не вказано, береться з батьківського елементу. Якщо
+					дорівнює пустому рядку, то модель не зберігається в базі даних, а просто повертається на клієнт.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">container</td>
+				<td>string</td>
+				<td>Обов'язково для типу <code>azureBlob</code>. Им'я контейнера в Azure Storage.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">azureSource</td>
+				<td>string</td>
+				<td>
+					Тільки для типу <code>azureBlob</code>. Джерело (ім'я рядку підключення) для Azure Storage.
+					Якщо не вказано, то дорівнює <b>"AzureStorage"</b>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">clrType</td>
+				<td>string</td>
+				<td>Обов'язково для типу <b>clr</b>. Рядок, що описує збірку і .NET тип.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">async</td>
+				<td>boolean</td>
+				<td>
+					Тільки для типу <b>clr</b>. Асинхронне виконання clr-команди.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">parameters</td>
+				<td>object</td>
+				<td>
+					Об'єкт, статичні параметри, які передаються в збережену процедуру оновлення моделі.
+					Им'я властивості є ім'ям параметра,
+					значення - значенням параметра.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">imageCompress</td>
+				<td>object</td>
+				<td>
+					Керує стисканням зображень при завантаженні на сервер. Тільки для файлів JPEG.
+					<table class="sub-table">
+						<tr class="top">
+							<td class="prop-name">quality</td>
+							<td>
+								Якість файлу (0..100). 0-мінімальна, 100-максимальна.
+								Реальне значення 40-50 не призводить до помітного погіршення якості зображення.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">threshold</td>
+							<td>
+								Мінімальне значення розміру файлу (в мегабайтах), для якого буде
+								застосовуватися стискання. Якщо розмір файлу менше, він зберігається "як є".
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Операція parse</h3>
+	<p>
+		Операція виконує розбір отриманого файлу (у відповідності до формату, вказаного у властивості <code>parse</code>) і представляє його у вигляді таблиці.
+		Якщо вказана модель, то система намагається зберігти отриману таблицю в базі даних.
+	</p>
+	<p>
+		Збереження моделі виконується наступним чином:
+		<ul class="std">
+			<li>
+				Викликається процедура отримання метаданих (<code>{source}: [{schema}].[{model}.Metadata]</code>).
+				Ця процедура повинна повернути один запис з описом однієї таблиці. Им'я таблиці попередньо визначене - <code>Rows</code>.
+			</li>
+			<li>Виконується пошук відповідності полів отриманого файлу и таблиці метаданих, та заповнюється відповідний табличный тип.</li>
+			<li>
+				Викликається процедура оновлення (<code>{source}: [{schema}].[{model}.Update]</code>). Їй передається таблиця,
+				отримана на попередньому кроці. Процедурі передаються наступні параметри:
+				<ul class="std">
+					<li>Стандартні параметри (<code>@TenantId</code>, <code>@UserId</code>).</li>
+					<li>Параметри, передані в url.</li>
+					<li>Параметри з властивості <code>parameters</code>.</li>
+					<li><code>@Rows (readonly)</code> - Табличний тип. Дані таблиці.</li>
+				</ul>
+			</li>
+			<li>Модель, отримана в результаті виконання збереженої процедури просто повертається клиенту.</li>
+		</ul>
+	</p>
+	<p>
+		Якщо значення властивості <code>model</code> дорівнює пустому рядку (<code>""</code>), то жодних додаткових
+		дій с результатом розбору файлу не виконується. Отримана таблиця просто повертається клиенту у вигляді об'єкта с
+		єдиною властивістю <code>Rows</code>, що містить массив записів вихідного файлу.
+	</p>
+
+	<h3>Операція sql</h3>
+	<p>
+		Ця операция просто зберігає отриманий файл в базі даних у вигляді байтового масива (тип <code>vabinary(max)</code>).
+		Якщо задано параметр <code>imageCompress</code>, то файл (можливо) буде попередньо стиснений.
+		Для цього викликаєся збережена процедура <code>{source}: [{schema}].[{model}.Update]</code>.
+		Їй передаються наступні параметри (такі самі, как і у випадку збереження вкладень):
+	</p>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr class="top">
+				<td class="prop-name no-wrap">@UserId</td>
+				<td>bigint</td>
+				<td>Id поточного користувача.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@TenantId</td>
+				<td>bigint</td>
+				<td>Id тенанта (тільки в мультитенантному середовищі)</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@Name</td>
+				<td>nvarchar(255)</td>
+				<td>Им'я файлу (без шляху)</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@Mime</td>
+				<td>nvarchar(255)</td>
+				<td>MIME -тип файлу</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name no-wrap">@Stream</td>
+				<td>varbinary(max)</td>
+				<td>Дані файлу (просто байти без перетворення)</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Зверніть увагу, что імена праметрів фіксовані!</p>
+
+	<h3>Операція clr</h3>
+	<p>
+		Операція типу <b>clr</b> викликає метод з типу, заданного властивістю <code>clrType</code>. Тип повинен реалізовувати 
+		інтерфейс <code>IInvokeTarget</code>.  <a href="clrcommand">Детальніше...</a>.
+	</p>
+	<p>В метод передається им'я, MIME-тип і потік (<code>Stream</code>) отриманого файла.
+	</p>
+</div>

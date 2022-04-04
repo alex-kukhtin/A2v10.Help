@@ -1,0 +1,80 @@
+﻿<div>
+	<!--title:Xaml.Span-->
+	<!--keywords:Span-->
+	<div class="title">
+		<h1>
+			Елемент Span
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все текстовые елементи</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой фрагмент текста.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/inline">Inline</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Content</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>String</td>
+				<td>Властивість содержимого. Текстовое содержимое.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Small</td>
+				<td>Boolean</td>
+				<td>
+					Уменьшенный шрифт. Конкретный размер шрифта зависит від темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Big</td>
+				<td>Boolean</td>
+				<td>
+					Увеличенный шрифт. Конкретный размер шрифта зависит від темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Space</td>
+				<td>SpaceMode</td>
+				<td>
+					Добавлять пробел до або после елементу. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - (за замовчанням) нет пробелов.</li>
+						<li><span class="prop-name">Before</span> - пробел перед елементом.</li>
+						<li><span class="prop-name">After</span> - пробел после елементу.</li>
+						<li><span class="prop-name">Both</span> - пробел перед и после елементу.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MaxChars</td>
+				<td>Int32</td>
+				<td>
+					Максимальное количество символов в елементе. Роботает тільки для связанных значений. Якщо в значенні больше символов, то текст 
+					обрезается и в конец добавляется многоточие.
+					Не забывайте предоставлять користувачу полный текст (наприклад з використанням подсказки - <code>Tip</code>).
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/inline">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

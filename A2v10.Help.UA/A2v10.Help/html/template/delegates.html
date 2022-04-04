@@ -1,0 +1,99 @@
+﻿<div>
+	<!--title:Шаблони. Делегаты-->
+	<!--keywords:delegates;-->
+	<div class="title">
+		<h1>
+			Шаблони. Делегаты
+		</h1>
+	</div>
+
+	<p>
+		Делегат це функция "обратного вызова" (callback function). Она буде викликатися в тот момент,
+		когда потрібно выполнить какое-либо действие.
+		Например в елементе керування <a href="/xaml/controls/selector">Selector</a>,
+		делегат буде викликатися при вводе фрагмента текста для того щоб получить список вариантов выбора.
+	</p>
+
+	<p>
+		Об'єкт, що описує делегаты в шаблоне, является обычным об'єктом JavaScript.
+		Імена властивостей этого об'єкта являются іменами делегатов, а значення - функциями.
+	</p>
+
+	<p>
+		Делегаты в видух задаются за допомогою властивості
+		<code>Delegate</code> соответствующйого елементу керування.
+	</p>
+
+	<h3>Синтаксис</h3>
+<pre class="code-highlight js">
+<script type="text/template">
+/* делегаты */
+delegates: {
+	Delegate1: Function,
+	Delegate2: Function,
+	...
+}
+</script>
+</pre>
+
+	<h3>Аргументы делегатов</h3>
+	<ul class="params">
+		<li><code>this</code> - корневой об`єкт (TRoot).</li>
+		<li>
+			<code>...</code> - остальные аргументы зависят від конкретного делегата.
+		</li>
+	</ul>
+
+	<h3>Возвращаемое значення</h3>
+	<ul class="params">
+		<li>
+			Возвращаемое значення зависит від конкретного делегата.
+		</li>
+	</ul>
+
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML:
+<pre class="code-highlight xml">
+<script type="text/template">
+<!--селектор-->
+<Selector Delegate="FetchAgent" Value="{Bind Document.Agent}"
+		  DisplayProperty="Name"
+		  Label="Выберите контрагента">
+</Selector>
+</script>
+</pre>
+
+		Javascript:
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+
+const template = {
+	delegates: {
+		FetchAgent: fetchAgent
+	}
+};
+
+function fetchAgent(agent, text) {
+	/*
+	agent - контрагент, выбранный в селекторе 
+	text - фрагмент текста, введенный пользователем
+	*/
+
+	const ctrl = this.$ctrl;
+
+	/* 
+	Выполнить на сервере команду 'fetchCustomer', яка вернет список подходящих клиентов. 
+	В данном случае функция повинна повернути Promise, который буде обрабатываться селектором.
+	*/
+	return ctrl.$invoke('fetchCustomer', { Text: text, Kind: 'Customer' });
+
+}
+
+</script>
+</pre>
+	</p>
+
+</div>

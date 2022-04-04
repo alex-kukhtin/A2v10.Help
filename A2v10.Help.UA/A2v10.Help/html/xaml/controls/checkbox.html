@@ -1,0 +1,88 @@
+﻿<div>
+	<!--title:Xaml.CheckBox-->
+	<!--keywords:CheckBox-->
+	<div class="title">
+		<h1>
+			Елемент CheckBox
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>Представляет собой флажок. Зазвичай связывается с булевским значенням в моделі.</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/checkboxbase">CheckBoxBase</a> :
+	<a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="3">Об'єкт не має собственных властивостей</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/checkboxbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Приклад</h3>
+
+	<p>
+		Нехай в моделі маєся елемент <code>Element</code>, у якого есть властивість <code>Checked</code>.
+	</p>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Grid Columns="1*, 1*">
+	<CheckBox Value="{Bind Element.Checked}" Label="Флажок" />
+	<Span Content="{Bind Element.Checked}" Align="Right" />
+</Grid>
+</script>
+</pre>
+	</p>
+
+
+	<div id="xaml-checkbox">
+		<p>
+			Результат
+			<div class="xaml-sample" style="padding:0">
+				<div class="grid" style="grid-template-columns:1fr 1fr">
+					<label class="checkbox">
+						<input type="checkbox" v-model="Checked" />
+						<span>Флажок</span>
+					</label>
+					<span v-text="Checked" class="text-right"></span>
+				</div>
+			</div>
+		</p>
+	</div>
+
+	<script type="text/javascript">
+		(function () {
+			if (!window.Vue) return;
+			var vm = new Vue({
+				el: "#xaml-checkbox",
+				data: {
+					Checked: false
+				}
+			});
+		})();
+	</script>
+</div>

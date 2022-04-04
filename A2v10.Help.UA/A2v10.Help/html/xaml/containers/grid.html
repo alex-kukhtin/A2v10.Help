@@ -1,0 +1,123 @@
+﻿<div>
+	<!--title:Xaml.Grid-->
+	<!--keywords:Grid;Grid.Row;Grid.Col;Grid.RowSpan;Grid.ColSpan-->
+	<div class="title">
+		<h1>
+			Елемент Grid
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой сетку з строк и колонок.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>
+		Примечание. Контейнер <code>Grid</code> використовується в макетах пользовательского интерфейса. Он не предназначен
+		для отображения даних. Для отображения и привязки к данным используйте соответствующие елементи упрвления, такі
+		как <a class="code-link" href="../controls/table">Table</a> або <a class="code-link" href="../controls/datagrid">DataGrid</a>.
+	</p>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Высота елементу керування.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Gap</td>
+				<td><a class="code-link" href="/xaml/simple/gapsize">GapSize</a></td>
+				<td>Промежутки между строками и колонками сетки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DropShadow</td>
+				<td><a class="code-link" href="/xaml/enums/shadowstyle">ShadowStyle</a></td>
+				<td>Вид тени.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AutoFlow</td>
+				<td><a class="code-link" href="/xaml/enums/autoflowmode">AutoFlowMode</a></td>
+				<td>Режим автоматического размещения елементів.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AlignItems</td>
+				<td><a class="code-link" href="/xaml/enums/alignitem">AlignItem</a></td>
+				<td>Режим выравнивания елементів.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Rows</td>
+				<td>RowDefinitions</td>
+				<td>Определения строк сетки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Columns</td>
+				<td>ColumnDefinitions</td>
+				<td>Определения колонок сетки.</td>
+			</tr>
+		</tbody>
+		<tr>
+			<td colspan="3">
+				<a href="/xaml/abstract/container">Властивості базового елементу</a>
+			</td>
+		</tr>
+	</table>
+
+
+	<h3>Присоединенные властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Grid.Row</td>
+				<td>Int32</td>
+				<td>Определяет номер строки, в которую повинен быть помещен дочерний елемент.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Grid.Col</td>
+				<td>Int32</td>
+				<td>Определяет номер колонки, в которую повинен быть помещен дочерний елемент.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Grid.RowSpan</td>
+				<td>Int32</td>
+				<td>Определяет количество рядків, які буде занимать дочерний елемент. За замовчанням - 1.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Grid.ColSpan</td>
+				<td>Int32</td>
+				<td>Определяет количество колонок, які буде занимать дочерний елемент. За замовчанням - 1.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Grid.VAlign</td>
+				<td><a class="code-link" href="/xaml/enums/alignitem">AlignItem</a></td>
+				<td>Определяет вертикальное выравнивание дочірнього елементу таблиці. За замовчанням - <code>Top</code>.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

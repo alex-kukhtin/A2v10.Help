@@ -1,0 +1,242 @@
+﻿<div>
+	<!--title:Обновление моделей-->
+	<!--keywords:Update;-->
+	<div class="title">
+		<h1>
+			Обновление моделей
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Модели даних</a>
+		</div>
+	</div>
+	<p>
+		Зверніть увагу, что модель обновляется целиком за один вызов збереженої процедури.
+		Для передчи даних широко використовуються
+		<a target="_blank" href="https://docs.microsoft.com/en-us/sql/relational-databases/tables/use-table-valued-parameters-database-engine?view=sql-server-ver15">табличные параметри</a> SQL-сервер.
+	</p>
+	<p>Обновление моделей виконується наступним чином.</p>
+	<p>Сначала клиент отправляет всю модель на сервер.</p>
+	<p>
+		Система находит ім'ямоделі для соответствующйого дії и викликає збережену процедуру
+		з суфіксом <b>.Metadata</b>. Ця процедура возвращает несколько наборов с пустым содержимым.
+		Імена полей в этих наборах визначають правила, каким образом пребразовывать
+		содержимое полученной с клієнта моделі в параметри збереженої процедури оновлення моделі.
+	</p>
+	<p>Система преобразовывает полученые сырые данные в набор таблиц используя полученные метаданные.</p>
+	<p>Викликається процедура з суфіксом <b>.Update</b> и ей передаються преобразованные таблиці.</p>
+
+	<h3>Правила интерпретации наборов .Metadata</h3>
+	<p>Им'я первого поля каждого набора всегда состоит з трех елементів, разделенных символом '!'.</p>
+	<ul>
+		<li>Первый елемент - ім'япараметра в процедуре <b>.Update</b>.</li>
+		<li>
+			Второй елемент - шлях до данным з моделі даних. Не смотря на то, что неякі
+			значення могут являться масивами, путь все дорівнює задається через точку.
+		</li>
+		<li>Третий елемент - всегда значення <b>Metadata</b>.</li>
+	</ul>
+	<p>
+		Остальные поля набора являють собою властивості в моделі и соответственно поля в табличной переменной.
+	</p>
+	<p>
+		Количество табличных параметров в процедуре <b>.Update</b> (не считая предопределенных) всегда буде
+		дорівнює количеству наборов, які вернула процедура <b>.Metadata</b>.
+	</p>
+
+	<h3>Приклад</h3>
+	<p>Рассмотрим процедуру оновлення документа. Роботающий пример <a target="_blank" href="https://github.com/alex-kukhtin/A2v10.Web.Sample/blob/master/App_application/sample/document/model.sql">таблиц и хранмых процедур</a> можна найти на GitHub</p>
+
+	<p>Определим табличные типы</p>
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create type a2v10sample.[Document.TableType] as table(
+	Id bigint,
+	Kind nvarchar(32),
+	[Date] date,
+	[No] nvarchar(255),
+	[Sum] money,
+	[Agent] bigint,
+	Memo nvarchar(255)
+)
+go
+create type a2v10sample.[DocDetails.TableType]
+as table(
+	Id bigint null,
+	ParentId bigint null,
+	RowNumber int,
+	[Qty] float,
+	[Price] float,
+	[Sum] money,
+	Product bigint,
+	[Memo] nvarchar(255)
+)
+go
+</script>
+</pre>
+	<p>
+		Первый тип буде соответствовать таблице <b>a2v10sample.Documents</b>, а другої таблице
+		<b>a2v10sample.DocDetails</b>.
+	</p>
+
+	<p>Процедура отримання метаданих буде иметь следующий вид:</p>
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure a2v10sample.[Document.Metadata]
+as
+begin
+	set nocount on;
+
+	declare @Document a2v10sample.[Document.TableType];
+	declare @Rows a2v10sample.[DocDetails.TableType];
+
+	select [Document!Document!Metadata] = null, * from @Document;
+	select [Rows!Document.Rows!Metadata]=null, * from @Rows;
+end
+go</script>
+</pre>
+	<p>
+		Она возвращает два набора. Первый набор описує сам документ (в таблице буде всегда одна запись) со всеми нужными полями.
+		Ця таблиця буде передана в параметр с именем <b>@Document</b>. Обатите внимание, что в имени
+		<b>[Document!Document!Metadata]</b> первое слово <b>Document</b> це ім'япараметра, а второе <b>Document</b> -
+		путь в моделі, откуда надо получить данные.
+	</p>
+	<p>
+		Второй набор описує таблицу строк. В этой таблице буде стільки же рядків, сколько и в массиве
+		<b>Document.Rows</b> исходной моделі. Им'я параметра - <b>@Rows</b>.
+	</p>
+
+	<p>Процедура оновлення буде иметь следующий вид:</p>
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure a2v10sample.[Document.Update]
+@TenantId int = 1,
+@UserId bigint,
+@Document a2v10sample.[Document.TableType] readonly,
+@Rows a2v10sample.[DocDetails.TableType] readonly,
+@Kind nvarchar(32)
+as
+begin
+	set nocount on;
+
+	declare @RetId bigint;
+	declare @output table(op sysname, id bigint);
+
+	merge a2v10sample.Documents as target
+	using @Document as source
+	on (target.Id = source.Id)
+	when matched then update set 
+		target.[Date] = source.[Date],
+		target.[No] = source.[No],
+		target.Agent = source.Agent,
+		target.[Sum] = source.[Sum],
+		target.Memo = source.Memo,
+		target.DateModified = getdate()
+	when not matched by target then
+	insert(Kind, [Date], [No], Agent, [Sum], Memo) 
+	values (@Kind, [Date], [No], Agent, [Sum], Memo)
+	output 
+		$action op,
+		inserted.Id id
+	into @output(op, id);
+	select top(1) @RetId = id from @output;
+
+	merge a2v10sample.DocDetails as target
+	using @Rows as source
+	on (target.Id = source.Id and target.Document = @RetId)
+	when matched then update set
+			target.RowNo = source.RowNumber,
+			target.Product = source.Product,
+			target.Qty = source.Qty,
+			target.Price = source.Price,
+			target.[Sum] = source.[Sum],
+			target.Memo = source.Memo
+	when not matched by target then insert 
+		(Document, RowNo, Qty, Price, [Sum], Product, Memo) values
+		(@RetId, RowNumber, Qty, Price, [Sum], Product, Memo)
+	when not matched by source and target.Document = @RetId then delete;
+
+	exec a2v10sample.[Document.Load] @UserId, @RetId;
+end
+go</script>
+</pre>
+
+	<p>
+		Процедура просто обновляет (или вставляет) документ и його строки используя оператор <b>merge</b>.
+		Зверніть увагу, что для отримання идентификатора документа (который нужен для вставки строк)
+		використовується псевдотаблица <b>inserted</b>
+	</p>
+
+	<h3>Дополнительные служебные поля в наборах даних </h3>
+	<p>
+		При заполнении таблиц даних з моделей в таблиці добавляются наступні служебные поля. Якщо вони будуть
+		объявлены в табличных типах, то их значення будуть заполнены.
+		Эти поля використовуються для связывания дочерних записей (ведь вони могут быть новыми и их идентификаторов пока може не быть).
+	</p>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">GUID</td>
+				<td>uniqueidentifier</td>
+				<td>
+					Уникальное значення. Використовується совместно с <b>ParentGUID</b>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowNumber</td>
+				<td>int</td>
+				<td>
+					Номер строки в таблице (начиная с 1).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CurrentKey</td>
+				<td>Разные типы</td>
+				<td>
+					Текущий ключ в таблицях типа <b>Map</b>. Використовується вместе с полем 
+					<b>ParentKey</b> дочерней таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentId</td>
+				<td>Разные типы</td>
+				<td>Идентификатор родительской записи. Идентификатор - всегда властивість с именем <b>Id</b>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentGUID</td>
+				<td>uniqueidentifier</td>
+				<td>Уникальный идентификатор родительской записи (властивість с именем <b>GUID</b> з родительской таблиці).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentKey</td>
+				<td>Разные типы</td>
+				<td>Ключ родительской записи (<b>CurrentKey</b>). Використовується для заполнения таблиц типа <b>Map</b>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ParentRowNumber</td>
+				<td>int</td>
+				<td>Номер строки родительской записи (властивість с именем <b>RowNumber</b> з родительской таблиці).</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Совет</h3>
+	<p>Для того, щоб посмотреть какие данные приходят в збережену процедуру можна використовувати следующий фрагмент кода
+	(где @Rows - ім'ятабличного параметра):</p>
+
+	<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+declare @xml nvarchar(max);
+set @xml = (select * from @Rows for xml auto);
+throw 60000, @xml, 0;
+</script>
+</pre>
+
+</div>

@@ -1,0 +1,133 @@
+﻿<div>
+	<!--title:Xaml.PropertyGrid-->
+	<!--keywords:PropertyGrid-->
+	<div class="title">
+		<h1>
+			Елемент PropertyGrid
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой таблицу властивостей.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit"><code>PropertyGridItems</code></td>
+				<td>Властивість содержимого. Коллекция дочерних елементів <a class="code-link" href="propertygriditem">PropertyGridItem</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Джерело даних для отримання дочерних елементів.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Style</td>
+				<td><code>PropertyGridStyle</code></td>
+				<td>
+					Стиль отображения таблиці. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - Обычная таблиця.</li>
+						<li><span class="prop-name">Compact</span> - Компактная таблиця (соответствует <code>Compact = "True"</code>).</li>
+						<li><span class="prop-name">Small</span> - Миниатюрная таблиця. Зазвичай використовується внутри других таблиц.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Compact</td>
+				<td>Boolean</td>
+				<td>
+					Компактный стиль отображения таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Striped</td>
+				<td>Boolean</td>
+				<td>
+					Раскраска таблиці "в полоску" с выделением четных и нечетных строк.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">NoWrapName</td>
+				<td>Boolean</td>
+				<td>
+					Запретить перенос имен властивостей.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">GridLines</td>
+				<td><code>GridLinesVisibility</code></td>
+				<td>
+					Отображение сетки. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - за замовчанням.</li>
+						<li><span class="prop-name">Horizontal</span> - горизонтальные линии.</li>
+						<li><span class="prop-name">Vertical</span> - вертикальные линии.</li>
+						<li><span class="prop-name">Both</span> - сетка.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TestId</td>
+				<td>String</td>
+				<td>Идентификатор елементу для инструментов тестирования.</td>
+			</tr>
+		</tbody>
+		<tr>
+			<td colspan="3">
+				<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+			</td>
+		</tr>
+	</table>
+
+
+	<h3>Приклад</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<PropertyGrid GridLines="Horizontal" NoWrapName="True">
+	<PropertyGridItem Name="Identifier" Content="{Bind Document.Id}" />
+	<PropertyGridItem Name="Date Modified" Content="{Bind Document.Date, DataType=DateTime}" />
+	<PropertyGridItem Name="User Modified" Content="{Bind Document.User.Name}" />
+</PropertyGrid>
+</script>
+</pre>
+	</p>
+	<p>
+		Результат:
+		<div class="xaml-sample">
+			<table class="prop-grid grid-horizontal no-wrap-name">
+				<colgroup>
+					<col class="prop-name"/>
+					<col class="prop-value"/>
+				</colgroup>
+				<tbody>
+					<tr><td class="prop-name">Identifier</td><td class="prop-value">95053</td></tr>
+					<tr><td class="prop-name">Date Modified</td><td class="prop-value">17.08.2020 15:33</td></tr>
+					<tr><td class="prop-name">User Modified</td><td class="prop-value">System administrator</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</p>
+
+</div>

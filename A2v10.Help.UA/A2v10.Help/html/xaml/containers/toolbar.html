@@ -1,0 +1,142 @@
+﻿<div>
+	<!--title:Xaml.Toolbar-->
+	<!--keywords:Toolbar-->
+	<div class="title">
+		<h1>
+			Елемент Toolbar
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой панель инструментов.
+	</p>
+
+	<p>
+		В панель инструментов можна помещать любые елементи, но чаще всього там размещаются простые кнопки
+		<a class="code-link" href="/xaml/controls/button">Button</a>, текстовые поля
+		<a class="code-link" href="/xaml/controls/textbox">TextBox</a> и т.д.
+		Для визуального разделения кнопок використовується 
+		елемент <a class="code-link" href="/xaml/controls/separator">Separator</a>.
+	</p>
+	<p>Для того, щоб разделить блоки кнопок на две части - левую и правую, використовується присоединенное властивість 
+	<code>Toolbar.Align</code>.</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Style</td>
+				<td class="fit"><code>ToolbarStyle</code></td>
+				<td>
+					Стиль отображения панели инструментов. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчанням) Стандартное отображение.</li>
+						<li><span class="prop-name">Transparent</span> - Прозрачная панель инструментов.</li>
+						<li><span class="prop-name">Light</span> - Светлый стиль.</li>
+					</ul>
+					Конретный вид отображения зависит від темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Border</td>
+				<td class="fit"><code>ToolbarBorderStyle</code></td>
+				<td>
+					Рамка. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - (за замовчанням) Нет рамки.</li>
+						<li><span class="prop-name">Bottom</span> - Рамка тільки снизу.</li>
+						<li><span class="prop-name">BottomShadow</span> - Рамка снизу с тенью.</li>
+					</ul>
+					Конретный вид отображения зависит від темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AlignItems</td>
+				<td><a class="code-link" href="/xaml/enums/alignitems">AlignItems</a></td>
+				<td>Режим выравнивания елементів.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/container">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Присоединенные властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Toolbar.Align</td>
+				<td class="fit"><code>ToolbarAlign</code></td>
+				<td>
+					Куда помещать елемент. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Left</span> - (за замовчанням) В левый блок кнопок.</li>
+						<li><span class="prop-name">Right</span> - В правый блок кнопок.</li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Toolbar>
+	<Button Content="Open" Icon="File"/>
+	<Button Icon="Save" Content="Save" />
+	<Button Icon="Close" Content="Close" />
+	<Separator />
+	<Button Icon="Help" Content="Help" Toolbar.Align="Right"/>
+</Toolbar>
+</script>
+</pre>
+	</p>
+
+	<p>
+		Результат
+		<div class="xaml-sample" style="width:500px">
+			<div class="toolbar">
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-file"></i>  Open
+				</button>
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-save"></i> Save
+				</button>
+				<div class="divider"></div>
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-close"></i> Close
+				</button>
+				<div class="aligner"></div>
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-help"></i> Help
+				</button>
+			</div>
+		</div>
+	</p>
+
+</div>

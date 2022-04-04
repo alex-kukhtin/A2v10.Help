@@ -1,0 +1,81 @@
+﻿<div>
+	<!--title:Что нового. Февраль 2018-->
+	<!--keywords:Что нового-->
+	<div class="title">
+		<h1>
+			Выпуск 1 - версії 7109-7119 (февраль 2018)
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі випуски</a>|
+			<a href="" class="disabled">« Попередній випуск</a>|
+			<a href="w201803" >Наступний випуск »</a>
+		</div>
+	</div>
+
+	<h3>Общие</h3>
+	<ul class="std">
+		<li>Исправлена ошибка, из-за которой нельзя было очистить фильтр после перезавантаження страницы.</li>
+		<li>Добавлены темы пользовательского интерфейса.</li>
+		<li>Добавлена можливість роботи с пользовательской справочной системой.</li>
+		<li>
+			Теперь, при открытии елементу в новом окне, кнопка &quot;закрыть&quot; просто закрывает окно, а не
+			намагається перейти на предыдущую страницу.
+		</li>
+		<li>
+			Исправлена ошибка, из-за которой можна було открыть діалог в новом окне, что
+			приводило к непредсказуемому поведению.
+		</li>
+	</ul>
+
+	<h3>Модель даних</h3>
+	<ul class="std">
+		<li>В файл описания моделі <a href="/app/model">model.json</a> додані параметри для моделей в діях (<a href="/app/actions">actions</a>).</li>
+		<li>
+			Исправлена ошибка, из-за которой не работала локализация в об'єктах
+			с вложенными властивостіми
+			(наприклад в таком властивостейе: <code>[Agent.Name!TAgent!Name]</code>).
+		</li>
+	</ul>
+
+	<h3>Шаблони</h3>
+	<ul class="std">
+		<li>Исправлена ошибка, из-за которой не работала локализация во включаемых модулях (require)</li>
+	</ul>
+
+	<h3>Xaml</h3>
+	<ul class="std">
+		<li>
+			Исправлена ошибка, из-за которой неправильно работало властивість
+			<code>Disabled</code> об'єкта <a class="code-link" href="/xaml/controls/menuitem">MenuItem</a>.
+		</li>
+		<li>
+			Елемент <a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a> теперь
+			підтримує властивість <code>ItemsSource</code>.
+		</li>
+		<li>Не работала локализация в привязках с указанным форматом. Исправлено.</li>
+		<li>
+			В правой або нижней панели об'єкта
+			<a class="code-link" href="/xaml/containers/splitter">Splitter</a> теперь можна задавати
+			минимально допустимую ширину
+		</li>
+		<li>
+			Исправлена ошибка, из-за которой для моделі даних &quot;тільки чтение&quot; не запрещался
+			елемент <a class="code-link" href="/xaml/controls/selector">Selector</a>.
+		</li>
+		<li>Добавлен елемент <a class="code-link" href="/xaml/text/taglabel">TagLabel</a>.</li>
+		<li>
+			Исправлена ошибка, из-за которой не работало властивість <code>TabIndex</code> для
+			кнопок (<a class="code-link" href="/xaml/controls/button">Button</a>),
+			радиокнопок (<a class="code-link" href="/xaml/controls/radio">Radio</a>) и
+			флажков (<a class="code-link" href="/xaml/controls/checkbox">CheckBox</a>).
+		</li>
+		<li>В елемент <a class="code-link" href="/xaml/containers/dialog">Dialog</a> добавлено властивість <code>HelpUrl</code>.</li>
+		<li>Добавлен елемент <a class="code-link" href="/xaml/controls/tablemarkcell">TableMarkCell</a>.</li>
+		<li>В елемент <a class="code-link" href="/xaml/controls/tablerow">TableRow</a> добавлено властивість <code>Mark</code>.</li>
+		<li>Исправлена ошибка, из-за которой в об'єкте 
+			<a class="code-link" href="/xaml/containers/grid">Grid</a> нельзя 
+			было задавати ширину колонок и высоту строк c использованием единиц измерения <code>rem</code> або <code>em</code>.</li>
+		<li>Исправлена ошибка, из-за которой нельзя было задавати отрицание условия в привязках (<a class="code-link" href="/xaml/bind/bind">Bind</a>) вложенных елементів.</li>
+		<li>В привязки команд <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> добавлено властивість <code>CheckArgument</code>.</li>
+	</ul>
+</div>

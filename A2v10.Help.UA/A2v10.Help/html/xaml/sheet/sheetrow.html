@@ -1,0 +1,112 @@
+﻿<div>
+	<!--title:Xaml.SheetRow-->
+	<!--keywords:SheetRow-->
+	<div class="title">
+		<h1>
+			Елемент SheetRow
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи таблиц</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой строку таблиці.
+	</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Властивість содержимого: <code>Cells</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Cells</td>
+				<td>Коллекция <a class="code-link" href="sheetcell">SheetCell</a></td>
+				<td>Коллекция ячеек в строке.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">RowStyle</td>
+				<td><code>RowStyle</code></td>
+				<td>
+					Стиль отображения строки. Можливі значения
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчанням) обычная строка.</li>
+						<li><span class="prop-name">Title</span> - Заголовок звіта.</li>
+						<li><span class="prop-name">Parameter</span> - Параметр звіта.</li>
+						<li><span class="prop-name">LastParameter</span> - Последний параметр в списке параметров.</li>
+						<li><span class="prop-name">Header</span> - Рядок заголовка.</li>
+						<li><span class="prop-name">LightHeader</span> - Рядок заголовка другого стиля.</li>
+						<li><span class="prop-name">Footer</span> - Рядок подвала.</li>
+						<li><span class="prop-name">Total</span> - Рядок итогов.</li>
+						<li><span class="prop-name">NoBorder</span> - Рядок с ячейками без рамок.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign?</a></td>
+				<td>
+					Выравнивание по горизонтали для всех ячеек строки. Може бути переопределено в каждой ячейке индивидуально.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mark</td>
+				<td>Object</td>
+				<td>
+					Тільки привязка. Маркировка строки. Подробности ниже.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Маркировка строк</h4>
+	<p>
+		Выражение привязки для властивості <code>Mark</code> должно возвращать текстовую строку, яка являє собою дополнительный
+		css-класс, добавляемый к строке.
+
+		В теме за замовчанням поддерживаются наступні варианты маркировки строк:
+	</p>
+	<p>
+		<table class="sheet grid-both">
+			<tr class="danger">
+				<td><code>"danger", "error", "red"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="warning">
+				<td><code>"warning", "orange"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="success">
+				<td><code>"success", "green"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="info">
+				<td><code>"info", "cyan"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+			<tr class="gray">
+				<td><code>"gray"</code></td>
+				<td>Содержимое строки</td>
+			</tr>
+		</table>
+	</p>
+	<p class="tip info">
+		Зверніть увагу! Маркировка просто добавляе css-класс к строке. Это означает, что вы не ограничены 
+		тільки указанными вариантами. Например, якщо властивість привязки вернет <code>"danger bold"</code>, то строка буде 
+		маркирована красным фоном и буде показываться полужирным шрифтом.
+	</p>
+
+</div>

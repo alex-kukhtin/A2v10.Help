@@ -1,0 +1,76 @@
+﻿<div>
+	<!--title:Xaml.Badge-->
+	<!--keywords:Badge-->
+	<div class="title">
+		<h1>
+			Елемент Badge
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все текстовые елементи</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой бейджик с вспомогательным текстом (наприклад, количество елементів).
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/inline">Inline</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Content</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>String</td>
+				<td>Властивість содержимого. Текст бейджика.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Small</td>
+				<td>Boolean</td>
+				<td>
+					Уменьшенный шрифт. Конкретный размер шрифта зависит від темы пользовательского интерфейса.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/inline">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Неякі елементи, наприклад <a class="code-link" href="/xaml/controls/header">Header</a> или
+		<a class="code-link" href="/xaml/containers/tab">Tab</a>, имеют властивість <code>Badge</code>, которое фактически вставляет елемент
+		<code>Badge</code> в потрібное место.
+	</p>
+
+	<h3>Приклад</h3>
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Text>Всйого елементів: <Badge>25</Badge></Text>
+</script>
+</pre>
+	</p>
+
+	<p>
+		Результат
+		<div class="xaml-sample" id="xaml-control">
+			Всйого елементів: <span class="a2-badge">25</span>
+		</div>
+	</p>
+
+</div>

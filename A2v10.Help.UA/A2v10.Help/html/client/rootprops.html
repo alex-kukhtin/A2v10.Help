@@ -1,0 +1,59 @@
+﻿<div>
+	<!--title:Властивості и методы кореневого об'єкта-->
+	<!--keywords:$readOnly;$stateReadOnly;$isCopy;$ready;$template;$defer;$emit;$forceValidate;$setDirty;-->
+	<div class="title">
+		<h1>
+			Властивості и методы кореневого об'єкта
+		</h1>
+		<div class="breadcrumb">
+			<a href="data">Модель на клиенте</a>
+		</div>
+	</div>
+	<p>
+		Корневой об`єкт расширяется следующими служебными властивостіми и методами:
+	</p>
+	<p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+interface IRoot extends IElement {
+	// properties
+	readonly $readOnly: boolean;
+	readonly $stateReadOnly: boolean;
+	readonly $isCopy: boolean;
+	readonly $ready: boolean;
+
+	readonly $template: Template;
+
+	// methods
+	$defer(handler:()=>any): void;
+	$emit(event: string, ...params: any[]): void;
+	$forceValidate(): void;
+	$setDirty(dirty:boolean, path?:string): void;
+}
+</script>
+</pre>
+	</p>
+
+	<h2>Властивості</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $ready: boolean</pre></div>
+		<p>
+			<code>true</code>, якщо в данный момент НЕ виконується жодних запитов к серверу. Может
+			використовуватися для запрета/разрешения елементів интерфейса при выполнении серверных команд.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $template: Template</pre></div>
+		<p>
+			Ссылка на <a class="code-link" href="/template/index">об`єкт шаблона (Template)</a>.
+		</p>
+	</div>
+
+	<h2>Методы</h2>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$defer(handler:()=>any): void</pre></div>
+		<p>
+			Выполняет функцию (handler) после завершения поточного цикла событий.
+		</p>
+	</div>
+</div>

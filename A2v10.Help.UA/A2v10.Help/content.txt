@@ -1,0 +1,269 @@
+﻿Платформа A2v10		/index
+	Що нового		/whatsnew/index
+		Січень 2022				/whatsnew/w202201
+
+	
+Загальна інформація		/common/index
+	Платформа			/common/platform
+
+Прикладні прогами		/app/index
+	model.json			/app/model
+		actions			/app/actions
+		dialogs			/app/dialogs
+		popups			/app/popups
+		commands		/app/commands
+		reports			/app/reports
+		files			/app/files
+
+	Спеціальні папки		/app/folders/index
+		_assets				/app/folders/assets
+		_layout				/app/folders/layout
+		_emails				/app/folders/emails
+		_files				/app/folders/files
+
+	redirect.json		/app/redirect
+
+Моделі даних		/models/index
+	Загальна інформація				/models/general
+	Прості моделі					/models/simple
+	Робота з масивами				/models/array
+	Розбиття на сторінки			/models/paging
+	Оновлення моделей				/models/update
+	Ієрархічні моделі				/models/tree
+	Перехресні моделі				/models/cross
+	Моделі з групуванням			/models/group
+	Робота з двоїчними об'єктами	/models/blob
+
+
+Представления	/views/index
+	Xaml			/xaml/index
+		Общие сведения		/xaml/overview/index
+			Расширения розмітки	/xaml/overview/extensions
+		Элементы управления	/xaml/controls/index
+			Alert				/xaml/controls/alert
+			Button				/xaml/controls/button
+			ChatItem			/xaml/controls/chatitem
+			CheckBox			/xaml/controls/checkbox
+			Code				/xaml/controls/code
+			ComboBox			/xaml/controls/combobox
+			ComboBoxItem		/xaml/controls/comboboxitem
+			DataGrid			/xaml/controls/datagrid
+			DataGridColumn		/xaml/controls/datagridcolumn
+			DataGridRowDetails	/xaml/controls/datagridrowdetails
+			DatePicker			/xaml/controls/datepicker
+			EmptyPanel			/xaml/controls/emptypanel
+			FileImage			/xaml/controls/fileimage
+			Graphics			/xaml/controls/graphics
+			GridDivider			/xaml/controls/griddivider
+			Header				/xaml/controls/header
+			Image				/xaml/controls/image
+			Label				/xaml/controls/label
+			List				/xaml/controls/list
+			ListItem			/xaml/controls/listitem
+			MenuItem			/xaml/controls/menuitem
+			Pager				/xaml/controls/pager
+			PeriodPicker		/xaml/controls/periodpicker
+			PropertyGrid		/xaml/controls/propertygrid
+			PropertyGridItem	/xaml/controls/propertygriditem
+			Radio				/xaml/controls/radio
+			Selector			/xaml/controls/selector
+			Separator			/xaml/controls/separator
+			StateCard			/xaml/controls/statecard
+			Static				/xaml/controls/static
+			TabButton			/xaml/controls/tabbutton
+			Table				/xaml/controls/table
+			TableCell			/xaml/controls/tablecell
+			TableColumn			/xaml/controls/tablecolumn
+			TableMarkCell		/xaml/controls/tablemarkcell
+			TableRow			/xaml/controls/tablerow
+			TextBox				/xaml/controls/textbox
+			TimePicker			/xaml/controls/timepicker
+			TreeView			/xaml/controls/treeview
+			TreeViewItem		/xaml/controls/treeviewitem
+			UploadFile			/xaml/controls/uploadfile
+
+		Контейнеры			/xaml/containers/index
+			Block				/xaml/containers/block
+			Card				/xaml/containers/card
+			CardBody			/xaml/containers/cardbody
+			Case				/xaml/containers/case
+			CommandBar			/xaml/containers/commandbar
+			Dialog				/xaml/containers/dialog
+			DropDownMenu		/xaml/containers/dropdownmenu
+			DropDownMegaMenu	/xaml/containers/dropdownmegamenu
+			FieldSet			/xaml/containers/fieldset
+			Flex				/xaml/containers/flex
+			FlexList			/xaml/containers/flexlist
+			FullHeightPanel		/xaml/containers/fullheightpanel
+			Grid				/xaml/containers/grid
+			GridGroup			/xaml/containers/gridgroup
+			Group				/xaml/containers/group
+			IFrame				/xaml/containers/iframe
+			Include				/xaml/containers/include
+			InlineDialog		/xaml/containers/inlinedialog
+			Page				/xaml/containers/page
+			Panel				/xaml/containers/panel
+			Partial				/xaml/containers/partial
+			Popup				/xaml/containers/popup
+			Repeater			/xaml/containers/repeater
+			Splitter			/xaml/containers/splitter
+			StackPanel			/xaml/containers/stackpanel
+			Tab					/xaml/containers/tab
+			TabBar				/xaml/containers/tabbar
+			TabPanel			/xaml/containers/tabpanel
+			Taskpad				/xaml/containers/taskpad
+			Toolbar				/xaml/containers/toolbar
+			Wizard				/xaml/containers/wizard
+			WizardPage			/xaml/containers/wizardpage
+
+		Текстовые елементи			/xaml/text/index
+			Badge				/xaml/text/badge
+			Break				/xaml/text/break
+			Hyperlink			/xaml/text/hyperlink
+			Html				/xaml/text/html
+			Line				/xaml/text/line
+			Paragraph			/xaml/text/paragraph
+			Popover				/xaml/text/popover
+			Span				/xaml/text/span
+			SpanIcon			/xaml/text/spanicon
+			SpanSum				/xaml/text/spansum
+			StaticImage			/xaml/text/staticimage
+			TagLabel			/xaml/text/taglabel
+			Text				/xaml/text/text
+
+		Таблицы				/xaml/sheet/index
+			Sheet			/xaml/sheet/sheet
+			SheetCell		/xaml/sheet/sheetcell
+			SheetCellGroup	/xaml/sheet/sheetcellgroup
+			SheetColumn		/xaml/sheet/sheetcolumn
+			SheetColumnGroup		/xaml/sheet/sheetcolumngroup
+			SheetGroupCell			/xaml/sheet/sheetgroupcell
+			SheetPage		/xaml/sheet/sheetpage
+			SheetRow		/xaml/sheet/sheetrow
+			SheetSection		/xaml/sheet/sheetsection
+			SheetTreeSection	/xaml/sheet/sheettreesection
+			SheetAutoGenerate	/xaml/sheet/sheetautogenerate
+		Прив'язки					/xaml/bind/index
+			Bind					/xaml/bind/bind
+			BindCmd					/xaml/bind/bindcmd
+			StyleResource			/xaml/bind/styleresource
+
+		Компоненты					/xaml/components/index
+			CollectionView			/xaml/components/collectionview
+			Confirm					/xaml/components/confirm
+			FilterDescription		/xaml/components/filterdescription
+			Slot					/xaml/components/slot
+			SortDescription			/xaml/components/sortdescription
+			Switch					/xaml/components/switch
+			Validator				/xaml/components/validator
+
+		Простые елементи	/xaml/simple/index
+			Accel			/xaml/simple/accel
+			AccelCommand	/xaml/simple/accelcommand
+			GapSize			/xaml/simple/gapsize
+			Length			/xaml/simple/length
+			Size			/xaml/simple/size
+			Thickness		/xaml/simple/thickness
+			PrintPage		/xaml/simple/printpage
+			AccelCommandCollection		/xaml/simple/accelcommandcollection
+			UIElementCollection			/xaml/simple/uielementcollection
+			ResourceDictionary			/xaml/simple/resourcedictionary
+
+		Перечисления	/xaml/enums/index
+			AlignItem			/xaml/enums/alignitem
+			AlignItems			/xaml/enums/alignitems
+			AutoFlowMode		/xaml/enums/autoflowmode
+			AutoSelectMode		/xaml/enums/autoselectmode
+			BackgroundStyle		/xaml/enums/backgroundstyle
+			ButtonStyle			/xaml/enums/buttonstyle
+			BorderStyle			/xaml/enums/borderstyle
+			ColumnBackgroundStyle		/xaml/enums/columnbackgroundstyle
+			ColumnControlType	/xaml/enums/columncontroltype
+			ControlSize			/xaml/enums/controlsize
+			DataType			/xaml/enums/datatype
+			Icon				/xaml/enums/icon
+			ListStyle			/xaml/enums/liststyle
+			Orientation			/xaml/enums/orientation
+			RadioButtonStyle	/xaml/enums/radiobuttonstyle
+			ShadowStyle			/xaml/enums/shadowstyle
+			TextAlign			/xaml/enums/textalign
+			TextColor			/xaml/enums/textcolor
+			UpdateTrigger		/xaml/enums/updatetrigger
+			VerticalAlign		/xaml/enums/verticalalign
+			WrapMode			/xaml/enums/wrapmode
+
+		Абстрактные елементи	/xaml/abstract/index
+			CheckBoxBase		/xaml/abstract/checkboxbase
+			Control				/xaml/abstract/control
+			CommandControl		/xaml/abstract/commandcontrol
+			Container			/xaml/abstract/container
+			ContentControl		/xaml/abstract/contentcontrol
+			Inline				/xaml/abstract/inline
+			RootContainer		/xaml/abstract/rootcontainer
+			ValuedControl		/xaml/abstract/valuedcontrol
+			UIContentElement	/xaml/abstract/uicontentelement
+			UIElement			/xaml/abstract/uielement
+			UIElementBase		/xaml/abstract/uielementbase
+		Диаграммы				/xaml/diagram/index
+			Diagram				/xaml/diagram/diagram
+			Group				/xaml/diagram/group
+			Path				/xaml/diagram/path
+
+Програмування клієнта	/client/index
+	Контролер		/client/controller
+	Модель			/client/data
+		Властивості і методи об'єкта			/client/elemprops
+		Властивості і методи кореневого об'єкта	/client/rootprops
+		Властивості і методи елементу масива	/client/arrayelemprops
+		Властивості і методи елементу дерева	/client/treeelemprops
+		Властивості і методи масива				/client/arrayprops
+
+	Шаблони		/template/index
+		Події			/template/events
+		Опції			/template/options
+		Початкові значення		/template/defaults
+		Властивості		/template/properties
+		Валідатори		/template/validators
+		Команди			/template/commands
+		Делегати		/template/delegates
+
+	Модулі				/client/module
+		std:utils			/client/stdutils
+
+	Глобальні функції	/client/global
+		require			/client/global_require
+
+Настольні програми			/desktop/index
+	Файл app.config.json		/desktop/config
+
+Бізнес-процеси			/workflow/index
+	Активності			/workflow/activities/index
+		Request			/workflow/activities/request
+		SendMessage		/workflow/activities/sendmessage
+	Об'єкти				/workflow/objects/index
+		Inbox			/workflow/objects/inbox
+		MessageInfo		/workflow/objects/messageinfo
+		ModelStateInfo	/workflow/objects/modelstateinfo
+		TrackRecord		/workflow/objects/trackrecord
+
+Робота з повідомленнями	/messaging/index
+	Нлаштування			/messaging/settings
+	Прив'язки			/messaging/bindings
+	EmailMessage		/messaging/emailmessage
+	MessageAddress		/messaging/messageaddress
+	MessageAttachemnt	/messaging/messageattachment
+	MessageReport		/messaging/messagereport
+	MessageReportModel		/messaging/messagereportmodel
+	MessageReportParam		/messaging/messagereportparam
+	Template			/messaging/template
+	TemplatedMessage	/messaging/templatedmessage
+
+Як зробити			/howto/index
+	Імпорт даних з Excel		/howto/importexcel
+
+Тестування		/tests/index
+	Перевірка типів	/tests/checktypes
+	Інструменти		/tests/tools
+
+Про довідкову систему	/help/about
+

@@ -1,0 +1,58 @@
+﻿<div>
+	<!--title:Что нового. Июнь 2018-->
+	<!--keywords:Что нового-->
+	<div class="title">
+		<h1>
+			Выпуск 5 - версії 7200-7236 (июнь 2018)
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі випуски</a>|
+			<a href="w201805">« Попередній випуск</a>|
+			<a href="w201807">Наступний випуск »</a>
+		</div>
+	</div>
+
+	<h3>Исправлено</h3>
+	<ul class="std">
+		<li>
+			Исправлена ошибка, из-за которой для команди <code>Select</code> в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			неправильно работало властивість <code>ValidRequired</code>.
+		</li>
+		<li>Исправлена ошибка, из-за которой не работало властивість <code>Export</code> в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>.</li>
+		<li>Исправлена ошибка, из-за которой не рабала привязка <code>Value</code> в об'єкте <code>FilterItem</code>.</li>
+	</ul>
+
+
+	<h3>Общие</h3>
+	<ul class="std">
+		<li>При регистрации пользователей добавлено протоколирование отправки e-mail.</li>
+		<li>Добавлен механизм формирования xml-файлів по заданной схеме.</li>
+		<li>В файле <code>app.json</code> теперь можна задавати властивості для панели "Обратная связь".</li>
+	</ul>
+
+	<h3>Файли програми</h3>
+	<ul class="std">
+		<li>В разделе <a href="/app/reports">reports</a> файла <a href="/app/model">model.json</a> властивість <code>name</code> теперь 
+		може содержать макроси для доступа к властивостім моделі даних (<b>{{...}}</b>).</li>
+	</ul>
+
+	<h3>Шаблони</h3>
+	<ul class="std">
+		<li>Добавлено событие <code>Model.saved</code>.</li>
+		<li>В события <code>*.change</code> добавлен аргумент oldValue (предыдущее значення).</li>
+		<li>Валидаторы теперь могут быть просто функциями.</li>
+	</ul>
+
+	<h3>Xaml</h3>
+	<ul class="std">
+		<li>Добавлен елемент <a class="code-link" href="/xaml/containers/gridgroup">GridGroup</a>.</li>
+		<li>В елемент <a class="code-link" href="/xaml/controls/list">List</a> додані властивості <code>Select</code> и <code>Height</code>.</li>
+		<li>В елемент <a class="code-link" href="/xaml/controls/listitem">ListItem</a> добавлено властивість <code>Footer</code>.</li>
+		<li>В елемент <a class="code-link" href="/xaml/containers/block">Block</a> добавлено властивість <code>Color</code>.</li>
+		<li>В елемент <a class="code-link" href="/xaml/containers/taskpad">TaskPad</a> додані властивості <code>Background</code>, <code>Collapsible</code>.</li>
+		<li>Елемент <a href="/xaml/text/taglabel">TagLabel</a> теперь підтримує новый стиль <code>LightGray</code>.</li>
+		<li>Властивість <code>Mask</code> об'єкта <a class="code-link" href="/xaml/bind/bind">Bind</a> теперь підтримує связывание.</li>
+		<li>В привязку <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> додані команди <code>Navigate</code>, <code>Help</code>, <code>Download</code>.</li>
+		<li>Добавлены новые иконки <code>ArrowUpGreen</code>, <code>ArrowDownRed</code>.</li>
+	</ul>
+</div>

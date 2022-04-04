@@ -1,0 +1,87 @@
+﻿<div>
+	<!--title:EmailMessage-->
+	<!--keywords:EmailMessage-->
+	<div class="title">
+		<h1>
+			Елемент EmailMessage
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Надсилання сообщений</a>
+		</div>
+	</div>
+
+	<p>Представляет собой сообщение электронной почты.</p>
+
+	Наследует:
+	<a class="code-link" href="templatedmessage">TemplatedMessage</a>
+
+	<p>Властивість содержимого: <code>Body</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Body</td>
+				<td class="fit">String</td>
+				<td>Тіло повідомлення. Якщо задано властивість <code>BodyTemplate</code>, то значення властивості игнорируется.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Subject</td>
+				<td>String</td>
+				<td>Тема повідомлення.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">BodyTemplate</td>
+				<td>String</td>
+				<td>Им'я файла с шаблоном повідомлення.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">From</td>
+				<td><a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Отправитель. Може бути пустым. Якщо не вказано, використовується з <a href="settings">настроек почты</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">To</td>
+				<td>Коллекция <a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Получатели повідомлення.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">СС</td>
+				<td class="no-wrap">Коллекция <a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Копия (Carbon Copy).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bcc</td>
+				<td class="no-wrap">Коллекция <a href="messageaddress" class="code-link">MessageAddress</a></td>
+				<td>Скрытая копия (Blind Carbon Copy).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Attachments</td>
+				<td class="no-wrap">Коллекция <a href="messageattachment" class="code-link">MessageAttachment</a></td>
+				<td>Вложения.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Reports</td>
+				<td class="no-wrap">Коллекция <a href="messagereport" class="code-link">MessageReport</a></td>
+				<td>Звіти.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="templatedmessage">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Все текстовые властивості поддерживают <a href="bindings">привязки</a>.
+	</p>
+
+</div>

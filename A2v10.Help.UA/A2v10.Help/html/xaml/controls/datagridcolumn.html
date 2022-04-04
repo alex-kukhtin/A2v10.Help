@@ -1,0 +1,165 @@
+﻿<div>
+	<!--title:Xaml.DataGridColumn-->
+	<!--keywords:DataGridColumn-->
+	<div class="title">
+		<h1>
+			Елемент DataGridColumn
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>Представляет собой одну колонку таблиці <a class="code-link" href="datagrid">DataGrid</a>.</p>
+
+	<p>Властивість содержимого: <code>Content</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Властивість содержимого. Тільки привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Содержимое ячейки таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td>String</td>
+				<td>
+					Заголовок колонки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Ширина колонки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Fit</td>
+				<td>Boolean</td>
+				<td>
+					Устанавливать ширину колонки по содержимому.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Wrap</td>
+				<td><a class="code-link" href="/xaml/enums/wrapmode">WrapMode</a></td>
+				<td>
+					Режим переноса для содержимого ячейки и для заголовка.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание содержимого ячейки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bold</td>
+				<td>Boolean</td>
+				<td>
+					Отображать содержимое ячейки полужирным шрифтом
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Small</td>
+				<td>Boolean</td>
+				<td>
+					Отображать содержимое ячейки уменьшенным шрифтом.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Mark</td>
+				<td>Object</td>
+				<td>
+					Тільки привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка ячейки таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Icon</td>
+				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+				<td>
+					Иконка, яка буде отображаться в таблице перед содержимым.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Editable</td>
+				<td>Boolean</td>
+				<td>
+					Разрешено ли редактирование ячейки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ControlType</td>
+				<td><a class="code-link" href="/xaml/enums/columncontroltype">ColumnControlType</a></td>
+				<td>
+					Тип елементу керування в ячейке таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Sort</td>
+				<td>Boolean?</td>
+				<td>
+					Разрешена ли сортировка в данной колонке. Позволяет индивидуально перевизначити сортировку по каждой колонке.
+					Общее разрешение сортировки задається властивістю <code>Sort</code> всей таблиці <a class="code-link" href="datagrid">DataGrid</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SortProperty</td>
+				<td>String</td>
+				<td>
+					Им'я властивості в джерелі даних, по которому буде виконуватися сортировка. Якщо не вказано, буде виконуватися
+					сортировка по властивості <code>Content</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">If</td>
+				<td>Boolean?</td>
+				<td>Включать колонку в поток рендеринга. Для того, щоб показывать/скрывать колонки в залежності від умов використовується привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Command</td>
+				<td><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
+				<td>
+					Команда для ячейки таблиці. Якщо команда указана, то содержимое (<code>Content</code>) буде выводится у вигляді гиперссылки со связанной командой.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Role</td>
+				<td class="fit"><code>ColumnRole</code></td>
+				<td>
+					Роль колонки. Устанавливает определенный набор властивостей для колонок предопределенных типов. 
+					Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчанням). Ничйого не устанавливается.</li>
+						<li>
+							<span class="prop-name">Number</span> - Отображение идентификатора. Ширина по содержимому, выравнивание вправо, нет переноса
+							(<code>Fit="True" Align="Right" Wrap="NoWrap"</code>).
+						</li>
+						<li>
+							<span class="prop-name">Number</span> - Отображение числа. Ширина по содержимому, выравнивание вправо, нет переноса
+							(<code>Fit="True" Align="Right" Wrap="NoWrap"</code>).
+						</li>
+						<li>
+							<span class="prop-name">Date</span> - Отображение даты. Ширина по содержимому, выравнивание по центру, нет переноса
+							(<code>Fit="True" Align="Center" Wrap="NoWrap"</code>).
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

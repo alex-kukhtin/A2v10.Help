@@ -1,0 +1,39 @@
+﻿<div>
+	<!--title:Xaml.GridGroup-->
+	<!--keywords:GridGroup-->
+	<div class="title">
+		<h1>
+			Елемент GridGroup
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой группу елементів внутри сетки <a class="code-link" href="grid">Grid</a>. Елемент не має зовнішнього виду
+		и предназначен для того, щоб было удобно скрывать/показывать группы елементів за допомогою властивостей <code>If</code>,
+		<code>Show</code>, <code>Hide</code>.
+	</p>
+
+	<p>
+		Елемент <b>GridGroup</b> является "прозрачным" с точки зрения присоединенных властивостей. Это означает, что
+		присоединенные властивості (такі как, наприклад <code>Grid.Row</code>, <code>Grid.Col</code>) дочерних елементів будуть
+		относиться не к <b>GridGroup</b>, а к родительскому контейнеру <a class="code-link" href="grid">Grid</a>.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>
+		Елемент не містить собственных властивостей.
+		<a href="/xaml/abstract/container">Властивості базового елементу</a>.
+	</p>
+
+	<p class="tip warning">
+		Зверніть увагу! Поскольку елемент не має собственного виду, то з всех властивостей базового елементу допустимо використовувати
+		тільки властивості, пов'язані с отображением (<code>If</code>, <code>Show</code>, <code>Hide</code>). Указывать любые другие властивості 
+		не має смысла.
+	</p>
+
+</div>

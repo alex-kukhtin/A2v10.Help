@@ -1,0 +1,119 @@
+﻿<div xmlns:v-on="v-on">
+	<div>
+		<!--title:Xaml.MenuItem-->
+		<!--keywords:MenuItem-->
+		<div class="title">
+			<h1>
+				Елемент MenuItem
+			</h1>
+			<div class="breadcrumb">
+				<a href="index">Все елементи керування</a>
+			</div>
+		</div>
+
+		<p>Представляет собой елемент меню. Зазвичай находится в контейнере <a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a>.</p>
+
+		Наследует: <a class="code-link" href="/xaml/abstract/commandcontrol">CommandControl</a> :
+		<a class="code-link" href="/xaml/abstract/contentcontrol">ContentControl</a> :
+		<a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+		<p>Властивість содержимого: <code>Content</code></p>
+
+
+		<h3>Властивості</h3>
+		<table class="table-props">
+			<thead>
+				<tr>
+					<th>Им'я</th>
+					<th>Тип</th>
+					<th>Опис</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="prop-name fit">Icon</td>
+					<td class="fit"><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
+					<td>
+						Иконка елементу.
+					</td>
+				</tr>
+				<tr class="top">
+					<td class="prop-name">Separator</td>
+					<td><code>SeparatorMode</code></td>
+					<td>
+						Связанный роздільник. Можливі значения:
+						<ul class="enum-vals">
+							<li><span class="prop-name">None</span> - (за замовчанням) нет.</li>
+							<li><span class="prop-name">Before</span> - добавить роздільник перед елементом меню.</li>
+							<li><span class="prop-name">After</span> - добавить роздільник после елементу меню.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<a href="/xaml/abstract/commandcontrol">Властивості базового елементу</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<h3>Приклад</h3>
+
+		<p>
+			XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Button Content="File" Style="Primary">
+	<Button.DropDown>
+		<DropDownMenu Direction="DownRight" Separate="True">
+			<MenuItem Content="File" Icon="File" />
+			<MenuItem Content="Save" Icon="Save" />
+			<MenuItem Content="Exit" Icon="Exit" Separator="Before"/>
+		</DropDownMenu>
+	</Button.DropDown>
+</Button>
+</script>
+</pre>
+		</p>
+
+		<p>
+			Результат
+			<div class="xaml-sample" id="xaml-menuitem">
+				<div class="dropdown dir-down separate" dropdown-top="" v-dropdown="1">
+					<button toggle="" class="btn btn-primary">
+						File<span class="caret"></span>
+					</button>
+					<div role="menu" class="dropdown-menu menu down-right">
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-file"></i> <span>Open</span>
+						</a>
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-save"></i> <span>Save</span>
+						</a>
+						<div class="divider"></div>
+						<a href="" class="dropdown-item" v-on:click.prevent="click">
+							<i class="ico ico-exit"></i> <span>Exit</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</p>
+	</div>
+
+	<script type="text/javascript">
+(function () {
+	if (!window.Vue) return;
+	var vm = new Vue({
+		el: "#xaml-menuitem",
+		methods: {
+			click() {
+
+			}
+		},
+		created: function () {
+		}
+	});
+})();
+	</script>
+</div>

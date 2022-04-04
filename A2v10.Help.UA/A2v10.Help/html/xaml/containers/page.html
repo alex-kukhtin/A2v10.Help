@@ -1,0 +1,85 @@
+﻿<div>
+	<!--title:Xaml.Page-->
+	<!--keywords:Page-->
+	<div class="title">
+		<h1>
+			Елемент Page
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой страницу.
+	</p>
+
+	<p>Страница має свой Url адрес и попадает в контекст переходов бразуера.</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th class="fit">Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Title</td>
+				<td class="fit">String</td>
+				<td>
+					Заголовок окна страницы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Taskpad</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Панель задач страницы. Частіше за все це елемент <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Toolbar</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Панель инструментов страницы. Частіше за все це елемент <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CollectionView</td>
+				<td class="fit"><a class="code-link" href="/xaml/components/collectionview">CollectionView</a></td>
+				<td>
+					Представление коллекции, яка буде отображаться на странице. Зазвичай це серверная коллекция.
+					Властивість необходимо щоб
+					вынести управление коллекцией "за дужки" содержимого страницы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Pager</td>
+				<td class="fit"><a class="code-link" href="/xaml/controls/pager">Pager</a></td>
+				<td>
+					Пейджер для коллекции, яка буде отображаться на странице. Властивість необходимо щоб 
+					вынести управление коллекцией "за дужки" содержимого страницы.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td class="fit"><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона страницы.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/rootcontainer">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

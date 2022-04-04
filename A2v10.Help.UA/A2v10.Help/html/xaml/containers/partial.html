@@ -1,0 +1,65 @@
+﻿<div>
+	<!--title:Xaml.Partial-->
+	<!--keywords:Partial-->
+	<div class="title">
+		<h1>
+			Елемент Partial
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+
+	<p>
+		Представляет собой часть страницы. Використовується у випадку, якщо потрібно отобразить
+		фрейм с собственной моделью и шаблоном как часть другой страницы.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th class="fit">Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td class="fit"><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона страницы.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/rootcontainer">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Приклад</h3>
+	<p>Например есть сторінка з двух колонок. В левой колонке - список сущностей, а в 
+	правой властивості выбранной сущности.</p>
+
+	<p>В левой колонке выводим список сущностей, в правой - 
+	елемент <a class="code-link" href="/xaml/containers/include">Include</a>. Властивість <code>Source</code>
+	этого елементу связываем со властивістю (возможна вычисляемым) елементу списка, которое 
+	должно представлять собой <b>url</b> к правой части страницы.
+	</p>
+
+	<p>По сформированным <b>url</b> размещаем виду с елементуми <code>Partial</code> в качестве 
+	корня с собственной моделью и собственным шаблоном.
+	</p>
+
+	<p>Зверніть увагу, что сами моделі и их виду в 
+	правой части могут быть совершенно произвольными и никак не связанными друг с другом.</p>
+
+</div>

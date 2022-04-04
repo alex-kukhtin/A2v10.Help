@@ -1,0 +1,81 @@
+﻿<div>
+	<!--title:Xaml.Slot-->
+	<!--keywords:Slot-->
+	<div class="title">
+		<h1>
+			Компонент Slot
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все компоненты</a>
+		</div>
+	</div>
+
+	<p>Представляет собой елемент, который устанавливает контекст даних и область видимости для вложенных компонентов.</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>Властивість содержимого. Коллекция дочерних елементів.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Scope</td>
+				<td>Object</td>
+				<td>Всегда привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Контекст даних.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Fallback</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>Елемент, который буде отображаться у випадку, якщо контекст даних пустой.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML:
+<pre class="code-highlight xml">
+<script type="text/template">
+<![CDATA[
+<!--Прив'язка к выделенному елементу коллекции -->
+<List ItemsSource="{Bind Agents}">
+	...
+</List>
+<Slot Scope="{Bind Agents.$selected}">
+	<!--фактически: Agents.$selected.Documents-->
+	<DataGrid ItemsSource="{Bind Documents}">
+	...
+	</DataGrid>
+	<Slot.Fallback>
+		<Text>Нет выделенных елементів</Text>
+	</Slot.Fallback>
+</Slot>
+]]>
+</script>
+</pre>
+	</p>
+
+</div>

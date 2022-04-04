@@ -1,0 +1,78 @@
+﻿<div>
+	<!--title:Шаблони-->
+	<!--keywords:template;Шаблон;-->
+	<div class="title">
+		<h1>
+			Шаблони
+		</h1>
+	</div>
+
+	<p>Шаблон являє собою об`єкт JavaScript, который определяет поведение моделі даних. Общая структура шаблона:</p>
+
+	<p>
+<pre class="code-highlight js">
+<script type="text/template">
+const template = {
+  'options':    {}
+  'defaults':   {},
+  'properties': {},
+  'validators': {},
+  'events':     {},
+  'commands':   {},
+  'delegates':  {}
+}
+
+module.exports = template; /*експорт шаблона з поточного модуля*/
+</script>
+</pre>
+	</p>
+
+
+	<h3>Властивості об'єкта шаблона</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">options</td>
+				<td><a href="options">options</a></td>
+				<td>Об'єкт, що описує опции настройки шаблона.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">defaults</td>
+				<td><a href="defaults">defaults</a></td>
+				<td>Об'єкт, що описує правила инициализации моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">properties</td>
+				<td><a href="properties">properties</a></td>
+				<td>Об'єкт, що описує додаткові властивості, які будуть додані в модель.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">validators</td>
+				<td><a href="validators">validators</a></td>
+				<td>Об'єкт, що описує правила перевірки достоверности для елементів моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">events</td>
+				<td><a href="events">events</a></td>
+				<td>Об'єкт, що описує обработчики событий моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">commands</td>
+				<td><a href="commands">commands</a></td>
+				<td>Об'єкт, що описує команди для моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">delegates</td>
+				<td><a href="delegates">delegates</a></td>
+				<td>Об'єкт, що описує делегаты (функции обратного вызова, callback functions), необходимые для роботи моделі.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

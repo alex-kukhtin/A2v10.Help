@@ -1,0 +1,55 @@
+﻿<div>
+	<!--title:Робота с повідомленнями-->
+	<div class="title">
+		<h1>
+			Робота с повідомленнями
+		</h1>
+	</div>
+
+
+	<p>
+		Для того, щоб отделить логику построения повідомлення и механизм його отправки використовується механизм шаблонов.
+		Шаблон являє собою набор правил, при помощи которых строится тіло повідомлення, його тема, адресаты, копии и т.д.
+	</p>
+
+	<p>Шаблон може включать несколько сообщений. Доступ к ним осуществляется по простому текстовому ключу.</p>
+
+	<p>
+		При построении повідомлення може використовуватися модель даних,
+		додаткові параметри, які передаються отправителем и переменные окружения.
+	</p>
+
+	<p>
+		Когда системе потрібно отправить сообщение, она просто указывает, по какому шаблону його потрібно построить, и передает нужные параметри,
+		такі как ім'яшаблона, ключ повідомлення, идентификатор для моделі даних и произвольные параметри.
+	</p>
+
+	<p>
+		Подсистема оправки выбирает потрібное сообщение, загружает модель даних (якщо потрібно), формирует непосредственно текст повідомлення з використанням <a href="bindings">привязок</a>
+		и отправляет його адресату.
+	</p>
+	<h3>Использование</h3>
+	<p>Сообщение можна отправить следующими способами:</p>
+	<ul class="std">
+		<li>Из бізнес-процесу за допомогою активностей <a class="code-link" href="/workflow/activities/request">Request</a> 
+		или <a href="/workflow/activities/sendmessage" class="code-link">SendMessage</a>.</li>
+		<li>Непосредственно серверной командой типа <a href="/app/sendmessagecommand">sendMessage</a></li>
+	</ul>
+
+	<h3>Налаштування</h3>
+	<ul class="std">
+		<li><a href="/messaging/settings">Налаштування конфигурації</a>.</li>
+	</ul>
+
+	<h3>Об'єкты для роботи с повідомленнями</h3>
+	<ul class="std">
+		<li><a href="/messaging/emailmessage">EmailMessage</a> - сообщение электронной почты.</li>
+		<li><a href="/messaging/messageaddress">MessageAddress</a> - адрес повідомлення.</li>
+		<li><a href="/messaging/messageattachment">MessageAttachment</a> - вложение.</li>
+		<li><a href="/messaging/messagereport">MessageReport</a> - звіт.</li>
+		<li><a href="/messaging/messagereportmodel">MessageReportModel</a> - модель даних для звіта.</li>
+		<li><a href="/messaging/messagereportparam">MessageReportParam</a> - параметр моделі даних для звіта.</li>
+		<li><a href="/messaging/template">Template</a> - шаблон.</li>
+		<li><a href="/messaging/templatedmessage">TemplatedMessage</a> - базовый класс для роботи с повідомленнями.</li>
+	</ul>
+</div>

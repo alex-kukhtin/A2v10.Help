@@ -1,0 +1,123 @@
+﻿<div>
+	<!--title:Xaml.Accel-->
+	<!--keywords:Accel-->
+	<div class="title">
+		<h1>
+			Елемент Accel
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі прості елементи</a>
+		</div>
+	</div>
+
+	<p>Представляет собой описание акселератора ("горячей" клавиши).</p>
+
+	<p>
+		Використовується:
+		<a class="code-link" href="/xaml/controls/textbox">TextBox</a>,
+		<a class="code-link" href="/xaml/simple/accelcommand">AccelCommand</a>.
+	</p>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th width="1px">Им'я</th>
+				<th width="1px">Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Key</td>
+				<td>String</td>
+				<td>
+					Акселератор ("горячая" клавиша). Задается у вигляді наименования клавиши и необязательных (одного або нескольких)
+					модификаторов. Модификаторы и названия клавиш разделяются знаком "+".
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Названия клавиш</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Единица</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name no-wrap">A..Z, 0..9</td>
+				<td>Алфавитно-цифровые клавиши.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">F0..F12</td>
+				<td>Функциональные клавиши.</td>
+			</tr>
+			<tr>
+				<td class="prop-name  no-wrap">Left, Right, Up, Down</td>
+				<td>Клавиши со стрелками.</td>
+			</tr>
+			<tr>
+				<td class="prop-name no-wrap">PageUp, PageDown, Insert, Delete, <br />Enter, Escape, Tab, Home, End, <br />Backspace, Delete</td>
+				<td>Управляющие клавиши.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Модификаторы</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Единица</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name no-wrap">Control, Ctrl</td>
+				<td>Клавиша Control.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Shift</td>
+				<td>Клавиша Shift.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Alt</td>
+				<td>Клавиша Alt.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Meta</td>
+				<td>
+					Windows - клавиша <kbd style="padding:2px 4px">&#x229e; Windows</kbd>.
+					<br />
+					Mac - клавиша <kbd style="padding:3px 4px 1px 4px">&#8984; Command</kbd>.
+					<br />
+					Зверніть увагу, може работать не во всех браузерах.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Конвертор</h3>
+	<p>
+		Підтримується преобразование з текстовой строки. Рядок буде просто значенням властивості <code>Key</code>.
+	</p>
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<TextBox Accel="Ctrl+Shift+F7">
+	...
+</TextBox>
+</script>
+</pre>
+	</p>
+
+</div>

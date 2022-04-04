@@ -1,0 +1,112 @@
+﻿<div>
+	<!--title:Xaml.Sheet-->
+	<!--keywords:Sheet-->
+	<div class="title">
+		<h1>
+			Елемент Sheet
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи таблиц</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой таблицу в стиле электронных таблиц.
+		Таблица оптимизирована для простой выгрузки в Excel.
+	</p>
+
+	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Властивість содержимого: <code>Sections</code></p>
+
+	<!--
+	Border,
+	Width,
+		-->
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Sections</td>
+				<td class="fit"><code>SheetSections</code></td>
+				<td>
+					Набор секций таблиці. (<a href="sheetsection" class="code-link">SheetSection</a>)
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Columns</td>
+				<td><code>SheetColumnCollection</code></td>
+				<td>
+					Колонки таблиці. (<a href="sheetcolumn" class="code-link">SheetColumn</a>)
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td><code>SheetRows</code></td>
+				<td>
+					Строки заголовка. (<a href="sheetrow" class="code-link">SheetRow</a>)
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Footer</td>
+				<td><code>SheetRows</code></td>
+				<td>
+					Строки футера. (<a href="sheetrow" class="code-link">SheetRow</a>)
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Compact</td>
+				<td>Boolean</td>
+				<td>
+					Компактный стиль отображения таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Hover</td>
+				<td>Boolean</td>
+				<td>
+					Выделение строки при наведении курсора мыши.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Striped</td>
+				<td>Boolean</td>
+				<td>
+					Раскраска таблиці "в полоску" с выделением четных и нечетных строк.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">GridLines</td>
+				<td><code>GridLinesVisibility</code></td>
+				<td>
+					Отображение сетки. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - за замовчанням.</li>
+						<li><span class="prop-name">Horizontal</span> - горизонтальные линии.</li>
+						<li><span class="prop-name">Vertical</span> - вертикальные линии.</li>
+						<li><span class="prop-name">Both</span> - сетка.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">AutoGenerate</td>
+				<td><a class="code-link" href="/xaml/sheet/sheetautogenerate">SheetAutoGenerate</a></td>
+				<td>
+					Автоматическая генерация таблиці. Позволяет сгенерировать таблицу у відповідності до текущими данными.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

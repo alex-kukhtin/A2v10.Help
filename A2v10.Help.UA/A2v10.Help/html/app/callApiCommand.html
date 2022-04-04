@@ -1,0 +1,169 @@
+﻿<div>
+	<!--title:Команди типу callApi-->
+	<!--keywords:callApi-->
+	<div class="title">
+		<h1>
+			Команди типу callApi
+		</h1>
+		<div class="breadcrumb">
+			<a href="commands">Команди</a>
+		</div>
+	</div>
+	<p>Команди виклику зовнішніх API дозволяють звертатися до зовнішніх ресурсів по протоколу http.</p>
+	<p>
+		Поведінка команди визначається параметрами, які передаються в команду з використанням властивості <code>parameters</code>
+		команди.
+	</p>
+
+	<h3>Параметри</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">url</td>
+				<td>string</td>
+				<td>
+					Обов'язково. Url, що викликається. Підтримуються прив'язки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">method</td>
+				<td>enum</td>
+				<td>Не обов'язково. http метод. <code>get</code> або <code>post</code>. За замовчанням - <code>get</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">headers</td>
+				<td>object</td>
+				<td>
+					Не обов'язково. Заголовки запиту. Об'єкт, властивості якого будуть додані як заголовки запиту.
+					Им'я властивості - ім'язаголовку, значення - значення заголовку. В значеннях підтримуються прив'язки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">body</td>
+				<td>object</td>
+				<td>
+					Не обов'язково. Тіло запиту. Може бути рядком або об'єктом. Підтримуються прив'язки.
+					Якщо тіло являє собою об'єкт, воно буде серіалізовано в формат <code>json</code>.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>Є можливість завантаження моделі даних перед зверненням до зовнішнього API. Це може бути потрібно, якщо 
+	якісь властивості для звернення зберігаються в БД. В цьому випадку потрібно визначити модель стандартним набором властивостей
+	<code>model</code>, <code>schema</code>, <code>source</code>.</p>
+
+	<h3>Прив'язки</h3>
+	<p>
+		Для того, щоб у властивостях можна було використовувати значення "ззовні", використовуються прив'язки.
+		Прив'язка це просто шлях до властивості, взятий у подвійні квадратні або круглі дужки.
+	</p>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Прив'язка</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">[[param]]</td>
+				<td>Параметри команди</td>
+				<td>
+					Значення з параметрів команди. Зверніть увагу, що це не властивість <code>parameters</code>, а параметри,
+					з якими команду викликано з клієнта.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">((key.prop))</td>
+				<td>Середовище</td>
+				<td>
+					Значення з <code>appSettings</code> файлу конфігурації. <code>key</code> являє собою ім'яключа,
+					а <code>prop</code> - властивість. Значення <code>appSettings</code> повинно бути представлено в форматі <code>json</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">{{path}}</td>
+				<td>Модель даних</td>
+				<td>
+					Властивість з моделі даних. <code>path</code> являє собою шлях до властивості в моделі даних.
+					Допустимо тільки у випадку завантаження моделі даних перед виконанням команди.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Приклад</h3>
+	<p>
+		Нехай, наприклад, ми бажаємо дізнатися прогноз погоди за допомогою сервису openweathermap. Місто, в якому ми хочемо дізнатися
+		прогноз погоди, будемо передавати в параметрі команди <code>City</code>. Ключ для доступу до api будемо зберігати 
+		в файлі конфигурації програми.
+	</p>
+
+	<h4>Серверна команда</h4>
+
+	<pre class="code-highlight js" data-lang="js">
+"commands": {
+"getWeather": {
+	"type": "callApi",
+	"parameters": {
+		"url": "https://samples.openweathermap.org/data/2.5/weather?q=[[City]]&amp;appid=((openweathermap.appid))",
+		"method": "get"
+	}
+}
+</pre>
+
+	<h4>Виклик з клієнта</h4>
+
+	<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+async function getWeather() {
+	const ctrl = this.$ctrl;
+	let result = await ctrl.$invoke('getWeather', { City: 'London' });
+	console.dir(result);
+}
+</script>
+</pre>
+
+	<h4>Налаштування ключа в файлі <code>web.config</code></h4>
+
+	<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<appSettings>
+	<add key="openweathermap" value="{appid:'b6907d289e10d714a6e88b30761fae22'}" />
+</appSettings>
+</script>
+</pre>
+
+	<h4>Результат (в консолі браузера)</h4>
+
+	<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	coord: {lon: -0.13, lat: 51.51}
+	weather: [{…}]
+	base: "stations"
+	main: {temp: 280.32, pressure: 1012, humidity: 81, temp_min: 279.15, temp_max: 281.15}
+	visibility: 10000
+	wind: {speed: 4.1, deg: 80}
+	clouds: {all: 90}
+	dt: 1485789600
+	sys: {type: 1, id: 5091, message: 0.0103, country: "GB", sunrise: 1485762037, …}
+	id: 2643743
+	name: "London"
+	cod: 200
+}
+</script>
+</pre>
+
+</div>

@@ -1,0 +1,109 @@
+﻿<div>
+	<!--title:Xaml.Block-->
+	<!--keywords:Block-->
+	<div class="title">
+		<h1>
+			Елемент Block
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой контейнер, які містить другие елементи
+		керування або другие контейнеры.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>Властивість содержимого. Коллекция дочерних елементів.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>
+					Горизонтальное выравнивание содержимого контейнера.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Color</td>
+				<td><a class="code-link" href="/xaml/enums/textcolor">TextColor</a></td>
+				<td>
+					Цвет текста.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Высота блока.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Ширина блока. За замовчанням блок занимает 100% ширины батьківського елементу.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MaxWidth</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Максимальная ширина блока. Якщо содержимое шире, то оно переносится.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Border</td>
+				<td>Boolean</td>
+				<td>
+					Отображать рамку для блока.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Scroll</td>
+				<td>Boolean?</td>
+				<td>
+					Допускает ли блок прокрутку. Має сенс тільки, якщо установлена высота блока.
+					Якщо установлено в <b>True</b>, то буде появляться полоса прокрутки.
+					Якщо установлено в <b>False</b>, то лишнее содержимое буде обрезано.
+					За замовчанням высота блока буде такой, щоб включать все вложенные елементи.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DropShadow</td>
+				<td><a class="code-link" href="/xaml/enums/shadowstyle">ShadowStyle</a></td>
+				<td>Вид тени.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Relative</td>
+				<td>Boolean</td>
+				<td>
+					Относительное позиционирование для блока. Все дочерние елементи с установленным властивістю <code>Absolute</code>
+					будуть позиционироваться відносно этого блока.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielement">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,188 @@
+﻿<div>
+	<!--title:Xaml.Dialog-->
+	<!--keywords:Dialog-->
+	<div class="title">
+		<h1>
+			Елемент Dialog
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все контейнеры</a>
+		</div>
+	</div>
+	<p>
+		Представляет собой контейнер, які містить другие елементи
+		керування або другие контейнеры. Всегда використовується как корневой елемент розмітки.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<p>Властивість содержимого: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Title</td>
+				<td>String</td>
+				<td>
+					Заголовок окна діалога.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">HelpUrl</td>
+				<td>String</td>
+				<td>
+					Путь к странице справки. Якщо указан, то в заголовке окна діалога появится гиперссылка на страницу справки.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TitleInfo</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Дополнительный елемент в заголовке. Выводится после текста заголовка.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Buttons</td>
+				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
+				<td>
+					Содержимое панели кнопок. Зазвичай набор управляющих кнопок.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Taskpad</td>
+				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
+				<td>
+					Панель задач діалога. Частіше за все це елемент <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Ширина окна діалога. За замовчанням визначається содержимым.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Высота окна діалога. За замовчанням визначається содержимым.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinWidth</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Минимальная ширина окна.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Size</td>
+				<td><code>DialogSize</code></td>
+				<td>
+					Размер окна діалога. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - за замовчанням.</li>
+						<li><span class="prop-name">Small</span> - маленький.</li>
+						<li><span class="prop-name">Medium</span> - нормальный.</li>
+						<li><span class="prop-name">Large</span> - большой.</li>
+						<li><span class="prop-name">Max</span> - Развернутый на весь экран. Эквивалентно <code>Maximize="True"</code></li>
+					</ul>
+					Конкретные значення розміру зависят від темы пользовательского интерфейса.
+					Якщо указано властивість <code>Width</code>, то це властивість игнорируется.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Maximize</td>
+				<td>Boolean</td>
+				<td>
+					Максимально возможный размер діалога. Будет меняться в залежності від размеров окна браузера.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ButtonOnTop</td>
+				<td>Boolean</td>
+				<td>
+					Размешать панель кнопок в верхней части окна діалога.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">ShowWaitCursor</td>
+				<td>Boolean</td>
+				<td>
+					Якщо властивість установлено в <code>True</code>, то при выполнении запитов к серверу
+					окно діалога буде затеняться и буде показываться индикатор виконання запиту.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TestId</td>
+				<td>String</td>
+				<td>
+					Идентификатор окна. Використовується при тестировании.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">AlwaysOk</td>
+				<td>Boolean</td>
+				<td>
+					Якщо властивість установлено в <code>True</code>, то при закрытии діалога любым способом буде считаться что
+					возвращаемый результат равен <code>true</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CanCloseDelegate</td>
+				<td>String</td>
+				<td>Им'я <a href="/template/delegates">делегата</a>, который буде викликатися при попытке закрытия окна (любым способом).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
+				<td>Цвет фона діалога.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Overflow</td>
+				<td>Boolean</td>
+				<td>
+					Может ли появляться скролл-бар в діалоге. Установите це властивість, 
+					якщо потрібно щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли выходить за границы елементу.
+					В цьому випадку потрібно внимательно следить за тем, щоб основное содержимое не вышло за границы. 
+					Скролл-бар отображаться не буде.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/rootcontainer">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Формат делегата CanCloseDelegate</h3>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">canClose(this:IRoot): any | Promise</pre></div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>this</code> - корень моделі даних.
+			</li>
+		</ul>
+		<h4>Возвращаемое значення:</h4>
+		<ul class="enum-vals">
+			<li><code>Promise</code> - Якщо <code>Promise</code> вернет <code>truthy</code> значення, то діалог закроется с этим результатом.</li>
+			<li><code>any</code> - Якщо значення <code>truthy</code>, то діалог закроется с этим результатом.</li>
+		</ul>
+		<p>Примечание: <code>truthy</code> - любое значення, которое вважається истинным.</p>
+	</div>
+
+</div>

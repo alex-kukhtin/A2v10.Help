@@ -1,0 +1,107 @@
+﻿<div>
+	<!--title:Xaml.Graphics-->
+	<!--keywords:Graphics-->
+	<div class="title">
+		<h1>
+			Елемент Graphics
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Все елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		Представляет собой место для отрисовки графики. Сама отрисовка виконується программно с
+		использованием <a href="/template/delegates">делегата</a>.
+	</p>
+
+	<p>
+		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Delegate</td>
+				<td>String</td>
+				<td>Им'я <a href="/template/delegates">делегата</a>, который буде викликатися для отрисовки графики.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Argument</td>
+				<td>Object</td>
+				<td>
+					Аргумент (обычно це привязка <a class="code-link" href="/xaml/bind/bind">Bind</a>),
+					который буде передан в делегат.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CenterContent</td>
+				<td>Boolean</td>
+				<td>
+					Центрировать ли содержимое.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Watch</td>
+				<td><code>WatchMode</code></td>
+				<td>
+					Режим отслеживания изменений при изменении значення аргумента. Можливі значения:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - (за замовчанням) не отслеживать.</li>
+						<li><span class="prop-name">Watch</span> - викликати делегат тільки при изменении аргумента.</li>
+						<li>
+							<span class="prop-name">Deep</span> - викликати делегат при изменении аргумента або при
+							изменении любых його вложенных властивостей (рекурсивно).
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Высота елементу. За замовчанням <code>Auto</code>.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Формат делегата</h3>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">draw(this:IRoot, chart:object, arg:any, node:DOMElement): void</pre></div>
+		<h4>Аргументы:</h4>
+		<ul class="params">
+			<li>
+				<code>chart</code> - об`єкт библиотеки <code>d3.js</code>.
+			</li>
+			<li>
+				<code>arg</code> - аргумент, описанный в разметке.
+			</li>
+			<li>
+				<code>node</code> - узел DOM, связанный с елементом.
+			</li>
+		</ul>
+	</div>
+
+	<p class="tip warning">
+		<b>Зверніть увагу!</b> Зазвичай требуется щоб отрисовка графики выполнялась однократно. Однако, в некоторых 
+		случаях елемент, связанный с графикой може изменяться.
+		<br />
+		Установить режим отслеживания изменений можна за допомогою властивості <code>Watch</code>.
+		Не устанавливайте режим <code>Deep</code> без необходимости, поскольку це приводит к снижению 
+		скорости роботи.
+	</p>
+
+</div>

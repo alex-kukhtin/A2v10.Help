@@ -1,0 +1,50 @@
+﻿<div>
+	<!--title:MessageReport-->
+	<!--keywords:MessageReport-->
+	<div class="title">
+		<h1>
+			Елемент MessageReport
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Надсилання сообщений</a>
+		</div>
+	</div>
+
+	<p>Представляет собой звіт, который буде сформирован и вложен в сообщение электронной почты.</p>
+
+	<p>Властивість содержимого: <code>Model</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Им'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Report</td>
+				<td>String</td>
+				<td>
+					Всегда привязка з моделі даних. Поле основної моделі (не моделі звіта!), которое
+					должно содержать текстовое описание звіта (тип поля - <b>nvarchar(max)</b>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Name</td>
+				<td>String</td>
+				<td>Им'я звіта (вложения). Якщо не вказано, буде иметь значення "report".
+				Кроме того, якщо не вказано розширення, то автоматически добавляется розширення <b>.pdf</b>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Model</td>
+				<td><a class="code-link" href="messagereportmodel">MessageReportModel</a></td>
+				<td>
+					Опис моделі даних для построения звіта.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
