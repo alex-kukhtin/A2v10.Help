@@ -5055,7 +5055,7 @@ Vue.component('validator-control', {
 */
 // Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
 
-/*20210531-7776*/
+/*20220110-7819*/
 /*components/textbox.js*/
 
 /* password-- fake fields are a workaround for chrome autofill getting the wrong fields -->*/
@@ -5077,6 +5077,7 @@ Vue.component('validator-control', {
 				v-on:keypress="onKey($event)"
 				:class="inputClass" :placeholder="placeholder" :disabled="disabled" :tabindex="tabIndex" :maxlength="maxLength" :spellcheck="spellCheck"/>
 		<slot></slot>
+		<a class="a2-hyperlink add-on a2-inline" href="" @click.stop.prevent="dummy" v-if=hasFilter><i class="ico ico-filter-outline"></i></a>
 		<a class="a2-hyperlink add-on a2-inline" tabindex="-1" href="" @click.stop.prevent="clear" v-if="clearVisible"><i class="ico ico-clear"></i></a>
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 	</div>
@@ -5140,6 +5141,7 @@ Vue.component('validator-control', {
 			spellCheck: { type: Boolean, default: undefined },
 			enterCommand: Function,
 			hasClear: Boolean,
+			hasFilter: Boolean,
 			filters: Array
 		},
 		computed: {
@@ -5192,6 +5194,9 @@ Vue.component('validator-control', {
 			},
 			clear() {
 				this.item[this.prop] = '';
+			},
+			dummy() {
+
 			}
 		}
 	};
@@ -5301,13 +5306,12 @@ Vue.component('validator-control', {
 	app.components['static', staticControl];
 
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-/*20200618-7674*/
-/*components/combobox.js*/
+/*20220127-7822*/
+/*components/combobox.js */
 
 (function () {
-
 
 	const utils = require('std:utils');
 
@@ -5361,6 +5365,11 @@ Vue.component('validator-control', {
 		computed: {
 			cmbValue: {
 				get() {
+					if (this.itemsSource.length === 0 && this.item) {
+						let itemval = this.item[this.prop];
+						if (itemval && itemval.$empty)
+							itemval.$empty();
+					}
 					return this.getComboValue();
 				},
 				set(value) {
@@ -5397,10 +5406,12 @@ Vue.component('validator-control', {
 					return val;
 				}
 				// always return value from ItemsSource
-				return this.itemsSource.find(x => x[vProp] === val[vProp]);
+				return this.itemsSource.find(x => x[vProp] === val[vProp]) || null;
 			},
 			getText() {
 				let cv = this.getComboValue();
+				if (!cv)
+					return '';
 				if (utils.isObjectExact(cv))
 					return this.getName(cv);
 				if (this.itemsSource && this.itemsSource.length) {
@@ -11495,9 +11506,9 @@ Vue.directive('resize', {
 });
 
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-/*20211210-7812*/
+/*20220320-7828*/
 // controllers/base.js
 
 (function () {
@@ -11543,6 +11554,12 @@ Vue.directive('resize', {
 		return ra.length ? ra : null;
 	}
 
+	function treeNormalPath(path) {
+		if (!path) return;
+		path = '' + path;
+		return [... new Set(path.split('.'))].join('.');
+	}
+
 	function isPermissionsDisabled(opts, arg) {
 		if (opts && opts.checkPermission) {
 			if (utils.isObjectExact(arg)) {
@@ -11575,7 +11592,8 @@ Vue.directive('resize', {
 				__baseQuery__: {},
 				__requestsCount__: 0,
 				__lockQuery__: true,
-				__testId__: null
+				__testId__: null,
+				__saveEvent__: null
 			};
 		},
 
@@ -11697,6 +11715,8 @@ Vue.directive('resize', {
 						if (self.__destroyed__) return;
 						self.$data.$merge(data, true, true /*only exists*/);
 						self.$data.$emit('Model.saved', self.$data);
+						if (self.__saveEvent__)
+							self.$caller.$data.$emit(self.__saveEvent__, self.$data);
 						self.$data.$setDirty(false);
 						// data is a full model. Resolve requires only single element.
 						let dataToResolve;
@@ -12670,6 +12690,8 @@ Vue.directive('resize', {
 							if (data.$ModelInfo)
 								modelInfo.reconcile(data.$ModelInfo[propName]);
 							arr._root_._setModelInfo_(arr, data);
+							let eventName = treeNormalPath(arr._path_) + '.load';
+							self.$data.$emit(eventName, arr);
 						}
 						resolve(arr);
 					}).catch(function (msg) {
@@ -12839,6 +12861,9 @@ Vue.directive('resize', {
 				}
 				if (json.alwaysOk)
 					result.alwaysOk = true;
+				if (json.saveEvent) {
+					this.__saveEvent__ = json.saveEvent;
+				}
 				return result;
 			},
 			__isModalRequery() {
@@ -13014,9 +13039,9 @@ Vue.directive('resize', {
 		isSeparatePage
 	};
 })();	
-// Copyright © 2020-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2020-2022 Alex Kukhtin. All rights reserved.
 
-/*20210428-7771*/
+/*20220320-7830*/
 /* controllers/navbar.js */
 
 (function () {
@@ -13121,7 +13146,7 @@ Vue.directive('resize', {
 	<h2 v-text=title></h2>
 </div>
 <ul class=menu-navbar-list>
-	<li v-for="(item, index) in menu" :key=index>
+	<li v-for="(item, index) in menu" :key=index :class='item.ClassName' >
 		<a class="menu-navbar-link" :href="itemHref(item)" @click.prevent="navigate(item)" :class="{active : isActive(item)}">
 			<i class="ico" :class=icoClass(item)></i>
 			<span v-text="item.Name"></span>

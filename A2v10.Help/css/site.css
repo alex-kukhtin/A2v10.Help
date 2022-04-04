@@ -171,6 +171,15 @@
 .ico-flame:before {
   content: "\ea1a";
 }
+.ico-truck:before {
+  content: "\ea1b";
+}
+.ico-cart:before {
+  content: "\ea1c";
+}
+.ico-shopping:before {
+  content: "\ea1d";
+}
 .ico-camera:before {
   content: "\e9a1";
 }
@@ -4345,7 +4354,7 @@ tr:hover .commandbar.visible-hover {
   align-self: flex-start;
 }
 .chat-item {
-  padding: 0.25rem;
+  padding: 0.5rem / 2;
   display: block;
   text-align: left;
 }
@@ -6268,7 +6277,7 @@ iframe.eusign-iframe {
 }
 .card.compact .card-header,
 .card.compact .card-footer {
-  padding: 0 0.625rem;
+  padding: 0 1.25rem / 2;
   font-size: 13px;
   line-height: 2rem;
 }
