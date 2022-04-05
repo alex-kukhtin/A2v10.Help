@@ -6,7 +6,7 @@
 Загальна інформація		/common/index
 	Платформа			/common/platform
 
-Прикладні прогами		/app/index
+Прикладні програми		/app/index
 	model.json			/app/model
 		actions			/app/actions
 		dialogs			/app/dialogs

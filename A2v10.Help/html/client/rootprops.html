@@ -1,16 +1,16 @@
 ﻿<div>
-	<!--title:Властивості и методы кореневого об'єкта-->
+	<!--title:Властивості і методи кореневого об'єкта-->
 	<!--keywords:$readOnly;$stateReadOnly;$isCopy;$ready;$template;$defer;$emit;$forceValidate;$setDirty;-->
 	<div class="title">
 		<h1>
-			Властивості и методы кореневого об'єкта
+			Властивості і методи кореневого об'єкта
 		</h1>
 		<div class="breadcrumb">
-			<a href="data">Модель на клиенте</a>
+			<a href="data">Модель на клієнті</a>
 		</div>
 	</div>
 	<p>
-		Корневой об`єкт расширяется следующими служебными властивостіми и методами:
+		Кореневий об`єкт розширюється наступними службовими властивостями і методами:
 	</p>
 	<p>
 <pre class="code-highlight js" data-lang="js">
@@ -38,22 +38,22 @@ interface IRoot extends IElement {
 	<div class="method">
 		<div class="syntax"><pre class="code-highlight js">readonly $ready: boolean</pre></div>
 		<p>
-			<code>true</code>, якщо в данный момент НЕ виконується жодних запитов к серверу. Может
-			використовуватися для запрета/разрешения елементів интерфейса при выполнении серверных команд.
+			<code>true</code>, якщо в даний момент НЕ виконується жодних запитів до серверу. Може
+			використовуватися для заборони/дозволу елементів інтерфейса при виконанні серверних команд.
 		</p>
 	</div>
 	<div class="method">
 		<div class="syntax"><pre class="code-highlight js">readonly $template: Template</pre></div>
 		<p>
-			Ссылка на <a class="code-link" href="/template/index">об`єкт шаблона (Template)</a>.
+			Посилання на <a class="code-link" href="/template/index">об`єкт шаблона (Template)</a>.
 		</p>
 	</div>
 
-	<h2>Методы</h2>
+	<h2>Методи</h2>
 	<div class="method">
 		<div class="syntax"><pre class="code-highlight js">$defer(handler:()=>any): void</pre></div>
 		<p>
-			Выполняет функцию (handler) после завершения поточного цикла событий.
+			Виконує функцію (handler) після завершения поточного циклу подій.
 		</p>
 	</div>
 </div>

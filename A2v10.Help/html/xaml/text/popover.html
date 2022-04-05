@@ -13,7 +13,7 @@
 
 	<p>
 		Представляет собой ссылку, при щелчке (или наведении курсора мыши) на которой показывается всплывающее окно.
-		Спливаюче вікно може содержать как простой текст або другой елемент, так и ссылаться на другой <code>url</code>.
+		Спливаюче вікно може містити як простой текст або другой елемент, так і ссылаться на другой <code>url</code>.
 	</p>
 
 	<p>
@@ -22,7 +22,7 @@
 
 	<p>Властивість содержимого: <code>Content</code></p>
 
-	<p>Конвертер: підтримуєся преобразование з строки текста и з любого елементу, наследующйого <a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.</p>
+	<p>Конвертер: підтримуєся преобразование з строки текста і з любого елементу, наследующйого <a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.</p>
 
 	<h3>Властивості</h3>
 	<table class="table-props">
@@ -43,8 +43,8 @@
 				<td class="prop-name">Url</td>
 				<td>String</td>
 				<td>
-					Url для отримання содержимого с сервера. В цьому випадку всплывающее окно буде содержать собственную модель даних,
-					собственный шаблон и, конечно, саму разметку.
+					Url для отримання содержимого с сервера. В цьому випадку всплывающее окно буде містити собственную модель даних,
+					собственный шаблон и, конечно, саму розмітку.
 				</td>
 			</tr>
 			<tr>
@@ -76,16 +76,16 @@
 				<td class="prop-name">Placement</td>
 				<td>PopupPlacement</td>
 				<td>
-					Положение спливаючого вікна. Можливі значения:
+					Положение спливаючого вікна. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">TopRight</span> - (за замовчанням) сверху, разворачивается вправо.</li>
-						<li><span class="prop-name">TopLeft</span> - сверху, разворачивается влево.</li>
-						<li><span class="prop-name">RightBottom</span> - справа, разворачивается вниз.</li>
-						<li><span class="prop-name">RightTop</span> - справа, разворачивается вверх.</li>
-						<li><span class="prop-name">BottomRight</span> - снизу, разворачивается вправо.</li>
-						<li><span class="prop-name">BottomLeft</span> - снизу, разворачивается влево.</li>
-						<li><span class="prop-name">LeftBottom</span> - слева, разворачивается вниз.</li>
-						<li><span class="prop-name">LeftTop</span> - слева, разворачивается вверх.</li>
+						<li><span class="prop-name">TopRight</span> - (за замовчанням) сверху, розгортаєся вправо.</li>
+						<li><span class="prop-name">TopLeft</span> - сверху, розгортаєся влево.</li>
+						<li><span class="prop-name">RightBottom</span> - справа, розгортаєся вниз.</li>
+						<li><span class="prop-name">RightTop</span> - справа, розгортаєся вверх.</li>
+						<li><span class="prop-name">BottomRight</span> - снизу, розгортаєся вправо.</li>
+						<li><span class="prop-name">BottomLeft</span> - снизу, розгортаєся влево.</li>
+						<li><span class="prop-name">LeftBottom</span> - слева, розгортаєся вниз.</li>
+						<li><span class="prop-name">LeftTop</span> - слева, розгортаєся вверх.</li>
 					</ul>
 				</td>
 			</tr>
@@ -93,7 +93,7 @@
 				<td class="prop-name">Underline</td>
 				<td>PopoverUnderlineMode</td>
 				<td>
-					Стиль подчеркивания ссылки при наведении мыши. Можливі значения:
+					Стиль подчеркивания ссылки при наведении мыши. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Enable</span> - (за замовчанням) подчеркивать.</li>
 						<li><span class="prop-name">Disable</span> - не подчеркивать.</li>
@@ -106,7 +106,7 @@
 				<td>PopoverBackgroundStyle</td>
 				<td>
 					Цвет фона спливаючого вікна. Можливі значення (обратите внимание, что конкретные цвета зависят від поточної
-					темы пользовательского интерфейса):
+					темы пользовательского інтерфейса):
 					<ul class="enum-vals">
 						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Default</span> - за замовчанням.</li>
 						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Yellow</span> - желтый.</li>
@@ -133,11 +133,11 @@
 
 	<p class="tip warning">
 		Зверніть увагу! Якщо установлено властивість <b>ShowOnHover</b>, то размещать в елементе другие органы керування
-		не має смысла. Все дорівнює к ним нельзя буде получить доступ. Ведь, как тільки вы уберете курсор мыши с текста,
+		не має смысла. Все дорівнює к ним нельзя буде получить доступ. Ведь, як тільки вы уберете курсор мыши с текста,
 		всплывающее окно исчезнет.
 		<br />
 		<br />
-		Кроме того, властивість <b>ShowOnHover</b> не совместимо с можливістью получать содержимое окна с сервера (зовнішній Url)
+		Кроме того, властивість <b>ShowOnHover</b> не совместимо с можливістью получать содержимое вікна с сервера (зовнішній Url)
 		Это сделано з соображений производительности, щоб не звертатися до серверу при каждом движении мышью.
 	</p>
 
@@ -148,10 +148,10 @@
 <pre class="code-highlight xml">
 <script type="text/template">
 <FlexList>
-	<Popover Text="TopRight..." Icon="Help">Сверху, разворачивается вправо</Popover>
-	<Popover Text="TopLeft..." Underline="Hover" Background="Cyan">Сверху, разворачивается влево</Popover>
-	<Popover Text="RightBottom..." Underline="Disable" Background="Red" Icon="HelpOutline">Справа, разворачивается вниз</Popover>
-	<Popover Text="LeftTop..." Background="Green" Hover="True" Icon="Report">Слева, разворачивается вверх</Popover>
+	<Popover Text="TopRight..." Icon="Help">Сверху, розгортаєся вправо</Popover>
+	<Popover Text="TopLeft..." Underline="Hover" Background="Cyan">Сверху, розгортаєся влево</Popover>
+	<Popover Text="RightBottom..." Underline="Disable" Background="Red" Icon="HelpOutline">Справа, розгортаєся вниз</Popover>
+	<Popover Text="LeftTop..." Background="Green" Hover="True" Icon="Report">Слева, розгортаєся вверх</Popover>
 </FlexList>
 </script>
 </pre>
@@ -163,22 +163,22 @@
 			<ul class="flex-list horizontal">
 				<li class="flex-list-item">
 					<popover class="po-top-right" content="TopRight..." icon="help">
-						Сверху, разворачивается вправо
+						Сверху, розгортаєся вправо
 					</popover>
 				</li>
 				<li class="flex-list-item">
 					<popover class="po-top-left underline-hover po-cyan" content="TopLeft...">
-						Сверху, разворачивается влево
+						Сверху, розгортаєся влево
 					</popover>
 				</li>
 				<li class="flex-list-item">
 					<popover class="po-right-bottom underline-disable po-red" content="RightBottom..." icon="help-outline">
-						Справа, разворачивается вниз
+						Справа, розгортаєся вниз
 					</popover>
 				</li>
 				<li class="flex-list-item">
 					<popover class="po-left-top po-green" v-bind:hover="true" content="LeftTop..." icon="report">
-						Слева, разворачивается вверх
+						Слева, розгортаєся вверх
 					</popover>
 				</li>
 			</ul>

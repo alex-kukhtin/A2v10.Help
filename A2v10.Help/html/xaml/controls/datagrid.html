@@ -10,13 +10,13 @@
 		</div>
 	</div>
 	<p>
-		Представляет собой таблицу с данными. Роботает тільки с джерелоом даних. Отображает одну строку
-		для каждого елементу масива - джерела даних. Колонки таблиці визначаються коллекцией вложенных об'єктов
+		Представляет собой таблицу с данными. Працює тільки с джерелоом даних. Отображает одну строку
+		для каждого елементу масива - джерела даних. Колонки таблиці визначаються коллекцией вложенных об'єктів
 		<a class="code-link" href="datagridcolumn">DataGridColumn</a>.
 	</p>
 	<p>
 		Совместно с компонентом <a class="code-link" href="../components/collectionview">CollectionView</a>,
-		таблица підтримує сортировку, фильтрацию, разбиение на страницы и группировку строк.
+		таблица підтримує сортировку, фильтрацию, разбиение на страницы і группировку строк.
 	</p>
 
 	Наследует: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
@@ -56,7 +56,7 @@
 				<td class="prop-name">Striped</td>
 				<td>Boolean</td>
 				<td>
-					Раскраска таблиці "в полоску" с выделением четных и нечетных строк.
+					Раскраска таблиці "в полоску" с выделением четных і нечетных строк.
 				</td>
 			</tr>
 			<tr>
@@ -70,9 +70,9 @@
 				<td class="prop-name">Style</td>
 				<td><code>DataGridStyle</code></td>
 				<td>
-					Стиль отображения таблиці. Можливі значения:
+					Стиль отображения таблиці. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - (за замовчанням) обычный стиль.</li>
+						<li><span class="prop-name">Default</span> - (за замовчанням) звичайний стиль.</li>
 						<li><span class="prop-name">Light</span> - светлый стиль.</li>
 					</ul>
 				</td>
@@ -96,10 +96,10 @@
 				<td><code>RowMarkerStyle</code></td>
 				<td>
 					Стиль маркировки строки в таблице.
-					Можливі значения:
+					Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">None</span> - (за замовчанням) нет маркировки.</li>
-						<li><span class="prop-name">Row</span> - фоновый цвет.</li>
+						<li><span class="prop-name">Row</span> - фоновий цвет.</li>
 						<li><span class="prop-name">Marker</span> - маркер у вигляді линии в первой колонке.</li>
 						<li><span class="prop-name">Both</span> - оба вида маркировки.</li>
 					</ul>
@@ -139,8 +139,8 @@
 				<td class="prop-name">AutoSelect</td>
 				<td><a class="code-link" href="/xaml/enums/autoselectmode">AutoSelectMode</a></td>
 				<td>
-					Автоматически выделять елемент после завантаження або оновлення списка.
-					Поддерживаются тільки значення <code>FirstItem</code> и <code>LastItem</code>.
+					Автоматически выделять елемент після завантаження або оновлення списка.
+					Поддерживаются тільки значення <code>FirstItem</code> і <code>LastItem</code>.
 				</td>
 			</tr>
 			<tr>
@@ -151,7 +151,7 @@
 		</tbody>
 	</table>
 
-	<h4>Маркировка строк таблиці</h4>
+	<h4>Маркировка рядків таблиці</h4>
 	<p>
 		Выражение привязки для властивості <code>Mark</code> должно возвращать текстовую строку, яка являє собою дополнительный
 		css-класс, добавляемый к строке.
