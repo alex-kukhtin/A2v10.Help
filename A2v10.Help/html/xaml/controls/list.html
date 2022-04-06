@@ -9,12 +9,12 @@
 			<a href="index">Все елементи керування</a>
 		</div>
 	</div>
-	<p>Представляет собой список елементів (c можливістью виділення). 
-	Содержимое обычно являє собою список елементів <a class="code-link" href="listitem">ListItem</a>.</p>
+	<p>Являє собою список елементів (c можливістью виділення). 
+	Вміст обычно являє собою список елементів <a class="code-link" href="listitem">ListItem</a>.</p>
 
 	Наследует: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
-	<p>Властивість содержимого: <code>Content</code></p>
+	<p>Властивість вмісту: <code>Content</code></p>
 
 	<h3>Властивості</h3>
 	<table class="table-props">
@@ -30,14 +30,14 @@
 				<td class="prop-name">Content</td>
 				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
 				<td>
-					Властивість содержимого. Содержимое списка
+					Властивість вмісту. Вміст списка
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">ItemsSource</td>
 				<td>Array</td>
 				<td>
-					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для отображения в списке.
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для отображения в списке.
 				</td>
 			</tr>
 			<tr>
@@ -114,7 +114,7 @@
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка елементу списка.
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка елементу списка.
 					Маркер являє собою вертикальную линию слева від елементу.
 					Подробности ниже.
 				</td>
@@ -137,7 +137,7 @@
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
 				<td>
-					Панель, яка отображается, якщо содержимое пустое. Зазвичай являє собою об'єкт
+					Панель, яка отображается, якщо вміст пустое. Зазвичай являє собою об'єкт
 					<a class="code-link" href="emptypanel">EmptyPanel</a>.
 				</td>
 			</tr>
@@ -159,7 +159,7 @@
 
 	<h4>Маркировка елементів списка</h4>
 	<p>
-		Выражение привязки для властивості <code>Mark</code> должно возвращать текстовую строку, яка являє собою дополнительный
+		Выражение прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою дополнительный
 		css-класс, добавляемый к елементу списка.
 
 		В теме за замовчанням поддерживаются наступні варианты маркировки елементів списка:

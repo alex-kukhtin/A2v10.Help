@@ -13,7 +13,7 @@
 	</p>
 
 	<p>
-		Команди в видух задаются за допомогою привязки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> со значенням
+		Команди в видух задаются за допомогою прив`язки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> зі заченнями
 		властивості <code>Command</code> равным <code>Execute</code> або <code>ExecuteSelected</code>.
 		Им'я команди задається властивістю <code>CommandName</code>.
 	</p>
@@ -39,15 +39,15 @@ commands: {
 
 
 	<p>
-		Якщо значенням является функція, то она просто викликаєся при виконанні команди.
+		Якщо значенням является функція, то вона просто викликаєся при виконанні команди.
 	</p>
 
 	<h3>Властивості об'єкта команди</h3>
 	<ul class="params">
 		<li><code>{Function} exec</code> - функція, выполняющая команду.</li>
 		<li>
-			<code>{Function} canExec</code> - функція, определяющая можна ли выполнить команду. Повертає признак того, можна
-			ли выполнить команду. Значення приводится к типу <code>Boolean</code>.
+			<code>{Function} canExec</code> - функція, определяющая можна ли виконати команду. Повертає признак того, можна
+			ли виконати команду. Значення приводится к типу <code>Boolean</code>.
 		</li>
 		<li>
 			<code>{Boolean} saveRequired</code> - потрібно ли сохранять модель перед виконанням команди. Также може быть
@@ -55,19 +55,19 @@ commands: {
 		</li>
 		<li>
 			<code>{Boolean} validRequired</code> - виконувати команду тільки для моделі, прошедшей перевірку (властивість $valid кореневого об'єкта = <code>true</code>.
-			Также може быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			Также може бути установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
 			за допомогою властивості <code>ValidRequired</code>.
 		</li>
 		<li>
 			<code>{Boolean} checkReadOnly</code> - запрещать команду для моделі в состоянии "тільки чтение",
-			Также може быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			Также може бути установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
 			за допомогою властивості <code>CheckReadOnly</code>.
 		</li>
 		<li>
 			<code>{String|Object} confirm</code> - запрашивать подтверждение користувача перед виконанням команди.
-			Также може быть установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
-			за допомогою властивості <code>Confirm</code>. Якщо значення - строка, то она вважається текстом підтвердження. Якщо це об'єкт,
-			то он має структуру, приведенную ниже.
+			Также може бути установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
+			за допомогою властивості <code>Confirm</code>. Якщо значення - строка, то вона вважається текстом підтвердження. Якщо це об'єкт,
+			то він має структуру, приведенную ниже.
 		</li>
 	</ul>
 
@@ -84,14 +84,14 @@ commands: {
 		<li><code>this</code> - кореневий об`єкт (TRoot).</li>
 		<li>
 			<code>arg</code> -аргумент, переданий в команду. Якщо команда задається в разметке, то аргумент задається
-			властивістю (или привязкой) <code>Argument</code> об'єкта
+			властивістю (або привязкой) <code>Argument</code> об'єкта
 			<a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>.
 		</li>
 	</ul>
 
 	<p class="tip warning">
 		<b>Зверніть увагу!</b> Елементы пользовательского інтерфейса, пов'язані с командами (наприклад кнопки) будуть
-		автоматически запрещаться або разрешаться в залежності від возможнасти выполнить команду.
+		автоматично запрещаться або разрешаться в залежності від возможнасти виконати команду.
 		Использовать властивість <code>Disabled</code> не потрібно.
 	</p>
 
@@ -117,7 +117,7 @@ const template = {
 	commands: {
 		MyCommand: {
 			exec(doc) {alert(doc.Id); },         // просто вывести повідомлення
-			canExec(doc) {return doc.$isNew; },  // тільки для новых документов
+			canExec(doc) {return doc.$isNew; },  // тільки для новых документів
 			validRequired: true,                 // без ошибок
 			confirm: {
 				message: 'Точно выполнить?',

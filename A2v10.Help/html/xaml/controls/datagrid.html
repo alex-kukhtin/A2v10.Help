@@ -10,13 +10,13 @@
 		</div>
 	</div>
 	<p>
-		Представляет собой таблицу с данными. Працює тільки с джерелоом даних. Отображает одну строку
+		Являє собою таблицю с данными. Працює тільки с джерелоом даних. Отображает одну строку
 		для каждого елементу масива - джерела даних. Колонки таблиці визначаються коллекцией вложенных об'єктів
 		<a class="code-link" href="datagridcolumn">DataGridColumn</a>.
 	</p>
 	<p>
 		Совместно с компонентом <a class="code-link" href="../components/collectionview">CollectionView</a>,
-		таблица підтримує сортировку, фильтрацию, разбиение на страницы і группировку строк.
+		таблица підтримує сортировку, фільтрацію, розбиття на сторінки і группировку строк.
 	</p>
 
 	Наследует: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
@@ -35,7 +35,7 @@
 				<td class="prop-name">ItemsSource</td>
 				<td class="fit">Array</td>
 				<td>
-					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для отображения.
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для отображения.
 				</td>
 			</tr>
 			<tr>
@@ -86,8 +86,8 @@
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки привязка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка строки таблиці.
-					Маркер являє собою вертикальную линию в левой колонке и/или выделение цветом.
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка строки таблиці.
+					Маркер являє собою вертикальную линию в левой колонке и/або выделение цветом.
 					Подробности ниже.
 				</td>
 			</tr>
@@ -109,7 +109,7 @@
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
 				<td>
-					Панель, яка отображается, якщо содержимое пустое. Зазвичай являє собою об'єкт
+					Панель, яка отображается, якщо вміст пустое. Зазвичай являє собою об'єкт
 					<a class="code-link" href="emptypanel">EmptyPanel</a>.
 				</td>
 			</tr>
@@ -140,7 +140,7 @@
 				<td><a class="code-link" href="/xaml/enums/autoselectmode">AutoSelectMode</a></td>
 				<td>
 					Автоматически выделять елемент після завантаження або оновлення списка.
-					Поддерживаются тільки значення <code>FirstItem</code> і <code>LastItem</code>.
+					Підтримуються тільки значення <code>FirstItem</code> і <code>LastItem</code>.
 				</td>
 			</tr>
 			<tr>
@@ -153,7 +153,7 @@
 
 	<h4>Маркировка рядків таблиці</h4>
 	<p>
-		Выражение привязки для властивості <code>Mark</code> должно возвращать текстовую строку, яка являє собою дополнительный
+		Выражение прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою дополнительный
 		css-класс, добавляемый к строке.
 
 		В теме за замовчанням поддерживаются наступні варианты маркировки строк:

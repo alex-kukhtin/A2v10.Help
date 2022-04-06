@@ -10,14 +10,14 @@
 		</div>
 	</div>
 
-	<p>Представляет собой выпадающий список выбора.</p>
+	<p>Являє собою выпадающий список выбора.</p>
 
 	Наследует: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
 	<a class="code-link" href="/xaml/abstract/control">Control</a> :
 	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
 	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
-	<p>Властивість содержимого: <code>Children</code></p>
+	<p>Властивість вмісту: <code>Children</code></p>
 
 	<h3>Властивості</h3>
 	<table class="table-props">
@@ -33,7 +33,7 @@
 				<td class="prop-name">Children</td>
 				<td>List&lt;<a class="code-link" href="comboboxitem">ComboBoxItems</a>&gt;</td>
 				<td>
-					Содержимое списка. Представляет собой список елементів <a class="code-link" href="comboboxitem">ComboBoxItem</a>.
+					Вміст списка. Являє собою список елементів <a class="code-link" href="comboboxitem">ComboBoxItem</a>.
 					Може бути статическим або динамическим.
 				</td>
 			</tr>
@@ -41,7 +41,7 @@
 				<td class="prop-name">ItemsSource</td>
 				<td>Array</td>
 				<td>
-					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для отображения в списке.
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для отображения в списке.
 				</td>
 			</tr>
 			<tr>
@@ -52,7 +52,7 @@
 			<tr>
 				<td class="prop-name">ShowValue</td>
 				<td>Boolean</td>
-				<td>Отображать в списке значення вмісце содержимого.</td>
+				<td>Отображать в списке значення вмісце вмісту.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Align</td>
@@ -79,7 +79,7 @@
 						<li><span class="prop-name">Default</span> - (за замовчанням) список звичайного розміру.</li>
 						<li><span class="prop-name">Large</span> - увеличенный размер списка.</li>
 					</ul>
-					(остальные значення перечисления <code>ControlSize</code> не поддерживаются).
+					(остальные значення перечисления <code>ControlSize</code> не підтримуються).
 				</td>
 			</tr>
 			<tr>
@@ -92,22 +92,22 @@
 
 	<h3>Опис</h3>
 	<p>
-		Содержимое выпадающйого списка може задаватися тремя различными способами:
+		Вміст выпадающйого списка може задаватися тремя различными способами:
 		<ul class="std">
 			<li>
-				<b>Статическое содержимое</b>. В цьому випадку, елемент повинен включать перечень елементів
+				<b>Статическое вміст</b>. В цьому випадку, елемент повинен включать перечень елементів
 				<a class="code-link" href="comboboxitem">ComboBoxItem</a>, для каждого з которых задаются
 				властивості <code>Content</code> і <code>Value</code>. Властивість <code>ItemsSource</code> не зазначається.
 				При выборе елементу властивості <code>Value</code> присваивается соответствующее значення <code>Value</code>
-				з елементу. В списке отображается властивість <code>Content</code> (или <code>Value</code>, якщо установлено <code>ShowValue = true</code>).
+				з елементу. В списке отображается властивість <code>Content</code> (або <code>Value</code>, якщо установлено <code>ShowValue = true</code>).
 			</li>
 			<li>
-				<b>Прив'язка к списку об'єктів</b>. В цьому випадку привязка <code>ItemsSource</code>
+				<b>Прив'язка к списку об'єктів</b>. В цьому випадку прив'язка <code>ItemsSource</code>
 				связывается с масивом об'єктів. Значенням буде выбранный об'єкт. В списке отображается властивість связанного об'єкта,
 				заданное властивістю <code>DisplayProperty</code>.
 			</li>
 			<li>
-				<b>Прив'язка к списку об'єктів і значению</b>. В цьому випадку привязка <code>ItemsSource</code> також связывается 
+				<b>Прив'язка к списку об'єктів і значению</b>. В цьому випадку прив'язка <code>ItemsSource</code> також связывается 
 				с масивом об'єктів. Но для отображения і выбора значений використовується единственный вложенный елемент 
 				<a class="code-link" href="comboboxitem">ComboBoxItem</a>. Властивості <code>Content</code> і <code>Value</code> 
 				цього елементу связываются с необходимыми значениями елементу масива.

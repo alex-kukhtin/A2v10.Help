@@ -10,12 +10,12 @@
 		</div>
 	</div>
 	<p>
-		Представляет собой панель с закладками. Содержимое представлено елементуми <a class="code-link" href="tab">Tab</a>.
+		Являє собою панель с закладками. Вміст представлено елементуми <a class="code-link" href="tab">Tab</a>.
 	</p>
 
 	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
-	<p>Властивість содержимого: <code>Tabs</code></p>
+	<p>Властивість вмісту: <code>Tabs</code></p>
 
 	<h3>Властивості</h3>
 	<table class="table-props">
@@ -38,8 +38,8 @@
 				<td class="prop-name">ItemsSource</td>
 				<td>Array</td>
 				<td>
-					Всегда привязка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для закладок.
-					Содержимое елементу буде повторяться у відповідності до содержимым <code>ItemsSource</code>.
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для закладок.
+					Вміст елементу буде повторяться у відповідності до содержимым <code>ItemsSource</code>.
 				</td>
 			</tr>
 			<tr>
@@ -77,7 +77,7 @@
 				<td>
 					Может ли появляться скролл-бар в панели. Установите це властивість,
 					якщо потрібно щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли выходить за границы елементу.
-					В цьому випадку потрібно внимательно следить за тем, щоб основное содержимое не вышло за границы.
+					В цьому випадку потрібно внимательно следить за тем, щоб основное вміст не вышло за границы.
 					Скролл-бар отображаться не буде.
 				</td>
 			</tr>
@@ -110,12 +110,12 @@
 <TabPanel Header="Заголовок панели" Border="True">
 	<Tab Header="Tab 1">
 		<Grid>
-			<Text>Содержимое первой закладки</Text>
+			<Text>Вміст первой закладки</Text>
 		</Grid>
 	</Tab>
 	<Tab Header="Tab 2">
 		<Grid>
-			<Text>Содержимое другої закладки</Text>
+			<Text>Вміст другої закладки</Text>
 		</Grid>
 	</Tab>
 </TabPanel>
@@ -132,12 +132,12 @@
 				</template>
 				<a2-tab-item header="Tab 1">
 					<template>
-						<div class="grid">Содержимое первой закладки</div>
+						<div class="grid">Вміст первой закладки</div>
 					</template>
 				</a2-tab-item>
 				<a2-tab-item header="Tab 2">
 					<template>
-						<div class="grid">Содержимое другої закладки</div>
+						<div class="grid">Вміст другої закладки</div>
 					</template>
 				</a2-tab-item>
 			</a2-tab-panel>

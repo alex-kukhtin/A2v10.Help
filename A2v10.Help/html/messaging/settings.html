@@ -5,11 +5,11 @@
 			Налаштування роботи с повідомленнями
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Надсилання сообщений</a>
+			<a href="index">Надсилання повідомлень</a>
 		</div>
 	</div>
 
-	<h3>Налаштування отправки e-mail</h3>
+	<h3>Налаштування відправки e-mail</h3>
 
 	<h4>Налаштування <b>smtp</b> в файлі <code>web.config</code></h4>
 
@@ -21,7 +21,7 @@
 
 	</p>
 
-	<p>Формат json-текста для <code>&lt;appSettings&gt;</code> полностью повторяет стандартний формат настроек .NET.</p>
+	<p>Формат json-текста для <code>&lt;appSettings&gt;</code> повністю повторює стандартний формат налаштувань .NET.</p>
 	<pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 {
@@ -38,12 +38,12 @@
 </pre>
 
 	<p class="tip info">
-		<b>Зверніть увагу!</b>, Якщо задан метод доставки <code>'SpecifiedPickupDirectory'</code> (використовується для тестирования, без реальной отправки повідомлення), 
-		то обов'язково потрібно задать папку, 
-		куда будуть помещаться тестовые повідомлення (<code>pickupDirectoryLocation</code>).
+		<b>Зверніть увагу!</b>, Якщо заданий метод доставки <code>'SpecifiedPickupDirectory'</code> (використовується для тестування, без реальної відправки повідомлення), 
+		то обов'язково потрібно задати папку, 
+		де будуть розміщуватися тестові повідомлення (<code>pickupDirectoryLocation</code>).
 	</p>
 
-	<h4>Приклад настройки через ключ mailSettings</h4>
+	<h4>Приклад налаштування через ключ mailSettings</h4>
 	<pre class="code-highlight xml" data-lang="xml">
 <script type="text/template">
 <appSettings>
@@ -52,7 +52,7 @@
 </script>
 </pre>
 
-	<p>Приклад настройки через <b>system.net</b></p>
+	<p>Приклад налаштування через <b>system.net</b></p>
 	<pre class="code-highlight xml" data-lang="xml">
 <script type="text/template">
 <system.net>
