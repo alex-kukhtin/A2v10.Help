@@ -15,7 +15,7 @@
 	<p>
 		Команди в видух задаются за допомогою прив`язки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> зі заченнями
 		властивості <code>Command</code> равным <code>Execute</code> або <code>ExecuteSelected</code>.
-		Им'я команди задається властивістю <code>CommandName</code>.
+		Ім'я команди задається властивістю <code>CommandName</code>.
 	</p>
 
 	<h3>Синтаксис</h3>
@@ -39,7 +39,7 @@ commands: {
 
 
 	<p>
-		Якщо значенням является функція, то вона просто викликаєся при виконанні команди.
+		Якщо значенням является функція, то вона просто викликається при виконанні команди.
 	</p>
 
 	<h3>Властивості об'єкта команди</h3>
@@ -50,7 +50,7 @@ commands: {
 			ли виконати команду. Значення приводится к типу <code>Boolean</code>.
 		</li>
 		<li>
-			<code>{Boolean} saveRequired</code> - потрібно ли сохранять модель перед виконанням команди. Также може быть
+			<code>{Boolean} saveRequired</code> - потрібно ли зберігати модель перед виконанням команди. Также може быть
 			установлено в привязке <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> за допомогою властивості <code>SaveRequired</code>.
 		</li>
 		<li>
@@ -105,7 +105,7 @@ commands: {
 <!--Кнопка, связанная с командой-->
 <Button 
 	Command="{BindCmd Execute, CommandName='MyCommand', Argument={Bind Document}}">
-	Выполнить команду
+	Виконати команду
 </Button>
 </script>
 </pre>

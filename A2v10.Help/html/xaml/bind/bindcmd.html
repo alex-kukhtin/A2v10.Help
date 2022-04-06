@@ -23,7 +23,7 @@
 	<table class="table-props">
 		<thead>
 			<tr>
-				<th>Им'я</th>
+				<th>Ім'я</th>
 				<th>Тип</th>
 				<th>Опис</th>
 			</tr>
@@ -52,7 +52,7 @@
 			<tr>
 				<td class="prop-name">CommandName</td>
 				<td>String</td>
-				<td>Тільки для команди <b>Execute</b>. Им'я команди в шаблоне (<a class="code-link" href="/template/commands">template.commands</a>).</td>
+				<td>Тільки для команди <b>Execute</b>. Ім'я команди в шаблоне (<a class="code-link" href="/template/commands">template.commands</a>).</td>
 			</tr>
 			<tr>
 				<td class="prop-name">SaveRequired</td>
@@ -87,12 +87,12 @@
 			<tr>
 				<td class="prop-name">Export</td>
 				<td>Boolean</td>
-				<td>Выполнять ли експорт вмісце отображения. Не совместима с <code>Print</code>.</td>
+				<td>Выполнять ли експорт вмісце відображення. Не совместима с <code>Print</code>.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Print</td>
 				<td>Boolean</td>
-				<td>Выполнять ли печать вмісце отображения.</td>
+				<td>Выполнять ли печать вмісце відображення.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">FileAction</td>
@@ -160,7 +160,7 @@
 		<div class="command"><b>Reload</b>, <b>Refresh</b> - обновить</div>
 		<p>
 			Обновляет текущую модель або її частину. Якщо аргумент задан, то обновляется тільки частина моделі.
-			Обновление части моделі використовується для <a href="/models/array">"лінивих масивів"</a>.
+			Оновлення части моделі використовується для <a href="/models/array">"лінивих масивів"</a>.
 		</p>
 		<h4>Аргументи:</h4>
 		<ul class="params">
@@ -176,8 +176,8 @@
 	<div class="method">
 		<div class="command"><b>Print</b> - напечатать</div>
 		<p>
-			Печать поточної страницы. Команда не має аргументов. Зверніть увагу, що фактически
-			печатается текущее изображение страницы. Деякі елементи (наприклад <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>) на печать не выводятся.
+			Печать поточної страницы. Команда не має аргументов. Зверніть увагу, що фактично
+			печатается текущее зображення страницы. Деякі елементи (наприклад <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>) на печать не выводятся.
 			Более тонко управлять видимостью елементів при печати можна за допомогою властивості <code>Print</code> об'єкта
 			<a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.
 		</p>
@@ -206,7 +206,7 @@
 						Колекція задається аргументом команди.
 					</li>
 					<li><span class="prop-name">Browse</span> - выбрать елемент, заданий аргументом. Елемент заменяется выбранным в діалоге.</li>
-					<li><span class="prop-name">Append</span> - создать новий елемент і добавить його в коллекцию. Колекція задається аргументом.</li>
+					<li><span class="prop-name">Append</span> - создать новий елемент і додати його в коллекцию. Колекція задається аргументом.</li>
 					<li><span class="prop-name">New</span> - создать новий елемент.</li>
 					<li><span class="prop-name">Copy</span> - создать копию заданного елементу. Елемент задається аргументом.</li>
 				</ul>
@@ -224,11 +224,11 @@
 		</ul>
 	</div>
 	<div class="method">
-		<div class="command"><b>File</b> - работа с файлами (двоичными об'єктами)</div>
+		<div class="command"><b>File</b> - работа с файлами (бінарними об'єктами)</div>
 		<p>
 			Виконує отображение, загрузку або печать вкладення (двоичного об'єкта). Це може
 			быть картика, файл і т.д.
-			<a href="/models/blob">Детальніше про роботі с двоичными об'єктами.</a>
+			<a href="/models/blob">Детальніше про роботі с бінарними об'єктами.</a>
 		</p>
 		<h4>Аргументи:</h4>
 		<ul class="params">
@@ -252,7 +252,7 @@
 		<div class="command"><b>Download</b> - завантажити</div>
 		<p>
 			Позволяет користувачу завантажити статический файл. Статические файли, 
-			пов'язані с приложением должны бути розміщені в специальной папке <a class="code-link" href="/app/folders/files">_files</a>.
+			пов'язані с приложением мають бути розміщені в специальной папке <a class="code-link" href="/app/folders/files">_files</a>.
 		</p>
 		<h4>Аргументи:</h4>
 		<ul class="params">

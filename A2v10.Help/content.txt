@@ -32,7 +32,7 @@
 	Ієрархічні моделі				/models/tree
 	Перехресні моделі				/models/cross
 	Моделі з групуванням			/models/group
-	Робота з двоїчними об'єктами	/models/blob
+	Робота з бінарними об'єктами	/models/blob
 
 
 Представления	/views/index
