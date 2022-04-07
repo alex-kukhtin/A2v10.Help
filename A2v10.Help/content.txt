@@ -35,7 +35,7 @@
 	Робота з бінарними об'єктами	/models/blob
 
 
-Представления	/views/index
+Види	/views/index
 	Xaml			/xaml/index
 		Общие сведения		/xaml/overview/index
 			Расширения розмітки	/xaml/overview/extensions

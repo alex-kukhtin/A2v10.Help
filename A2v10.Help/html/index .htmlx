@@ -1,5 +1,5 @@
 ﻿<div>
-    <!--title:Главная-->
+    <!--title:Головна-->
     <!--keywords:word1;word2-->
     <h1>Header 1</h1>
     <h2>Header 2</h2>
@@ -7,7 +7,7 @@
     <hr />
 
     <p>
-        Это пример кода <code>v-model</code>, <code>v-code</code>, <a href="whatsnew/w201802" class="code-link">v-code</a>
+        це приклад коду <code>v-model</code>, <code>v-code</code>, <a href="whatsnew/w201802" class="code-link">v-code</a>
     </p>
     <p>
         <pre>var t = 5;
@@ -19,13 +19,13 @@ let f = function(a, b, c) {
     </p>
     <p>
         Another paragraph
-        Длинный текст с разными, знаками. препинания; [скобки] {и такие} $доллар
+        Довгий текст з різними, знаками. пунктуації; [дужки] {і такі} $доллар
         &amp;амперсанд
-        в несколько строк (со скобками, <br /><b>A2.Web.Text</b>)
+        в декіотка рядків (з дужками, <br /><b>A2.Web.Text</b>)
     </p>
     <p>
         <a href="whatsnew/index">Whats New</a>
-        И Большими БОЛЬШИМИ БУКВАМИ
+        І Великими ВЕЛИКИМИ ЛІТЕРАМИ
     </p>
 
     <table>
@@ -52,9 +52,9 @@ let f = function(a, b, c) {
 
     <ul>
         <li>
-            <code>oldValue</code>: предыдущее значение
+            <code>oldValue</code>: попереднє значення
                 <ul>
-                    <li><code>name</code>: наименование</li>
+                    <li><code>name</code>: найменування</li>
                 </ul>
         </li>
         <li>list item 1</li>
