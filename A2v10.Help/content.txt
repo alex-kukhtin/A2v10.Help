@@ -82,7 +82,7 @@
 			TreeViewItem		/xaml/controls/treeviewitem
 			UploadFile			/xaml/controls/uploadfile
 
-		Контейнеры			/xaml/containers/index
+		Контейнери			/xaml/containers/index
 			Block				/xaml/containers/block
 			Card				/xaml/containers/card
 			CardBody			/xaml/containers/cardbody
@@ -116,7 +116,7 @@
 			Wizard				/xaml/containers/wizard
 			WizardPage			/xaml/containers/wizardpage
 
-		Текстовые елементи			/xaml/text/index
+		Текстові елементи			/xaml/text/index
 			Badge				/xaml/text/badge
 			Break				/xaml/text/break
 			Hyperlink			/xaml/text/hyperlink
@@ -148,7 +148,7 @@
 			BindCmd					/xaml/bind/bindcmd
 			StyleResource			/xaml/bind/styleresource
 
-		Компоненты					/xaml/components/index
+		Компоненти					/xaml/components/index
 			CollectionView			/xaml/components/collectionview
 			Confirm					/xaml/components/confirm
 			FilterDescription		/xaml/components/filterdescription
@@ -192,7 +192,7 @@
 			VerticalAlign		/xaml/enums/verticalalign
 			WrapMode			/xaml/enums/wrapmode
 
-		Абстрактные елементи	/xaml/abstract/index
+		Абстрактні елементи	/xaml/abstract/index
 			CheckBoxBase		/xaml/abstract/checkboxbase
 			Control				/xaml/abstract/control
 			CommandControl		/xaml/abstract/commandcontrol

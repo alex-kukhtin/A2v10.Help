@@ -3,17 +3,17 @@
 	<!--keywords:Control-->
 	<div class="title">
 		<h1>
-			Абстрактный елемент Control
+			Абстрактний елемент Control
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все абстрактные елементи</a>
+			<a href="index">Всі абстрактні елементи</a>
 		</div>
 	</div>
 
 	<p>Являє собою абстрактний елемент керування. </p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 	<p>
@@ -38,44 +38,44 @@
 			<tr>
 				<td class="prop-name">Block</td>
 				<td>Boolean</td>
-				<td>Выводить елемент керування у вигляді блочного, а не строчного елементу.</td>
+				<td>Выводить елемент керування у вигляді блочного, а не рядкового елементу.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Label</td>
 				<td>String</td>
-				<td>Текстовая метка для елементу керування. Зазвичай выводится сверху або слева від поля ввода.</td>
+				<td>Текстова мітка для елементу керування. Зазвичай виводиться над полем або ліворуч від поля введення.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Description</td>
 				<td>String</td>
-				<td>Опис для елементу керування. Зазвичай выводится под полем ввода.</td>
+				<td>Опис для елементу керування. Зазвичай виводиться під полем введення.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Required</td>
 				<td>Boolean</td>
 				<td>
-					Обов'язковое значення для ввода. Зверніть увагу, що це тільки визуальное вид обов'язкового ввода
-					в поле ввода (конкретный вид зависит від темы користувацького інтерфейса). Для керування перевірками используйте
-					<a href="/template/validators">валідатори шаблонов</a>.
+					Обов'язкове значення для введення. Зверніть увагу, що це тільки візуальне відображення обов'язкового вмісту
+					поле введення (конкретний вигляд залежить від теми користувацького інтерфейсу). Для керування перевірками використовуйте
+					<a href="/template/validators">валідатори шаблонів</a>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Disabled</td>
 				<td>Boolean</td>
-				<td>Елемент керування недоступен для ввода. Для керування этим полем обычно використовується прив'язка <a class="code-link" href="/xaml/bind/bind">Bind</a>.</td>
+				<td>Елемент керування недоступний для введення. Для керування цим полем зазвичай використовується прив'язка <a class="code-link" href="/xaml/bind/bind">Bind</a>.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Width</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Ширина елементу керування. За замовчанням елемент занимает 100% ширины батьківського елементу.
-					Для некоторых контейнеров (наприклад <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>) ширина вложенных елементів буде установлена в некоторое значення за замовчанням.
+					Ширина елементу керування. За замовчанням елемент займає 100% ширини батьківського елементу.
+					Для деяких контейнерів (наприклад <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>) ширина вкладених елементів буде встановлена в певне значення за замовчанням.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">TabIndex</td>
 				<td>Int32</td>
-				<td>Порядковый номер елементу в цепочке переходов по клавише <kbd>Tab</kbd>. Значення "-1" исключает елемент з цепочки переходов.</td>
+				<td>Порядковий номер елементу в ланцюзі переходів по клавіші <kbd>Tab</kbd>. Значення "-1" виключає елемент з ланцюга переходів.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">TestId</td>
@@ -85,31 +85,31 @@
 			<tr>
 				<td class="prop-name">Popover</td>
 				<td><a class="code-link" href="/xaml/text/popover">Popover</a></td>
-				<td>Всплывающая подсказка для елементу. Выводится у вигляді посилання <a class="a2-hyperlink a2-inline"><i class="ico ico-help-outline"></i></a> справа від елементу.</td>
+				<td>Спливаюча підказка для елементу. Виводиться у вигляді посилання <a class="a2-hyperlink a2-inline"><i class="ico ico-help-outline"></i></a> праворуч від елементу.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Hint</td>
 				<td><a class="code-link" href="/xaml/text/popover">Popover</a></td>
 				<td>
-				Всплывающая подсказка для елементу. Выводится у вигляді <i class="ico po-ico ico-help" style="color:#999"></i> після метки.
-				Иконку можна заменить, указав властивість <code>Icon</code> об'єкта <code>Popover</code>.
+				Спливаюча підказка для елементу. Виводиться у вигляді <i class="ico po-ico ico-help" style="color:#999"></i> після мітки.
+				Іконку можна замінити, вказавши властивість <code>Icon</code> об'єкта <code>Popover</code>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Validator</td>
 				<td><a class="code-link" href="/xaml/components/validator">Validator</a></td>
-				<td>Позволяет задать властивості валідатора елементу, такі як положение або ширину.</td>
+				<td>Дозволяє задати властивості валідатора елементу, такі як позицію або ширину.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">AddOns</td>
 				<td><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
-				<td>Додаткові елементи керування. Зазвичай це гиперпосилання, які выполняют якісь додаткові команди.</td>
+				<td>Додаткові елементи керування. Зазвичай це гіперпосилання, які виконують якісь додаткові команди.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Link</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
-				<td>Додаткова ссылка, пов'язана з елементом. Отображается в правом верхнем углу елементу.
-				Зазвичай це гиперссылка.</td>
+				<td>Додаткове просилання, пов'язане з елементом. Відображається в правому верхньому куті елементу.
+				Зазвичай це гіперпосилання.</td>
 			</tr>
 			<tr>
 				<td colspan="3">
@@ -125,8 +125,8 @@
 <pre class="code-highlight xml">
 <script type="text/template">
 <!-- приклад елементу -->
-<TextBox Label="Метка елементу" Description="Опис елементу" 
-		Hint="Текст всплывающей подсказки для редактора">
+<TextBox Label="Мітка елементу" Description="Опис елементу" 
+		Hint="Текст спливаючої підказки для редактора">
 	<TextBox.AddOns>
 		<Hyperlink Icon="Search" />
 	</TextBox.AddOns>
@@ -141,9 +141,9 @@
 	<p>
 		Результат
 		<div class="xaml-sample" id="xaml-control">
-			<textbox label="Метка елементу" description="Опис елементу" v-bind:item="Agent" prop="Name">
+			<textbox label="Мітка елементу" description="Опис елементу" v-bind:item="Agent" prop="Name">
 				<template slot="hint">
-					<popover class="a2-inline hint po-top-right" icon="help"><span>Текст всплывающей подсказки для редактора</span></popover>
+					<popover class="a2-inline hint po-top-right" icon="help"><span>Текст спливаючої підказки для редактора</span></popover>
 				</template>
 				<template slot="link">
 					<a class="a2-hyperlink control-link">додатково...</a>

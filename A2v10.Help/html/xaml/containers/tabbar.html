@@ -6,22 +6,22 @@
 			Елемент TabBar
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 	<p>
-		Являє собою панель для выбора елементу. Фактично це просто контейнер з кнопками
-		<a class="code-link" href="/xaml/controls/tabbutton">TabButton</a>, в якому текущая выделенная кнопка
-		связывается зі заченнями. При нажатии кнопок, связанное значення изменяется і навпаки, при изменении значения, 
-		выбирается нужная кнопка.
+		Являє собою панель для вибору елементу. Фактично це просто контейнер з кнопками
+		<a class="code-link" href="/xaml/controls/tabbutton">TabButton</a>, в якому поточна виділена кнопка
+		пов'язується зі заченнями. При натисканні кнопок, пов'язане значення змінюється і навпаки, при зміні значення, 
+		обирається потрібна кнопка.
 	</p>
 	<p>
-		Для того, щоб управлять, наприклад, видимостью панелей можна використовувати елемент
+		Для того, щоб управляти, наприклад, видимістю панелей, можна використовувати елемент
 		<a class="code-link" href="/xaml/components/switch">Switch</a>.
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 	<p>Властивість вмісту: <code>Buttons</code></p>
@@ -55,34 +55,34 @@
 				<td class="prop-name">Value</td>
 				<td><code>Object</code></td>
 				<td>
-					Значення, определяющее активную кнопку.
+					Значення, що визначає активну кнопку.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">Style</td>
 				<td class="fit"><code>TabBarStyle</code></td>
 				<td>
-					Стиль відображення панели. Можливі значення:
+					Стиль відображення панелі. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - (за замовчанням) Стандартное отображение.</li>
-						<li><span class="prop-name">MainMenu</span> - В виде основного меню системи.</li>
-						<li><span class="prop-name">Tab</span> - В виде панели закладок.</li>
-						<li><span class="prop-name">Wizard</span> - В виде мастера.</li>
-						<li><span class="prop-name">ButtonGroup</span> - В виде группы кнопок.</li>
+						<li><span class="prop-name">Default</span> - Стандартне відображення (за замовчанням).</li>
+						<li><span class="prop-name">MainMenu</span> - У вигляді основного меню системи.</li>
+						<li><span class="prop-name">Tab</span> - У вигляді панелі закладок.</li>
+						<li><span class="prop-name">Wizard</span> - У вигляді майстеру.</li>
+						<li><span class="prop-name">ButtonGroup</span> - У вигляді групи кнопок.</li>
 					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">DropShadow</td>
 				<td><a class="code-link" href="/xaml/enums/shadowstyle">ShadowStyle</a></td>
-				<td>Вид тени.</td>
+				<td>Вид тіні.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Description</td>
 				<td class="no-wrap">String | <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
 				<td>
-					Текст (або елемент) который буде выводиться справа від кнопок. Для некоторых стилей не має сенса,
-					поэтому отображаться не буде.
+					Текст (або елемент) який буде виводитися праворуч від кнопок. Для деяких стилів не має сенсу,
+					тому відображатися не буде.
 				</td>
 			</tr>
 			<tr>
@@ -102,7 +102,7 @@
 <script type="text/template">
 <TabBar Value="{Bind Root.Value}">
 	<TabBar.Description>
-		Выбрано: <Span Content="{Bind Root.Value}"/>
+		Обрано: <Span Content="{Bind Root.Value}"/>
 	</TabBar.Description>
 	<TabButton ActiveValue="1" Content="Первая кнопка"/>
 	<TabButton ActiveValue="2" Content="Вторая кнопка"/>
@@ -116,14 +116,14 @@
 		<div class="grid xaml-sample" style="width:500px" id="xaml-tabbar">
 			<div class="a2-tab-bar">
 				<div class="a2-tab-bar-item">
-					<a v-bind:class="{active: isActive('1')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('1')">Первая кнопка</a>
+					<a v-bind:class="{active: isActive('1')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('1')">Перша кнопка</a>
 				</div>
 				<div class="a2-tab-bar-item">
-					<a v-bind:class="{active: isActive('2')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('2')">Вторая кнопка</a>
+					<a v-bind:class="{active: isActive('2')}" class="a2-tab-button" href="" v-on:click.stop.prevent="click('2')">Друга кнопка</a>
 				</div>
 				<div class="divider" role="separator"></div>
 				<div class="a2-tab-description">
-					Выбрано: <span v-text="value"></span>
+					Обрано: <span v-text="value"></span>
 				</div>
 			</div>
 		</div>

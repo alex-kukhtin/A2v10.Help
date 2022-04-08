@@ -6,14 +6,14 @@
 			Елемент TabPanel
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 	<p>
-		Являє собою панель з закладками. Вміст представлено елементуми <a class="code-link" href="tab">Tab</a>.
+		Являє собою панель з закладками. Вміст представлено елементами <a class="code-link" href="tab">Tab</a>.
 	</p>
 
-	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	Наслідує: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
 	<p>Властивість вмісту: <code>Tabs</code></p>
 
@@ -31,7 +31,7 @@
 				<td class="prop-name">Tabs</td>
 				<td class="fit"><code>TabCollection</code></td>
 				<td>
-					Набор закладок (елементи <a class="code-link" href="tab">Tab</a>).
+					Набір закладок (елементи <a class="code-link" href="tab">Tab</a>).
 				</td>
 			</tr>
 			<tr>
@@ -39,14 +39,14 @@
 				<td>Array</td>
 				<td>
 					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для закладок.
-					Вміст елементу буде повторяться у відповідності до содержимым <code>ItemsSource</code>.
+					Вміст елементу буде повторюватися у відповідності до вмісту <code>ItemsSource</code>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Header</td>
 				<td><code>Object</code></td>
 				<td>
-					Заголовок панели. Выводится в правой части панели з закладками. Може бути рядком, прив'язкою или
+					Заголовок панелі. Виводиться в правій частині панелі з закладками. Може бути рядком, прив'язкою або
 					об'єктом <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>.
 				</td>
 			</tr>
@@ -54,41 +54,41 @@
 				<td class="prop-name">Border</td>
 				<td>Boolean</td>
 				<td>
-					Выводить ли рамку вокруг панели.
+					Чи виводити рамку навколо панелі.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">FullPage</td>
 				<td>Boolean</td>
 				<td>
-					Панель буде занимать всю страницу (є корневым елементом).
+					Панель буде займати всю сторінку (є кореневим елементом).
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">MinHeight</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Минимальная высота панели.
+					Мінімальна висота панелі.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Overflow</td>
 				<td>Boolean</td>
 				<td>
-					Может ли появляться скролл-бар в панели. Установите це властивість,
-					якщо потрібно щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли выходить за границы елементу.
-					В цьому випадку потрібно внимательно следить за тем, щоб основное вміст не вышло за границы.
-					Скролл-бар отображаться не буде.
+					Чи може з'являтися скролл-бар в панелі. Встановіть цю властивість,
+					якщо потрібно, щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли виходити за межі елементу.
+					В цьому випадку потрібно уважно слідкувати за тим, щоб основний вміст не вийшов за межі.
+					Скролл-бар відображатися не буде.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">TabPosition</td>
 				<td class="fit"><code>TabPosition</code></td>
 				<td>
-					Положение панели закладок. Можливі значення:
+					Положення панелі закладок. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Top</span> - (за замовчанням) Сверху.</li>
-						<li><span class="prop-name">Bottom</span> - Снизу.</li>
+						<li><span class="prop-name">Top</span> - Зверху (за замовчанням).</li>
+						<li><span class="prop-name">Bottom</span> - Внизу.</li>
 					</ul>
 				</td>
 			</tr>
@@ -107,10 +107,10 @@
 		XAML
 <pre class="code-highlight xml">
 <script type="text/template">
-<TabPanel Header="Заголовок панели" Border="True">
+<TabPanel Header="Заголовок панелі" Border="True">
 	<Tab Header="Tab 1">
 		<Grid>
-			<Text>Вміст первой закладки</Text>
+			<Text>Вміст першої закладки</Text>
 		</Grid>
 	</Tab>
 	<Tab Header="Tab 2">
@@ -128,11 +128,11 @@
 		<div class="grid xaml-sample" style="width:500px" id="xaml-tabpanel">
 			<a2-tab-panel class="bordered tab-pos-top" >
 				<template slot="title">
-					<div class="pane-header">Заголовок панели</div>
+					<div class="pane-header">Заголовок панелі</div>
 				</template>
 				<a2-tab-item header="Tab 1">
 					<template>
-						<div class="grid">Вміст первой закладки</div>
+						<div class="grid">Вміст першої закладки</div>
 					</template>
 				</a2-tab-item>
 				<a2-tab-item header="Tab 2">

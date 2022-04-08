@@ -6,15 +6,15 @@
 			Елемент FullHeightPanel
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 	<p>
-		Представляє панель, высота которой завжди равна 100%.
+		Являє собою панель, висота якої завжди дорівнює 100%.
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 	<h3>Властивості</h3>
@@ -30,7 +30,7 @@
 			<tr>
 				<td class="prop-name">MinWidth</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
-				<td>Минимальная ширина панели</td>
+				<td>Мінімальна ширина панелі</td>
 			</tr>
 		</tbody>
 		<tr>
@@ -41,7 +41,7 @@
 	</table>
 
 
-	<h3>Присоединенные властивості</h3>
+	<h3>Приєднані властивості</h3>
 	<table class="table-props">
 		<thead>
 			<tr>
@@ -55,7 +55,7 @@
 				<td class="prop-name">FullHeightPanel.Fill</td>
 				<td>Boolean</td>
 				<td>
-					Определяет дочірній елемент, высота якого буде изменяться при изменении высоты батьківського контейнера.
+					Визначає дочірній елемент, висота якого буде змінюватися при изменении висоти батьківського контейнера.
 					<br /> Тільки один дочірній елемент може мати властивість <code>Fill = True</code>.
 				</td>
 			</tr>
@@ -63,16 +63,16 @@
 				<td class="prop-name">FullHeightPanel.Skip</td>
 				<td>Boolean</td>
 				<td>
-					Пропускать цей елемент при создании контейнера. Це властивість використовується в тому випадку, якщо потрібно, щоб в одном
-					блоке контейнера выводился один з кількох елементів (наприклад за допомогою прив`язки <code>If</code>).
-					<br />Установите <code>Skip = True</code> для всех елементів в блоке, крім одного (любого).
+					Пропускати цей елемент при створенні контейнера. Ця властивість використовується в тому випадку, коли потрібно, щоб в одному
+					блоці контейнера виводився один з кількох елементів (наприклад за допомогою прив`язки <code>If</code>).
+					<br />Встановіть <code>Skip = True</code> для всех елементів в блоці, крім одного (будь-якого).
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<p class="tip warning">
-		<b>Зверніть увагу!</b> Для реализации панели використовується сетка (css grid). Из-за этого, при скрытии елементів за допомогою
+		<b>Зверніть увагу!</b> Для реалізації панелі використовується сетка (css grid). Из-за этого, при скрытии елементів за допомогою
 		прив`язки <code>If</code>, выбор елементу для заполнения буде неправильным.
 		<br />
 		Це відбувається потому, что

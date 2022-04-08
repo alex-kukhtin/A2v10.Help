@@ -6,12 +6,12 @@
 			Елемент DataGrid
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все елементи керування</a>
+			<a href="index">Всі елементи керування</a>
 		</div>
 	</div>
 	<p>
 		Являє собою таблицю з даними. Працює тільки з джерелом даних. Отображает одну строку
-		для кожного елементу масива - джерела даних. Колонки таблиці визначаються коллекцией вложенных об'єктів
+		для кожного елементу масива - джерела даних. Колонки таблиці визначаються колекцією вкладених об'єктів
 		<a class="code-link" href="datagridcolumn">DataGridColumn</a>.
 	</p>
 	<p>
@@ -19,7 +19,7 @@
 		таблица підтримує сортировку, фільтрацію, розбиття на сторінки і группировку строк.
 	</p>
 
-	Наследует: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	Наслідує: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
 	<h3>Властивості</h3>
 	<table class="table-props">
@@ -49,7 +49,7 @@
 				<td class="prop-name">Hover</td>
 				<td>Boolean</td>
 				<td>
-					Выделение строки при наведении курсора мыши.
+					Выделение рядки при наведении курсора мыши.
 				</td>
 			</tr>
 			<tr>
@@ -80,13 +80,13 @@
 			<tr>
 				<td class="prop-name">Background</td>
 				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
-				<td>Цвет фона.</td>
+				<td>Колір фона.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка строки таблиці.
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка рядки таблиці.
 					Маркер являє собою вертикальную линию в левой колонке и/або выделение цветом.
 					Подробности ниже.
 				</td>
@@ -95,12 +95,12 @@
 				<td class="prop-name">MarkerStyle</td>
 				<td><code>RowMarkerStyle</code></td>
 				<td>
-					Стиль маркировки строки в таблице.
+					Стиль маркировки рядки в таблице.
 					Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">None</span> - (за замовчанням) нет маркировки.</li>
 						<li><span class="prop-name">Row</span> - фоновий цвет.</li>
-						<li><span class="prop-name">Marker</span> - маркер у вигляді линии в первой колонке.</li>
+						<li><span class="prop-name">Marker</span> - маркер у вигляді линии в першої колонке.</li>
 						<li><span class="prop-name">Both</span> - оба вида маркировки.</li>
 					</ul>
 				</td>
@@ -109,7 +109,7 @@
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
 				<td>
-					Панель, яка отображается, якщо вміст пустое. Зазвичай являє собою об'єкт
+					Панель, яка відображається, якщо вміст пустое. Зазвичай являє собою об'єкт
 					<a class="code-link" href="emptypanel">EmptyPanel</a>.
 				</td>
 			</tr>
@@ -117,7 +117,7 @@
 				<td class="prop-name">DoubleClick</td>
 				<td width="1px"><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
 				<td>
-					Команда, яка буде выполнена при двойном щелчке на строке таблиці.
+					Команда, яка буде виконана при двойном щелчке на строке таблиці.
 					Не забудьте передать в команду аргумент.
 				</td>
 			</tr>
@@ -132,7 +132,7 @@
 				<td class="prop-name">RowDetails</td>
 				<td width="1px"><a class="code-link" href="/xaml/controls/datagridrowdetails">DataGridRowDetails</a></td>
 				<td>
-					Детализация для строки.
+					Детализация для рядки.
 				</td>
 			</tr>
 			<tr>
@@ -153,7 +153,7 @@
 
 	<h4>Маркировка рядків таблиці</h4>
 	<p>
-		Выражение прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
+		Вираз прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
 		css-класс, добавляемый к строке.
 
 		В теме за замовчанням поддерживаются наступні варианты маркировки строк:

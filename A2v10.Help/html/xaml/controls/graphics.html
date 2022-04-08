@@ -6,7 +6,7 @@
 			Елемент Graphics
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все елементи керування</a>
+			<a href="index">Всі елементи керування</a>
 		</div>
 	</div>
 
@@ -16,7 +16,7 @@
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 
@@ -33,14 +33,14 @@
 			<tr>
 				<td class="prop-name">Delegate</td>
 				<td>String</td>
-				<td>Ім'я <a href="/template/delegates">делегата</a>, который буде викликатися для отрисовки графики.</td>
+				<td>Ім'я <a href="/template/delegates">делегата</a>, який буде викликатися для отрисовки графики.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Argument</td>
 				<td>Object</td>
 				<td>
-					Аргумент (обычно це прив'язка <a class="code-link" href="/xaml/bind/bind">Bind</a>),
-					который буде передан в делегат.
+					Аргумент (зазвичай це прив'язка <a class="code-link" href="/xaml/bind/bind">Bind</a>),
+					який буде передан в делегат.
 				</td>
 			</tr>
 			<tr>
@@ -60,7 +60,7 @@
 						<li><span class="prop-name">Watch</span> - викликати делегат тільки при изменении аргумента.</li>
 						<li>
 							<span class="prop-name">Deep</span> - викликати делегат при изменении аргумента або при
-							изменении любых його вложенных властивостей (рекурсивно).
+							изменении будь-яких його вкладених властивостей (рекурсивно).
 						</li>
 					</ul>
 				</td>
@@ -68,7 +68,7 @@
 			<tr>
 				<td class="prop-name">Height</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
-				<td>Высота елементу. За замовчанням <code>Auto</code>.</td>
+				<td>Висота елементу. За замовчанням <code>Auto</code>.</td>
 			</tr>
 			<tr>
 				<td colspan="3">
@@ -90,14 +90,14 @@
 				<code>arg</code> - аргумент, описанный в розмітці.
 			</li>
 			<li>
-				<code>node</code> - узел DOM, связанный з елементом.
+				<code>node</code> - узел DOM, пов'язаний з елементом.
 			</li>
 		</ul>
 	</div>
 
 	<p class="tip warning">
-		<b>Зверніть увагу!</b> Зазвичай требуется щоб отрисовка графики выполнялась однократно. Однако, в некоторых 
-		случаях елемент, связанный з графикой може изменяться.
+		<b>Зверніть увагу!</b> Зазвичай требуется щоб отрисовка графики выполнялась однократно. Однако, в деяких 
+		случаях елемент, пов'язаний з графикой може змінюватися.
 		<br />
 		Установить режим отслеживания изменений можна за допомогою властивості <code>Watch</code>.
 		Не устанавливайте режим <code>Deep</code> без необхідности, поскольку це приводит к снижению 

@@ -6,20 +6,20 @@
 			Елемент CommandBar
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 	<p>
-		Являє собою панель команд. Зазвичай використовується внутри елементів
-		<a class="code-link" href="/xaml/controls/datagrid">DataGrid</a> и
+		Являє собою панель команд. Зазвичай використовується всередині елементів
+		<a class="code-link" href="/xaml/controls/datagrid">DataGrid</a> та
 		<a class="code-link" href="/xaml/controls/listitem">ListItem</a>.
 	</p>
 
-	<p>Особенность цього елементу в том, що його видимость буде визначатися состояние батьківського контейнера. 
-	Наприклад, якщо разместить його в колонке таблиці і встановити властивість <code>Visibility = "Active"</code>, то 
-	панель команд буде отображаться тільки для активной строки таблиці.</p>
+	<p>Особливість цього елементу в тому, що його видимість буде визначатися станом батьківського контейнеру. 
+	Наприклад, якщо розмістити його в стовпчику таблиці і встановити властивість <code>Visibility = "Active"</code>, то 
+	панель команд буде відображатися тільки для активного рядку таблиці.</p>
 
-	Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> :
+	Наслідує: <a class="code-link" href="/xaml/abstract/container">Container</a> :
 	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
 	<h3>Властивості</h3>
@@ -37,13 +37,13 @@
 				<td class="prop-name">Visibility</td>
 				<td class="fit"><code>CommandBarVisibility</code></td>
 				<td>
-					Видимость панели. Можливі значення:
+					Видимість панелі. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Default</span> - (за замовчанням) Видима завжди.</li>
 						<li><span class="prop-name">Active</span> - Видима тільки для активного елементу.</li>
 						<li>
 							<span class="prop-name">Hover</span> - Видима як для активного елементу, так і для елементу,
-							на котором знаходиться курсор мыши.
+							на якому знаходиться курсор миші.
 						</li>
 					</ul>
 				</td>
@@ -52,11 +52,11 @@
 				<td class="prop-name">Float</td>
 				<td><code>FloatMode</code></td>
 				<td>
-					Сделать панель "плавающей".
+					Зробити панель "плаваючою".
 					<ul class="enum-vals">
-						<li><span class="prop-name">None</span> - (за замовчанням) нет.</li>
-						<li><span class="prop-name">Left</span> - разместить слева.</li>
-						<li><span class="prop-name">Right</span> - разместить справа.</li>
+						<li><span class="prop-name">None</span> - ні (за замовчанням).</li>
+						<li><span class="prop-name">Left</span> - розмістити ліворуч.</li>
+						<li><span class="prop-name">Right</span> - розмістити праворуч.</li>
 					</ul>
 				</td>
 			</tr>

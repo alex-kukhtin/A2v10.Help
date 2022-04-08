@@ -6,13 +6,13 @@
 			Елемент List
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все елементи керування</a>
+			<a href="index">Всі елементи керування</a>
 		</div>
 	</div>
 	<p>Являє собою список елементів (c можливістю виділення). 
-	Вміст обычно являє собою список елементів <a class="code-link" href="listitem">ListItem</a>.</p>
+	Вміст зазвичай являє собою список елементів <a class="code-link" href="listitem">ListItem</a>.</p>
 
-	Наследует: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	Наслідує: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
 	<p>Властивість вмісту: <code>Content</code></p>
 
@@ -58,14 +58,14 @@
 				<td class="prop-name">Border</td>
 				<td>Boolean</td>
 				<td>
-					Отображать ли рамку вокруг списка.
+					Відображати ли рамку навколо списка.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">BorderStyle</td>
 				<td class="fit"><a class="code-link" href="/xaml/enums/borderstyle">BorderStyle</a></td>
 				<td>
-					Стиль рамки вокруг елементу.
+					Стиль рамки навколо елементу.
 				</td>
 			</tr>
 			<tr>
@@ -93,14 +93,14 @@
 				<td class="prop-name">Height</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Высота списка.
+					Висота списка.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">MaxHeight</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Максимальная высота списка. Якщо список больше, з'являється вертикальный скроллер.
+					Максимальна висота списка. Якщо список больше, з'являється вертикальный скроллер.
 				</td>
 			</tr>
 			<tr>
@@ -115,7 +115,7 @@
 				<td>Object</td>
 				<td>
 					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка елементу списка.
-					Маркер являє собою вертикальную линию слева від елементу.
+					Маркер являє собою вертикальную линию ліворуч від елементу.
 					Подробности ниже.
 				</td>
 			</tr>
@@ -128,7 +128,7 @@
 					<ul class="enum-vals">
 						<li><span class="prop-name">None</span> - (за замовчанням) нет маркировки.</li>
 						<li><span class="prop-name">Row</span> - фоновий цвет.</li>
-						<li><span class="prop-name">Marker</span> - маркер у вигляді полоски слева.</li>
+						<li><span class="prop-name">Marker</span> - маркер у вигляді полоски ліворуч.</li>
 						<li><span class="prop-name">Both</span> - оба вида маркировки.</li>
 					</ul>
 				</td>
@@ -137,7 +137,7 @@
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
 				<td>
-					Панель, яка отображается, якщо вміст пустое. Зазвичай являє собою об'єкт
+					Панель, яка відображається, якщо вміст пустое. Зазвичай являє собою об'єкт
 					<a class="code-link" href="emptypanel">EmptyPanel</a>.
 				</td>
 			</tr>
@@ -145,7 +145,7 @@
 				<td class="prop-name">DoubleClick</td>
 				<td width="1px"><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
 				<td>
-					Команда, яка буде выполнена при двойном щелчке на елементе списка.
+					Команда, яка буде виконана при двойном щелчке на елементе списка.
 					Не забудьте передать в команду аргумент.
 				</td>
 			</tr>
@@ -159,7 +159,7 @@
 
 	<h4>Маркировка елементів списка</h4>
 	<p>
-		Выражение прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
+		Вираз прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
 		css-класс, добавляемый к елементу списка.
 
 		В теме за замовчанням поддерживаются наступні варианты маркировки елементів списка:

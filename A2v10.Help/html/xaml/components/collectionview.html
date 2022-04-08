@@ -6,23 +6,23 @@
 			Компонент CollectionView
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все компоненты</a>
+			<a href="index">Всі компоненти</a>
 		</div>
 	</div>
 
 	<p>
-		Являє собою елемент, который дозволяє работать з коллекциями. Обеспечивает
-		розбиття на сторінки, сортировку і фільтрацію.
-		Колекція може оброблятися як на сервере, так і на клієнті.
+		Являє собою елемент, який дозволяє працювати з колекціями. Забезпечує 
+		розбиття на сторінки, сортування і фільтрацію.
+		Колекція може оброблятися як на сервері, так і на клієнті.
 	</p>
 
 	<p>
-		Внутри елементу обработанная коллекция доступна по ссылке <code>Parent</code>.
-		При серверной обробці требуется специальная <a href="/models/array">поддержка на уровне моделі даних</a>.
+		Всередині елементу оброблена колекція доступна за посиланням <code>Parent</code>.
+		При серверній обробці потрібна спеціальна <a href="/models/array">підтримка на рівні моделі даних</a>.
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 
@@ -47,20 +47,20 @@
 				<td class="prop-name">ItemsSource</td>
 				<td>Array</td>
 				<td>
-					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для роботи з коллекцией.
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для роботи з коллекцією.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">RunAt</td>
 				<td class="fit"><code>RunMode</code></td>
 				<td>
-					Режим роботи з коллекцией. Можливі значення:
+					Режим роботи з коллекцією. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Client</span> - (за замовчанням). Колекція обробляється на клієнті.</li>
-						<li><span class="prop-name">Server</span> - коллекция обробляється на сервере.</li>
+						<li><span class="prop-name">Server</span> - колекція обробляється на сервері.</li>
 						<li>
-							<span class="prop-name">ServerUrl</span> - коллекция обробляється на сервере. Дополнительно в url
-							додаються параметри запиту для обробки коллекции.
+							<span class="prop-name">ServerUrl</span> - колекція обробляється на сервері. Додатково в url
+							додаються параметри запиту для обробки колекції.
 						</li>
 					</ul>
 				</td>
@@ -69,7 +69,7 @@
 				<td class="prop-name">Filter</td>
 				<td><a class="code-link" href="filterdescription">FilterDescription</a></td>
 				<td>
-					Определение фильтров.
+					с фільтрів.
 				</td>
 			</tr>
 			<!--
@@ -77,7 +77,7 @@
 				<td class="prop-name">GroupBy</td>
 				<td>GroupDescription</td>
 				<td>
-					Определение групування.
+					Визначення групування.
 				</td>
 			</tr>
 				-->
@@ -85,21 +85,21 @@
 				<td class="prop-name">PageSize</td>
 				<td>Int32?</td>
 				<td>
-					Размер страницы. Тільки для роботи на клієнті.
+					Розмір сторінки. Тільки для роботи на клієнті.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Sort</td>
 				<td><a class="code-link" href="sortdescription">SortDescription</a></td>
 				<td>
-					Определение сортировки. Тільки для роботи на клієнті.
+					Визначення сортування. Тільки для роботи на клієнті.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">FilterDelegate</td>
 				<td>String</td>
 				<td>
-					Делегат для фильтрации. Тільки для роботи на клієнті.
+					Делегат для фільтрації. Тільки для роботи на клієнті.
 				</td>
 			</tr>
 			<tr>
@@ -111,11 +111,11 @@
 	</table>
 
 	<p>
-		Компонент має властивості, к которым можуть обращаться дочірні компоненты. Такое обращение осуществляется через префікс
+		Компонент має властивості, до яких можуть звертатися дочірні компоненти. Таке звернення реалізується через префікс
 		<code>Parent</code>.
 	</p>
 
-	<h3>Внешние властивості</h3>
+	<h3>Зовнішні властивості</h3>
 	<table class="table-props">
 		<thead>
 			<tr>
@@ -129,22 +129,22 @@
 				<td class="prop-name">ItemsSource</td>
 				<td>Array</td>
 				<td>
-					Часть отображаемой коллекции. Содержит дані выбранной страницы в правильно отсортированном виде.
+					Частина колекції, що відображається. Містить дані вибранної сторінки в правильно відсортованому вигляді.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Filter</td>
 				<td>Object</td>
 				<td>
-					Фильтр коллекции. Структура об'єкта соответствует
-					определению фильтра <a class="code-link" href="filterdescription">FilterDescription</a>.
+					Фильтр колекції. Структура об'єкту відповідає
+					визначенню фільтра <a class="code-link" href="filterdescription">FilterDescription</a>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Pager</td>
 				<td>Object</td>
 				<td>
-					Джерело для зв'язування со властивістю <code>Source</code> об'єкта
+					Джерело для зв'язування з властивістю <code>Source</code> об'єкта
 					<a class="code-link" href="/xaml/controls/pager">Pager</a>.
 				</td>
 			</tr>
@@ -152,10 +152,10 @@
 	</table>
 
 	<p class="tip info">
-		<b>Зверніть увагу!</b> Компонент <code>CollectionView</code> дуже тесно взаимодействует з об'єктами, поддерживающими
-		работу з коллекциями (зокрема <a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>).
-		Наприклад, щелчок по заголовку колонки автоматично меняет сортировку в родительском компоненте. Никаких додаткових
-		дій не требуется.
+		<b>Зверніть увагу!</b> Компонент <code>CollectionView</code> дуже тісно взаємодіє з об'єктами, що підтримують
+		роботу з колекціями (зокрема <a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>).
+		Наприклад, клік по заголовку стовпчика автоматично змінює сортування в батьківському компоненті. Жодних додаткових
+		дій виконувати не потрібно.
 	</p>
 
 

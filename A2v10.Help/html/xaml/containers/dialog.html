@@ -6,16 +6,16 @@
 			Елемент Dialog
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 	<p>
-		Являє собою контейнер, які містить інші елементи
-		керування або інші контейнеры. Завжди використовується як кореневий елемент розмітки.
+		Являє собою контейнер, який містить інші елементи
+		керування або інші контейнери. Завжди використовується як кореневий елемент розмітки.
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 	<p>Властивість вмісту: <code>Children</code></p>
@@ -42,122 +42,122 @@
 				<td class="prop-name">HelpUrl</td>
 				<td>String</td>
 				<td>
-					Путь к странице справки. Якщо указан, то в заголовке вікна діалога появится гиперпосилання на страницу справки.
+					Шлях до сторінки довідки. Якщо вказаний, то в заголовку вікна діалога з'явиться гіперпосилання на сторінку довідки.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">TitleInfo</td>
 				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
 				<td>
-					Дополнительный елемент в заголовке. Выводится після текста заголовка.
+					Додатковий елемент в заголовку. Виводиться після тексту заголовку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Buttons</td>
 				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
 				<td>
-					Вміст панели кнопок. Зазвичай набір управляющих кнопок.
+					Вміст панелі кнопок. Зазвичай набір кнопок керування.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Taskpad</td>
 				<td class="fit"><a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a></td>
 				<td>
-					Панель задач діалога. Частіше за всі це елемент <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>.
+					Панель задач діалогу. Частіше за все це елемент <a class="code-link" href="/xaml/containers/taskpad">Taskpad</a>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Width</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Ширина вікна діалога. За замовчанням визначається содержимым.
+					Ширина вікна діалогу. За замовчанням визначається вмістом.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Height</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Высота вікна діалога. За замовчанням визначається содержимым.
+					Висота вікна діалогу. За замовчанням визначається вмістом.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">MinWidth</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Минимальная ширина вікна.
+					Мінімальна ширина вікна.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">Size</td>
 				<td><code>DialogSize</code></td>
 				<td>
-					Размер вікна діалога. Можливі значення:
+					Розмір вікна діалогу. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Default</span> - за замовчанням.</li>
 						<li><span class="prop-name">Small</span> - маленький.</li>
-						<li><span class="prop-name">Medium</span> - нормальный.</li>
-						<li><span class="prop-name">Large</span> - большой.</li>
-						<li><span class="prop-name">Max</span> - Развернутый на весь экран. Эквивалентно <code>Maximize="True"</code></li>
+						<li><span class="prop-name">Medium</span> - нормальний.</li>
+						<li><span class="prop-name">Large</span> - великий.</li>
+						<li><span class="prop-name">Max</span> - на весь экран. Еквівалентно <code>Maximize="True"</code></li>
 					</ul>
-					Конкретные значення розміру залежать від темы користувацького інтерфейса.
-					Якщо указано властивість <code>Width</code>, то це властивість ігнорується.
+					Конкретні значення розміру залежать від теми користувацького інтерфейса.
+					Якщо вказано властивість <code>Width</code>, то ця властивість ігнорується.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Maximize</td>
 				<td>Boolean</td>
 				<td>
-					Максимально возможный размер діалога. Будет меняться в залежності від размеров вікна браузера.
+					Максимально можливий розмір діалогу. Буде змінюватися в залежності від розмірів вікна браузера.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">ButtonOnTop</td>
 				<td>Boolean</td>
 				<td>
-					Размешать панель кнопок в верхней части вікна діалога.
+					Розміщувати панель кнопок у верхній частині вікна діалогу.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">ShowWaitCursor</td>
 				<td>Boolean</td>
 				<td>
-					Якщо властивість установлено в <code>True</code>, то при виконанні запитів к серверу
-					окно діалога буде затеняться і буде показываться индикатор виконання запиту.
+					Якщо властивість встановлено в <code>True</code>, то при виконанні запитів до серверу
+					вікно діалогу буде затінятися і буде демонструватися індикатор виконання запиту.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">TestId</td>
 				<td>String</td>
 				<td>
-					Ідентифікатор вікна. Використовується при тестировании.
+					Ідентифікатор вікна. Використовується при тестуванні.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">AlwaysOk</td>
 				<td>Boolean</td>
 				<td>
-					Якщо властивість установлено в <code>True</code>, то при закрытии діалога любым способом буде считаться что
-					возвращаемый результат равен <code>true</code>.
+					Якщо властивість встановлено в <code>True</code>, то при закритті діалогу будь-яким способом буде вважатися, що
+					результат, що повертається, дорівнює <code>true</code>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">CanCloseDelegate</td>
 				<td>String</td>
-				<td>Ім'я <a href="/template/delegates">делегата</a>, который буде викликатися при спробі закриття вікна (любым способом).</td>
+				<td>Ім'я <a href="/template/delegates">делегата</a>, який буде викликатися при спробі закриття вікна (будь-яким способом).</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Background</td>
 				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
-				<td>Цвет фона діалога.</td>
+				<td>Колір фону діалога.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Overflow</td>
 				<td>Boolean</td>
 				<td>
-					Может ли появляться скролл-бар в діалоге. Установите це властивість, 
-					якщо потрібно щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли выходить за границы елементу.
-					В цьому випадку потрібно внимательно следить за тем, щоб основное вміст не вышло за границы. 
-					Скролл-бар отображаться не буде.
+					Чи може з'являтися скролл-бар в діалозі. Встановіть цю властивість, 
+					якщо потрібно, щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли виходити за межі елементу.
+					В цьому випадку потрібно уважно слідкувати за тим, щоб основний вміст не виходив за межі. 
+					Скролл-бар відображатися не буде.
 				</td>
 			</tr>
 			<tr>
@@ -177,12 +177,12 @@
 				<code>this</code> - корінь моделі даних.
 			</li>
 		</ul>
-		<h4>Возвращаемое значення:</h4>
+		<h4>Значення, що повертається:</h4>
 		<ul class="enum-vals">
 			<li><code>Promise</code> - Якщо <code>Promise</code> вернет <code>truthy</code> значення, то діалог закриєся з цим результатом.</li>
 			<li><code>any</code> - Якщо значення <code>truthy</code>, то діалог закриєся з цим результатом.</li>
 		</ul>
-		<p>Примечание: <code>truthy</code> - любое значення, которое вважається истинным.</p>
+		<p>Примітка: <code>truthy</code> - будь-яке значення, яке вважається вірним.</p>
 	</div>
 
 </div>

@@ -6,17 +6,17 @@
 			Елемент Partial
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 
 	<p>
-		Являє собою частина сторінки. Використовується у випадку, якщо потрібно отобразить
-		фрейм з собственной моделью і шаблоном як частина другой страницы.
+		Являє собою частину сторінки. Використовується у випадку, якщо потрібно відобразити
+		фрейм з власною моделлю і шаблоном як частину іншої сторінки.
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/rootcontainer">RootContainer</a> : <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 	<p>Властивість вмісту: <code>Children</code></p>
@@ -34,7 +34,7 @@
 			<tr>
 				<td class="prop-name">Background</td>
 				<td class="fit"><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
-				<td>Цвет фона сторінки.</td>
+				<td>Колір фону сторінки.</td>
 			</tr>
 			<tr>
 				<td colspan="3">
@@ -46,20 +46,21 @@
 
 
 	<h3>Приклад</h3>
-	<p>Наприклад є сторінка з двух колонок. В левой колонке - список сущностей, а в 
-	правой властивості выбранной сутності.</p>
+	<p>Наприклад є сторінка з двох стовпчиків. В лівому стовпчику - перелік сутностей, а в 
+	правому -  властивості обраної сутності.</p>
 
-	<p>В левой колонке выводим список сущностей, в правой - 
-	елемент <a class="code-link" href="/xaml/containers/include">Include</a>. Властивість <code>Source</code>
-	цього елементу связываем со властивістю (возможна вычисляемым) елементу списка, которое 
-	повинно представлять собой <b>url</b> к правой части страницы.
+	<p>
+		В лівому стовпчику виводимо перелік сутностей, в правому -
+		елемент <a class="code-link" href="/xaml/containers/include">Include</a>. Властивість <code>Source</code>
+		цього елементу пов'язуємо з властивістю (можливо обчислюваною) елементу переліку, яка
+		повинна являти собою <b>url</b> до правої частини сторінки.
 	</p>
 
-	<p>По сформированным <b>url</b> размещаем виду з елементуми <code>Partial</code> в якості 
-	кореня з собственной моделью і собственным шаблоном.
+	<p>По сформированим <b>url</b> розміщуємо вид з елементами <code>Partial</code> в якості 
+	кореня з власною моделлю і власним шаблоном.
 	</p>
 
-	<p>Зверніть увагу, що сами моделі і їх виду в 
-	правой части можуть бути совершенно произвольными і никак не связанными друг з другом.</p>
+	<p>Зверніть увагу, що сами моделі та їх види в 
+	правій частині можуть бути абсолютно довільними і ніяк не пов'язаними один з одним.</p>
 
 </div>

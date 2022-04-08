@@ -6,7 +6,7 @@
 			Елемент Panel
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все контейнеры</a>
+			<a href="index">Всі контейнери</a>
 		</div>
 	</div>
 	<p>
@@ -14,7 +14,7 @@
 	</p>
 
 	<p>
-		Наследует: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+		Наслідує: <a class="code-link" href="/xaml/abstract/container">Container</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
 	<h3>Властивості</h3>
@@ -31,14 +31,14 @@
 				<td class="prop-name">Style</td>
 				<td>PaneStyle</td>
 				<td>
-					Стиль відображення панели. Можливі значення:
+					Стиль відображення панелі. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - Обычная панель.</li>
-						<li><span class="prop-name">Danger, Error, Red</span> - ошибка (красный).</li>
-						<li><span class="prop-name">Warning, Yellow</span> - предупреждение (желтая).</li>
-						<li><span class="prop-name">Success, Green</span> - успех (зеленая).</li>
-						<li><span class="prop-name">Info, Cyan</span> - інформація (голубая).</li>
-						<li><span class="prop-name">Cut</span> - Сворачиваемая панель з заголовком у вигляді посилання.</li>
+						<li><span class="prop-name">Default</span> - Звичайна панель.</li>
+						<li><span class="prop-name">Danger, Error, Red</span> - помилка (червона).</li>
+						<li><span class="prop-name">Warning, Yellow</span> - попередження (жовта).</li>
+						<li><span class="prop-name">Success, Green</span> - успіх (зелена).</li>
+						<li><span class="prop-name">Info, Cyan</span> - інформація (блакитна).</li>
+						<li><span class="prop-name">Cut</span> - Панель, що згортається, з заголовком у вигляді посилання.</li>
 					</ul>
 				</td>
 			</tr>
@@ -46,21 +46,21 @@
 				<td class="prop-name">Compact</td>
 				<td>Boolean</td>
 				<td>
-					Компактный стиль відображення панели.
+					Компактний стиль відображення панелі.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Collapsible</td>
 				<td>Boolean</td>
 				<td>
-					Можна ли сворачивать панель.
+					Чи можна згортати панель.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Collapsed</td>
 				<td>Boolean?</td>
 				<td>
-					Свернута ли панель в исходном состоянии.
+					Чи згорнута панель у вихідному стані.
 				</td>
 			</tr>
 			<tr>
@@ -75,28 +75,28 @@
 				<td class="prop-name">Icon</td>
 				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
 				<td>
-					Иконка. Отображается в левой части заголовка.
+					Іконка. Відображається в левій частині заголовку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Hint</td>
 				<td><a class="code-link" href="/xaml/text/popover">Popover</a></td>
-				<td>Всплывающая подсказка для панели. Выводится у вигляді <i class="ico po-ico ico-help" style="color:#999"></i> після текста заголовка.</td>
+				<td>Спливаюча підказка для панелі. Виводиться у вигляді <i class="ico po-ico ico-help" style="color:#999"></i> після текста заголовку.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Height</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
-				<td>Высота панели.</td>
+				<td>Висота панелі.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">DropShadow</td>
 				<td><a class="code-link" href="/xaml/enums/shadowstyle">ShadowStyle</a></td>
-				<td>Вид тени.</td>
+				<td>Вид тіні.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Background</td>
 				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
-				<td>Цвет фона.</td>
+				<td>Колір фону.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">TestId</td>
@@ -148,7 +148,7 @@
 		<a2-panel class="panel-cut" v-bind:collapsible="true">
 			<div class="panel-header-slot" slot="header">Cut</div>
 			<div class="panel-content">
-				Стиль "Cut". Вміст панели
+				Стиль "Cut". Вміст панелі
 			</div>
 		</a2-panel>
 	</div>

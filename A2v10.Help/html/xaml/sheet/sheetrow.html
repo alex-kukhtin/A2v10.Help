@@ -6,14 +6,14 @@
 			Елемент SheetRow
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Все елементи таблиц</a>
+			<a href="index">Всі елементи таблиц</a>
 		</div>
 	</div>
 	<p>
 		Являє собою строку таблиці.
 	</p>
 
-	Наследует: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	Наслідує: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
 	<p>Властивість вмісту: <code>Cells</code></p>
 
@@ -36,7 +36,7 @@
 				<td class="prop-name">RowStyle</td>
 				<td><code>RowStyle</code></td>
 				<td>
-					Стиль відображення строки. Можливі значения
+					Стиль відображення рядки. Можливі значення
 					<ul class="enum-vals">
 						<li><span class="prop-name">Default</span> - (за замовчанням) обычная рядок.</li>
 						<li><span class="prop-name">Title</span> - Заголовок звіта.</li>
@@ -54,14 +54,14 @@
 				<td class="prop-name">Align</td>
 				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign?</a></td>
 				<td>
-					Выравнивание по горизонтали для всех ячеек строки. Може бути переопределено в каждой ячейке индивидуально.
+					Вирівнювання по горизонтали для всех ячеек рядки. Може бути переопределено в каждой ячейке индивидуально.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки привязка. Маркировка строки. Подробности ниже.
+					Тільки привязка. Маркировка рядки. Подробности ниже.
 				</td>
 			</tr>
 			<tr>
@@ -74,7 +74,7 @@
 
 	<h4>Маркировка строк</h4>
 	<p>
-		Выражение прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
+		Вираз прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
 		css-класс, добавляемый к строке.
 
 		В теме за замовчанням поддерживаются наступні варианты маркировки строк:
@@ -83,30 +83,30 @@
 		<table class="sheet grid-both">
 			<tr class="danger">
 				<td><code>"danger", "error", "red"</code></td>
-				<td>Вміст строки</td>
+				<td>Вміст рядки</td>
 			</tr>
 			<tr class="warning">
 				<td><code>"warning", "orange"</code></td>
-				<td>Вміст строки</td>
+				<td>Вміст рядки</td>
 			</tr>
 			<tr class="success">
 				<td><code>"success", "green"</code></td>
-				<td>Вміст строки</td>
+				<td>Вміст рядки</td>
 			</tr>
 			<tr class="info">
 				<td><code>"info", "cyan"</code></td>
-				<td>Вміст строки</td>
+				<td>Вміст рядки</td>
 			</tr>
 			<tr class="gray">
 				<td><code>"gray"</code></td>
-				<td>Вміст строки</td>
+				<td>Вміст рядки</td>
 			</tr>
 		</table>
 	</p>
 	<p class="tip info">
 		Зверніть увагу! Маркировка просто добавляе css-класс к строке. Це означає, що вы не ограничены 
 		тільки вказаними вариантами. Наприклад, якщо властивість прив`язки вернет <code>"danger bold"</code>, то рядок буде 
-		маркирована красным фоном і буде показываться полужирным шрифтом.
+		маркирована красным фоном і буде відображатися полужирным шрифтом.
 	</p>
 
 </div>
