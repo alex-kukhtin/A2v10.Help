@@ -10,7 +10,7 @@
 		</div>
 	</div>
 
-	<p>Являє собою флажок. Зазвичай пов'язується з булевским значенням в моделі.</p>
+	<p>Являє собою прапорець. Зазвичай пов'язується з булевим значенням в моделі.</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/checkboxbase">CheckBoxBase</a> :
 	<a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
@@ -51,7 +51,7 @@
 <pre class="code-highlight xml">
 <script type="text/template">
 <Grid Columns="1*, 1*">
-	<CheckBox Value="{Bind Element.Checked}" Label="Флажок" />
+	<CheckBox Value="{Bind Element.Checked}" Label="Прапорець" />
 	<Span Content="{Bind Element.Checked}" Align="Right" />
 </Grid>
 </script>
@@ -66,7 +66,7 @@
 				<div class="grid" style="grid-template-columns:1fr 1fr">
 					<label class="checkbox">
 						<input type="checkbox" v-model="Checked" />
-						<span>Флажок</span>
+						<span>Прапорець</span>
 					</label>
 					<span v-text="Checked" class="text-right"></span>
 				</div>

@@ -10,7 +10,7 @@
 		</div>
 	</div>
 
-	<p>Являє собою радивікнопку.</p>
+	<p>Являє собою радіокнопку.</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/checkboxbase">CheckBoxBase</a> :
 	<a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
@@ -19,8 +19,8 @@
 	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
 	<p>
-		Набор радивікнопок пов'язується з одним значенням. Зазвичай такой набір располагается всередині контейнера
-		<a class="code-link" href="/xaml/containers/fieldset">FieldSet</a>, хотя це і не обов'язково.
+		Набір радіокнопок пов'язується з одним значенням. Зазвичай такий набір розташовується всередині контейнера
+		<a class="code-link" href="/xaml/containers/fieldset">FieldSet</a>, хоча це і не обов'язково.
 	</p>
 
 	<h3>Властивості</h3>
@@ -36,15 +36,15 @@
 			<tr>
 				<td class="prop-name">CheckedValue</td>
 				<td>Скалярный тип (String, Number, і т.д.)</td>
-				<td>Обов'язково. Значення, при котором кнопка буде отмечена.
+				<td>Обов'язково. Значення, при якому кнопку буде відмічено.
 				Може бути прив'язкою.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Style</td>
 				<td><a class="code-link" href="/xaml/enums/radiobuttonstyle">RadioButtonStyle</a></td>
 				<td>
-					Вид кнопки. Может відображатися як стандартная радивікнопка, так і у вигляді флажка. Отображение у вигляді флажка чаще
-					всього використовується в звітах.
+					Вид кнопки. Може відображатися у вигляді як стандартної радіокнопки, так і прапорця. Відображення у вигляді прапорця 
+					найчастіше використовується у звітах.
 				</td>
 			</tr>
 			<tr>
@@ -59,7 +59,7 @@
 	<h3>Приклад</h3>
 
 	<p>
-		Нехай в моделі маємо елемент <code>Element</code>, у якого є властивість <code>Option</code>.
+		Нехай в моделі маємо елемент <code>Element</code>, в якого є властивість <code>Option</code>.
 	</p>
 
 	<p>
@@ -77,7 +77,7 @@
 		<Radio Label="Option 2" Value="{Bind Element.Option}" Style="CheckBox" CheckedValue="2" />
 		<Radio Label="Option 3" Value="{Bind Element.Option}" Style="CheckBox" CheckedValue="3" />
 	</FieldSet>
-	<Text>Выбрано: <Span Bold="True">Option 1</Span></Text>
+	<Text>Обрано: <Span Bold="True">Option 1</Span></Text>
 </Grid>
 </script>
 </pre>
@@ -117,7 +117,7 @@
 							<span>Option 2</span>
 						</label>
 					</fieldset>
-					<span>Выбрано: <span class="bold" v-text="Option"></span></span>
+					<span>Обрано: <span class="bold" v-text="Option"></span></span>
 				</div>
 			</div>
 		</p>

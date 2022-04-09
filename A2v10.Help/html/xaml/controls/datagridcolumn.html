@@ -10,7 +10,7 @@
 		</div>
 	</div>
 
-	<p>Являє собою одну колонку таблиці <a class="code-link" href="datagrid">DataGrid</a>.</p>
+	<p>Являє собою один стовпчик таблиці <a class="code-link" href="datagrid">DataGrid</a>.</p>
 
 	<p>Властивість вмісту: <code>Content</code></p>
 
@@ -28,132 +28,132 @@
 				<td class="prop-name">Content</td>
 				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
 				<td>
-					Властивість вмісту. Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Вміст ячейки таблиці.
+					Властивість вмісту. Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Вміст клітинки таблиці.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Header</td>
 				<td>String</td>
 				<td>
-					Заголовок колонки.
+					Заголовок стовпчика.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Width</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Ширина колонки.
+					Ширина стовпчика.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Fit</td>
 				<td>Boolean</td>
 				<td>
-					Устанавливать ширину колонки по содержимому.
+					Встановлювати ширину стовпчика по вмісту.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Wrap</td>
 				<td><a class="code-link" href="/xaml/enums/wrapmode">WrapMode</a></td>
 				<td>
-					Режим переноса для вмісту ячейки і для заголовка.
+					Режим перенесення для вмісту клітинки і для заголовку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Align</td>
 				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
 				<td>
-					Горизонтальное вирівнювання вмісту ячейки.
+					Горизонтальне вирівнювання вмісту клітинки.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Bold</td>
 				<td>Boolean</td>
 				<td>
-					Відображати вміст ячейки полужирным шрифтом
+					Відображати вміст клітинки напівжирним шрифтом
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Small</td>
 				<td>Boolean</td>
 				<td>
-					Відображати вміст ячейки уменьшенным шрифтом.
+					Відображати вміст клітинки зменшеним шрифтом.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка ячейки таблиці.
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркування клітинки таблиці.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Icon</td>
 				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
 				<td>
-					Иконка, яка буде відображатися в таблице перед вмістом.
+					Іконка, яка буде відображатися в таблиці перед вмістом.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Editable</td>
 				<td>Boolean</td>
 				<td>
-					Разрешено ли редактирование ячейки.
+					Чи дозволено редагування клітинки.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">ControlType</td>
 				<td><a class="code-link" href="/xaml/enums/columncontroltype">ColumnControlType</a></td>
 				<td>
-					Тип елементу керування в ячейке таблиці.
+					Тип елементу керування в ячейці таблиці.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Sort</td>
 				<td>Boolean?</td>
 				<td>
-					Разрешена ли сортировка в данной колонке. Дозволяє индивидуально перевизначити сортировку по каждой колонке.
-					Общее разрешение сортування задається властивістю <code>Sort</code> всей таблиці <a class="code-link" href="datagrid">DataGrid</a>.
+					Чи дозволене сортування в даному стовпчику. Дозволяє індивідуально перевизначити сортування по кожному стовпчику.
+					Загальний дозвіл сортування задається властивістю <code>Sort</code> всієї таблиці <a class="code-link" href="datagrid">DataGrid</a>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">SortProperty</td>
 				<td>String</td>
 				<td>
-					Ім'я властивості в джерелі даних, по якому буде виконуватися сортировка. Якщо не вказано, буде виконуватися
-					сортировка по властивості <code>Content</code>.
+					Ім'я властивості в джерелі даних, по якому буде виконуватися сортування. Якщо не вказано, буде виконуватися
+					сортування по властивості <code>Content</code>.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">If</td>
 				<td>Boolean?</td>
-				<td>Включать колонку в потік рендеринга. Для того, щоб показывать/скрывать колонки в залежності від умов використовується прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>).</td>
+				<td>Включати стовпчик в потік рендерингу. Для того, щоб показувати/приховувати стовпчик в залежності від умов використовується прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>).</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Command</td>
 				<td><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
 				<td>
-					Команда для ячейки таблиці. Якщо команда указана, то вміст (<code>Content</code>) буде виводиться у вигляді гіперпосилання со связанной командой.
+					Команда для клітинки таблиці. Якщо команда вказана, то вміст (<code>Content</code>) буде виводиться у вигляді гіперпосилання зі зв'язаною командою.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Role</td>
 				<td class="fit"><code>ColumnRole</code></td>
 				<td>
-					Роль колонки. Встановлює определенный набір властивостей для колонок предопределенных типів. 
+					Роль стовпчика. Встановлює визначений набір властивостей для стовпчиків попередньо визначених типів. 
 					Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - (за замовчанням). Ничйого не встановлюєся.</li>
+						<li><span class="prop-name">Default</span> - (за замовчанням). Нічого не встановлюєся.</li>
 						<li>
-							<span class="prop-name">Number</span> - Отображение ідентифікатора. Ширина по содержимому, вирівнювання праворуч, нет переноса
+							<span class="prop-name">Number</span> - Відображення ідентифікатора. Ширина по вмісту, вирівнювання праворуч, нема перенесення
 							(<code>Fit="True" Align="Right" Wrap="NoWrap"</code>).
 						</li>
 						<li>
-							<span class="prop-name">Number</span> - Отображение числа. Ширина по содержимому, вирівнювання праворуч, нет переноса
+							<span class="prop-name">Number</span> - Відображення числа. Ширина по вмісту, вирівнювання праворуч, нема перенесення
 							(<code>Fit="True" Align="Right" Wrap="NoWrap"</code>).
 						</li>
 						<li>
-							<span class="prop-name">Date</span> - Отображение даты. Ширина по содержимому, вирівнювання по центру, нет переноса
+							<span class="prop-name">Date</span> - Відображення дати. Ширина по вмісту, вирівнювання по центру, нема перенесення
 							(<code>Fit="True" Align="Center" Wrap="NoWrap"</code>).
 						</li>
 					</ul>

@@ -10,7 +10,7 @@
 		</div>
 	</div>
 
-	<p>Являє собою поле для введення текста.</p>
+	<p>Являє собою поле для введення тексту.</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> : <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
@@ -28,71 +28,71 @@
 				<td class="prop-name">Multiline</td>
 				<td>Boolean</td>
 				<td>
-					Многорядковий елемент.
+					Елемент з кількома рядками.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">AutoSize</td>
 				<td>Boolean</td>
 				<td>
-					Автоматически устанавливать высоту елементу в залежності від вмісту. Тільки для многострочных елементів.
+					Автоматично встановлювати висоту елементу в залежності від вмісту. Тільки для елементів з кількома рядками.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Rows</td>
 				<td>Int32?</td>
 				<td>
-					Кількість строк. Тільки для многострочных елементів.
+					Кількість рядків. Тільки для елементів з кількома рядками.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Align</td>
 				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
-				<td>Вирівнювання текста</td>
+				<td>Вирівнювання тексту</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Password</td>
 				<td>Boolean</td>
 				<td>
-					Поле введення пароля. Замість текста відображаються заполнители. Копіювання текста з поля невозможна.
+					Поле введення пароля. Замість текста відображаються заповнювачі. Копіювання тексту з поля неможливе.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Number</td>
 				<td>Boolean</td>
 				<td>
-					В поле разрешено вводить тільки цифры і знак минус ('-').
+					В поле дозволено вводити тільки цифри і знак мінус ('-').
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Placeholder</td>
 				<td>String</td>
 				<td>
-					Подсказка. Відображається в пустом поле введення. Исчезает при получении полем фокуса введення.
+					Підказка. Відображається в пустому полі введення. Зникає при отриманні полем фокусу введення.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">SpellCheck</td>
 				<td>Boolean?</td>
 				<td>
-					Чи перевіряти орфографические ошибки. За замовчанням - залежить від налаштувань браузера.
+					Чи перевіряти орфографічні помилки. За замовчанням - залежить від налаштувань браузера.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">UpdateTrigger</td>
 				<td><a class="code-link" href="/xaml/enums/updatetrigger">UpdateTrigger</a></td>
-				<td>Способ оновлення значення моделі даних, зв'язаних з цим елементом.</td>
+				<td>Спосіб оновлення значення моделі даних, зв'язаних з цим елементом.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">EnterCommand</td>
 				<td><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
-				<td>Команда, яка буде виконана при нажатии <kbd>Enter</kbd> (для многострочного поля - <kbd>Ctrl+Enter</kbd>).</td>
+				<td>Команда, яка буде виконана при натисканні <kbd>Enter</kbd> (для поля з багатьма рядками - <kbd>Ctrl+Enter</kbd>).</td>
 			</tr>
 			<tr>
 				<td class="prop-name">MaxHeight</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Максимальна висота елементу. Має сенс тільки для многострочных елементів, у которых установлено властивість <code>AutoSize</code>.
+					Максимальна висота елементу. Має сенс тільки для елементів з кількома рядками, у яких встановлено властивість <code>AutoSize</code>.
 				</td>
 			</tr>
 			<tr class="top">
@@ -102,24 +102,24 @@
 					Розмір елементу. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Default, Normal</span> - (за замовчанням) елемент звичайного розміру.</li>
-						<li><span class="prop-name">Large</span> - увеличенный розмір елементу.</li>
+						<li><span class="prop-name">Large</span> - збільшений розмір елементу.</li>
 					</ul>
-					(остальные значення перечисления <code>ControlSize</code> не підтримуються).
+					(інші значення переліку <code>ControlSize</code> не підтримуються).
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">ShowClear</td>
 				<td>Boolean</td>
 				<td>
-					Показывать кнопку очистки вмісту. Нажатие на эту кнопку очищает пов'язане значення моделі.
-					Якщо значення пустое, кнопка буде запрещена.
+					Показувати кнопку очистки вмісту. Натискання на цю кнопку очищує пов'язане значення моделі.
+					Якщо значення пусте - кнопку буде заборонено.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Accel</td>
 				<td><a class="code-link" href="/xaml/simple/accel">Accel</a></td>
 				<td>
-					Акселератор (горячая клавиша). При нажатии этой клавиши фокус буде установлен на цей елемент.
+					Акселератор (гаряча клавіша). При натисканні цієї клавіші фокус буде встановлено на цей елемент.
 				</td>
 			</tr>
 			<tr>
@@ -135,13 +135,13 @@
 		XAML
 <pre class="code-highlight xml">
 <script type="text/template">
-<!-- простое поле введення -->
+<!-- просте поле введення -->
 <TextBox Placeholder="введите сюда текст"
-		Label="Простое поле" />
+		Label="Просте поле" />
 
-<!-- многострочное поле введення -->
+<!-- поле введення з багатьма рядками -->
 <TextBox Multiline="True" Rows="3"
-		Label="Многострочное поле" />
+		Label="Поле введення з багатьма рядками" />
 </script>
 </pre>
 	</p>
@@ -149,13 +149,13 @@
 		Результат
 		<div class="xaml-sample">
 			<div class="control-group">
-				<label>Простое поле</label>
+				<label>Просте поле</label>
 				<div class="input-group">
-					<input placeholder="введите сюда текст" />
+					<input placeholder="введіть текст сюди" />
 				</div>
 			</div>
 			<div class="control-group">
-				<label>Многострочное поле</label>
+				<label>Поле введення з багатьма рядками</label>
 				<div class="input-group">
 					<textarea rows="3"></textarea>
 				</div>

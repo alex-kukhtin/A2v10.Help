@@ -32,7 +32,7 @@
 			<tr>
 				<td class="prop-name">Content</td>
 				<td>Object</td>
-				<td>Властивість вмісту. Вміст панелі. Може бути як простым текстом, так і 
+				<td>Властивість вмісту. Вміст панелі. Може бути як звичайним текстом, так і 
 				елементом керування (<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).
 				</td>
 			</tr>
@@ -40,15 +40,15 @@
 				<td class="prop-name">Style</td>
 				<td><code>AlertStyle</code></td>
 				<td>
-					Стиль відображення. Можливі значення (конкретный вид залежить від теми користувацького інтерфейса):
+					Стиль відображення. Можливі значення (конкретний вигляд залежить від теми користувацького інтерфейса):
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - (за замовчанням) Обычная панель.</li>
-						<li><span class="prop-name">Success</span> - Успех (зеленая).</li>
-						<li><span class="prop-name">Warning</span> - Предупреждение (оранжевая).</li>
-						<li><span class="prop-name">Info</span> - Информация (голубая).</li>
-						<li><span class="prop-name">Danger</span> - Ошибка (красная).</li>
-						<li><span class="prop-name">Dark</span> - Темная.</li>
-						<li><span class="prop-name">Light</span> - Светлая.</li>
+						<li><span class="prop-name">Default</span> - Звичайна панель. (за замовчанням)</li>
+						<li><span class="prop-name">Success</span> - Успіх (зелена).</li>
+						<li><span class="prop-name">Warning</span> - Попередження (помаранчева).</li>
+						<li><span class="prop-name">Info</span> - Інформація (блакитна).</li>
+						<li><span class="prop-name">Danger</span> - Помилка (червона).</li>
+						<li><span class="prop-name">Dark</span> - Темна.</li>
+						<li><span class="prop-name">Light</span> - Світла.</li>
 					</ul>
 				</td>
 			</tr>
@@ -56,7 +56,7 @@
 				<td class="prop-name">Icon</td>
 				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
 				<td>
-					Иконка, яка буде відображатися перед вмістом.
+					Іконка, яка буде відображатися перед вмістом.
 				</td>
 			</tr>
 			<tr>
@@ -77,15 +77,15 @@
 		XAML
 <pre class="code-highlight xml">
 		<script type="text/template">
-<Alert Content="Произошла ошибка" Style="Danger" DropShadow="Shadow1" Icon="ErrorOutline"/>
+<Alert Content="Виникла помилка" Style="Danger" DropShadow="Shadow1" Icon="ErrorOutline"/>
 
-<Alert Content="Внимание! Что-то случилось" Style="Warning" DropShadow="Shadow1" Icon="WarningOutline"/>
+<Alert Content="Увага! Щось трапилося" Style="Warning" DropShadow="Shadow1" Icon="WarningOutline"/>
 
-<Alert Content="Операція завершена успешно" Style="Success" DropShadow="Shadow1" Icon="SuccessOutline"/>
+<Alert Content="Операцію завершено успішно" Style="Success" DropShadow="Shadow1" Icon="SuccessOutline"/>
 
 <Alert Style="Info" DropShadow="Shadow1" Icon="InfoOutline">
 	<Text>
-		<Span>Додаткова інформація о проблеме</Span>
+		<Span>Додаткова інформація про проблему</Span>
 		<Hyperlink Block="True">Детальніше...</Hyperlink>
 	</Text>
 </Alert>
@@ -96,10 +96,10 @@
 	<p>
 		Результат
 		<div class="xaml-sample" id="xaml-control" style="width:500px">
-			<div class="a2-alert danger drop-shadow shadow1"><i class="ico ico-error-outline"></i><span>Произошла ошибка</span></div>
-			<div class="a2-alert warning drop-shadow shadow1"><i class="ico ico-warning-outline"></i><span>Внимание! Что-то случилось</span></div>
-			<div class="a2-alert success drop-shadow shadow1"><i class="ico ico-success-outline"></i><span>Операція завершена успешно</span></div>
-			<div class="a2-alert info drop-shadow shadow1"><i class="ico ico-info-outline"></i><span>Додаткова інформація о проблеме <a class="a2-hyperlink block" href="">Детальніше...</a></span></div>
+			<div class="a2-alert danger drop-shadow shadow1"><i class="ico ico-error-outline"></i><span>Виникла помилка</span></div>
+			<div class="a2-alert warning drop-shadow shadow1"><i class="ico ico-warning-outline"></i><span>Увага! Щось трапилося</span></div>
+			<div class="a2-alert success drop-shadow shadow1"><i class="ico ico-success-outline"></i><span>Операцію завершено успішно</span></div>
+			<div class="a2-alert info drop-shadow shadow1"><i class="ico ico-info-outline"></i><span>Додаткова інформація про проблему <a class="a2-hyperlink block" href="">Детальніше...</a></span></div>
 		</div>
 	</p>
 </div>

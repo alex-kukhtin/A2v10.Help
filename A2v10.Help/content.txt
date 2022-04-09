@@ -204,7 +204,7 @@
 			UIContentElement	/xaml/abstract/uicontentelement
 			UIElement			/xaml/abstract/uielement
 			UIElementBase		/xaml/abstract/uielementbase
-		Диаграммы				/xaml/diagram/index
+		Діаграми				/xaml/diagram/index
 			Diagram				/xaml/diagram/diagram
 			Group				/xaml/diagram/group
 			Path				/xaml/diagram/path

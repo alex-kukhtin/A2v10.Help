@@ -10,11 +10,11 @@
 		</div>
 	</div>
 	<p>
-		Являє собою елемент для постраничной навигации. Зазвичай використовується для всей сторінки
+		Являє собою елемент для навігації по сторінках. Зазвичай використовується для всієї сторінки
 		<a class="code-link" href="/xaml/containers/page">Page</a> і задається як властивість <code>Pager</code>.
 	</p>
 
-	<p>Сам компонент не использует жодних колекцій. Для цього завжди використовується компонент роботи з коллекцією <a class="code-link" href="/xaml/components/collectionview">CollectionView</a>.</p>
+	<p>Сам компонент не використовує жодних колекцій. Для цього завжди використовується компонент роботи з коллекцією <a class="code-link" href="/xaml/components/collectionview">CollectionView</a>.</p>
 
 	Наслідує:
 	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
@@ -33,8 +33,8 @@
 				<td class="prop-name fit">Source</td>
 				<td>Object</td>
 				<td>
-					Исходная колекція. Завжди привязка. Якщо використовується спільно с
-					<a class="code-link" href="/xaml/components/collectionview">CollectionView</a>, то привязка
+					Вихідна колекція. Завжди прив'язка. Якщо використовується спільно с
+					<a class="code-link" href="/xaml/components/collectionview">CollectionView</a>, то прив'язка
 					буде <code>Source="{Bind Parent.Pager}"</code>
 				</td>
 			</tr>
@@ -44,7 +44,7 @@
 				<td>
 					Стиль відображення. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - (за замовчанням) обычные кнопки.</li>
+						<li><span class="prop-name">Default</span> - (за замовчанням) звичайні кнопки.</li>
 						<li><span class="prop-name">Rounded</span> - круглі кнопки.</li>
 					</ul>
 				</td>
@@ -53,15 +53,15 @@
 				<td class="prop-name fit">EmptyText</td>
 				<td>String</td>
 				<td>
-					Текст, який буде відображатися в правой частині елементу у випадку, якщо колекція пуста. Якщо не вказано,
-					показывается текст <b>"нет елементів"</b> (с учетом поточної локалізації).
+					Текст, який буде відображатися в правій частині елементу у випадку, коли колекція пуста. Якщо не вказано,
+					відображається текст <b>"нема елементів"</b> (з врахуванням поточної локалізації).
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name fit">TemplateText</td>
 				<td>String</td>
 				<td>
-					Текст, який буде відображатися в правой частині елементу. В тексте допускаются макроси:
+					Текст, який буде відображатися в правій частині елементу. В тексті допускаються макроси:
 					<table class="sub-table">
 						<tr>
 							<td class="prop-name no-wrap">#[Start]</td>
@@ -69,7 +69,7 @@
 						</tr>
 						<tr>
 							<td class="prop-name  no-wrap">#[End]</td>
-							<td>Номер последнйого елементу на сторінці.</td>
+							<td>Номер останнього елементу на сторінці.</td>
 						</tr>
 						<tr>
 							<td class="prop-name no-wrap">#[Count]</td>
@@ -77,7 +77,7 @@
 						</tr>
 					</table>
 					Якщо властивість не вказано, виводиться текст
-					<b>"елементи #[Start]-#[End] з #[Count]"</b> (с учетом поточної локалізації).
+					<b>"елементи #[Start]-#[End] з #[Count]"</b> (з врахуванням поточної локалізації).
 				</td>
 			</tr>
 			<tr>
@@ -90,7 +90,7 @@
 
 	<h3>Приклад</h3>
 
-	<p>Просто приклад відображення (не функциональный) </p>
+	<p>Просто приклад відображення (не функциональний) </p>
 
 	<div class="xaml-sample" style="width:100%">
 		<div class="rounded a2-pager" style="padding: 1rem 0px 0px;">

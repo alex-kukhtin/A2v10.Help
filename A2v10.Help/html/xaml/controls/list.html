@@ -9,8 +9,8 @@
 			<a href="index">Всі елементи керування</a>
 		</div>
 	</div>
-	<p>Являє собою список елементів (c можливістю виділення). 
-	Вміст зазвичай являє собою список елементів <a class="code-link" href="listitem">ListItem</a>.</p>
+	<p>Являє собою перелік елементів (c можливістю виділення). 
+	Вміст зазвичай являє собою перелік елементів <a class="code-link" href="listitem">ListItem</a>.</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 
@@ -30,35 +30,35 @@
 				<td class="prop-name">Content</td>
 				<td class="fit"><a class="code-link" href="/xaml/simple/uielementcollection">UIElementCollection</a></td>
 				<td>
-					Властивість вмісту. Вміст списка
+					Властивість вмісту. Вміст переліку
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">ItemsSource</td>
 				<td>Array</td>
 				<td>
-					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для відображення в списке.
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для відображення в переліку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Style</td>
 				<td><a class="code-link" href="/xaml/enums/liststyle">ListStyle</a></td>
 				<td>
-					Стиль відображення списка.
+					Стиль відображення переліку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Background</td>
 				<td><a class="code-link" href="/xaml/enums/backgroundstyle">BackgroundStyle</a></td>
 				<td>
-					Стиль фона для списка.
+					Стиль фону для переліку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Border</td>
 				<td>Boolean</td>
 				<td>
-					Відображати ли рамку навколо списка.
+					Чи відображати рамку навколо переліку.
 				</td>
 			</tr>
 			<tr>
@@ -72,64 +72,64 @@
 				<td class="prop-name">Striped</td>
 				<td>Boolean</td>
 				<td>
-					Раскраска списка "в полоску" з выделением четных і нечентых елементів.
+					Розфарбування переліку "у смужку" з виділенням парних і непарних елементів.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Flush</td>
 				<td>Boolean</td>
 				<td>
-					Убирает линию після последнйого елементу в списке (тільки для стиля <code>Underlined</code>).
+					Прибирає лінію після останнього елементу в переліку (тільки для стилю <code>Underlined</code>).
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">AutoSelect</td>
 				<td><a class="code-link" href="/xaml/enums/autoselectmode">AutoSelectMode</a></td>
 				<td>
-					Автоматически выделять елемент після завантаження або оновлення списка.
+					Автоматично виділяти елемент після завантаження або оновлення переліку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Height</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Висота списка.
+					Висота переліку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">MaxHeight</td>
 				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
 				<td>
-					Максимальна висота списка. Якщо список больше, з'являється вертикальный скроллер.
+					Максимальна висота переліку. Якщо список вищий, з'являється вертикальний скроллер.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Select</td>
 				<td>Boolean?</td>
 				<td>
-					Разрешено ли выделение елементів в списке.
+					Чи дозволено виділення елементів в переліку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка елементу списка.
-					Маркер являє собою вертикальную линию ліворуч від елементу.
-					Подробности ниже.
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркування елементу переліку.
+					Маркер являє собою вертикальну лінію ліворуч від елементу.
+					Підробиці нижче.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">MarkerStyle</td>
 				<td><code>RowMarkerStyle</code></td>
 				<td>
-					Стиль маркировки елементу в списке.
+					Стиль маркування елементу в списку.
 					Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">None</span> - (за замовчанням) нет маркировки.</li>
-						<li><span class="prop-name">Row</span> - фоновий цвет.</li>
-						<li><span class="prop-name">Marker</span> - маркер у вигляді полоски ліворуч.</li>
-						<li><span class="prop-name">Both</span> - оба вида маркировки.</li>
+						<li><span class="prop-name">None</span> - (за замовчанням) нема маркування.</li>
+						<li><span class="prop-name">Row</span> - фоновий колір.</li>
+						<li><span class="prop-name">Marker</span> - маркер у вигляді смужки ліворуч.</li>
+						<li><span class="prop-name">Both</span> - обидва види маркування.</li>
 					</ul>
 				</td>
 			</tr>
@@ -137,7 +137,7 @@
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
 				<td>
-					Панель, яка відображається, якщо вміст пустое. Зазвичай являє собою об'єкт
+					Панель, що відображається, коли вміст пустий. Зазвичай являє собою об'єкт
 					<a class="code-link" href="emptypanel">EmptyPanel</a>.
 				</td>
 			</tr>
@@ -145,8 +145,8 @@
 				<td class="prop-name">DoubleClick</td>
 				<td width="1px"><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
 				<td>
-					Команда, яка буде виконана при двойном щелчке на елементе списка.
-					Не забудьте передать в команду аргумент.
+					Команда, яку буде виконано при подвійному кліку на елементі переліку.
+					Не забудьте передати в команду аргумент.
 				</td>
 			</tr>
 			<tr>
@@ -157,12 +157,12 @@
 		</tbody>
 	</table>
 
-	<h4>Маркировка елементів списка</h4>
+	<h4>Маркування елементів переліку</h4>
 	<p>
-		Вираз прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
-		css-класс, добавляемый к елементу списка.
+		Вираз прив`язки для властивості <code>Mark</code> повинен повертати текстовий рядок, який являє собою додатковий
+		css-клас, що додається до елементу переліку.
 
-		В теме за замовчанням поддерживаются наступні варианты маркировки елементів списка:
+		В темі за замовчанням підтримуються наступні варіанти маркування елементів переліку:
 		<div style="display:inline-grid;grid-template-columns:auto 90px 90px;align-items:center;grid-gap:4px 8px;">
 			<code>значення Mark</code><code>"Marker"</code><code>"Row"</code>
 			<code>"danger", "red", "error"</code>

@@ -12,7 +12,7 @@
 
 
 
-	<p>Являє собою селектор времени.</p>
+	<p>Являє собою селектор часу.</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
 	<a class="code-link" href="/xaml/abstract/control">Control</a> :
@@ -39,12 +39,12 @@
 				<td class="prop-name">Placement</td>
 				<td class="fit"><code>DropDownPlacement</code></td>
 				<td>
-					Напрямок "выпадения" селектора. Можливі значення:
+					Напрямок "спадання" селектора. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">BottomLeft</span> - (за замовчанням) внз з прив'язкою лівого края.</li>
-						<li><span class="prop-name">BottomRight</span> - внз з прив'язкою правого края.</li>
-						<li><span class="prop-name">TopLeft</span> - верх з прив'язкою лівого края.</li>
-						<li><span class="prop-name">TopRight</span> - вверх з прив'язкою правого края.</li>
+						<li><span class="prop-name">BottomLeft</span> - (за замовчанням) донизу з прив'язкою лівого краю.</li>
+						<li><span class="prop-name">BottomRight</span> - донизу з прив'язкою правого краю.</li>
+						<li><span class="prop-name">TopLeft</span> - вверх з прив'язкою лівого краю.</li>
+						<li><span class="prop-name">TopRight</span> - вверх з прив'язкою правого краю.</li>
 					</ul>
 				</td>
 			</tr>
@@ -55,9 +55,9 @@
 					Розмір елементу. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Default, Normal</span> - (за замовчанням) елемент звичайного розміру.</li>
-						<li><span class="prop-name">Large</span> - увеличенный розмір елементу.</li>
+						<li><span class="prop-name">Large</span> - збільшений розмір елементу.</li>
 					</ul>
-					(остальные значення перечисления <code>ControlSize</code> не підтримуються).
+					(інші значення переліку <code>ControlSize</code> не підтримуються).
 				</td>
 			</tr>
 			<tr>
@@ -71,13 +71,13 @@
 
 	<h3>Приклад</h3>
 	<div class="grid xaml-sample" style="grid-template-columns:1fr 1fr;width:400px" id="xaml-timepicker">
-		<a2-time-picker label="Введите время" v-bind:item="Document" prop="Date"></a2-time-picker>
+		<a2-time-picker label="Введіть час" v-bind:item="Document" prop="Date"></a2-time-picker>
 	</div>
 
 
 	<p class="tip info">
-		<b>Зверніть увагу!</b> При изменении времени, дата змінюватися не буде. Це дозволяє вводить дату і время с
-		помощью двух елементів керування - <a class="code" href="datepicker">DatePicker</a> і <code>TimePicker</code>.
+		<b>Зверніть увагу!</b> При зміні часу дата змінюватися не буде. Це дозволяє вводити дату і час з
+		допомогою двох елементів керування - <a class="code" href="datepicker">DatePicker</a> та <code>TimePicker</code>.
 	</p>
 
 

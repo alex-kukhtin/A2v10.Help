@@ -10,13 +10,13 @@
 		</div>
 	</div>
 	<p>
-		Являє собою таблицю з даними. Працює тільки з джерелом даних. Отображает одну строку
-		для кожного елементу масива - джерела даних. Колонки таблиці визначаються колекцією вкладених об'єктів
+		Являє собою таблицю з даними. Працює тільки з джерелом даних. Відображає один рядок
+		для кожного елементу масиву - джерела даних. Стовпчики таблиці визначаються колекцією вкладених об'єктів
 		<a class="code-link" href="datagridcolumn">DataGridColumn</a>.
 	</p>
 	<p>
-		Совместно з компонентом <a class="code-link" href="../components/collectionview">CollectionView</a>,
-		таблица підтримує сортировку, фільтрацію, розбиття на сторінки і группировку строк.
+		Спільно з компонентом <a class="code-link" href="../components/collectionview">CollectionView</a>,
+		таблица підтримує сортування, фільтрацію, розбиття на сторінки і групування рядків.
 	</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
@@ -49,21 +49,21 @@
 				<td class="prop-name">Hover</td>
 				<td>Boolean</td>
 				<td>
-					Выделение рядки при наведении курсора мыши.
+					Виділення рядка при наведенні курсора миші.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Striped</td>
 				<td>Boolean</td>
 				<td>
-					Раскраска таблиці "в полоску" з выделением четных і нечетных строк.
+					Розфарбування таблиці "у смужку" з виділенням парних і непарних рядків.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">FixedHeader</td>
 				<td>Boolean</td>
 				<td>
-					Зафиксировать шапку таблиці при прокрутке.
+					Зафіксувати "шапку"" таблиці при прокрутці.
 				</td>
 			</tr>
 			<tr class="top">
@@ -73,7 +73,7 @@
 					Стиль відображення таблиці. Можливі значення:
 					<ul class="enum-vals">
 						<li><span class="prop-name">Default</span> - (за замовчанням) звичайний стиль.</li>
-						<li><span class="prop-name">Light</span> - светлый стиль.</li>
+						<li><span class="prop-name">Light</span> - світлий стиль.</li>
 					</ul>
 				</td>
 			</tr>
@@ -86,22 +86,22 @@
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркировка рядки таблиці.
-					Маркер являє собою вертикальную линию в левой колонке и/або выделение цветом.
-					Подробности ниже.
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Маркування рядків таблиці.
+					Маркер являє собою вертикальну лінію в лівому стовпчику та/або позначення кольором.
+					Підробиці ниже.
 				</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">MarkerStyle</td>
 				<td><code>RowMarkerStyle</code></td>
 				<td>
-					Стиль маркировки рядки в таблице.
+					Стиль маркування рядку в таблице.
 					Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">None</span> - (за замовчанням) нет маркировки.</li>
-						<li><span class="prop-name">Row</span> - фоновий цвет.</li>
-						<li><span class="prop-name">Marker</span> - маркер у вигляді линии в першої колонке.</li>
-						<li><span class="prop-name">Both</span> - оба вида маркировки.</li>
+						<li><span class="prop-name">None</span> - (за замовчанням) нема маркування.</li>
+						<li><span class="prop-name">Row</span> - фоновий колір.</li>
+						<li><span class="prop-name">Marker</span> - маркер у вигляді лінії в першому стовпчику.</li>
+						<li><span class="prop-name">Both</span> - обидва види маркування.</li>
 					</ul>
 				</td>
 			</tr>
@@ -109,7 +109,7 @@
 				<td class="prop-name">EmptyPanel</td>
 				<td><a class="code-link" href="/xaml/abstract/uielement">UIElement</a></td>
 				<td>
-					Панель, яка відображається, якщо вміст пустое. Зазвичай являє собою об'єкт
+					Панель, яка відображається, якщо вміст пустий. Зазвичай являє собою об'єкт
 					<a class="code-link" href="emptypanel">EmptyPanel</a>.
 				</td>
 			</tr>
@@ -117,29 +117,29 @@
 				<td class="prop-name">DoubleClick</td>
 				<td width="1px"><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
 				<td>
-					Команда, яка буде виконана при двойном щелчке на строке таблиці.
-					Не забудьте передать в команду аргумент.
+					Команда, яку буде виконано при подвійному кліку на рядку таблиці.
+					Не забудьте передати в команду аргумент.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">ContextMenu</td>
 				<td width="1px"><a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a></td>
 				<td>
-					Контекстное меню, которое буде показыватьcя по правой кнопке мыши.
+					Контекстне меню, яке буде показуватися по правій кнопці миші.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">RowDetails</td>
 				<td width="1px"><a class="code-link" href="/xaml/controls/datagridrowdetails">DataGridRowDetails</a></td>
 				<td>
-					Детализация для рядки.
+					Деталізація для рядку.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">AutoSelect</td>
 				<td><a class="code-link" href="/xaml/enums/autoselectmode">AutoSelectMode</a></td>
 				<td>
-					Автоматически выделять елемент після завантаження або оновлення списка.
+					Автоматично виділяти елемент після завантаження або оновлення списку.
 					Підтримуються тільки значення <code>FirstItem</code> і <code>LastItem</code>.
 				</td>
 			</tr>
@@ -151,12 +151,12 @@
 		</tbody>
 	</table>
 
-	<h4>Маркировка рядків таблиці</h4>
+	<h4>Маркування рядків таблиці</h4>
 	<p>
-		Вираз прив`язки для властивості <code>Mark</code> повинно возвращать текстовую строку, яка являє собою додатковий
-		css-класс, добавляемый к строке.
+		Вираз прив`язки для властивості <code>Mark</code> повинен повертати текстовий рядок, який являє собою додатковий
+		css-клас, що додається до рядку.
 
-		В теме за замовчанням поддерживаются наступні варианты маркировки строк:
+		В темі за замовчанням підтримуються наступні варіанти маркування рядків:
 		<div style="display:inline-grid;grid-template-columns:auto 120px 120px;align-items:center;grid-gap:4px 8px;">
 			<code>значення Mark</code><code>"Marker"</code><code>"Row"</code>
 			<code>"danger", "red", "error"</code>
