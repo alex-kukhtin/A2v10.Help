@@ -233,7 +233,7 @@
 	Глобальні функції	/client/global
 		require			/client/global_require
 
-Настольні програми			/desktop/index
+Настільні програми			/desktop/index
 	Файл app.config.json		/desktop/config
 
 Бізнес-процеси			/workflow/index
