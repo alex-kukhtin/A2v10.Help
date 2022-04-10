@@ -6,11 +6,11 @@
 			Елемент SheetRow
 		</h1>
 		<div class="breadcrumb">
-			<a href="index">Всі елементи таблиц</a>
+			<a href="index">Всі елементи таблиць</a>
 		</div>
 	</div>
 	<p>
-		Являє собою строку таблиці.
+		Являє собою рядок таблиці.
 	</p>
 
 	Наслідує: <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
@@ -36,16 +36,16 @@
 				<td class="prop-name">RowStyle</td>
 				<td><code>RowStyle</code></td>
 				<td>
-					Стиль відображення рядки. Можливі значення
+					Стиль відображення рядку. Можливі значення
 					<ul class="enum-vals">
-						<li><span class="prop-name">Default</span> - (за замовчанням) обычная рядок.</li>
-						<li><span class="prop-name">Title</span> - Заголовок звіта.</li>
-						<li><span class="prop-name">Parameter</span> - Параметр звіта.</li>
-						<li><span class="prop-name">LastParameter</span> - Последний параметр в переліку параметров.</li>
-						<li><span class="prop-name">Header</span> - Рядок заголовка.</li>
-						<li><span class="prop-name">LightHeader</span> - Рядок заголовка другого стиля.</li>
-						<li><span class="prop-name">Footer</span> - Рядок подвала.</li>
-						<li><span class="prop-name">Total</span> - Рядок итогов.</li>
+						<li><span class="prop-name">Default</span> - (за замовчанням) Звичайний рядок.</li>
+						<li><span class="prop-name">Title</span> - Заголовок звіту.</li>
+						<li><span class="prop-name">Parameter</span> - Параметр звіту.</li>
+						<li><span class="prop-name">LastParameter</span> - Останній параметр в переліку параметрів.</li>
+						<li><span class="prop-name">Header</span> - Рядок заголовку.</li>
+						<li><span class="prop-name">LightHeader</span> - Рядок заголовку іншого стилю.</li>
+						<li><span class="prop-name">Footer</span> - Рядок футера.</li>
+						<li><span class="prop-name">Total</span> - Рядок підсумків.</li>
 						<li><span class="prop-name">NoBorder</span> - Рядок з клітинками без рамок.</li>
 					</ul>
 				</td>
@@ -54,14 +54,14 @@
 				<td class="prop-name">Align</td>
 				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign?</a></td>
 				<td>
-					Вирівнювання по горизонтали для всех клітинок рядки. Може бути переопределено в каждой ячейке індивідуально.
+					Вирівнювання по горизонталі для всіх клітинок рядку. Може бути перевизначено в кожній клітинці індивідуально.
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Mark</td>
 				<td>Object</td>
 				<td>
-					Тільки прив'язка. Маркування рядки. Підробиці ниже.
+					Тільки прив'язка. Маркування рядку. Підробиці нижче.
 				</td>
 			</tr>
 			<tr>
@@ -72,41 +72,41 @@
 		</tbody>
 	</table>
 
-	<h4>Маркування строк</h4>
+	<h4>Маркування рядків</h4>
 	<p>
-		Вираз прив`язки для властивості <code>Mark</code> повинно повертати текстовий рядок, яка являє собою додатковий
-		css-клас, добавляемый до рядку.
+		Вираз прив`язки для властивості <code>Mark</code> повинен повертати текстовий рядок, який являє собою додатковий
+		css-клас, що додається до рядку.
 
-		В теме за замовчанням підтримуються наступні варіанти маркування строк:
+		В темі за замовчанням підтримуються наступні варіанти маркування рядків:
 	</p>
 	<p>
 		<table class="sheet grid-both">
 			<tr class="danger">
 				<td><code>"danger", "error", "red"</code></td>
-				<td>Вміст рядки</td>
+				<td>Вміст рядку</td>
 			</tr>
 			<tr class="warning">
 				<td><code>"warning", "orange"</code></td>
-				<td>Вміст рядки</td>
+				<td>Вміст рядку</td>
 			</tr>
 			<tr class="success">
 				<td><code>"success", "green"</code></td>
-				<td>Вміст рядки</td>
+				<td>Вміст рядку</td>
 			</tr>
 			<tr class="info">
 				<td><code>"info", "cyan"</code></td>
-				<td>Вміст рядки</td>
+				<td>Вміст рядку</td>
 			</tr>
 			<tr class="gray">
 				<td><code>"gray"</code></td>
-				<td>Вміст рядки</td>
+				<td>Вміст рядку</td>
 			</tr>
 		</table>
 	</p>
 	<p class="tip info">
-		Зверніть увагу! Маркування просто добавляе css-клас до рядку. Це означає, що вы не обмежені 
+		Зверніть увагу! Маркування просто добавляє css-клас до рядку. Це означає, що ви не обмежені 
 		тільки вказаними варіантами. Наприклад, якщо властивість прив`язки поверне <code>"danger bold"</code>, то рядок буде 
-		маркирована червоним фоном і буде відображатися напівжирним шрифтом.
+		маркований червоним фоном і буде відображатися напівжирним шрифтом.
 	</p>
 
 </div>

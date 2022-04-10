@@ -1,6 +1,6 @@
 ﻿<div>
-	<!--title:Перекрестные моделі даних-->
-	<!--keywords:Перекрестные моделі даних;-->
+	<!--title:Перехресні моделі даних-->
+	<!--keywords:Перехресні моделі даних;-->
 	<div class="title">
 		<h1>
 			Перехресні моделі даних
@@ -213,48 +213,49 @@ const template = {
 
 	</p>
 
-	<p>XAML:
+	<p>
+		XAML:
 <pre class="code-highlight xml">
 <script type="text/template">
 <![CDATA[
-	<Sheet Margin="1rem" GridLines="Both" Compact="True">
+		<Sheet Margin="1rem" GridLines="Both" Compact="True">
 		<Sheet.Header>
-			<SheetRow Style="Header">
-				<SheetCell RowSpan="2">Id</SheetCell>
-				<SheetCell RowSpan="2">S1</SheetCell>
-				<SheetCell RowSpan="2">N1</SheetCell>
-				<SheetCell ColSpan="{Bind RepData.$Cross1Span}">Cross1</SheetCell>
+		<SheetRow Style="Header">
+		<SheetCell RowSpan="2">Id</SheetCell>
+		<SheetCell RowSpan="2">S1</SheetCell>
+		<SheetCell RowSpan="2">N1</SheetCell>
+		<SheetCell ColSpan="{Bind RepData.$Cross1Span}">Cross1</SheetCell>
 			</SheetRow>
-			<SheetRow Style="Header">
-				<SheetCellGroup ItemsSource="{Bind RepData.$cross.Cross1}">
-					<SheetCell Content="{Bind}" />
+		<SheetRow Style="Header">
+		<SheetCellGroup ItemsSource="{Bind RepData.$cross.Cross1}">
+		<SheetCell Content="{Bind}" />
 				</SheetCellGroup>
-				<SheetCell>Total</SheetCell>
+		<SheetCell>Total</SheetCell>
 			</SheetRow>
-			<SheetRow Style="Total">
-				<SheetCell ColSpan="3">Total</SheetCell>
-				<SheetCellGroup ItemsSource="{Bind RepData.$Cross1Total}">
-					<SheetCell Content="{Bind Val}" />
+		<SheetRow Style="Total">
+		<SheetCell ColSpan="3">Total</SheetCell>
+		<SheetCellGroup ItemsSource="{Bind RepData.$Cross1Total}">
+		<SheetCell Content="{Bind Val}" />
 				</SheetCellGroup>
-				<SheetCell Content="{Bind RepData.$GrandTotal}"/>
+		<SheetCell Content="{Bind RepData.$GrandTotal}" />
 			</SheetRow>
 		</Sheet.Header>
 		<SheetSection ItemsSource="{Bind RepData}">
-			<SheetRow>
-				<SheetCell Content="{Bind Id}" />
-				<SheetCell Content="{Bind S1}" />
-				<SheetCell Content="{Bind N1}" />
-				<SheetCellGroup ItemsSource="{Bind Cross1}">
-					<SheetCell Content="{Bind Val, DataType=Number, HideZeros=True}" />
+		<SheetRow>
+		<SheetCell Content="{Bind Id}" />
+		<SheetCell Content="{Bind S1}" />
+		<SheetCell Content="{Bind N1}" />
+		<SheetCellGroup ItemsSource="{Bind Cross1}">
+		<SheetCell Content="{Bind Val, DataType=Number, HideZeros=True}" />
 				</SheetCellGroup>
-				<SheetCell Content="{Bind $Cross1Total}"/>
+		<SheetCell Content="{Bind $Cross1Total}" />
 			</SheetRow>
 		</SheetSection>
 	</Sheet>
 ]]>
 </script>
 </pre>
-</p>
+	</p>
 	<p>
 		Результат:
 

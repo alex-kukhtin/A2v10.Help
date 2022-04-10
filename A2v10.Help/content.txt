@@ -37,9 +37,9 @@
 
 Види	/views/index
 	Xaml			/xaml/index
-		Общие сведения		/xaml/overview/index
-			Расширения розмітки	/xaml/overview/extensions
-		Элементы управления	/xaml/controls/index
+		Загальні відомості		/xaml/overview/index
+			Розширення розмітки	/xaml/overview/extensions
+		Элементи управління	/xaml/controls/index
 			Alert				/xaml/controls/alert
 			Button				/xaml/controls/button
 			ChatItem			/xaml/controls/chatitem
@@ -131,7 +131,7 @@
 			TagLabel			/xaml/text/taglabel
 			Text				/xaml/text/text
 
-		Таблицы				/xaml/sheet/index
+		Таблиці				/xaml/sheet/index
 			Sheet			/xaml/sheet/sheet
 			SheetCell		/xaml/sheet/sheetcell
 			SheetCellGroup	/xaml/sheet/sheetcellgroup
@@ -157,7 +157,7 @@
 			Switch					/xaml/components/switch
 			Validator				/xaml/components/validator
 
-		Простые елементи	/xaml/simple/index
+		Прості елементи	/xaml/simple/index
 			Accel			/xaml/simple/accel
 			AccelCommand	/xaml/simple/accelcommand
 			GapSize			/xaml/simple/gapsize
@@ -169,7 +169,7 @@
 			UIElementCollection			/xaml/simple/uielementcollection
 			ResourceDictionary			/xaml/simple/resourcedictionary
 
-		Перечисления	/xaml/enums/index
+		Переліки	/xaml/enums/index
 			AlignItem			/xaml/enums/alignitem
 			AlignItems			/xaml/enums/alignitems
 			AutoFlowMode		/xaml/enums/autoflowmode

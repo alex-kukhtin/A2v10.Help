@@ -12,8 +12,8 @@
 
 
 	<p>
-		Являє собою посилання, при щелчке (або наведении курсора миші) на которой показывается всплывающее вікно.
-		Спливаюче вікно може містити як простий текст або другой елемент, так і посилатися на другой <code>url</code>.
+		Являє собою посилання, при клікуе (або наведенні курсора миші) на яку виводиться спливаюче вікно.
+		Спливаюче вікно може містити як звичайний текст або інший елемент, так і посилатися на інший <code>url</code>.
 	</p>
 
 	<p>
@@ -22,7 +22,7 @@
 
 	<p>Властивість вмісту: <code>Content</code></p>
 
-	<p>Конвертер: підтримується перетворення з рядки текста і з будь-якого елементу, нанаступного <a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.</p>
+	<p>Конвертер: підтримується перетворення з рядку тексту і з будь-якого елементу, що наслідує <a class="code-link" href="/xaml/abstract/uielement">UIElement</a>.</p>
 
 	<h3>Властивості</h3>
 	<table class="table-props">
@@ -43,8 +43,8 @@
 				<td class="prop-name">Url</td>
 				<td>String</td>
 				<td>
-					Url для отримання вмісту з сервера. В цьому випадку всплывающее вікно буде містити собственную модель даних,
-					собственный шаблон и, конечно, саму розмітку.
+					Url для отримання вмісту з сервера. В цьому випадку спливаюче вікно буде містити власну модель даних,
+					власний шаблон і, звісно, саму розмітку.
 				</td>
 			</tr>
 			<tr>
@@ -60,12 +60,12 @@
 			<tr>
 				<td class="prop-name">ShowOnHover</td>
 				<td>Boolean</td>
-				<td>Показувати подсказку не по щелчку, а по наведению курсора миші. Не совместимо з внешним вмістом.</td>
+				<td>Показувати підказку не по кліку, а по наведенню курсору миші. Несумісно з зовнішнім вмістом.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Badge</td>
 				<td>String</td>
-				<td>Текстовий бейджик на елементе. Зазвичай показывается на иконке.</td>
+				<td>Текстовий бейджик на елементі. Зазвичай показується на іконці.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Width</td>
@@ -76,14 +76,14 @@
 				<td class="prop-name">Placement</td>
 				<td>PopupPlacement</td>
 				<td>
-					Положение спливаючого вікна. Можливі значення:
+					Позиція спливаючого вікна. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">TopRight</span> - (за замовчанням) сверху, розгортається праворуч.</li>
-						<li><span class="prop-name">TopLeft</span> - сверху, розгортається ліворуч.</li>
+						<li><span class="prop-name">TopRight</span> - (за замовчанням) зверху, розгортається праворуч.</li>
+						<li><span class="prop-name">TopLeft</span> - зверху, розгортається ліворуч.</li>
 						<li><span class="prop-name">RightBottom</span> - праворуч, розгортається вниз.</li>
 						<li><span class="prop-name">RightTop</span> - праворуч, розгортається вверх.</li>
-						<li><span class="prop-name">BottomRight</span> - снизу, розгортається праворуч.</li>
-						<li><span class="prop-name">BottomLeft</span> - снизу, розгортається ліворуч.</li>
+						<li><span class="prop-name">BottomRight</span> - знизу, розгортається праворуч.</li>
+						<li><span class="prop-name">BottomLeft</span> - знизу, розгортається ліворуч.</li>
 						<li><span class="prop-name">LeftBottom</span> - ліворуч, розгортається вниз.</li>
 						<li><span class="prop-name">LeftTop</span> - ліворуч, розгортається вверх.</li>
 					</ul>
@@ -93,11 +93,11 @@
 				<td class="prop-name">Underline</td>
 				<td>PopoverUnderlineMode</td>
 				<td>
-					Стиль подчеркивания посилання при наведенні мыши. Можливі значення:
+					Стиль підкреслення посилання при наведенні миші. Можливі значення:
 					<ul class="enum-vals">
-						<li><span class="prop-name">Enable</span> - (за замовчанням) подчеркивать.</li>
-						<li><span class="prop-name">Disable</span> - не подчеркивать.</li>
-						<li><span class="prop-name">ShowOnHover</span> - подчеркивать при наведенні мыши.</li>
+						<li><span class="prop-name">Enable</span> - (за замовчанням) підкреслювати.</li>
+						<li><span class="prop-name">Disable</span> - не підкреслювати.</li>
+						<li><span class="prop-name">ShowOnHover</span> - підкреслювати при наведенні миші.</li>
 					</ul>
 				</td>
 			</tr>
@@ -105,23 +105,23 @@
 				<td class="prop-name">Background</td>
 				<td>PopoverBackgroundStyle</td>
 				<td>
-					Колір фона спливаючого вікна. Можливі значення (зверніть увагу, що конкретные коліра залежать від поточної
+					Колір фону спливаючого вікна. Можливі значення (зверніть увагу, що конкреті кольори залежать від поточної
 					теми користувацького інтерфейса):
 					<ul class="enum-vals">
 						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Default</span> - за замовчанням.</li>
-						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Yellow</span> - желтый.</li>
-						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#edfcfe">#edfcfe</span> Cyan</span> - голубой.</li>
-						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#f4ffd8">#f4ffd8</span> Green</span> - зеленый.</li>
-						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fedbdb">#fedbdb</span> Red</span> - красный.</li>
-						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#e5f1fe">#e5f1fe</span> Blue</span> - синий.</li>
-						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#ffffff">#ffffff</span> White</span> - белый.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fffce9">#fffce9</span> Yellow</span> - жовтий.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#edfcfe">#edfcfe</span> Cyan</span> - блакитний.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#f4ffd8">#f4ffd8</span> Green</span> - зелений.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#fedbdb">#fedbdb</span> Red</span> - червоний.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#e5f1fe">#e5f1fe</span> Blue</span> - синій.</li>
+						<li><span class="prop-name"><span class="bkstyle-sample" style="background-color:#ffffff">#ffffff</span> White</span> - білий.</li>
 					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">OffsetX</td>
 				<td><a href="/xaml/simple/length">Length</a></td>
-				<td>Горизонтальне смещение спливаючого вікна. Може бути отрицательным.</td>
+				<td>Горизонтальне зміщення спливаючого вікна. Може бути від'ємним.</td>
 			</tr>
 			<tr>
 				<td colspan="3">
@@ -132,13 +132,13 @@
 	</table>
 
 	<p class="tip warning">
-		Зверніть увагу! Якщо установлено властивість <b>ShowOnHover</b>, то размещать в елементе інші органы керування
-		не має сенса. Всі дорівнює к ним неможна буде отримати доступ. Ведь, як тільки вы уберете курсор мыши з текста,
-		всплывающее вікно исчезнет.
+		Зверніть увагу! Якщо установлено властивість <b>ShowOnHover</b>, то розміщувати в елементі інші органи керування
+		нема сенсу. Все одно до них неможна буде отримати доступ: щойно ви приберете курсор миші з тексту,
+		спливаюче вікно зникне.
 		<br />
 		<br />
-		Крім того, властивість <b>ShowOnHover</b> не совместимо з можливістю получать вміст вікна з сервера (зовнішній Url)
-		Це сделано з соображений производительности, щоб не звертатися до серверу при каждом движении мышью.
+		Крім того, властивість <b>ShowOnHover</b> несумісна з можливістю отримувати вміст вікна з сервера (зовнішній Url)
+		Це зроблено з міркувань продуктивності, щоб не звертатися до серверу при кожному русі курсору миші.
 	</p>
 
 
@@ -148,10 +148,10 @@
 <pre class="code-highlight xml">
 <script type="text/template">
 <FlexList>
-	<Popover Text="TopRight..." Icon="Help">Сверху, розгортається праворуч</Popover>
-	<Popover Text="TopLeft..." Underline="Hover" Background="Cyan">Сверху, розгортається ліворуч</Popover>
-	<Popover Text="RightBottom..." Underline="Disable" Background="Red" Icon="HelpOutline">Справа, розгортається вниз</Popover>
-	<Popover Text="LeftTop..." Background="Green" Hover="True" Icon="Report">Слева, розгортається вверх</Popover>
+	<Popover Text="TopRight..." Icon="Help">Зверху, розгортається праворуч</Popover>
+	<Popover Text="TopLeft..." Underline="Hover" Background="Cyan">Зверху, розгортається ліворуч</Popover>
+	<Popover Text="RightBottom..." Underline="Disable" Background="Red" Icon="HelpOutline">Праворуч, розгортається донизу</Popover>
+	<Popover Text="LeftTop..." Background="Green" Hover="True" Icon="Report">Ліворуч, розгортається вверх</Popover>
 </FlexList>
 </script>
 </pre>
@@ -163,22 +163,22 @@
 			<ul class="flex-list horizontal">
 				<li class="flex-list-item">
 					<popover class="po-top-right" content="TopRight..." icon="help">
-						Сверху, розгортається праворуч
+						Зверху, розгортається праворуч
 					</popover>
 				</li>
 				<li class="flex-list-item">
 					<popover class="po-top-left underline-hover po-cyan" content="TopLeft...">
-						Сверху, розгортається ліворуч
+						Зверху, розгортається ліворуч
 					</popover>
 				</li>
 				<li class="flex-list-item">
 					<popover class="po-right-bottom underline-disable po-red" content="RightBottom..." icon="help-outline">
-						Справа, розгортається вниз
+						Праворуч, розгортається донизу
 					</popover>
 				</li>
 				<li class="flex-list-item">
 					<popover class="po-left-top po-green" v-bind:hover="true" content="LeftTop..." icon="report">
-						Слева, розгортається вверх
+						Ліворуч, розгортається вверх
 					</popover>
 				</li>
 			</ul>
