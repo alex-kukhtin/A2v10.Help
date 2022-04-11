@@ -85,7 +85,7 @@ function fetchAgent(agent, text) {
 	const ctrl = this.$ctrl;
 
 	/* 
-	Виконати на сервері команду 'fetchCustomer', яка поверне перелік відповідних клиентів. 
+	Виконати на сервері команду 'fetchCustomer', яка поверне перелік відповідних клієнтів. 
 	В данному випадку функція повинна повернути Promise, який буде оброблятися селектором.
 	*/
 	return ctrl.$invoke('fetchCustomer', { Text: text, Kind: 'Customer' });

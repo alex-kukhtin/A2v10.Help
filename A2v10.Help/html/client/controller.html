@@ -89,7 +89,7 @@ interface IConfirm {
 				<code>opts</code> - об`єкт опций. В поточній версії містить єдину властивість - <code>catchError</code>.
 				Якщо вона встановлена, то при виникненні помилок проміс буде відмінено і помилку можна буде
 				перехопити в коді за допомогою метода <code>catch</code>
-				(або в операторі <code>try... catch</code> для <code>async ... await</code>) проміса). За замовчанням
+				(або в операторі <code>try... catch</code> для <code>async ... await</code>) проміса). За замовчуванням
 				система просто виводить повідомлення про помилку і не виконує проміс.
 			</li>
 		</ul>
@@ -123,8 +123,8 @@ interface IConfirm {
 		<h4>Аргументи:</h4>
 		<ul class="params">
 			<li><code>msg</code> - текст повідомлення. Може містити html-розмітку.</li>
-			<li><code>title</code> - заголовок вікна повідомлення. За замовчанням: рядок <b>"Повідомлення"</b> (в поточній локалізації).</li>
-			<li><code>{Enum:['info', 'alert', 'confirm']} style</code>  - стиль. За замовчанням: <code class="string">'info'</code>.</li>
+			<li><code>title</code> - заголовок вікна повідомлення. За замовчуванням: рядок <b>"Повідомлення"</b> (в поточній локалізації).</li>
+			<li><code>{Enum:['info', 'alert', 'confirm']} style</code>  - стиль. За замовчуванням: <code class="string">'info'</code>.</li>
 		</ul>
 		<h4>Повертає:</h4>
 		<ul class="params">
