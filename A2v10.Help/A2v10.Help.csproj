@@ -197,7 +197,7 @@
     <Content Include="html\xaml\containers\case.html" />
     <Content Include="html\xaml\containers\dropdownmegamenu.html" />
     <Content Include="html\xaml\containers\tabbar.html" />
-    <Content Include="html\xaml\containers\wizardPage.html" />
+    <Content Include="html\xaml\containers\wizardpage.html" />
     <Content Include="html\xaml\containers\wizard.html" />
     <Content Include="html\xaml\controls\datagridrowdetails.html" />
     <Content Include="html\xaml\controls\fileimage.html" />
