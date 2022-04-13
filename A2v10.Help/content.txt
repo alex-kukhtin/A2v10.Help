@@ -247,14 +247,14 @@
 		TrackRecord		/workflow/objects/trackrecord
 
 Робота з повідомленнями	/messaging/index
-	Нлаштування			/messaging/settings
+	Налаштування		/messaging/settings
 	Прив'язки			/messaging/bindings
 	EmailMessage		/messaging/emailmessage
 	MessageAddress		/messaging/messageaddress
 	MessageAttachemnt	/messaging/messageattachment
 	MessageReport		/messaging/messagereport
-	MessageReportModel		/messaging/messagereportmodel
-	MessageReportParam		/messaging/messagereportparam
+	MessageReportModel	/messaging/messagereportmodel
+	MessageReportParam	/messaging/messagereportparam
 	Template			/messaging/template
 	TemplatedMessage	/messaging/templatedmessage
 

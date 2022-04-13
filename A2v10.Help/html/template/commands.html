@@ -64,7 +64,7 @@ commands: {
 			за допомогою властивості <code>CheckReadOnly</code>.
 		</li>
 		<li>
-			<code>{String|Object} confirm</code> - запрашивать підтвердження користувача перед виконанням команди.
+			<code>{String|Object} confirm</code> - запитувати підтвердження користувача перед виконанням команди.
 			Також може бути встановлено в прив'язці <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>
 			за допомогою властивості <code>Confirm</code>. Якщо значення - рядок, то він вважається текстом підтвердження. Якщо це об'єкт,
 			то він має структуру, приведену нижче.
@@ -74,9 +74,9 @@ commands: {
 	<h3>Властивості об'єкта confirm</h3>
 	<ul class="params">
 		<li><code>{String} message</code> - текст повідомлення.</li>
-		<li><code>{String} title</code> - заголовок вікна повідомлення. Якщо не вказано, буде дорівнявати <a href="/client/localization">locale.$Confirm</a>.</li>
-		<li><code>{String} okText</code> - текст на кнопці підтвердження. Якщо не вказано, буде дорівнявати <a href="/client/localization">locale.$Ok</a>.</li>
-		<li><code>{String} cancelText</code> - текст на кнопці скасування. Якщо не вказано, буде дорівнявати <a href="/client/localization">locale.$Cancel</a>.</li>
+		<li><code>{String} title</code> - заголовок вікна повідомлення. Якщо не вказано, буде дорівнювати <a href="/client/localization">locale.$Confirm</a>.</li>
+		<li><code>{String} okText</code> - текст на кнопці підтвердження. Якщо не вказано, буде дорівнювати <a href="/client/localization">locale.$Ok</a>.</li>
+		<li><code>{String} cancelText</code> - текст на кнопці скасування. Якщо не вказано, буде дорівнювати <a href="/client/localization">locale.$Cancel</a>.</li>
 	</ul>
 
 	<h3>Аргументи функцій exec і canExec</h3>
