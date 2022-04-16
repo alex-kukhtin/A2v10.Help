@@ -666,3 +666,7 @@ p {
   top: 20%;
   left: 40%;
 }
+header .lang {
+  font-size: 12px;
+  margin-right: 5px;
+}

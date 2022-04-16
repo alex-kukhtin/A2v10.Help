@@ -16,8 +16,8 @@
 	<title>A2v10:SDK version 10</title>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="/css/site.min.css?v=10.0.7818" async />
-	<link rel="stylesheet" href="/css/site.help.min.css?v=10.0.7818" async />
+	<link rel="stylesheet" href="/css/site.min.css?v=10.0.7820" async />
+	<link rel="stylesheet" href="/css/site.help.min.css?v=10.0.7820" async />
 </head>
 <body>
 	<div id="app" class="help-main-view">
@@ -31,6 +31,12 @@
 			<div class="search">
 				<label><a href="" v-on:click.stop.prevent="doSearch"><i class="ico ico-search"></i></a></label>
 				<input style="width:130px" v-model="searchText" v-on:keyup.enter="doSearch" />
+			</div>
+			<div class="lang" style="display:none">
+				<a href="https:https://docs-en.a2v10.com">EN</a>
+			</div>
+			<div class="lang">
+				<a href="https:https://docs-ru.a2v10.com">RU</a>
 			</div>
 		</header>
 		<ul class="menu-tab-header">
@@ -47,14 +53,14 @@
 		<a2-include class="help-content-view" :source="content"></a2-include>
 
 		<footer class="help-footer">
-			<span>Copyright &copy; 2017-2022 А. Кухтін</span>
+			<span>Copyright &copy; 2017-2022 О. Кухтін</span>
 			<span class="divider"></span>
 			<a href="/help/about">Про довідкову систему...</a>
 			<span class="divider"></span>
 			<span>
 				<a target="_blank" tabindex="-1" rel="noopener" href="https://a2v10.com" title="Платформа A2v10">
 				<i class="ico ico-a2logo a2logo-layout"></i></a>
-				<span>Довідкова система. версія 10.0.7818</span>
+				<span>Довідкова система. версія 10.0.7820</span>
 			</span>
 		</footer>
 	</div>
@@ -77,8 +83,8 @@
 		})();
 	</script>
 	<script type="text/javascript" src="/scripts/vue.min.js?v=2.6.12"></script>
-	<script type="text/javascript" src="/scripts/locale-ru.min.js?v=10.0.7818"></script>
-	<script type="text/javascript" src="/scripts/a2v10.js?v=10.0.7818"></script>
-	<script type="text/javascript" src="/scripts/main.js?v=10.0.7818"></script>
+	<script type="text/javascript" src="/scripts/locale-ru.min.js?v=10.0.7820"></script>
+	<script type="text/javascript" src="/scripts/a2v10.js?v=10.0.7820"></script>
+	<script type="text/javascript" src="/scripts/main.js?v=10.0.7820"></script>
 </body>
 </html>
