@@ -12,7 +12,7 @@
 `<div class="sub-side">
 	<div class="index-view">
 		<div class="search-block">
-			<label>Введите слово для поиска:</label>
+			<label>Введіть слово для пошуку:</label>
 			<input class="input-search" v-model.lazy="searchText" ref="input">
 			<a v-if="debugMode" @click="showDebug">debug</a>
 		</div>

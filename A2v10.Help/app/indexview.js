@@ -9,7 +9,7 @@
 <div class="sub-side">
 	<div class="index-view">
 		<div class="search-block">
-			<label>Введите ключевое слово для поиска:</label>
+			<label>Введіть ключове слово для пошуку:</label>
 			<input class="input-search" type=text v-model="fragment"></input>
 		</div>
 		<ul class="index-tree">
