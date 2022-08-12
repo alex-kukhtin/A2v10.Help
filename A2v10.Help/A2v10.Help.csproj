@@ -128,6 +128,7 @@
     <Content Include="html\models\blob.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
+    <Content Include="html\whatsnew\w202208.html" />
     <Content Include="html\whatsnew\w202201.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
     <Content Include="html\workflow\objects\index.html" />
@@ -338,7 +339,7 @@
     <Content Include="README.md" />
     <Content Include="scripts\a2v10.js" />
     <Content Include="scripts\a2v10.min.js" />
-    <Content Include="scripts\locale-ru.min.js" />
+    <Content Include="scripts\locale-uk.min.js" />
     <Content Include="sitemap.txt" />
     <Content Include="visio\mvc1vsdx.vsdx" />
   </ItemGroup>
@@ -396,7 +397,7 @@
     </PropertyGroup>
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)MakeHelp\bin\Release\makeHelp.exe $(SolutionDir)\A2v10.Help</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)MakeHelp\bin\Release\makeHelp.exe $(SolutionDir)A2v10.Help</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

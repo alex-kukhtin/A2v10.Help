@@ -1,6 +1,7 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
 https://docs.a2v10.com/whatsnew/w202201
+https://docs.a2v10.com/whatsnew/w202208
 https://docs.a2v10.com/common/index
 https://docs.a2v10.com/common/platform
 https://docs.a2v10.com/app/index
