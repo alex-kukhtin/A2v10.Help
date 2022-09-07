@@ -1,7 +1,7 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
 https://docs.a2v10.com/whatsnew/w202201
-https://docs.a2v10.com/whatsnew/w202208
+https://docs.a2v10.com/whatsnew/w202209
 https://docs.a2v10.com/common/index
 https://docs.a2v10.com/common/platform
 https://docs.a2v10.com/app/index
@@ -71,6 +71,8 @@ https://docs.a2v10.com/xaml/controls/tablemarkcell
 https://docs.a2v10.com/xaml/controls/tablerow
 https://docs.a2v10.com/xaml/controls/textbox
 https://docs.a2v10.com/xaml/controls/timepicker
+https://docs.a2v10.com/xaml/controls/treegrid
+https://docs.a2v10.com/xaml/controls/treegridcolumn
 https://docs.a2v10.com/xaml/controls/treeview
 https://docs.a2v10.com/xaml/controls/treeviewitem
 https://docs.a2v10.com/xaml/controls/uploadfile

@@ -1,7 +1,7 @@
 ﻿Платформа A2v10		/index
 	Що нового		/whatsnew/index
 		Січень 2022				/whatsnew/w202201
-		Серпень 2022				/whatsnew/w202208
+		Вересень 2022			/whatsnew/w202209
 
 	
 Загальна інформація		/common/index
@@ -79,6 +79,8 @@
 			TableRow			/xaml/controls/tablerow
 			TextBox				/xaml/controls/textbox
 			TimePicker			/xaml/controls/timepicker
+			TreeGrid			/xaml/controls/treegrid
+			TreeGridColumn		/xaml/controls/treegridcolumn
 			TreeView			/xaml/controls/treeview
 			TreeViewItem		/xaml/controls/treeviewitem
 			UploadFile			/xaml/controls/uploadfile

@@ -128,7 +128,7 @@
     <Content Include="html\models\blob.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
-    <Content Include="html\whatsnew\w202208.html" />
+    <Content Include="html\whatsnew\w202209.html" />
     <Content Include="html\whatsnew\w202201.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
     <Content Include="html\workflow\objects\index.html" />
@@ -167,6 +167,8 @@
     <Content Include="html\xaml\containers\tabbar.html" />
     <Content Include="html\xaml\containers\wizardpage.html" />
     <Content Include="html\xaml\containers\wizard.html" />
+    <Content Include="html\xaml\controls\treegridcolumn.html" />
+    <Content Include="html\xaml\controls\treegrid.html" />
     <Content Include="html\xaml\controls\datagridrowdetails.html" />
     <Content Include="html\xaml\controls\fileimage.html" />
     <Content Include="html\xaml\controls\propertygriditem.html" />

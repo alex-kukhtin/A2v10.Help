@@ -1,0 +1,145 @@
+﻿<div>
+	<!--title:Xaml.TreeGrid-->
+	<!--keywords:TreeGrid-->
+	<div class="title">
+		<h1>
+			Елемент TreeGrid
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+	<p>
+		Являє собою таблицю з даними і деревом. Працює тільки з джерелом даних. Відображає один рядок
+		для кожного елементу масиву - джерела даних. Стовпчики таблиці визначаються колекцією вкладених об'єктів
+		<a class="code-link" href="treegridcolumn">TreeGridColumn</a>.
+		Щоб в таблиці зявилися елементи керування деревом, в одному (або в декількох)
+		стовпчиках потрібно встановити <code>ShowButton = "True"</code>.
+	</p>
+	<p>
+		Спільно з компонентом <a class="code-link" href="../components/collectionview">CollectionView</a>,
+		таблица підтримує сортування, фільтрацію, розбиття на сторінки і групування рядків.
+	</p>
+
+	Наслідує: <a class="code-link" href="/xaml/abstract/control">Control</a> : <a class="code-link" href="/xaml/abstract/uielement">UIElement</a> : <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Властивість вмісту: <code>Columns</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Columns</td>
+				<td class="fit no-wrap">Колекція <a class="code-link" href="treegridcolumn">TreeGridColumn</a></td>
+				<td>
+					Стовпчики таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td class="fit">Array</td>
+				<td>
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>.
+					Джерело даних для відображення. Може бути масивом (тоді перший рівень дерева буде елементами цього масиву),
+					або об'єктом (тоді всі рівні дерева)
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ItemsProperty</td>
+				<td>String</td>
+				<td>
+					Ім'я властивості, яка містить рівні дерева.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">MinWidth</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Мінімальна ширина таблиці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>
+					Висота таблиці. За замовчуванням визначається вмістом. Якщо встановлено <code>StickyHeaders</code>,
+					то висота має бути обмеженою (або задана властивістю <code>Height</code>,
+					або задана в конетейнері).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Hover</td>
+				<td>Boolean</td>
+				<td>
+					Виділення рядка при наведенні курсора миші.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Striped</td>
+				<td>Boolean</td>
+				<td>
+					Розфарбування таблиці "у смужку" з виділенням парних і непарних рядків.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">StickyHeaders</td>
+				<td>Boolean</td>
+				<td>
+					Зафіксувати "шапку" таблиці при прокрутці.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DoubleClick</td>
+				<td width="1px"><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
+				<td>
+					Команда, яку буде виконано при подвійному кліку на рядку таблиці.
+					Не забудьте передати в команду аргумент.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ContextMenu</td>
+				<td width="1px"><a class="code-link" href="/xaml/containers/dropdownmenu">DropDownMenu</a></td>
+				<td>
+					Контекстне меню, яке буде показуватися по правій кнопці миші.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">GridLines</td>
+				<td><code>GridLinesVisibility</code></td>
+				<td>
+					Відображення сітки. Можливі значення:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - за замовчуванням.</li>
+						<li><span class="prop-name">Horizontal</span> - горизонтальні лінії.</li>
+						<li><span class="prop-name">Vertical</span> - вертикальні лінії.</li>
+						<li><span class="prop-name">Both</span> - сітка.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">FolderStyle</td>
+				<td><code>FolderStyle</code></td>
+				<td>
+					Відображення папок в дереві. Можливі значення:
+					<ul class="enum-vals">
+						<li><span class="prop-name">None</span> - за замовчуванням.</li>
+						<li><span class="prop-name">Bold</span> - папки виводяться напівжирним шрифтом.</li>
+						<li><span class="prop-name">Italic</span> - папки виводяться курсивним шрифтом.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/control">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
