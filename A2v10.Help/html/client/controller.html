@@ -39,6 +39,9 @@ interface IController {
   $inlineOpen(id: string): void;
   $inlineClose(id: string, result:any): void;
   $focus(htmlid: string): void;
+  $emitCaller(event: string, ...params: any[]): void;
+  $emitSaveEvent(): void;
+  $nodirty(func: () => Promise<any>): void;
 }
 
 declare const enum ~CommonStyle {
@@ -244,8 +247,44 @@ interface IConfirm {
 		</p>
 		<h4>Аргументи:</h4>
 		<ul class="params">
-			<li><code>htmlid</code> - ідентифікатор елементу 
-			(можна встановити за допомогою властивості <code>HtmlId</code> об'єкту <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).</li>
+			<li>
+				<code>htmlid</code> - ідентифікатор елементу
+				(можна встановити за допомогою властивості <code>HtmlId</code> об'єкту <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>).
+			</li>
 		</ul>
 	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$emitSaveEvent(): void</pre></div>
+		<p>
+			Відправляє коду, що визвав діалог (caller) подію, яка задається властивістю <code>SaveEvent</code>
+			елемента <a class="code-link" href="/xaml/containers/dialog">Dialog</a>.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$emitCaller(event: string, ...params: any[]): void</pre></div>
+		<p>
+			Відправляє коду, що визвав діалог (caller) подію.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>event</code> - назва події.
+			</li>
+			<li><code>params</code> - Параметри події.</li>
+		</ul>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$nodirty(func: () => Promise&lt;any&gt;): void</pre></div>
+		<p>
+			Визиває функцію-параметр таким чином, щоб не змінити властивість <code>$dirty</code> для моделі.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>func</code> - функція, що визивається. Функція обов'язвово має бути асінхронною 
+				(або має повернути проміс).
+			</li>
+		</ul>
+	</div>
+	
 </div>

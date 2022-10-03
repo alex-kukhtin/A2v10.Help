@@ -103,6 +103,19 @@
 					Якщо вказано властивість <code>Width</code>, то ця властивість ігнорується.
 				</td>
 			</tr>
+			<tr class="top">
+				<td class="prop-name">Placement</td>
+				<td><code>DialogPlacement</code></td>
+				<td>
+					Положення діалогу на екрані. Можливі значення:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - за замовчуванням.</li>
+						<li><span class="prop-name">SideBarRight</span> - по правий бік екрану (без заголовка).</li>
+						<li><span class="prop-name">SideBarLeft</span> - по лівий бік екрану (без заголовка).</li>
+						<li><span class="prop-name">FullScreen</span> - розгорнуто на весь екран (без заголовка).</li>
+					</ul>
+				</td>
+			</tr>
 			<tr>
 				<td class="prop-name">Maximize</td>
 				<td>Boolean</td>
@@ -154,10 +167,19 @@
 				<td class="prop-name">Overflow</td>
 				<td>Boolean</td>
 				<td>
-					Чи може з'являтися скролл-бар в діалозі. Встановіть цю властивість, 
+					Чи може з'являтися скролл-бар в діалозі. Встановіть цю властивість,
 					якщо потрібно, щоб спливаючі вікна (наприклад <code>DatePicker</code>) могли виходити за межі елементу.
-					У цьому випадку потрібно уважно слідкувати за тим, щоб основний вміст не виходив за межі. 
+					У цьому випадку потрібно уважно слідкувати за тим, щоб основний вміст не виходив за межі.
 					Скролл-бар відображатися не буде.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SaveEvent</td>
+				<td>String</td>
+				<td>
+					Ім'я події (event), яка буде відправлено при збереженні об'єкту в діалозі.
+					Подія відправляється елементу, що визвав діалог (caller). Також в <a href="/client/controller">контролері</a> існує метод
+					<code>$emitSaveEvent</code>, який теж посилає цю подію.
 				</td>
 			</tr>
 			<tr>
