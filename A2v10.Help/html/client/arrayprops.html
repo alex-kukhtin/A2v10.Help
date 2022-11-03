@@ -36,6 +36,7 @@ interface IElementArray<T> extends Array<T> {
 	readonly $ctrl: IController;
 	readonly $isEmpty: boolean;
 	readonly $hasSelected: boolean;
+	readonly $hasChecked: boolean;
 	readonly $selectedIndex: number;
 	readonly $checked: IElementArray<T>;
 	readonly $cross: {[prop: string]: string[]};
@@ -83,6 +84,12 @@ interface IElementArray<T> extends Array<T> {
 		<div class="syntax"><pre class="code-highlight js">readonly $hasSelected: boolean</pre></div>
 		<p>
 			Чи є в масиві виділений елемент (той, в якого властивість <code>$selected</code> встановлено в <code>true</code>).
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $hasChecked: boolean</pre></div>
+		<p>
+			Чи є в масиві щонайменьше один відмічений елемент (той, в якого властивість <code>$checked</code> встановлено в <code>true</code>).
 		</p>
 	</div>
 	<div class="method">
@@ -340,7 +347,9 @@ interface IElementArray<T> extends Array<T> {
 		</pre>
 		</div>
 		<h4>Опис</h4>
-		<p>Скидає ознаку завантаження <a href="/models/array">"лінивого"</a> масиву. 
-		При наступному звернені масив заново буде завантажений з сервера.</p>
+		<p>
+			Скидає ознаку завантаження <a href="/models/array">"лінивого"</a> масиву.
+			При наступному звернені масив заново буде завантажений з сервера.
+		</p>
 	</div>
 </div>

@@ -128,7 +128,7 @@
     <Content Include="html\models\blob.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
-    <Content Include="html\whatsnew\w202210.html" />
+    <Content Include="html\whatsnew\w202211.html" />
     <Content Include="html\whatsnew\w202209.html" />
     <Content Include="html\whatsnew\w202201.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />

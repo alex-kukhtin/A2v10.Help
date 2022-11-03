@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового		/whatsnew/index
-		Жовтень 2022			/whatsnew/w202210
+		Листопад 2022			/whatsnew/w202211
 		Вересень 2022			/whatsnew/w202209
 		Січень 2022				/whatsnew/w202201
 
