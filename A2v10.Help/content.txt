@@ -237,6 +237,9 @@
 	Глобальні функції	/client/global
 		require			/client/global_require
 
+Програмування на сервері	/server/index
+	Javascript		/server/javascript
+
 Настільні програми			/desktop/index
 	Файл app.config.json		/desktop/config
 

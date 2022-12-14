@@ -1,0 +1,196 @@
+﻿<div>
+	<!--title:Javascript на сервері-->
+	<!--keywords:Javascript;-->
+	<div class="title">
+		<h1>
+			Javascript на сервері
+		</h1>
+	</div>
+
+
+	<h2>Загальні відомості</h2>
+	<p>
+		Для виконання кода javascript на сервері використвується біблиотека
+		<b>JInt</b> від Себастьяна Роса (https://github.com/sebastienros/jint).
+		В цій бібліотеці реалізовано практично повну підтримку ES6 за винятком деяких специфічних особливостей.
+	</p>
+
+	<h2>Виклик javascript</h2>
+
+	<p>
+		Серверний javascript изначається типом команди "type":"javascript" в розділі
+		<a href="/app/commands">commands</a> файла
+		<a href="/app/model">model.json</a>. В команді
+		задається ім'я файлу та довільні аргументи, які будуть передані у функцію javascript.
+	</p>
+
+	<pre class="code-highlight js" data-lang="js">
+	<script type="text/template">
+			<![CDATA[
+"commands": {
+   "testjs": {
+      "type": "javascript",
+      "file": "server.module", /*ім'я модуля в поточному каталозі */
+      "args": {}, /*довільний об'єкт з аргументами для скрипта */
+   }
+}
+			]]>
+		</script>
+	</pre>
+	<h2>Формат модуля</h2>
+	<p>
+		Модуль має експортувати єдину функцію. Ії і буде виконано при виклику
+	</p>
+
+	<pre class="code-highlight js" data-lang="js">
+	<script type="text/template">
+			<![CDATA[
+/*server module function*/
+module.exports = function (prms, args) {
+  //this: environment
+  //prms: parameters from client (object)
+  //args: arguments from model.json (object)
+  return {}; 
+}
+			]]>
+		</script>
+	</pre>
+
+	<p>
+		Значення (об'єкт), яке поверне ця функція, буде просто повернуто на клієнт.
+	</p>
+
+	<h2>Об'єкт environment</h2>
+	<p>
+		Оточення (environment) дозволяє звертатися до конфігураційної інформації
+		(з файлу <b>web.config</b>), а також містить функції для виконання різних
+		операцій, як-от звернення до зовнішніх джерел за протоколом http (<b>fetch</b>) та роботу
+		з моделями даних (<b>loadModel</b>, <b>saveModel</b>, <b>executeSql</b>).
+		Під час виконання серверного коду оточення передається
+		через контекст виконання функції (<b>this</b>).
+	</p>
+
+	<pre class="code-highlight js" data-lang="js">
+	<script type="text/template">
+			<![CDATA[
+export interface IConfig {
+	appSettings(key: string): object;
+}
+
+declare type execSqlParams = {
+	procedure: string,
+	source?: string,
+	parameters?: object
+}
+
+declare type saveModelParams = {
+	procedure: string,
+	data: object,
+	source?: string,
+	parameters?: object
+}
+
+declare type fetchParams = {
+	method: string;
+	body: object | string;
+	headers: object;
+}
+
+declare type fetchResponse = {
+	ok: boolean;
+	status: number;
+	statusText: string;
+	contentType: string;
+	body: string;
+	headers: object;
+	isJson(): boolean;
+	text(): string;
+	json(): string;
+}
+
+declare type sendSmsResponse = {
+	success: boolean;
+}
+
+export interface IEnvironment {
+	config: IConfig;
+	loadModel(prms: execSqlParams): object;
+	saveModel(prms: saveModelParams): object;
+	executeSql(prms: execSqlParams): object;
+	fetch(url: string, prms: fetchParams): fetchResponse;
+	sendSms(phone: string, message: string, extId: string): sendSmsResponse;
+	toBase64(source: string, codePage: number, safe: boolean): string;
+
+	/*filename: relative path with extension */
+	require(filename: string, prms: object, args: object): any;
+
+	createObject(name: string, prms: object): object;
+}
+			]]>
+		</script>
+	</pre>
+
+	<h2>Объект config</h2>
+
+	<p>
+		Об'єкт <b>config</b> має єдиний метод <b>appSettings</b>, який
+		повертає конфігураційний об'єкт з розділу <b>&lt;appSettings&gt;</b>
+		файлу <b>web.config.</b>
+	</p>
+	<p>
+		Наприклад, якщо у web.config є такий параметр:
+
+		<pre class="code-highlight xml" data-lang="xml">
+		<script type="text/template">
+			<![CDATA[
+<appSettings>
+		<add key="myApi" value="{param1:'value1', param2: 222, param3:true}" />
+</appSettings>
+			]]>
+		</script>
+	</pre>
+		то виклик <code>this.config.appSettings('myApi')</code> поверне об'єкт:
+		<pre class="code-highlight js" data-lang="js">
+		<script type="text/template">
+			<![CDATA[
+{
+	param1: 'value1',
+	param2: 222,
+	param3: true
+}
+			]]>
+		</script>
+	</pre>
+	</p>
+
+	<h2>Додаткові об’єкти для метода createObject</h2>
+
+	<pre class="code-highlight js" data-lang="js">
+	<script type="text/template">
+			<![CDATA[
+
+this.createObject('KsSmsSender', prms: KsSmsSenderParams): IKsSmsSender;
+
+declare type KsResponse = {
+	success: boolean;
+	mis: string;
+	errorId: number;
+	errorMsg: string;
+}
+
+declare type KsSmsSenderParams = {
+	url: string;
+	login: string;
+	password: string;
+	source: string;
+}
+
+export interface IKsSmsSender {
+	sendSms(prms: string, text: string): KsResponse;
+	sendViber(prms: string, text: string): KsResponse;
+}
+
+			]]>
+		</script>
+	</pre>
+</div>

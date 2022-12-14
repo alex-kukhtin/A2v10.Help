@@ -126,6 +126,8 @@
     <Content Include="html\models\update.html" />
     <Content Include="html\models\paging.html" />
     <Content Include="html\models\blob.html" />
+    <Content Include="html\server\javascript.html" />
+    <Content Include="html\server\index.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
     <Content Include="html\whatsnew\w202211.html" />

@@ -17,7 +17,7 @@
 	<p>
 		<pre class="code-highlight js" data-lang="js">
 <script type="text/template">{
-  "type": "sql" | "clr" | "callApi" | "startProcess" | "resumeProcess" | "sendMessage",
+  "type": "sql" | "clr" | "callApi" | "startProcess" | "resumeProcess" | "sendMessage" | "javascript",
   "source": "",
   "schema": "",
   "procedure": "",
@@ -61,6 +61,13 @@
 							<td>
 								Виклик зовнішнього http-API. Параметри визначаються властивістю <code>parameters</code>.
 								<a href="callapicommand">Детальніше...</a>.
+							</td>
+						</tr>
+						<tr>
+							<td class="prop-name">javascript</td>
+							<td>
+								Виклик javascript на сервері.
+								<a href="/server/javascript">Детальніше...</a>.
 							</td>
 						</tr>
 						<tr>
@@ -108,7 +115,7 @@
 			<tr>
 				<td class="prop-name">file</td>
 				<td>string</td>
-				<td>Рядок. Ім'я файла для бізнес-процесів.</td>
+				<td>Рядок. Ім'я файла для бізнес-процесів або ім'я файлу скрипта для серверних команд.</td>
 			</tr>
 			<tr class="top">
 				<td class="prop-name">parameters</td>
@@ -126,8 +133,10 @@
 			<tr>
 				<td class="prop-name">debugOnly</td>
 				<td>boolean</td>
-				<td>Команда буде виконуватися тільки в налагоджувальній конфигурації (
-				ключ <code>configuration</code> розділу <code>appSettings</code> має значення <b>"debug"</b>).</td>
+				<td>
+					Команда буде виконуватися тільки в налагоджувальній конфигурації (
+					ключ <code>configuration</code> розділу <code>appSettings</code> має значення <b>"debug"</b>).
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -150,8 +159,14 @@
 
 	<h3>Команди типу clr</h3>
 	<p>
-		Команда типу <b>clr</b> викликає метод з типу, заданного властивістю <code>clrType</code>. Тип повинен реалізовувати 
+		Команда типу <b>clr</b> викликає метод з типу, заданного властивістю <code>clrType</code>. Тип повинен реалізовувати
 		інтерфейс <code>IInvokeTarget</code>.  <a href="clrcommand">Детальніше...</a>
+	</p>
+
+	<h3>Команди типу javascript</h3>
+	<p>
+		Команда типу <b>javascript</b> викликає серверний модуль, заданий властивістю <code>file</code>. 
+		<a href="/server/javascript">Детальніше...</a>
 	</p>
 
 	<h3>Команди типу callApi</h3>
