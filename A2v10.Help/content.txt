@@ -69,6 +69,7 @@
 			PropertyGridItem	/xaml/controls/propertygriditem
 			Radio				/xaml/controls/radio
 			Selector			/xaml/controls/selector
+			SelectorSimple		/xaml/controls/selectorsimple
 			Separator			/xaml/controls/separator
 			StateCard			/xaml/controls/statecard
 			Static				/xaml/controls/static
@@ -108,6 +109,7 @@
 			Page				/xaml/containers/page
 			Panel				/xaml/containers/panel
 			Partial				/xaml/containers/partial
+			PartialBlock		/xaml/containers/partialblock
 			Popup				/xaml/containers/popup
 			Repeater			/xaml/containers/repeater
 			Splitter			/xaml/containers/splitter

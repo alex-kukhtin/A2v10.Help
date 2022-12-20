@@ -1,0 +1,82 @@
+﻿<div>
+	<!--title:Xaml.SelectorSimple-->
+	<!--keywords:SelectorSimple-->
+	<div class="title">
+		<h1>
+			Елемент SelectorSimple
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>Являє собою спрощений селектор.</p>
+	<p>
+		Фактично це скорочений запис для звичайного елемента <b>Selector</b> в якому
+		встановлені деякі властивості.
+	</p>
+
+	Наслідує: <a class="code-link" href="/xaml/controls/selector">Selector</a> :
+	<a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Url</td>
+				<td>String</td>
+				<td>
+					URL <a href="/app/model">кінцевої точки</a>. В цій точці мають
+					бути діалог <b>"browse"</b> та команда <b>"fetch"</b>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Data</td>
+				<td>Object</td>
+				<td>
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>.
+					Додаткові параметри для вибору.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/controls/selector">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+	<p>Такий код XAML</p>
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<SelectorSimpe Value="{Bind Document.Agent" Url="/catalog/agent" />
+</script>
+</pre>
+
+	<p>
+		фактично е аналогом ось такого коду:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Selector Value="{Bind Document.Agent}" DisplayProperty="Name"
+		Fetch="/catalog/agent/fetch">
+	<Hyperlink Command="{BindCmd Browse, Url='/catalog/agent/browse'
+			   Argument={Bind Document.Agent}}"
+	/>
+</Selector>
+</script>
+</pre>
+</div>

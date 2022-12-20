@@ -61,6 +61,7 @@ https://docs.a2v10.com/xaml/controls/propertygrid
 https://docs.a2v10.com/xaml/controls/propertygriditem
 https://docs.a2v10.com/xaml/controls/radio
 https://docs.a2v10.com/xaml/controls/selector
+https://docs.a2v10.com/xaml/controls/selectorsimple
 https://docs.a2v10.com/xaml/controls/separator
 https://docs.a2v10.com/xaml/controls/statecard
 https://docs.a2v10.com/xaml/controls/static
@@ -99,6 +100,7 @@ https://docs.a2v10.com/xaml/containers/inlinedialog
 https://docs.a2v10.com/xaml/containers/page
 https://docs.a2v10.com/xaml/containers/panel
 https://docs.a2v10.com/xaml/containers/partial
+https://docs.a2v10.com/xaml/containers/partialblock
 https://docs.a2v10.com/xaml/containers/popup
 https://docs.a2v10.com/xaml/containers/repeater
 https://docs.a2v10.com/xaml/containers/splitter
