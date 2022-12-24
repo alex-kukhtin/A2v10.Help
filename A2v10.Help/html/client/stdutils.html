@@ -8,6 +8,131 @@
 			<a href="module">Модулі</a>
 		</div>
 	</div>
+
 	<p>
+		Модуль утіліт включає корисні функції для обробки дат, валюти, тексту, та деякі допоміжні функції.
 	</p>
+
+	<p>Завантаження модуля за ім'ям <b>std:utils</b>. Наприклад:
+	</p>
+
+	<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+const utils:~Utils = require('std:utils');
+// за потреби
+const utilsDate:~UtilsDate = utils.date;
+const utilsCy:~UtilsCurrency = utils.currency;
+const utilsText:~UtilsText = utils.text;
+]]>
+</script>
+</pre>
+
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+declare const enum ~DataType {
+	Currency = "Currency",
+	Number = "Number",
+	DateTime = "DateTime",
+	Date = "Date",
+	DateUrl = "DateUrl",
+	Time = "Time",
+	Period = "Period"
+}
+
+declare const enum ~DateTimeUnit {
+	year = 'year',
+	month = 'month',
+	day = 'day',
+	hour = 'hour',
+	minute = 'minute',
+	second = 'second'
+}
+
+declare const enum ~DateUnit {
+	year = 'year',
+	month = 'month',
+	day = 'day',
+	minute = 'minute',
+	second = 'second'
+}
+
+
+interface ~UtilsDate {
+	readonly minDate: Date;
+	readonly maxDate: Date;
+
+	today(): Date,
+	now(seconds?: boolean): Date,
+	zero(): Date,
+	equal(d1: Date, d2: Date): boolean;
+	isZero(d: Date): boolean;
+	add(d: Date, nm: number, unit: ~DateTimeUnit);
+	create(year: number, month: number, day: number): Date;
+	fromDays(days: number): Date;
+	compare(d1: Date, d2: Date): number;
+	diff(unit: ~DateUnit, d1: Date, d2: Date): number;
+	endOfMonth(d: Date): Date;
+	format(d: number | Date): string;
+	formatDate(d: number | Date): string;
+	parse(str: string): Date;
+	tryParse(str: string): Date | string;
+}
+
+interface ~UtilsText {
+	contains(text: string, probe: string): boolean;
+	containsText(obj: object, props: string, probe: string): boolean;
+	capitalize(text: string): string;
+	equalNoCase(s1: string, s2: string): boolean;
+	maxChars(s1: string, len: number): string;
+}
+
+interface ~UtilsCurrency {
+	round(val: number, digits?: number): number;
+	format(val: any): string;
+}
+
+interface ~FormatOptions {
+	format?: string;
+	hideZeros?: boolean;
+}
+
+interface ~Utils {
+	isArray(arg: any): boolean;
+	isFunction(arg: any): boolean;
+	isDefined(arg: any): boolean;
+	isObject(arg: any): boolean;
+	isObjectExact(arg: any): boolean;
+	isDate(arg: any): boolean;
+	isString(arg: any): boolean;
+	isNumber(arg: any): boolean;
+	isBoolean(arg: any): boolean;
+
+	toNumber(arg: any): number;
+	toString(arg: any): string;
+
+	notBlank(arg: any): boolean;
+
+	toJson(arg: object): string;
+	fromJson(arg: string): object;
+
+	isEqual(o1: any, o2: any): boolean;
+
+	format(arg: any, dataType: ~DataType, opts?: ~FormatOptions);
+
+	eval(obj: any, path: string, dataType: ~DataType, opts?: ~FormatOptions, skipFormat?: boolean): any;
+	simpleEval(obj: any, path: string): any;
+
+	mergeTemplate(tml1: Template, tml2: Template): Template;
+
+	readonly date: ~UtilsDate;
+	readonly text: ~UtilsText;
+	readonly currency: ~UtilsCurrency;
+}
+
+]]>
+</script>
+</pre>
 </div>
