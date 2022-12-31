@@ -670,3 +670,7 @@ header .lang {
   font-size: 12px;
   margin-right: 5px;
 }
+.control-group input,
+.control-group select {
+  height: 2em;
+}
