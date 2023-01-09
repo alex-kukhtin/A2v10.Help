@@ -47,7 +47,7 @@
 			<tr>
 				<td class="prop-name">Url</td>
 				<td>String</td>
-				<td>Url для внешней команди.</td>
+				<td>Url для зовнішньї команди.</td>
 			</tr>
 			<tr>
 				<td class="prop-name">CommandName</td>
@@ -251,15 +251,43 @@
 		<a href="#download"></a>
 		<div class="command"><b>Download</b> - завантажити</div>
 		<p>
-			Дозволяє користувачу завантажити статичний файл. Статичні файли, 
+			Дозволяє користувачу завантажити статичний файл. Статичні файли,
 			пов'язані з програмою мають бути розміщені в спеціальній папці <a class="code-link" href="/app/folders/files">_files</a>.
 		</p>
 		<h4>Аргументи:</h4>
 		<ul class="params">
 			<li>
-				<code>Url</code> - шлях до статичного файлу. Шлях зазначається 
+				<code>Url</code> - шлях до статичного файлу. Шлях зазначається
 				відносно папки <b>_files</b>.
 			</li>
+		</ul>
+	</div>
+	<div class="method">
+		<a href="#report"></a>
+		<div class="command"><b>Report</b> - звіт</div>
+		<p>
+			Дозволяє користувачу виконати дії зі звітом. Звіти
+			мають бути розміщені в розділі <a class="code-link" href="/app/reports">reports</a>.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>Report</code> - назва <a href="/app/reports">звіту</a>.
+			</li>
+			<li>
+				<code>Url</code> - шлях до <a href="/app/reports">кінцевої точки звіту</a>.
+			</li>
+			<li>
+				<code>Export</code> - завантажити звіт.
+			</li>
+			<li>
+				<code>Print</code> - надрукувати звіт.
+			</li>
+			<li>
+				<code>Format</code> - формат завантаження для звіту. Доступні значення залежать від виду звіту.
+			</li>
+			<li><code>Argument</code> - Аргумент для звіту. З аргументу буде отримано ідентіфікатор звіту.</li>
+			<li><code>Data</code> - Додаткові дані для звіту. Будуть параметрами процедури завантаження моделі звіту.</li>
 		</ul>
 	</div>
 </div>
