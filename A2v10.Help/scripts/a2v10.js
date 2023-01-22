@@ -198,7 +198,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
-// 20220815-7879
+// 20221027-7902
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -222,6 +222,7 @@ app.modules['std:utils'] = function () {
 
 	let numFormatCache = {};
 
+	const zeroDate = new Date(Date.UTC(0, 0, 1, 0, 0, 0, 0));
 
 	return {
 		isArray: Array.isArray,
@@ -386,6 +387,9 @@ app.modules['std:utils'] = function () {
 					break;
 				case 'string':
 					obj[key] = '';
+					break;
+				case 'object':
+					clearObject(obj[key]);
 					break;
 				default:
 					console.error(`utils.clearObject. Unknown property type ${typeof (val)}`);
@@ -625,8 +629,7 @@ app.modules['std:utils'] = function () {
 	}
 
 	function dateZero() {
-		let td = new Date(Date.UTC(0, 0, 1, 0, 0, 0, 0));
-		return td;
+		return zeroDate;
 	}
 
 	function dateTryParse(str) {
@@ -1692,9 +1695,9 @@ app.modules['std:modelInfo'] = function () {
 };
 
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
-// 20220918-7891
+// 20221124-7907
 /* services/http.js */
 
 app.modules['std:http'] = function () {
@@ -1810,7 +1813,7 @@ app.modules['std:http'] = function () {
 		}
 	}
 
-	function load(url, selector, baseUrl) {
+	function load(url, selector, baseUrl, skipIndicator) {
 
 		if (selector) {
 			let fc = selector.firstElementChild
@@ -1827,7 +1830,7 @@ app.modules['std:http'] = function () {
 
 		return new Promise(function (resolve, reject) {
 			eventBus.$emit('beginLoad');
-			doRequest('GET', url)
+			doRequest('GET', url, null, false, skipIndicator)
 				.then(function (html) {
 					if (!html)
 						return;
@@ -1940,7 +1943,7 @@ app.modules['std:http'] = function () {
 
 // Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-// 20221002-7894
+// 20221124-7907
 /* platform/routex.js */
 
 (function () {
@@ -2006,6 +2009,7 @@ app.modules['std:http'] = function () {
 			navigate: function (state, to) { // to: {url, query, title}
 				eventBus.$emit('closeAllPopups');
 				eventBus.$emit('modalCloseAll');
+				eventBus.$emit('showSidePane', null);
 				let root = window.$$rootUrl;
 				let oldUrl = root + state.route + urlTools.makeQueryString(state.query);
 				state.route = to.url.toLowerCase();
@@ -2373,9 +2377,9 @@ app.modules['std:validators'] = function () {
 
 
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-/*20210623-7786*/
+/*20221026-7902*/
 /* services/impl/array.js */
 
 app.modules['std:impl:array'] = function () {
@@ -2707,6 +2711,9 @@ app.modules['std:impl:array'] = function () {
 			return !!this.$selected;
 		});
 
+		defPropertyGet(arr, "$hasChecked", function () {
+			return this.$checked && this.$checked.length;
+		});
 	}
 
 	function defineArrayItemProto(elem) {
@@ -3938,16 +3945,16 @@ app.modules['std:impl:array'] = function () {
 })();
 
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
-// 20210302-7752
+// 20221124-7907
 // dataservice.js
 (function () {
 
 	let http = require('std:http');
 
-	function post(url, data, raw) {
-		return http.post(url, data, raw);
+	function post(url, data, raw, hideIndicator) {
+		return http.post(url, data, raw, hideIndicator);
 	}
 
 	function get(url) {
@@ -4708,9 +4715,9 @@ app.modules['std:accel'] = function () {
 	}
 };
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
-// 20220918-7891
+// 20221124-7907
 /*components/include.js*/
 
 (function () {
@@ -4741,7 +4748,8 @@ app.modules['std:accel'] = function () {
 			needReload: Boolean,
 			insideDialog: Boolean,
 			done: Function,
-			queued: Boolean
+			queued: Boolean,
+			hideIndicator: Boolean
 		},
 		data() {
 			return {
@@ -4762,7 +4770,7 @@ app.modules['std:accel'] = function () {
 				if (this.currentUrl) {
 					// Do not set loading. Avoid blinking
 					this.__destroy();
-					http.load(this.currentUrl, this.$el)
+					http.load(this.currentUrl, this.$el, undefined, this.hideIndicator)
 						.then(this.loaded)
 						.catch(this.error);
 				}
@@ -4805,7 +4813,7 @@ app.modules['std:accel'] = function () {
 			//console.warn('include has been mounted');
 			if (this.src) {
 				this.currentUrl = this.src;
-				http.load(this.src, this.$el)
+				http.load(this.src, this.$el, undefined, this.hideIndicator)
 					.then(this.loaded)
 					.catch(this.error);
 			}
@@ -4834,7 +4842,7 @@ app.modules['std:accel'] = function () {
 					this.loading = true; // hides the current view
 					this.currentUrl = newUrl;
 					this.__destroy();
-					http.load(newUrl, this.$el)
+					http.load(newUrl, this.$el, undefined, this.hideIndicator)
 						.then(this.loaded)
 						.catch(this.error);
 				}
@@ -4881,7 +4889,7 @@ app.modules['std:accel'] = function () {
 			load() {
 				let url = this.makeUrl();
 				this.__destroy();
-				http.load(url, this.$el)
+				http.load(url, this.$el, undefined, this.hideIndicator)
 					.then(this.loaded)
 					.catch(this.error);
 			}
@@ -4906,7 +4914,7 @@ app.modules['std:accel'] = function () {
 		mounted() {
 			if (this.source) {
 				this.currentUrl = this.makeUrl(this.source);
-				http.load(this.currentUrl, this.$el)
+				http.load(this.currentUrl, this.$el, undefined, this.hideIndicator)
 					.then(this.loaded)
 					.catch(this.error);
 			}
@@ -5823,9 +5831,9 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-// 20210728-7797
+// 20221027-7902
 // components/datepicker.js
 
 
@@ -5884,6 +5892,8 @@ Vue.component('validator-control', {
 			},
 			fitDate(dt) {
 				let du = utils.date;
+				if (du.isZero(dt))
+					return dt;
 				if (dt < du.minDate)
 					dt = du.minDate;
 				else if (dt > du.maxDate)
@@ -6427,10 +6437,8 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-/*20220815-7879*/
+/*20221006-7899*/
 // components/selector.js
-
-/*TODO*/
 
 (function selector_component() {
 	const popup = require('std:popup');
@@ -6452,10 +6460,10 @@ Vue.component('validator-control', {
 		<div v-if="isCombo" class="selector-combo" @click.stop.prevent="open"><span tabindex="-1" class="select-text" v-text="valueText" @keydown="keyDown" ref="xcombo"/></div>
 		<input v-focus v-model="query" :class="inputClass" :placeholder="placeholder" v-else
 			@input="debouncedUpdate" @blur.stop="blur" @keydown="keyDown" @keyup="keyUp" ref="input" 
-			:disabled="disabled" @click="clickInput($event)"/>
+			:disabled="disabled" @click="clickInput($event)" :tabindex="tabIndex"/>
 		<slot></slot>
 		<a class="selector-open" href="" @click.stop.prevent="open" v-if="caret"><span class="caret"></span></a>
-		<a class="selector-clear" href="" @click.stop.prevent="clear" v-if="clearVisible">&#x2715</a>
+		<a class="selector-clear" href="" @click.stop.prevent="clear" v-if="clearVisible" tabindex="-1">&#x2715</a>
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 		<div class="selector-pane" v-if="isOpen" ref="pane" :class="paneClass">
 			<div class="selector-body" :style="bodyStyle">
@@ -6835,7 +6843,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-// 20220801-7875
+// 20221107-7903
 // components/datagrid.js*/
 
 (function () {
@@ -6883,7 +6891,7 @@ Vue.component('validator-control', {
 					</tr>
 					<template v-for="(row, rowIndex) in g.items">
 						<data-grid-row v-show="isGroupBodyVisible(g)" :group="true" :level="g.level" :cols="columns" :row="row" :key="gIndex + ':' + rowIndex" :index="rowIndex" :mark="mark" ref="row" />
-						<data-grid-row-details v-if="rowDetails" v-show="isGroupBodyVisible(g)" :cols="columns.length" :row="row" :key="'rd:' + gIndex + ':' + rowIndex" :mark="mark">
+						<data-grid-row-details v-if="rowDetailsShow(row)" v-show="isGroupBodyVisible(g)" :cols="columns.length" :row="row" :key="'rd:' + gIndex + ':' + rowIndex" :mark="mark">
 							<slot name="row-details" :row="row"></slot>
 						</data-grid-row-details>
 					</template>
@@ -6894,7 +6902,7 @@ Vue.component('validator-control', {
 			<tbody>
 				<template v-for="(item, rowIndex) in $items">
 					<data-grid-row :cols="columns" :row="item" :key="rowIndex" :index="rowIndex" :mark="mark" ref="row" :is-item-active="isItemActive" :hit-item="hitItem"/>
-					<data-grid-row-details v-if="rowDetails" :cols="columns.length" :row="item" :key="'rd:' + rowIndex" :mark="mark">
+					<data-grid-row-details v-if="rowDetailsShow(item)" :cols="columns.length" :row="item" :key="'rd:' + rowIndex" :mark="mark">
 						<slot name="row-details" :row="item"></slot>
 					</data-grid-row-details>
 				</template>
@@ -7505,7 +7513,8 @@ Vue.component('validator-control', {
 			$isEmpty() {
 				if (!this.itemsSource) return false;
 				let mi = this.itemsSource.$ModelInfo;
-				if (!mi) return false;
+				if (!mi)
+					return this.itemsSource.length === 0;
 				if ('HasRows' in mi) {
 					if (this.itemsSource.length)
 						return false;
@@ -7545,6 +7554,14 @@ Vue.component('validator-control', {
 				let ix = this.columns.indexOf(column);
 				if (ix !== -1)
 					this.columns.splice(ix, 1);
+			},
+			rowDetailsShow(item) {
+				if (!this.rowDetails)
+					return false;
+				if (utils.isBoolean(this.rowDetailsVisible))
+					return this.rowDetailsVisible; // unset
+				let vis = item[this.rowDetailsVisible];
+				return !!vis;
 			},
 			columnClass(column) {
 				let cls = '';
@@ -7856,15 +7873,15 @@ template: `
 })();
 
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-//20210104-7738
+//20221107-7903
 /*components/popover.js*/
 
 Vue.component('popover', {
 	template: `
-<div v-dropdown class="popover-wrapper" :style="{top: top}" :class="{show: isShowHover}">
-	<span toggle class="popover-title" v-on:mouseover="mouseover" v-on:mouseout="mouseout"><i v-if="hasIcon" :class="iconClass"></i> <span :title="title" v-text="content"></span><slot name="badge"></slot></span>
+<div v-dropdown class="popover-wrapper" :style="{top: top}" :class="{show: isShowHover}" :title="title">
+	<span toggle class="popover-title" v-on:mouseover="mouseover" v-on:mouseout="mouseout"><i v-if="hasIcon" :class="iconClass"></i> <span v-text="content"></span><slot name="badge"></slot></span>
 	<div class="popup-body" :style="{width: width, left:offsetLeft}">
 		<div class="arrow" :style="{left:offsetArrowLeft}"/>
 		<div v-if="visible">
@@ -8214,7 +8231,7 @@ Vue.component('popover', {
 
 // Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-// 20220414-7835
+// 20221127-7908
 // components/collectionview.js
 
 /*
@@ -8375,7 +8392,7 @@ TODO:
 				return arr;
 			},
 			sourceCount() {
-				return this.ItemsSource.length;
+				return this.filteredCount;
 			},
 			thisPager() {
 				return this;
@@ -8668,6 +8685,9 @@ TODO:
 		methods: {
 			commit(query) {
 				//console.dir(this.$root.$store);
+				query.__baseUrl__ = '';
+				if (this.$root.$data)
+					query.__baseUrl__ = this.$root.$data.__baseUrl__;
 				this.$store.commit('setquery', query);
 			},
 			sortDir(order) {
@@ -10475,9 +10495,9 @@ Vue.component('a2-panel', {
 	});
 
 })();
-/*! Copyright © 2015-2022 Alex Kukhtin. All rights reserved.*/
+/* Copyright © 2015-2022 Alex Kukhtin. All rights reserved.*/
 
-// 20220627-7853
+// 20221004-7897
 // components/sheet.js
 
 (function () {
@@ -11284,14 +11304,15 @@ Vue.component('a2-panel', {
 })();
 // Copyright © 2022 Alex Kukhtin. All rights reserved.
 
-// 20220825-7883
+// 20221112-7905
 // components/treegrid.js
 
 (function () {
 
 	let gridTemplate = `
-<table>
-	<thead><tr><slot name="header"></slot></tr></thead>
+<table v-lazy="root">
+	<colgroup><slot name="columns" v-bind:that="that"></slot></colgroup>
+	<thead><tr><slot name="header" v-bind:that="that"></slot></tr></thead>
 	<tbody>
 		<tr v-for="(itm, ix) in rows" :class="rowClass(itm)" 
 				@click.stop.prevent="select(itm)" v-on:dblclick.prevent="dblClick($event, itm)">
@@ -11327,13 +11348,25 @@ Vue.component('a2-panel', {
 					collect(this.root[this.item], 0);
 				return arr;
 			},
+			sortColumn() {
+				let sort = {
+					dir: '',
+					order: ''
+				};
+				let mi = this.root.$ModelInfo;
+				if (!mi)
+					return sort;
+				sort.dir = (mi.SortDir || '').toLowerCase();
+				sort.order = (mi.SortOrder || '').toLowerCase();
+				return sort;
+			},
 			that() {
 				return this;
 			}
 		},
 		watch: {
 			root() {
-				console.dir('whatch items');
+				//console.dir('whatch items');
 			}
 		},
 		methods: {
@@ -11364,6 +11397,27 @@ Vue.component('a2-panel', {
 			},
 			toggleClass(itm) {
 				return itm.$expanded ? 'expanded' : 'collapsed';
+			},
+			columnClass(sort, fitcol) {
+				let col = this.sortColumn;
+				let cls = {
+					sorted: false,
+					fit: fitcol,
+				};
+				if (sort.toLowerCase() === col.order) {
+					cls.sorted = true;
+				}
+				return cls;
+			},
+			headerClass(sort) {
+				let col = this.sortColumn;
+				if (col.order === (sort || '').toLowerCase())
+					return col.dir;
+				return null;
+			},
+			doSort(prop) {
+				prop = (prop || '').toLowerCase();
+				this.$parent.$emit('sort', prop);
 			}
 		}
 	});
@@ -11775,26 +11829,17 @@ Vue.directive('disable', {
 
 // Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-/*20220823-7883*/
+/*20221027-7902*/
 /* directives/dropdown.js */
 
 (function () {
 
 	const popup = require('std:popup');
-	const eventBus = require('std:eventBus');
 
 	Vue.directive('dropdown', {
 		bind(el, binding, vnode) {
 
-			let me = this;
-
-			el._btn = el.querySelector('[toggle]');
 			el.setAttribute('dropdown-top', '');
-			// el.focus(); // ???
-			if (!el._btn) {
-				console.error('DropDown does not have a toggle element');
-			}
-
 			popup.registerPopup(el);
 
 			el._close = function (ev) {
@@ -11803,15 +11848,24 @@ Vue.directive('disable', {
 				el.classList.remove('show');
 			};
 
-			el.addEventListener('click', function (event) {
+			el._findButton = function() {
+				let btn = el.querySelector('[toggle]');
+				if (!btn) {
+					console.error('DropDown does not have a toggle element');
+				}
+				return btn;
+			}
+
+			el._handler = function(event) {
 				let trg = event.target;
-				if (el._btn.disabled) return;
+				let btn = el._findButton(el);
+				if (!btn || btn.disabled) return;
 				while (trg) {
-					if (trg === el._btn) break;
+					if (trg === btn) break;
 					if (trg === el) return;
 					trg = trg.parentElement;
 				}
-				if (trg === el._btn) {
+				if (trg === btn) {
 					event.preventDefault();
 					event.stopPropagation();
 					let isVisible = el.classList.contains('show');
@@ -11832,11 +11886,14 @@ Vue.directive('disable', {
 						el.classList.add('show');
 					}
 				}
-			});
+			}
+
+			el.addEventListener('click', el._handler);
 		},
 		unbind(el) {
 			const popup = require('std:popup');
 			popup.unregisterPopup(el);
+			el.removeEventListener('click', el._handler);
 		}
 	});
 
@@ -12214,9 +12271,9 @@ Vue.directive('resize', {
 });
 
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
-/*20221002-7894*/
+/*20221127-7908*/
 // controllers/base.js
 
 (function () {
@@ -12519,6 +12576,10 @@ Vue.directive('resize', {
 				bus.$emit('childrenSaved', dat);
 			},
 
+			$showSidePane(url, arg, data) {
+				let newurl = urltools.combine('_navpane', url, arg || '0') + urltools.makeQueryString(data);
+				eventBus.$emit('showSidePane', newurl);
+			},
 
 			$invoke(cmd, data, base, opts) {
 				let self = this;
@@ -12528,9 +12589,10 @@ Vue.directive('resize', {
 				let baseUrl = self.$indirectUrl || self.$baseUrl;
 				if (base)
 					baseUrl = urltools.combine('_page', base, 'index', 0);
+				let hideIndicator = opts && opts.hideIndicator || false;
 				return new Promise(function (resolve, reject) {
 					var jsonData = utils.toJson({ cmd: cmd, baseUrl: baseUrl, data: data });
-					dataservice.post(url, jsonData).then(function (data) {
+					dataservice.post(url, jsonData, false, hideIndicator).then(function (data) {
 						if (self.__destroyed__) return;
 						if (utils.isObject(data))
 							resolve(data);
@@ -12670,6 +12732,9 @@ Vue.directive('resize', {
 					href += '?subject=' + urltools.encodeUrl(subject);
 				return href;
 			},
+			$callphone(phone) {
+				return `tel:${phone}`;
+			},
 			$href(url, data) {
 				return urltools.createUrlForNavigate(url, data);
 			},
@@ -12712,15 +12777,17 @@ Vue.directive('resize', {
 				window.location = root + url;
 			},
 
-			async $upload(url, accept) {
+			async $upload(url, accept, data) {
 				eventBus.$emit('closeAllPopups');
 				let root = window.$$rootUrl;
 				try {
 					let file = await htmlTools.uploadFile(accept, url);
 					var dat = new FormData();
 					dat.append('file', file, file.name);
+					if (data)
+						dat.append('Key', data.Key || null);
 					let uploadUrl = urltools.combine(root, '_file', url);
-					uploadUrl = urltools.createUrlForNavigate(uploadUrl);
+					uploadUrl = urltools.createUrlForNavigate(uploadUrl, data);
 					return await httpTools.upload(uploadUrl, dat);
 				} catch (err) {
 					err = err || 'unknown error';
@@ -13534,8 +13601,17 @@ Vue.directive('resize', {
 				if (!utils.isObjectExact(search)) {
 					console.error('base.__queryChange. invalid argument type');
 				}
+				let searchBase = search.__baseUrl__;
+				if (searchBase) {
+					let searchurl = urltools.parseUrlAndQuery(searchBase);
+					let thisurl = urltools.parseUrlAndQuery(this.$data.__baseUrl__);
+					if (searchurl.url !== thisurl.url)
+						return;
+				}
 				let nq = Object.assign({}, this.$baseQuery);
 				for (let p in search) {
+					if (p.startsWith('__'))
+						continue;
 					if (search[p]) {
 						// replace from search
 						nq[p] = search[p];
@@ -13591,7 +13667,8 @@ Vue.directive('resize', {
 					$upload: this.$upload,
 					$emitCaller: this.$emitCaller,
 					$emitSaveEvent: this.$emitSaveEvent,
-					$nodirty: this.$nodirty
+					$nodirty: this.$nodirty,
+					$showSidePane: this.$showSidePane
 				};
 				Object.defineProperty(ctrl, "$isDirty", {
 					enumerable: true,
@@ -14152,9 +14229,9 @@ Vue.directive('resize', {
 		tabSideBar: a2TabSideBar
 	};
 })();	
-// Copyright © 2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2021-2022 Oleksandr Kukhtin. All rights reserved.
 
-/*20210914-7803*/
+/*20221123-7907*/
 /* controllers/appheader.js */
 
 (function () {
@@ -14736,6 +14813,7 @@ Vue.directive('resize', {
 				feedbackVisible: false,
 				globalPeriod: null,
 				dataCounter: 0,
+				sidePaneUrl: '',
 				traceEnabled: log.traceEnabled()
 			};
 		},
@@ -14754,7 +14832,10 @@ Vue.directive('resize', {
 				if (this.userIsExternal)
 					return undefined;
 				return this.doChangePassword;
-			}
+			},
+			sidePaneVisible() {
+				return !!this.sidePaneUrl
+			},
 		},
 		watch: {
 			traceEnabled(val) {
@@ -14876,6 +14957,17 @@ Vue.directive('resize', {
 				}
 			});
 
+			eventBus.$on('showSidePane', function (url) {
+				if (!url) {
+					me.sidePaneUrl = '';
+				} else {
+					let newurl = '/_page' + url;
+					if (me.sidePaneUrl === newurl)
+						me.sidePaneUrl = '';
+					else
+						me.sidePaneUrl = newurl;
+				}
+			});
 
 			popup.startService();
 
