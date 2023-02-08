@@ -674,3 +674,45 @@ header .lang {
 .control-group select {
   height: 2em;
 }
+.mobile-menu .ico {
+  font-size: 26px;
+  line-height: 2;
+}
+.help-header .mobile-menu {
+  display: none;
+}
+@media (max-width: 768px) {
+  header .mobile-menu,
+  .help-header .mobile-menu {
+    display: block;
+  }
+  header .help-title,
+  .help-header .help-title {
+    display: none;
+  }
+  footer .hide-mobile {
+    display: none;
+  }
+  aside.help-side-bar {
+    display: none;
+    top: 91px;
+    z-index: 3;
+    border-right: 1px solid #ccc;
+    position: absolute;
+    height: 100%;
+    background-color: white;
+  }
+  .menu-tab-header {
+    display: none;
+    width: 390px;
+    position: absolute;
+    top: 45px;
+    border-right: 1px solid #ccc;
+  }
+  #app.show aside.help-side-bar {
+    display: block;
+  }
+  #app.show .menu-tab-header {
+    display: flex;
+  }
+}

@@ -1,4 +1,4 @@
-﻿/* Copyright © 2017-2018 Alex Kukhtin. All rights reserved. */
+﻿/* Copyright © 2017-2023 Oleksandr Kukhtin. All rights reserved. */
 
 (function () {
 
@@ -35,6 +35,8 @@
 				url = makeUrl(url);
 				if (this.content === url)
 					return;
+				if (window.__closeMobileMenu)
+					window.__closeMobileMenu();
 				window.history.pushState(null, null, url);
 				this.content = url;
 				this.$emit('navigated', this.content);

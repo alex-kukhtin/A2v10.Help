@@ -22,10 +22,11 @@
 <body>
 	<div id="app" class="help-main-view">
 		<header class="help-header">
+			<a href="" class="mobile-menu" id="mobile-menu"><i class="ico ico-menu"></i></a>
 			<a href="/index">
 				<i class="ico ico-a2v10 h-logo"></i>
-				<span class="h-title">Платформа A2v10</span>
-				<span class="h-sub-title">довідкова система</span>
+				<span class="h-title help-title">Платформа A2v10</span>
+				<span class="h-sub-title help-title">довідкова система</span>
 			</a>
 			<div class="divider"></div>
 			<div class="search">
@@ -47,7 +48,7 @@
 			<a2-search-view v-show="isActive('fts')"></a2-search-view>
 		</aside>
 
-		<a2-include class="help-content-view" :source="content">
+		<a2-include class="help-content-view" :source="content" v-cloak>
 			<div v-pre>
 				$(PageContent)
 			</div>
@@ -56,12 +57,12 @@
 		<footer class="help-footer">
 			<span>Copyright &copy; 2017-2023 О. Кухтін</span>
 			<span class="divider"></span>
-			<a href="/help/about">Про довідкову систему...</a>
+			<a href="/help/about" class="hide-mobile">Про довідкову систему...</a>
 			<span class="divider"></span>
 			<span>
 				<a target="_blank" tabindex="-1" rel="noopener" href="https://a2v10.com" title="Платформа A2v10">
 				<i class="ico ico-a2logo a2logo-layout"></i></a>
-				<span>Довідкова система. версія 10.0.7915</span>
+				<span class="hide-mobile">Довідкова система.</span><span> версія 10.0.7915</span>
 			</span>
 		</footer>
 	</div>
@@ -81,6 +82,21 @@
 				nsd.innerText = "We're sorry, but this browser is not supported.";
 				document.body.appendChild(nsd);
 			}
+
+
+			window.addEventListener("load", () => {
+				document.getElementById('mobile-menu').addEventListener("click", e => {
+					e.preventDefault();
+					e.stopPropagation();
+					document.getElementById('app').classList.toggle('show');
+				});
+
+				window.__closeMobileMenu = function () {
+					document.getElementById('app').classList.remove('show');
+				};
+
+			});
+
 		})();
 	</script>
 	<script type="text/javascript" src="/scripts/vue.min.js?v=2.6.14"></script>
