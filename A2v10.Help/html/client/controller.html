@@ -66,6 +66,9 @@ interface IMessage {
 interface IConfirm {
 	msg: string;
 	style?: ~MessageStyle;
+	title?: string;
+	list?: string[];
+	buttons?: { text: string, result: string | boolean }[];
 }
 
 ]]>
@@ -135,6 +138,33 @@ interface IConfirm {
 		</ul>
 		<p>
 			Кнопки, які будуть розміщені у вікні, залежать від стилю повідомлення.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$confirm(msg:string | IConfrim): Promise&lt;boolean|string&gt;</pre></div>
+		<p>
+			Метод виводить запитання в модальному вікні.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>msg</code> - текст запиту. Може містити html-розмітку.</li>
+			<li><code>title</code> - заголовок вікна запиту. За замовчуванням: рядок <b>"Підтвердження"</b> (в поточній локалізації).</li>
+			<li><code>{Enum:['info', 'alert', 'confirm']} style</code>  - стиль. За замовчуванням: <code class="string">'confrim'</code>.</li>
+			<li><code>list</code> - перелік додаткових рядків (наприклад, помилок).</li>
+			<li>
+				<code>buttons</code> - перелік кнопок відповіді Властивість 'text' це заголовок кнопки.
+				Властивість 'result' - результат, який поверне проміс після закриття вікна.
+				Якщо <b>buttons</b> не вказано, застосовуються стандартні кнопки <b>Ok</b> та <b>Cancel</b> (з урахуванням поточної локалізації).
+			</li>
+		</ul>
+		<h4>Повертає:</h4>
+		<ul class="params">
+			<li><code>Promise&lt;boolean|string&gt;</code>, який буде виконаний після закриття вікна.</li>
+		</ul>
+		<p>
+			Кнопка відміни має містити значення <code>result: false</code>. Натискання на цю кнопку закриває вікно 
+			без виконання промісу.
 		</p>
 	</div>
 
@@ -281,10 +311,10 @@ interface IConfirm {
 		<h4>Аргументи:</h4>
 		<ul class="params">
 			<li>
-				<code>func</code> - функція, що визивається. Функція обов'язвово має бути асінхронною 
+				<code>func</code> - функція, що визивається. Функція обов'язвово має бути асінхронною
 				(або має повернути проміс).
 			</li>
 		</ul>
 	</div>
-	
+
 </div>
