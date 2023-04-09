@@ -218,40 +218,40 @@ const template = {
 <pre class="code-highlight xml">
 <script type="text/template">
 <![CDATA[
-		<Sheet Margin="1rem" GridLines="Both" Compact="True">
-		<Sheet.Header>
+<Sheet Margin="1rem" GridLines="Both" Compact="True">
+	<Sheet.Header>
 		<SheetRow Style="Header">
-		<SheetCell RowSpan="2">Id</SheetCell>
-		<SheetCell RowSpan="2">S1</SheetCell>
-		<SheetCell RowSpan="2">N1</SheetCell>
-		<SheetCell ColSpan="{Bind RepData.$Cross1Span}">Cross1</SheetCell>
-			</SheetRow>
+			<SheetCell RowSpan="2">Id</SheetCell>
+			<SheetCell RowSpan="2">S1</SheetCell>
+			<SheetCell RowSpan="2">N1</SheetCell>
+			<SheetCell ColSpan="{Bind RepData.$Cross1Span}">Cross1</SheetCell>
+		</SheetRow>
 		<SheetRow Style="Header">
-		<SheetCellGroup ItemsSource="{Bind RepData.$cross.Cross1}">
-		<SheetCell Content="{Bind}" />
-				</SheetCellGroup>
-		<SheetCell>Total</SheetCell>
-			</SheetRow>
+			<SheetCellGroup ItemsSource="{Bind RepData.$cross.Cross1}">
+				<SheetCell Content="{Bind}" />
+			</SheetCellGroup>
+			<SheetCell>Total</SheetCell>
+		</SheetRow>
 		<SheetRow Style="Total">
-		<SheetCell ColSpan="3">Total</SheetCell>
-		<SheetCellGroup ItemsSource="{Bind RepData.$Cross1Total}">
-		<SheetCell Content="{Bind Val}" />
-				</SheetCellGroup>
-		<SheetCell Content="{Bind RepData.$GrandTotal}" />
-			</SheetRow>
-		</Sheet.Header>
-		<SheetSection ItemsSource="{Bind RepData}">
+			<SheetCell ColSpan="3">Total</SheetCell>
+			<SheetCellGroup ItemsSource="{Bind RepData.$Cross1Total}">
+				<SheetCell Content="{Bind Val}" />
+			</SheetCellGroup>
+			<SheetCell Content="{Bind RepData.$GrandTotal}" />
+		</SheetRow>
+	</Sheet.Header>
+	<SheetSection ItemsSource="{Bind RepData}">
 		<SheetRow>
-		<SheetCell Content="{Bind Id}" />
-		<SheetCell Content="{Bind S1}" />
-		<SheetCell Content="{Bind N1}" />
-		<SheetCellGroup ItemsSource="{Bind Cross1}">
-		<SheetCell Content="{Bind Val, DataType=Number, HideZeros=True}" />
-				</SheetCellGroup>
-		<SheetCell Content="{Bind $Cross1Total}" />
-			</SheetRow>
-		</SheetSection>
-	</Sheet>
+			<SheetCell Content="{Bind Id}" />
+			<SheetCell Content="{Bind S1}" />
+			<SheetCell Content="{Bind N1}" />
+			<SheetCellGroup ItemsSource="{Bind Cross1}">
+				<SheetCell Content="{Bind Val, DataType=Number, HideZeros=True}" />
+			</SheetCellGroup>
+			<SheetCell Content="{Bind $Cross1Total}" />
+		</SheetRow>
+	</SheetSection>
+</Sheet>
 ]]>
 </script>
 </pre>
