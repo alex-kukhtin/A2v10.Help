@@ -2386,9 +2386,9 @@ app.modules['std:validators'] = function () {
 
 
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-/*20221026-7902*/
+/*20230318-7922*/
 /* services/impl/array.js */
 
 app.modules['std:impl:array'] = function () {
@@ -2494,6 +2494,7 @@ app.modules['std:impl:array'] = function () {
 		arr.$empty = function () {
 			if (this.$root.isReadOnly)
 				return this;
+			this._root_.$setDirty(true);
 			this.splice(0, this.length);
 			if ('$RowCount' in this)
 				this.$RowCount = 0;
@@ -2755,9 +2756,9 @@ app.modules['std:impl:array'] = function () {
 	}
 };
 
-/* Copyright © 2015-2022 Alex Kukhtin. All rights reserved.*/
+/* Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.*/
 
-/*20220825-7883*/
+/*20230318-7922*/
 // services/datamodel.js
 
 /*
@@ -3156,6 +3157,7 @@ app.modules['std:impl:array'] = function () {
 			elem._root_ctor_ = elem.constructor;
 			elem.$dirty = false;
 			elem._query_ = {};
+			elem._allErrors_ = [];
 
 			// rowcount implementation
 			for (var m in elem._meta_.props) {
@@ -3702,6 +3704,36 @@ app.modules['std:impl:array'] = function () {
 
 	}
 
+	function hasErrors(props) {
+		if (!props || !props.length) return false;
+		let errs = this._collectErrors_();
+		if (!errs.length) return false;
+		for (let i = 0; i < errs.length; i++) {
+			let e = errs[i];
+			if (props.some(p => p === e.x))
+				return true;
+		}
+		return false;
+	}
+
+	function collectErrors() {
+		let me = this;
+		if (!me._host_) return me._allErrors_;
+		if (!me._needValidate_) return me._allErrors_;
+		let tml = me.$template;
+		if (!tml) return me._allErrors_;
+		let vals = tml.validators;
+		if (!vals) return me._allErrors_;
+		me._allErrors_.splice(0, me._allErrors_.length);
+		for (var val in vals) {
+			let err1 = validateOneElement(me, val, vals[val]);
+			if (err1) {
+				me._allErrors_.push({ x: val, e: err1 });
+			}
+		}
+		return me._allErrors_;
+	}
+
 	function validateAll(force) {
 		var me = this;
 		if (!me._host_) return;
@@ -3831,7 +3863,8 @@ app.modules['std:impl:array'] = function () {
 				if (Array.isArray(trg)) {
 					if (trg.$loaded)
 						trg.$loaded = false; // may be lazy
-					trg.$copy(src[prop]);
+					if ('$copy' in trg)
+						trg.$copy(src[prop]);
 					// copy rowCount
 					if (ROWCOUNT in trg) {
 						let rcProp = prop + '.$RowCount';
@@ -3888,6 +3921,8 @@ app.modules['std:impl:array'] = function () {
 		root.prototype._validate_ = validate;
 		root.prototype._validateAll_ = validateAll;
 		root.prototype.$forceValidate = forceValidateAll;
+		root.prototype._collectErrors_ = collectErrors;
+		root.prototype.$hasErrors = hasErrors;
 		root.prototype.$destroy = destroyRoot;
 		// props cache for t.construct
 		if (!template) return;
@@ -6940,6 +6975,8 @@ Vue.component('validator-control', {
 						// first property from result
 						let prop = Object.keys(result)[0];
 						this.items = result[prop];
+						if (this.items.length)
+							this.current = 0;
 					}).catch(() => {
 						this.items = [];
 					});
@@ -9113,10 +9150,10 @@ const maccel = require('std:accel');
 
 })();
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2013 Oleksandr Kukhtin. All rights reserved.
 
 
-/* 20180821-7280 */
+/* 20230318-7922 */
 /*components/tab.js*/
 
 /*
@@ -9173,7 +9210,7 @@ TODO:
 `;
 
 	const tabItemTemplate = `
-<div class="tab-item" v-show="isActive">
+<div class="tab-item" v-if="isActive" v-show="isVisible">
 	<slot />
 </div>
 `;
@@ -9187,7 +9224,7 @@ TODO:
 			badge: [String, Number, Object],
 			icon: String,
 			tabStyle: String,
-			show: undefined,
+			tabShow: { type: Boolean, default: true },
 			itemToValidate: Object,
 			propToValidate: String
 		},
@@ -9213,9 +9250,7 @@ TODO:
 				return (this.isActive ? 'active ' : '') + (this.tabStyle || '');
 			},
 			isVisible() {
-				if (typeof this.show === 'boolean')
-					return this.show;
-				return true;
+				return this.tabShow;
 			}
 		},
 		methods: {
@@ -12195,6 +12230,78 @@ Vue.component('a2-panel', {
 })();
 
 
+// Copyright © 2023 Oleksandr Kukhtin. All rights reserved.
+
+// 20230325-7923
+// components/kanban.js
+
+(function () {
+
+	let kanbanTemplate = `
+<div class="kanban">
+	<div class="kanban-header kanban-part">
+		<div class=lane-header v-for="(lane, lx) in lanes" :key=lx>
+			<div class=lane-header-body>
+				<slot name=header v-bind:lane=lane></slot>
+			</div>
+			<button v-if="false">›</button>
+		</div>
+	</div>
+	<div class="kanban-body kanban-part">
+		<div class=lane v-for="(lane, lx) in lanes" :key=lx @dragover=dragOver @drop="drop($event, lane)">
+			<ul class=card-list>
+				<li class=card v-for="(card, cx) in cards(lane)" :key=cx :draggable="true"
+						@dragstart="dragStart($event, card)">
+					<slot name=card v-bind:card=card></slot>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="kanban-footer kanban-part">
+		<div class=lane-footer  v-for="(lane, lx) in lanes" :key=lx>
+			<slot name=footer v-bind:lane=lane></slot>
+		</div>
+	</div>
+</div>
+`;
+
+	Vue.component('a2-kanban', {
+		template: kanbanTemplate,
+		props: {
+			lanes: Array,
+			items: Array,
+			dropDelegate: Function,
+			stateProp: String
+		},
+		data() {
+			return {
+				currentElem: null
+			};
+		},
+		computed: {
+		},
+		methods: {
+			cards(lane) {
+				let id = lane.$id;
+				return this.items.filter(itm => itm[this.stateProp].$id === id);
+			},
+			dragStart(ev, card) {
+				ev.dataTransfer.effectAllowed = "move";
+				this.currentElem = card;
+			},
+			dragOver(ev) {
+				ev.preventDefault();
+			},
+			drop(ev, lane) {
+				if (!this.currentElem) return;
+				if (this.dropDelegate)
+					this.dropDelegate(this.currentElem, lane);
+				this.currentElem = null;
+			}
+		}
+	});
+})();
+
 // Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
 
 /*20190308-7461*/
@@ -12712,7 +12819,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-/*20230224-7921*/
+/*20230411-7926*/
 // controllers/base.js
 
 (function () {
@@ -13242,7 +13349,7 @@ Vue.directive('resize', {
 					if (opts && opts.catchError)
 						throw err;
 					else if (err.indexOf('UI:') === 0)
-						this.$alert(err);
+						this.$alert(err.substring(3).replace('\\n', '\n'));
 					else
 						alert(err);
 				}
