@@ -56,6 +56,14 @@
 		</tbody>
 	</table>
 
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Якщо в елементі задано властивість <code>Data</code>, 
+		вона буде використовуватися в якості параметрів, як для виклику діалогу вибору (browse), 
+		так і для отримання даних з сервера (fetch).
+		<br />
+		Фактично <code>Data</code> просто дублюється в <code>FetchData</code> базового селектора.
+	</p>
+
 	<h3>Приклад</h3>
 
 	<p>Такий код XAML</p>
@@ -72,10 +80,9 @@
 <pre class="code-highlight xml" data-lang="xml">
 <script type="text/template">
 <Selector Value="{Bind Document.Agent}" DisplayProperty="Name"
-		Fetch="/catalog/agent/fetch">
+		  Fetch="/catalog/agent/fetch">
 	<Hyperlink Command="{BindCmd Browse, Url='/catalog/agent/browse'
-			   Argument={Bind Document.Agent}}"
-	/>
+			   Argument={Bind Document.Agent}}" />
 </Selector>
 </script>
 </pre>
