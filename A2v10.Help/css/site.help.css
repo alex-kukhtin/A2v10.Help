@@ -715,4 +715,9 @@ header .lang {
   #app.show .menu-tab-header {
     display: flex;
   }
+  .title h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

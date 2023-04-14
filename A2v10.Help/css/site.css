@@ -77,6 +77,9 @@
 .ico-arrow-left-right:before {
   content: "\e906";
 }
+.ico-arrow-left-right-full:before {
+  content: "\e907";
+}
 .ico-arrow-export:before {
   content: "\e908";
 }
@@ -359,6 +362,9 @@
 }
 .ico-devices:before {
   content: "\e958";
+}
+.ico-personnel:before {
+  content: "\e9c0";
 }
 .ico-ellipsis-bottom:before {
   content: "\e9b3";
