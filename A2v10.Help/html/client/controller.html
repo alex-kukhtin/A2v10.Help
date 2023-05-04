@@ -42,6 +42,7 @@ interface IController {
   $emitCaller(event: string, ...params: any[]): void;
   $emitSaveEvent(): void;
   $nodirty(func: () => Promise<any>): void;
+  $upload(url: string, accept?: string, data?: { Id?: any, Key?: any }, opts?: { catchError?: boolean }): Promise<any>;
 }
 
 declare const enum ~CommonStyle {
@@ -163,7 +164,7 @@ interface IConfirm {
 			<li><code>Promise&lt;boolean|string&gt;</code>, який буде виконаний після закриття вікна.</li>
 		</ul>
 		<p>
-			Кнопка відміни має містити значення <code>result: false</code>. Натискання на цю кнопку закриває вікно 
+			Кнопка відміни має містити значення <code>result: false</code>. Натискання на цю кнопку закриває вікно
 			без виконання промісу.
 		</p>
 	</div>
@@ -317,4 +318,40 @@ interface IConfirm {
 		</ul>
 	</div>
 
+	<div class="method">
+		<a href="#upload"></a>
+		<div class="syntax"><pre class="code-highlight js">$upload(url: string, accept?: string, data?: { Id?: any, Key?: any }, opts?: { catchError?: boolean }): Promise&lt;any&gt;</pre></div>
+		<p>
+			Показує діалог вибору файлу та відправляє його вміст на сервер.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>url</code> - шлях до <a href="/app/files">команди file</a>, яка має опрацювати завантажений файл.
+			</li>
+			<li>
+				<code>accept</code> - дозволені mime-типи файлу (через кому). Виставляє фільтр в діалозі вибору.
+				Приклади:
+				<ul class="enum-vals">
+					<li><b>image/jpeg</b> - картинки jpeg.</li>
+					<li><b>image/*</b> - будь які картинки;</li>
+					<li><b>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</b> - таблиця xlsx.</li>
+				</ul>
+			</li>
+			<li>
+				<code>data</code> - об'єкт. Цого властивість <code>Id</code> буде передано в команду в якості ідентифікатора.
+			</li>
+			<li>
+				<code>opts</code> - об`єкт опцій. В поточній версії містить єдину властивість - <code>catchError</code>.
+				Якщо вона встановлена, то при виникненні помилок проміс буде відмінено і помилку можна буде
+				перехопити в коді за допомогою метода <code>catch</code>
+				(або в операторі <code>try... catch</code> для <code>async ... await</code>) проміса). За замовчуванням
+				система просто виводить повідомлення про помилку і не виконує проміс.
+			</li>
+		</ul>
+		<h4>Повертає:</h4>
+		<ul class="params">
+			<li><code>Promise&lt;any&gt;</code>, який буде виконаний після завершення операції. Вміст промісу - це те, що поверне сервер.</li>
+		</ul>
+	</div>
 </div>

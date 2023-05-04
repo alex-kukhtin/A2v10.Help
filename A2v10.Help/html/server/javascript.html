@@ -112,8 +112,15 @@ declare type sendSmsResponse = {
 	success: boolean;
 }
 
+export interface ~CurrentUserInfo {
+	segment?: string;
+	userId?: number;
+	tenantId?: number;
+}
+
 export interface IEnvironment {
-	config: IConfig;
+	readonly config: IConfig;
+	readonly currentUser: ~CurrentUserInfo;
 	loadModel(prms: execSqlParams): object;
 	saveModel(prms: saveModelParams): object;
 	executeSql(prms: execSqlParams): object;
