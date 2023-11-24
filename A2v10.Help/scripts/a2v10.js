@@ -143,9 +143,9 @@ app.modules['std:locale'] = function () {
 
 
 
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-/*20200722-7691*/
+/*20231005-7950*/
 /* platform/webvue.js */
 
 (function () {
@@ -198,7 +198,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20230527-7936
+// 20230922-7948
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -236,16 +236,16 @@ app.modules['std:utils'] = function () {
 		notBlank,
 		toJson,
 		fromJson: JSON.parse,
-		isPrimitiveCtor: isPrimitiveCtor,
+		isPrimitiveCtor,
 		isDateCtor,
 		isEmptyObject,
 		defineProperty: defProperty,
 		eval: evaluate,
-		simpleEval: simpleEval,
+		simpleEval,
 		format: format,
 		convertToString,
 		toNumber,
-		parse: parse,
+		parse,
 		getStringId,
 		isEqual,
 		ensureType,
@@ -440,7 +440,7 @@ app.modules['std:utils'] = function () {
 		for (let i = 0; i < ps.length; i++) {
 			let pi = ps[i];
 			if (!(pi in r))
-				throw new Error(`Property '${pi}' not found in ${r.constructor.name} object`);
+				return '';
 			r = r[ps[i]];
 		}
 		return r;
@@ -539,6 +539,7 @@ app.modules['std:utils'] = function () {
 			return '';
 		switch (dataType) {
 			case "DateTime":
+				if (!obj) return '';
 				if (!isDate(obj)) {
 					console.error(`Invalid Date for utils.format (${obj})`);
 					return obj;
@@ -549,6 +550,7 @@ app.modules['std:utils'] = function () {
 					return formatDateWithFormat(obj, opts.format);
 				return formatDate(obj) + ' ' + formatTime(obj);
 			case "Date":
+				if (!obj) return '';
 				if (isString(obj))
 					obj = string2Date(obj);
 				if (!isDate(obj)) {
@@ -745,6 +747,7 @@ app.modules['std:utils'] = function () {
 	}
 
 	function dateIsZero(d1) {
+		if (d1 === null) return true;
 		if (!isDate(d1)) return false;
 		return dateEqual(d1, dateZero());
 	}
@@ -988,7 +991,7 @@ app.modules['std:utils'] = function () {
 
 	function currencyRound(n, digits) {
 		if (isNaN(n))
-			return Nan;
+			return NaN;
 		if (!isDefined(digits))
 			digits = 2;
 		let m = false;
@@ -1585,7 +1588,7 @@ app.modules['std:period'] = function () {
 
 // Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
-// 20210211-7747
+// 20210823-7842
 /* services/modelinfo.js */
 
 app.modules['std:modelInfo'] = function () {
@@ -1622,7 +1625,10 @@ app.modules['std:modelInfo'] = function () {
 		let x = { pageSize: mi.PageSize, offset: mi.Offset, dir: mi.SortDir, order: mi.SortOrder, group: mi.GroupBy };
 		if (mi.Filter) {
 			for (let p in mi.Filter) {
-				x[p] = mi.Filter[p];
+				let fv = mi.Filter[p];
+				if (fv && fv.call)
+					fv = fv.call(this);
+				x[p] = fv;
 			}
 		}
 		return x;
@@ -1962,9 +1968,9 @@ app.modules['std:http'] = function () {
 
 
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2023 Alex Kukhtin. All rights reserved.
 
-// 20221124-7907
+// 20231005-7950
 /* platform/routex.js */
 
 (function () {
@@ -2123,11 +2129,16 @@ app.modules['std:http'] = function () {
 		return replaceUrlSearch(url, urlTools.makeQueryString(query));
 	}
 
+	function replaceBrowseUrl(newUrl) {
+		window.history.replaceState(null, null, newUrl);
+	}
+
 	store.parseQueryString = urlTools.parseQueryString;
 	store.makeQueryString = urlTools.makeQueryString;
 	store.replaceUrlSearch = replaceUrlSearch;
 	store.replaceUrlQuery = replaceUrlQuery;
 	store.makeBackUrl = makeBackUrl;
+	store.replaceBrowseUrl = replaceBrowseUrl;
 
 	app.components['std:store'] = store;
 })();
@@ -2240,7 +2251,8 @@ app.modules['std:validators'] = function () {
 
 	return {
 		validate: validateItem,
-		removeWeak
+		removeWeak,
+		revalidate
 	};
 
 	function validateStd(rule, val) {
@@ -2266,6 +2278,35 @@ app.modules['std:validators'] = function () {
 
 	function removeWeak() {
 		validateMap = new WeakMap();
+	}
+
+	function revalidate(item, key, templ) {
+		if (!validateMap || !key || !templ || !templ.validators) return;
+		let rule = templ.validators[key];
+		if (!rule) return;
+
+		function doIt(rule) {
+			let elem = validateMap.get(rule);
+			if (!elem)
+				return;
+			if (elem.has(item)) {
+				let xval = elem.get(item);
+				if (xval) {
+					xval.val = undefined;
+					xval.result = null;
+				}
+			}
+		}
+
+		if (utils.isArray(rule)) {
+			rule.forEach(r => {
+				if (utils.isObject(r) && validateMap.has(r)) {
+					doIt(r);
+				}
+			});
+		} else if (utils.isObject(rule) && validateMap.has(rule)) {
+			doIt(rule);
+		}
 	}
 
 	function addToWeak(rule, item, val) {
@@ -2348,10 +2389,12 @@ app.modules['std:validators'] = function () {
 						let dm = { severity: sev, msg: rule.msg };
 						let nu = false;
 						if (utils.isString(result)) {
-							dm.msg = result;
-							valRes.result = dm;
-							retval.push(dm);
-							nu = true;
+							if (result) {
+								dm.msg = result;
+								valRes.result = dm;
+								retval.push(dm);
+								nu = true;
+							}
 						} else if (!result) {
 							retval.push(dm);
 							valRes.result = dm;
@@ -2400,7 +2443,7 @@ app.modules['std:validators'] = function () {
 
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-/*20230807-7941*/
+/*20230922-7948*/
 /* services/impl/array.js */
 
 app.modules['std:impl:array'] = function () {
@@ -2451,6 +2494,16 @@ app.modules['std:impl:array'] = function () {
 			}
 			return null;
 		}
+
+		/* generator */
+		arr.$allItems = function* () {
+			for (let i = 0; i < this.length; i++) {
+				let el = this[i];
+				yield el;
+				if ('$items' in el)
+					yield* el.$items.$allItems();
+			}
+		};
 
 		arr.$sort = function (compare) {
 			this.sort(compare);
@@ -3755,6 +3808,14 @@ app.modules['std:impl:array'] = function () {
 		return errs.length ? errs : null;
 	}
 
+	function revalidateItem(itm, valname) {
+		this.$defer(() => {
+			validators.revalidate(itm, valname, this.$template);
+			this._needValidate_ = true;
+			this._validateAll_(false);
+		});
+	}
+
 	function forceValidateAll() {
 		let me = this;
 		me._needValidate_ = true;
@@ -3986,6 +4047,7 @@ app.modules['std:impl:array'] = function () {
 		root.prototype._validate_ = validate;
 		root.prototype._validateAll_ = validateAll;
 		root.prototype.$forceValidate = forceValidateAll;
+		root.prototype.$revalidate = revalidateItem;
 		root.prototype.$hasErrors = hasErrors;
 		root.prototype.$destroy = destroyRoot;
 		// props cache for t.construct
@@ -5983,7 +6045,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20230809-7941
+// 20230911-7946
 // components/datepicker.js
 
 (function () {
@@ -6002,7 +6064,8 @@ Vue.component('validator-control', {
 <div :class="cssClass2()" class="date-picker" :test-id="testId">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/><slot name="link"></slot></label>
 	<div class="input-group"  @click="clickInput($event)">
-		<input v-focus v-model.lazy="model" :class="inputClass" :disabled="inputDisabled"/>
+		<input v-focus v-model.lazy="model" v-if="!isMonth" :class="inputClass" :readonly="inputDisabled"/>
+		<div class="month-wrapper" v-if=isMonth v-text=model></div>
 		<a href @click.stop.prevent="toggle($event)" tabindex="-1"><i class="ico ico-calendar"></i></a>
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 		<div class="calendar" v-if="isOpen">		
@@ -6028,6 +6091,11 @@ Vue.component('validator-control', {
 				isOpen: false,
 				viewDate: null
 			};
+		},
+		watch: {
+			modelDate() {
+				this.viewDate = this.modelDate;
+			}
 		},
 		methods: {
 			toggle(ev) {
@@ -6100,6 +6168,9 @@ Vue.component('validator-control', {
 		computed: {
 			modelDate() {
 				return this.item[this.prop];
+			},
+			isMonth() {
+				return this.view === 'month';
 			},
 			inputDisabled() {
 				return this.disabled || this.view === 'month';
@@ -6453,7 +6524,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2019-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20230801-7940
+// 20230829-7945
 // components/colorcombobox.js*/
 
 (function () {
@@ -6540,6 +6611,7 @@ Vue.component('validator-control', {
 			},
 			keydown(event) {
 				event.stopPropagation();
+				if (this.disabled) return;
 				let items = this.itemsSource;
 				switch (event.which) {
 					case 40: // down
@@ -6561,6 +6633,7 @@ Vue.component('validator-control', {
 				}
 			},
 			toggle() {
+				if (this.disabled) return;
 				if (!this.isOpen) {
 					eventBus.$emit('closeAllPopups');
 				}
@@ -6585,7 +6658,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20230705-7939
+// 20231001-7949
 // components/periodpicker.js
 
 
@@ -6605,7 +6678,7 @@ Vue.component('validator-control', {
 	Vue.component('a2-period-picker', {
 		extends: baseControl,
 		template: `
-<div class="control-group period-picker" @click.stop.prevent="toggle($event)" :class="{open: isOpen}">
+<div class="control-group period-picker" @click.stop.prevent="toggle($event)" :class="{open: isOpen, disabled: disabled}">
 	<label v-if="hasLabel"><span v-text="label"/><slot name="hint"/></label>
 	<div class="input-group">
 		<span class="period-text" v-text="text" :class="inputClass" :tabindex="tabIndex"/>
@@ -6779,6 +6852,7 @@ Vue.component('validator-control', {
 				if (!this.isOpen) {
 					// close other popups
 					eventBus.$emit('closeAllPopups');
+					if (this.disabled) return;
 					this.modelDate = this.period.To; // TODO: calc start month
 					if (this.modelDate.isZero() || this.modelDate.getTime() === du.maxDate.getTime())
 						this.modelDate = du.today();
@@ -6836,7 +6910,7 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2023 Alex Kukhtin. All rights reserved.
 
-/*20230613-7937*/
+/*20230613-7948*/
 // components/selector.js
 
 (function selector_component() {
@@ -6903,6 +6977,7 @@ Vue.component('validator-control', {
 			placement: String,
 			caret: Boolean,
 			hasClear: Boolean,
+			useAll: Boolean,
 			mode: String,
 			fetchCommand: String,
 			fetchCommandData: Object,
@@ -6943,6 +7018,7 @@ Vue.component('validator-control', {
 				if (!to) return false;
 				if (utils.isDefined(to.$isEmpty))
 					return !to.$isEmpty;
+				if (this.useAll && to.Id === -1) return false;
 				return !utils.isPlainObjectEmpty(to);
 			},
 			hasText() { return !!this.textProp; },
@@ -7141,6 +7217,12 @@ Vue.component('validator-control', {
 				this.isOpen = false;
 				this.isOpenNew = false;
 				let obj = this.item[this.prop];
+				if (!obj) return;
+				if (this.useAll) {
+					obj.Id = -1;
+					obj.Name = '';
+					return;
+				} 
 				if (obj.$empty)
 					obj.$empty();
 				else if (utils.isObjectExact(obj))
@@ -8426,9 +8508,9 @@ Vue.component('popover', {
 	}
 });
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-/*20220627-7853*/
+/*20230924-7948*/
 // components/treeview.js
 
 (function () {
@@ -8471,7 +8553,7 @@ Vue.component('popover', {
 			getHref: Function,
 			doubleclick: Function
 		},
-		data() { 
+		data() {
 			return {
 				_toggling: false
 			};
@@ -8519,7 +8601,7 @@ Vue.component('popover', {
 			expandItem(val) {
 				platform.set(this.item, '$expanded', val);
 			},
-			openElem: function() {
+			openElem: function () {
 				if (!this.isFolder)
 					return;
 				this.expandItem(true);
@@ -8604,7 +8686,7 @@ Vue.component('popover', {
 		},
 		created() {
 			if (this.options.initialExpand)
-			platform.set(this.item, '$expanded', true);
+				platform.set(this.item, '$expanded', true);
 		}
 	};
 
@@ -9626,11 +9708,8 @@ TODO:
 })();
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20230527-7936
+// 20230811-7943
 // components/list.js
-
-/* TODO:
-*/
 
 (function () {
 
@@ -9762,13 +9841,13 @@ TODO:
 						console.error('Id not found in Root.modelInfo');
 						return;
 					}
-					let fe = src.find(itm => itm.$id === rootId);
-					if (!fe) {
-						console.error(`Element with id=${rootId} not found`);
-						fe = src[0];
+					let fe = src[0];
+					if (rootId) {
+						fe = src.find(itm => itm.$id === rootId);
+						if (!fe) 
+							console.error(`Element with id=${rootId} not found`);
 					}
-					if (fe)
-						this.select(fe);
+					if (fe) this.select(fe);
 				}
 			},
 			keyDown(e) {
@@ -12288,7 +12367,7 @@ Vue.component('a2-panel', {
 })();
 // Copyright © 2019-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20230122-7918
+// 20230903-7941
 // components/tagscontrol.js*/
 
 (function () {
@@ -12305,9 +12384,9 @@ Vue.component('a2-panel', {
 		<div class="tags-placeholder" v-else v-text="placeholder"></div>
 		<div class="tags-pane" v-if=isOpen>
 			<ul class="tags-pane-items">
-				<li v-for="(itm, ix) in actualItemsSource" :key="ix" class="tag-body tag-md" :class="tagColor(itm)">
-					<span v-text="tagName(itm)" 
-						@click.stop.prevent="addTag(itm)"/>
+				<li v-for="(itm, ix) in actualItemsSource" :key="ix" class="tag-body tag-md" :class="tagColor(itm)"
+					@click.stop.prevent="addTag(itm)">
+					<span v-text="tagName(itm)"/>
 				</li>
 			</ul>
 			<div class="tags-settings" v-if="!disabled">
@@ -12339,9 +12418,9 @@ Vue.component('a2-panel', {
 		<div class="tags-placeholder" v-else v-text="placeholder"></div>
 		<div class="tags-pane" v-if=isOpen>
 			<ul class="tags-pane-items">
-				<li v-for="(itm, ix) in actualItemsSource" :key="ix" class="tag-body tag-md" :class="tagColor(itm)">
-					<span v-text="tagName(itm)" 
-						@click.stop.prevent="addTag(itm)"/>
+				<li v-for="(itm, ix) in actualItemsSource" :key="ix" class="tag-body tag-md" :class="tagColor(itm)"
+						@click.stop.prevent="addTag(itm)">
+					<span v-text="tagName(itm)"/>
 				</li>
 			</ul>
 		</div>
@@ -12766,7 +12845,7 @@ Vue.directive('disable', {
 	});
 
 })();
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Oleksandr Kukhtin. All rights reserved.
 
 /*20190721-7507*/
 /* directives/focus.js */
@@ -13120,7 +13199,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-/*20230801-7940*/
+/*20231106-7951*/
 // controllers/base.js
 
 (function () {
@@ -13544,12 +13623,12 @@ Vue.directive('resize', {
 				let url = `${root}/${routing.dataUrl()}/reload`;
 				let dat = self.$data;
 
-				let mi = args ? modelInfo.get(args.$ModelInfo) : null;
+				let mi = args ? modelInfo.get.call(this.$data, args.$ModelInfo) : null;
 				if (!args && !mi) {
 					// try to get first $ModelInfo
 					let modInfo = this.$data._findRootModelInfo();
 					if (modInfo) {
-						mi = modelInfo.get(modInfo);
+						mi = modelInfo.get.call(this.$data, modInfo);
 					}
 				}
 
@@ -13561,7 +13640,7 @@ Vue.directive('resize', {
 						// special element -> use url
 						dataToQuery.baseUrl = urltools.replaceUrlQuery(self.$baseUrl, dat.Query);
 						let newUrl = urltools.replaceUrlQuery(null/*current*/, dat.Query);
-						window.history.replaceState(null, null, newUrl);
+						store.replaceBrowseUrl(newUrl);
 					}
 					let jsonData = utils.toJson(dataToQuery);
 					dataservice.post(url, jsonData).then(function (data) {
@@ -13588,7 +13667,8 @@ Vue.directive('resize', {
 			async $nodirty(callback) {
 				let wasDirty = this.$data.$dirty;
 				await callback();
-				this.$defer(() => this.$data.$setDirty(wasDirty));
+				if (!this.$data) return;
+				this.$defer(() => this.$data ? this.$data.$setDirty(wasDirty) : undefined);
 			},
 			$requery(query) {
 				if (this.inDialog)
@@ -13693,7 +13773,7 @@ Vue.directive('resize', {
 				}
 			},
 
-			$file(url, arg, opts) {
+			$file(url, arg, opts, dat) {
 				eventBus.$emit('closeAllPopups');
 				const root = window.$$rootUrl;
 				let id = arg;
@@ -13704,7 +13784,7 @@ Vue.directive('resize', {
 						token = arg[arg._meta_.$token];
 				}
 				let fileUrl = urltools.combine(root, '_file', url, id);
-				let qry = {};
+				let qry = dat || {};
 				let action = (opts || {}).action;
 				if (token)
 					qry.token = token;
@@ -13998,7 +14078,11 @@ Vue.directive('resize', {
 							});
 						case 'append':
 							if (argIsNotAnArray()) return;
-							return __runDialog(url, 0, query, (result) => { arg.$append(result); });
+							return __runDialog(url, 0, query, (result) => {
+								arg.$append(result);
+								if (reloadAfter)
+									that.$reload();
+							});
 						case 'browse':
 							if (!utils.isObject(arg)) {
 								console.error(`$dialog.${command}. The argument is not an object`);
@@ -14030,28 +14114,23 @@ Vue.directive('resize', {
 						case 'edit':
 							if (argIsNotAnObject()) return;
 							return __runDialog(url, arg, query, (result) => {
-								if (result === 'reload')
-									that.$reload();
-								else if (arg.$merge && utils.isObjectExact(result)) {
+								if (arg.$merge && utils.isObjectExact(result))
 									arg.$merge(result);
-									if (reloadAfter)
-										that.$reload();
-								}
+								if (result === 'reload' || reloadAfter)
+									that.$reload();
 							});
 						case 'copy':
 							if (argIsNotAnObject()) return;
 							let arr = arg.$parent;
 							return __runDialog(url, arg, query, (result) => {
 								arr.$append(result);
-								if (reloadAfter) {
+								if (reloadAfter)
 									that.$reload();
-								}
 							});
 						default: // simple show dialog
 							return __runDialog(url, arg, query, (r) => {
-								if (reloadAfter) {
+								if (reloadAfter)
 									that.$reload();
-								}
 							});
 					}
 				}
@@ -14378,25 +14457,17 @@ Vue.directive('resize', {
 				let self = this,
 					root = window.$$rootUrl,
 					url = `${root}/${routing.dataUrl()}/loadlazy`,
-					selfMi = elem[propName].$ModelInfo,
-					parentMi = elem.$parent.$ModelInfo;
+					selfMi = elem[propName].$ModelInfo;
 
-				// HACK. inherit filter from parent modelInfo
-				/*
-				?????
-				if (parentMi && parentMi.Filter) {
-					if (selfMi)
-						modelInfo.mergeFilter(selfMi.Filter, parentMi.Filter);
-					else
-						selfMi = parentMi;
+				if (!selfMi) {
+					let evData = { elem: elem, prop: propName, modelInfo: null };
+					this.$data.$emit('Model.lazy.init', evData);
+					selfMi = evData.modelInfo; // may be changed
 				}
-				*/
 
-				let mi = modelInfo.get(selfMi);
+				let mi = modelInfo.get.call(self.$data, selfMi);
 				let xQuery = urltools.parseUrlAndQuery(self.$baseUrl, mi);
 				let newUrl = xQuery.url + urltools.makeQueryString(mi);
-				//console.dir(newUrl);
-				//let jsonData = utils.toJson({ baseUrl: urltools.replaceUrlQuery(self.$baseUrl, mi), id: elem.$id, prop: propName });
 				let jsonData = utils.toJson({ baseUrl: newUrl, id: elem.$id, prop: propName });
 
 				return new Promise(function (resolve, reject) {
@@ -14638,11 +14709,11 @@ Vue.directive('resize', {
 				this.$data._fireGlobalPeriodChanged_(period);
 			},
 			__signalAppEvent__(data) {
-				if (this.$data._fireSignalAppEvent_)
+				if (this.$data && this.$data._fireSignalAppEvent_)
 					this.$data._fireSignalAppEvent_(data);
 			},
 			__globalAppEvent__(data) {
-				if (this.$data._fireGlobalAppEvent_)
+				if (this.$data && this.$data._fireGlobalAppEvent_)
 					this.$data._fireGlobalAppEvent_(data);
 			}
 		},

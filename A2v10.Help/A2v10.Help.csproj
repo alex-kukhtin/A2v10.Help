@@ -130,6 +130,7 @@
     <Content Include="html\server\index.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
+    <Content Include="html\whatsnew\w202311.html" />
     <Content Include="html\whatsnew\w202305.html" />
     <Content Include="html\whatsnew\w202304.html" />
     <Content Include="html\whatsnew\w202212.html" />

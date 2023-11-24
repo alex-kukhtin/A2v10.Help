@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Властивості і методи кореневого об'єкта-->
-	<!--keywords:$readOnly;$stateReadOnly;$isCopy;$ready;$template;$defer;$emit;$forceValidate;$setDirty;-->
+	<!--keywords:$readOnly;$stateReadOnly;$isCopy;$ready;$template;$defer;$emit;$forceValidate;$revalidate;$setDirty;-->
 	<div class="title">
 		<h1>
 			Властивості і методи кореневого об'єкта
@@ -28,6 +28,7 @@ interface IRoot extends IElement {
 	$defer(handler:()=>any): void;
 	$emit(event: string, ...params: any[]): void;
 	$forceValidate(): void;
+	$revalidate(elem: IElement, rule: string): void;
 	$setDirty(dirty:boolean, path?:string): void;
 }
 </script>
@@ -55,5 +56,20 @@ interface IRoot extends IElement {
 		<p>
 			Виконує функцію (handler) після завершения поточного циклу подій.
 		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$revalidate(elem: IElement, rule: string): void</pre></div>
+		<p>
+			Примусово викликає асінхронні валідатори для элементу.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>elem</code> - елемент, для якого має бути виконано валідатор.
+			</li>
+			<li>
+				<code>rule</code> - текстове ім'я валідатора.
+			</li>
+		</ul>
 	</div>
 </div>
