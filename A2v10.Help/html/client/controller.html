@@ -189,9 +189,12 @@ interface IConfirm {
 		<ul class="params">
 			<li><code>Promise</code>. Зазвичай є значенням, що повертається, для <a href="/template/validators">асинхронного валідатора</a>.</li>
 		</ul>
+		<p>Зазвичай команда викликає процедуру sql. Ця процедура має повернути один об'єкт <code>Result</code> 
+		з єдиної властивістю <code>Value</code> типу <b>bit</b> aбо <b>nvarchar</b>.</p>
 	</div>
 
 	<div class="method">
+		<a id="save">HASH</a>
 		<div class="syntax"><pre class="code-highlight js">$saveModified(message?:string, title?:string):boolean</pre></div>
 		<p>
 			Перевіряє, чи змінилася модель, і виводить повідомлення про необхідність збереження моделі.
