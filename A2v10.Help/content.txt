@@ -61,6 +61,8 @@
 			Graphics			/xaml/controls/graphics
 			GridDivider			/xaml/controls/griddivider
 			Header				/xaml/controls/header
+			HtmlAttribute		/xaml/controls/htmlattribute
+			HtmlElement			/xaml/controls/htmlelement
 			Image				/xaml/controls/image
 			Label				/xaml/controls/label
 			List				/xaml/controls/list
@@ -155,6 +157,7 @@
 		Прив'язки					/xaml/bind/index
 			Bind					/xaml/bind/bind
 			BindCmd					/xaml/bind/bindcmd
+			StaticResource			/xaml/bind/staticresource
 			StyleResource			/xaml/bind/styleresource
 
 		Компоненти					/xaml/components/index

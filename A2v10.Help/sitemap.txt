@@ -53,6 +53,8 @@ https://docs.a2v10.com/xaml/controls/fileimage
 https://docs.a2v10.com/xaml/controls/graphics
 https://docs.a2v10.com/xaml/controls/griddivider
 https://docs.a2v10.com/xaml/controls/header
+https://docs.a2v10.com/xaml/controls/htmlattribute
+https://docs.a2v10.com/xaml/controls/htmlelement
 https://docs.a2v10.com/xaml/controls/image
 https://docs.a2v10.com/xaml/controls/label
 https://docs.a2v10.com/xaml/controls/list
@@ -144,6 +146,7 @@ https://docs.a2v10.com/xaml/sheet/sheetautogenerate
 https://docs.a2v10.com/xaml/bind/index
 https://docs.a2v10.com/xaml/bind/bind
 https://docs.a2v10.com/xaml/bind/bindcmd
+https://docs.a2v10.com/xaml/bind/staticresource
 https://docs.a2v10.com/xaml/bind/styleresource
 https://docs.a2v10.com/xaml/components/index
 https://docs.a2v10.com/xaml/components/collectionview

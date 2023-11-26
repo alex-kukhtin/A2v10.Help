@@ -142,6 +142,7 @@
     <Content Include="html\workflow\objects\modelstateinfo.html" />
     <Content Include="html\workflow\objects\messageinfo.html" />
     <Content Include="html\workflow\objects\inbox.html" />
+    <Content Include="html\xaml\bind\staticresource.html" />
     <Content Include="html\xaml\components\sortdescription.html" />
     <Content Include="html\xaml\components\filterdescription.html" />
     <Content Include="html\models\cross.html" />
@@ -174,6 +175,8 @@
     <Content Include="html\xaml\containers\tabbar.html" />
     <Content Include="html\xaml\containers\wizardpage.html" />
     <Content Include="html\xaml\containers\wizard.html" />
+    <Content Include="html\xaml\controls\htmlattribute.html" />
+    <Content Include="html\xaml\controls\htmlelement.html" />
     <Content Include="html\xaml\controls\selectorsimple.html" />
     <Content Include="html\xaml\controls\treegridcolumn.html" />
     <Content Include="html\xaml\controls\treegrid.html" />
