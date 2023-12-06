@@ -161,8 +161,10 @@
 			StyleResource			/xaml/bind/styleresource
 
 		Компоненти					/xaml/components/index
+			Case					/xaml/components/case
 			CollectionView			/xaml/components/collectionview
 			Confirm					/xaml/components/confirm
+			Else					/xaml/components/else
 			FilterDescription		/xaml/components/filterdescription
 			Slot					/xaml/components/slot
 			SortDescription			/xaml/components/sortdescription

@@ -143,6 +143,7 @@
     <Content Include="html\workflow\objects\messageinfo.html" />
     <Content Include="html\workflow\objects\inbox.html" />
     <Content Include="html\xaml\bind\staticresource.html" />
+    <Content Include="html\xaml\components\else.html" />
     <Content Include="html\xaml\components\sortdescription.html" />
     <Content Include="html\xaml\components\filterdescription.html" />
     <Content Include="html\models\cross.html" />
@@ -167,6 +168,7 @@
     <Content Include="html\xaml\bind\styleresource.html" />
     <Content Include="html\xaml\components\confirm.html" />
     <Content Include="html\xaml\components\slot.html" />
+    <Content Include="html\xaml\components\case.html" />
     <Content Include="html\xaml\components\switch.html" />
     <Content Include="html\xaml\components\validator.html" />
     <Content Include="html\xaml\containers\case.html" />

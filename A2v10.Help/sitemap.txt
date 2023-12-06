@@ -149,8 +149,10 @@ https://docs.a2v10.com/xaml/bind/bindcmd
 https://docs.a2v10.com/xaml/bind/staticresource
 https://docs.a2v10.com/xaml/bind/styleresource
 https://docs.a2v10.com/xaml/components/index
+https://docs.a2v10.com/xaml/components/case
 https://docs.a2v10.com/xaml/components/collectionview
 https://docs.a2v10.com/xaml/components/confirm
+https://docs.a2v10.com/xaml/components/else
 https://docs.a2v10.com/xaml/components/filterdescription
 https://docs.a2v10.com/xaml/components/slot
 https://docs.a2v10.com/xaml/components/sortdescription
