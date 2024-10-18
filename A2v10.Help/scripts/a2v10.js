@@ -85,9 +85,9 @@ app.modules['std:locale'] = function () {
 	return window.$$locale;
 };
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20181120-7363
+// 20240215-7960
 // platform/polyfills.js
 
 
@@ -132,15 +132,24 @@ app.modules['std:locale'] = function () {
 
 (function (date) {
 
+	let td = new Date(0, 0, 1, 0, 0, 0, 0);
+
 	date.isZero = date.isZero || function () {
-		let td = new Date(0, 0, 1, 0, 0, 0, 0);
-		td.setHours(0, -td.getTimezoneOffset(), 0, 0);
 		return this.getTime() === td.getTime();
 	};
 
+	date.toJSON = function (key) {
+		let nd = new Date(this);
+		let ds = 0;
+		if (nd.getFullYear() < 1925) {
+			ds = -4;
+		}
+		nd.setHours(nd.getHours(), nd.getMinutes() - nd.getTimezoneOffset(),
+			nd.getSeconds() - ds, nd.getMilliseconds());
+		return nd.toISOString().replace('Z', '');
+	};
+
 })(Date.prototype);
-
-
 
 
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
@@ -175,7 +184,7 @@ app.modules['std:locale'] = function () {
 
 })();
 
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Oleksandr Kukhtin. All rights reserved.
 
 /*20190704-7504*/
 /* services/const.js */
@@ -196,33 +205,41 @@ app.modules['std:const'] = function () {
 
 
 
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230922-7948
+// 20240909-7971
 // services/utils.js
 
 app.modules['std:utils'] = function () {
 
 	const locale = require('std:locale');
 	const platform = require('std:platform');
-	const dateLocale = locale.$Locale;
-	const numLocale = locale.$Locale;
+	const dateLocale = locale.$DateLocale || locale.$Locale;
+	const numLocale = locale.$NumberLocale || locale.$Locale;
+
 	const _2digit = '2-digit';
 
-	const dateOptsDate = { timeZone: 'UTC', year: 'numeric', month: _2digit, day: _2digit };
-	const dateOptsTime = { timeZone: 'UTC', hour: _2digit, minute: _2digit };
+	const dateOptsDate = { year: 'numeric', month: _2digit, day: _2digit };
+	const dateOptsTime = { hour: _2digit, minute: _2digit };
+	const dateOptsTime2 = { hour: _2digit, minute: _2digit, second: _2digit };
 	
 	const formatDate = new Intl.DateTimeFormat(dateLocale, dateOptsDate).format;
 	const formatTime = new Intl.DateTimeFormat(dateLocale, dateOptsTime).format;
+	const formatTime2 = new Intl.DateTimeFormat(dateLocale, dateOptsTime2).format;
 
 	const currencyFormat = new Intl.NumberFormat(numLocale, { minimumFractionDigits: 2, maximumFractionDigits: 6, useGrouping: true }).format;
-	const numberFormat = new Intl.NumberFormat(numLocale, { minimumFractionDigits: 0, maximumFractionDigits: 6, useGrouping: true }).format;
+	const nf = new Intl.NumberFormat(numLocale, { minimumFractionDigits: 0, maximumFractionDigits: 6, useGrouping: true });
+	const numberFormat = nf.format;
 
-	const utcdatRegEx = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
+	const parts = nf.formatToParts(1000.5);
+	const decimalSymbol = parts[3].value;
+	const groupingSymbol = parts[1].value;
+
+	const utcdatRegEx = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?$/;
 
 	let numFormatCache = {};
 
-	const zeroDate = new Date(Date.UTC(0, 0, 1, 0, 0, 0, 0));
+	const zeroDate = new Date(0, 0, 1, 0, 0, 0, 0);
 
 	return {
 		isArray: Array.isArray,
@@ -270,7 +287,8 @@ app.modules['std:utils'] = function () {
 			minDate: dateCreate(1901, 1, 1),
 			maxDate: dateCreate(2999, 12, 31),
 			fromDays: fromDays,
-			parseTime: timeParse
+			parseTime: timeParse,
+			fromServer: dateFromServer
 		},
 		text: {
 			contains: textContains,
@@ -295,7 +313,8 @@ app.modules['std:utils'] = function () {
 		model: {
 			propFromPath
 		},
-		mergeTemplate
+		mergeTemplate,
+		mapTagColor
 	};
 
 	function isFunction(value) { return typeof value === 'function'; }
@@ -450,7 +469,7 @@ app.modules['std:utils'] = function () {
 		let r = simpleEval(obj, path);
 		if (skipFormat) return r;
 		if (isDate(r))
-			return format(r, dataType);
+			return format(r, dataType, opts);
 		else if (isObject(r))
 			return toJson(r);
 		else
@@ -468,6 +487,8 @@ app.modules['std:utils'] = function () {
 			case 'Currency':
 			case 'Number':
 				return toNumber(obj);
+			case 'Percent':
+				return toNumber(obj) / 100.0;
 			case 'Date':
 				return dateParse(obj);
 		}
@@ -513,6 +534,10 @@ app.modules['std:utils'] = function () {
 		if (!format)
 			return formatDate(date);
 		switch (format) {
+			case 'ddMMyyyy':
+				return '' + pad2(date.getDate()) + pad2(date.getMonth() + 1) + date.getFullYear();
+			case 'dd.MM.yyyy HH:mm:ss':
+				return `${formatDate(date)}  ${formatTime2(date)}`;
 			case 'MMMM yyyy':
 				return capitalize(date.toLocaleDateString(locale.$Locale, { month: 'long', year: 'numeric' }));
 			default:
@@ -539,6 +564,7 @@ app.modules['std:utils'] = function () {
 			return '';
 		switch (dataType) {
 			case "DateTime":
+			case "DateTime2":
 				if (!obj) return '';
 				if (!isDate(obj)) {
 					console.error(`Invalid Date for utils.format (${obj})`);
@@ -548,7 +574,8 @@ app.modules['std:utils'] = function () {
 					return '';
 				if (opts.format)
 					return formatDateWithFormat(obj, opts.format);
-				return formatDate(obj) + ' ' + formatTime(obj);
+				let fnTime = dataType === "DateTime2" ? formatTime2 : formatTime;
+				return `${formatDate(obj)} ${fnTime(obj)}`;
 			case "Date":
 				if (!obj) return '';
 				if (isString(obj))
@@ -566,7 +593,7 @@ app.modules['std:utils'] = function () {
 				if (dateIsZero(obj))
 					return '';
 				if (dateHasTime(obj))
-					return obj.toISOString();
+					return obj.toJSON();
 				return '' + obj.getFullYear() + pad2(obj.getMonth() + 1) + pad2(obj.getDate());
 			case 'Time':
 				if (!isDate(obj)) {
@@ -603,6 +630,12 @@ app.modules['std:utils'] = function () {
 					return '';
 
 				return formatNumber(obj, opts.format);
+			case 'Percent':
+				if (!isNumber(obj))
+					obj = toNumber(obj);
+				if (opts.hideZeros && obj === 0)
+					return '';
+				return formatNumber((+obj) * 100, opts.format) + '%';
 			default:
 				console.error(`Invalid DataType for utils.format (${dataType})`);
 		}
@@ -628,20 +661,23 @@ app.modules['std:utils'] = function () {
 	}
 
 	function toNumber(val) {
-		if (isString(val))
-			val = val.replace(/\s/g, '').replace(',', '.');
+		if (isString(val)) {
+			val = val.replaceAll(groupingSymbol, '');
+			val = val.replace(/\s|%/g, '').replace(',', '.');
+		}
 		return isFinite(val) ? +val : 0;
 	}
 
 	function dateToday() {
 		let td = new Date();
-		return new Date(Date.UTC(td.getFullYear(), td.getMonth(), td.getDate(), 0, 0, 0, 0));
+		td.setHours(0, 0, 0, 0);
+		return td;
 	}
 
 	function dateNow(second) {
 		let td = new Date();
 		let sec = second ? td.getSeconds() : 0;
-		return new Date(Date.UTC(td.getFullYear(), td.getMonth(), td.getDate(), td.getHours(), td.getMinutes(), sec, 0));
+		return new Date(td.getFullYear(), td.getMonth(), td.getDate(), td.getHours(), td.getMinutes(), sec, 0);
 	}
 
 	function dateZero() {
@@ -653,19 +689,19 @@ app.modules['std:utils'] = function () {
 		if (isDate(str)) return str;
 
 		if (utcdatRegEx.test(str)) {
-			return new Date(str);
+			return dateFromServer(str);
 		}
 
 		let dt;
 		if (str.length === 8) {
 			dt = new Date(+str.substring(0, 4), +str.substring(4, 6) - 1, +str.substring(6, 8), 0, 0, 0, 0);
 		} else if (str.startsWith('\"\\/\"')) {
-			dt = new Date(str.substring(4, str.length - 4));
+			dt = dateFromServer(str.substring(4, str.length - 4));
 		} else {
-			dt = new Date(str);
+			dt = dateFromServer(str);
 		}
 		if (!isNaN(dt.getTime())) {
-			return new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), 0, 0, 0, 0));
+			return new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 0, 0, 0, 0);
 		}
 		return str;
 	}
@@ -673,7 +709,7 @@ app.modules['std:utils'] = function () {
 	function string2Date(str) {
 		try {
 			let dt = new Date(str);
-			dt.setUTCHours(0, 0, 0, 0);
+			dt.setHours(0, 0, 0, 0);
 			return dt;
 		} catch (err) {
 			return str;
@@ -734,7 +770,7 @@ app.modules['std:utils'] = function () {
 			}
 			return +y;
 		};
-		let td = new Date(Date.UTC(+normalizeYear(seg[2]), +((seg[1] ? seg[1] : 1) - 1), +seg[0], 0, 0, 0, 0));
+		let td = new Date(+normalizeYear(seg[2]), +((seg[1] ? seg[1] : 1) - 1), +seg[0], 0, 0, 0, 0);
 		if (isNaN(td.getDate()))
 			return dateZero();
 		return td;
@@ -754,27 +790,37 @@ app.modules['std:utils'] = function () {
 
 	function dateHasTime(d1) {
 		if (!isDate(d1)) return false;
-		return d1.getUTCHours() !== 0 || d1.getUTCMinutes() !== 0 && d1.getUTCSeconds() !== 0;
+		return d1.getHours() !== 0 || d1.getMinutes() !== 0 && d1.getSeconds() !== 0;
 	}
 
 	function endOfMonth(dt) {
-		var dte = new Date(Date.UTC(dt.getFullYear(), dt.getMonth() + 1, 0, 0, 0, 0));
+		var dte = new Date(dt.getFullYear(), dt.getMonth() + 1, 0, 0, 0, 0);
 		return dte;
 	}
 
 	function dateCreate(year, month, day) {
-		let dt = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
+		let dt = new Date(year, month - 1, day, 0, 0, 0, 0);
 		return dt;
 	}
 
 	function dateCreateTime(year, month, day, hour, min, sec) {
-		let dt = new Date(Date.UTC(year, month - 1, day, hour || 0, min || 0, sec || 0, 0));
+		let dt = new Date(year, month - 1, day, hour || 0, min || 0, sec || 0, 0);
 		return dt;
+	}
+
+	function dateFromServer(src) {
+		if (isDate(src))
+			return src;
+		let dx = new Date(src);
+		return dx;
 	}
 
 	function dateDiff(unit, d1, d2) {
 		if (d1.getTime() > d2.getTime())
 			[d1, d2] = [d2, d1];
+		let tz1 = d1.getTimezoneOffset();
+		let tz2 = d2.getTimezoneOffset();
+		let timezoneDiff = (tz1 - tz2) * 60 * 1000;
 		switch (unit) {
 			case "second":
 				return (d2 - d1) / 1000;
@@ -801,7 +847,7 @@ app.modules['std:utils'] = function () {
 				return month + delta;
 			case "day":
 				let du = 1000 * 60 * 60 * 24;
-				return Math.floor((d2 - d1) / du);
+				return Math.floor((d2 - d1 + timezoneDiff) / du);
 			case "year":
 				var dd = new Date(d1.getFullYear(), d2.getMonth(), d2.getDate(), d2.getHours(), d2.getMinutes(), d2.getSeconds(), d2.getMilliseconds());
 				let dy = dd < d1 ?
@@ -813,7 +859,7 @@ app.modules['std:utils'] = function () {
 	}
 
 	function fromDays(days) {
-		return new Date(Date.UTC(1900, 0, days, 0, 0, 0, 0));
+		return new Date(1900, 0, days, 0, 0, 0, 0);
 	}
 
 	function dateAdd(dt, nm, unit) {
@@ -822,18 +868,19 @@ app.modules['std:utils'] = function () {
 		var du = 0;
 		switch (unit) {
 			case 'year':
-				return new Date(Date.UTC(dt.getFullYear() + nm, dt.getMonth(), dt.getDate(), 0, 0, 0, 0));
+				return new Date(dt.getFullYear() + nm, dt.getMonth(), dt.getDate(), 0, 0, 0, 0);
 			case 'month':
 				// save day of month
 				let newMonth = dt.getMonth() + nm;
 				let day = dt.getDate();
-				var ldm = new Date(Date.UTC(dt.getFullYear(), newMonth + 1, 0, 0, 0)).getDate();
+				var ldm = new Date(dt.getFullYear(), newMonth + 1, 0, 0, 0).getDate();
 				if (day > ldm)
 					day = ldm;
-				var dtx = new Date(Date.UTC(dt.getFullYear(), newMonth, day, 0, 0, 0));
+				var dtx = new Date(dt.getFullYear(), newMonth, day, 0, 0, 0);
 				return dtx;
 			case 'day':
-				du = 1000 * 60 * 60 * 24;
+				// Daylight time!!!
+				return new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + nm, 0, 0, 0, 0);
 				break;
 			case 'hour':
 				du = 1000 * 60 * 60;
@@ -876,6 +923,7 @@ app.modules['std:utils'] = function () {
 		return text.charAt(0).toUpperCase() + text.slice(1);
 	}
 	function maxChars(text, length) {
+		if (!text) return text;
 		text = '' + text || '';
 		if (text.length < length)
 			return text;
@@ -975,10 +1023,10 @@ app.modules['std:utils'] = function () {
 
 	function debounce(fn, timeout) {
 		let timerId = null;
-		return function () {
+		return function (arg) {
 			clearTimeout(timerId);
 			timerId = setTimeout(() => {
-				fn.call();
+				fn.call(undefined, arg);
 			}, timeout);
 		};
 	}
@@ -1033,9 +1081,32 @@ app.modules['std:utils'] = function () {
 			options: assign(src.options, tml.options)
 		});
 	}
+
+	function mapTagColor(style) {
+		let tagColors = {
+			'cyan': '#60bbe5',
+			'green': '#5db750',
+			'olive': '#b5cc18',
+			'white': 'white',
+			'teal': '#00b5ad',
+			'tan': 'tan',
+			'red': '#da533f',
+			'blue': 'cornflowerblue',
+			'orange': '#ffb74d',
+			'seagreen': 'darkseagreen',
+			'null': '#8f94b0',
+			'gold': '#eac500',
+			'salmon': 'salmon',
+			'purple': 'mediumpurple',
+			'pink': 'hotpink',
+			'magenta': 'darkmagenta',
+			'lightgray': '#ccc'
+		};
+		return tagColors[style || 'null'] || '#8f94b0';
+	}
 };
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
 /*20220626-7852*/
 /* services/url.js */
@@ -1284,7 +1355,7 @@ app.modules['std:url'] = function () {
 
 
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 /*20210729-7797*/
 // services/period.js
@@ -1721,9 +1792,9 @@ app.modules['std:modelInfo'] = function () {
 };
 
 
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230518-7933
+// 20240705-7969
 /* services/http.js */
 
 app.modules['std:http'] = function () {
@@ -1748,6 +1819,8 @@ app.modules['std:http'] = function () {
 	async function doRequest(method, url, data, raw, skipEvents) {
 		if (!skipEvents)
 			eventBus.$emit('beginRequest', url);
+		let appver = '';
+		let modulever = '';
 		try {
 			var response = await fetch(url, {
 				method,
@@ -1759,6 +1832,8 @@ app.modules['std:http'] = function () {
 				body: data
 			});
 			let ct = response.headers.get("content-type") || '';
+			appver = response.headers.get("app-version") || '';
+			modulever = response.headers.get("module-version") || '';
 			switch (response.status) {
 				case 200:
 					if (raw)
@@ -1795,8 +1870,11 @@ app.modules['std:http'] = function () {
 			throw err;
 		}
 		finally {
-			if (!skipEvents)
+			if (!skipEvents) {
 				eventBus.$emit('endRequest', url);
+				if (appver || modulever)
+					eventBus.$emit('checkVersion', { app: appver, module: modulever });
+			}
 		}
 	}
 
@@ -1968,7 +2046,7 @@ app.modules['std:http'] = function () {
 
 
 
-// Copyright © 2015-2023 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
 // 20231005-7950
 /* platform/routex.js */
@@ -2142,7 +2220,7 @@ app.modules['std:http'] = function () {
 
 	app.components['std:store'] = store;
 })();
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 /*20210104-7738*/
 /* services/log.js */
@@ -2232,7 +2310,7 @@ app.modules['std:console'] = function () {
 		}
 	}
 };
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 /*20210223-7751*/
 /*validators.js*/
@@ -2441,9 +2519,9 @@ app.modules['std:validators'] = function () {
 
 
 
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20230922-7948*/
+/*20240227-7961*/
 /* services/impl/array.js */
 
 app.modules['std:impl:array'] = function () {
@@ -2552,6 +2630,35 @@ app.modules['std:impl:array'] = function () {
 			return this.$vm.$reload(this);
 		}
 
+		arr.$move = function (el, dir) {
+			if (!el) return;
+			let rowNoProp = el._meta_.$rowNo;
+			if (!rowNoProp) return;
+			let ix1 = this.indexOf(el);
+			let ix2 = 0;
+			if (dir === 'up') {
+				if (ix1 <= 0) return;
+				ix2 = ix1;
+				ix1 = ix2 - 1;
+			}
+			else if (dir === 'down') {
+				if (ix1 >= this.length - 1) return;
+				ix2 = ix1 + 1;
+			} else
+				return;
+			// swap ix1-ix2
+			let t = [this[ix1], this[ix2]];
+			this.splice(ix1, 2, t[1], t[0]);
+			this.$renumberRows();
+		}
+
+		arr.$canMove = function (el, dir) {
+			if (dir === 'up')
+				return this.indexOf(el) > 0;
+			else if (dir === 'down')
+				return this.indexOf(el) < this.length - 1;
+			return false;
+		}
 	}
 
 	function addResize(arr) {
@@ -2854,9 +2961,9 @@ app.modules['std:impl:array'] = function () {
 	}
 };
 
-/* Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.*/
+/* Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.*/
 
-/*20230807-7941*/
+/*20240828-7971*/
 // services/datamodel.js
 
 /*
@@ -2883,6 +2990,10 @@ app.modules['std:impl:array'] = function () {
 	const FLAG_DELETE = 4;
 	const FLAG_APPLY = 8;
 	const FLAG_UNAPPLY = 16;
+	const FLAG_CREATE = 32;
+	const FLAG_64 = 64;
+	const FLAG_128 = 128;
+	const FLAG_256 = 256;
 
 	const platform = require('std:platform');
 	const validators = require('std:validators');
@@ -2902,6 +3013,20 @@ app.modules['std:impl:array'] = function () {
 	function logtime(msg, time) {
 		if (!log) return;
 		log.time(msg, time);
+	}
+
+	function createPermissionObject(perm) {
+		return Object.freeze({
+			canView: !!(perm & FLAG_VIEW),
+			canEdit: !!(perm & FLAG_EDIT),
+			canDelete: !!(perm & FLAG_DELETE),
+			canApply: !!(perm & FLAG_APPLY),
+			canUnapply: !!(perm & FLAG_UNAPPLY),
+			canCreate: !!(perm & FLAG_CREATE),
+			canFlag64: !!(perm & FLAG_64),
+			canFlag128: !!(perm & FLAG_128),
+			canFlag256: !!(perm & FLAG_256)
+		});
 	}
 
 	function defHidden(obj, prop, value, writable) {
@@ -2951,7 +3076,7 @@ app.modules['std:impl:array'] = function () {
 				break;
 			case Date:
 				let srcval = source[prop] || null;
-				shadow[prop] = srcval ? new Date(srcval) : utils.date.zero();
+				shadow[prop] = srcval ? utils.date.fromServer(srcval) : utils.date.zero();
 				break;
 			case platform.File:
 			case Object:
@@ -3225,7 +3350,8 @@ app.modules['std:impl:array'] = function () {
 
 		function setDefaults(root) {
 			if (!root.$template || !root.$template.defaults)
-				return;
+				return false;
+			let called;
 			for (let p in root.$template.defaults) {
 				let px = p.lastIndexOf('.');
 				if (px === -1)
@@ -3237,12 +3363,14 @@ app.modules['std:impl:array'] = function () {
 				let def = root.$template.defaults[p];
 				let obj = utils.simpleEval(root, path);
 				if (obj.$isNew) {
+					called = true;
 					if (utils.isFunction(def))
 						platform.set(obj, prop, def.call(root, obj, prop));
 					else
 						platform.set(obj, prop, def);
 				}
 			}
+			return called;
 		}
 
 		let constructEvent = ctorname + '.construct';
@@ -3277,7 +3405,8 @@ app.modules['std:impl:array'] = function () {
 
 			elem._modelLoad_ = (caller) => {
 				_lastCaller = caller;
-				setDefaults(elem);
+				if (setDefaults(elem))
+					elem.$emit('Model.defaults', elem);
 				elem._fireLoad_();
 				__initialized__ = true;
 			};
@@ -3391,6 +3520,14 @@ app.modules['std:impl:array'] = function () {
 
 		defPropertyGet(arr, "$invalid", function () {
 			return !this.$valid;
+		});
+
+		defPropertyGet(arr, "$permissions", function () {
+			let mi = arr.$ModelInfo;
+			if (!mi || !utils.isDefined(mi.Permissions))
+				return {};
+			let perm = mi.Permissions;
+			return createPermissionObject(perm);
 		});
 
 		if (ctor.prototype._meta_.$cross)
@@ -3537,13 +3674,7 @@ app.modules['std:impl:array'] = function () {
 					if (mi && utils.isDefined(mi.Permissions))
 						perm = mi.Permissions;
 				}
-				return Object.freeze({
-					canView: !!(perm & FLAG_VIEW),
-					canEdit: !!(perm & FLAG_EDIT),
-					canDelete: !!(perm & FLAG_DELETE),
-					canApply: !!(perm & FLAG_APPLY),
-					canUnapply: !!(perm & FLAG_UNAPPLY)
-				});
+				return createPermissionObject(perm);
 			});
 		}
 	}
@@ -4004,8 +4135,9 @@ app.modules['std:impl:array'] = function () {
 						let dt = src[prop];
 						if (!dt)
 							platform.set(this, prop, utils.date.zero());
-						else
-							platform.set(this, prop, new Date(src[prop]));
+						else {
+							platform.set(this, prop, utils.date.fromServer(src[prop]));
+						}
 					} else if (utils.isPrimitiveCtor(ctor)) {
 						platform.set(this, prop, src[prop]);
 					} else {
@@ -4140,7 +4272,7 @@ app.modules['std:impl:array'] = function () {
 
 
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 /*20210627-7787*/
 /* services/popup.js */
@@ -4250,9 +4382,9 @@ app.modules['std:popup'] = function () {
 };
 
 
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20230629-7939*/
+/*20240220-7961*/
 /* services/mask.js */
 
 app.modules['std:mask'] = function () {
@@ -4589,11 +4721,11 @@ app.modules['std:mask'] = function () {
 	}
 
 	function focusHandler(/*e*/) {
-		if (!this.value)
-			this.value = getMasked(this.__opts.mask, '');
-		setTimeout(() => {
+		Vue.nextTick(() => {
+			if (!this.value)
+				this.value = getMasked(this.__opts.mask, '');
 			setCaretPosition(this, 0, 'r');
-		}, 10);
+		});
 	}
 
 	function pasteHandler(e) {
@@ -4634,9 +4766,9 @@ app.modules['std:tools'] = function () {
 	}
 };
 
-// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20201004-7806
+// 20241018-7971
 /* services/html.js */
 
 app.modules['std:html'] = function () {
@@ -4652,7 +4784,8 @@ app.modules['std:html'] = function () {
 		printDirect,
 		removePrintFrame,
 		updateDocTitle,
-		uploadFile
+		uploadFile,
+		purgeTable
 	};
 
 	function getColumnsWidth(elem) {
@@ -4780,11 +4913,23 @@ app.modules['std:html'] = function () {
 	}
 };
 
+function purgeTable(tbl) {
+	let node = tbl.cloneNode(true)
+	for (let td of node.getElementsByTagName('TD')) {
+		if (!td.childNodes.length) continue;
+		td.removeAttribute('title');
+		let c = td.childNodes[0];
+		if (c.classList && (c.classList.contains('popover-wrapper') || c.classList.contains('hlink-dd-wrapper'))) {
+			if (c.childNodes.length)
+				td.innerText = c.childNodes[0].innerText;
+		}
+	}
+	return node;
+}
 
 
 
-
-// Copyright © 2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2018 Oleksandr Kukhtin. All rights reserved.
 
 /*20180227-7121*/
 /* services/routing.js */
@@ -5190,7 +5335,7 @@ app.modules['std:barcode'] = function () {
 		}
 	});
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Oleksandr Kukhtin. All rights reserved.
 
 // 20200206-7653
 // components/control.js
@@ -5717,9 +5862,9 @@ Vue.component('validator-control', {
 	app.components['static', staticControl];
 
 })();
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20230713-7939*/
+/*20240909-7971*/
 /*components/combobox.js */
 
 (function () {
@@ -5776,6 +5921,7 @@ Vue.component('validator-control', {
 			nameProp: String,
 			valueProp: String,
 			boldProp: String,
+			cssClassProp: String,
 			showvalue: Boolean,
 			align: String,
 			groupby : String
@@ -5818,8 +5964,11 @@ Vue.component('validator-control', {
 				return v;
 			},
 			getClass(itm) {
-				return this.boldProp ?
-					(utils.eval(itm, this.boldProp) ? 'bold' : undefined) : undefined;
+				if (this.boldProp)
+					return utils.eval(itm, this.boldProp) ? 'bold' : undefined;
+				if (this.cssClassProp)
+					return utils.eval(itm, this.cssClassProp);
+				return undefined;
 			},
 			getWrapText() {
 				return this.showvalue ? this.getComboValue() : this.getText();
@@ -5932,20 +6081,17 @@ Vue.component('validator-control', {
 			},
 			days() {
 				let dt = new Date(this.model);
-				dt.setHours(0, -dt.getTimezoneOffset(), 0, 0);
 				let d = dt.getDate();
 				dt.setDate(1); // 1-st day of month
 				let w = dt.getDay() - 1; // weekday
 				if (w === -1) w = 6;
-				else if (w === 0) w = 7;
+				//else if (w === 0) w = 7;
 				dt.setDate(-w + 1);
 				let arr = [];
 				for (let r = 0; r < 6; r++) {
 					let row = [];
 					for (let c = 0; c < 7; c++) {
-						let xd = new Date(dt);
-						xd.setHours(0, -xd.getTimezoneOffset(), 0, 0);
-						row.push(new Date(xd));
+						row.push(new Date(dt));
 						dt.setDate(dt.getDate() + 1);
 					}
 					arr.push(row);
@@ -6043,9 +6189,9 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230911-7946
+// 20240309-7962
 // components/datepicker.js
 
 (function () {
@@ -6057,6 +6203,8 @@ Vue.component('validator-control', {
 
 	const baseControl = component('control');
 	const locale = window.$$locale;
+	const dateLocale = locale.$DateLocale || locale.$Locale;
+	const monthLocale = locale.$Locale; // for text
 
 	Vue.component('a2-date-picker', {
 		extends: baseControl,
@@ -6067,6 +6215,7 @@ Vue.component('validator-control', {
 		<input v-focus v-model.lazy="model" v-if="!isMonth" :class="inputClass" :readonly="inputDisabled"/>
 		<div class="month-wrapper" v-if=isMonth v-text=model></div>
 		<a href @click.stop.prevent="toggle($event)" tabindex="-1"><i class="ico ico-calendar"></i></a>
+		<a href v-if="clearVisible" @click.stop.prevent="clear($event)" tabindex="-1">✕</a>
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 		<div class="calendar" v-if="isOpen">		
 			<a2-calendar :model="viewDate" :view="view" :current-model="modelDate"
@@ -6084,7 +6233,8 @@ Vue.component('validator-control', {
 			// override control.align (default value)
 			align: { type: String, default: 'center' },
 			view: String,
-			yearCutOff: String
+			yearCutOff: String,
+			hasClear: Boolean
 		},
 		data() {
 			return {
@@ -6107,6 +6257,10 @@ Vue.component('validator-control', {
 						this.updateModel(utils.date.today());
 				}
 				this.isOpen = !this.isOpen;
+			},
+			clear(ev) {
+				this.isOpen = false;
+				this.updateModel(utils.date.zero());
 			},
 			updateModel(date) {
 				this.item[this.prop] = date;
@@ -6133,14 +6287,14 @@ Vue.component('validator-control', {
 				this.viewDate = dt;
 			},
 			selectDay(day) {
-				var dt = new Date(Date.UTC(day.getFullYear(), day.getMonth(), day.getDate(), 0, 0, 0, 0));
+				var dt = new Date(day.getFullYear(), day.getMonth(), day.getDate(), 0, 0, 0, 0);
 				this.setDate(dt);
 				this.isOpen = false;
 			},
 			setDate(d) {
 				// save time
 				let md = this.modelDate;
-				let nd = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), md.getUTCHours(), md.getUTCMinutes(), 0, 0));
+				let nd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), md.getHours(), md.getMinutes(), 0, 0);
 				nd = this.fitDate(nd);
 				this.updateModel(nd);
 			},
@@ -6175,14 +6329,17 @@ Vue.component('validator-control', {
 			inputDisabled() {
 				return this.disabled || this.view === 'month';
 			},
+			clearVisible() {
+				return this.hasClear && !utils.date.isZero(this.modelDate);
+			},
 			model: {
 				get() {
 					if (utils.date.isZero(this.modelDate))
-						return '';
+						return '\u00A0'; /* avoid baseline problem */
 					if (this.view === 'month')
-						return utils.text.capitalize(this.modelDate.toLocaleString(locale.$Locale, { timeZone:'UTC',  year: 'numeric', month: 'long' }));
+						return utils.text.capitalize(this.modelDate.toLocaleString(monthLocale, { year: 'numeric', month: 'long' }));
 					else
-						return this.modelDate.toLocaleString(locale.$Locale, { timeZone: 'UTC', year: 'numeric', month: '2-digit', day: '2-digit' });
+						return this.modelDate.toLocaleString(dateLocale, { year: 'numeric', month: '2-digit', day: '2-digit' });
 				},
 				set(str) {
 					let md = utils.date.parse(str, this.yearCutOff);
@@ -6207,10 +6364,10 @@ Vue.component('validator-control', {
 	});
 })();
 
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20200907-7706
-// components/datepicker.js
+// 20240154-7954
+// components/timepicker.js
 
 
 (function () {
@@ -6222,6 +6379,7 @@ Vue.component('validator-control', {
 
 	const baseControl = component('control');
 	const locale = window.$$locale;
+	const dateLocale = locale.$DateLocale || locale.$Locale;
 
 	const timesheet = {
 		props: {
@@ -6345,7 +6503,7 @@ Vue.component('validator-control', {
 			},
 			setHour(h) {
 				let nd = new Date(this.modelDate);
-				nd.setUTCHours(h);
+				nd.setHours(h);
 				this.item[this.prop] = nd;
 			},
 			setMinute(m) {
@@ -6356,12 +6514,12 @@ Vue.component('validator-control', {
 			},
 			hourClass(h) {
 				let cls = '';
-				if (this.modelDate.getUTCHours() === +h)
+				if (this.modelDate.getHours() === +h)
 					cls += ' active';
 				return cls;
 			},
 			minuteClass(m) {
-				return this.modelDate.getUTCMinutes() === +m ? 'active' : undefined;
+				return this.modelDate.getMinutes() === +m ? 'active' : undefined;
 			},
 			cssClass2() {
 				let cx = this.cssClass();
@@ -6385,7 +6543,7 @@ Vue.component('validator-control', {
 					let md = this.modelDate;
 					if (utils.date.isZero(md))
 						return '';
-					return md.toLocaleTimeString(locale.$Locale, { timeZone: 'UTC', hour: '2-digit', minute:"2-digit"});
+					return md.toLocaleTimeString(dateLocale, { hour: '2-digit', minute: "2-digit" });
 				},
 				set(str) {
 					let md = new Date(this.modelDate);
@@ -6393,9 +6551,9 @@ Vue.component('validator-control', {
 						if (utils.date.isZero(md))
 							md = utils.date.today();
 						let time = utils.date.parseTime(str);
-						md.setUTCHours(time.getHours(), time.getMinutes());
+						md.setHours(time.getHours(), time.getMinutes());
 					} else {
-						md.setUTCHours(0, 0);
+						md.setHours(0, 0);
 					}
 					this.item[this.prop] = md;
 					this.isOpen = false;
@@ -6522,9 +6680,9 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2019-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2019-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230829-7945
+// 20240528-7968
 // components/colorcombobox.js*/
 
 (function () {
@@ -6569,7 +6727,8 @@ Vue.component('validator-control', {
 			prop: String,
 			nameProp: String,
 			colorProp: String,
-			valueProp: String
+			valueProp: String,
+			outline: Boolean
 		},
 		data() {
 			return {
@@ -6584,7 +6743,10 @@ Vue.component('validator-control', {
 			},
 			color() {
 				let cv = this.cmbValue;
-				return cv ? (cv[this.colorProp] || 'transparent') : 'transparent';
+				let clr = cv ? (cv[this.colorProp] || 'transparent') : 'transparent';
+				if (this.outline)
+					clr += ' outline';
+				return clr;
 			},
 			cmbValue: {
 				get() {
@@ -6607,7 +6769,7 @@ Vue.component('validator-control', {
 				return itm[this.nameProp];
 			},
 			itemClass(itm) {
-				return itm[this.colorProp];
+				return itm[this.colorProp] + (this.outline ? ' outline': '');
 			},
 			keydown(event) {
 				event.stopPropagation();
@@ -6658,7 +6820,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20231001-7949
+// 20240107-7955
 // components/periodpicker.js
 
 
@@ -6908,9 +7070,9 @@ Vue.component('validator-control', {
 })();
 
 
-// Copyright © 2015-2023 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20230613-7948*/
+/*20240429-7970*/
 // components/selector.js
 
 (function selector_component() {
@@ -6940,10 +7102,12 @@ Vue.component('validator-control', {
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 		<div class="selector-pane" v-if="isOpen" ref="pane" :class="paneClass">
 			<div class="selector-body" :style="bodyStyle">
-				<slot name="pane" :items="items" :is-item-active="isItemActive" :item-name="itemName" :hit="hit" :max-chars="maxChars" :slotStyle="slotStyle">
+				<slot name="pane" :items="items" :is-item-active="isItemActive" :item-name="itemName" :hit="hit" :max-chars="maxChars" :line-clamp="lineClamp" :slotStyle="slotStyle">
 					<ul class="selector-ul">
-						<li @mousedown.prevent="hit(itm)" :class="{active: isItemActive(itmIndex)}"
-							v-for="(itm, itmIndex) in items" :key="itmIndex" v-text="itemName(itm)"></li>
+						<li @mousedown.prevent="hit(itm)" :class="{'active': isItemActive(itmIndex)}"
+							v-for="(itm, itmIndex) in items" :key="itmIndex">
+							<span :style="itemStyle(itm)" :class="itemClass(itm, itmIndex)" :title="itemTitle(itm)" v-text="itemName(itm)"></span>
+						</li>
 					</ul>
 				</slot>
 			</div>
@@ -6981,7 +7145,8 @@ Vue.component('validator-control', {
 			mode: String,
 			fetchCommand: String,
 			fetchCommandData: Object,
-			maxChars: Number
+			maxChars: Number,
+			lineClamp: Number
 		},
 		data() {
 			return {
@@ -7193,6 +7358,22 @@ Vue.component('validator-control', {
 						return;
 				}
 			},
+			itemTitle(itm) {
+				if (this.lineClamp > 0)
+					return this.itemName(itm)
+				return '';
+			},
+			itemStyle(itm) {
+				if (this.lineClamp > 0)
+					return { '-webkit-line-clamp': this.lineClamp };
+				return undefined;
+			},
+			itemClass(itm, itmIndex) {
+				let cls = '';
+				if (this.lineClamp > 0)
+					cls += ' line-clamp';
+				return cls;
+			},
 			hit(itm) {
 				let obj = this.item[this.prop];
 				this.query = this.valueText;
@@ -7201,7 +7382,7 @@ Vue.component('validator-control', {
 				this.current = this.items.indexOf(itm);
 				this.$nextTick(() => {
 					if (this.hitfunc) {
-						this.hitfunc.call(this.item.$root, itm);
+						this.hitfunc.call(this.item.$root, itm, this.item, this.prop);
 						return;
 					}
 					if (obj && obj.$merge)
@@ -7330,9 +7511,9 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230807-7941
+// 20240429-7970
 // components/datagrid.js*/
 
 (function () {
@@ -7350,7 +7531,7 @@ Vue.component('validator-control', {
 	const eqlower = utils.text.equalNoCase;
 
 	const dataGridTemplate = `
-<div v-lazy="itemsSource" :class="{'data-grid-container':true, 'fixed-header': fixedHeader, 'bordered': border}" :test-id="testId">
+<div v-lazy="itemsSource" :class="{'data-grid-container':true, 'fixed-header': fixedHeader, 'bordered': border, 'compact': compact}" :test-id="testId">
 	<div class="data-grid-header-border" v-if="fixedHeader" />
 	<div :class="{'data-grid-body': true, 'fixed-header': fixedHeader}">
 	<div class="data-grid-empty" v-if="$isEmpty">
@@ -7379,7 +7560,7 @@ Vue.component('validator-control', {
 						<span v-if="isGroupCountVisible(g)" class="grcount" v-text="g.count" /></td>
 					</tr>
 					<template v-for="(row, rowIndex) in g.items">
-						<data-grid-row v-show="isGroupBodyVisible(g)" :group="true" :level="g.level" :cols="columns" :row="row" :key="gIndex + ':' + rowIndex" :index="rowIndex" :mark="mark" ref="row" />
+						<data-grid-row v-show="isGroupBodyVisible(g)" :group="true" :level="g.level" :cols="columns" :row="row" :key="gIndex + ':' + rowIndex" :index="rowIndex" :mark="mark" ref="row"  :is-item-active="isItemActive" :hit-item="hitItem"/>
 						<data-grid-row-details v-if="rowDetailsShow(row)" v-show="isGroupBodyVisible(g)" :cols="columns.length" :row="row" :key="'rd:' + gIndex + ':' + rowIndex" :mark="mark">
 							<slot name="row-details" :row="row"></slot>
 						</data-grid-row-details>
@@ -7472,6 +7653,7 @@ Vue.component('validator-control', {
 			wrap: String,
 			command: Object,
 			maxChars: Number,
+			lineClamp: Number,
 			checkAll: String
 		},
 		created() {
@@ -7709,11 +7891,16 @@ Vue.component('validator-control', {
 			}
 
 			let content = utils.eval(row, col.content, col.dataType, col.evalOpts);
-			let spanProps = { 'class': { 'dg-cell': true, 'negative-red': isNegativeRed(col) } };
+			let spanProps = { 'class': { 'dg-cell': true, 'negative-red': isNegativeRed(col), 'line-clamp': col.lineClamp > 0 } };
 			if (col.maxChars) {
 				spanProps.attrs = { title: content };
 				content = utils.text.maxChars(content, col.maxChars);
 			}
+			else if (col.lineClamp > 0) {
+				spanProps.attrs = { title: content }
+				spanProps.style = { '-webkit-line-clamp': col.lineClamp };
+			}
+
 			let chElems = [h('span', spanProps, content)];
 			let icoSingle = !col.content ? ' ico-single' : '';
 			if (col.icon)
@@ -8409,9 +8596,9 @@ template: `
 })();
 
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-//20221107-7903
+//20240913-7971
 /*components/popover.js*/
 
 Vue.component('popover', {
@@ -8449,7 +8636,8 @@ Vue.component('popover', {
 		width: String,
 		top: String,
 		hover: Boolean,
-		offsetX: String
+		offsetX: String,
+		arg: undefined,
 	},
 	computed: {
 		hasIcon() {
@@ -8498,7 +8686,10 @@ Vue.component('popover', {
 			if (this.url) {
 				const urltools = require('std:url');
 				let root = window.$$rootUrl;
-				this.popoverUrl = urltools.combine(root, '/_popup', this.url);
+				let arg = this.arg || '';
+				if (typeof arg === 'object')
+					arg = arg.Id;
+				this.popoverUrl = urltools.combine(root, '/_popup', this.url, arg);
 			}
 		};
 		this.$el._hide = () => {
@@ -8765,7 +8956,7 @@ Vue.component('popover', {
 	});
 })();
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
 // 20221127-7908
 // components/collectionview.js
@@ -9300,7 +9491,7 @@ TODO:
 	});
 
 })();
-// Copyright © 2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2021 Oleksandr Kukhtin. All rights reserved.
 
 // 20210502-7773
 // components/accelcommand.js
@@ -10426,9 +10617,9 @@ TODO:
 	});
 
 })();
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20190610-7499
+// 20240201-7959
 // components/toastr.js
 
 
@@ -10508,7 +10699,7 @@ TODO:
 
 				setTimeout(() => {
 					this.removeToast(toast.$index);
-				}, 2000);
+				}, toast.time || 2000);
 			},
 			removeToast(tstIndex) {
 				let ix = this.items.findIndex(x => x.$index === tstIndex);
@@ -10523,9 +10714,9 @@ TODO:
 
 	app.components['std:toastr'] = toastrComponent;
 })();
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
 
-// 20210704-7793
+// 20231230-7954
 // components/image.js
 
 (function () {
@@ -10689,6 +10880,62 @@ TODO:
 			}
 		}
 	});
+
+	Vue.component('a2-file-preview', {
+		template: `<div class="a2-file-preview">
+		<img v-if="isImage"" :src=href :style=cssStyle />
+		<object v-else-if="isPdf"" type="application/pdf" :data=href
+			:width=pdfWidth :height=height :style=cssStyle></object>
+		<div v-else class="no-preview">
+			<span class="ico ico-file-preview"></span>
+			<span v-text="unavailable"></span>
+		</div>
+	</div>`,
+		props: {
+			url: String,
+			width: String,
+			height: String,
+			value: Object
+		},
+		computed: {
+			mime() {
+				if (utils.isObjectExact(this.value))
+					return this.value.Mime;
+				console.error('value must be an Object')
+			},
+			isImage() {
+				return this.mime.startsWith('image');
+			},
+			isPdf() {
+				return this.mime.endsWith('pdf');
+			},
+			pdfWidth() {
+				return this.width ?? '100%';
+			},
+			href: function () {
+				let root = window.$$rootUrl;
+				let id = this.value;
+				let qry = {};
+				if (utils.isObjectExact(this.value)) {
+					id = utils.getStringId(this.value);
+					if (this.value._meta_ && this.value._meta_.$token)
+						qry.token = this.value[this.value._meta_.$token];
+				}
+				return url.combine(root, '_file', this.url, id) + url.makeQueryString(qry);
+			},
+			unavailable() {
+				return locale.$PreviewIsUnavailable;
+			},
+			cssStyle() {
+				let r = {};
+				if (this.width)
+					r.maxWidth = this.width;
+				if (this.height)
+					r.maxHeight = this.height;
+				return r;
+			}
+		}
+	});
 })();
 // Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
 
@@ -10799,12 +11046,12 @@ TODO:
 })();
 // Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
 
-// 20200111-7850
+// 20200111-7969
 // components/taskpad.js
 
 Vue.component("a2-taskpad", {
 	template:
-		`<div :class="cssClass">
+`<div :class="cssClass" :style="{width:width}">
 	<a class="ico taskpad-collapse-handle" @click.stop="toggle"></a>
 	<div v-if="expanded" class="taskpad-body">
 		<slot>
@@ -10818,20 +11065,22 @@ Vue.component("a2-taskpad", {
 	props: {
 		title: String,
 		initialCollapsed: Boolean,
-		position: String
+		position: String,
+		initialWidth: { type: String, default: '20rem' }
 	},
 	data() {
 		return {
-			expanded: true,
-			__savedCols: ''
+			expanded: true
 		};
 	},
 	computed: {
+		width() {
+			return this.expanded ? this.initialWidth : undefined;
+		},
 		cssClass() {
 			let cls = "taskpad";
 			cls += ' position-' + this.position;
 			if (this.expanded) cls += ' expanded'; else cls += ' collapsed';
-
 			return cls;
 		},
 		tasksText() {
@@ -10841,24 +11090,12 @@ Vue.component("a2-taskpad", {
 	methods: {
 		setExpanded(exp) {
 			this.expanded = exp;
-			// HACK
-			let topStyle = this.$el.parentElement.style;
-			if (this.expanded)
-				topStyle.gridTemplateColumns = this.__savedCols;
-			else {
-				if (this.position === 'left')
-					topStyle.gridTemplateColumns = "36px 1fr"; // TODO: ???
-				else
-					topStyle.gridTemplateColumns = "1fr 36px"; // TODO: ???
-			}
 		},
 		toggle() {
 			this.setExpanded(!this.expanded);
 		}
 	},
 	mounted() {
-		let topStyle = this.$el.parentElement.style;
-		this.__savedCols = topStyle.gridTemplateColumns;
 		if (this.initialCollapsed)
 			this.setExpanded(false);
 	}
@@ -10935,7 +11172,7 @@ Vue.component('a2-panel', {
 		}
 	}
 });
-// Copyright © 2020-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2020-2021 Oleksandr Kukhtin. All rights reserved.
 
 // 20211210-7812
 // components/inlinedialog.js
@@ -11026,9 +11263,9 @@ Vue.component('a2-panel', {
 	});
 
 })();
-/* Copyright © 2015-2022 Alex Kukhtin. All rights reserved.*/
+/* Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.*/
 
-// 20221004-7897
+// 20240312-7963
 // components/sheet.js
 
 (function () {
@@ -11107,7 +11344,7 @@ Vue.component('a2-panel', {
 			function rowCssClass(mark) {
 				let cls = mark || '';
 				if (this.hasChildren())
-					cls += ' group';
+					cls += ` group gl-${this.item.$level}`;
 				if (this.item.$collapsed)
 					cls += ' collapsed';
 				return cls;
@@ -11135,7 +11372,7 @@ Vue.component('a2-panel', {
 		}
 	});
 })();
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 /*20210914-7803*/
 /*components/newbutton.js*/
@@ -11238,10 +11475,10 @@ Vue.component('a2-panel', {
 		}
 	});
 })();
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Oleksandr Kukhtin. All rights reserved.
 
 /*20191216-7600*/
-/*components/newbutton.js*/
+/*components/companybutton.js*/
 
 (function () {
 
@@ -11374,9 +11611,9 @@ Vue.component('a2-panel', {
 	});
 })();
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20210606-7781
+// 20241005-7971
 // components/debug.js*/
 
 (function () {
@@ -11549,6 +11786,7 @@ Vue.component('a2-panel', {
 		},
 		created() {
 			eventBus.$on('endRequest', (url) => {
+				if (!url) return;
 				if (url.indexOf('/_shell/trace') !== -1) return;
 				if (!this.traceVisible) return;
 				this.loadTrace();
@@ -11700,7 +11938,7 @@ Vue.component('a2-panel', {
 	app.components['std:doctitle'] = documentTitle;
 
 })();
-// Copyright © 2019-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2019-2020 Oleksandr Kukhtin. All rights reserved.
 
 // 20200224-7635
 // components/a2-span-sum.js*/
@@ -11833,14 +12071,24 @@ Vue.component('a2-panel', {
 		}
 	});
 })();
-// Copyright © 2022-2023 Olekdsandr Kukhtin. All rights reserved.
+// Copyright © 2022-2024 Olekdsandr Kukhtin. All rights reserved.
 
-// 20230625-7939
+// 20240128-7959
 // components/treegrid.js
 
 (function () {
 
 	const utils = require('std:utils');
+	const eventBus = require('std:eventBus');
+
+	let debouncedUpdate = utils.debounce((pane) => {
+		if (!pane) return;
+		let elem = pane.querySelector('.active');
+		if (!elem) return;
+		if (elem && elem.scrollIntoViewCheck)
+			elem.scrollIntoViewCheck();
+	}, 300);
+
 
 	let gridTemplate = `
 <table v-lazy="root">
@@ -11849,7 +12097,7 @@ Vue.component('a2-panel', {
 		<th class="c-m" v-if=isMarkCell :class=gridLines></th>
 		<slot name="header" v-bind:that="that"></slot>
 	</tr></thead>
-	<tbody>
+	<tbody ref="pane">
 		<tr v-for="(itm, ix) in rows" :class="rowClass(itm)" 
 				@click.stop="select(itm)" v-on:dblclick.prevent="dblClick($event, itm)">
 			<td class="c-m" v-if=isMarkCell :class="rowMarkClass(itm)"></td>
@@ -11911,27 +12159,33 @@ Vue.component('a2-panel', {
 				return this.markStyle === 'row' || this.markStyle === 'both';
 			}
 		},
-		watch: {
-			root() {
-				//console.dir('whatch items');
-			}
-		},
 		methods: {
 			toggle(itm) {
-				itm.$expanded = !itm.$expanded;
+				itm.$select(this.root);
+				if (itm.$expand) {
+					if (!itm.$expanded)
+						itm.$expand();
+					else
+						itm.$expanded = false;
+				}
+				else
+					itm.$expanded = !itm.$expanded;
 			},
 			select(itm) {
+				eventBus.$emit('closeAllPopups');
 				itm.elem.$select(this.root);
 			},
 			dblClick(evt, itm) {
+				eventBus.$emit('closeAllPopups');
 				evt.stopImmediatePropagation();
 				window.getSelection().removeAllRanges();
 				if (this.doubleclick)
 					this.doubleclick();
 			},
 			hasChildren(itm) {
+				var hc = utils.isDefined(itm.$hasChildren) && itm.$hasChildren;
 				let ch = itm[this.item];
-				return ch && ch.length > 0;
+				return hc || (ch && ch.length > 0);
 			},
 			isRowFolder(elm) {
 				if (this.hasChildren(elm))
@@ -11982,6 +12236,9 @@ Vue.component('a2-panel', {
 				prop = (prop || '').toLowerCase();
 				this.$parent.$emit('sort', prop);
 			}
+		},
+		updated() {
+			debouncedUpdate(this.$refs['pane']);
 		}
 	});
 })();
@@ -12753,9 +13010,9 @@ Vue.directive('disable', {
 });
 
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20221027-7902*/
+/*20240107-7954*/
 /* directives/dropdown.js */
 
 (function () {
@@ -12823,11 +13080,22 @@ Vue.directive('disable', {
 		}
 	});
 
+	function canClick(el) {
+		const hlink = "a2-hyperlink";
+		if (el.classList.contains(hlink))
+			return false;
+		el = el.parentElement;
+		if (el && el.classList.contains(hlink))
+			return false;
+		return true;
+	}
+
 	Vue.directive('contextmenu', {
 		_contextMenu(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
-			ev.target.click();
+			if (canClick(ev.target))
+				ev.target.click();
 			let menu = document.querySelector('#' + this._val);
 			let br = menu.parentNode.getBoundingClientRect();
 			let style = menu.style;
@@ -13197,9 +13465,9 @@ Vue.directive('resize', {
 });
 
 
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20231106-7951*/
+/*20241005-7973*/
 // controllers/base.js
 
 (function () {
@@ -13252,21 +13520,17 @@ Vue.directive('resize', {
 	}
 
 	function isPermissionsDisabled(opts, arg) {
-		if (opts && opts.checkPermission) {
-			if (utils.isObjectExact(arg)) {
-				if (arg.$permissions) {
-					let perm = arg.$permissions;
-					let prop = opts.checkPermission;
-					if (prop in perm) {
-						if (!perm[prop])
-							return true;
-					} else {
-						console.error(`invalid permssion name: '${prop}'`);
-					}
-				}
-			}
+		if (!arg || !opts || !opts.checkPermission) return false;
+
+		let prop = opts.checkPermission;
+		if (!utils.isDefined(arg.$permissions)) {
+			console.warn('[!!Permissions] not found');
+			return true;
 		}
-		return false;
+		let perm = arg.$permissions;
+		if (prop in perm)
+			return !perm[prop];
+		return true;
 	}
 
 	const base = Vue.extend({
@@ -13330,17 +13594,47 @@ Vue.directive('resize', {
 			$marker() {
 				return true;
 			},
+			$isDisabledAlert(opts, arg) {
+				if (isPermissionsDisabled(opts, arg)) {
+					this.$alert(locale.$PermissionDenied);
+					return true;
+				}
+				return false;
+			},
 			$exec(cmd, arg, confirm, opts) {
 				if (this.$isReadOnly(opts)) return;
 				if (this.$isLoading) return;
 
-				if (isPermissionsDisabled(opts, arg)) {
-					this.$alert(locale.$PermissionDenied);
+				if (this.$isDisabledAlert(opts, arg))
 					return;
-				}
+
 				eventBus.$emit('closeAllPopups');
 				const root = this.$data;
 				return root._exec_(cmd, arg, confirm, opts);
+			},
+
+			$move(dir, arg) {
+				if (!arg) return;
+				arg.$parent.$move(arg, dir);
+			},
+
+			$moveSelected(dir, arg) {
+				if (!arg) return;
+				let sel = arg.$selected;
+				if (sel)
+					arg.$move(sel, dir);
+			},
+
+			$canMove(dir, arg) {
+				if (!arg) return false;
+				return arg.$parent.$canMove(arg, dir);
+			},
+
+			$canMoveSelected(dir, arg) {
+				if (!arg) return false;
+				let sel = arg.$selected;
+				if (!sel) return false;
+				return arg.$canMove(sel, dir);
 			},
 
 			async $invokeServer(url, arg, confirm, opts) {
@@ -13388,6 +13682,7 @@ Vue.directive('resize', {
 				else
 					this.$confirm(confirm).then(() => root._exec_(cmd, arg.$selected));
 			},
+			$isPermissionsDisabled: isPermissionsDisabled,
 			$canExecute(cmd, arg, opts) {
 				//if (this.$isLoading) return false; // do not check here. avoid blinking
 				if (this.$isReadOnly(opts))
@@ -13551,6 +13846,17 @@ Vue.directive('resize', {
 				eventBus.$emit('showSidePane', newurl);
 			},
 
+			$hideSidePane() {
+				eventBus.$emit('hideSidePane', null);
+			},
+			async $longOperation(action) {
+				try {
+					eventBus.$emit('beginRequest', '');
+					await action();
+				} finally {
+					eventBus.$emit('endRequest', '');
+				}
+			},
 			$invoke(cmd, data, base, opts) {
 				let self = this;
 				let root = window.$$rootUrl;
@@ -13775,32 +14081,40 @@ Vue.directive('resize', {
 
 			$file(url, arg, opts, dat) {
 				eventBus.$emit('closeAllPopups');
-				const root = window.$$rootUrl;
-				let id = arg;
-				let token = undefined;
-				if (arg && utils.isObject(arg)) {
-					id = utils.getStringId(arg);
-					if (arg._meta_ && arg._meta_.$token)
-						token = arg[arg._meta_.$token];
+				const doFile = () => {
+					const root = window.$$rootUrl;
+					let id = arg;
+					let token = undefined;
+					if (arg && utils.isObject(arg)) {
+						id = utils.getStringId(arg);
+						if (arg._meta_ && arg._meta_.$token)
+							token = arg[arg._meta_.$token];
+					}
+					let fileUrl = urltools.combine(root, '_file', url, id);
+					let qry = dat || {};
+					let action = (opts || {}).action;
+					if (token)
+						qry.token = token;
+					if (action == 'download')
+						qry.export = 1;
+					fileUrl += urltools.makeQueryString(qry);
+					switch (action) {
+						case 'download':
+							htmlTools.downloadUrl(fileUrl);
+							break;
+						case 'print':
+							htmlTools.printDirect(fileUrl);
+							break;
+						default:
+							window.open(fileUrl, '_blank');
+					}
 				}
-				let fileUrl = urltools.combine(root, '_file', url, id);
-				let qry = dat || {};
-				let action = (opts || {}).action;
-				if (token)
-					qry.token = token;
-				if (action == 'download')
-					qry.export = 1;
-				fileUrl += urltools.makeQueryString(qry);
-				switch (action) {
-					case 'download':
-						htmlTools.downloadUrl(fileUrl);
-						break;
-					case 'print':
-						htmlTools.printDirect(fileUrl);
-						break;
-					default:
-						window.open(fileUrl, '_blank');
-				}
+				if (opts && opts.saveRequired && this.$isDirty) {
+					this.$save().then(() => {
+						doFile();
+					});
+				} else
+					doFile();
 			},
 
 			$attachment(url, arg, opts) {
@@ -13852,10 +14166,9 @@ Vue.directive('resize', {
 				if (!elem)
 					return;
 
-				if (isPermissionsDisabled(opts, elem)) {
-					this.$alert(locale.$PermissionDenied);
+				if (this.$isDisabledAlert(opts, elem))
 					return;
-				}
+
 				if (this.$isLoading) return;
 				eventBus.$emit('closeAllPopups');
 
@@ -13900,8 +14213,7 @@ Vue.directive('resize', {
 				if (this.$isLoading) return;
 				eventBus.$emit('closeAllPopups');
 				let sel = arr.$selected;
-				if (!sel)
-					return;
+				if (!sel) return;
 				this.$dbRemove(sel, confirm, opts);
 			},
 
@@ -13935,7 +14247,12 @@ Vue.directive('resize', {
 					let root = this.$data;
 					if (!root.$valid) return false;
 				}
-				return arr && !!arr.$selected;
+				let has = arr && !!arr.$selected;
+				if (!has)
+					return false;
+				if (isPermissionsDisabled(opts, arr.$selected))
+					return false;
+				return true;
 			},
 
 			$hasChecked(arr) {
@@ -14003,10 +14320,10 @@ Vue.directive('resize', {
 					alert(msg);
 			},
 
-			$toast(toast, style) {
+			$toast(toast, style, time) {
 				if (!toast) return;
 				if (utils.isString(toast))
-					toast = { text: toast, style: style || 'success' };
+					toast = { text: toast, style: style || 'success', time: time };
 				eventBus.$emit('toast', toast);
 			},
 
@@ -14061,10 +14378,8 @@ Vue.directive('resize', {
 
 				function doDialog() {
 					// result always is raw data
-					if (isPermissionsDisabled(opts, arg)) {
-						that.$alert(locale.$PermissionDenied);
+					if (that.$isDisabledAlert(opts, arg))
 						return;
-					}
 					if (utils.isFunction(query))
 						query = query();
 					let reloadAfter = opts && opts.reloadAfter;
@@ -14098,6 +14413,8 @@ Vue.directive('resize', {
 						case 'edit-selected':
 							if (argIsNotAnArray()) return;
 							if (!arg.$selected) return;
+							if (that.$isDisabledAlert(opts, arg.$selected))
+								return;
 							return __runDialog(url, arg.$selected, query, (result) => {
 								arg.$selected.$merge(result);
 								arg.__fireChange__('selected');
@@ -14157,7 +14474,7 @@ Vue.directive('resize', {
 						id = utils.getStringId(arg);
 					const self = this;
 					const root = window.$$rootUrl;
-					let newurl = url ? urltools.combine('/_export', url, id) : self.$baseUrl.replace('/_page/', '/_export/');
+					let newurl = url ? urltools.combine('/_export', url, id) : self.$baseUrl.split('?')[0].replace('/_page/', '/_export/');
 					newurl = urltools.combine(root, newurl) + urltools.makeQueryString(dat);
 					window.location = newurl; // to display errors
 				};
@@ -14191,8 +14508,12 @@ Vue.directive('resize', {
 					// attention! from css!
 					let padding = tbl.classList.contains('compact') ? 4 : 12;
 					htmlTools.getRowHeight(tbl, padding);
+					// after colWidth, rowHeight!
+					tbl = htmlTools.purgeTable(tbl);
 				}
-				let html = '<table>' + tbl.innerHTML + '</table>';
+				const dateLocale = locale.$DateLocale || locale.$Locale;
+				const numLocale = locale.$NumberLocale || locale.$Locale;
+				let html = `<table data-num-locale="${numLocale}" data-date-locale="${dateLocale}">${tbl.innerHTML}</table>`;
 				let data = { format, html, fileName, zoom: +(window.devicePixelRatio).toFixed(2) };
 				const routing = require('std:routing');
 				let url = `${root}/${routing.dataUrl()}/exportTo`;
@@ -14259,9 +14580,8 @@ Vue.directive('resize', {
 					this.$save().then(() => {
 						doReport();
 					});
-				} else {
+				} else
 					doReport();
-				}
 			},
 
 			$modalSaveAndClose(result, opts) {
@@ -14326,9 +14646,10 @@ Vue.directive('resize', {
 			},
 
 			$showHelp(path) {
-				window.open(this.$helpHref(path), "_blank");
+				if (window.$$helpWindow && !window.$$helpWindow.closed)
+					window.$$helpWindow.close();
+				window.$$helpWindow = window.open(this.$helpHref(path), "_blank");
 			},
-
 			$helpHref(path) {
 				return urltools.helpHref(path);
 			},
@@ -14339,7 +14660,7 @@ Vue.directive('resize', {
 				this.$reload();
 			},
 
-			$saveModified(message, title) {
+			$saveModified(message, title, validRequired) {
 				if (!this.$isDirty)
 					return true;
 				if (this.isIndex)
@@ -14368,8 +14689,12 @@ Vue.directive('resize', {
 						closeImpl(false);
 					} else if (result === 'save') {
 						// save then close
+						if (validRequired && self.$data.$invalid) {
+							let errs = makeErrors(self.$data.$forceValidate());
+							self.$alert(locale.$MakeValidFirst, undefined, errs);
+							return false;
+						}
 						self.$save().then(function (saveResult) {
-							//console.dir(saveResult);
 							closeImpl(saveResult);
 						});
 					}
@@ -14634,12 +14959,15 @@ Vue.directive('resize', {
 					$focus: this.$focus,
 					$report: this.$report,
 					$upload: this.$upload,
+					$file: this.$file,
 					$emitCaller: this.$emitCaller,
 					$emitSaveEvent: this.$emitSaveEvent,
 					$emitGlobal: this.$emitGlobal,
 					$emitParentTab: this.$emitParentTab,
 					$nodirty: this.$nodirty,
-					$showSidePane: this.$showSidePane
+					$showSidePane: this.$showSidePane,
+					$hideSidePane: this.$hideSidePane,
+					$longOperation: this.$longOperation
 				};
 				Object.defineProperty(ctrl, "$isDirty", {
 					enumerable: true,
@@ -14785,7 +15113,7 @@ Vue.directive('resize', {
 
 	app.components['baseController'] = base;
 })();
-// Copyright © 2020-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2020-2022 Oleksandr Kukhtin. All rights reserved.
 
 /*20220816-7880*/
 /* controllers/navmenu.js */
@@ -15374,9 +15702,9 @@ Vue.directive('resize', {
 
 	app.components['std:appHeader'] = a2AppHeader;
 })();	
-// Copyright © 2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2021-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20210608-7782*/
+/*20240201-7959*/
 /* controllers/mainview.js */
 
 (function () {
@@ -15454,7 +15782,7 @@ Vue.directive('resize', {
 		store,
 		template: `
 <div :class=cssClass class=main-view>
-	<component :is=navBarComponent :title=title :menu=menu v-if=isNavBarVisible 
+	<component :is=navBarComponent :menu=menu v-if=isNavBarVisible 
 		:period=period :is-navbar-menu=isNavBarMenu></component>
 	<component :is=sideBarComponent v-if=sideBarVisible :menu=menu :mode=sideBarMode></component>
 	<a2-content-view :pages=pages></a2-content-view>
@@ -15681,9 +16009,10 @@ Vue.directive('resize', {
 
 				if (dlg.attrs.canClose) {
 					let canResult = dlg.attrs.canClose();
-					//console.dir(canResult);
+
 					if (canResult === true)
 						closeImpl(result);
+
 					else if (canResult.then) {
 						result.then(function (innerResult) {
 							if (innerResult === true)

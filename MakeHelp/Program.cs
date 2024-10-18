@@ -1,4 +1,4 @@
-﻿// Copyright © 2012-2018 Alex Kukhtin. All rights reserved.
+﻿// Copyright © 2012-2024 Oleksandr Kukhtin. All rights reserved.
 
 using System;
 using System.IO;
@@ -23,7 +23,7 @@ namespace MakeHelp
 			hp.MakeContent(dir + "\\content.txt");
 
 			String jsFile = hp.MakeJsFile();
-			String contentFileName = $"{dir}\\app\\content.js";
+			String contentFileName = Path.Combine(dir, "app\\content.js");
 			Console.WriteLine();
 			Console.WriteLine($"Generating content file: {contentFileName}");
 			File.WriteAllText(contentFileName, jsFile);

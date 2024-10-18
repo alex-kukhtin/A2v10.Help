@@ -1,4 +1,4 @@
-﻿// Copyright © 2012-2018 Alex Kukhtin. All rights reserved.
+﻿// Copyright © 2012-2024 Oleksandr Kukhtin. All rights reserved.
 
 using System;
 using System.Configuration;
@@ -43,12 +43,15 @@ namespace MakeHelp
 				AddFilesFromDirectory(za, "css");
 				AddFilesFromDirectory(za, "scripts");
 				AddFilesFromDirectory(za, "html");
+				AddFilesFromDirectory(za, "img");
 			}
 		}
 
 		void AddFilesFromDirectory(ZipArchive za, String dir)
 		{
 			String srcDir = Path.Combine(_dirName, dir);
+			if (!Directory.Exists(srcDir))
+				return;
 			foreach (var f in Directory.GetFiles(srcDir))
 			{
 				String fn = Path.GetFileName(f);

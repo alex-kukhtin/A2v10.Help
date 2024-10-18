@@ -16,11 +16,12 @@
 */
 /* mixins */
 /* icon colors */
+/* free: e920, e921, e92b, e92c */
 @font-face {
   font-family: 'A2v10';
   font-display: fallback;
   src: url('/css/fonts/A2v10.eot');
-  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7946') format('woff'), url('/css/fonts/A2v10.ttf?v=7946') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
+  src: url('/css/fonts/A2v10.eot?#iefix') format('eot'), url('/css/fonts/A2v10.woff?v=7970') format('woff'), url('/css/fonts/A2v10.ttf?v=7970') format('truetype'), url('/css/fonts/A2v10.svg#A2v10') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -177,8 +178,14 @@
 .ico-disapprove:before {
   content: "\e937";
 }
+.ico-calendar-today:before {
+  content: "\e93c";
+}
 .ico-calendar:before {
   content: "\e93d";
+}
+.ico-calendar-week:before {
+  content: "\e93e";
 }
 .ico-call:before {
   content: "\ea19";
@@ -351,6 +358,12 @@
 .ico-rename:before {
   content: "\e953";
 }
+.ico-edit-undo:before {
+  content: "\e947";
+}
+.ico-edit-redo:before {
+  content: "\e948";
+}
 .ico-pencil:before {
   content: "\e949";
 }
@@ -386,6 +399,10 @@
 }
 .ico-failure-red:before {
   content: "\ea04";
+  color: #e41400 !important;
+}
+.ico-failure-outline-red:before {
+  content: "\ea05";
   color: #e41400 !important;
 }
 .ico-file:before {
@@ -448,6 +465,9 @@
 }
 .ico-folder-outline:before {
   content: "\e95a";
+}
+.ico-folder-move-to:before {
+  content: "\e957";
 }
 .ico-folders-outline:before {
   content: "\e959";
@@ -625,6 +645,10 @@
 .ico-info-outline:before {
   content: "\ea09";
 }
+.ico-info-outline-blue:before {
+  content: "\ea09";
+  color: #1ba1e2 !important;
+}
 .ico-paste:before {
   content: "\e94e";
 }
@@ -637,6 +661,10 @@
 }
 .ico-success-outline:before {
   content: "\ea13";
+}
+.ico-success-outline-green:before {
+  content: "\ea13";
+  color: #16cd16 !important;
 }
 .ico-waiting:before {
   content: "\ea15";
@@ -657,6 +685,10 @@
 }
 .ico-warning-outline:before {
   content: "\ea17";
+}
+.ico-warning-outline-yellow:before {
+  content: "\ea17";
+  color: #ffcc00 !important;
 }
 .ico-trash:before {
   content: "\e992";
@@ -1359,6 +1391,12 @@ kbd {
   box-shadow: 1px 1px 1px 0 #999;
   background-color: #f8f8f8;
 }
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 html {
   font-family: system, 'Segoe UI', Tahoma, Verdana, sans-serif;
   font-size: 13px;
@@ -1947,6 +1985,8 @@ header .include.nav-pane .partial-block .control-group,
 }
 .taskpad.collapsed {
   background-color: #f9f9f9;
+  width: 36px;
+  padding: 0 !important;
 }
 .taskpad.collapsed .taskpad-collapse-handle:before {
   content: "\e9ab";
@@ -2044,6 +2084,26 @@ header .include.nav-pane .partial-block .control-group,
 }
 .a2-file-upload .file-upload .upload-tip {
   padding-bottom: 0.2rem;
+}
+.a2-file-preview {
+  display: flex;
+  flex-direction: row;
+}
+.a2-file-preview img {
+  object-fit: contain;
+  object-position: 0 0;
+}
+.a2-file-preview .no-preview {
+  width: 100%;
+  text-align: center;
+  align-self: center;
+  color: #ccc;
+}
+.a2-file-preview .no-preview .ico {
+  font-size: 4rem;
+  color: #ccc;
+  display: block;
+  margin: 0 0 20px 0;
 }
 .a2-simple-upload {
   display: block;
@@ -2476,6 +2536,12 @@ pre.a2-code {
 .control-group.lg {
   font-size: 1.3rem;
 }
+.control-group.sm {
+  font-size: 0.9rem;
+}
+.control-group.no-border .input-group {
+  border: none;
+}
 .control-group.with-width .input-group {
   width: 100%;
 }
@@ -2587,6 +2653,9 @@ pre.a2-code {
 .control-group.disabled a:not(.rendershow) {
   pointer-events: none;
   opacity: 0.5;
+}
+.control-group.disabled .selector-combo {
+  pointer-events: none;
 }
 .data-grid .control-group {
   margin: 0;
@@ -3589,6 +3658,7 @@ table.data-grid > tbody > tr.bold > td {
 }
 .data-grid-container.fixed-header > .data-grid-body.fixed-header > table > thead {
   height: 0;
+  position: unset;
 }
 .data-grid-container.fixed-header > .data-grid-body.fixed-header > table > thead > tr > th {
   border-top-style: none;
@@ -4936,10 +5006,11 @@ ul.news-list > li {
 .toastr-stack .list-enter,
 .toastr-stack .list-leave-to {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(3px);
 }
 .toastr-stack .list-leave-active {
   position: absolute;
+  width: 320px;
 }
 table th {
   border: 1px solid #ddd;
@@ -5231,6 +5302,9 @@ table.hover > tbody > tr.active:hover {
 .a2-sticky-container {
   overflow: auto;
 }
+.a2-sticky-container tr {
+  scroll-margin-top: 35px;
+}
 table.a2-table.sticky {
   width: 100%;
 }
@@ -5350,7 +5424,7 @@ label.radio span::before,
 label.radio span::after {
   border-radius: 50%;
 }
-input[type="checkbox"],
+input[type="checkbox"]:not(.switch),
 input[type="radio"] {
   opacity: 0;
   z-index: 1;
@@ -5363,17 +5437,17 @@ input[type="radio"] {
   left: 2px;
   top: 2px;
 }
-input[type="checkbox"]:disabled + span,
+input[type="checkbox"]:not(.switch):disabled + span,
 input[type="radio"]:disabled + span {
   cursor: not-allowed;
   color: #aaa;
 }
-input[type="checkbox"]:disabled + span::before,
+input[type="checkbox"]:not(.switch):disabled + span::before,
 input[type="radio"]:disabled + span::before {
   border-color: #aaa;
   background-color: #f9f9f9;
 }
-input[type="checkbox"]:disabled + span::after,
+input[type="checkbox"]:not(.switch):disabled + span::after,
 input[type="radio"]:disabled + span::after {
   color: #aaa;
   border-color: transparent;
@@ -5429,6 +5503,44 @@ label.checkbox.small span:before {
 }
 label.checkbox.small span:after {
   transform: scale(0.9, 0.9);
+}
+label.switchbox {
+  display: inline-block;
+  cursor: pointer;
+  padding: 2px 0;
+  line-height: 14px;
+  white-space: nowrap;
+}
+label.switchbox > span {
+  padding: 0 6px;
+}
+label.switchbox input.switch {
+  cursor: pointer;
+  width: 2.125em;
+  height: 1.25em;
+  border-radius: 1em;
+  appearance: none;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  vertical-align: -4px;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3.5' fill='rgba(255, 255, 255, 0.99)'/></svg>");
+  background-color: #ddd;
+  background-repeat: no-repeat;
+  background-position: left center;
+  transition: background-color 0.2s ease 0s, background-position 0.2s linear 0s;
+}
+label.switchbox input.switch:checked {
+  background-position: right center;
+  background-color: #208cf8;
+}
+label.switchbox input.switch:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
+}
+label.switchbox input.switch:disabled + span {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 .a2-pager {
   padding: 8px 6px 2px 0;
@@ -5498,6 +5610,10 @@ TODO:
   min-width: 160px;
   box-shadow: 3px 3px 10px 0 rgba(174, 174, 174, 0.5), 0 5px 40px 0 rgba(0, 0, 0, 0.15);
   border: 1px solid #ddd;
+}
+.menu.menu-columns {
+  column-rule: 1px solid #ddd;
+  column-gap: 0.5rem;
 }
 .menu .dropdown-item {
   display: flex;
@@ -6529,6 +6645,9 @@ table.sheet td.indent.lev-3 {
 table.sheet td.indent.lev-4 {
   padding-left: 42px;
 }
+table.sheet td.indent.lev-5 {
+  padding-left: 54px;
+}
 table.sheet .col-shadow {
   visibility: collapse;
   display: none;
@@ -7257,6 +7376,17 @@ table.tree-grid a.toggle.expanded:after {
 }
 .color-picker .caret {
   margin: 3px 3px 0 6px;
+}
+.color-picker.disabled .color-picker-wrapper {
+  pointer-events: none;
+}
+.color-picker.disabled .caret {
+  opacity: 0.5;
+}
+.color-picker.drop-up .color-picker-pane {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 2px;
 }
 .debug-panel {
   position: absolute;

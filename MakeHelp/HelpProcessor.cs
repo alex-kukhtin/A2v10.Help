@@ -68,12 +68,12 @@ namespace MakeHelp
 	{
 		const String HTML = "*.html";
 
-		List<FileInfo> _files = new List<FileInfo>();
+		readonly List<FileInfo> _files = new List<FileInfo>();
 
-		SortedFileDictionary _keywords = new SortedFileDictionary();
-		FileDictionary _fts = new FileDictionary();
+		readonly SortedFileDictionary _keywords = new SortedFileDictionary();
+		readonly FileDictionary _fts = new FileDictionary();
 
-		ContentItem _content = new ContentItem();
+		readonly ContentItem _content = new ContentItem();
 
 		public Boolean HasErrors { get; set; }
 
@@ -214,9 +214,8 @@ namespace MakeHelp
 		public void MakeContent(String fileName)
 		{
 			StringBuilder sitemap = new StringBuilder();
-			var host = ConfigurationManager.AppSettings["host"];
-			if (host == null)
-				throw new InvalidOperationException("appSettings/host not defined");
+			var host = ConfigurationManager.AppSettings["host"] 
+				?? throw new InvalidOperationException("appSettings/host not defined");
 			try
 			{
 				foreach (var ln in File.ReadAllLines(fileName))
@@ -306,9 +305,8 @@ namespace MakeHelp
 		public void WriteBundleWebCompiler(String dirName)
 		{ 
 			var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			var bmPath = ConfigurationManager.AppSettings["bundlerMinifier"];
-			if (bmPath == null)
-				throw new ConfigurationErrorsException("Bundler path is not specified in app.config");
+			var bmPath = ConfigurationManager.AppSettings["bundlerMinifier"] 
+				?? throw new ConfigurationErrorsException("Bundler path is not specified in app.config");
 			String bundlerPath = Path.Combine(appDataPath, bmPath);
 
 			//@"Microsoft\VisualStudio\15.0_1705bee0\Extensions\lh1eakt1.nnl\BundlerMinifierConsole.exe");
