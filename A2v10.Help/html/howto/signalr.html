@@ -1,0 +1,208 @@
+﻿<div>
+	<!--title:Імпорт даних з Excel-->
+	<div class="title">
+		<h1>
+			SignalR
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Як зробити</a>
+		</div>
+	</div>
+
+	<h3>Як працює SignalR</h3>
+	<p>
+		Якщо в дії model.json вказано signal:true, то в результаті виконується пошук обєкту
+		Signal: {
+		UserId: 22,
+		Message: '',
+		Data: {
+		}
+		}
+		Якщо такий обєкт існує, то відповідному користувачу надсилається повідомлення SingalR.
+		В шині eventBus з'явиться event з ім'ям 'Signal.${Message}' та з відповідними даними (Data).
+		Десь в коді має бути підписка на цій event
+
+
+		Наприклад в процедурі виконується код:
+
+		select [Signal!TSignal!Object] = null, [User] = @UserId, [Message] = N'notify.reload';
+
+		а десь в коді є:
+
+		events: {
+			'Signal.notify.reload': notifyReload
+		}
+	</p>
+
+	<p>Фрагмент файлу <b>index.view.xaml</b></p>
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Toolbar>
+	<Button Icon="FileImport" Content="@[Import]"
+			Command="{BindCmd Dialog, Action=Show, Url='/catalog/product/import'}"
+			Toolbar.Align="Right" />
+</Toolbar>
+</script>
+</pre>
+
+	<p>Кнопка просто викликає діалог import.</p>
+
+	<h3>Діалог імпорту і його шаблон</h3>
+
+	<p>
+		Не забудемо вказати
+		цей діалог в файлі <span class="file-name">/catalog/product/model.json</span>.
+	</p>
+
+	<p>Фрагмент файлу <span class="file-name">model.json</span></p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	"dialogs": {
+		"import": {
+			"model": "",
+			"template": "import.template",
+			"view": "import.dialog"
+		}
+	}
+}
+</script>
+</pre>
+
+	<p>
+		Модель даних для цього діалога нам не потрібна, тому вказуємо пустий рядок у
+		властивості <code>model</code>. Можливі інші сценарії, які, наприклад, будуть спочатку
+		відображати імпортовані записи. У цьому випадку модель буде потрібна.
+	</p>
+	<p>
+		В усьому іншому це стандартний діалог платформи.
+		При його роботі використовується шаблон <code>import.template</code>
+	</p>
+
+	<p>Фрагмент файлу <b>import.dialog.xaml</b></p>
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Dialog>
+	<UploadFile Url="/catalog/product/import" Delegate="uploadFile"
+				Accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+	<Hyperlink Content="@[File.Sample]" Margin="1rem,0" Block="True"
+			   Command="{BindCmd Command=Download, Url='/entity_import_sample.xlsx'}" />
+</Dialog>
+</script>
+</pre>
+	<p>
+		У цьому діалозі цікаві два елементи керувння.
+		В першу чергу <a class="code-link" href="/xaml/controls/uploadfile">UploadFile</a>.
+		Цей елемент виведе на екран поле для завантаження файлу (кліком або перетягуваням).
+		Вміст обраного файлу буде відправлено на сервер і буде оброблятися командою
+		<code>/catalog/product/import</code> з розділу <b>files</b> файлу <span class="file-name">model.json</span>.
+		Після завантаження і обробки файлу буде викликаний делегат, який вказано у властивості <code>Delegate</code>.
+	</p>
+	<p>
+		Другий елемент керування - посилання, яке дозволить користувачу завантажити зразок файлу для завантаження.
+		Команда <a class="code-link" href="/xaml/bind/bindcmd">Download</a> дозволяє завантажити файл
+		з спеціальної папки <a class="code-link" href="/app/folders/files">_files</a>.
+	</p>
+
+	<h3>Обробка файлу на сервері</h3>
+	<p>Після завантаження файла на сервер буде викликана команда з розділу <b>files</b> файлу <span class="file-name">model.json</span></p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+{
+	"files": {
+		"import": {
+			"type": "parse",
+			"parse": "xlsx",
+			"model": "Product.Import"
+		}
+	}
+}
+</script>
+</pre>
+	<p>
+		Тип команди <code>parse</code> говорить про те, що файл необхідно розібрати, а вид обробки <code>parse</code>
+		про те, що система очікує файл Microsoft Excel.
+	</p>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Обробляються тільки файли формата <b>.xlsx</b> (Excel 2007 і новіші версії).
+		Старі версії таблиць у форматі <b>.xls</b> не підтримуються.
+	</p>
+
+	<p>
+		Після того, як система отримає файл від клієнта, вона намагатиметься його розібрати і
+		отримати з нього просту таблицю. Якщо в команді вказана модель (властивість <b>model</b>, то
+		створюється об`єкт з єдиною властивістю <b>Rows</b> (ім'я попередньо визначене!), що являє собою масив рядків з файла Excel.
+
+		Після цього система намагатиметься <a href="/models/update">зберігти цей об`єкт як стандартну модель</a>, викликавши процедури
+		<b>.Metadata</b> та <b>.Update</b>.
+	</p>
+
+	<p>В результаті обробки на клієнті буде повернуто модель, яка повернеться з процедури <b>.Update</b>.</p>
+
+	<p>
+		Зі збереженими процедурами і типами даних можна ознайомитися, переглянувши файл
+		<a target="_blank" class="file-name" href="https://github.com/alex-kukhtin/A2v10.Web.Sample/blob/master/App_application/sample/catalog/product/import.sql">import.sql</a>
+	</p>
+
+	<h3>Оповіщення викликаючого кода</h3>
+	<p>
+		Після того, як дані будуть імпортовані в базу даних, необхідно мати якийсь спосіб оповістити про це викликаючий код.
+	</p>
+	<p>
+		Для цього простіше за все використовувати користувацькі події. В обробнику події <b>Model.load</b> діалогу
+		можна зберігти у змінній посилання на викликаючий контекст. В делегаті, який буде викликаний
+		після завершення завантаження, можна ініціювати подію в викликаючому контексті.
+	</p>
+
+	<p>Фрагмент файлу шаблону діалогу <span class="file-name">import.template.ts</span></p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+
+let indexPage;
+
+const template: ~Template = {
+	events: {
+		"Model.load": modelLoad,
+	},
+	delegates: {
+		uploadFile
+	}
+}
+
+export default template;
+
+function modelLoad(root, caller) {
+	indexPage = caller;
+}
+
+function uploadFile(result) {
+	indexPage?.$emit('$product.import.done');
+}
+</script>
+</pre>
+	<p>При отриманні події <b>$product.import.done</b> сторінка індекса просто перезавантажується.</p>
+
+	<p>Фрагмент файлу шаблону діалогу <span class="file-name">import.template.ts</span></p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+const template: Template = {
+	events: {
+		'$product.import.done': function(this: IRoot) {
+			this.$ctrl.$reload();
+		}
+	}
+}
+
+export default template;
+</script>
+</pre>
+
+	<h3>Порада</h3>
+	<p>
+		Для того, щоб виконати імпорт даних з одного контекста (в цьому випадку події будуть не потрібні),
+		можна використовувати елемент керування <a href="/xaml/containers/inlinedialog">InlineDialog</a>.
+	</p>
+	<p>Реалізацію цього способу залишимо як вправу.</p>
+</div>
