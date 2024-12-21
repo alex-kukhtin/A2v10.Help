@@ -1,9 +1,9 @@
 ﻿<div>
-	<!--title:Що нового. Жовтень 2024-->
+	<!--title:Що нового. Грудень 2024-->
 	<!--keywords:Що нового-->
 	<div class="title">
 		<h1>
-			Випуск 45 - версії 7961-7971 (Жовтень 2024)
+			Випуск 44 - версії 7961-7971 (Грудень 2024)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Всі випуски</a>|
@@ -13,16 +13,26 @@
 	</div>
 
 	<!--
-	 
- 
-		Icon: EditUndo/EditRedo, CalendarWeek, CalendarToday, FolderMoveTo
+
+		Bind DateTime2,
+
+		TreeViewItem.IsFolder2
+		TreeViewItem.IsGroup binding
+
+		Components/Component control
+		ColorComboBox control
+		DataGridColumn.CheckAll
+		DataGridColumn.MinWidth
+		BindCmdExec, BindSum, BindNumber
+
+		utils.int2time, time2int
+
+		arrayItem.$move, $canMove
+		ctrl.$savePartial
 
 		PropertyGrid.NameMaxChars, ValueMaxChars, PropertyGridItem.NameMaxChars, ValueMaxChars
 
-		DataGridColumn.CheckAll
-		ColorComboBox control
 		Dialog.HeaderMenu
-		Components/Component control
 		ListItemSimple - new element
 		Lazy
 
@@ -33,10 +43,6 @@
 		SheetColumnCollection, TableColumnCollection -> Convertor
 		Card - зробити приклад
 
-		ComboBoxItem.Bold (binding)
-
-		arrayItem.$move, $canMove
-		ctrl.$savePartial
 
 		signalR (CORE ONLY!). - команда типа signal - просто отправляет юзеру
 			signal: 'true' - выбирает из результата Signal: {User: 99, Message: "message", Data: {}}
@@ -71,7 +77,6 @@
 		<li>%%%TRoot додано метод <code>$createModelInfo</code>.</li>
 		<li>%%%IElementArray додано метод <code>$lockUpdate</code>.</li>
 
-		TreeViewItem.IsGroup binding
 
 		BindCmd Toast, Permission, Viewer
 		Bind.Format for Number, Currency
@@ -113,6 +118,14 @@
 			В перечислення <a class="code-link" href="/xaml/enums/icon">Icon</a> додано нові
 			іконки <code>EditUndo</code>, <code>EditRedo</code>, <code>FolderMoveTo</code>, <code>CalendarWeek</code>.
 			<code>CalendarToday</code>
+		</li>
+		<li>
+			В елемент управління <a class="code-link" href="/xaml/controls/comboboxitem">ComboBoxItem</a> додано
+			властивість <code>Bold</code>.
+		</li>
+		<li>
+			В елемент управління <a class="code-link" href="/xaml/controls/selector">Selector</a> додано
+			властивість <code>UseAll</code>.
 		</li>
 	</ul>
 </div>

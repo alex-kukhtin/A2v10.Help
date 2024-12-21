@@ -19,7 +19,8 @@ const template = {
   'validators': {},
   'events':     {},
   'commands':   {},
-  'delegates':  {}
+  'delegates':  {},
+  'utils':      {}
 }
 
 module.exports = template; /*експорт шаблону з поточного модуля*/
@@ -72,6 +73,11 @@ module.exports = template; /*експорт шаблону з поточного
 				<td class="prop-name">delegates</td>
 				<td><a href="delegates">delegates</a></td>
 				<td>Об'єкт, що описує делегати (функції зворотнього виклику, callback functions), необхідні для роботи моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">utils</td>
+				<td>Object</td>
+				<td>Довільний об'єкт. Корисно для mergeTemplate.</td>
 			</tr>
 		</tbody>
 	</table>

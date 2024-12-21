@@ -79,6 +79,8 @@ interface ~UtilsDate {
 	formatDate(d: number | Date): string;
 	parse(str: string): Date;
 	tryParse(str: string): Date | string;
+	int2time(val: number): string;
+	time2int(time: string): number;
 }
 
 interface ~UtilsText {
