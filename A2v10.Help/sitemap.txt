@@ -230,8 +230,8 @@ https://docs.a2v10.com/client/global
 https://docs.a2v10.com/client/global_require
 https://docs.a2v10.com/server/index
 https://docs.a2v10.com/server/javascript
-https://docs.a2v10.com/desktop/index
-https://docs.a2v10.com/desktop/config
+https://docs.a2v10.com/deploy/index
+https://docs.a2v10.com/deploy/appsettings
 https://docs.a2v10.com/workflow/index
 https://docs.a2v10.com/workflow/activities/index
 https://docs.a2v10.com/workflow/activities/request

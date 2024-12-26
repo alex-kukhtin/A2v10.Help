@@ -251,8 +251,8 @@
 Програмування на сервері	/server/index
 	Javascript		/server/javascript
 
-Настільні програми			/desktop/index
-	Файл app.config.json		/desktop/config
+Встановлення програм			/deploy/index
+	Файл appsettings.json		/deploy/appsettings
 
 Бізнес-процеси			/workflow/index
 	Активності			/workflow/activities/index

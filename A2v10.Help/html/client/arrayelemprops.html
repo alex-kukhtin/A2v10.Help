@@ -16,6 +16,12 @@
 <pre class="code-highlight js" data-lang="js">
 <script type="text/template">
 <![CDATA[
+
+declare const enum MoveDir {
+	up = 'up',
+	down = 'down'
+}
+
 interface IArrayElement extends IElement {
 	// properties
 	readonly $parent: IElementArray<IElement>;
@@ -23,6 +29,9 @@ interface IArrayElement extends IElement {
 	$checked: boolean;
 	// methods
 	$remove(): void;
+	$select(root?: IElementArray<IElement>): void;
+	$move(dir: MoveDir): void;
+	$canMove(dir: MoveDir): boolean;
 }
 ]]>
 </script>
@@ -55,6 +64,26 @@ interface IArrayElement extends IElement {
 		<div class="syntax"><pre class="code-highlight js">$remove(): void</pre></div>
 		<p>
 			Видаляє елемент з батьківського масиву.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$select(root?: IElementArray&lt;IElement&gt;): void</pre></div>
+		<p>
+			Виділяє елемент. Ініш виделені елементи скидуються. Якщо виділення в дереві, то потрібно передати
+			в якості аргумента корень дерева.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$move(dir: MoveDir): void</pre></div>
+		<p>
+			Переміщує елемент в масиві в заданому напрямку. Повертає сам елемент.
+		</p>
+	</div>
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">$canMove(dir: MoveDir): boolean</pre></div>
+		<p>
+			Чи можливо перемістити елемент в заданому напрямку. 
+				Фактично повертає false для першого елементу при переміщенні догори, та для останньго елементу при переміщенні вниз.
 		</p>
 	</div>
 </div>

@@ -103,8 +103,8 @@
     <Content Include="html\common\index.html" />
     <Content Include="html\app\redirect.html" />
     <Content Include="html\client\controller.html" />
-    <Content Include="html\desktop\config.html" />
-    <Content Include="html\desktop\index.html" />
+    <Content Include="html\deploy\appsettings.html" />
+    <Content Include="html\deploy\index.html" />
     <Content Include="html\help\about.html" />
     <Content Include="html\app\index.html" />
     <Content Include="html\howto\signalr.html" />
