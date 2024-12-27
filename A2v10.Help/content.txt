@@ -158,6 +158,7 @@
 		Прив'язки					/xaml/bind/index
 			Bind					/xaml/bind/bind
 			BindCmd					/xaml/bind/bindcmd
+			Components				/xaml/bind/components
 			StaticResource			/xaml/bind/staticresource
 			StyleResource			/xaml/bind/styleresource
 
@@ -165,6 +166,7 @@
 			Case					/xaml/components/case
 			CollectionView			/xaml/components/collectionview
 			Confirm					/xaml/components/confirm
+			Component				/xaml/components/component
 			Else					/xaml/components/else
 			FilterDescription		/xaml/components/filterdescription
 			Slot					/xaml/components/slot
@@ -181,6 +183,7 @@
 			Thickness		/xaml/simple/thickness
 			PrintPage		/xaml/simple/printpage
 			AccelCommandCollection		/xaml/simple/accelcommandcollection
+			ComponentDictionary			/xaml/simple/componentdictionary
 			UIElementCollection			/xaml/simple/uielementcollection
 			ResourceDictionary			/xaml/simple/resourcedictionary
 
