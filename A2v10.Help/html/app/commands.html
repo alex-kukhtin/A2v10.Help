@@ -23,7 +23,8 @@
   "procedure": "",
   "file": "",
   "clrType": "",
-  "parameters": {}
+  "parameters": {},
+  "signal": true|false
 }
 </script>
 </pre>
@@ -136,6 +137,13 @@
 				<td>
 					Команда буде виконуватися тільки в налагоджувальній конфигурації (
 					ключ <code>configuration</code> розділу <code>appSettings</code> має значення <b>"debug"</b>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">signal</td>
+				<td>boolean</td>
+				<td>
+					<span class="core-only">Тільки NET.Core</span> Відправити повідомлення SignalR. <a href="signalr">Детальніше...</a>.
 				</td>
 			</tr>
 		</tbody>

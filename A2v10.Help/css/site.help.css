@@ -721,3 +721,11 @@ header .lang {
     text-overflow: ellipsis;
   }
 }
+.core-only {
+  border: 1px solid deeppink;
+  font-size: 85%;
+  padding: 2px 6px;
+  border-radius: 8px;
+  color: white;
+  background-color: deeppink;
+}

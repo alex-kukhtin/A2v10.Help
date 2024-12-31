@@ -74,6 +74,7 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="html\app\signalr.html" />
     <Content Include="html\app\folders\emails.html" />
     <Content Include="html\app\folders\files.html" />
     <Content Include="html\app\folders\layout.html" />

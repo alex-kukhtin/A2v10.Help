@@ -9,4 +9,31 @@
 			<a href="index">Всі прості елементи</a>
 		</div>
 	</div>
+	<p>
+		Словник елементів, яки можуть використовуватися в якості <a class="code-link" href="/xaml/components/component">компоненту</a>.
+		Кожний елемент повинен мати ключ (x:Key).
+	</p>
+	<p>
+		Зверніть увагу, що для того, щоб використовувати ключ компоненту, потрібно включити в xaml відповідний <b>namespace</b>.
+	</p>
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML:
+<pre class="code-highlight xml">
+<script type="text/template">
+<![CDATA[
+<ComponentDictionary xmlns="clr-namespace:A2v10.Xaml;assembly=A2v10.Xaml"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<TextBox x:Key="Component1" Bold="True">
+		<TextBox.AddOns>
+			<Hyperlink />
+		</TextBox.AddOns>
+	</TextBox>
+</ComponentDictionary>
+]]>
+</script>
+</pre>
+	</p>
 </div>
