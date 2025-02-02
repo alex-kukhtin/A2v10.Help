@@ -1,6 +1,6 @@
-// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20220416-7838
+// 20250121-7976
 // app.js
 
 "use strict";
@@ -207,7 +207,7 @@ app.modules['std:const'] = function () {
 
 // Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20240909-7972
+// 20241221-7973
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -277,7 +277,7 @@ app.modules['std:utils'] = function () {
 			equal: dateEqual,
 			isZero: dateIsZero,
 			formatDate: formatDate,
-			format: formatDate,
+			format: formatDateWithFormat,
 			add: dateAdd,
 			diff: dateDiff,
 			create: dateCreate,
@@ -288,7 +288,9 @@ app.modules['std:utils'] = function () {
 			maxDate: dateCreate(2999, 12, 31),
 			fromDays: fromDays,
 			parseTime: timeParse,
-			fromServer: dateFromServer
+			fromServer: dateFromServer,
+			int2time,
+			time2int
 		},
 		text: {
 			contains: textContains,
@@ -530,18 +532,38 @@ app.modules['std:utils'] = function () {
 		return formatFunc(num);
 	}
 
+	function formatDateFormat2(date, format) {
+		if (!date) return '';
+		const parts = {
+			yyyy: date.getFullYear(),
+			yy: ('' + date.getFullYear()).substring(2),
+			MM: pad2(date.getMonth() + 1),
+			dd: pad2(date.getDate()),
+			HH: pad2(date.getHours()),
+			hh: pad2(date.getHours() > 12 ? date.getHours() - 12 : date.getHours()),
+			mm: pad2(date.getMinutes()),
+			ss: pad2(date.getSeconds()),
+			tt: date.getHours() < 12 ? 'AM' : 'PM'
+		};
+		return format.replace(/yyyy|yy|MM|dd|HH|hh|mm|ss|tt/g, (match) => parts[match]);
+	}
+
 	function formatDateWithFormat(date, format) {
 		if (!format)
 			return formatDate(date);
 		switch (format) {
+			case 'dd.MM':
+				return `${pad2(date.getDate())}.${pad2(date.getMonth() + 1)}`;
 			case 'ddMMyyyy':
 				return '' + pad2(date.getDate()) + pad2(date.getMonth() + 1) + date.getFullYear();
 			case 'dd.MM.yyyy HH:mm:ss':
 				return `${formatDate(date)}  ${formatTime2(date)}`;
+			case 'MM.yyyy':
+				return `${pad2(date.getMonth() + 1)}.${date.getFullYear()}`;
 			case 'MMMM yyyy':
 				return capitalize(date.toLocaleDateString(locale.$Locale, { month: 'long', year: 'numeric' }));
 			default:
-				console.error('invalid date format: ' + format);
+				return formatDateFormat2(date, format);
 		}
 		return formatDate(date);
 	}
@@ -1103,6 +1125,22 @@ app.modules['std:utils'] = function () {
 			'lightgray': '#cccccc'
 		};
 		return tagColors[style || 'null'] || '#8f94b0';
+	}
+
+	function int2time(val) {
+		if (!val) return '';
+		let h = Math.floor(val / 60), m = val % 60;
+		if (m < 10)
+			m = '0' + m;
+		return (h || m) ? `${h}:${m}` : '';
+	}
+
+	function time2int(val) {
+		let v = (val || '').split(':');
+		let h = v[0], m = 0;
+		if (v.length > 1)
+			m = v[1];
+		return +h * 60 + (+m);
 	}
 };
 
@@ -2519,9 +2557,9 @@ app.modules['std:validators'] = function () {
 
 
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20240227-7961*/
+/*20250202-7977*/
 /* services/impl/array.js */
 
 app.modules['std:impl:array'] = function () {
@@ -2899,7 +2937,7 @@ app.modules['std:impl:array'] = function () {
 		});
 
 		defPropertyGet(arr, "$hasChecked", function () {
-			return this.$checked && this.$checked.length;
+			return !!(this.$checked && this.$checked.length);
 		});
 	}
 
@@ -2961,9 +2999,9 @@ app.modules['std:impl:array'] = function () {
 	}
 };
 
-/* Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.*/
+/* Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.*/
 
-/*20240828-7971*/
+/*20250130-7977*/
 // services/datamodel.js
 
 /*
@@ -3149,6 +3187,7 @@ app.modules['std:impl:array'] = function () {
 		if (objname in props) {
 			for (let p in props[objname]) {
 				let propInfo = props[objname][p];
+				if (!propInfo) continue;
 				if (utils.isPrimitiveCtor(propInfo)) {
 					loginfo(`create scalar property: ${objname}.${p}`);
 					elem._meta_.props[p] = propInfo;
@@ -3174,6 +3213,7 @@ app.modules['std:impl:array'] = function () {
 		if (objname in props) {
 			for (let p in props[objname]) {
 				let propInfo = props[objname][p];
+				if (!propInfo) continue;
 				if (utils.isPrimitiveCtor(propInfo)) {
 					continue;
 				}
@@ -4017,6 +4057,8 @@ app.modules['std:impl:array'] = function () {
 		if (this.$root.$readOnly)
 			return;
 		this.$root.$emit('Model.dirty.change', val, `${path}.${prop}`);
+		if (this.$vm && this.$vm.isIndex)
+			return;
 		if (isNoDirty(this.$root))
 			return;
 		if (path && path.toLowerCase().startsWith('query'))
@@ -4945,7 +4987,7 @@ app.modules['std:routing'] = function () {
 	}
 };
 
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
 /*20210502-7773*/
 /* services/accel.js */
@@ -5498,7 +5540,7 @@ app.modules['std:barcode'] = function () {
 	app.components['control'] = control;
 
 })();
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Oleksandr Kukhtin. All rights reserved.
 
 /*20190226-7444*/
 /*components/validator.js*/
@@ -5604,9 +5646,9 @@ Vue.component('validator-control', {
     }
 });
 */
-// Copyright © 2015-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20230710-7939*/
+/*20241223-7973*/
 /*components/textbox.js*/
 
 /* password-- fake fields are a workaround for chrome autofill getting the wrong fields -->*/
@@ -5626,7 +5668,7 @@ Vue.component('validator-control', {
 				v-on:change="onChange($event.target.value)" 
 				v-on:input="onInput($event.target.value)"
 				v-on:keypress="onKey($event)"
-				:class="inputClass" :placeholder="placeholder" :disabled="disabled" :tabindex="tabIndex" :maxlength="maxLength" :spellcheck="spellCheck"/>
+				:class="inputClass" :placeholder="placeholder" :readonly="disabled" :tabindex="tabIndex" :maxlength="maxLength" :spellcheck="spellCheck"/>
 		<slot></slot>
 		<a class="a2-hyperlink add-on a2-inline" href="" @click.stop.prevent="dummy" v-if=hasFilter><i class="ico ico-filter-outline"></i></a>
 		<a class="a2-hyperlink add-on a2-inline" href="" @click.stop.prevent="dummy" v-if=searchVisible><i class="ico ico-search"></i></a>
@@ -5646,7 +5688,7 @@ Vue.component('validator-control', {
 			v-on:change="onChange($event.target.value)" 
 			v-on:input="onInput($event.target.value)"
 			v-on:keypress="onKey($event)"
-			:rows="rows" :class="inputClass" :placeholder="placeholder" :disabled="disabled" :tabindex="tabIndex" :maxlength="maxLength" :spellcheck="spellCheck"/>
+			:rows="rows" :class="inputClass" :placeholder="placeholder" :readonly="disabled" :tabindex="tabIndex" :maxlength="maxLength" :spellcheck="spellCheck"/>
 		<slot></slot>
 		<validator :invalid="invalid" :errors="errors" :options="validatorOptions"></validator>
 	</div>
@@ -7072,7 +7114,7 @@ Vue.component('validator-control', {
 
 // Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-/*20240429-7970*/
+/*20241223-7973*/
 // components/selector.js
 
 (function selector_component() {
@@ -7095,7 +7137,7 @@ Vue.component('validator-control', {
 		<div v-if="isCombo" class="selector-combo" @click.stop.prevent="open"><span tabindex="-1" class="select-text" v-text="valueText" @keydown="keyDown" ref="xcombo"/></div>
 		<input v-focus v-model="query" :class="inputClass" :placeholder="placeholder" v-else
 			@input="debouncedUpdate" @blur.stop="blur" @keydown="keyDown" @keyup="keyUp" ref="input" 
-			:disabled="disabled" @click="clickInput($event)" :tabindex="tabIndex"/>
+			:readonly="disabled" @click="clickInput($event)" :tabindex="tabIndex"/>
 		<slot></slot>
 		<a class="selector-open" href="" @click.stop.prevent="open" v-if="caret"><span class="caret"></span></a>
 		<a class="selector-clear" href="" @click.stop.prevent="clear" v-if="clearVisible" tabindex="-1">&#x2715</a>
@@ -7513,7 +7555,7 @@ Vue.component('validator-control', {
 })();
 // Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20240429-7970
+// 20241221-7975
 // components/datagrid.js*/
 
 (function () {
@@ -7649,6 +7691,7 @@ Vue.component('validator-control', {
 			mark: String,
 			controlType: String,
 			width: String,
+			minWidth:String,
 			fit: Boolean,
 			wrap: String,
 			command: Object,
@@ -8273,7 +8316,8 @@ Vue.component('validator-control', {
 			},
 			columnStyle(column) {
 				return {
-					width: utils.isDefined(column.width) ? column.width : undefined
+					width: utils.isDefined(column.width) ? column.width : undefined,
+					minWidth: utils.isDefined(column.minWidth) ? column.minWidth : undefined
 				};
 			},
 			doSort(order) {
@@ -8435,7 +8479,7 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Oleksandr Kukhtin. All rights reserved.
 
 // 20200625-7676
 /*components/pager.js*/
@@ -9516,7 +9560,7 @@ const maccel = require('std:accel');
 		},
 	});
 })();
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 // 20210704-7793
 // components/upload.js
@@ -10108,7 +10152,7 @@ TODO:
 	});
 })();
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
 // 20221002-7894
 // components/modal.js
@@ -10369,7 +10413,7 @@ TODO:
 
 	app.components['std:modal'] = modalComponent;
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Oleksandr Kukhtin. All rights reserved.
 
 // 20200819-7703
 // components/waitcursor.js
@@ -10391,7 +10435,7 @@ TODO:
 
 	Vue.component("wait-cursor", waitCursor);
 })();
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2018 Oleksandr Kukhtin. All rights reserved.
 
 
 /* 20181126-7373 */
@@ -10937,7 +10981,7 @@ TODO:
 		}
 	});
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Oleksandr Kukhtin. All rights reserved.
 
 // 20200108-7609
 // components/fileupload.js
@@ -11044,7 +11088,7 @@ TODO:
 		}
 	});
 })();
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
 // 20200111-7969
 // components/taskpad.js
@@ -11102,7 +11146,7 @@ Vue.component("a2-taskpad", {
 });
 
 
-// Copyright © 2015-2019 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2019 Oleksandr Kukhtin. All rights reserved.
 
 // 20190309-7488
 // components/panel.js
@@ -11554,7 +11598,7 @@ Vue.component('a2-panel', {
 	});
 
 })();
-// Copyright © 2015-2021 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
 
 // 20210208-7745
 // components/graphics.js
@@ -11611,43 +11655,153 @@ Vue.component('a2-panel', {
 	});
 })();
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20241005-7971
-// components/debug.js*/
+// 20250202-7977
+// components/browsejson.js*/
 
 (function () {
 
-    /**
-     */
+	let du = require('std:utils').date;
+
+	function getProps(root) {
+		const ff = (p) => {
+			if (p.startsWith('_')) return false;
+			let v = root[p];
+			if (typeof v === 'function') return false;
+			let c = v ? v.constructor : null;
+			if (c) c = c.constructor;
+			if (c && c.name === 'GeneratorFunction') return false;
+			return true;
+		};
+		const fm = (p) => {
+			let v = root[p];
+			let isDate = v instanceof Date;
+			let tof = typeof v;
+			return {
+				name: p,
+				value: v,
+				isObject: !isDate && tof === 'object' && !Array.isArray(v),
+				isArray: Array.isArray(v),
+				isDate: isDate,
+				isString: tof === 'string'
+			};
+		};
+		return Object.keys(root).filter(ff).map(fm);
+	}
+
+	const jsonItemTemplate = `
+		<li @click.stop.prevent="toggle">
+			<span class="jb-label">
+				<span v-text="chevron" class="jb-chevron"/>
+				<span class="jbp-overlay">
+					<span v-text="root.name" class="jbp-name"/>:
+					<span class="jbp-value" :class="valueClass">
+						<span v-text="valueText" />
+						<span v-if="isScalar" class="ico ico-edit jbp-edit" @click.stop.prevent="editValue"/>
+					</span>
+				</span>
+			</span>
+			<ul v-if="expanded">
+				<a2-json-browser-item v-if="!root.isScalar" v-for="(itm, ix) in items" :key=ix :root="itm"></a2-json-browser-item>
+			</ul>
+		</li>
+	`;
+
+	const jsonTreeItem = {
+		template: jsonItemTemplate,
+		name: 'a2-json-browser-item',
+		props: {
+			root: Object
+		},
+		data() {
+			return {
+				expanded: false
+			};
+		},
+		methods: {
+			toggle() {
+				if (this.root.isString) return;
+				this.expanded = !this.expanded;
+			},
+			editValue() {
+				let n = this.root.name;
+				let parentVal = this.$parent.root.value;
+				//parentVal[n] = null;
+			}
+		},
+		computed: {
+			isScalar() {
+				return !this.root.isObject && !this.root.isArray;
+			},
+			chevron() {
+				// \u2003 - em-space
+				return (this.isScalar || this.root.isDate) ? '\u2003' : this.expanded ? '⏷' : '⏵';
+			},
+			valueText() {
+				let r = this.root;
+				if (r.isObject)
+					return r.value.constructor.name; // "Object";
+				else if (r.isArray) {
+					let ename = '';
+					if (r.value && r.value._elem_)
+						ename = r.value._elem_.name;
+					return `${ename}Array(${r.value.length})`;
+				}
+				else if (r.isString)
+					return `"${r.value}"`;
+				else if (r.isDate)
+					return du.isZero(r.value) ? 'null' : JSON.stringify(r.value);
+				return r.value;
+			},
+			valueClass() {
+				let cls = '';
+				if (this.root.isString)
+					cls += ' jbp-string';
+				else if (this.root.isObject || this.root.isArray)
+					cls += ' jbp-object';
+				return cls;
+			},
+			items() {
+				return getProps(this.root.value);
+			}
+		}
+	};
+
+
+	const browserTemplate = `
+	<ul class="a2-json-b">
+		<a2-json-browser-item v-for="(itm, ix) in items" :key=ix :root="itm"></a2-json-browser-item>
+	</ul>
+	`;
+
+	Vue.component('a2-json-browser', {
+		template: browserTemplate,
+		components: {
+			'a2-json-browser-item': jsonTreeItem
+		},
+		props: {
+			root: Object
+		},
+		computed: {
+			items() {
+				return getProps(this.root);
+			}
+		}
+	});
+})();
+
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
+
+// 20250202-7977
+// components/debug.js*/
+
+(function () {
 
 	const http = require('std:http');
 	const urlTools = require('std:url');
 	const eventBus = require('std:eventBus');
 	const locale = window.$$locale;
-	const utils = require('std:utils');
-
-	const isZero = utils.date.isZero;
-
-	const specKeys = {
-		'$vm': null,
-		'$ctrl': null,
-		'$host': null,
-		'$root': null,
-		'$parent': null,
-		'$items': null
-	};
-
-	function toJsonDebug(data) {
-		return JSON.stringify(data, function (key, value) {
-			if (key[0] === '$')
-				return !(key in specKeys) ? value : undefined;
-			else if (key[0] === '_')
-				return undefined;
-			if (isZero(this[key])) return null;
-			return value;
-		}, 2);
-	}
 
 	const traceItem = {
 		name: 'a2-trace-item',
@@ -11684,7 +11838,7 @@ Vue.component('a2-panel', {
 		<button class="btn btn-tb" @click.prevent="toggle"><i class="ico" :class="toggleIcon"></i></button>
 	</div>
 	<div class="debug-model debug-body" v-if="modelVisible">
-		<pre class="a2-code" v-text="modelJson()"></pre>
+		<a2-json-browser :root="modelRoot()"></a2-json-browser>
 	</div>
 	<div class="debug-trace debug-body" v-if="traceVisible">
 		<ul class="a2-debug-trace">
@@ -11736,17 +11890,16 @@ Vue.component('a2-panel', {
 			},
 			panelClass() {
 				return this.left ? 'left' : 'right';
-			}
+			},
 		},
 		methods: {
-			modelJson() {
+			modelRoot() {
 				// method. not cached
 				if (!this.modelVisible)
-					return;
-				if (this.modelStack.length) {
-					return toJsonDebug(this.modelStack[0].$data);
-				}
-				return '';
+					return {};
+				if (this.modelStack.length)
+					return this.modelStack[0].$data;
+				return {};
 			},
 			refresh() {
 				if (this.modelVisible)
@@ -11795,7 +11948,7 @@ Vue.component('a2-panel', {
 	});
 })();
 
-// Copyright © 2015-2022 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
 
 // 20220906-7884
 // components/feedback.js*/
@@ -11907,7 +12060,7 @@ Vue.component('a2-panel', {
 	});
 })();
 
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
 // 20180821-7280
 // components/doctitle.js*/
@@ -11971,7 +12124,7 @@ Vue.component('a2-panel', {
 		}
 	});
 })();
-// Copyright © 2015-2020 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2020 Oleksandr Kukhtin. All rights reserved.
 
 // 20200930-7708
 // components/megamenu.js
@@ -12040,7 +12193,7 @@ Vue.component('a2-panel', {
 	});
 
 })();
-// Copyright © 2015-2018 Alex Kukhtin. All rights reserved.
+// Copyright © 2015-2018 Oleksandr Kukhtin. All rights reserved.
 
 // 20180605-7327
 // components/iframetarget.js*/
@@ -12243,9 +12396,9 @@ Vue.component('a2-panel', {
 	});
 })();
 
-// Copyright © 2022-2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2022-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230807-7941
+// 20241221-7971
 // components/dashboard.js
 
 (function () {
@@ -12269,8 +12422,12 @@ Vue.component('a2-panel', {
 	<div class="drag-host" ref=drag-host></div>
 	<div class=dashboard :style="{gridTemplateColumns: templateColumns, gridTemplateRows: templateRows}" ref=dash>
 		<div v-if="editable && !editMode" class="start-toolbar toolbar" 
-			:style="{'grid-column':cols + 1}" :class="{'no-items': !hasItems}">
+				:style="{'grid-column':cols + 1}" :class="{'no-items': !hasItems}">
 			<slot name="startbtn"></slot>
+		</div>
+		<div v-if="!editMode" class="main-toolbar"
+			:style="{'grid-column':cols + 1}">
+			<slot name="toolbar2"></slot>
 		</div>
 		<template v-for="ph in placeholders" v-if=editMode>
 			<a2-dashboard-placeholder v-show="placeholderVisible(ph.row, ph.col)"
@@ -12863,9 +13020,9 @@ Vue.component('a2-panel', {
 })();
 
 
-// Copyright © 2023 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2023-2024 Oleksandr Kukhtin. All rights reserved.
 
-// 20230809-7941
+// 20241028-7971
 // components/kanban.js
 
 (function () {
@@ -12873,7 +13030,7 @@ Vue.component('a2-panel', {
 	let kanbanTemplate = `
 <div class="kanban">
 	<div class="kanban-header kanban-part">
-		<div class=lane-header v-for="(lane, lx) in lanes" :key=lx>
+		<div class=lane-header v-for="(lane, lx) in lanes" :key=lx :class="laneClass(lane)">
 			<div class=lane-header-body>
 				<slot name=header v-bind:lane=lane></slot>
 			</div>
@@ -12881,10 +13038,11 @@ Vue.component('a2-panel', {
 		</div>
 	</div>
 	<div class="kanban-body kanban-part">
-		<div class=lane v-for="(lane, lx) in lanes" :key=lx @dragover=dragOver @drop="drop($event, lane)">
+		<div class=lane v-for="(lane, lx) in lanes" :key=lx @dragover="dragOver($event, lane)"
+				@drop="drop($event, lane)" :class="laneClass(lane)">
 			<ul class=card-list>
 				<li class=card v-for="(card, cx) in cards(lane)" :key=cx :draggable="true"
-						@dragstart="dragStart($event, card)">
+						@dragstart="dragStart($event, card)" @dragend=dragEnd>
 					<slot name=card v-bind:card=card></slot>
 				</li>
 			</ul>
@@ -12908,7 +13066,8 @@ Vue.component('a2-panel', {
 		},
 		data() {
 			return {
-				currentElem: null
+				currentElem: null,
+				laneOver: null
 			};
 		},
 		computed: {
@@ -12918,7 +13077,11 @@ Vue.component('a2-panel', {
 				let id = lane.$id;
 				return this.items.filter(itm => itm[this.stateProp].$id === id);
 			},
+			dragEnd() {
+				this.laneOver = null;
+			},
 			dragStart(ev, card) {
+				this.laneOver = null;
 				if (!this.dropDelegate) {
 					ev.preventDefault();
 					return;
@@ -12926,14 +13089,19 @@ Vue.component('a2-panel', {
 				ev.dataTransfer.effectAllowed = "move";
 				this.currentElem = card;
 			},
-			dragOver(ev) {
+			dragOver(ev, lane) {
+				this.laneOver = lane;
 				ev.preventDefault();
 			},
 			drop(ev, lane) {
+				this.laneOver = null;
 				if (!this.currentElem) return;
 				if (this.dropDelegate)
 					this.dropDelegate(this.currentElem, lane);
 				this.currentElem = null;
+			},
+			laneClass(lane) {
+				return lane == this.laneOver ? 'over' : undefined;
 			}
 		}
 	});
@@ -13465,9 +13633,9 @@ Vue.directive('resize', {
 });
 
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20241020-7975*/
+/*20250202-7978*/
 // controllers/base.js
 
 (function () {
@@ -13690,6 +13858,12 @@ Vue.directive('resize', {
 				let root = this.$data;
 				return root._canExec_(cmd, arg, opts);
 			},
+			$canExecSel(cmd, arg, opts) {
+				if (!arg) return false;
+				let sel = arg.$selected;
+				if (!sel) return false;
+				return this.$canExecute(cmd, sel, opts);
+			},
 			$setCurrentUrl(url) {
 				if (this.inDialog)
 					url = urltools.combine('_dialog', url);
@@ -13746,6 +13920,11 @@ Vue.directive('resize', {
 						self.$alertUi(msg);
 					});
 				});
+			},
+			$requeryNew(id) {
+				this.$store.commit('setnewid', { id: id });
+				vm.$data.__baseUrl__ = urltools.replaceSegment(vm.$data.__baseUrl__, id);
+				vm.$requery();
 			},
 			$save(opts) {
 				if (this.$data.$readOnly)
@@ -14967,7 +15146,8 @@ Vue.directive('resize', {
 					$nodirty: this.$nodirty,
 					$showSidePane: this.$showSidePane,
 					$hideSidePane: this.$hideSidePane,
-					$longOperation: this.$longOperation
+					$longOperation: this.$longOperation,
+					$requeryNew
 				};
 				Object.defineProperty(ctrl, "$isDirty", {
 					enumerable: true,
