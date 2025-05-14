@@ -85,9 +85,9 @@ app.modules['std:locale'] = function () {
 	return window.$$locale;
 };
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20240215-7960
+// 20250421-7976
 // platform/polyfills.js
 
 
@@ -139,14 +139,9 @@ app.modules['std:locale'] = function () {
 	};
 
 	date.toJSON = function (key) {
-		let nd = new Date(this);
-		let ds = 0;
-		if (nd.getFullYear() < 1925) {
-			ds = -4;
-		}
-		nd.setHours(nd.getHours(), nd.getMinutes() - nd.getTimezoneOffset(),
-			nd.getSeconds() - ds, nd.getMilliseconds());
-		return nd.toISOString().replace('Z', '');
+		// we need local time as UTC+0
+		// sv locale is used to get ISO format
+		return this.toLocaleString('sv').replace(' ', 'T') + '.000';
 	};
 
 })(Date.prototype);
@@ -2951,12 +2946,16 @@ app.modules['std:impl:array'] = function () {
 		};
 
 		proto.$select = function (root) {
+			if (!root && this.$findTreeRoot)
+				root = this.$findTreeRoot();
 			let arr = root || this._parent_;
+
 			let sel = arr.$selected;
 			if (sel === this) return;
 			if (sel) sel.$selected = false;
 			this.$selected = true;
 			emitSelect(arr, this);
+
 			if (this._meta_.$items) {
 				// expand all parent items
 				let p = this._parent_._parent_;
@@ -3001,7 +3000,7 @@ app.modules['std:impl:array'] = function () {
 
 /* Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.*/
 
-/*20250130-7977*/
+/*20250512-7985*/
 // services/datamodel.js
 
 /*
@@ -3122,7 +3121,10 @@ app.modules['std:impl:array'] = function () {
 				break;
 			case TMarker: // marker for dynamic property
 				let mp = trg._meta_.markerProps[prop];
-				shadow[prop] = mp;
+				if (utils.isDefined(mp.type) && utils.isDefined(mp.value))
+					shadow[prop] = mp.value;
+				else
+					shadow[prop] = mp;
 				break;
 			case period.constructor:
 				shadow[prop] = new propCtor(source[prop]);
@@ -3248,6 +3250,16 @@ app.modules['std:impl:array'] = function () {
 			let coll = this[this._meta_.$items];
 			return this.$vm.$expand(this, this._meta_.$items, true);
 		};
+		elem.$findTreeRoot = function () {
+			let p = this;
+			let r = null;
+			while (p && p !== this.$root) {
+				if (p._meta_ && p._meta_.$items)
+					r = p;
+				p = p._parent_;
+			}
+			return r ? r._parent_ : null;
+		};
 		elem.$selectPath = async function (arr, cb) {
 			if (!arr.length) return null;
 			let itemsProp = this._meta_.$items;
@@ -3366,12 +3378,20 @@ app.modules['std:impl:array'] = function () {
 			defPropertyGet(elem, "$groupName", function () {
 				if (!utils.isDefined(this.$level))
 					return ERR_STR;
+				// !!! $level присваивается только в TreeSection!
 				// this.constructor.name == objectType;
 				const mi = this._root_.__modelInfo.Levels;
 				if (mi) {
 					const levs = mi[this.constructor.name];
-					if (levs && this.$level <= levs.length)
-						return this[levs[this.$level - 1]];
+					if (levs && this.$level <= levs.length) {
+						let xv = this[levs[this.$level - 1]];
+						if (!xv) return '';
+						if (utils.isObjectExact(xv))
+							return xv.$name;
+						else if (utils.isDate(xv))
+							return utils.format(xv, 'Date');
+						return xv;
+					}
 				}
 				console.error('invalid data for $groupName');
 				return ERR_STR;
@@ -3389,8 +3409,8 @@ app.modules['std:impl:array'] = function () {
 		}
 
 		function setDefaults(root) {
-			if (!root.$template || !root.$template.defaults)
-				return false;
+			if (!root.$template || !root.$template.defaults) return false;
+			if (root.$isCopy) return false;
 			let called;
 			for (let p in root.$template.defaults) {
 				let px = p.lastIndexOf('.');
@@ -3445,10 +3465,14 @@ app.modules['std:impl:array'] = function () {
 
 			elem._modelLoad_ = (caller) => {
 				_lastCaller = caller;
-				if (setDefaults(elem))
-					elem.$emit('Model.defaults', elem);
+				elem._setDefaults_();
 				elem._fireLoad_();
 				__initialized__ = true;
+			};
+
+			elem._setDefaults_ = () => {
+				if (setDefaults(elem))
+					elem.$emit('Model.defaults', elem);
 			};
 
 			elem._fireLoad_ = () => {
@@ -4808,9 +4832,9 @@ app.modules['std:tools'] = function () {
 	}
 };
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20241018-7971
+// 20250307-7975
 /* services/html.js */
 
 app.modules['std:html'] = function () {
@@ -4956,14 +4980,17 @@ app.modules['std:html'] = function () {
 };
 
 function purgeTable(tbl) {
-	let node = tbl.cloneNode(true)
+	let node = tbl.cloneNode(true);
 	for (let td of node.getElementsByTagName('TD')) {
 		if (!td.childNodes.length) continue;
 		td.removeAttribute('title');
-		let c = td.childNodes[0];
-		if (c.classList && (c.classList.contains('popover-wrapper') || c.classList.contains('hlink-dd-wrapper'))) {
-			if (c.childNodes.length)
-				td.innerText = c.childNodes[0].innerText;
+		let qs = td.querySelector('.popover-wrapper, .hlink-dd-wrapper');
+		if (!qs) continue;
+		if (!qs.childNodes.length) continue;
+		for (let c of qs.childNodes) {
+			if (c.nodeType != c.ELEMENT_NODE) continue;
+			td.innerText = c.innerText;
+			break;
 		}
 	}
 	return node;
@@ -5904,6 +5931,83 @@ Vue.component('validator-control', {
 	app.components['static', staticControl];
 
 })();
+// Copyright © 2024-2025 Oleksandr Kukhtin. All rights reserved.
+
+// 20240208-7999
+// components/inlineedit.js
+(function () {
+
+	/* placeholder: https://codepen.io/flesler/pen/kdJmbw */
+	const inlineTempl = `
+	<div class="a2-edit-inline-wrapper" :class=wrapperClass>
+		<div ref=edit class="a2-edit-inline" contenteditable="true" v-text="modelVal"
+			@blur=emitChange @focus=onFocus @keypress=onKeyPress @keyup=onKeyUp :data-placeholder="placeholder"/>
+		<span class="ico ico-edit" :title="editTip" @click=startEdit v-if="!focus" />
+	</div>
+	`;
+
+	Vue.component('a2-edit-inline', {
+		template: inlineTempl,
+		props: {
+			item: Object,
+			prop: String,
+			enterCommand: Function,
+			editTip: String,
+			placeholder: String
+		},
+		data() {
+			return {
+				focus: false
+			};
+		},
+		computed: {
+			wrapperClass() {
+				return this.focus ? 'focus' : undefined;
+			},
+			modelVal() {
+				return this.item[this.prop];
+			}
+		},
+		methods: {
+			onFocus() {
+				this.focus = true;
+			},
+			startEdit() {
+				this.$refs.edit.focus();
+			},
+			endEdit() {
+				if (this.enterCommand)
+					this.enterCommand();
+				this.$refs.edit.blur();
+			},
+			cancelEdit() {
+				this.$refs.edit.textContent = this.modelVal;
+				this.focus = false; // lock change
+				this.$refs.edit.blur();
+			},
+			onKeyUp(ev) {
+				if (ev.keyCode === 27) { /*Esc*/
+					ev.preventDefault();
+					ev.stopImmediatePropagation();
+					this.cancelEdit();
+				}
+			},
+			onKeyPress(ev) {
+				if (ev.keyCode === 13) { /*Enter*/
+					ev.preventDefault();
+					ev.stopImmediatePropagation();
+					this.endEdit();
+				}
+			},
+			emitChange(ev) {
+				if (!this.focus) return;
+				this.item[this.prop] = ev.target.textContent;
+				this.focus = false;
+			}
+		}
+	});
+})();
+
 // Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
 
 /*20240909-7971*/
@@ -7112,9 +7216,9 @@ Vue.component('validator-control', {
 })();
 
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20241223-7973*/
+/*20250421-7982*/
 // components/selector.js
 
 (function selector_component() {
@@ -7188,7 +7292,8 @@ Vue.component('validator-control', {
 			fetchCommand: String,
 			fetchCommandData: Object,
 			maxChars: Number,
-			lineClamp: Number
+			lineClamp: Number,
+			highlight: Boolean,
 		},
 		data() {
 			return {
@@ -7216,6 +7321,13 @@ Vue.component('validator-control', {
 				}
 				return utils.simpleEval(el, this.display);
 			},
+			hasValue() {
+				if (!this.highlight) return false;
+				if (!this.item) return false;
+				let el = this.item[this.prop];
+				if (utils.isObjectExact(el) && el.Id && el.Id != -1)
+					return true;
+			},
 			canNew() {
 				return !!this.createNew;
 			},
@@ -7223,9 +7335,9 @@ Vue.component('validator-control', {
 				if (!this.hasClear) return false;
 				let to = this.item[this.prop];
 				if (!to) return false;
+				if (this.useAll && to.Id === -1) return false;
 				if (utils.isDefined(to.$isEmpty))
 					return !to.$isEmpty;
-				if (this.useAll && to.Id === -1) return false;
 				return !utils.isPlainObjectEmpty(to);
 			},
 			hasText() { return !!this.textProp; },
@@ -7301,6 +7413,8 @@ Vue.component('validator-control', {
 					cx += ' selector-hyperlink';
 				else if (this.mode === 'combo-box')
 					cx += ' selector-combobox';
+				if (this.hasValue)
+					cx += ' has-value';
 				return cx;
 			},
 			isItemActive(ix) {
@@ -7553,9 +7667,9 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20241221-7975
+// 20250424-7975
 // components/datagrid.js*/
 
 (function () {
@@ -7689,6 +7803,7 @@ Vue.component('validator-control', {
 			small: { type: Boolean, default: undefined },
 			bold: String, //{ type: Boolean, default: undefined },
 			mark: String,
+			done: String,
 			controlType: String,
 			width: String,
 			minWidth:String,
@@ -7841,7 +7956,7 @@ Vue.component('validator-control', {
 				return h(tag, cellProps, [h(cellValid, { props: { item: row, col: col } })]);
 			}
 
-			if (!col.content && !col.icon && !col.bindIcon) {
+			if (!col.content && !col.icon && !col.bindIcon && !col.done) {
 				return h(tag, cellProps);
 			}
 
@@ -7890,11 +8005,13 @@ Vue.component('validator-control', {
 					/*@click.prevent, no stop*/
 					template: '<a @click.prevent="doCommand($event)" :href="getHref()"><i v-if="hasIcon" :class="iconClass" class="ico"></i><span v-text="eval(row, col.content, col.dataType, col.evalOpts)"></span></a>',
 					computed: {
-						hasIcon() { return col.icon || col.bindIcon; },
+						hasIcon() { return col.icon || col.bindIcon || col.done; },
 						iconClass() {
 							let icoSingle = !col.content ? ' ico-single' : '';
 							if (col.bindIcon)
 								return 'ico-' + utils.eval(row, col.bindIcon) + icoSingle;
+							else if (col.done)
+								return (utils.eval(row, col.done) ? 'ico-success-outline-green' : 'ico-warning-outline-yellow') + icoSingle;
 							else if (col.icon)
 								return 'ico-' + col.icon + icoSingle;
 							return null;
@@ -7951,6 +8068,8 @@ Vue.component('validator-control', {
 				chElems.unshift(h('i', { 'class': 'ico ico-' + col.icon + icoSingle }));
 			else if (col.bindIcon)
 				chElems.unshift(h('i', { 'class': 'ico ico-' + utils.eval(row, col.bindIcon) + icoSingle }));
+			else if (col.done)
+				chElems.unshift(h('i', { 'class': 'ico ico-' + (utils.eval(row, col.done) ? 'success-outline-green' : 'warning-outline-yellow') + icoSingle }));
 			/*TODO: validate ???? */
 			if (col.validate) {
 				chElems.push(h(validator, validatorProps));
@@ -11661,15 +11780,22 @@ Vue.component('a2-panel', {
 
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20250202-7977
+// 20250204-7979
 // components/browsejson.js*/
 
 (function () {
 
-	let du = require('std:utils').date;
+	let utils = require('std:utils');
+	let du = utils.date;
 
-	function getProps(root) {
+	const sppArray = "$valid,$invalid,$dirty,$lock,$selected,$selectedIndex,$checked,$hasSelected,$hasChecked,$isEmpty,$permissions,$RowCount,$expanded,$collapsed,$level,$loaded"
+		.split(',');
+	const specProps = new Set(sppArray);
+
+	function getProps(root, skipSpec) {
+		if (!root) return [];
 		const ff = (p) => {
+			if (skipSpec && specProps.has(p)) return false;
 			if (p.startsWith('_')) return false;
 			let v = root[p];
 			if (typeof v === 'function') return false;
@@ -11707,7 +11833,7 @@ Vue.component('a2-panel', {
 				</span>
 			</span>
 			<ul v-if="expanded">
-				<a2-json-browser-item v-if="!root.isScalar" v-for="(itm, ix) in items" :key=ix :root="itm"></a2-json-browser-item>
+				<a2-json-browser-item v-if="!root.isScalar" v-for="(itm, ix) in items" :key=ix :root="itm" :use-spec="useSpec"/>
 			</ul>
 		</li>
 	`;
@@ -11716,7 +11842,8 @@ Vue.component('a2-panel', {
 		template: jsonItemTemplate,
 		name: 'a2-json-browser-item',
 		props: {
-			root: Object
+			root: Object,
+			useSpec: Boolean
 		},
 		data() {
 			return {
@@ -11732,6 +11859,19 @@ Vue.component('a2-panel', {
 				let n = this.root.name;
 				let parentVal = this.$parent.root.value;
 				//parentVal[n] = null;
+			},
+			expandAll(val) {
+				if (this.root.isString) return;
+				this.expanded = val;
+				Vue.nextTick(() => {
+					for (let c of this.$children)
+						c.expandAll(val);
+				});
+			},
+			clearExpanded() {
+				this.expanded = false;
+				for (let c of this.$children)
+					c.clearExpanded();
 			}
 		},
 		computed: {
@@ -11740,12 +11880,17 @@ Vue.component('a2-panel', {
 			},
 			chevron() {
 				// \u2003 - em-space
-				return (this.isScalar || this.root.isDate) ? '\u2003' : this.expanded ? '⏷' : '⏵';
+				let noExpand = this.isScalar || this.root.isDate;
+				if (this.root.isObject && this.root.value === null)
+					noExpand = true;
+				return noExpand ? '\u2003' : this.expanded ? '⏷' : '⏵';
 			},
 			valueText() {
 				let r = this.root;
-				if (r.isObject)
+				if (r.isObject) {
+					if (!r.value) return "null";
 					return r.value.constructor.name; // "Object";
+				}
 				else if (r.isArray) {
 					let ename = '';
 					if (r.value && r.value._elem_)
@@ -11767,7 +11912,7 @@ Vue.component('a2-panel', {
 				return cls;
 			},
 			items() {
-				return getProps(this.root.value);
+				return getProps(this.root.value, !this.useSpec);
 			}
 		}
 	};
@@ -11775,7 +11920,7 @@ Vue.component('a2-panel', {
 
 	const browserTemplate = `
 	<ul class="a2-json-b">
-		<a2-json-browser-item v-for="(itm, ix) in items" :key=ix :root="itm"></a2-json-browser-item>
+		<a2-json-browser-item v-for="(itm, ix) in items" :key=ix :root="itm" :use-spec="useSpec"/>
 	</ul>
 	`;
 
@@ -11785,11 +11930,29 @@ Vue.component('a2-panel', {
 			'a2-json-browser-item': jsonTreeItem
 		},
 		props: {
-			root: Object
+			root: Object,
+			useSpec: Boolean
+		},
+		data() {
+			return {
+				expandFlag: false
+			};
 		},
 		computed: {
 			items() {
-				return getProps(this.root);
+				return getProps(this.root, !this.useSpec);
+			}
+		},
+		methods: {
+			expandAll() {
+				this.expandFlag = !this.expandFlag;
+				for (let c of this.$children)
+					c.expandAll(this.expandFlag);
+			},
+			clearExpanded() {
+				this.expandFlag = false;
+				for (let c of this.$children)
+					c.clearExpanded();
 			}
 		}
 	});
@@ -11797,7 +11960,7 @@ Vue.component('a2-panel', {
 
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20250202-7977
+// 20250204-7979
 // components/debug.js*/
 
 (function () {
@@ -11838,11 +12001,20 @@ Vue.component('a2-panel', {
 	</div>
 	<div class="toolbar">
 		<button class="btn btn-tb" @click.prevent="refresh"><i class="ico ico-reload"></i> {{text('$Refresh')}}</button>
+		<template v-if="modelVisible">
+			<div class="divider"/>
+			<label class="btn btn-tb btn-checkbox" :class="{checked: useSpec}"
+				:title="text('$ShowSpecProps')">
+				<input type="checkbox" v-model="useSpec"/>
+				<i class="ico ico-list"/>
+			</label>
+			<button class="btn btn-tb" @click.prevent="expandAll"><i class="ico ico-arrow-sort"></i></button>
+		</template>
 		<div class="aligner"></div>
 		<button class="btn btn-tb" @click.prevent="toggle"><i class="ico" :class="toggleIcon"></i></button>
 	</div>
 	<div class="debug-model debug-body" v-if="modelVisible">
-		<a2-json-browser :root="modelRoot()"></a2-json-browser>
+		<a2-json-browser :root="modelRoot()" :use-spec="useSpec" ref="modelJson"/>
 	</div>
 	<div class="debug-trace debug-body" v-if="traceVisible">
 		<ul class="a2-debug-trace">
@@ -11871,7 +12043,8 @@ Vue.component('a2-panel', {
 		data() {
 			return {
 				trace: [],
-				left: false
+				left: false,
+				useSpec: false
 			};
 		},
 		computed: {
@@ -11911,6 +12084,12 @@ Vue.component('a2-panel', {
 				else if (this.traceVisible)
 					this.loadTrace();
 			},
+			expandAll() {
+				if (!this.modelVisible) return;
+				let brw = this.$refs.modelJson;
+				if (!brw) return;
+				brw.expandAll();
+			},
 			toggle() {
 				this.left = !this.left;
 			},
@@ -11934,6 +12113,9 @@ Vue.component('a2-panel', {
 		watch: {
 			refreshCount() {
 				// dataModel stack changed
+				let brw = this.$refs.modelJson;
+				if (brw)
+					brw.clearExpanded();
 				this.$forceUpdate();
 			},
 			traceView(newVal) {
@@ -13639,7 +13821,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20250202-7978*/
+/*20250512-7985*/
 // controllers/base.js
 
 (function () {
@@ -13951,6 +14133,9 @@ Vue.directive('resize', {
 				}
 				self.$data.$emit('Model.beforeSave', self.$data);
 
+				if (!this.$data.$dirty)
+					return; // may be changed
+
 				let saveSels = self.$data._saveSelections();
 
 				return new Promise(function (resolve, reject) {
@@ -14140,6 +14325,7 @@ Vue.directive('resize', {
 							modelInfo.reconcileAll(data.$ModelInfo);
 							dat._setModelInfo_(undefined, data);
 							dat._setRuntimeInfo_(data.$runtime);
+							dat._setDefaults_();
 							dat._fireLoad_();
 							dat._restoreSelections(saveSels);
 							resolve(dat);
