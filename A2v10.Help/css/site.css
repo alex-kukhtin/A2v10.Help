@@ -1,23 +1,4 @@
-﻿/* controls */
-/* header-footer */
-/* nav bar */
-/* side bar */
-/* data grid */
-/* toolbar */
-/* table */
-/* tree-view*/
-/* dialog */
-/* z-index */
-/*
-@hover-open-index: auto;
-@invalid-index: auto;
-@focus-index: auto;
-@hover-index: auto;
-*/
-/* mixins */
-/* icon colors */
-/* free: e939, e93a, e93b, e93f, e942, e952 */
-@font-face {
+﻿@font-face {
   font-family: 'A2v10';
   font-display: fallback;
   src: url('/css/fonts/A2v10.eot');
@@ -1689,22 +1670,6 @@ header .include.nav-pane .partial-block .control-group,
 .include.loading > div {
   display: none;
 }
-/* controls */
-/* header-footer */
-/* nav bar */
-/* side bar */
-/* data grid */
-/* toolbar */
-/* table */
-/* tree-view*/
-/* dialog */
-/* z-index */
-/*
-@hover-open-index: auto;
-@invalid-index: auto;
-@focus-index: auto;
-@hover-index: auto;
-*/
 .nav-bar {
   position: absolute;
   left: 0;
@@ -7646,6 +7611,11 @@ table.tree-grid a.toggle.expanded:after {
 .a2-json-b .jbp-object {
   font-style: italic;
   color: darkcyan;
+}
+.a2-json-view {
+  background-color: white;
+  overflow: auto;
+  border: 1px solid #ddd;
 }
 .feedback-panel {
   position: absolute;
