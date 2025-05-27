@@ -1,9 +1,9 @@
 ﻿<div>
-	<!--title:Що нового. Січень 2025-->
+	<!--title:Що нового. Травень 2025-->
 	<!--keywords:Що нового-->
 	<div class="title">
 		<h1>
-			Випуск 45 - версії 7973-7973 (Лютий 2025)
+			Випуск 45 - версії 8540-8548 (Травень 2025)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Всі випуски</a>|
@@ -14,37 +14,47 @@
 
 	<!--
 
-		DataGridColumn.Monospace
-		DataGridColumn.Background
+
+		Index - упорядочить Nuget-ccылки. Написать про основные и модули.
+		Выделить Net.Core и Net. Framework.
+
+		DataGridColumn.CheckAll, CssClass, Done, Background, Monospace
+		Toolbar.Orientation
+
 		Switch.Height,
+
 		ComboBox.Highlight
 		Selector.Highlight
 		TextBox.Highlight
-		SearchBox - новий елемент
 
-		GroupingModel = use Object
+		SelectorSimple.Folder
 
-		ColorPicker.Compact
-		InlineTextBox
-		TextBox.EnterCommand - возникает ДО обновления данных модели.
+		Component.Slots
 
-		Dialog.MinHeight,
-		IController.$requeryNew
-
-		описание {Bind Icon}
-		Bold, Italic
+		SearchBox, ColorComboBox, ColorPicker, InlineTextBox - новые елементы
+		Bold, Italic - новые элементы управления
 		BindCmdExec, BindSum, BindNumber
 
-		enums: ColumnControlType, ControlSize
-		DataGridColumn.CheckAll, DataGridColumn.MinWidth, DataGridColumn.LineClamp
-		BindCmd: Execute,ExecuteSelected и проверить остальные команды.
+		DataModel.GroupingModel = use Object
+		DataModel.TreeModel = [InitExpand!!Expanded] - имя поля обязательно
+		DataModel. $System recorset описание
+		Dialog.HeaderMenu
 
-		$System recorset описание
+		TextBox.EnterCommand - возникает ДО обновления данных модели.
+
+		IController.$requeryNew, $showSidePane, $hideSidePane, $longOperation, $inlineDepth
+
+		Reports - pdf - model.json и опиание как подключить
+		ReportEngine.Pdf - описание
+		Scheduler - описание
+
+		описание {Bind Icon}
+
+		enums: ColumnControlType, ControlSize
+		BindCmd: Execute,ExecuteSelected и проверить остальные команды.
 
 		TreeViewItem.IsFolder2
 		TreeViewItem.IsGroup binding
-
-		ColorComboBox control
 
 		utils.int2time, time2int
 
@@ -52,9 +62,8 @@
 
 		PropertyGrid.NameMaxChars, ValueMaxChars, PropertyGridItem.NameMaxChars, ValueMaxChars
 
-		Dialog.HeaderMenu
 		ListItemSimple - new element
-		Lazy
+		Lazy - компонент
 
 		TODO: StaticResource/ResourceDictionary
 		TODO: /ChatItem/StateCard/TableMarkCell/ValidatorLabel
@@ -97,6 +106,13 @@
 		<li>%%%TRoot додано метод <code>$createModelInfo</code>.</li>
 		<li>%%%IElementArray додано метод <code>$lockUpdate</code>.</li>
 
+		Special Folders
+		===============
+		_localization
+		_home
+		_navpane
+		_profile
+
 
 		BindCmd Toast, Permission, Viewer
 		Bind.Format for Number, Currency
@@ -136,7 +152,20 @@
 	<ul class="std">
 		<li>
 			В перечислення <a class="code-link" href="/xaml/enums/icon">Icon</a> додано нові
-			іконки <code>Bookmark</code>, <code>Code</code>, <code>CodeCheck</code>, <code>Variable</code>.
+			іконки <code>Bookmark</code>, <code>de>Code</code>, <code>CodeCheck</code>, <code>Variable</code>.
+		</li>
+		<li>
+			В елемент управління <a class="code-link" href="/xaml/controls/datagridcolumn">DataGridColumn</a> додано
+			нові властивості <code>MinWidth</code>, <code>LineClamp</code>.
+		</li>
+		<li>
+			В контейнер <a class="code-link" href="/xaml/containers/dialog">Dialog</a> додано
+			нову властивість <code>MinHeight</code>.
+		</li>
+	</ul>
+	<h3>Моделі даних</h3>
+	<ul class="std">
+		<li>
 		</li>
 	</ul>
 	<h3>Програмування клієнта</h3>

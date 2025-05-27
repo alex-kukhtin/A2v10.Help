@@ -88,7 +88,7 @@
 				return this.isFolder && !this.item.open;
 			},
 			iconClass: function () {
-				return "ico ico-" + (this.isFolder ? "folder" : "file");
+				return "ico ico-" + (this.isFolder ? "folder-outline" : "file");
 			},
 			dataHref() {
 				return this.getHref ? this.getHref(this.item) : '';

@@ -1,6 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
-https://docs.a2v10.com/whatsnew/w202502
+https://docs.a2v10.com/whatsnew/w202505
 https://docs.a2v10.com/whatsnew/w202412
 https://docs.a2v10.com/whatsnew/w202311
 https://docs.a2v10.com/whatsnew/w202305
