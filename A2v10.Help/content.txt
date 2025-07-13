@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
-	Що нового		/whatsnew/index
-		Травень 2025			/whatsnew/w202505
+	Що нового					/whatsnew/index
+		Липень 2025			    /whatsnew/w202507
 		Грудень 2024			/whatsnew/w202412
 		Листопад 2023			/whatsnew/w202311
 		Травень 2023			/whatsnew/w202305
