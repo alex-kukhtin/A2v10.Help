@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Властивості і методи масива-->
-	<!--keywords:$empty;$remove;$clearSelected;$append;$prepend;$insert;$copy;$root;$parent;$ctrl;$isEmpty;$hasSelected;$selectedIndex;$checked;$cross;$isLazy;$resetLazy-->
+	<!--keywords:$empty;$remove;$clearSelected;$append;$prepend;$insert;$copy;$root;$parent;$ctrl;$isEmpty;$hasSelected;$selectedIndex;$checked;$cross;$isLazy;$resetLazy;$ids;&names-->
 	<div class="title">
 		<h1>
 			Властивості і методи масиву
@@ -40,6 +40,9 @@ interface IElementArray<T> extends Array<T> {
 	readonly $selectedIndex: number;
 	readonly $checked: IElementArray<T>;
 	readonly $cross: {[prop: string]: string[]};
+	readonly $loaded: boolean;
+	readonly $ids: string;
+	readonly $names: string;
 	// methods
 	$empty(): this;
 	$reload(): Promise<IElementArray<T>>;
@@ -114,6 +117,26 @@ interface IElementArray<T> extends Array<T> {
 		</p>
 	</div>
 
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $loaded: boolean</pre></div>
+		<p>
+			Чи завантажено "лінівий" масив.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $ids: string</pre></div>
+		<p>
+			Рядок з ідентіфікаторми об'єктів (через кому). Елемент масиву має містити властивість <b>Id</b>.
+		</p>
+	</div>
+
+	<div class="method">
+		<div class="syntax"><pre class="code-highlight js">readonly $names: string</pre></div>
+		<p>
+			Рядок з назвами об'єктів (через кому з пробілом). Елемент масиву має містити властивість <b>Name</b>.
+		</p>
+	</div>
 
 	<h2>Методи</h2>
 	<div class="method">

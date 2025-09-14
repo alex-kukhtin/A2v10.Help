@@ -1,0 +1,76 @@
+﻿<div>
+	<!--title:Відстеження змін-->
+	<!--keywords:Моделі даних;rowversion;Відстеження змін-->
+	<div class="title">
+		<h1>
+			Відстеження змін в моделях
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Моделі даних</a>
+		</div>
+	</div>
+
+	<h3>Загальна інформація</h3>
+	<p>
+		SQL-Server підтримує спеціальний тип поля, значення якого буде оновлюватись кожного разу, коли запис модифікується.
+		Це оновлення виконується незалежно від того, якми чином змінюється поле, мабуть якшо в нього записується те ж саме значення.
+		Таке поле має тип <b>rowversion</b>.
+	</p>
+
+	<p>
+		Поле <b>rowversion</b> можна використати для відстеження змін обєкта.
+		Якщо при оновленні моделі значення поля не дорівнює тому, що було на момент його зчитування з бази даних,
+		це означає, що запис було змінено іншим чином та оновлення потрібно заборонити.
+	</p>
+
+	<p>
+		Платформа підримує читання та запис поля <b>rowversion</b>. Але його назва завжди
+		має бути <b>rv</b> (маленькимі літерами).
+	</p>
+
+	<h3>Приклад відстеження</h3>
+	<p>
+		Вся обробка відстеження змін виконується на рівні SQL.
+	</p>
+
+	Приклад для відсеження змін в документах (таблиця doc.Documents)
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+<![CDATA[
+/* поперше додамо поле rv */
+alter table doc.Documents add rv rowversion;
+go
+
+/* в табличний тип додамо поле для відстеження */
+create type doc.[Document.TableType] as table 
+(
+	Id bigint,
+	rv varbinary(8), /* тут rowversion не підтримується - беремо еквівалент */
+	/* всі інші поля */
+);
+go
+
+/* процедура оновлення моделі */
+create or alter procedure doc.[Document.Update]
+@Document doc.[Document.TableType] readonly
+as
+begin
+	set nocount on;
+	set transaction isolation level read committed;
+	/* Перевіряємо співпадіння rv */
+     if exists(
+		select * from @Document t 
+		inner join doc.Documents d on d.Id = t.Id
+        where t.rv is not null and t.rv <> d.rv
+	)
+		throw 60000, N'UI:Invalid row version', 0;
+
+	/* Оновлення таблиці документів */
+end
+go
+]]>
+</script>
+</pre>
+
+</div>

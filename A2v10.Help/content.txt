@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового					/whatsnew/index
-		Липень 2025			    /whatsnew/w202507
+		Вересень 2025			/whatsnew/w202509
 		Грудень 2024			/whatsnew/w202412
 		Листопад 2023			/whatsnew/w202311
 		Травень 2023			/whatsnew/w202305
@@ -40,6 +40,8 @@
 	Перехресні моделі				/models/cross
 	Моделі з групуванням			/models/group
 	Робота з бінарними об'єктами	/models/blob
+	Відстеження змін				/models/rowversion
+	Системні набори даних			/models/system
 
 
 Види	/views/index

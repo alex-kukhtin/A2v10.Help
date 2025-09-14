@@ -518,9 +518,10 @@ table.sheet-table tr.total th {
 }
 .bkstyle-sample {
   border: 1px solid #ccc;
-  display: inline-block;
+  display: inline;
   padding: 2px 8px;
   font-family: Consolas, 'Fira Code', 'Courier New', Courier, monospace;
+  font-weight: normal;
 }
 .markcss_sample {
   display: inline-block;
@@ -724,8 +725,8 @@ header .lang {
 .core-only {
   border: 1px solid deeppink;
   font-size: 85%;
-  padding: 2px 6px;
-  border-radius: 8px;
+  padding: 0 6px;
+  border-radius: 4px;
   color: white;
   background-color: deeppink;
 }

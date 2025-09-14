@@ -1,6 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
-https://docs.a2v10.com/whatsnew/w202507
+https://docs.a2v10.com/whatsnew/w202509
 https://docs.a2v10.com/whatsnew/w202412
 https://docs.a2v10.com/whatsnew/w202311
 https://docs.a2v10.com/whatsnew/w202305
@@ -34,6 +34,8 @@ https://docs.a2v10.com/models/tree
 https://docs.a2v10.com/models/cross
 https://docs.a2v10.com/models/group
 https://docs.a2v10.com/models/blob
+https://docs.a2v10.com/models/rowversion
+https://docs.a2v10.com/models/system
 https://docs.a2v10.com/views/index
 https://docs.a2v10.com/xaml/index
 https://docs.a2v10.com/xaml/overview/index
