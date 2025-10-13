@@ -74,6 +74,7 @@
       <DependentUpon>site.help.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="html\app\folders\home.html" />
     <Content Include="html\app\signalr.html" />
     <Content Include="html\app\folders\emails.html" />
     <Content Include="html\app\folders\files.html" />
@@ -134,6 +135,7 @@
     <Content Include="html\server\index.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
+    <Content Include="html\whatsnew\w202510.html" />
     <Content Include="html\whatsnew\w202509.html" />
     <Content Include="html\whatsnew\w202412.html" />
     <Content Include="html\whatsnew\w202311.html" />
@@ -148,6 +150,8 @@
     <Content Include="html\workflow\objects\modelstateinfo.html" />
     <Content Include="html\workflow\objects\messageinfo.html" />
     <Content Include="html\workflow\objects\inbox.html" />
+    <Content Include="html\xaml\bind\bindcmdexec.html" />
+    <Content Include="html\xaml\bind\bindex.html" />
     <Content Include="html\xaml\bind\staticresource.html" />
     <Content Include="html\xaml\bind\components.html" />
     <Content Include="html\xaml\components\else.html" />

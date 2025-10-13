@@ -1,0 +1,35 @@
+﻿<div>
+	<!--title:BindSum, BindNumber-->
+	<!--keywords:BindSum,BindNumber-->
+	<div class="title">
+		<h1>
+			Прив'язки BindSum, BindNumber
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі прив`язки</a>
+		</div>
+	</div>
+
+	<p>
+		Являє собою скорочення привязки <a href="/xaml/bind/bind">Bind</a> для сум та чисел.
+	</p>
+
+	<p>
+		Прив'язка
+<pre class="code-highlight xml">
+<script type="text/template">
+<BindSum Value="{Element.Prop}" />
+</script>
+</pre>
+
+		Це скорочення для
+
+<pre class="code-highlight xml">
+<script type="text/template">
+<Bind Value="{Bind Element.Prop, DataType=Currency, HideZeros=True, NegativeRed=True}" />
+</script>
+</pre>
+	</p>
+
+
+</div>

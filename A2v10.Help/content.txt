@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового					/whatsnew/index
+		Жовтень 2025			/whatsnew/w202510
 		Вересень 2025			/whatsnew/w202509
 		Грудень 2024			/whatsnew/w202412
 		Листопад 2023			/whatsnew/w202311
@@ -23,6 +24,7 @@
 		files			/app/files
 
 	Спеціальні папки		/app/folders/index
+		_home				/app/folders/home
 		_assets				/app/folders/assets
 		_layout				/app/folders/layout
 		_emails				/app/folders/emails
@@ -160,7 +162,9 @@
 			SheetAutoGenerate	/xaml/sheet/sheetautogenerate
 		Прив'язки					/xaml/bind/index
 			Bind					/xaml/bind/bind
+			BindSum, BindNumber		/xaml/bind/bindex
 			BindCmd					/xaml/bind/bindcmd
+			BindCmdExec				/xaml/bind/bindcmdexec
 			Components				/xaml/bind/components
 			StaticResource			/xaml/bind/staticresource
 			StyleResource			/xaml/bind/styleresource

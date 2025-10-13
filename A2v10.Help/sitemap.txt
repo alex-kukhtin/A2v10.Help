@@ -1,5 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
+https://docs.a2v10.com/whatsnew/w202510
 https://docs.a2v10.com/whatsnew/w202509
 https://docs.a2v10.com/whatsnew/w202412
 https://docs.a2v10.com/whatsnew/w202311
@@ -19,6 +20,7 @@ https://docs.a2v10.com/app/commands
 https://docs.a2v10.com/app/reports
 https://docs.a2v10.com/app/files
 https://docs.a2v10.com/app/folders/index
+https://docs.a2v10.com/app/folders/home
 https://docs.a2v10.com/app/folders/assets
 https://docs.a2v10.com/app/folders/layout
 https://docs.a2v10.com/app/folders/emails
@@ -149,7 +151,9 @@ https://docs.a2v10.com/xaml/sheet/sheettreesection
 https://docs.a2v10.com/xaml/sheet/sheetautogenerate
 https://docs.a2v10.com/xaml/bind/index
 https://docs.a2v10.com/xaml/bind/bind
+https://docs.a2v10.com/xaml/bind/bindex
 https://docs.a2v10.com/xaml/bind/bindcmd
+https://docs.a2v10.com/xaml/bind/bindcmdexec
 https://docs.a2v10.com/xaml/bind/components
 https://docs.a2v10.com/xaml/bind/staticresource
 https://docs.a2v10.com/xaml/bind/styleresource
