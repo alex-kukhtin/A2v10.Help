@@ -23,24 +23,22 @@
 
 		DataGridColumn.CheckAll, Done, Monospace
 
-		Switch.Height,
-
-		ComboBox.Highlight
-		Selector.Highlight
-		TextBox.Highlight
-
 		SelectorSimple.Folder
-		MultiSelect
+		Xaml. MultiSelect
 
 		Component.Slots
 
 		SearchBox, ColorComboBox, ColorPicker, InlineTextBox - новые елементы
 		Bold, Italic - новые элементы управления
 
+		ListItemSimple - new element
+		Lazy - компонент
+
+		Dialog.HeaderMenu
+
 		DataModel.GroupingModel = use Object
 		DataModel.TreeModel = [InitExpand!!Expanded] - имя поля обязательно
 		DataModel. $System recorset описание
-		Dialog.HeaderMenu
 
 		TextBox.EnterCommand - возникает ДО обновления данных модели.
 
@@ -52,7 +50,8 @@
 
 		описание {Bind Icon}
 
-		enums: ColumnControlType, ControlSize
+		enums: ColumnControlType, ControlSize, WrapMode, TextColor
+
 		BindCmd: проверить остальные команды.
 
 		TreeViewItem.IsFolder2
@@ -60,12 +59,9 @@
 
 		utils.int2time, time2int
 
-		ctrl.$savePartial
+		ctrl.$savePartial, ctrl.$saveCaller?, 
 
 		PropertyGrid.NameMaxChars, ValueMaxChars, PropertyGridItem.NameMaxChars, ValueMaxChars
-
-		ListItemSimple - new element
-		Lazy - компонент
 
 		TODO: StaticResource/ResourceDictionary
 		TODO: /ChatItem/StateCard/TableMarkCell/ValidatorLabel
@@ -157,6 +153,17 @@
 			Додано нові прив'язки <a class="code-link" href="/xaml/bind/bindex">BindSum</a>,
 			<a class="code-link" href="/xaml/bind/bindex">BindNumber</a> та
 			<a class="code-link" href="/xaml/bind/bindcmdexec">BindCmdExec</a>.
+		</li>
+		<li>
+			В елемент <a class="code-link" href="/xaml/components/switch">Switch</a> додано
+			нову властивість <code>Height</code>.
+		</li>
+		<li>
+			В елементи <a class="code-link" href="/xaml/controls/textbox">TextBox</a>,
+			<a class="code-link" href="/xaml/controls/selector">Selector</a>,
+			<a class="code-link" href="/xaml/controls/combobox">ComboBox</a>
+			додано
+			нову властивість <code>Highlight</code>.
 		</li>
 	</ul>
 	<h3>Моделі даних</h3>

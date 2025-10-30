@@ -200,9 +200,9 @@ app.modules['std:const'] = function () {
 
 
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20241221-7973
+// 20250822-7982
 // services/utils.js
 
 app.modules['std:utils'] = function () {
@@ -1064,7 +1064,10 @@ app.modules['std:utils'] = function () {
 			n = -n;
 			m = true;
 		}
-		// toFixed = avoid js rounding error
+		// avoid js rounding error
+		const exp = Math.floor(Math.log2(n));
+		const eps = Math.pow(2, exp - 52);
+		n += eps; 
 		let r = Number(Math.round(n.toFixed(12) + `e${digits}`) + `e-${digits}`);
 		return m ? -r : r;
 	}
@@ -1139,9 +1142,9 @@ app.modules['std:utils'] = function () {
 	}
 };
 
-// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20220626-7852*/
+/*20250913-7983*/
 /* services/url.js */
 
 app.modules['std:url'] = function () {
@@ -1198,9 +1201,11 @@ app.modules['std:url'] = function () {
 	function toUrl(obj) {
 		if (!utils.isDefined(obj) || obj === null) return '';
 		if (utils.isDate(obj)) {
-			return utils.format(obj, "DateUrl");		
+			return utils.format(obj, "DateUrl");
 		} else if (period.isPeriod(obj)) {
 			return obj.format('DateUrl');
+		} else if (Array.isArray(obj)) {
+			return obj.map(x => x.Id).join(',');
 		} else if (utils.isObjectExact(obj)) {
 			if (obj.constructor.name === 'Object') {
 				if (!utils.isDefined(obj.Id))
@@ -1690,9 +1695,9 @@ app.modules['std:period'] = function () {
 };
 
 
-// Copyright © 2015-2021 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20210823-7842
+// 20250627-7982
 /* services/modelinfo.js */
 
 app.modules['std:modelInfo'] = function () {
@@ -1761,11 +1766,12 @@ app.modules['std:modelInfo'] = function () {
 	function checkPeriod(obj) {
 		let f = obj.Filter;
 		if (!f) return obj;
-		if (!('Period' in f))
+		Object.keys(f).filter(k => k.startsWith('Period')).forEach(k => {
+			let p = f[k];
+			if (period.like(p))
+				f[k] = new period.constructor(p);
 			return obj;
-		let p = f.Period;
-		if (period.like(p))
-			f.Period = new period.constructor(p);
+		});
 		return obj;
 	}
 
@@ -2554,7 +2560,7 @@ app.modules['std:validators'] = function () {
 
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20250202-7977*/
+/*20250914-7984*/
 /* services/impl/array.js */
 
 app.modules['std:impl:array'] = function () {
@@ -2934,6 +2940,14 @@ app.modules['std:impl:array'] = function () {
 		defPropertyGet(arr, "$hasChecked", function () {
 			return !!(this.$checked && this.$checked.length);
 		});
+
+		defPropertyGet(arr, "$names", function () {
+			return this.map(x => x.Name).join(', ');
+		});
+
+		defPropertyGet(arr, "$ids", function () {
+			return this.map(x => x.Id).join(',');
+		});
 	}
 
 	function defineArrayItemProto(elem) {
@@ -3000,7 +3014,7 @@ app.modules['std:impl:array'] = function () {
 
 /* Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.*/
 
-/*20250512-7985*/
+/*20250525-7986*/
 // services/datamodel.js
 
 /*
@@ -4145,7 +4159,7 @@ app.modules['std:impl:array'] = function () {
 		let result = {};
 		for (let p of ps) {
 			let arr = utils.simpleEval(root, p);
-			if ('$selected' in arr) {
+			if (utils.isObject(arr) && '$selected' in arr) {
 				let sel = arr.$selected;
 				if (sel)
 					result[p] = sel.$id;
@@ -5406,7 +5420,7 @@ app.modules['std:barcode'] = function () {
 })();
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20250522-7983
+// 20251024-7988
 // components/control.js
 
 (function () {
@@ -5418,10 +5432,10 @@ app.modules['std:barcode'] = function () {
 	const control = {
 		props: {
 			label: String,
-			required: Boolean,
+			required: { type: null },
 			align: { type: String, default: 'left' },
 			description: String,
-			disabled: Boolean,
+			disabled: {type: null},
 			tabIndex: Number,
 			dataType: String,
 			format: String,
@@ -5431,7 +5445,7 @@ app.modules['std:barcode'] = function () {
 			hideZeros: Boolean,
 			testId: String,
 			accel: String,
-			highlight: Boolean
+			highlight: {type: null}
 		},
 		computed: {
 			path() {
@@ -6346,9 +6360,9 @@ Vue.component('validator-control', {
 		}
 	});
 })();
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20240309-7962
+// 20251001-7985
 // components/datepicker.js
 
 (function () {
@@ -6411,7 +6425,7 @@ Vue.component('validator-control', {
 					// close other popups
 					eventBus.$emit('closeAllPopups');
 					if (utils.date.isZero(this.modelDate))
-						this.updateModel(utils.date.today());
+						this.viewDate = utils.date.today();
 				}
 				this.isOpen = !this.isOpen;
 			},
@@ -6450,7 +6464,7 @@ Vue.component('validator-control', {
 			},
 			setDate(d) {
 				// save time
-				let md = this.modelDate;
+				let md = this.modelDate || d;
 				let nd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), md.getHours(), md.getMinutes(), 0, 0);
 				nd = this.fitDate(nd);
 				this.updateModel(nd);
@@ -8779,15 +8793,16 @@ template: `
 })();
 
 
-// Copyright © 2015-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-//20240913-7971
+//20250913-7983
 /*components/popover.js*/
 
 Vue.component('popover', {
 	template: `
 <div v-dropdown class="popover-wrapper" :style="{top: top}" :class="{show: isShowHover}" :title="title">
-	<span toggle class="popover-title" v-on:mouseover="mouseover" v-on:mouseout="mouseout"><i v-if="hasIcon" :class="iconClass"></i> <span v-text="content"></span><slot name="badge"></slot></span>
+	<span toggle class="popover-title" :class=poClass :style=poStyle v-on:mouseover="mouseover"
+		v-on:mouseout="mouseout" ><i v-if="hasIcon" :class="iconClass"></i> <span v-text="content"></span><slot name="badge"></slot></span>
 	<div class="popup-body" :style="{width: width, left:offsetLeft}">
 		<div class="arrow" :style="{left:offsetArrowLeft}"/>
 		<div v-if="visible">
@@ -8821,6 +8836,7 @@ Vue.component('popover', {
 		hover: Boolean,
 		offsetX: String,
 		arg: undefined,
+		lineClamp: Number
 	},
 	computed: {
 		hasIcon() {
@@ -8839,6 +8855,12 @@ Vue.component('popover', {
 			if (this.icon)
 				cls += ' ico-' + this.icon;
 			return cls;
+		},
+		poClass() {
+			return this.lineClamp ? 'line-clamp' : undefined;
+		},
+		poStyle() {
+			return this.lineClamp ? { '-webkit-line-clamp': '' + this.lineClamp } : undefined;
 		},
 		visible() {
 			return this.url && this.state === 'shown';
@@ -9139,9 +9161,9 @@ Vue.component('popover', {
 	});
 })();
 
-// Copyright © 2015-2022 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20221127-7908
+// 20250913-7983
 // components/collectionview.js
 
 /*
@@ -9184,6 +9206,9 @@ TODO:
 			}
 			else if (utils.isDate(fVal)) {
 				nq[x] = utils.format(fVal, 'DateUrl');
+			}
+			else if (Array.isArray(fVal)) {
+				nq[x] = fVal.map(x => x.Id).join(',');
 			}
 			else if (utils.isObjectExact(fVal)) {
 				if (!('Id' in fVal)) {
@@ -11796,7 +11821,7 @@ Vue.component('a2-panel', {
 
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20250204-7979
+// 20250914-7984
 // components/browsejson.js*/
 
 (function () {
@@ -11804,7 +11829,7 @@ Vue.component('a2-panel', {
 	let utils = require('std:utils');
 	let du = utils.date;
 
-	const sppArray = "$valid,$invalid,$dirty,$lock,$selected,$selectedIndex,$checked,$hasSelected,$hasChecked,$isEmpty,$permissions,$RowCount,$expanded,$collapsed,$level,$loaded"
+	const sppArray = "$valid,$invalid,$dirty,$lock,$selected,$selectedIndex,$checked,$hasSelected,$hasChecked,$isEmpty,$permissions,$RowCount,$expanded,$collapsed,$level,$loaded,$names,$ids"
 		.split(',');
 	const specProps = new Set(sppArray);
 
@@ -13222,9 +13247,9 @@ Vue.component('a2-panel', {
 })();
 
 
-// Copyright © 2023-2024 Oleksandr Kukhtin. All rights reserved.
+// Copyright © 2023-2025 Oleksandr Kukhtin. All rights reserved.
 
-// 20241028-7971
+// 20251024-7974
 // components/kanban.js
 
 (function () {
@@ -13238,10 +13263,14 @@ Vue.component('a2-panel', {
 			</div>
 			<button v-if="false">›</button>
 		</div>
+		<div class="kanban-trash drop-shadow shadow1" v-if="showTrash" @dragover="dragTrash($event)"
+				@drop="dropTrash($event)" :class="trashClass()" @dragleave="clearDrag">
+			<i class="ico ico-trash"></i>
+		</div>
 	</div>
 	<div class="kanban-body kanban-part">
 		<div class=lane v-for="(lane, lx) in lanes" :key=lx @dragover="dragOver($event, lane)"
-				@drop="drop($event, lane)" :class="laneClass(lane)">
+				@drop="drop($event, lane)" :class="laneClass(lane)" @dragleave="clearDrag">
 			<ul class=card-list>
 				<li class=card v-for="(card, cx) in cards(lane)" :key=cx :draggable="true"
 						@dragstart="dragStart($event, card)" @dragend=dragEnd>
@@ -13264,26 +13293,31 @@ Vue.component('a2-panel', {
 			lanes: Array,
 			items: Array,
 			dropDelegate: Function,
-			stateProp: String
+			trashDelegate: Function,
+			stateProp: String,
+			showTrash: Boolean
 		},
 		data() {
 			return {
 				currentElem: null,
-				laneOver: null
+				laneOver: null,
+				insideTrash: false
 			};
-		},
-		computed: {
 		},
 		methods: {
 			cards(lane) {
 				let id = lane.$id;
 				return this.items.filter(itm => itm[this.stateProp].$id === id);
 			},
-			dragEnd() {
+			clearDrag() {
 				this.laneOver = null;
+				this.insideTrash = false;
+			},
+			dragEnd() {
+				this.clearDrag();
 			},
 			dragStart(ev, card) {
-				this.laneOver = null;
+				this.clearDrag();
 				if (!this.dropDelegate) {
 					ev.preventDefault();
 					return;
@@ -13293,17 +13327,32 @@ Vue.component('a2-panel', {
 			},
 			dragOver(ev, lane) {
 				this.laneOver = lane;
+				this.insideTrash = false;
+				ev.preventDefault();
+			},
+			dragTrash(ev) {
+				this.insideTrash = true;
 				ev.preventDefault();
 			},
 			drop(ev, lane) {
-				this.laneOver = null;
+				this.clearDrag();
 				if (!this.currentElem) return;
 				if (this.dropDelegate)
 					this.dropDelegate(this.currentElem, lane);
 				this.currentElem = null;
 			},
+			dropTrash(ev) {
+				this.clearDrag();
+				if (!this.currentElem) return;
+				if (this.trashDelegate)
+					this.trashDelegate(this.currentElem);
+				this.currentElem = null;
+			},
 			laneClass(lane) {
 				return lane == this.laneOver ? 'over' : undefined;
+			},
+			trashClass() {
+				return this.insideTrash ? 'over' : undefined;
 			}
 		}
 	});
@@ -13837,7 +13886,7 @@ Vue.directive('resize', {
 
 // Copyright © 2015-2025 Oleksandr Kukhtin. All rights reserved.
 
-/*20250512-7985*/
+/*20251024-7988*/
 // controllers/base.js
 
 (function () {
@@ -13863,6 +13912,12 @@ Vue.directive('resize', {
 	let __createStartTime = 0;
 
 	function __runDialog(url, arg, query, cb) {
+		if (url.indexOf('?') !== -1)
+		{
+			let x = urltools.parseUrlAndQuery(url);
+			url = x.url;
+			query = x.query;
+		}
 		return new Promise(function (resolve, reject) {
 			const dlgData = { promise: null, data: arg, query: query, rd:true };
 			eventBus.$emit('modal', url, dlgData);
@@ -14127,6 +14182,15 @@ Vue.directive('resize', {
 				this.$store.commit('setnewid', { id: id });
 				this.$data.__baseUrl__ = urltools.replaceSegment(this.$data.__baseUrl__, id);
 				this.$requery();
+			},
+			$saveCaller() {
+				if (this.$caller)
+					return this.$caller.$save();
+				return null;
+			},
+			$dirtyCaller() {
+				if (this.$caller)
+					this.$caller.$data.$setDirty(true);
 			},
 			$save(opts) {
 				if (this.$data.$readOnly)
@@ -15353,7 +15417,9 @@ Vue.directive('resize', {
 					$showSidePane: this.$showSidePane,
 					$hideSidePane: this.$hideSidePane,
 					$longOperation: this.$longOperation,
-					$requeryNew: this.$requeryNew
+					$requeryNew: this.$requeryNew,
+					$saveCaller: this.$saveCaller,
+					$dirtyCaller: this.$dirtyCaller
 				};
 				Object.defineProperty(ctrl, "$isDirty", {
 					enumerable: true,
