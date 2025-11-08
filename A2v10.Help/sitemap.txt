@@ -66,6 +66,7 @@ https://docs.a2v10.com/xaml/controls/label
 https://docs.a2v10.com/xaml/controls/list
 https://docs.a2v10.com/xaml/controls/listitem
 https://docs.a2v10.com/xaml/controls/menuitem
+https://docs.a2v10.com/xaml/controls/multiselect
 https://docs.a2v10.com/xaml/controls/pager
 https://docs.a2v10.com/xaml/controls/periodpicker
 https://docs.a2v10.com/xaml/controls/propertygrid

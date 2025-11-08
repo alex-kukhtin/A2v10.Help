@@ -74,6 +74,7 @@
 			List				/xaml/controls/list
 			ListItem			/xaml/controls/listitem
 			MenuItem			/xaml/controls/menuitem
+			MultiSelect			/xaml/controls/multiselect
 			Pager				/xaml/controls/pager
 			PeriodPicker		/xaml/controls/periodpicker
 			PropertyGrid		/xaml/controls/propertygrid

@@ -1,0 +1,62 @@
+﻿<div>
+	<!--title:Xaml.MultiSelect-->
+	<!--keywords:MultiSelect-->
+	<div class="title">
+		<h1>
+			Елемент MultiSelect
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>Являє собою селектор з можливістю множинного вибору елементів.</p>
+
+	Наслідує: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Placeholder</td>
+				<td>String</td>
+				<td>
+					Підказка. Відображається в пустому полі введення. Зникає при отриманні полем фокуса введення.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Url</td>
+				<td>String</td>
+				<td>
+					URL <a href="/app/model">кінцевої точки</a>. В цій точці мають
+					бути діалог <b>"browse"</b> та команда <b>"fetch"</b>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Data</td>
+				<td>Object</td>
+				<td>
+					Додаткові дані для операції вибору.
+					Практично завжди прив'язка (<a class="code-link" href="bind">Bind</a>).
+					Властивості переданого об'єкта будуть використані в якості
+					параметрів для збереженої процедури пошуку елементів.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/valuedcontrol">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -191,6 +191,7 @@
     <Content Include="html\xaml\components\component.html" />
     <Content Include="html\xaml\controls\htmlattribute.html" />
     <Content Include="html\xaml\controls\htmlelement.html" />
+    <Content Include="html\xaml\controls\multiselect.html" />
     <Content Include="html\xaml\controls\selectorsimple.html" />
     <Content Include="html\xaml\controls\treegridcolumn.html" />
     <Content Include="html\xaml\controls\treegrid.html" />
