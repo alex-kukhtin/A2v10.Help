@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового					/whatsnew/index
+		Січень 2026				/whatsnew/w202601
 		Листопад 2025			/whatsnew/w202511
 		Вересень 2025			/whatsnew/w202509
 		Грудень 2024			/whatsnew/w202412
@@ -262,7 +263,7 @@
 Програмування на сервері	/server/index
 	Javascript		/server/javascript
 
-Встановлення програм			/deploy/index
+Налаштування програми			/deploy/index
 	Файл appsettings.json		/deploy/appsettings
 
 Бізнес-процеси			/workflow/index
