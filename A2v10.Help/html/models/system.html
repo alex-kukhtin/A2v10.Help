@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Системні набори даних-->
-	<!--keywords:Моделі даних;Системні набори даних-->
+	<!--keywords:Моделі даних;Системні набори даних;$System;$Aliases;$Defaults-->
 	<div class="title">
 		<h1>
 			Системні набори даних
@@ -10,4 +10,380 @@
 		</div>
 	</div>
 
+	<p>
+		Окрім наборів даних, які формують саму модель, збережена процедура може повертати
+		<b>системні набори</b>. Вони не створюють властивостей моделі безпосередньо, а керують тим,
+		як платформа обробляє інші набори: задають параметри розбиття на сторінки, фільтри,
+		значення за замовчуванням тощо.
+	</p>
+
+	<p>
+		Системний набір розпізнається за <b>іменем типу</b> в першому полі набору. Імена всіх системних
+		типів починаються з символа <code>$</code>. Як і для звичайних наборів, значення першого поля
+		завжди має бути <code>null</code>.
+	</p>
+
+	<table class="table-props top">
+		<thead>
+			<tr>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">$System</td>
+				<td>Параметри розбиття на сторінки, сортування, фільтри та ознаки моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">$Aliases</td>
+				<td>Підстановка імен полів, які обчислюються під час виконання процедури.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">$Defaults</td>
+				<td>
+					<span class="core-only">Тільки NET.Core</span>
+					Значення за замовчуванням для нового (незавантаженого) екземпляра моделі.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>$System</h2>
+
+	<p>
+		Найчастіше вживаний системний набір. Його основне призначення - повернути у форму той стан,
+		з яким вона була завантажена: поточну сторінку, порядок сортування та значення фільтрів.
+		Без цього набору форма втратить ці значення при кожному оновленні даних.
+	</p>
+
+	<p>
+		Набір складається з одного рядка. Перше поле - <code>[!$System!]</code> зі значенням <code>null</code>,
+		всі інші поля описують окремі параметри.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+select [Documents!TDocument!Array] = null, [Id!!Id] = d.Id, [Date] = d.[Date],
+	[!!RowCount] = (select count(*) from doc.Documents)
+from doc.Documents d
+order by d.[Date]
+offset @Offset rows fetch next @PageSize rows only;
+
+select [!$System!] = null,
+	/*розбиття на сторінки*/
+	[!Documents!Offset] = @Offset, [!Documents!PageSize] = @PageSize,
+	[!Documents!SortOrder] = @Order, [!Documents!SortDir] = @Dir,
+	/*фільтри*/
+	[!Documents.Period.From!Filter] = @From, [!Documents.Period.To!Filter] = @To,
+	[!Documents.Fragment!Filter] = @Fragment;
+</script>
+</pre>
+
+	<p>
+		Зверніть увагу: значеннями є <b>параметри процедури</b>, а не константи. Саме тому цей набір
+		повертає у форму те, з чим її було викликано.
+	</p>
+
+	<h3>Модифікатори набору $System</h3>
+
+	<p>
+		Другий елемент імені поля вказує, до <b>якого елемента моделі</b> відноситься параметр
+		(в прикладі вище - до масиву <code>Documents</code>). Третій елемент - сам модифікатор.
+	</p>
+
+	<table class="table-props top">
+		<thead>
+			<tr>
+				<th>Модифікатор</th>
+				<th>Ім'я елемента</th>
+				<th>Тип значення</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">PageSize</td>
+				<td>обов'язкове</td>
+				<td>int</td>
+				<td>Кількість елементів на сторінці.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Offset</td>
+				<td>обов'язкове</td>
+				<td>int</td>
+				<td>Зміщення відносно початку (номер першого елемента сторінки).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SortOrder</td>
+				<td>обов'язкове</td>
+				<td>string</td>
+				<td>Ім'я властивості, за якою відсортовано набір.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">SortDir</td>
+				<td>обов'язкове</td>
+				<td>string</td>
+				<td>Напрямок сортування (<code>asc</code> або <code>desc</code>).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">GroupBy</td>
+				<td>обов'язкове</td>
+				<td>string</td>
+				<td>Властивість, за якою виконується групування.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">HasRows</td>
+				<td>обов'язкове</td>
+				<td>int або bit</td>
+				<td>
+					Ознака наявності рядків. Використовується для "лінивих" колекцій, вміст яких
+					ще не завантажено: кількість елементів невідома, але відомо, що вони є.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Filter</td>
+				<td>обов'язкове</td>
+				<td>будь-який</td>
+				<td>
+					Значення фільтра. Ім'я елемента - складене. Див. нижче.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">ReadOnly</td>
+				<td>не вказується</td>
+				<td>bit</td>
+				<td>
+					Якщо <code>1</code>, платформа блокує всі елементи керування форми
+					та забороняє збереження моделі.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Copy</td>
+				<td>не вказується</td>
+				<td>bit</td>
+				<td>Ознака того, що модель завантажено в режимі копіювання.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Permissions</td>
+				<td>обов'язкове</td>
+				<td>int</td>
+				<td>Бітова маска прав доступу до елемента.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Якщо для модифікаторів <code>PageSize</code>, <code>Offset</code>, <code>SortOrder</code>,
+		<code>SortDir</code>, <code>GroupBy</code>, <code>HasRows</code>, <code>Filter</code> або
+		<code>Permissions</code> не вказано ім'я елемента, виникає помилка завантаження моделі.
+	</p>
+
+	<p>
+		Поле з невідомим модифікатором не є помилкою - його значення додається до системних
+		властивостей моделі "як є", під власним ім'ям.
+	</p>
+
+	<h3>Фільтри</h3>
+
+	<p>
+		Ім'я елемента для модифікатора <code>Filter</code> має складатися мінімум з двох частин,
+		розділених крапкою: <code>ЕлементМоделі.ВластивістьФільтра</code>.
+	</p>
+
+	<table class="table-props top">
+		<thead>
+			<tr>
+				<th>Форма запису</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Documents.Fragment</td>
+				<td>Простий фільтр. Значення будь-якого скалярного типу.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">
+					Documents.Period.From<br />
+					Documents.Period.To
+				</td>
+				<td>
+					Період. Проміжний вузол, ім'я якого починається з <code>Period</code>,
+					обробляється як період з двома межами.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Documents.Agent.TAgent.RefId</td>
+				<td>
+					Посилання. Останній елемент - <code>RefId</code>, передостанній - ім'я типу.
+					Об'єкт, на який вказує значення, має бути присутнім у відповідному наборі
+					типу <code>Map</code>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Documents.Agents.TAgent.Array</td>
+				<td>
+					Масив посилань. Значення - рядок з переліком ідентифікаторів через кому.
+					Кожен з них має бути присутнім у наборі типу <code>Map</code>.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Значення фільтра має бути прочитане формою під тим самим іменем. Про використання фільтрів
+		у поданнях див. <a href="paging">Розбиття на сторінки</a>.
+	</p>
+
+	<h2>$Aliases</h2>
+
+	<p>
+		Структура моделі описується <b>іменами полів</b>, а ім'я поля в SQL - це літерал.
+		Обчислити його під час виконання неможливо, не вдаючись до динамічного SQL.
+		Набір <code>$Aliases</code> знімає це обмеження: справжнє ім'я поля передається
+		як <b>значення</b>, а значення SQL обчислює як завгодно.
+	</p>
+
+	<p>
+		Кожне поле набору - це псевдонім, а його значення - повне ім'я, яке цей псевдонім замінює.
+		В наступних наборах замість повного імені пишеться псевдонім.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+select [!$Aliases!] = null, [~Document] = N'Document!TDocument!Object',
+	[~TRow] = N'!TRow!Array', [~EntRef] = N'Entity!TEntity!RefId';
+
+select [~Document] = null, [Id!!Id] = @Id, [Rows!TRow!Array] = null;
+
+select [~TRow] = null, [Id!!Id] = r.Id, [!TDocument.Rows!ParentId] = @Id,
+	[~EntRef] = r.Entity
+from doc.DocRows r where r.Document = @Id;
+
+select [!TEntity!Map] = null, [Id!!Id] = Id, [Name] = [Name]
+from cat.Entities;
+</script>
+</pre>
+
+	<p>
+		Набір <code>$Aliases</code> має бути повернутий <b>перед першим використанням</b> псевдонімів.
+		Псевдоніми застосовуються тільки до наборів, які йдуть після нього. Імена, для яких псевдонім
+		не визначено, використовуються без змін.
+	</p>
+
+	<p>
+		Підстановка застосовується до <b>всіх</b> імен полів у наступних наборах. Тому псевдонім
+		не повинен збігатися зі справжнім іменем якогось поля - інакше це поле буде мовчки
+		замінено. Саме для цього псевдоніми починають з символа <code>~</code>: таке ім'я
+		свідомо не може зустрітися серед звичайних полів.
+	</p>
+
+	<h3>Обчислювані імена полів</h3>
+
+	<p>
+		Основне призначення псевдонімів - імена, які неможливо записати літералом, бо вони залежать
+		від даних. Найтиповіший випадок - набір типу <a href="mapobject">MapObject</a>, де перелік
+		ключів є частиною <b>імені</b> поля-заповнювача.
+	</p>
+
+	<p>
+		Якщо перелік ключів відомий заздалегідь, його записують прямо в імені:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+select [Card!TCard!Object] = null, [Id!!Id] = @Id,
+	[Attrs!TAttr!MapObject!Attr1:Attr2] = null;
+</script>
+</pre>
+
+	<p>
+		Але зазвичай перелік ключів зберігається в базі даних і на момент написання процедури
+		невідомий. Тоді ім'я поля формується під час виконання і підставляється через
+		<code>$Aliases</code>:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+/*перелік ключів залежить від даних*/
+declare @keys nvarchar(max);
+select @keys = string_agg([Prop], N':') from cat.CardProps;
+
+select [!$Aliases!] = null, [~Attrs] = N'Attrs!TAttr!MapObject!' + @keys;
+
+select [Card!TCard!Object] = null, [Id!!Id] = c.Id, [Name] = c.[Name],
+	[~Attrs] = null
+from cat.Cards c where c.Id = @Id;
+
+select [!TAttr!MapObject] = null, [!!Key] = a.Prop, [Value] = a.[Value],
+	[!TCard.Attrs!ParentId] = @Id
+from cat.CardAttributes a where a.Card = @Id;
+</script>
+</pre>
+
+	<h2>$Defaults</h2>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Набір <code>$Defaults</code> задає значення за замовчуванням для властивостей моделі.
+		Значення застосовуються <b>тільки до тих елементів кореня моделі, які не були завантажені</b>.
+		Завдяки цьому набір можна повертати безумовно, не аналізуючи, створюється новий екземпляр
+		чи завантажується існуючий.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+select [Document!TDocument!Object] = null, [Id!!Id] = d.Id, [Date] = d.[Date],
+	[Agent!TAgent!RefId] = d.Agent
+from doc.Documents d where d.Id = @Id;
+
+/*застосується, тільки якщо документ не завантажено*/
+select [!$Defaults!] = null,
+	[Document.Date] = getdate(),
+	[Document.Name] = N'Новий документ',
+	[Document.Agent!TAgent!RefId] = @DefaultAgent;
+
+select [!TAgent!Map] = null, [Id!!Id] = Id, [Name] = [Name]
+from cat.Agents;
+</script>
+</pre>
+
+	<p>
+		Ім'я поля - це шлях до властивості моделі, елементи якого розділені крапкою.
+		Проміжні об'єкти створюються автоматично.
+	</p>
+
+	<ul class="std">
+		<li>Значення <code>null</code> ігнорується - задавати порожнє значення за замовчуванням не має сенсу.</li>
+		<li>
+			Підтримується модифікатор <code>RefId</code>. Об'єкт, на який вказує значення, має бути
+			присутнім у наборі типу <code>Map</code>, при цьому <b>тип значення повинен точно збігатися</b>
+			з типом ідентифікатора в цьому наборі (<code>int</code> 22 не дорівнює <code>bigint</code> 22).
+			Сам набір <code>Map</code> може бути повернутий пізніше.
+		</li>
+		<li>Рядкові значення локалізуються.</li>
+		<li>Підтримується модифікатор <code>Utc</code> для перетворення дати в локальний час.</li>
+	</ul>
+
+	<h2>Порядок наборів</h2>
+
+	<p>
+		Набори даних обробляються послідовно, один за одним. З цього випливають вимоги до їх порядку:
+	</p>
+
+	<ul class="std">
+		<li>
+			<code>$Aliases</code> має бути повернутий перед першим набором, у якому вживаються
+			визначені в ньому псевдоніми.
+		</li>
+		<li>
+			<code>$System</code> має бути повернутий після того, як оброблено всі елементи моделі,
+			на які він посилається. На практиці його зазвичай розміщують останнім.
+		</li>
+		<li>
+			<code>$Defaults</code> може бути розміщений у будь-якому місці - посилання
+			(<code>RefId</code>) в ньому розв'язуються після обробки всіх наборів.
+		</li>
+	</ul>
 </div>

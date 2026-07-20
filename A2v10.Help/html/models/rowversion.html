@@ -59,12 +59,12 @@ begin
 	set nocount on;
 	set transaction isolation level read committed;
 	/* Перевіряємо співпадіння rv */
-     if exists(
-		select * from @Document t 
-		inner join doc.Documents d on d.Id = t.Id
-        where t.rv is not null and t.rv <> d.rv
-	)
-		throw 60000, N'UI:Invalid row version', 0;
+    if exists(
+	    select * from @Document t 
+	    inner join doc.Documents d on d.Id = t.Id
+	    where t.rv is not null and t.rv <> d.rv
+    )
+	    throw 60000, N'UI:Invalid row version', 0;
 
 	/* Оновлення таблиці документів */
 end

@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Розбиття на сторінки-->
-	<!--keywords:Pager;Filter-->
+	<!--keywords:Моделі даних;Розбиття на сторінки;Pager;Filter;RowCount-->
 	<div class="title">
 		<h1>
 			Розбиття на сторінки та фільтри
@@ -9,10 +9,377 @@
 			<a href="index">Моделі даних</a>
 		</div>
 	</div>
-	<p>Будь яку модель (частіше за все index) можна використовувати з додатковими параметрами, такими 
-	як поточна сторінка та різноманітні фільтри. Для цього використвуються додаткові поля в основному наборі даних, 
+	<p>Будь-яку модель (частіше за все index) можна використовувати з додатковими параметрами, такими
+	як поточна сторінка та різноманітні фільтри. Для цього використовуються додаткові поля в основному наборі даних,
 	та додатковий системний набір даних.</p>
-	
 
-	<p></p>
+	<h3>Складові механізму</h3>
+
+	<p>
+		Розбиття на сторінки складається з трьох частин, і всі три обов'язкові:
+	</p>
+
+	<ul class="std">
+		<li>
+			<b>Параметри процедури</b> - поточна сторінка, порядок сортування та значення фільтрів.
+			Платформа передає їх при кожному завантаженні.
+		</li>
+		<li>
+			<b>Загальна кількість записів</b> - поле з модифікатором <code>!RowCount</code>
+			в основному наборі даних. Без нього неможливо визначити кількість сторінок.
+		</li>
+		<li>
+			<b>Повернення стану</b> - системний набір <code>$System</code>, який повертає у форму
+			ті самі параметри. Без нього форма втратить їх при наступному оновленні.
+		</li>
+	</ul>
+
+	<h3>Параметри процедури</h3>
+
+	<table class="table-props top">
+		<thead>
+			<tr>
+				<th>Параметр</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">@Offset</td>
+				<td>Зміщення відносно початку. Номер першого запису сторінки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">@PageSize</td>
+				<td>Кількість записів на сторінці.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">@Order</td>
+				<td>Ім'я властивості, за якою виконується сортування.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">@Dir</td>
+				<td>Напрямок сортування - <code>asc</code> або <code>desc</code>.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Це всі параметри, пов'язані з розбиттям на сторінки. Фільтри - це <b>звичайні параметри
+		процедури</b>, їх кількість та імена визначає розробник. Всі параметри повинні мати
+		значення за замовчуванням.
+	</p>
+
+	<h3>Мінімальний приклад</h3>
+
+	<p>
+		Сама обробка проста. Платформа вимагає тільки двох речей: поля <code>!RowCount</code>
+		в наборі даних і набору <code>$System</code> з поточними параметрами. Все інше -
+		звичайний запит.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure cat.[Agent.Index]
+@UserId bigint,
+@Offset int = 0,
+@PageSize int = 20
+as
+begin
+	set nocount on;
+
+	select [Agents!TAgent!Array] = null,
+		[Id!!Id] = a.Id, [Name!!Name] = a.[Name],
+		[!!RowCount] = count(*) over()
+	from cat.Agents a
+	where a.Void = 0
+	order by a.[Name]
+	offset @Offset rows fetch next @PageSize rows only;
+
+	select [!$System!] = null,
+		[!Agents!Offset] = @Offset, [!Agents!PageSize] = @PageSize;
+end
+</script>
+</pre>
+
+	<p>
+		Цього достатньо для працездатного посторінкового переліку.
+	</p>
+
+	<h3>Як це роблять на практиці</h3>
+
+	<p>
+		Наведений нижче приклад складніший, але жодна з цих складностей не є вимогою платформи.
+		Він додатково розв'язує чотири задачі:
+	</p>
+
+	<ul class="std">
+		<li>сортування за властивістю, яку обирає користувач;</li>
+		<li>фільтри - період, пошук за фрагментом, посилання;</li>
+		<li>формування наборів <code>Map</code> для посилань поточної сторінки;</li>
+		<li>
+			вибірка повного набору колонок тільки для записів сторінки, а не для всієї
+			відфільтрованої множини.
+		</li>
+	</ul>
+
+	<p>
+		Тимчасова таблиця описується як <b>іменований тип</b>, а не як локальна таблична змінна -
+		завдяки цьому її можна передати в іншу процедуру (див. нижче).
+		Окрім ідентифікатора та номера рядка, вона містить <b>колонки зовнішніх ключів</b>.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+<![CDATA[
+create type doc.[Document.Map.TableType] as table(
+	id			bigint,
+	rowNo		int identity(1, 1),
+	agent		bigint,
+	[rowCount]	int
+);
+go
+------------------------------------------------
+create or alter procedure doc.[Document.Index]
+@UserId bigint,
+@Offset int = 0,
+@PageSize int = 20,
+@Order nvarchar(32) = N'date',
+@Dir nvarchar(5) = N'desc',
+@From date = null,
+@To date = null,
+@Fragment nvarchar(255) = null,
+@Agent bigint = null
+as
+begin
+	set nocount on;
+	set transaction isolation level read uncommitted;
+
+	set @Order = lower(@Order);
+	set @Dir = lower(@Dir);
+	declare @fr nvarchar(255) = N'%' + @Fragment + N'%';
+
+	/*відбір, сортування та вирізання сторінки*/
+	declare @docs doc.[Document.Map.TableType];
+
+	insert into @docs(id, agent, [rowCount])
+	select d.Id, d.Agent, count(*) over()
+	from doc.Documents d
+		left join cat.Agents a on d.Agent = a.Id
+	where d.Void = 0
+		and (@Agent is null or d.Agent = @Agent)
+		and (@From is null or d.[Date] >= @From)
+		and (@To is null or d.[Date] <= @To)
+		and (@fr is null or d.[No] like @fr or d.Memo like @fr or a.[Name] like @fr)
+	order by
+		case when @Dir = N'asc'  then case @Order when N'no'   then d.[No]   end end asc,
+		case when @Dir = N'desc' then case @Order when N'no'   then d.[No]   end end desc,
+		case when @Dir = N'asc'  then case @Order when N'date' then d.[Date] end end asc,
+		case when @Dir = N'desc' then case @Order when N'date' then d.[Date] end end desc,
+		case when @Dir = N'asc'  then case @Order when N'sum'  then d.[Sum]  end end asc,
+		case when @Dir = N'desc' then case @Order when N'sum'  then d.[Sum]  end end desc,
+		d.Id
+	offset @Offset rows fetch next @PageSize rows only
+	option(recompile);
+
+	/*вибірка даних*/
+	select [Documents!TDocument!Array] = null,
+		[Id!!Id] = d.Id, [No!!Name] = d.[No], d.[Date], d.[Sum], d.Memo,
+		[Agent!TAgent!RefId] = d.Agent,
+		[!!RowCount] = t.[rowCount]
+	from doc.Documents d
+		inner join @docs t on d.Id = t.Id
+	order by t.rowNo;
+
+	/*розв'язання посилань*/
+	exec doc.[Document.Map] @Map = @docs;
+
+	/*повернення стану*/
+	select [!$System!] = null,
+		[!Documents!Offset] = @Offset, [!Documents!PageSize] = @PageSize,
+		[!Documents!SortOrder] = @Order, [!Documents!SortDir] = @Dir,
+		[!Documents.Period.From!Filter] = @From,
+		[!Documents.Period.To!Filter] = @To,
+		[!Documents.Fragment!Filter] = @Fragment,
+		[!Documents.Agent.TAgent.RefId!Filter] = @Agent;
+end
+]]>
+</script>
+</pre>
+
+	<h3>Двоетапна вибірка</h3>
+
+	<p>
+		У цьому прикладі відбір виконується в два етапи: спочатку в тимчасову таблицю потрапляють
+		<b>тільки ідентифікатори</b> записів потрібної сторінки, і лише потім вибираються самі дані.
+		Так роблять з двох причин:
+	</p>
+
+	<ul class="std">
+		<li>
+			Відбір і сортування виконуються по мінімальному набору колонок, а повні дані
+			читаються тільки для записів сторінки.
+		</li>
+		<li>
+			Тимчасова таблиця несе колонки зовнішніх ключів, завдяки чому її можна передати
+			в процедуру, яка формує набори <code>Map</code>.
+		</li>
+	</ul>
+
+	<p>
+		Поле <code>rowNo</code> зберігає порядок, отриманий при сортуванні. Друга вибірка
+		з'єднується з тимчасовою таблицею, і <code>order by t.rowNo</code> відновлює цей порядок -
+		інакше <code>join</code> може повернути записи в довільній послідовності.
+	</p>
+
+	<h3>Сортування</h3>
+
+	<p>
+		Оскільки властивість для сортування обирає користувач, <code>order by</code> будується
+		на конструкціях <code>case</code> - окремо для зростання і спадання.
+	</p>
+
+	<p class="tip warning">
+		Всередині одного <code>case</code> не можна змішувати колонки різних типів - SQL-Server
+		видасть помилку приведення типів. Тому для кожної групи типів (рядки, дати, числа)
+		потрібна окрема пара <code>case</code>.
+	</p>
+
+	<p>
+		Останнім у переліку вказують сортування за ідентифікатором. Це гарантує, що порядок
+		записів буде визначеним навіть тоді, коли значення в колонці сортування збігаються.
+	</p>
+
+	<h3>Розв'язання посилань</h3>
+
+	<p>
+		Якщо в наборі даних є посилання (<code>!RefId</code>), для них потрібні набори
+		типу <code>Map</code>. Повертати весь довідник неправильно - у <code>Map</code> мають
+		потрапити тільки ті записи, на які посилаються рядки <b>поточної сторінки</b>.
+	</p>
+
+	<p>
+		Саме для цього тимчасова таблиця описується іменованим типом і містить колонки зовнішніх
+		ключів: її передають в окрему процедуру, яка й формує набори <code>Map</code>.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+create or alter procedure doc.[Document.Map]
+@Map doc.[Document.Map.TableType] readonly
+as
+begin
+	set nocount on;
+	set transaction isolation level read uncommitted;
+
+	with TA as (select agent from @Map where agent is not null group by agent)
+	select [!TAgent!Map] = null, [Id!!Id] = a.Id, [Name!!Name] = a.[Name]
+	from cat.Agents a
+		inner join TA on a.Id = TA.agent;
+end
+</script>
+</pre>
+
+	<p>
+		Таку процедуру зазвичай викликають і з <code>.Index</code>, і з <code>.Load</code> -
+		логіка розв'язання посилань описується один раз.
+	</p>
+
+	<h3>Загальна кількість записів</h3>
+
+	<p>
+		Поле з модифікатором <code>!RowCount</code> в основному наборі даних містить загальну
+		кількість записів, що задовольняють умовам відбору - тобто <b>без урахування</b>
+		розбиття на сторінки. Значення потрапляє у властивість <code>$RowCount</code> масиву.
+	</p>
+
+	<p>
+		Значення однакове в усіх рядках набору, тому його зазвичай отримують
+		віконною функцією <code>count(*) over()</code>.
+	</p>
+
+	<h3>Фільтри</h3>
+
+	<p>
+		Фільтр - це звичайний параметр процедури. Платформа не знає про нього нічого, окрім того,
+		що процедура повідомить сама: значення фільтра повертається у форму через системний набір
+		<code>$System</code> з модифікатором <code>!Filter</code>.
+	</p>
+
+	<p>
+		Ім'я елемента складене: перша частина - елемент моделі, до якого належить фільтр,
+		решта - шлях до властивості фільтра. Форма запису залежить від виду фільтра.
+	</p>
+
+	<h4>Скалярні значення</h4>
+
+	<p>
+		Рядки, числа, дати та логічні значення. Найпростіший випадок - шлях з двох частин.
+		Вид фільтра платформа визначає за типом даних самого значення.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+[!Documents.Fragment!Filter] = @Fragment,		/*рядок*/
+[!Documents.Count!Filter] = @Count,				/*число*/
+[!Documents.DateOpt!Filter] = @DateOpt,			/*дата*/
+[!Documents.Flag!Filter] = @Flag				/*логічне*/
+</script>
+</pre>
+
+	<h4>Період</h4>
+
+	<p>
+		Проміжний вузол, ім'я якого починається з <code>Period</code>, обробляється як період.
+		Він завжди має дві межі - <code>From</code> і <code>To</code>.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+[!Documents.Period.From!Filter] = @From,
+[!Documents.Period.To!Filter] = @To
+</script>
+</pre>
+
+	<p>
+		Вузлів-періодів може бути декілька - достатньо, щоб їх імена починались
+		з <code>Period</code>.
+	</p>
+
+	<h4>Посилання</h4>
+
+	<p>
+		Останній елемент шляху - <code>RefId</code>, передостанній - ім'я типу. Об'єкт, на який
+		вказує значення, обов'язково має бути присутнім у наборі типу <code>Map</code> -
+		інакше форма не зможе показати назву обраного значення.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+[!Documents.Agent.TAgent.RefId!Filter] = @Agent
+</script>
+</pre>
+
+	<h4>Масив посилань</h4>
+
+	<p>
+		Якщо фільтр дозволяє обрати декілька значень, останнім елементом шляху вказують
+		<code>Array</code>. Значення - <b>рядок</b> з переліком ідентифікаторів через кому.
+		Кожен з них так само має бути присутнім у наборі <code>Map</code>.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+[!Documents.Agents.TAgent.Array!Filter] = @Agents	/*N'15,20,25'*/
+</script>
+</pre>
+
+	<p>
+		Формальний опис усіх форм запису - в розділі
+		<a href="system">Системні набори даних</a>.
+	</p>
+
+	<p class="tip alert">
+		Якщо значення фільтра не повернути через <code>$System</code>, форма втратить його
+		при першому ж оновленні даних - користувач побачить порожній фільтр і повний перелік.
+	</p>
 </div>

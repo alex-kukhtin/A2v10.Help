@@ -1,6 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
-https://docs.a2v10.com/whatsnew/w202601
+https://docs.a2v10.com/whatsnew/w202607
 https://docs.a2v10.com/whatsnew/w202511
 https://docs.a2v10.com/whatsnew/w202509
 https://docs.a2v10.com/whatsnew/w202412
@@ -35,6 +35,7 @@ https://docs.a2v10.com/models/paging
 https://docs.a2v10.com/models/update
 https://docs.a2v10.com/models/tree
 https://docs.a2v10.com/models/cross
+https://docs.a2v10.com/models/mapobject
 https://docs.a2v10.com/models/group
 https://docs.a2v10.com/models/blob
 https://docs.a2v10.com/models/rowversion

@@ -1,0 +1,101 @@
+﻿<div>
+	<!--title:Іменовані набори (MapObject)-->
+	<!--keywords:Моделі даних;MapObject;Іменовані набори-->
+	<div class="title">
+		<h1>
+			Іменовані набори (MapObject)
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Моделі даних</a>
+		</div>
+	</div>
+
+	<p>
+		Набір типу <code>MapObject</code> схожий на <code>Map</code>, але зв'язування виконується
+		не за ідентифікатором, а за <b>ключем</b>. Кожне окреме значення ключа стає
+		<b>іменованою властивістю</b> батьківського об'єкта.
+	</p>
+
+	<p class="tip info">
+		Механізм використовується рідко. Якщо перелік властивостей відомий заздалегідь,
+		простіше описати їх звичайними полями.
+	</p>
+
+	<h3>Опис набору</h3>
+
+	<p>
+		Як і для інших дочірніх наборів, у батьківському наборі має бути поле-заповнювач,
+		а сам набір повинен містити ключ (<code>!Key</code>) і посилання
+		на батьківський елемент (<code>!ParentId</code>).
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+select [Card!TCard!Object] = null, [Id!!Id] = c.Id, [Name] = c.[Name],
+	[Attrs!TAttr!MapObject] = null
+from cat.Cards c where c.Id = @Id;
+
+select [!TAttr!MapObject] = null, [!!Key] = a.Prop, [Value] = a.[Value],
+	[!TCard.Attrs!ParentId] = @Id
+from cat.CardAttributes a where a.Card = @Id;
+</script>
+</pre>
+
+	<p>
+		Якщо в таблиці <code>CardAttributes</code> є рядки з ключами <code>Color</code>
+		і <code>Weight</code>, то в моделі буде побудовано:
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">Card: {
+	Id: 1,
+	Name: "Назва",
+	Attrs: {
+		Color:  { Value: "червоний" },
+		Weight: { Value: "10 кг" }
+	}
+}
+</script>
+</pre>
+
+	<h3>Перелік ключів</h3>
+
+	<p>
+		Ключі, які реально присутні в даних, потрапляють в модель автоматично. Однак у такому разі
+		структура об'єкта залежала б від даних: за відсутності рядка не було б і відповідної
+		властивості.
+	</p>
+
+	<p>
+		<b>Структура об'єкта має бути незмінною.</b> Тому перелік ключів вказують у <b>імені</b>
+		поля-заповнювача, четвертим елементом, через двокрапку - і платформа створює ці властивості
+		при побудові метаданих, незалежно від того, чи є для них дані:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">
+select [Card!TCard!Object] = null, [Id!!Id] = c.Id,
+	[Attrs!TAttr!MapObject!Color:Weight] = null
+from cat.Cards c where c.Id = @Id;
+</script>
+</pre>
+
+	<p>
+		Тепер властивості <code>Color</code> і <code>Weight</code> присутні в моделі завжди,
+		навіть якщо дочірній набір порожній.
+	</p>
+
+	<h3>Ключі, які залежать від даних</h3>
+
+	<p>
+		Найчастіше перелік ключів зберігається в базі даних і на момент написання процедури
+		невідомий. Оскільки ім'я поля в SQL є літералом, сформувати таке ім'я безпосередньо
+		неможливо - для цього використовується системний набір <code>$Aliases</code>.
+		<a href="system">Детальніше...</a>
+	</p>
+
+	<p class="tip alert">
+		Якщо в наборі немає поля з модифікатором <code>!Key</code>, набір буде побудовано
+		як звичайний масив.
+	</p>
+</div>

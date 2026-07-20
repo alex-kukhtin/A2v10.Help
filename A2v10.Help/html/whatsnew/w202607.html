@@ -1,9 +1,9 @@
 ﻿<div>
-	<!--title:Що нового. Листопад 2025-->
+	<!--title:Що нового. Липень 2026-->
 	<!--keywords:Що нового-->
 	<div class="title">
 		<h1>
-			Випуск 46 - версії 8601-8606 (Січень 2026)
+			Випуск 47 - версії 8601-8606 (Липень 2026)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Всі випуски</a>|
@@ -14,11 +14,9 @@
 
 	<!--
 		Icon.Robot, DataGridColumnRole.Fit
- 
+
 
 		Length.Min,Max,Clamp (CoreOnly)
-
-		Описать несколько периодов [!Agents.Period2.From!Filter] = @From2, [!Agents.Period2.To!Filter] = @To2;
 
 		Index - упорядочить Nuget-ccылки. Написать про основные и модули.
 		Выделить Net.Core и Net. Framework.
@@ -42,7 +40,6 @@
 
 		DataModel.GroupingModel = use Object
 		DataModel.TreeModel = [InitExpand!!Expanded] - имя поля обязательно
-		DataModel. $System recorset описание
 
 		TextBox.EnterCommand - возникает ДО обновления данных модели.
 
@@ -63,7 +60,7 @@
 
 		utils.int2time, time2int
 
-		ctrl.$savePartial, ctrl.$saveCaller?, 
+		ctrl.$savePartial, ctrl.$saveCaller?,
 
 		PropertyGrid.NameMaxChars, ValueMaxChars, PropertyGridItem.NameMaxChars, ValueMaxChars
 
@@ -95,7 +92,7 @@
 
 		IIS: appSettings
 
-		models: paging, update, simple, system recordset
+		models: update
 
 		IController.$report
 		FileImage - зробити детальний опис (files/sql - load/save, azureStorage)
@@ -147,9 +144,24 @@
 		5. Search - підсвітка знайденого тексту.
 		8. MakeHelp - StopWords назовні.
 		-->
-	<h3>Xaml</h3>
+
+	<h3>Моделі даних</h3>
 	<ul class="std">
 		<li>
+			Додано опис <a class="code-link" href="/models/system">системних наборів даних</a> -
+			<code>$System</code>, <code>$Aliases</code> та <code>$Defaults</code>.
+		</li>
+		<li>
+			Додано опис <a class="code-link" href="/models/paging">розбиття на сторінки та фільтрів</a> -
+			параметри процедури, поле <code>!RowCount</code> та всі види фільтрів.
+		</li>
+		<li>
+			Додано опис <a class="code-link" href="/models/simple">простих моделей даних</a>,
+			а також посилань (<code>!RefId</code>) та наборів типу <code>Map</code>.
+		</li>
+		<li>
+			Додано опис <a class="code-link" href="/models/mapobject">іменованих наборів</a>
+			(<code>MapObject</code>).
 		</li>
 	</ul>
 </div>

@@ -1,6 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового					/whatsnew/index
-		Січень 2026				/whatsnew/w202601
+		Липень 2026				/whatsnew/w202607
 		Листопад 2025			/whatsnew/w202511
 		Вересень 2025			/whatsnew/w202509
 		Грудень 2024			/whatsnew/w202412
@@ -41,6 +41,7 @@
 	Оновлення моделей				/models/update
 	Ієрархічні моделі				/models/tree
 	Перехресні моделі				/models/cross
+	Іменовані набори				/models/mapobject
 	Моделі з групуванням			/models/group
 	Робота з бінарними об'єктами	/models/blob
 	Відстеження змін				/models/rowversion
