@@ -12,8 +12,11 @@
 
 	<p>Являє собою спрощений селектор.</p>
 	<p>
-		Фактично це скорочений запис для звичайного елемента <b>Selector</b> в якому
-		встановлені деякі властивості.
+		Це скорочений запис для звичайного елемента
+		<a class="code-link" href="/xaml/controls/selector">Selector</a>. Замість того, щоб вручну
+		задавати команду отримання даних, посилання на діалог вибору та властивість відображення,
+		достатньо вказати <b>одну властивість <code>Url</code></b> - решту
+		<code>SelectorSimple</code> сформує сам за угодою про імена.
 	</p>
 
 	Наслідує: <a class="code-link" href="/xaml/controls/selector">Selector</a> :
@@ -36,16 +39,26 @@
 				<td class="prop-name">Url</td>
 				<td>String</td>
 				<td>
-					URL <a href="/app/model">кінцевої точки</a>. В цій точці мають
-					бути діалог <b>"browse"</b> та команда <b>"fetch"</b>.
+					URL <a href="/app/model">кінцевої точки</a>. Ця точка обов'язково повинна
+					містити діалог <b>browse</b> та команду <b>fetch</b> - саме їх
+					<code>SelectorSimple</code> викликає за замовчуванням.
 				</td>
 			</tr>
-			<tr>
+			<tr class="top">
 				<td class="prop-name">Data</td>
 				<td>Object</td>
 				<td>
 					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>.
 					Додаткові параметри для вибору.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Folder</td>
+				<td>Boolean</td>
+				<td>
+					Якщо <code>true</code>, замість <code>fetch</code> і <code>browse</code>
+					викликаються <code>fetchfolder</code> і <code>browsefolder</code>.
+					Використовується для вибору з ієрархічних довідників.
 				</td>
 			</tr>
 			<tr>
@@ -56,9 +69,21 @@
 		</tbody>
 	</table>
 
+	<h3>Умовчання</h3>
+	<p>
+		За вказаним <code>Url</code> <code>SelectorSimple</code> формує решту властивостей базового
+		<a class="code-link" href="/xaml/controls/selector">Selector</a> самостійно:
+	</p>
+	<ul class="std">
+		<li>команда отримання даних - <code>Url + '/fetch'</code>;</li>
+		<li>діалог вибору - <code>Url + '/browse'</code>, з іконкою пошуку;</li>
+		<li>властивість відображення (<code>DisplayProperty</code>) - <code>Name</code>;</li>
+		<li>значення (<code>Value</code>) передається в діалог вибору як аргумент.</li>
+	</ul>
+
 	<p class="tip info">
-		<b>Зверніть увагу!</b> Якщо в елементі задано властивість <code>Data</code>, 
-		вона буде використовуватися в якості параметрів, як для виклику діалогу вибору (browse), 
+		<b>Зверніть увагу!</b> Якщо в елементі задано властивість <code>Data</code>,
+		вона буде використовуватися в якості параметрів, як для виклику діалогу вибору (browse),
 		так і для отримання даних з сервера (fetch).
 		<br />
 		Фактично <code>Data</code> просто дублюється в <code>FetchData</code> базового селектора.
@@ -69,19 +94,19 @@
 	<p>Такий код XAML</p>
 <pre class="code-highlight xml" data-lang="xml">
 <script type="text/template">
-<SelectorSimpe Value="{Bind Document.Agent" Url="/catalog/agent" />
+<SelectorSimple Value="{Bind Document.Agent}" Url="/catalog/agent" />
 </script>
 </pre>
 
 	<p>
-		фактично е аналогом ось такого коду:
+		фактично є аналогом ось такого коду:
 	</p>
 
 <pre class="code-highlight xml" data-lang="xml">
 <script type="text/template">
 <Selector Value="{Bind Document.Agent}" DisplayProperty="Name"
 		  Fetch="/catalog/agent/fetch">
-	<Hyperlink Command="{BindCmd Browse, Url='/catalog/agent/browse'
+	<Hyperlink Icon="Search" Command="{BindCmd Browse, Url='/catalog/agent/browse'
 			   Argument={Bind Document.Agent}}" />
 </Selector>
 </script>

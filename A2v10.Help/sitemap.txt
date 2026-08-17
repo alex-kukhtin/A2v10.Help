@@ -87,6 +87,7 @@ https://docs.a2v10.com/xaml/controls/tablemarkcell
 https://docs.a2v10.com/xaml/controls/tablerow
 https://docs.a2v10.com/xaml/controls/textbox
 https://docs.a2v10.com/xaml/controls/timepicker
+https://docs.a2v10.com/xaml/controls/toolbaraligner
 https://docs.a2v10.com/xaml/controls/treegrid
 https://docs.a2v10.com/xaml/controls/treegridcolumn
 https://docs.a2v10.com/xaml/controls/treeview

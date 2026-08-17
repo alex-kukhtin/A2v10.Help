@@ -1,0 +1,95 @@
+﻿<div>
+	<!--title:Xaml.ToolbarAligner-->
+	<!--keywords:ToolbarAligner;Toolbar-->
+	<div class="title">
+		<h1>
+			Елемент ToolbarAligner
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+	<p>
+		Порожній елемент, який займає весь вільний простір контейнера. Все, що стоїть у розмітці
+		після нього, зсувається до протилежного краю. Це аналог <code>flex-grow: 1</code>
+		в CSS flexbox.
+	</p>
+
+	<p>
+		Працює в будь-якому контейнері з горизонтальним розташуванням елементів - панелі
+		інструментів <a class="code-link" href="/xaml/containers/toolbar">Toolbar</a>,
+		<a class="code-link" href="/xaml/containers/stackpanel">StackPanel</a> тощо.
+	</p>
+
+	<p>
+		На відміну від <a class="code-link" href="/xaml/controls/separator">Separator</a>,
+		який малює вертикальну лінію, <code>ToolbarAligner</code> нічого не відображає -
+		він лише розподіляє простір.
+	</p>
+
+	<p>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="3">Об'єкт не має власних властивостей</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML
+<pre class="code-highlight xml">
+<script type="text/template">
+<Toolbar>
+	<Button Content="Open" Icon="File"/>
+	<Button Icon="Save" Content="Save" />
+	<ToolbarAligner />
+	<Button Icon="Help" Content="Help" />
+</Toolbar>
+</script>
+</pre>
+	</p>
+
+	<p>
+		Результат
+		<div class="xaml-sample" style="width:500px">
+			<div class="toolbar">
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-file"></i>  Open
+				</button>
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-save"></i> Save
+				</button>
+				<div class="aligner"></div>
+				<button toggle="" class="btn btn-tb">
+					<i class="ico ico-help"></i> Help
+				</button>
+			</div>
+		</div>
+	</p>
+
+	<p>
+		Того самого результату можна досягти доданою властивістю
+		<code>Toolbar.Align="Right"</code> на кнопці <code>Help</code>.
+		<code>ToolbarAligner</code> зручний тоді, коли праворуч треба відсунути одразу декілька
+		елементів або коли точку розділення хочеться бачити явно в розмітці.
+	</p>
+</div>

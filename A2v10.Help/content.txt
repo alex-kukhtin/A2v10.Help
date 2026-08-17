@@ -95,6 +95,7 @@
 			TableRow			/xaml/controls/tablerow
 			TextBox				/xaml/controls/textbox
 			TimePicker			/xaml/controls/timepicker
+			ToolbarAligner		/xaml/controls/toolbaraligner
 			TreeGrid			/xaml/controls/treegrid
 			TreeGridColumn		/xaml/controls/treegridcolumn
 			TreeView			/xaml/controls/treeview
