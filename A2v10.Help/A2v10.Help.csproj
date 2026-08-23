@@ -135,7 +135,6 @@
     <Content Include="html\server\index.html" />
     <Content Include="html\template\defaults.html" />
     <Content Include="html\tests\checktypes.html" />
-    <Content Include="html\whatsnew\w202601.html" />
     <Content Include="html\whatsnew\w202511.html" />
     <Content Include="html\whatsnew\w202509.html" />
     <Content Include="html\whatsnew\w202412.html" />
@@ -145,6 +144,8 @@
     <Content Include="html\whatsnew\w202212.html" />
     <Content Include="html\whatsnew\w202209.html" />
     <Content Include="html\whatsnew\w202201.html" />
+    <Content Include="html\whatsnew\w202607.html" />
+    <Content Include="html\whatsnew\w202608.html" />
     <Content Include="html\workflow\activities\sendmessage.html" />
     <Content Include="html\workflow\objects\index.html" />
     <Content Include="html\workflow\objects\trackrecord.html" />
