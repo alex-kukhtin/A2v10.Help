@@ -1,4 +1,4 @@
-﻿<div>
+<div>
 	<!--title:Xaml.WrapMode-->
 	<!--keywords:WrapMode-->
 	<div class="title">
@@ -9,4 +9,47 @@
 			<a href="index">Всі переліки</a>
 		</div>
 	</div>
+
+	<p>Задає режим перенесення тексту в елементі.</p>
+
+	<p>
+		Використовується:
+		<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a> (властивість
+		<code>Wrap</code>),
+		<a class="code-link" href="/xaml/controls/datagridcolumn">DataGridColumn</a>,
+		<a class="code-link" href="/xaml/controls/treegridcolumn">TreeGridColumn</a>
+	</p>
+
+	<h3>Значення</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Значення</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Default</td>
+				<td>За замовчуванням. Режим перенесення не встановлюється - текст поводиться так, як
+				це прийнято для самого елемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Wrap</td>
+				<td>Переносити рядки. Явні переноси рядків у тексті зберігаються
+				(css <code>white-space: pre-line</code>).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">NoWrap</td>
+				<td>Не переносити. Текст завжди залишається в одному рядку
+				(css <code>white-space: nowrap</code>).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">PreWrap</td>
+				<td>Переносити рядки, зберігаючи як явні переноси, так і послідовності пробілів
+				(css <code>white-space: pre-wrap</code>).</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>

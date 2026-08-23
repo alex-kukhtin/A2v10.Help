@@ -16,6 +16,26 @@
 	</p>
 
 	<p>
+		Графіка малюється засобами бібліотеки <b>d3.js</b>. Сам файл <code>d3.min.js</code>
+		постачається разом з платформою (папка <code>wwwroot/scripts</code>), але підключається
+		він по-різному:
+	</p>
+	<ul class="std">
+		<li>
+			у версії <b>.NET Framework</b> бібліотека підключається автоматично і завжди -
+			робити нічого не потрібно;
+		</li>
+		<li>
+			у версії <b>.NET Core</b> автоматичного підключення немає - скрипт потрібно підключити
+			самостійно у файлі <code>_scripts.html</code> спеціальної папки
+			<a href="/app/folders/layout">_layout</a>.
+		</li>
+	</ul>
+	<p>
+		Якщо бібліотека не підключена, замість графіки елемент відобразить повідомлення про помилку.
+	</p>
+
+	<p>
 		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
 	</p>
 
@@ -33,7 +53,11 @@
 			<tr>
 				<td class="prop-name">Delegate</td>
 				<td>String</td>
-				<td>Ім'я <a href="/template/delegates">делегата</a>, який буде викликатися для відмальовки графіки.</td>
+				<td>
+					Ім'я <a href="/template/delegates">делегата</a>, який буде викликатися для
+					відмальовки графіки. <b>Обов'язкова властивість</b> - якщо її не задано,
+					при формуванні розмітки виникне помилка.
+				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">Argument</td>
@@ -43,11 +67,13 @@
 					який буде передано в делегат.
 				</td>
 			</tr>
-			<tr>
+			<tr class="top">
 				<td class="prop-name">CenterContent</td>
 				<td>Boolean</td>
 				<td>
-					Чи центрувати вміст.
+					Чи центрувати вміст. Якщо <code>true</code>, вміст елемента центрується
+					одночасно по горизонталі та по вертикалі. Має сенс тільки разом із заданою
+					висотою (властивість <code>Height</code>).
 				</td>
 			</tr>
 			<tr class="top">
@@ -71,6 +97,11 @@
 				<td>Висота елементу. За замовчуванням <code>Auto</code>.</td>
 			</tr>
 			<tr>
+				<td class="prop-name">CssClass</td>
+				<td>String</td>
+				<td>Класи css, які потрібно додати до елементу. Може бути прив'язкою.</td>
+			</tr>
+			<tr>
 				<td colspan="3">
 					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
 				</td>
@@ -84,24 +115,91 @@
 		<h4>Аргументи:</h4>
 		<ul class="params">
 			<li>
-				<code>chart</code> - об`єкт бібліотеки <code>d3.js</code>.
+				<code>chart</code> - вузол DOM, пов'язаний з елементом, "загорнутий" в об`єкт
+				вибірки (selection) бібліотеки <code>d3.js</code>, тобто результат виклику
+				<code>d3.select(node)</code>.
 			</li>
 			<li>
 				<code>arg</code> - аргумент, описаний в розмітці.
 			</li>
 			<li>
-				<code>node</code> - вузел DOM, пов'язаний з елементом.
+				<code>node</code> - вузол DOM, пов'язаний з елементом.
 			</li>
 		</ul>
 	</div>
+
+	<p>
+		Перед кожним викликом делегата вміст елемента повністю очищується, тому делегат завжди
+		малює графіку "з нуля" - дописати щось до попереднього результату не вийде.
+	</p>
 
 	<p class="tip warning">
 		<b>Зверніть увагу!</b> Зазвичай потрібно, щоб відмальовка графіки виконувалася однократно. Однак, в деяких 
 		випадках елемент, пов'язаний з графікою може змінюватися.
 		<br />
 		Встановити режим відслідковування змін можна за допомогою властивості <code>Watch</code>.
-		Не встановлюйте режим <code>Deep</code> без необхідности, оскільки це призводить до зниження 
+		Не встановлюйте режим <code>Deep</code> без необхідности, оскільки це призводить до зниження
 		швидкодії.
+	</p>
+
+	<h3>Приклад</h3>
+
+	<p>
+		XAML:
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Graphics Delegate="DrawChart" Argument="{Bind Chart.Items}"
+		  Watch="Watch" Height="20rem" />
+</script>
+</pre>
+
+		Javascript:
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+
+const template = {
+	delegates: {
+		DrawChart: drawChart
+	}
+};
+
+function drawChart(chart, arg, node) {
+	/*
+	this  - кореневий об'єкт даних
+	chart - вибірка (selection) d3 для елемента
+	arg   - масив Chart.Items з розмітки
+	node  - вузол DOM, пов'язаний з елементом
+	*/
+
+	const data = arg || [];
+	const width = node.clientWidth;
+	const height = node.clientHeight;
+
+	const x = d3.scaleBand()
+		.domain(data.map(d => d.Name))
+		.range([0, width])
+		.padding(0.2);
+
+	const y = d3.scaleLinear()
+		.domain([0, d3.max(data, d => d.Value)])
+		.range([height, 0]);
+
+	const svg = chart.append('svg')
+		.attr('width', width)
+		.attr('height', height);
+
+	svg.selectAll('rect')
+		.data(data)
+		.enter()
+		.append('rect')
+		.attr('x', d => x(d.Name))
+		.attr('y', d => y(d.Value))
+		.attr('width', x.bandwidth())
+		.attr('height', d => height - y(d.Value));
+}
+
+</script>
+</pre>
 	</p>
 
 </div>
