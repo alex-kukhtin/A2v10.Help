@@ -128,6 +128,7 @@
     <Content Include="html\messaging\index.html" />
     <Content Include="html\models\system.html" />
     <Content Include="html\models\rowversion.html" />
+    <Content Include="html\models\errors.html" />
     <Content Include="html\models\update.html" />
     <Content Include="html\models\paging.html" />
     <Content Include="html\models\blob.html" />

@@ -46,6 +46,7 @@
 	Моделі з групуванням			/models/group
 	Робота з бінарними об'єктами	/models/blob
 	Відстеження змін				/models/rowversion
+	Повідомлення про помилки		/models/errors
 	Системні набори даних			/models/system
 
 
