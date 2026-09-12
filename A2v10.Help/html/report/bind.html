@@ -1,0 +1,258 @@
+﻿<div>
+	<!--title:Звіти. Вирази і прив'язки-->
+	<!--keywords:звіт;вираз;прив'язка;Bind;scope;Root-->
+	<div class="title">
+		<h1>
+			Вирази і прив'язки
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Звіти Xaml</a>
+		</div>
+	</div>
+
+	<p>
+		Кожен вираз обчислюється відносно <b>поточної області</b> (scope): нагорі це корінь
+		моделі, а всередині таблиці, переліку чи іменованого діапазону — поточний елемент колекції.
+	</p>
+
+	<p class="tip info">
+		<b>Правило одне:</b> голий шлях читається від поточної області; усе інше — звичайний
+		javascript, в якому <code>this</code> і є поточна область, вільні імена читаються від
+		кореня моделі, а <code>Root</code> — це явний корінь з будь-якої глибини.
+	</p>
+
+	<h3>Два написання, одне правило</h3>
+	<p>
+		У клітинці робочої книги вираз пишеться прямо в тексті, у фігурних дужках;
+		у розмітці — прив'язкою <code>Bind</code> на властивості:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- клітинка книги -->
+{Document.Agent.Name}
+
+<!-- розмітка -->
+<TableCell Content="{Bind Document.Agent.Name}"/>
+</script>
+</pre>
+
+	<p>
+		Правило розбору однакове: <code>Document.Agent.Name</code> — голий шлях, тому він
+		читається просто по даних. Усе, що на шлях не схоже (виклик, арифметика, дужки, індекс),
+		віддається javascript.
+	</p>
+
+	<p class="tip warning">
+		<b>Увага!</b> Місця, де це пишеться, не взаємозамінні. У розмітці значення приходить
+		лише через прив'язку в <b>атрибуті</b>; фігурні дужки в тексті елемента там нічого не
+		означають і друкуються як є. Підстановка прямо в тексті — властивість клітинки книги.
+	</p>
+
+	<h3>Область і вихід з неї</h3>
+	<p>
+		Область змінює <code>ItemsSource</code> таблиці або переліку — і, в книзі, іменований
+		діапазон. Усередині рядка шлях читається від його елемента:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Table ItemsSource="{Bind Document.Rows}" Columns="1fr,80pt">
+	<Table.Body>
+		<TableRow>
+			<!-- поле рядка -->
+			<TableCell Content="{Bind Item.Name}"/>
+			<!-- поле документа: вихід до кореня -->
+			<TableCell Content="{Bind Root.Document.Date, DataType=Date}"/>
+		</TableRow>
+	</Table.Body>
+</Table>
+</script>
+</pre>
+
+	<p>
+		Вкладеність працює сама: таблиця всередині клітинки іншої таблиці обчислює свій
+		<code>ItemsSource</code> вже від рядка, в якому вона стоїть.
+	</p>
+
+	<h3>Формат і тип</h3>
+	<p>
+		У клітинці книги формат пишеться після двокрапки, у прив'язці — властивостями
+		<code>DataType</code> і <code>Format</code>:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+{Document.Sum:#,##0.00}
+
+<TableCell Content="{Bind Document.Sum, DataType=Currency}"/>
+</script>
+</pre>
+
+	<p>
+		Двокрапка розділяє формат <b>тільки після шляху</b>: усередині виразу вона означає
+		умовний оператор, а не формат.
+	</p>
+
+	<p class="tip info">
+		<b>Правило про тип одне:</b> вказаний <code>DataType</code> або <code>Format</code>
+		діє завжди — і в клітинці, і в розмітці, і для шляху, і для виразу. Не вказаний —
+		вгадується тільки в клітинці книги і тільки за значенням з даних: <code>Decimal</code>
+		друкується валютою, дата — датою з часом.
+	</p>
+
+	<p>
+		Звідси два наслідки, обидва про пораховане значення:
+	</p>
+	<ul class="std">
+		<li>
+			Число, яке повернув javascript, <b>валютою не стане ніколи</b>: воно приходить
+			дробовим, і вгадування дає «число». <code>{Price}</code> у клітинці дасть
+			<code>10.00</code>, а <code>{(Price * 1)}</code> — <code>10</code>.
+		</li>
+		<li>
+			У розмітці вгадування нема взагалі: <code>{Bind Sum}</code> без
+			<code>DataType</code> друкується як є, з тим числом знаків, яке приїхало з бази —
+			поле <code>money</code> дасть <code>1234.5000</code>.
+		</li>
+	</ul>
+	<p>
+		Тому в обох випадках — у виразі і в розмітці — тип або формат пишуть явно.
+	</p>
+
+	<h3>Функції</h3>
+	<p>
+		Свої функції оголошуються в секції <code>Code</code> шаблону. Поточна область
+		передається в них аргументом — <code>this</code> в тілі стрілкової функції означає не те,
+		що очікує автор, тому платформа на нього не покладається:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Page.Code>
+	const rowTotal = (row) => row.Price * row.Qty;
+	const total = (doc) => doc.Rows.reduce((s, r) => s + rowTotal(r), 0);
+</Page.Code>
+
+<TableCell Content="{Bind rowTotal(this), DataType=Currency}"/>
+<TableCell Content="{Bind total(Document), DataType=Currency}"/>
+</script>
+</pre>
+
+	<p>
+		Колекції моделі поводяться як звичайні масиви javascript, тому підсумок можна порахувати
+		прямо у клітинці, без жодної функції:
+		<code>{(Document.Rows.reduce((s, r) =&gt; s + r.Sum, 0))}</code>.
+	</p>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Кожен вираз виконується в межах бюджету: не глибше 256 викликів,
+		обмежена кількість операцій і не довше 5 секунд. Нескінченний цикл чи рекурсія без виходу
+		в секції <code>Code</code> зупиняють друк з помилкою — сервер при цьому не зависає.
+		Бюджет рахується на кожен вираз окремо, тож довгий документ з тисячами клітинок його
+		не вичерпує.
+	</p>
+
+	<h3>Пробіли в розмітці</h3>
+	<p class="tip warning">
+		<b>Увага!</b> У фігурних дужках розмітки пробіл розділяє аргументи, тому вираз з пробілами
+		треба брати в лапки — і аргумент, і значення властивості однаково. Без лапок розбір
+		розмітки зупиняється з помилкою <i>«Quote a value with spaces: 'text' or `template`»</i>
+		і показує все розширення цілком. Раніше замість помилки мовчки бралося останнє слово,
+		і <code>{Bind Price * Qty}</code> перетворювався на прив'язку до <code>Qty</code>.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- пробілів нема - лапки не потрібні -->
+<TableCell Content="{Bind Sum, DataType=Currency}"/>
+<TableCell Content="{Bind rowTotal(this), DataType=Currency}"/>
+
+<!-- пробіли є - в одинарні лапки -->
+<TableCell Content="{Bind 'Price * Qty', DataType=Currency}"/>
+<TableCell Content="{Bind 'Document.Done ? 1 : 2'}"/>
+
+<!-- те саме окремим елементом, якщо так зрозуміліше -->
+<TableCell>
+	<TableCell.Content>
+		<Bind Expression="Price * Qty" DataType="Currency"/>
+	</TableCell.Content>
+</TableCell>
+</script>
+</pre>
+
+	<p>
+		Кома всередині лапок теж не розділяє: <code>Format='#,##0.00'</code> читається цілком.
+		Незакрита лапка — теж помилка розбору, а не прив'язка без виразу.
+		У клітинці робочої книги нічого з цього нема — там вираз пишеться як є.
+	</p>
+
+	<h4>Зворотні лапки</h4>
+	<p>
+		Другий вид лапок — зворотні, <code>`…`</code>. На відміну від одинарних, вони
+		<b>залишаються</b> у виразі: те, що всередині, — шаблонний рядок javascript з
+		підстановками <code>${…}</code>. Одинарні лапки всередині них не закривають значення,
+		тому це єдиний спосіб написати в атрибуті вираз, який сам містить одинарні лапки:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Span Content="{Bind `Накладна № ${Document.Number} від ${formatDate(Document.Date, 'dd.MM.yyyy')}`}"/>
+</script>
+</pre>
+
+	<p>
+		Це можливість, а не основний спосіб: такий рядок важко читати, а форматування в ньому
+		обходить <code>DataType</code> і <code>Format</code>. Якщо вираз розрісся до шаблонного
+		рядка, зазвичай простіше розбити його на кілька <code>Span</code> або винести в
+		функцію секції <code>Code</code>.
+	</p>
+
+	<h4>Вбудовані функції</h4>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Функція</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">spellMoney(value, currency)</td>
+				<td>Сума прописом. <code>currency</code> — код валюти, за замовчуванням <code>'980'</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">spellMoneyEn(value, currency)</td>
+				<td>Те саме англійською.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">formatDate(value, format)</td>
+				<td>Дата в заданому форматі, наприклад <code>'dd.MM.yyyy'</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">qrCode(value)</td>
+				<td>QR-код зі значення. Клітинка малює його як зображення.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Умовне відображення</h3>
+	<p>
+		Властивість <code>If</code> є у кожного елемента. Вираз читається за тим самим правилом,
+		а знак оклику перед ним інвертує результат:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Text If="{Bind !Document.Done}">Не проведено</Text>
+</script>
+</pre>
+
+	<h3>Річ, про яку варто знати заздалегідь</h3>
+	<p>
+		Те, що існує лише в javascript, шляхом не дістати: <code>{Rows.length}</code> дає
+		пусто, бо в даних такого поля нема. Пишіть виразом — <code>{(Rows.length)}</code>.
+		Зовнішні круглі дужки саме це й роблять: усе, що не схоже на шлях, обчислюється
+		як javascript.
+	</p>
+</div>

@@ -1,0 +1,96 @@
+﻿<div>
+	<!--title:Xaml.Report.Cell-->
+	<!--keywords:Cell;клітинка;книга;звіт-->
+	<div class="title">
+		<h1>
+			Cell
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Робоча книга</a>
+		</div>
+	</div>
+	<p>
+		Клітинка книги. Зберігається під своєю адресою (<code>"A1"</code>) і майже завжди
+		створюється конвертером з клітинки Excel — тобто пишеться не тут, а в самій книзі.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Value</td>
+				<td>String</td>
+				<td>
+					Вміст клітинки: текст, в якому у фігурних дужках підставляються значення
+					з моделі. Див. <a href="/report/bind">Вирази і прив'язки</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ColSpan</td>
+				<td>UInt32</td>
+				<td>Скільки колонок займає клітинка (з об'єднаних клітинок Excel).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowSpan</td>
+				<td>UInt32</td>
+				<td>Скільки рядків займає клітинка.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Style</td>
+				<td>String</td>
+				<td>Посилання на набір оформлення книги (<code>"S30"</code>).</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Format</td>
+				<td>String</td>
+				<td>
+					Формат значення. Зазвичай приїжджає з числового формату клітинки Excel
+					через оформлення, тому окремо його вказують рідко.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DataType</td>
+				<td class="fit"><code>DataType</code></td>
+				<td>
+					Тип значення: <code>String</code>, <code>Number</code>, <code>Currency</code>,
+					<code>Date</code>, <code>Time</code>, <code>DateTime</code>. Якщо не вказано,
+					визначається за самим значенням.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Що можна написати в клітинці</h3>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">Накладна № {Document.Number} від {Document.Date:dd-MM-yyyy} р.
+{Document.Company.Name}
+{Item.Name}
+{Sum:#,##0.00}
+{(spellMoney(Document.Sum))}
+{Company.Logo}
+</script>
+</pre>
+	<p>
+		Текст і підстановки змішуються вільно; формат пишеться після двокрапки. Якщо значення
+		виявилося байтами, клітинка малює картинку — так у бланк потрапляє логотип
+		(<a href="/report/images">Картинки і водяний знак</a>).
+	</p>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Формат клітинки, заданий в Excel, переноситься разом з
+		оформленням. Тому суму зазвичай досить відформатувати в самій книзі, а в тексті
+		написати просто <code>{Sum}</code>.
+	</p>
+</div>

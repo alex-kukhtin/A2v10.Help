@@ -1,0 +1,65 @@
+﻿<div>
+	<!--title:Xaml.Report. Row і Column-->
+	<!--keywords:Row;Column;висота;ширина;книга-->
+	<div class="title">
+		<h1>
+			Row і Column
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Робоча книга</a>
+		</div>
+	</div>
+	<p>
+		Розміри рядків і колонок книги. Обидва зберігаються тільки для тих, де розмір
+		відрізняється від типового, — решта беруть значення за замовчуванням з
+		<a class="code-link" href="workbook">Workbook</a>.
+	</p>
+
+	<h3>Row</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td>Single</td>
+				<td>Висота рядка в пунктах.</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Рядки зберігаються за номером: <code>"Rows": { "1": { "Height": 31.5 } }</code></p>
+
+	<h3>Column</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Width</td>
+				<td>Single</td>
+				<td>
+					Ширина колонки в пунктах. Від'ємне значення означає, що колонка розтягується
+					на вільне місце — так конвертер позначає колонку з іменем
+					<a href="range">Fit</a>.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Колонки зберігаються за літерою: <code>"Columns": { "A": { "Width": 21.75 } }</code></p>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Ширина колонки в Excel рахується в символах шрифту, а не в
+		пунктах, і конвертер її перераховує. Тому в шаблоні числа не збігаються з тим, що
+		показує Excel, — це нормально.
+	</p>
+</div>

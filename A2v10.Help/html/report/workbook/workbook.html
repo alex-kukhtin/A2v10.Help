@@ -1,0 +1,116 @@
+﻿<div>
+	<!--title:Xaml.Report.Workbook-->
+	<!--keywords:Workbook;книга;звіт-->
+	<div class="title">
+		<h1>
+			Workbook
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Робоча книга</a>
+		</div>
+	</div>
+	<p>
+		Книга — вміст шаблону, зробленого з Excel. Сам шаблон при цьому залишається сторінкою:
+		орієнтація, поля, шрифт, заголовок, секція <code>Code</code> і водяний знак задаються
+		так само, як у <a class="code-link" href="/report/elements/page">Page</a>.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">RowCount</td>
+				<td>UInt32</td>
+				<td>Кількість рядків книги.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ColumnCount</td>
+				<td>UInt32</td>
+				<td>Кількість колонок книги.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Cells</td>
+				<td class="fit"><code>CellCollection</code></td>
+				<td>
+					Клітинки за адресою: <code>"A1"</code>, <code>"C3"</code> — див.
+					<a class="code-link" href="cell">Cell</a>. Порожні клітинки не зберігаються.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Rows</td>
+				<td class="fit"><code>RowCollection</code></td>
+				<td>Висоти рядків за номером — <a class="code-link" href="rowcolumn">Row</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Columns</td>
+				<td class="fit"><code>ColumnCollection</code></td>
+				<td>Ширини колонок за літерою — <a class="code-link" href="rowcolumn">Column</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Ranges</td>
+				<td class="fit"><code>RangeCollection</code></td>
+				<td>Повторювані діапазони — <a class="code-link" href="range">Range</a>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td class="fit"><a class="code-link" href="range">Range</a></td>
+				<td>Рядки, які друкуються на початку кожної сторінки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Footer</td>
+				<td class="fit"><a class="code-link" href="range">Range</a></td>
+				<td>Рядки, які друкуються в кінці кожної сторінки.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">TableHeader</td>
+				<td class="fit"><a class="code-link" href="range">Range</a></td>
+				<td>
+					Шапка довгої таблиці: повторюється на кожній сторінці, де таблиця
+					продовжується.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">TableFooter</td>
+				<td class="fit"><a class="code-link" href="range">Range</a></td>
+				<td>Підвал довгої таблиці: друкується один раз, після рядків.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">PageFooter</td>
+				<td class="fit"><a class="code-link" href="pagefooter">PageFooter</a></td>
+				<td>Нижній колонтитул сторінки, зазвичай з номером.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Styles</td>
+				<td class="fit"><code>StyleCollection</code></td>
+				<td>
+					Набір оформлення, на який посилаються клітинки. Створюється конвертером
+					з оформлення книги; руками не пишеться.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ColumnWidth</td>
+				<td>Single?</td>
+				<td>Ширина колонки за замовчуванням, у пунктах (для колонок, яких нема в <code>Columns</code>).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowHeight</td>
+				<td>Single?</td>
+				<td>Висота рядка за замовчуванням, у пунктах.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Секція <code>Model</code>, яку можна побачити в бланках
+		метаданого шару поруч з <code>Workbook</code>, до рушія друку відношення не має:
+		вона описує, які дані вибрати, і читається на іншому боці. Рушій отримує вже готову
+		модель і цю секцію ігнорує.
+	</p>
+</div>

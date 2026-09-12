@@ -1,0 +1,75 @@
+﻿<div>
+	<!--title:Xaml.Report.Image-->
+	<!--keywords:Image;картинка;зображення;логотип-->
+	<div class="title">
+		<h1>
+			Елемент Image
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Зображення: логотип, підпис, печатка. Джерело — байти з моделі або файл програми;
+		растр і SVG розрізняються за вмістом, а не за розширенням. Подробиці —
+		<a href="/report/images">Картинки і водяний знак</a>.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Source</td>
+				<td>Object</td>
+				<td>
+					Зображення: байти з моделі (прив'язка) або ім'я файлу.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">FileName</td>
+				<td>String</td>
+				<td>
+					Друге написання того самого: приймає і ім'я файлу, і байти. Залишене для
+					сумісності зі старими бланками.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td class="fit"><a class="code-link" href="/report/simple/length">Length</a></td>
+				<td>Ширина зображення.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td class="fit"><a class="code-link" href="/report/simple/length">Length</a></td>
+				<td>Висота зображення.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- з моделі -->
+<Image Source="{Bind Company.Logo}" Height="20mm"/>
+
+<!-- з файлу програми -->
+<Image FileName="stamp.svg" Width="40mm"/>
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Якщо значення порожнє, елемент просто нічого не малює —
+		порожньої рамки на його місці не залишається.
+	</p>
+</div>

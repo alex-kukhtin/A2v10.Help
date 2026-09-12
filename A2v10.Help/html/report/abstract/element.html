@@ -1,0 +1,114 @@
+﻿<div>
+	<!--title:Звіти. Базовий елемент-->
+	<!--keywords:звіт;базовий елемент;Margin;Padding;Border-->
+	<div class="title">
+		<h1>
+			Базовий елемент
+		</h1>
+		<div class="breadcrumb">
+			<a href="/report/elements/index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Ці властивості є у кожного елемента шаблону звіту — від сторінки до клітинки таблиці.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td class="fit"><code>TextAlign</code></td>
+				<td>Горизонтальне вирівнювання: <code>Left</code>, <code>Center</code>, <code>Right</code>, <code>Justify</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">VAlign</td>
+				<td class="fit"><code>VertAlign</code></td>
+				<td>Вертикальне вирівнювання: <code>Top</code>, <code>Middle</code>, <code>Bottom</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bold</td>
+				<td>Boolean?</td>
+				<td>Напівжирний текст.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Italic</td>
+				<td>Boolean?</td>
+				<td>Курсив.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Underline</td>
+				<td>Boolean?</td>
+				<td>Підкреслений текст.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">FontSize</td>
+				<td>Single?</td>
+				<td>Розмір шрифту в пунктах.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Color</td>
+				<td>String</td>
+				<td>Колір тексту, наприклад <code>"#404040"</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Background</td>
+				<td>String</td>
+				<td>Колір тла. Тло суцільне і непрозоре.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Margin</td>
+				<td class="fit"><a class="code-link" href="/report/simple/thickness">Thickness</a></td>
+				<td>Відступ зовні елемента.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Padding</td>
+				<td class="fit"><a class="code-link" href="/report/simple/thickness">Thickness</a></td>
+				<td>Відступ всередині елемента, між рамкою і вмістом.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Border</td>
+				<td class="fit"><a class="code-link" href="/report/simple/thickness">Thickness</a></td>
+				<td>Товщина рамки з кожного боку. Нуль — рамки з цього боку нема.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">If</td>
+				<td>Boolean?</td>
+				<td>
+					Умова відображення. Зазвичай прив'язка; вираз читається за загальним
+					правилом, знак оклику перед ним інвертує результат.
+					Див. <a href="/report/bind">Вирази і прив'язки</a>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">ShowEntire</td>
+				<td>Boolean</td>
+				<td>
+					Не розривати елемент між сторінками: якщо він не вміщується до кінця
+					поточної сторінки, друкується цілком на наступній. Діє тільки на
+					<a class="code-link" href="/report/elements/column">Column</a>,
+					<a class="code-link" href="/report/elements/table">Table</a>,
+					<a class="code-link" href="/report/elements/text">Text</a>,
+					<a class="code-link" href="/report/elements/list">List</a> і на
+					<a href="/report/workbook/index">робочу книгу</a>; на решті елементів
+					не впливає.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Порядок застосування</h3>
+	<p>
+		Оформлення накладається саме в такому порядку: <code>Margin</code> —
+		<code>Background</code> — <code>Border</code> — <code>Padding</code> — вирівнювання.
+		Тобто тло малюється <b>всередині</b> зовнішнього відступу і <b>під</b> рамкою, а
+		<code>Padding</code> відсуває від рамки вміст, а не тло.
+	</p>
+</div>

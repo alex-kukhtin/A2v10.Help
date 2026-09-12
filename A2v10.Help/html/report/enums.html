@@ -1,0 +1,96 @@
+﻿<div>
+	<!--title:Звіти. Переліки-->
+	<!--keywords:звіт;переліки;DataType;TextAlign;PageOrientation-->
+	<div class="title">
+		<h1>
+			Переліки
+		</h1>
+		<div class="breadcrumb">
+			<a href="/report/index">Звіти Xaml</a>
+		</div>
+	</div>
+	<p>
+		Усі переліки, що зустрічаються у властивостях елементів звіту.
+	</p>
+
+	<h3>DataType</h3>
+	<p>
+		Тип значення. Визначає, як число або дата перетворюються на текст. Вказаний тип діє
+		завжди; не вказаний — вгадується за значенням, але тільки в клітинці книги. Подробиці:
+		<a href="/report/bind">Вирази і прив'язки</a>.
+	</p>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Значення</th>
+				<th>Як друкується</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">String</td>
+				<td>Як є (за замовчуванням).</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Currency</td>
+				<td>
+					Розділювач тисяч і щонайменше два знаки після коми: <code>1 234,50</code>.
+					Якщо в значенні знаків більше, друкуються і вони, до чотирьох.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Number</td>
+				<td>Розділювач тисяч, дробова частина лише якщо вона є: <code>1 234,5</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Date</td>
+				<td>Коротка дата.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Time</td>
+				<td>Час.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DateTime</td>
+				<td>Дата і час.</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Вигляд залежить від мови користувача. Якщо потрібен саме певний вигляд, задавайте
+		не тип, а формат: <code>{Bind Document.Date, Format='dd.MM.yyyy'}</code> або
+		<code>{Document.Date:dd.MM.yyyy}</code> у клітинці книги.
+	</p>
+
+	<h3>PageOrientation</h3>
+	<p>Орієнтація сторінки: <code>Portrait</code> (за замовчуванням), <code>Landscape</code>.</p>
+
+	<h3>TextAlign</h3>
+	<p>
+		Горизонтальне вирівнювання: <code>Left</code>, <code>Center</code>, <code>Right</code>,
+		<code>Justify</code>. Останнє діє тільки на текстовий абзац.
+	</p>
+
+	<h3>VertAlign</h3>
+	<p>Вертикальне вирівнювання: <code>Top</code>, <code>Middle</code>, <code>Bottom</code>.</p>
+
+	<h3>TextStyle</h3>
+	<p>
+		Оформлення абзацу <a class="code-link" href="/report/elements/text">Text</a>:
+		<code>Default</code> або <code>Title</code> — заголовок, 12 пунктів.
+	</p>
+
+	<h3>TableStyle</h3>
+	<p>
+		Оформлення <a class="code-link" href="/report/elements/table">Table</a>:
+		<code>Default</code> — без рамок і відступів; <code>Simple</code> — тонкі рамки,
+		відступи, сіре тло шапки; <code>Details</code> — те саме плюс рамка навколо таблиці
+		і напівжирний підвал.
+	</p>
+
+	<h3>BarcodeType</h3>
+	<p>
+		Стандарт штрихкоду <a class="code-link" href="/report/elements/barcode">Barcode</a>:
+		<code>EAN13</code> (за замовчуванням) або <code>EAN8</code>.
+	</p>
+</div>

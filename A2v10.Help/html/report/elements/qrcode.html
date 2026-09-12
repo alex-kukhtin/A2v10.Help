@@ -1,0 +1,57 @@
+﻿<div>
+	<!--title:Xaml.Report.QrCode-->
+	<!--keywords:QrCode;QR;код-->
+	<div class="title">
+		<h1>
+			Елемент QrCode
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		QR-код зі значення. Значення перетворюється на рядок і кодується під час друку.
+	</p>
+
+	<p>Властивість вмісту: <code>Value</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Value</td>
+				<td>Object</td>
+				<td>Властивість вмісту: сталий рядок або прив'язка.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Size</td>
+				<td class="fit"><a class="code-link" href="/report/simple/length">Length</a></td>
+				<td>Сторона квадрата. Якщо не вказано, код займає доступне місце.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<QrCode Size="25mm" Value="{Bind Document.QrData}"/>
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> У робочій книзі окремого елемента нема — там QR-код друкує
+		клітинка, якщо її вираз повертає <code>qrCode(...)</code>:
+		<code>{(qrCode(Document.Number))}</code>.
+	</p>
+</div>

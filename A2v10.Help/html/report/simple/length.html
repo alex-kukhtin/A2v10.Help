@@ -1,0 +1,64 @@
+﻿<div>
+	<!--title:Xaml.Report.Length-->
+	<!--keywords:Length;довжина;ширина;одиниці-->
+	<div class="title">
+		<h1>
+			Length
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Прості елементи</a>
+		</div>
+	</div>
+	<p>
+		Довжина: число і одиниця виміру. Пишеться рядком.
+	</p>
+
+	<h3>Одиниці</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Одиниця</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">pt</td>
+				<td>Пункт, 1/72 дюйма. Одиниця за замовчуванням: <code>"12"</code> означає <code>"12pt"</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">mm</td>
+				<td>Міліметри.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">cm</td>
+				<td>Сантиметри.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">in</td>
+				<td>Дюйми.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">fr</td>
+				<td>
+					Частка вільного місця (тільки для ширини колонок таблиці). Замість
+					<code>fr</code> можна писати зірочку: <code>"*"</code> означає <code>"1fr"</code>.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<TableColumn Width="80pt"/>
+<TableColumn Width="30mm"/>
+<TableColumn Width="2fr"/>
+<Space Width="6"/>   <!-- 6 пунктів -->
+</script>
+</pre>
+
+	<p class="tip warning">
+		<b>Увага!</b> Невідома одиниця — це помилка завантаження, а не мовчазна нуль-ширина.
+		Десятковий роздільник — крапка: <code>"0.5cm"</code>.
+	</p>
+</div>

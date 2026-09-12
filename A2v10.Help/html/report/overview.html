@@ -1,0 +1,182 @@
+﻿<div>
+	<!--title:Звіти. Загальні відомості-->
+	<!--keywords:звіт;шаблон;vxaml;json;Page;Code-->
+	<div class="title">
+		<h1>
+			Загальні відомості
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Звіти Xaml</a>
+		</div>
+	</div>
+
+	<p>
+		Шаблон звіту — це або розмітка з кореневим елементом <code>Page</code> і власним
+		простором імен, або <a href="workbook/index">робоча книга</a> в json. Формат рушій
+		визначає за першим значущим символом вмісту: <code>&lt;</code> — розмітка,
+		<code>{</code> — книга. Ні розширення файлу, ні те, звідки шаблон прийшов, на це
+		не впливають.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Page xmlns="clr-namespace:A2v10.Xaml.Report;assembly=A2v10.Xaml.Report">
+	<Column>
+		<Text>Привіт</Text>
+	</Column>
+</Page>
+</script>
+</pre>
+
+	<h3>Підключення</h3>
+	<p>
+		Звіт описується в <a href="/app/reports">reports</a> файлу <span class="file-name">model.json</span>.
+		Тип звіту треба вказати явно: за замовчуванням він <code>stimulsoft</code>, і шаблон Xaml
+		при цьому не використовується.
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">"reports": {
+	"invoice": {
+		"model": "Document",
+		"type": "pdf",
+		"report": "invoice.report",
+		"name": "Рахунок"
+	}
+}
+</script>
+</pre>
+
+	<p>
+		<code>report</code> — ім'я файлу шаблону <b>без розширення</b>, відносно папки
+		<span class="file-name">model.json</span>. Для наведеного прикладу рушій шукає по черзі
+		<span class="file-name">invoice.report.vxaml</span>, <span class="file-name">invoice.report.xaml</span>,
+		<span class="file-name">invoice.report.json</span> і бере перший, що знайшовся.
+	</p>
+	<p>
+		Замість імені файлу в <code>report</code> можна написати вираз у подвійних фігурних
+		дужках — <code>"report": "{{Model.FormText}}"</code>. Тоді текст шаблону береться
+		з поля моделі звіту, тобто з бази, а не з диска. І там, і там це може бути як розмітка,
+		так і книга: формат визначається за вмістом.
+	</p>
+	<p>
+		Рушій друку має бути зареєстрований у програмі під тим самим іменем, яке вказано в <code>type</code>:
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+services.AddReportEngines(factory =>
+{
+	factory.RegisterEngine<PdfReportEngine>("pdf");
+});]]>
+</script>
+</pre>
+
+	<h3>Дані</h3>
+	<p>
+		Дані для звіту готує збережена процедура — так само, як для звичайної моделі
+		(<code>model</code>, <code>procedure</code>, <code>parameters</code> в описі звіту).
+		Рушій отримує вже побудовану модель і сам по шаблону нічого не довантажує:
+		якщо в моделі чогось нема, відповідне місце документа залишиться пустим.
+	</p>
+	<p>
+		Корінь моделі доступний у виразах під іменем <code>Root</code>, а його властивості —
+		просто на ім'я. Подробиці: <a href="bind">Вирази і прив'язки</a>.
+	</p>
+
+	<h3>Два способи написати шаблон</h3>
+	<p>
+		<b>Потік.</b> <code>Page</code> містить колонки (<code>Column</code>), в колонках —
+		таблиці, переліки, текст і картинки. Розміри рахує рушій, елементи йдуть один за одним
+		і переносяться на наступну сторінку самі. Так зручно писати руками і правити в текстовому
+		редакторі.
+	</p>
+	<p>
+		<b>Робоча книга.</b> Бланк малюється в Excel, конвертується в json і зберігається
+		шаблоном — файлом поруч з <span class="file-name">model.json</span> або полем у базі.
+		Клітинки, ширини колонок, об'єднання і рамки беруться з книги, а іменовані діапазони
+		кажуть рушію, де шапка, де підвал і які рядки повторювати для кожного елемента колекції.
+		Так зручно, коли форма задана «по клітинках».
+	</p>
+	<p>
+		Далі різниці майже нема: вирази, стилі і секція коду однакові. Відмінність одна —
+		у клітинці книги тип значення вгадується, у розмітці його вказують явно
+		(<a href="bind">Вирази і прив'язки</a>).
+	</p>
+
+	<h3>Приклад</h3>
+	<p>Шапка документа, таблиця рядків і підсумок:</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<Page xmlns="clr-namespace:A2v10.Xaml.Report;assembly=A2v10.Xaml.Report"
+	  Orientation="Portrait" FontFamily="Verdana">
+	<Column>
+		<Text Style="Title" Align="Center">
+			<Span Content="{Bind Document.Name}"/>
+		</Text>
+		<Text Margin="10,0,0,0">
+			<Span Content="{Bind Document.Agent.Name}"/>
+		</Text>
+
+		<Table Columns="30pt,1fr,60pt,80pt,80pt" Margin="10,0,0,0"
+				ItemsSource="{Bind Document.Rows}">
+			<Table.Header>
+				<TableRow>
+					<TableCell Content="№"/>
+					<TableCell Content="Товар"/>
+					<TableCell Content="Кількість"/>
+					<TableCell Content="Ціна"/>
+					<TableCell Content="Сума"/>
+				</TableRow>
+			</Table.Header>
+			<Table.Body>
+				<TableRow>
+					<TableCell Content="{Bind RowNo}"/>
+					<TableCell Content="{Bind Item.Name}"/>
+					<TableCell Content="{Bind Qty, DataType=Number}" Align="Right"/>
+					<TableCell Content="{Bind Price, DataType=Currency}" Align="Right"/>
+					<TableCell Content="{Bind Sum, DataType=Currency}" Align="Right"/>
+				</TableRow>
+			</Table.Body>
+			<Table.Footer>
+				<TableRow>
+					<TableCell ColSpan="4" Content="Всього" Align="Right"/>
+					<TableCell Content="{Bind Document.Sum, DataType=Currency}" Align="Right"/>
+				</TableRow>
+			</Table.Footer>
+		</Table>
+	</Column>
+</Page>
+]]>
+</script>
+</pre>
+
+	<p>
+		Рядки таблиці беруться з колекції, яка вказана в <code>ItemsSource</code>; всередині
+		такого рядка вирази читаються від його елемента. Тому в тілі таблиці написано
+		<code>{Bind Sum}</code>, а в підвалі — <code>{Bind Document.Sum}</code>.
+	</p>
+
+	<h3>Секція коду</h3>
+	<p>
+		Властивість <code>Code</code> елементу <code>Page</code> — це javascript, який
+		виконується один раз перед побудовою документа. Оголошені в ній функції можна викликати
+		з виразів:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Page.Code>
+	const rowTotal = (row) => row.Price * row.Qty;
+</Page.Code>
+</script>
+</pre>
+
+	<p>
+		Поточний рядок передається у функцію аргументом — <code>{Bind rowTotal(this)}</code>.
+		Чому саме так, описано в розділі <a href="bind">Вирази і прив'язки</a>.
+	</p>
+</div>

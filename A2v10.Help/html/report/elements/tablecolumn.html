@@ -1,0 +1,67 @@
+﻿<div>
+	<!--title:Xaml.Report.TableColumn-->
+	<!--keywords:TableColumn;колонка;ширина;таблиця-->
+	<div class="title">
+		<h1>
+			Елемент TableColumn
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Колонка таблиці. Задає тільки ширину — все інше описується на клітинках.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Width</td>
+				<td class="fit"><a class="code-link" href="/report/simple/length">Length</a></td>
+				<td>
+					Ширина колонки. Стала (<code>80pt</code>, <code>30mm</code>) або частка
+					вільного місця (<code>1fr</code>). Якщо колонок не оголошено взагалі,
+					таблиця отримує одну колонку на всю ширину.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Короткий запис</h3>
+	<p>
+		Оголошувати кожну колонку окремим елементом зазвичай не потрібно: список ширин через
+		кому перетворюється на колонки автоматично.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<!-- коротко -->
+<Table Columns="30pt,1fr,80pt">
+
+<!-- те саме повністю -->
+<Table>
+	<Table.Columns>
+		<TableColumn Width="30pt"/>
+		<TableColumn Width="1fr"/>
+		<TableColumn Width="80pt"/>
+	</Table.Columns>
+</Table>
+]]>
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Частки (<code>fr</code>) ділять між собою те, що залишилося
+		після сталих колонок. Якщо сталих ширин разом більше, ніж ширина сторінки, документ
+		не збудується — рушій повідомить про суперечливі розміри.
+	</p>
+</div>

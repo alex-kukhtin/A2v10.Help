@@ -1,0 +1,74 @@
+﻿<div>
+	<!--title:Xaml.Report.TableCell-->
+	<!--keywords:TableCell;клітинка;таблиця;ColSpan;RowSpan-->
+	<div class="title">
+		<h1>
+			Елемент TableCell
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Клітинка таблиці. Вмістом може бути рядок, прив'язка або інший елемент —
+		наприклад, <a class="code-link" href="text">Text</a> чи вкладена
+		<a class="code-link" href="table">Table</a>.
+	</p>
+
+	<p>Властивість вмісту: <code>Content</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>Object</td>
+				<td>Властивість вмісту: текст, прив'язка або вкладений елемент.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ColSpan</td>
+				<td>UInt32</td>
+				<td>Скільки колонок займає клітинка.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">RowSpan</td>
+				<td>UInt32</td>
+				<td>Скільки рядків займає клітинка.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- текст -->
+<TableCell Content="Всього"/>
+
+<!-- значення з моделі, з форматом -->
+<TableCell Content="{Bind Sum, DataType=Currency}" Align="Right"/>
+
+<!-- об'єднання клітинок -->
+<TableCell ColSpan="3" Content="Разом за розділом" Align="Right"/>
+
+<!-- вкладений елемент -->
+<TableCell>
+	<Text>
+		<Span Content="{Bind Item.Name}" Bold="True"/>
+		<Break/>
+		<Span Content="{Bind Item.Article}"/>
+	</Text>
+</TableCell>
+</script>
+</pre>
+</div>

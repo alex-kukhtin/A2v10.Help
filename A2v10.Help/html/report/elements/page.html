@@ -1,0 +1,114 @@
+﻿<div>
+	<!--title:Xaml.Report.Page-->
+	<!--keywords:Page;сторінка;звіт-->
+	<div class="title">
+		<h1>
+			Елемент Page
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Корінь шаблону звіту. Задає розмір і орієнтацію сторінки, шрифт за замовчуванням,
+		колонтитули і водяний знак.
+	</p>
+
+	<p>Властивість вмісту: <code>Columns</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Columns</td>
+				<td class="fit"><code>ColumnCollection</code></td>
+				<td>
+					Властивість вмісту. Колонки сторінки — див.
+					<a class="code-link" href="column">Column</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td class="fit"><a class="code-link" href="column">Column</a></td>
+				<td>Верхній колонтитул: друкується на кожній сторінці.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Footer</td>
+				<td class="fit"><a class="code-link" href="column">Column</a></td>
+				<td>Нижній колонтитул: друкується на кожній сторінці.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Orientation</td>
+				<td class="fit"><code>PageOrientation</code></td>
+				<td>Орієнтація: <code>Portrait</code> (за замовчуванням) або <code>Landscape</code>. Розмір сторінки — A4.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">FontFamily</td>
+				<td>String</td>
+				<td>Шрифт за замовчуванням для всього документа. Якщо не вказано — <code>Verdana</code>.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Title</td>
+				<td>String</td>
+				<td>
+					Заголовок документа (потрапляє у властивості PDF-файлу). Підтримує підстановку
+					значень з моделі: <code>Title="Рахунок {Document.No}"</code>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Code</td>
+				<td>String</td>
+				<td>
+					Javascript, який виконується один раз перед побудовою документа. Оголошені
+					тут функції доступні у виразах. Див. <a href="/report/bind">Вирази і прив'язки</a>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Watermark</td>
+				<td>String</td>
+				<td>
+					Водяний знак: ім'я файлу або, через прив'язку, байти з моделі.
+					Малюється під вмістом на кожній сторінці. Див.
+					<a href="/report/images">Картинки і водяний знак</a>.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Поля сторінки і розмір шрифту</h3>
+	<p>
+		Поля сторінки задаються властивістю <code>Margin</code> базового елементу, розмір
+		шрифту — властивістю <code>FontSize</code>. Якщо їх не вказано, беруться значення
+		за замовчуванням: поля <code>20mm</code> зверху і знизу, <code>10mm</code> ліворуч
+		і праворуч, шрифт 9 пунктів.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Page xmlns="clr-namespace:A2v10.Xaml.Report;assembly=A2v10.Xaml.Report"
+	  Orientation="Landscape" Margin="15mm,10mm" FontSize="10">
+	<Page.Header>
+		<Column>
+			<Text Align="Right"><Span Content="{Bind Company.Name}"/></Text>
+		</Column>
+	</Page.Header>
+
+	<Column>
+		<!-- вміст документа -->
+	</Column>
+</Page>
+</script>
+</pre>
+</div>

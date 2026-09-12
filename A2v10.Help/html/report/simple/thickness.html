@@ -1,0 +1,66 @@
+﻿<div>
+	<!--title:Xaml.Report.Thickness-->
+	<!--keywords:Thickness;відступ;рамка;Margin;Padding;Border-->
+	<div class="title">
+		<h1>
+			Thickness
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Прості елементи</a>
+		</div>
+	</div>
+	<p>
+		Товщина з чотирьох боків — для <code>Margin</code>, <code>Padding</code> і
+		<code>Border</code>. Пишеться рядком: одне, два або чотири значення через кому,
+		кожне — <a class="code-link" href="length">Length</a>.
+	</p>
+
+	<h3>Форми запису</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Запис</th>
+				<th>Значення</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">"4pt"</td>
+				<td>Однаково з усіх боків.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">"10mm,5mm"</td>
+				<td>Перше — зверху і знизу, друге — ліворуч і праворуч.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">"1pt,4pt,1pt,4pt"</td>
+				<td>Зверху, праворуч, знизу, ліворуч — за годинниковою стрілкою.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		<b>Увага!</b> Три значення — помилка завантаження: припустимі тільки один, два або
+		чотири. Порядок у формі з чотирьох значень починається зверху і йде за годинниковою
+		стрілкою, як в CSS.
+	</p>
+
+	<h3>Рамка</h3>
+	<p>
+		Для <code>Border</code> нуль означає, що рамки з цього боку нема. Так малюються
+		частинні рамки — наприклад, лінія тільки під клітинкою:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<TableCell Border="0,0,.2pt,0" Content="Всього"/>
+<Column Margin="0,0,10pt,0" Padding="4pt" Border=".2pt"/>
+</script>
+</pre>
+
+	<p class="tip warning">
+		<b>Увага!</b> На <a class="code-link" href="/report/elements/tablerow">TableRow</a>
+		рамка не діє — рядок оформлення не малює. Щоб підкреслити рядок цілком, задайте
+		<code>Border</code> кожній його клітинці.
+	</p>
+</div>

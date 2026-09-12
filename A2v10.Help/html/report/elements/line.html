@@ -1,0 +1,52 @@
+﻿<div>
+	<!--title:Xaml.Report.Line-->
+	<!--keywords:Line;лінія;роздільник-->
+	<div class="title">
+		<h1>
+			Елемент Line
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Горизонтальна лінія на всю ширину доступного місця. Роздільник між частинами документа
+		або лінія для підпису.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Thickness</td>
+				<td class="fit"><a class="code-link" href="/report/simple/length">Length</a></td>
+				<td>Товщина лінії. За замовчуванням <code>1pt</code>.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Line Thickness=".5pt" Margin="6pt,0"/>
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Ширину лінії окремо не задають — вона займає всю ширину
+		батьківського елемента. Щоб зробити її коротшою, покладіть її в
+		<a class="code-link" href="column">Column</a> потрібної ширини або скористайтеся
+		відступами.
+	</p>
+</div>

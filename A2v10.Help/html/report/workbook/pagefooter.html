@@ -1,0 +1,86 @@
+﻿<div>
+	<!--title:Xaml.Report.PageFooter-->
+	<!--keywords:PageFooter;колонтитул;номер сторінки-->
+	<div class="title">
+		<h1>
+			PageFooter
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Робоча книга</a>
+		</div>
+	</div>
+	<p>
+		Нижній колонтитул сторінки — той, що задається в Excel у параметрах сторінки.
+		Друкується на кожній сторінці, по центру, під вмістом.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Center</td>
+				<td>String</td>
+				<td>Текст колонтитула по центру.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Left</td>
+				<td>String</td>
+				<td>Ліва частина.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Right</td>
+				<td>String</td>
+				<td>Права частина.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		<b>Увага!</b> Насправді працює тільки <code>Center</code>: конвертер переносить з книги
+		лише центральну частину колонтитула, і друкується теж тільки вона. Ліву і праву частини
+		в Excel задавати можна, але в звіт вони не потраплять.
+	</p>
+
+	<h3>Номер сторінки</h3>
+	<p>
+		Коди Excel перетворюються на службові позначки, які підставляються під час друку:
+	</p>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>В Excel</th>
+				<th>У шаблоні</th>
+				<th>Що друкується</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">&amp;P</td>
+				<td class="prop-name">&amp;(Page)</td>
+				<td>Номер поточної сторінки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">&amp;N</td>
+				<td class="prop-name">&amp;(Pages)</td>
+				<td>Загальна кількість сторінок.</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Тобто колонтитул <code>&amp;C&amp;P з &amp;N</code>, набраний в Excel, надрукується
+		як «1 з 3».
+	</p>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Це стосується колонтитула сторінки. Не плутайте з діапазоном
+		<a href="range">Footer</a>: той складається зі звичайних клітинок книги, друкується
+		теж на кожній сторінці, але вміст в ньому — будь-який, з виразами і оформленням.
+	</p>
+</div>

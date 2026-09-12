@@ -1,0 +1,106 @@
+<div>
+	<!--title:Звіти. Показ і друк на формі-->
+	<!--keywords:звіт;друк;PdfReportViewer;BindCmd;Report-->
+	<div class="title">
+		<h1>
+			Показ і друк на формі
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Звіти Xaml</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Звіт можна показати користувачу прямо на формі, а не тільки віддати файлом. Для цього
+		потрібні три речі: кінцева точка з описом звіту, шаблон поруч з нею і вид, на якому
+		стоїть <a class="code-link" href="/xaml/controls/pdfreportviewer">PdfReportViewer</a>.
+	</p>
+
+	<h3>Кінцева точка</h3>
+	<p>
+		Звіт описується в розділі <a href="/app/reports">reports</a> файлу
+		<span class="file-name">model.json</span>. У прикладі кінцева точка — папка
+		<span class="file-name">/document/print</span>, звіт називається <code>invoice</code>,
+		шаблон лежить поруч: <span class="file-name">invoice.report.vxaml</span>. Дія
+		<code>index</code> віддає вид, на якому звіт буде видно.
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">{
+	"$schema": "../../@schemas/model-json-schema.json#",
+	"actions": {
+		"index": {
+			"schema": "dbo",
+			"model": "Document",
+			"view": "index.view"
+		}
+	},
+	"reports": {
+		"invoice": {
+			"type": "pdf",
+			"schema": "dbo",
+			"model": "Document",
+			"report": "invoice.report"
+		}
+	}
+}
+</script>
+</pre>
+
+	<h3>Вид</h3>
+	<p>
+		<span class="file-name">/document/print/index.view.vxaml</span> — переглядач і дві
+		кнопки в панелі інструментів:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<Page xmlns="clr-namespace:A2v10.Xaml;assembly=A2v10.Xaml" Title="Рахунок">
+	<Page.Toolbar>
+		<Toolbar>
+			<Button Content="Друк" Icon="Print"
+					Command="{BindCmd Report, Report=invoice, Url='/document/print', Argument={Bind Document}, Print=True}"/>
+			<Button Content="Завантажити" Icon="Download"
+					Command="{BindCmd Report, Report=invoice, Url='/document/print', Argument={Bind Document}, Export=True}"/>
+		</Toolbar>
+	</Page.Toolbar>
+	<PdfReportViewer Url="/document/print" Report="invoice" Argument="{Bind Document}"/>
+</Page>
+]]>
+</script>
+</pre>
+
+	<h3>Що звідки береться</h3>
+	<ul class="std">
+		<li>
+			<code>Url</code> — шлях до <b>папки</b> кінцевої точки, тієї, де лежить
+			<span class="file-name">model.json</span> з розділом <code>reports</code>. Не до дії.
+		</li>
+		<li><code>Report</code> — ім'я звіту, тобто ключ у розділі <code>reports</code>.</li>
+		<li>
+			<code>Argument</code> — об'єкт, з якого береться ідентифікатор
+			(<code>$id</code>); саме він потрапить у вибірку даних звіту.
+		</li>
+	</ul>
+	<p>
+		У переглядача і в обох команд ці три значення однакові — вони описують один і той
+		самий звіт.
+	</p>
+
+	<h3>Друк і завантаження</h3>
+	<p>
+		Кнопки показують той самий звіт, але не на формі: команда
+		<a class="code-link" href="/xaml/bind/bindcmd">BindCmd Report</a> з
+		<code>Print=True</code> відкриває діалог друку, з <code>Export=True</code> завантажує
+		файл. Решта її аргументів — <code>Format</code>, <code>Data</code> — описані разом
+		з командою.
+	</p>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Показ на формі не потребує окремого шаблону: це той самий
+		звіт, що й у команди, і той самий файл <span class="file-name">invoice.report.vxaml</span>.
+		Змінювати треба тільки його.
+	</p>
+</div>

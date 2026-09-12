@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового					/whatsnew/index
+		Вересень 2026			/whatsnew/w202609
 		Серпень 2026			/whatsnew/w202608
 		Липень 2026				/whatsnew/w202607
 		Листопад 2025			/whatsnew/w202511
@@ -80,6 +81,7 @@
 			MenuItem			/xaml/controls/menuitem
 			MultiSelect			/xaml/controls/multiselect
 			Pager				/xaml/controls/pager
+			PdfReportViewer		/xaml/controls/pdfreportviewer
 			PeriodPicker		/xaml/controls/periodpicker
 			PropertyGrid		/xaml/controls/propertygrid
 			PropertyGridItem	/xaml/controls/propertygriditem
@@ -239,6 +241,38 @@
 			Diagram				/xaml/diagram/diagram
 			Group				/xaml/diagram/group
 			Path				/xaml/diagram/path
+
+Звіти Xaml			/report/index
+	Загальні відомості			/report/overview
+	Вирази і прив'язки			/report/bind
+	Картинки і водяний знак		/report/images
+	Показ і друк на формі		/report/view
+	Елементи					/report/elements/index
+		Page					/report/elements/page
+		Column					/report/elements/column
+		Table					/report/elements/table
+		TableRow				/report/elements/tablerow
+		TableCell				/report/elements/tablecell
+		TableColumn				/report/elements/tablecolumn
+		Text					/report/elements/text
+		List					/report/elements/list
+		Inlined					/report/elements/inlined
+		Line					/report/elements/line
+		Image					/report/elements/image
+		QrCode					/report/elements/qrcode
+		Barcode					/report/elements/barcode
+		Checkbox				/report/elements/checkbox
+	Робоча книга				/report/workbook/index
+		Workbook				/report/workbook/workbook
+		Cell					/report/workbook/cell
+		Range					/report/workbook/range
+		Row і Column			/report/workbook/rowcolumn
+		PageFooter				/report/workbook/pagefooter
+	Прості елементи				/report/simple/index
+		Length					/report/simple/length
+		Thickness				/report/simple/thickness
+	Переліки					/report/enums
+	Базовий елемент				/report/abstract/element
 
 Програмування клієнта	/client/index
 	Контролер		/client/controller

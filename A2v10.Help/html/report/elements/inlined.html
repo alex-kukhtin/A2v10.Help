@@ -1,0 +1,51 @@
+﻿<div>
+	<!--title:Xaml.Report.Inlined-->
+	<!--keywords:Inlined;в рядок;поруч-->
+	<div class="title">
+		<h1>
+			Елемент Inlined
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Розташовує вкладені елементи <b>поруч, у рядок</b>, і переносить їх на наступний рядок,
+		коли вони не вміщуються по ширині. Протилежність <a class="code-link" href="column">Column</a>,
+		яка ставить елементи один під одним.
+	</p>
+
+	<p>Властивість вмісту: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit"><code>FlowElementCollection</code></td>
+				<td>Властивість вмісту. Елементи, що друкуються поруч.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Inlined>
+	<Image Source="{Bind Company.Logo}" Height="15mm"/>
+	<Text><Span Content="{Bind Company.Name}" Bold="True"/></Text>
+</Inlined>
+</script>
+</pre>
+</div>

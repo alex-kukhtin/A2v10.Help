@@ -1,0 +1,132 @@
+﻿<div>
+	<!--title:Xaml.Report.Table-->
+	<!--keywords:Table;таблиця;звіт;ItemsSource-->
+	<div class="title">
+		<h1>
+			Елемент Table
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Таблиця з шапкою, тілом і підвалом. Якщо задано <code>ItemsSource</code>, рядки тіла
+		повторюються для кожного елемента колекції, а шапка — на кожній сторінці, де таблиця
+		продовжується.
+	</p>
+
+	<p>Властивість вмісту: <code>Body</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Тільки прив'язка (<a class="code-link" href="/report/bind">Bind</a>). Колекція,
+					за якою повторюються рядки тіла. Всередині такого рядка вирази читаються
+					від його елемента.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Columns</td>
+				<td class="fit"><code>TableColumnCollection</code></td>
+				<td>
+					Колонки таблиці — див. <a class="code-link" href="tablecolumn">TableColumn</a>.
+					Найкоротший запис — список ширин через кому: <code>Columns="30pt,1fr,80pt"</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Header</td>
+				<td class="fit"><code>TableRowCollection</code></td>
+				<td>Рядки шапки. Повторюються на кожній сторінці.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Body</td>
+				<td class="fit"><code>TableRowCollection</code></td>
+				<td>Властивість вмісту. Рядки тіла.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Footer</td>
+				<td class="fit"><code>TableRowCollection</code></td>
+				<td>
+					Рядки підвалу. Друкуються один раз, після тіла, і читаються від тієї ж
+					області, що й сама таблиця, — не від елемента колекції.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Style</td>
+				<td class="fit"><code>TableStyle</code></td>
+				<td>Оформлення таблиці, подробиці нижче.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Оформлення</h3>
+	<p>
+		Властивість <code>Style</code> вмикає готовий набір оформлення, щоб не описувати рамки
+		і відступи на кожній клітинці:
+	</p>
+	<ul class="std">
+		<li><b>Default</b> — без оформлення взагалі: ні рамок, ні відступів.</li>
+		<li><b>Simple</b> — тонкі рамки і відступи в клітинках шапки і тіла, сіре тло шапки.</li>
+		<li><b>Details</b> — те саме, плюс рамка навколо всієї таблиці, відступ зверху і знизу
+			і напівжирний підвал.</li>
+	</ul>
+	<p>
+		Будь-яку властивість оформлення можна перекрити на <b>клітинці</b> — вона має повний
+		набір властивостей базового елементу. На рядку оформлення не задають: він його не
+		малює, див. <a class="code-link" href="tablerow">TableRow</a>.
+	</p>
+
+	<h3>Приклад</h3>
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Table Style="Details" Columns="30pt,1fr,60pt,80pt"
+	   ItemsSource="{Bind Document.Rows}">
+	<Table.Header>
+		<TableRow>
+			<TableCell Content="№" Align="Center"/>
+			<TableCell Content="Товар" Align="Center"/>
+			<TableCell Content="Кількість" Align="Center"/>
+			<TableCell Content="Сума" Align="Center"/>
+		</TableRow>
+	</Table.Header>
+	<Table.Body>
+		<TableRow>
+			<TableCell Content="{Bind RowNo}"/>
+			<TableCell Content="{Bind Item.Name}"/>
+			<TableCell Content="{Bind Qty, DataType=Number}" Align="Right"/>
+			<TableCell Content="{Bind Sum, DataType=Currency}" Align="Right"/>
+		</TableRow>
+	</Table.Body>
+	<Table.Footer>
+		<TableRow>
+			<TableCell ColSpan="3" Content="Всього" Align="Right"/>
+			<TableCell Content="{Bind Document.Sum, DataType=Currency}" Align="Right"/>
+		</TableRow>
+	</Table.Footer>
+</Table>
+</script>
+</pre>
+
+	<h3>Вкладені таблиці</h3>
+	<p>
+		Вмістом клітинки може бути інша таблиця. Її <code>ItemsSource</code> обчислюється вже
+		від рядка, в якому вона стоїть, тому вкладеність працює на будь-яку глибину і нічого
+		додатково вказувати не треба.
+	</p>
+</div>

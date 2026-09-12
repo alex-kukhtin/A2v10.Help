@@ -1,0 +1,78 @@
+﻿<div>
+	<!--title:Xaml.Report.Barcode-->
+	<!--keywords:Barcode;штрихкод;EAN13;EAN8-->
+	<div class="title">
+		<h1>
+			Елемент Barcode
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Лінійний штрихкод стандарту EAN.
+	</p>
+
+	<p>Властивість вмісту: <code>Value</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Value</td>
+				<td>Object</td>
+				<td>Властивість вмісту: код, сталий або з моделі.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Type</td>
+				<td class="fit"><code>BarcodeType</code></td>
+				<td><code>EAN13</code> (за замовчуванням) або <code>EAN8</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td class="fit"><a class="code-link" href="/report/simple/length">Length</a></td>
+				<td>Ширина. Код розтягується на неї цілком.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td>Int32</td>
+				<td>Висота смуг. Число, не <code>Length</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">PrintDigits</td>
+				<td>Boolean</td>
+				<td>Чи друкувати цифри під смугами. За замовчуванням <code>True</code>.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Color</td>
+				<td>String</td>
+				<td>Колір смуг (властивість базового елементу).</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Barcode Type="EAN13" Width="45mm" Value="{Bind Item.Barcode}"/>
+</script>
+</pre>
+
+	<p class="tip warning">
+		<b>Увага!</b> Код — це тільки цифри: 12 або 13 для <code>EAN13</code>, 7 або 8 для
+		<code>EAN8</code>. Коротший варіант означає, що контрольну цифру дорахує сам рушій;
+		довший — що вона вже є і буде перевірена. Інша довжина або невірна контрольна цифра
+		зупиняють друк з повідомленням. Інші стандарти штрихкодів не підтримуються.
+	</p>
+</div>

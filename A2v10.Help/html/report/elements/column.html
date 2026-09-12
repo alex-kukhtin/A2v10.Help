@@ -1,0 +1,54 @@
+﻿<div>
+	<!--title:Xaml.Report.Column-->
+	<!--keywords:Column;колонка;звіт-->
+	<div class="title">
+		<h1>
+			Елемент Column
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Вертикальна послідовність елементів: вміст друкується зверху вниз і переноситься
+		на наступну сторінку, коли не вміщується. Це основний спосіб скласти сторінку —
+		вміст <a class="code-link" href="page">Page</a> складається саме з колонок.
+	</p>
+
+	<p>Властивість вмісту: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td class="fit"><code>FlowElementCollection</code></td>
+				<td>Властивість вмісту. Елементи, що друкуються один за одним.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Column Margin="0,0,10pt,0">
+	<Text Style="Title">Акт виконаних робіт</Text>
+	<Text><Span Content="{Bind Document.Agent.Name}"/></Text>
+	<Table Style="Details" Columns="1fr,80pt">
+		<!-- ... -->
+	</Table>
+</Column>
+</script>
+</pre>
+</div>

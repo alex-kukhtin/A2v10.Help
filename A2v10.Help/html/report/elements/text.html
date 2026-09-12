@@ -1,0 +1,125 @@
+﻿<div>
+	<!--title:Xaml.Report.Text-->
+	<!--keywords:Text;Span;Space;Break;текст;звіт-->
+	<div class="title">
+		<h1>
+			Елемент Text
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Текстовий абзац. Складається з частин (<code>Span</code>, <code>Space</code>,
+		<code>Break</code>), які друкуються поспіль і переносяться по словах.
+	</p>
+
+	<p>Властивість вмісту: <code>Inlines</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Inlines</td>
+				<td class="fit"><code>InlineCollection</code></td>
+				<td>
+					Властивість вмісту. Частини тексту. Звичайний рядок перетворюється
+					на один <code>Span</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Style</td>
+				<td class="fit"><code>TextStyle</code></td>
+				<td>
+					<code>Default</code> (за замовчуванням) або <code>Title</code> —
+					заголовок, 12 пунктів.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		<b>Увага!</b> Властивості <code>Content</code> у <code>Text</code> нема — спроба
+		написати <code>&lt;Text Content="..."/&gt;</code> зупиняє завантаження з помилкою
+		<i>«Property Content not found»</i>. Текст задається або рядком всередині елемента,
+		або частинами.
+	</p>
+
+	<p class="tip warning">
+		<b>Увага!</b> Прив'язка працює тільки в <b>атрибуті</b>. Написане в тексті елемента —
+		<code>&lt;Text&gt;{Bind Document.No}&lt;/Text&gt;</code> або
+		<code>&lt;Text&gt;Рахунок {Document.No}&lt;/Text&gt;</code> — помилки не викличе
+		і значення не підставить: на папері надрукується рівно те, що написано, з дужками.
+		Підстановка прямо в тексті є тільки в клітинках робочої книги.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- сталий текст -->
+<Text>Видаткова накладна</Text>
+
+<!-- значення з моделі -->
+<Text><Span Content="{Bind Document.Name}"/></Text>
+
+<!-- кілька частин з різним оформленням -->
+<Text>
+	<Span Content="Постачальник:"/>
+	<Space Width="6pt"/>
+	<Span Content="{Bind Document.Company.Name}" Bold="True"/>
+</Text>
+</script>
+</pre>
+
+	<h3>Span</h3>
+	<p>
+		Частина тексту. Властивість вмісту — <code>Content</code>: сталий рядок або прив'язка.
+		Має всі властивості <a href="/report/abstract/element">базового елементу</a>, тому
+		оформлення (напівжирний, курсив, колір, розмір) задається саме на <code>Span</code>,
+		якщо воно потрібне не всьому абзацу.
+	</p>
+
+	<h3>Space</h3>
+	<p>
+		Проміжок заданої ширини між частинами тексту. Єдина власна властивість —
+		<code>Width</code> (<a class="code-link" href="/report/simple/length">Length</a>).
+	</p>
+
+	<h3>Break</h3>
+	<p>
+		Перенесення рядка всередині абзацу.
+	</p>
+
+	<h3>Номер сторінки</h3>
+	<p>
+		У колонтитулах доступні два службові значення: <code>$(PageNumber)</code> —
+		номер поточної сторінки, <code>$(TotalPages)</code> — загальна кількість.
+		Вони пишуться як вміст <code>Span</code> і замінюються під час друку.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<Page.Footer>
+	<Column>
+		<Text Align="Right">
+			<Span Content="Сторінка"/>
+			<Span Content="$(PageNumber)"/>
+			<Span Content="з"/>
+			<Span Content="$(TotalPages)"/>
+		</Text>
+	</Column>
+</Page.Footer>
+</script>
+</pre>
+</div>

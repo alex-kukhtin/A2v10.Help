@@ -1,0 +1,103 @@
+﻿<div>
+	<!--title:Xaml.Report.List-->
+	<!--keywords:List;ListItem;перелік;звіт-->
+	<div class="title">
+		<h1>
+			Елемент List
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи</a>
+		</div>
+	</div>
+	<p>
+		Перелік: послідовність елементів, у кожного з яких є маркер і вміст. Як і таблиця,
+		вміє повторюватися за колекцією.
+	</p>
+
+	<p>Властивість вмісту: <code>Items</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Тільки прив'язка. Колекція, за якою повторюються елементи переліку.
+					Всередині вирази читаються від елемента колекції.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Items</td>
+				<td class="fit"><code>ListItemCollection</code></td>
+				<td>Властивість вмісту. Елементи переліку.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Spacing</td>
+				<td>Single</td>
+				<td>Проміжок між маркером і вмістом, у пунктах.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>ListItem</h3>
+	<p>Властивість вмісту: <code>Content</code></p>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td>Object</td>
+				<td>Властивість вмісту: текст, прив'язка або вкладений елемент.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Bullet</td>
+				<td>Object</td>
+				<td>Маркер ліворуч від вмісту: сталий текст або прив'язка (наприклад, номер рядка).</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/report/abstract/element">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- сталий перелік -->
+<List Spacing="4">
+	<ListItem Bullet="—" Content="Перша умова"/>
+	<ListItem Bullet="—" Content="Друга умова"/>
+</List>
+
+<!-- за колекцією: один ListItem повторюється -->
+<List Spacing="4" ItemsSource="{Bind Document.Rows}">
+	<ListItem Bullet="{Bind RowNo}" Content="{Bind Item.Name}"/>
+</List>
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Маркер не нумерується сам: якщо потрібен номер, його дає модель
+		(<code>{Bind RowNo}</code>) або обчислює вираз.
+	</p>
+</div>

@@ -1,0 +1,86 @@
+<div>
+	<!--title:Xaml.PdfReportViewer-->
+	<!--keywords:PdfReportViewer;звіт;pdf-->
+	<div class="title">
+		<h1>
+			Елемент PdfReportViewer
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Показує готовий <a href="/report/index">звіт</a> прямо на формі. Звіт будується на
+		сервері і відображається вбудованим засобом перегляду PDF самого браузера.
+	</p>
+
+	<p>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Url</td>
+				<td>String</td>
+				<td>
+					Обов'язкова. Шлях до папки кінцевої точки — тієї, де лежить
+					<span class="file-name">model.json</span> з розділом
+					<a href="/app/reports">reports</a>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Report</td>
+				<td>String</td>
+				<td>Обов'язкова. Ім'я звіту, ключ у розділі <code>reports</code>.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Argument</td>
+				<td>Object</td>
+				<td>
+					Зазвичай прив'язка. Об'єкт, з якого береться ідентифікатор
+					(<code>$id</code>) для вибірки даних звіту.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Висота області перегляду.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		<b>Увага!</b> <code>Url</code> і <code>Report</code> обов'язкові: якщо якогось з них
+		нема, вид не завантажиться і система повідомить про помилку розмітки.
+	</p>
+
+	<h3>Приклад</h3>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<PdfReportViewer Url="/document/print" Report="invoice" Argument="{Bind Document}" Height="40rem"/>
+</script>
+</pre>
+
+	<p>
+		Кінцева точка, шаблон звіту і кнопки друку поруч з переглядачем — у розділі
+		<a href="/report/view">Показ і друк на формі</a>.
+	</p>
+</div>
