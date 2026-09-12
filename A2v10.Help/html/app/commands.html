@@ -111,7 +111,13 @@
 			<tr>
 				<td class="prop-name">clrType</td>
 				<td>string</td>
-				<td>Обов'язково для типу <b>clr</b>. Рядок, що описує збірку і .NET тип.</td>
+				<td>
+					Обов'язково для типу <b>clr</b>. Рядок формата
+					<code>clr-type:&lt;повне ім'я типу&gt;;assembly=&lt;ім'я збірки&gt;</code>, наприклад
+					<code>clr-type:MainApp.Rates.Fetch;assembly=MainApp</code>.
+					Це власний формат платформи, а не assembly-qualified ім'я .NET
+					(<code>"Ns.Type, Assembly"</code> не приймається).
+				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">file</td>
@@ -167,8 +173,11 @@
 
 	<h3>Команди типу clr</h3>
 	<p>
-		Команда типу <b>clr</b> викликає метод з типу, заданного властивістю <code>clrType</code>. Тип повинен реалізовувати
-		інтерфейс <code>IInvokeTarget</code>.  <a href="clrcommand">Детальніше...</a>
+		Команда типу <b>clr</b> викликає метод з типу, заданного властивістю <code>clrType</code>. Тип повинен бути
+		<code>public</code>, реалізовувати інтерфейс <code>IClrInvokeTarget</code>
+		(<code>Task&lt;Object&gt; InvokeAsync(ExpandoObject args)</code>) і мати конструктор з єдиним параметром
+		<code>IServiceProvider</code> — платформа шукає саме таку сигнатуру.
+		<a href="clrcommand">Детальніше...</a>
 	</p>
 
 	<h3>Команди типу javascript</h3>
