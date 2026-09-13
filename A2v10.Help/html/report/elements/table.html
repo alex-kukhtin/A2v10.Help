@@ -129,4 +129,26 @@
 		від рядка, в якому вона стоїть, тому вкладеність працює на будь-яку глибину і нічого
 		додатково вказувати не треба.
 	</p>
+	<p>
+		Щоб вкладена таблиця виглядала частиною зовнішньої, приберіть відступи в клітинці
+		(<code>Padding="0"</code>) і задайте вкладеній таблиці стиль <code>Simple</code>.
+		Вона заповнить клітинку до рамки, а рамки її клітинок зіллються з рамкою зовнішньої.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<TableCell Padding="0">
+	<Table Style="Simple" Columns="1fr,1fr">
+		<TableRow>
+			<TableCell Content="A"/>
+			<TableCell Content="C"/>
+		</TableRow>
+		<TableRow>
+			<TableCell Content="B"/>
+			<TableCell Content="D"/>
+		</TableRow>
+	</Table>
+</TableCell>
+</script>
+</pre>
 </div>
