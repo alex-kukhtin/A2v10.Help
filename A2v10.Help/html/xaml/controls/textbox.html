@@ -86,7 +86,11 @@
 			<tr>
 				<td class="prop-name">EnterCommand</td>
 				<td><a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a></td>
-				<td>Команда, яка буде виконана при натисканні <kbd>Enter</kbd> (для поля з багатьма рядками - <kbd>Ctrl+Enter</kbd>).</td>
+				<td>
+					Команда, яка буде виконана при натисканні <kbd>Enter</kbd> (для поля з багатьма рядками - <kbd>Ctrl+Enter</kbd>).
+					Команда виконується <b>до</b> оновлення моделі: властивість, прив'язана до <code>Value</code>, ще містить попереднє значення.
+					Якщо команді потрібне нове значення, задайте <code>UpdateTrigger="Input"</code>.
+				</td>
 			</tr>
 			<tr>
 				<td class="prop-name">MaxHeight</td>
@@ -123,6 +127,13 @@
 					<a class="code-link" href="/xaml/components/collectionview">CollectionView</a>.
 					Показувати кнопку фільтру. Натискання на цю кнопку перезавантажує модель
 					з новим значенням фільтру.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">ShowSearch</td>
+				<td>Boolean</td>
+				<td>
+					Показувати значок пошуку, коли кнопка очистки (<code>ShowClear</code>) не видна.
 				</td>
 			</tr>
 			<tr>

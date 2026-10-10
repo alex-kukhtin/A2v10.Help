@@ -1,5 +1,6 @@
 ﻿https://docs.a2v10.com/index
 https://docs.a2v10.com/whatsnew/index
+https://docs.a2v10.com/whatsnew/w202610
 https://docs.a2v10.com/whatsnew/w202609
 https://docs.a2v10.com/whatsnew/w202608
 https://docs.a2v10.com/whatsnew/w202607
@@ -53,6 +54,8 @@ https://docs.a2v10.com/xaml/controls/button
 https://docs.a2v10.com/xaml/controls/chatitem
 https://docs.a2v10.com/xaml/controls/checkbox
 https://docs.a2v10.com/xaml/controls/code
+https://docs.a2v10.com/xaml/controls/colorcombobox
+https://docs.a2v10.com/xaml/controls/colorpicker
 https://docs.a2v10.com/xaml/controls/combobox
 https://docs.a2v10.com/xaml/controls/comboboxitem
 https://docs.a2v10.com/xaml/controls/datagrid
@@ -78,6 +81,7 @@ https://docs.a2v10.com/xaml/controls/periodpicker
 https://docs.a2v10.com/xaml/controls/propertygrid
 https://docs.a2v10.com/xaml/controls/propertygriditem
 https://docs.a2v10.com/xaml/controls/radio
+https://docs.a2v10.com/xaml/controls/searchbox
 https://docs.a2v10.com/xaml/controls/selector
 https://docs.a2v10.com/xaml/controls/selectorsimple
 https://docs.a2v10.com/xaml/controls/separator
@@ -133,9 +137,11 @@ https://docs.a2v10.com/xaml/containers/wizard
 https://docs.a2v10.com/xaml/containers/wizardpage
 https://docs.a2v10.com/xaml/text/index
 https://docs.a2v10.com/xaml/text/badge
+https://docs.a2v10.com/xaml/text/bold
 https://docs.a2v10.com/xaml/text/break
 https://docs.a2v10.com/xaml/text/hyperlink
 https://docs.a2v10.com/xaml/text/html
+https://docs.a2v10.com/xaml/text/italic
 https://docs.a2v10.com/xaml/text/line
 https://docs.a2v10.com/xaml/text/paragraph
 https://docs.a2v10.com/xaml/text/popover

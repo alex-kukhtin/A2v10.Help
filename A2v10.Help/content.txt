@@ -1,5 +1,6 @@
 ﻿Платформа A2v10		/index
 	Що нового					/whatsnew/index
+		Жовтень 2026			/whatsnew/w202610
 		Вересень 2026			/whatsnew/w202609
 		Серпень 2026			/whatsnew/w202608
 		Липень 2026				/whatsnew/w202607
@@ -61,6 +62,8 @@
 			ChatItem			/xaml/controls/chatitem
 			CheckBox			/xaml/controls/checkbox
 			Code				/xaml/controls/code
+			ColorComboBox		/xaml/controls/colorcombobox
+			ColorPicker			/xaml/controls/colorpicker
 			ComboBox			/xaml/controls/combobox
 			ComboBoxItem		/xaml/controls/comboboxitem
 			DataGrid			/xaml/controls/datagrid
@@ -86,6 +89,7 @@
 			PropertyGrid		/xaml/controls/propertygrid
 			PropertyGridItem	/xaml/controls/propertygriditem
 			Radio				/xaml/controls/radio
+			SearchBox			/xaml/controls/searchbox
 			Selector			/xaml/controls/selector
 			SelectorSimple		/xaml/controls/selectorsimple
 			Separator			/xaml/controls/separator
@@ -143,9 +147,11 @@
 
 		Текстові елементи			/xaml/text/index
 			Badge				/xaml/text/badge
+			Bold				/xaml/text/bold
 			Break				/xaml/text/break
 			Hyperlink			/xaml/text/hyperlink
 			Html				/xaml/text/html
+			Italic				/xaml/text/italic
 			Line				/xaml/text/line
 			Paragraph			/xaml/text/paragraph
 			Popover				/xaml/text/popover

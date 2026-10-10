@@ -48,7 +48,8 @@ interface ~templateValidatorObj {
 	msg?: string,
 	regExp?: RegExp,
 	severity?: ~Severity,
-	applyIf?: (elem: IElement, value?: any) => boolean
+	applyIf?(elem: IElement, value?: any): boolean, /* застаріле, див. when */
+	when?(this: IElement, value?: any): boolean
 }
 
 declare type ~templateValidator = String | ~tempateValidatorFunc | ~templateValidatorObj;
@@ -88,7 +89,10 @@ validators: {
 			<code>regExp</code> - регулярний вираз для стандартного валідатора типу <code>'regExp'</code>.
 		</li>
 		<li>
-			<code>applyIf</code> - функція, що визначає, чи потрібно застосовувати валідатор.
+			<code>when</code> - функція, що визначає, чи потрібно застосовувати валідатор.
+		</li>
+		<li>
+			<code>applyIf</code> - застаріле. Те саме, що <code>when</code>, але елемент передається першим аргументом.
 		</li>
 	</ul>
 
@@ -117,7 +121,7 @@ validators: {
 		об'єкта
 		<pre class="code-highlight js">
 <script type="text/template">
-{valid:'notBlank', msg:'заданий рядок', severity=~Severity.error}
+{valid:'notBlank', msg:'заданий рядок', severity: ~Severity.error}
 </script>
 </pre>
 	</p>
@@ -126,7 +130,7 @@ validators: {
 		Якщо валідатор - функція, то це еквівалент об'єкта
 <pre class="code-highlight js">
 <script type="text/template">
-{valid:func, severity=~Severity.error'}
+{valid:func, severity: ~Severity.error}
 </script>
 </pre>
 	</p>
@@ -140,7 +144,7 @@ validators: {
 				<code>elem</code> - елемент, до якого застосовується валідатор.
 			</li>
 			<li>
-				<code>val</code> - значення, що перевіряється.
+				<code>value</code> - значення, що перевіряється.
 			</li>
 		</ul>
 		<h4>Повертає:</h4>
@@ -159,16 +163,16 @@ validators: {
 		</ul>
 	</div>
 
-	<h3>Формат функції <code>applyIf</code></h3>
+	<h3>Формат функції <code>when</code></h3>
 	<div class="method">
-		<div class="syntax"><pre class="code-highlight js">applyIf?: (elem: IElement, value?: any): boolean</pre></div>
+		<div class="syntax"><pre class="code-highlight js">when(value?: any): boolean;</pre></div>
 		<h4>Аргументи:</h4>
 		<ul class="params">
 			<li>
-				<code>elem</code> - елемент, до якого застосовується валідатор.
+				<code>this</code> - елемент, до якого застосовується валідатор.
 			</li>
 			<li>
-				<code>val</code> - значення, що перевіряється.
+				<code>value</code> - значення, що перевіряється.
 			</li>
 		</ul>
 		<h4>Повертає:</h4>
@@ -176,6 +180,30 @@ validators: {
 			<li><code>true</code> - якщо валідатор активний і його потрібно застосувати. </li>
 		</ul>
 	</div>
+	<p class="tip warning">
+		<b>Зверніть увагу!</b> Не задавайте <code>when</code> стрілочною функцією: у ній <code>this</code> не буде елементом.
+	</p>
+
+	<h3>Приклад</h3>
+	<p>
+		Ціна в рядку документу обов'язкова, тільки якщо рядок не безкоштовний (<code>Free</code>).
+		Тут <code>this</code> - рядок документу.
+
+		<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+const template = {
+	validators: {
+		'Document.Rows[].Price': {
+			valid: 'notBlank',
+			msg: 'Вкажіть ціну',
+			when() { return !this.Free; }
+		}
+	}
+};
+</script>
+</pre>
+
+	</p>
 
 	<h3>Асинхронні валідатори</h3>
 	<p>

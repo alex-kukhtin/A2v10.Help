@@ -1,0 +1,132 @@
+﻿<div>
+	<!--title:Xaml.ColorComboBox-->
+	<!--keywords:ColorComboBox;ColorComboBoxItem-->
+	<div class="title">
+		<h1>
+			Елемент ColorComboBox
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>Являє собою спадний список, елементи якого відображаються кольоровими мітками.</p>
+
+	Наслідує: <a class="code-link" href="/xaml/abstract/valuedcontrol">ValuedControl</a> :
+	<a class="code-link" href="/xaml/abstract/control">Control</a> :
+	<a class="code-link" href="/xaml/abstract/uielement">UIElement</a> :
+	<a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+
+	<p>Властивість вмісту: <code>Children</code></p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">ItemsSource</td>
+				<td>Array</td>
+				<td>
+					Завжди прив'язка - <a class="code-link" href="../bind/bind">Bind</a>. Джерело даних для відображення в списку.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Children</td>
+				<td>List&lt;ColorComboBoxItem&gt;</td>
+				<td>
+					Властивість вмісту. Рівно один елемент <code>ColorComboBoxItem</code>, який зв'язує
+					властивості елементів масиву з текстом, значенням і кольором мітки (див. нижче).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Align</td>
+				<td><a class="code-link" href="/xaml/enums/textalign">TextAlign</a></td>
+				<td>Вирівнювання тексту.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">DropUp</td>
+				<td>Boolean</td>
+				<td>Розкривати список вгору.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Size</td>
+				<td><code>ControlSize</code></td>
+				<td>
+					Розмір елементу. Можливі значення:
+					<ul class="enum-vals">
+						<li><span class="prop-name">Default</span> - (за замовчуванням) список звичайного розміру.</li>
+						<li><span class="prop-name">Large</span> - збільшений розмір переліку.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/valuedcontrol">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Властивості ColorComboBoxItem</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Content</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>Обов'язкова прив'язка. Властивість елементу масиву, яка виводиться як текст мітки.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Value</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>Обов'язкова прив'язка. Властивість елементу масиву, яка буде значенням списку.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Color</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Обов'язкова прив'язка. Властивість елементу масиву з ім'ям кольору мітки
+					(ті самі імена, що у <a class="code-link" href="colorpicker">ColorPicker</a>).
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Outline</td>
+				<td>Boolean</td>
+				<td>Показувати тільки обводку міток.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Опис</h3>
+	<p>
+		Статичний вміст не підтримується: список завжди будується з масиву <code>ItemsSource</code>.
+	</p>
+	<p>
+		Якщо <code>Value</code> списку прив'язано до об'єкта, при виборі йому присвоюється обраний елемент масиву.
+		Інакше присвоюється значення властивості, заданої в <code>Value</code> елементу <code>ColorComboBoxItem</code>.
+	</p>
+	<p>
+		Клавіші <kbd>↑</kbd> і <kbd>↓</kbd> перебирають елементи без відкриття списку.
+	</p>
+
+	<h3>Приклад</h3>
+	<pre class="code-highlight xml">
+<script type="text/template">
+<ColorComboBox Label="Стан" Value="{Bind Document.State}" ItemsSource="{Bind States}">
+	<ColorComboBoxItem Content="{Bind Name}" Value="{Bind Id}" Color="{Bind Color}"/>
+</ColorComboBox>
+</script>
+</pre>
+</div>

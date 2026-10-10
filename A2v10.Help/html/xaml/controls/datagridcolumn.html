@@ -88,6 +88,23 @@
 				</td>
 			</tr>
 			<tr>
+				<td class="prop-name">Done</td>
+				<td>Object</td>
+				<td>
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Ознака "проведено".
+					Перед вмістом клітинки виводиться іконка: зелена, якщо значення істинне, жовта - якщо ні.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CheckAll</td>
+				<td>String</td>
+				<td>
+					Тільки прив'язка (<a class="code-link" href="/xaml/bind/bind">Bind</a>). Ім'я булевої властивості рядка.
+					Замість заголовка стовпчика виводиться прапорець "вибрати все": якщо властивість встановлена в усіх рядках,
+					клік знімає її в усіх, інакше встановлює в усіх. Прапорець показує три стани: всі, частина, жодного.
+				</td>
+			</tr>
+			<tr>
 				<td class="prop-name">Icon</td>
 				<td><a class="code-link" href="/xaml/enums/icon">Icon</a></td>
 				<td>
@@ -179,6 +196,14 @@
 						<li>
 							<span class="prop-name">CheckBox</span> - Відображення у вигляді прапорця. Ширина по вмісту, вирівнювання по центру, нема перенесення
 							(<code>Fit="True" Align="Center" Wrap="NoWrap" ControlType="CheckBox"</code>).
+						</li>
+						<li>
+							<span class="prop-name">Code</span> - Відображення коду. Ширина по вмісту, нема перенесення
+							(<code>Fit="True" Wrap="NoWrap"</code>).
+						</li>
+						<li>
+							<span class="prop-name">Fit</span> - Ширина по вмісту, нема перенесення, вирівнювання не змінюється
+							(<code>Fit="True" Wrap="NoWrap"</code>).
 						</li>
 					</ul>
 				</td>
