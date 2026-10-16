@@ -1,0 +1,69 @@
+<div>
+	<!--title:blobs (model.json)-->
+	<!--keywords:blobs;accept;maxSize-->
+	<div class="title">
+		<h1>
+			Файли (blobs)
+		</h1>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Об'єкт <b>blobs</b> оголошує, куди в цій кінцевій точці можна завантажити файл.
+		<a href="/models/blobs">Детальніше про роботу з файлами та зображеннями...</a>
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">"blobs": {
+	"Logo": { "accept": "image/png,image/jpeg", "maxSize": 512 }
+}
+</script>
+</pre>
+
+	<p>
+		Ключ — ім'я поля кореневого об'єкта моделі: при <code>"model": "Agent"</code> ключ <code>Logo</code>
+		означає поле <code>Agent.Logo</code>. Регістр не має значення, прийнято писати PascalCase — так само,
+		як у SQL і XAML. При збереженні моделі платформа перевіряє посилання в цьому полі
+		(<a href="/models/blobs">детальніше</a>).
+	</p>
+	<p>
+		У кінцевій точці з <a href="model">requireBase</a> ключ — просто ім'я, за яким завантажуються
+		вкладення (<code>$uploadBlob('/attachment/upload', null, owner)</code>), полем моделі воно не є.
+	</p>
+	<p>
+		Права на завантаження — ролі кінцевої точки. Кінцева точка з розділом <code>blobs</code>
+		не може мати власного джерела даних (<code>source</code>).
+	</p>
+
+	<h3>Властивості об'єкта</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">accept</td>
+				<td>string</td>
+				<td>
+					Не обов'язково. Дозволені MIME-типи через кому, допускається <code>image/*</code>.
+					Не вказано — будь-який тип. Для зображень (PNG, JPEG, GIF, WebP) і PDF тип визначається
+					за вмістом файлу, для решти — за розширенням імені. Те, що повідомив браузер, не враховується.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">maxSize</td>
+				<td>number</td>
+				<td>Не обов'язково. Найбільший розмір файлу, КБ. Не вказано — без обмеження.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Обидва обмеження перевіряє сервер. Файл, що їх порушує, не зберігається, а користувач бачить
+		повідомлення про помилку.
+	</p>
+</div>

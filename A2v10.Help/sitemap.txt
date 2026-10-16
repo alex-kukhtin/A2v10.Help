@@ -23,6 +23,7 @@ https://docs.a2v10.com/app/popups
 https://docs.a2v10.com/app/commands
 https://docs.a2v10.com/app/reports
 https://docs.a2v10.com/app/files
+https://docs.a2v10.com/app/blobs
 https://docs.a2v10.com/app/folders/index
 https://docs.a2v10.com/app/folders/home
 https://docs.a2v10.com/app/folders/assets
@@ -41,6 +42,7 @@ https://docs.a2v10.com/models/cross
 https://docs.a2v10.com/models/mapobject
 https://docs.a2v10.com/models/group
 https://docs.a2v10.com/models/blob
+https://docs.a2v10.com/models/blobs
 https://docs.a2v10.com/models/rowversion
 https://docs.a2v10.com/models/errors
 https://docs.a2v10.com/models/system
@@ -50,6 +52,8 @@ https://docs.a2v10.com/xaml/overview/index
 https://docs.a2v10.com/xaml/overview/extensions
 https://docs.a2v10.com/xaml/controls/index
 https://docs.a2v10.com/xaml/controls/alert
+https://docs.a2v10.com/xaml/controls/blobimage
+https://docs.a2v10.com/xaml/controls/blobpreview
 https://docs.a2v10.com/xaml/controls/button
 https://docs.a2v10.com/xaml/controls/chatitem
 https://docs.a2v10.com/xaml/controls/checkbox
@@ -94,6 +98,8 @@ https://docs.a2v10.com/xaml/controls/tablecolumn
 https://docs.a2v10.com/xaml/controls/tablemarkcell
 https://docs.a2v10.com/xaml/controls/tablerow
 https://docs.a2v10.com/xaml/controls/textbox
+https://docs.a2v10.com/xaml/controls/texteditor
+https://docs.a2v10.com/xaml/controls/textview
 https://docs.a2v10.com/xaml/controls/timepicker
 https://docs.a2v10.com/xaml/controls/toolbaraligner
 https://docs.a2v10.com/xaml/controls/treegrid

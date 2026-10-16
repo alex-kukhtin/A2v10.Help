@@ -1,0 +1,83 @@
+<div>
+	<!--title:Xaml.BlobPreview-->
+	<!--keywords:BlobPreview;вкладення;перегляд;blob-->
+	<div class="title">
+		<h1>
+			Елемент BlobPreview
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Перегляд файлу: зображення показує, PDF відкриває вбудованим засобом перегляду браузера,
+		для решти файлів показує ім'я посиланням — клік завантажує файл. Тільки показує, нічого не змінює.
+	</p>
+	<p><a href="/models/blobs">Детальніше про роботу з файлами та зображеннями...</a></p>
+
+	<p>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Value</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Обов'язково, завжди прив'язка. Об'єкт файлу з полями <code>Id</code>, <code>Token</code>,
+					<code>Name</code>, <code>Mime</code>.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Ширина області перегляду.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Висота області перегляду.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>
+		<code>Url</code> у елемента немає: файл читається за власним <code>Id</code> і токеном.
+	</p>
+
+	<h3>Приклад</h3>
+	<p>
+		Перегляд вибраного вкладення. <a class="code-link" href="/xaml/components/slot">Slot</a>
+		не відображає вміст, поки нічого не вибрано, а <code>Fallback</code> пояснює, чому місце пусте:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<Slot Scope="{Bind Attachments.$selected}">
+	<BlobPreview Value="{Bind Blob}" Height="100%"/>
+	<Slot.Fallback>
+		<EmptyPanel Content="Для цього елементу ще немає вкладень"/>
+	</Slot.Fallback>
+</Slot>
+]]>
+</script>
+</pre>
+</div>

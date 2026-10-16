@@ -1,0 +1,105 @@
+<div>
+	<!--title:Xaml.BlobImage-->
+	<!--keywords:BlobImage;зображення;blob-->
+	<div class="title">
+		<h1>
+			Елемент BlobImage
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Зображення в полі запису: показує його, завантажує нове і очищає поле.
+	</p>
+	<p><a href="/models/blobs">Детальніше про роботу з файлами та зображеннями...</a></p>
+
+	<p>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Url</td>
+				<td>String</td>
+				<td>
+					Кінцева точка — папка, де лежить <span class="file-name">model.json</span> з розділом
+					<a href="/app/blobs">blobs</a>. Ім'я ключа в <code>blobs</code> сюди не пишеться: воно
+					береться з імені поля у <code>Value</code>.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Value</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>
+					Обов'язково, завжди прив'язка. Поле кореневого об'єкта моделі <code>&lt;model&gt;.&lt;Key&gt;</code>,
+					наприклад <code>Agent.Logo</code>. Елемент записує в нього результат завантаження.
+				</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Width</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Ширина зображення.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Height</td>
+				<td><a class="code-link" href="/xaml/simple/length">Length</a></td>
+				<td>Висота зображення.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		<b>Увага!</b> Без прив'язки <code>Value</code> вид не завантажиться і система повідомить про
+		помилку розмітки.
+	</p>
+
+	<h3>Приклад</h3>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<BlobImage Url="/catalog/agentblob" Value="{Bind Agent.Logo}" Height="10rem"/>
+</script>
+</pre>
+
+	<p>
+		Відповідний <span class="file-name">/catalog/agentblob/model.json</span> містить
+		<code>"model": "Agent"</code> і <code>"blobs": { "Logo": {...} }</code>.
+	</p>
+
+	<h3>Особливості</h3>
+	<ul class="std">
+		<li>
+			Пусте поле показує область вибору файлу. Після завантаження в поле записуються <code>Id</code>,
+			<code>Token</code>, а також <code>Name</code> і <code>Mime</code>, якщо вони є в об'єкті.
+			Модель стає зміненою, як після редагування будь-якого поля.
+		</li>
+		<li>
+			Кнопка &#x2715; очищає поле (<code>$empty()</code>).
+		</li>
+		<li>
+			У запис файл потрапляє тільки при збереженні моделі. Працює і для нового запису.
+		</li>
+		<li>
+			Найчастіше задається тільки одна з властивостей <code>Width</code> або <code>Height</code>. Тоді
+			зображення зберігає пропорції.
+		</li>
+	</ul>
+</div>

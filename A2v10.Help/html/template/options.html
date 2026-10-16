@@ -33,10 +33,34 @@ options: {
 			позицію виділеного елементу в процесі збереження або перезавантаження моделі.
 		</li>
 		<li>
-			<code>skipDirty</code> - масив рядків, що визначає шляхи до властивостей моделі, при зміні яких не потрібно встановлювати 
+			<code>skipDirty</code> - масив рядків, що визначає шляхи до властивостей моделі, при зміні яких не потрібно встановлювати
 			прапорець (flag) змін <code>$isDirty</code>.
 		</li>
 	</ul>
+
+	<h3>skipDirty</h3>
+	<p>Шлях може мати одну з форм:</p>
+	<ul class="std">
+		<li>
+			<code>'Comments[].Text'</code> - властивість елементів масиву або об'єкта.
+		</li>
+		<li>
+			<code>'Comments'</code> - сам масив: його <code>$append</code>, <code>$remove</code>, <code>$empty</code>.
+			<span class="core-only">Тільки NET.Core</span>
+		</li>
+	</ul>
+	<p>
+		Типовий випадок - дані, які вже збережено окремою командою або завантаженням файлу: доданий коментар,
+		прикріплене вкладення. Для кнопки <code>Save</code> сторінки це не зміна. Для власних властивостей кореня,
+		що живуть тільки на клієнті, використовуйте імена з <code>$$</code>.
+	</p>
+
+<pre class="code-highlight js">
+<script type="text/template">options: {
+	skipDirty: ['Comments', 'Comments[].Text', 'Attachments']
+}
+</script>
+</pre>
 
 	<h3>Детальніше</h3>
 	<p>

@@ -3,7 +3,7 @@
 	<!--keywords:Що нового-->
 	<div class="title">
 		<h1>
-			Випуск 50 - версії 8654-8670 (Жовтень 2026)
+			Випуск 50 - версії 8654-8671 (Жовтень 2026)
 		</h1>
 		<div class="breadcrumb">
 			<a href="index">Всі випуски</a>|
@@ -136,6 +136,37 @@
 		8. MakeHelp - StopWords назовні.
 		-->
 
+	<h3>Файли та зображення <span class="core-only">Тільки NET.Core</span></h3>
+	<p class="tip warning">
+		<b>Увага!</b> Кожна база даних тепер потребує типу <code>dbo.platformid</code> — типу ключів програми.
+		Додайте файл <span class="file-name">_sql/platformid.sql</span> першим у <span class="file-name">sql.json</span>
+		хоста, інакше платформний скрипт зупиниться з помилкою.
+		<a href="/models/blobs">Детальніше...</a>
+	</p>
+	<ul class="std">
+		<li>
+			Платформа зберігає файли сама: <a href="/models/blobs">файл у полі запису і вкладення</a>.
+			Сховище задається в <code>appsettings.json</code> (<code>BlobStorage</code>).
+		</li>
+		<li>
+			В <a href="/app/model">model.json</a> додано розділ <a href="/app/blobs">blobs</a> і властивість
+			<code>requireBase</code>.
+		</li>
+		<li>
+			Нові елементи <a class="code-link" href="/xaml/controls/blobimage">BlobImage</a> і
+			<a class="code-link" href="/xaml/controls/blobpreview">BlobPreview</a>.
+		</li>
+		<li>
+			В <a href="/client/controller">контролер</a> додано методи <code>$uploadBlob</code>
+			і <code>$uploadBlobFile</code>.
+		</li>
+		<li>
+			Нові елементи <a class="code-link" href="/xaml/controls/texteditor">TextEditor</a> і
+			<a class="code-link" href="/xaml/controls/textview">TextView</a> - текст з жирним шрифтом і
+			зображеннями, які зберігаються як вкладення (<b>Layout: Tabbed</b>).
+		</li>
+	</ul>
+
 	<h3>Xaml</h3>
 	<ul class="std">
 		<li>
@@ -162,6 +193,16 @@
 		<li>
 			В <a href="/template/validators">валідатори</a> додано метод <code>when</code> - умова застосування
 			валідатора, <code>this</code> в ньому - елемент. Метод <code>applyIf</code> застарів.
+		</li>
+		<li>
+			<span class="core-only">Тільки NET.Core</span>
+			В <a href="/client/controller">контролер</a> додано метод <code>$ensureSaved</code> -
+			зберегти новий запис, щоб отримати його ідентифікатор.
+		</li>
+		<li>
+			<span class="core-only">Тільки NET.Core</span>
+			Опція шаблона <a href="/template/options">skipDirty</a> приймає шлях масиву: його
+			<code>$append</code>, <code>$remove</code>, <code>$empty</code> не змінюють <code>$isDirty</code>.
 		</li>
 	</ul>
 </div>

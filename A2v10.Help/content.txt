@@ -26,6 +26,7 @@
 		commands		/app/commands
 		reports			/app/reports
 		files			/app/files
+		blobs			/app/blobs
 
 	Спеціальні папки		/app/folders/index
 		_home				/app/folders/home
@@ -47,6 +48,7 @@
 	Іменовані набори				/models/mapobject
 	Моделі з групуванням			/models/group
 	Робота з бінарними об'єктами	/models/blob
+	Файли та зображення				/models/blobs
 	Відстеження змін				/models/rowversion
 	Повідомлення про помилки		/models/errors
 	Системні набори даних			/models/system
@@ -58,6 +60,8 @@
 			Розширення розмітки	/xaml/overview/extensions
 		Элементи управління	/xaml/controls/index
 			Alert				/xaml/controls/alert
+			BlobImage			/xaml/controls/blobimage
+			BlobPreview			/xaml/controls/blobpreview
 			Button				/xaml/controls/button
 			ChatItem			/xaml/controls/chatitem
 			CheckBox			/xaml/controls/checkbox
@@ -102,6 +106,8 @@
 			TableMarkCell		/xaml/controls/tablemarkcell
 			TableRow			/xaml/controls/tablerow
 			TextBox				/xaml/controls/textbox
+			TextEditor			/xaml/controls/texteditor
+			TextView			/xaml/controls/textview
 			TimePicker			/xaml/controls/timepicker
 			ToolbarAligner		/xaml/controls/toolbaraligner
 			TreeGrid			/xaml/controls/treegrid

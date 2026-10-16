@@ -1,0 +1,74 @@
+<div>
+	<!--title:Xaml.TextView-->
+	<!--keywords:TextView;коментар;markdown;ImageUrl-->
+	<div class="title">
+		<h1>
+			Елемент TextView
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span> та <b>Layout: Tabbed</b>.
+		Показує текст, написаний у <a class="code-link" href="texteditor">TextEditor</a>: переходи рядків,
+		жирний шрифт, зображення. Посилання <code>http(s)://</code> відкриваються в новій вкладці, зображення -
+		посилання на оригінал. Тільки показує, нічого не змінює.
+	</p>
+
+	<p>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Value</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>Обов'язково, завжди прив'язка. Текст для показу.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Delegates</td>
+				<td>Object</td>
+				<td>
+					Прив'язка до того самого об'єкта функцій, що й у <a class="code-link" href="texteditor">TextEditor</a>.
+					Використовується тільки <code>ImageUrl</code>: без неї зображення показуються текстом.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Приклад</h3>
+	<p>
+		Список коментарів: кожен показується текстом, а за кнопкою редагується в
+		<a class="code-link" href="texteditor">TextEditor</a>.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<Repeater ItemsSource="{Bind Comments}">
+	<StackPanel Gap=".5rem">
+		<TextView Value="{Bind Text}" Delegates="{Bind Root.$TextDelegates}" If="{Bind !$$Edit}"/>
+		<TextEditor Value="{Bind $$Draft}" Delegates="{Bind Root.$TextDelegates}" If="{Bind $$Edit}"/>
+	</StackPanel>
+</Repeater>
+]]>
+</script>
+</pre>
+</div>

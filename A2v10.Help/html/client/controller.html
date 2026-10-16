@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Контролер-->
-	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;-->
+	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;$upload;$uploadBlob;$uploadBlobFile;$ensureSaved;-->
 	<div class="title">
 		<h1>
 			Контролер
@@ -43,6 +43,9 @@ interface IController {
   $emitSaveEvent(): void;
   $nodirty(func: () => Promise<any>): void;
   $upload(url: string, accept?: string, data?: { Id?: any, Key?: any }, opts?: { catchError?: boolean }): Promise<any>;
+  $uploadBlob(url: string, accept?: string, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
+  $uploadBlobFile(url: string, file: File, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
+  $ensureSaved(): Promise<boolean>;
 }
 
 declare const enum ~CommonStyle {
@@ -322,7 +325,7 @@ interface IConfirm {
 	</div>
 
 	<div class="method">
-		<a href="#upload"></a>
+		<a id="upload"></a>
 		<div class="syntax"><pre class="code-highlight js">$upload(url: string, accept?: string, data?: { Id?: any, Key?: any }, opts?: { catchError?: boolean }): Promise&lt;any&gt;</pre></div>
 		<p>
 			Показує діалог вибору файлу та відправляє його вміст на сервер.
@@ -356,5 +359,106 @@ interface IConfirm {
 		<ul class="params">
 			<li><code>Promise&lt;any&gt;</code>, який буде виконаний після завершення операції. Вміст промісу - це те, що поверне сервер.</li>
 		</ul>
+	</div>
+
+	<div class="method">
+		<a id="uploadblob"></a>
+		<div class="syntax"><pre class="code-highlight js">$uploadBlob(url: string, accept?: string, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise&lt;any&gt;</pre></div>
+		<p>
+			<span class="core-only">Тільки NET.Core</span>
+			Показує діалог вибору файлу та завантажує його в розділ <a href="/app/blobs">blobs</a>.
+			Використовується для <a href="/models/blobs">вкладень</a>: з аргументом <code>data</code> файл
+			зв'язується з власником.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>url</code> - кінцева точка і ключ розділу <code>blobs</code>: <code>/attachment/upload</code>.
+			</li>
+			<li>
+				<code>accept</code> - дозволені mime-типи файлу (через кому). Виставляє фільтр в діалозі вибору.
+				Сервер все одно перевіряє <code>accept</code> з <span class="file-name">model.json</span>.
+			</li>
+			<li>
+				<code>data</code> - власник вкладення: <code>Id</code> - ідентифікатор запису власника,
+				<code>Base</code> - адреса його кінцевої точки (<code>/catalog/agentblob</code>). Інші властивості
+				об'єкта не передаються. Без <code>data</code> файл ні з чим не зв'язується.
+			</li>
+			<li>
+				<code>opts</code> - об`єкт опцій. Властивість <code>catchError</code> - так само, як у
+				<code>$upload</code>.
+			</li>
+		</ul>
+		<h4>Повертає:</h4>
+		<ul class="params">
+			<li>
+				<code>Promise&lt;any&gt;</code>. Для вкладення - новий рядок
+				<code>{ Id, Blob: { Id, Token, Name, Mime } }</code>, без <code>data</code> - об'єкт файлу
+				<code>{ Id, Token, Name, Mime }</code>. При помилці - <code>false</code>
+				(якщо не встановлено <code>catchError</code>).
+			</li>
+		</ul>
+		<p>
+			Що робити з результатом (додати рядок, виділити його, перечитати модель), вирішує програма:
+		</p>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">async upload() {
+	// Owner = { Id, Base } з процедури Index
+	const result = await this.$ctrl.$uploadBlob('/attachment/upload', null, this.Owner);
+	if (!result)
+		return;
+	this.Attachments.$append(result).$select();
+}
+</script>
+</pre>
+	</div>
+
+	<div class="method">
+		<a id="uploadblobfile"></a>
+		<div class="syntax"><pre class="code-highlight js">$uploadBlobFile(url: string, file: File, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise&lt;any&gt;</pre></div>
+		<p>
+			<span class="core-only">Тільки NET.Core</span>
+			Те саме, що <code>$uploadBlob</code>, але для готового файлу, без діалогу вибору:
+			файл уже отримано зі вставки (paste) або перетягування (drop). Використовується в функції
+			<code>UploadImage</code> елемента <a class="code-link" href="/xaml/controls/texteditor">TextEditor</a>.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>url</code>, <code>data</code>, <code>opts</code> - як у <code>$uploadBlob</code>.</li>
+			<li><code>file</code> - об'єкт <code>File</code> браузера.</li>
+		</ul>
+		<h4>Повертає:</h4>
+		<ul class="params">
+			<li>Те саме, що <code>$uploadBlob</code>.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<a id="ensuresaved"></a>
+		<div class="syntax"><pre class="code-highlight js">$ensureSaved(): Promise&lt;boolean&gt;</pre></div>
+		<p>
+			<span class="core-only">Тільки NET.Core</span>
+			Зберігає головний об'єкт моделі, якщо він новий (<code>$isNew</code>). Головний об'єкт — той самий,
+			що зберігає <code>$save</code>: позначений як головний, інакше перший об'єкт моделі. Новий
+			об'єкт зберігається, навіть якщо в ньому нічого не змінено. Одночасні виклики чекають одного й того
+			самого збереження.
+		</p>
+		<p>
+			Потрібен, коли дії необхідний ідентифікатор запису: наприклад, щоб прикріпити
+			<a href="/models/blobs">вкладення</a> до запису, який ще не збережено.
+		</p>
+		<h4>Повертає:</h4>
+		<ul class="params">
+			<li>
+				<code>Promise&lt;boolean&gt;</code> - <code>true</code>, якщо після виклику об'єкт має ідентифікатор
+				(вже був збережений або щойно збережений).
+			</li>
+		</ul>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">if (!await this.$ctrl.$ensureSaved())
+	return null;
+// тут this.Task.Id вже є
+</script>
+</pre>
 	</div>
 </div>

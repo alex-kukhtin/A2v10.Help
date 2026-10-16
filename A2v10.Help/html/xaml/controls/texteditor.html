@@ -1,0 +1,221 @@
+<div>
+	<!--title:Xaml.TextEditor-->
+	<!--keywords:TextEditor;редактор;коментар;markdown;UploadImage;ImageUrl;Submit-->
+	<div class="title">
+		<h1>
+			Елемент TextEditor
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі елементи керування</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span> та <b>Layout: Tabbed</b>.
+		Редактор тексту з жирним шрифтом і зображеннями: опис задачі, коментар. Зображення вставляються
+		з буфера обміну або перетягуванням і зберігаються як <a href="/models/blobs">вкладення</a> запису.
+		Показати текст без редагування - елемент <a class="code-link" href="textview">TextView</a>.
+	</p>
+
+	<p>
+		Наслідує: <a class="code-link" href="/xaml/abstract/uielementbase">UIElementBase</a>
+	</p>
+
+	<h3>Властивості</h3>
+
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="top">
+				<td class="prop-name">Value</td>
+				<td><a class="code-link" href="/xaml/bind/bind">Bind</a></td>
+				<td>Обов'язково, завжди прив'язка. Рядкова властивість, в яку редактор записує текст.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Placeholder</td>
+				<td>String</td>
+				<td>Текст-підказка в пустому редакторі.</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Disabled</td>
+				<td>Boolean</td>
+				<td>
+					Заборонити редагування. Модель тільки для читання вимикає редактор сама, як і будь-який
+					елемент керування.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name">Delegates</td>
+				<td>Object</td>
+				<td>
+					Прив'язка до об'єкта з функціями <code>UploadImage</code>, <code>ImageUrl</code>,
+					<code>Submit</code>. Див. нижче.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a href="/xaml/abstract/uielementbase">Властивості базового елементу</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="tip warning">
+		<b>Увага!</b> Без прив'язки <code>Value</code> вид не завантажиться і система повідомить про
+		помилку розмітки.
+	</p>
+
+	<h3>Формат тексту</h3>
+	<p>
+		У властивість записується текст з трьома елементами розмітки:
+	</p>
+	<ul class="std">
+		<li>перехід на новий рядок - <code>\n</code>;</li>
+		<li>жирний шрифт - <code>**текст**</code> (Ctrl+B);</li>
+		<li>зображення - <code>![ім'я](адреса)</code>, адресу повертає <code>UploadImage</code>.</li>
+	</ul>
+	<p>
+		Інших елементів немає: Ctrl+I і Ctrl+U не діють, вставлений HTML потрапляє в текст як звичайний текст.
+		Посилання <code>http(s)://</code> - це текст: редактор їх підсвічує, Ctrl+клік (⌘+клік) відкриває.
+		<a class="code-link" href="textview">TextView</a> робить їх клікабельними. Для колонки в базі
+		даних достатньо <code>nvarchar(max)</code>.
+	</p>
+
+	<h3>Функції Delegates</h3>
+	<p>
+		Об'єкт функцій створюється один раз у шаблоні і повертається властивістю моделі за посиланням.
+		Редактор викликає функції так само, як функції шаблону: <code>this</code> - модель сторінки.
+		Немає функції - немає і можливості.
+	</p>
+	<ul class="params">
+		<li>
+			<code>UploadImage(file: File): Promise&lt;string | null&gt;</code> - завантажує вставлене
+			зображення (PNG, JPEG, GIF, WebP). Повертає рядок, який буде записано в текст як адреса зображення,
+			або <code>null</code> - тоді зображення прибирається. Без цієї функції зображення не вставляються.
+		</li>
+		<li>
+			<code>ImageUrl(src: string): string | null</code> - повертає адресу, за якою браузер покаже
+			зображення з адресою <code>src</code> з тексту, або <code>null</code> - тоді воно залишається текстом.
+			Викликається під час відображення, тому має лише читати модель. Без цієї функції зображення
+			показуються текстом.
+		</li>
+		<li>
+			<code>Submit()</code> - викликається клавішами Ctrl+Enter (⌘+Enter). Наприклад, надіслати коментар.
+		</li>
+	</ul>
+
+	<h3>Зображення як вкладення</h3>
+	<p>
+		Зображення - це <a href="/models/blobs">вкладення</a> власника тексту, з моменту вставки, а не
+		збереження тексту. У тексті зберігається адреса без токена, наприклад <code>_blob/1234</code>:
+		токен залежить від користувача, і адреса з токеном відкрилася б тільки в автора. Кожен читач
+		отримує власну адресу з <code>ImageUrl</code>, яка шукає файл серед вкладень у моделі.
+	</p>
+	<p>
+		Приклад: задача з описом і коментарями, кінцева точка <span class="file-name">/task</span>,
+		вкладення - через кінцеву точку <span class="file-name">/attachment</span> з
+		<a href="/models/blobs">прикладу вкладень</a>, <code>base</code> = <code>/task</code>.
+	</p>
+
+	<h4>Процедура Load</h4>
+	<p>
+		Разом із задачею завантажуються її вкладення з токенами. Токен видається тільки для вкладень
+		задачі, тому чужий <code>Id</code>, вписаний у текст вручну, залишиться текстом.
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">select [Task!TTask!Object] = null, [Id!!Id] = t.Id, [Name!!Name] = t.[Name], t.[Text]
+from cat.Tasks t
+where t.Id = @Id;
+
+select [Attachments!TAttachment!Array] = null, [Id!!Id] = l.Id, [Blob!TBlob!RefId] = l.[Blob]
+from a2blob.BlobLinks l
+where l.[Base] = N'/task' and l.LinkId = @Id
+order by l.Id;
+
+select [!TBlob!Map] = null, [Id!!Id] = b.Id, b.[Name], b.Mime, [Token!!Token] = b.AccessToken
+from a2blob.Blobs b
+	inner join a2blob.BlobLinks l on b.Id = l.[Blob]
+where l.[Base] = N'/task' and l.LinkId = @Id;
+</script>
+</pre>
+
+	<h4>Шаблон</h4>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">
+<![CDATA[
+const BASE = '/task';
+const urltools = require('std:url');
+
+const template = {
+	options: {
+		// вкладення зберігаються завантаженням, а не кнопкою Save сторінки
+		skipDirty: ['Attachments']
+	},
+	properties: {
+		'TRoot.$TextDelegates'() { return textDelegates; }
+	}
+};
+
+// створюється один раз: новий об'єкт при кожному читанні змушував би перемальовувати кожен текст
+const textDelegates = {
+	async UploadImage(file) {
+		// вкладенню потрібен власник: нова задача спочатку зберігається
+		if (!await this.$ctrl.$ensureSaved())
+			return null;
+		const row = await this.$ctrl.$uploadBlobFile('/attachment/upload', file, { Id: this.Task.Id, Base: BASE });
+		if (!row)
+			return null;
+		// до повернення: редактор одразу викличе ImageUrl
+		this.Attachments.$append(row);
+		return `_blob/${row.Blob.Id}`;
+	},
+	ImageUrl(src) {
+		const m = /^_blob\/(\d+)$/.exec(src);
+		const a = m && this.Attachments.find(x => x.Blob.Id == +m[1]);
+		return a ? urltools.blobUrl(a.Blob) : null;
+	}
+};
+]]>
+</script>
+</pre>
+
+	<p>
+		<code>require('std:url').blobUrl(blob)</code> повертає адресу файлу для об'єкта файлу моделі
+		(<code>Id</code> і <code>Token</code>), для пустого посилання - <code>undefined</code>.
+		Методи <a href="/client/controller">$ensureSaved</a> і
+		<a href="/client/controller">$uploadBlobFile</a> описані в контролері.
+	</p>
+
+	<h4>Вид</h4>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<TextEditor Value="{Bind Task.Text}" Placeholder="Опис задачі" Delegates="{Bind Root.$TextDelegates}"/>
+]]>
+</script>
+</pre>
+
+	<h3>Особливості</h3>
+	<ul class="std">
+		<li>
+			Поки зображення завантажується, воно напівпрозоре. Стану «завантажується» редактор не повідомляє:
+			проміс <code>UploadImage</code> належить шаблону, тому шаблон сам знає, що завантаження триває,
+			і може на цей час заборонити свої кнопки.
+		</li>
+		<li>
+			Зображення, видалене з тексту, залишається вкладенням запису.
+		</li>
+		<li>
+			Вкладення, видалене зі списку, але згадане в тексті, показується текстом <code>![ім'я](_blob/…)</code>.
+		</li>
+	</ul>
+</div>

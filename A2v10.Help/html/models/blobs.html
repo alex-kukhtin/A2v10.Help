@@ -1,0 +1,464 @@
+<div>
+	<!--title:Файли та зображення-->
+	<!--keywords:Blob;BlobImage;BlobPreview;вкладення;attachment;зображення;файл;requireBase;platformid-->
+	<div class="title">
+		<h1>
+			Файли та зображення
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Моделі даних</a>
+		</div>
+	</div>
+
+	<p>
+		<span class="core-only">Тільки NET.Core</span>
+		Платформа сама зберігає файли, перевіряє їх і видає на клієнт. Прикладна програма
+		бачить файл тільки як посилання: <code>Id</code> і токен доступу. Байтів файлу немає ні в таблицях програми,
+		ні в її процедурах, ні в моделі.
+	</p>
+	<p>
+		Є два сценарії:
+	</p>
+	<ul class="std">
+		<li>
+			<b>Файл у полі запису</b> — один файл на запис: логотип контрагента, фото товару.
+			Посилання зберігається в колонці таблиці.
+		</li>
+		<li>
+			<b>Вкладення</b> — скільки завгодно файлів у будь-якого запису. Посилання зберігаються
+			в платформній таблиці зв'язків <code>a2blob.BlobLinks</code>.
+		</li>
+	</ul>
+
+	<h2>Підготовка</h2>
+
+	<h4>Сховище</h4>
+	<p>
+		Де лежать байти файлів, визначає конфігурація хоста, а не програма. Провайдер задається в
+		<a class="code-link" href="/deploy/appsettings">appsettings.json</a>:
+	</p>
+
+<pre class="code-highlight js" data-lang="json">
+<script type="text/template">"BlobStorage": {
+	"Provider": "FileSystem",
+	"Path": "d:/data/blobs"
+}
+</script>
+</pre>
+
+	<p>
+		<code>Provider</code> — ім'я сховища, зареєстрованого хостом. <code>Path</code> — папка для сховища
+		<code>FileSystem</code>. Сховища реєструються в <span class="file-name">Startup.cs</span>:
+	</p>
+
+<pre class="code-highlight js" data-lang="cs">
+<script type="text/template">
+<![CDATA[
+services.AddBlobStorages(factory =>
+{
+	factory.RegisterStorage<FileSystemBlobStorage>("FileSystem");
+	factory.RegisterStorage<AzureBlobStorage>("AzureStorage");
+});
+]]>
+</script>
+</pre>
+
+	<p>
+		Без провайдера, з незареєстрованим іменем або без <code>AddBlobStorages</code> завантаження і читання
+		файлу завершуються помилкою. Розробка і робочий сервер відрізняються тільки конфігурацією:
+		<span class="file-name">model.json</span> і код програми від провайдера не залежать.
+	</p>
+
+	<h4>Тип ключів програми</h4>
+	<p>
+		Таблиця вкладень посилається на записи програми, тому платформі потрібен тип ключа цих записів.
+		Програма оголошує його один раз, у файлі <span class="file-name">_sql/platformid.sql</span>
+		головного модуля:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">if type_id(N'dbo.platformid') is null
+	create type dbo.platformid from bigint;
+go
+</script>
+</pre>
+
+	<p>
+		Допустимі типи: <code>bigint</code>, <code>int</code>, <code>uniqueidentifier</code>. Файл стоїть
+		<b>першим</b> у <span class="file-name">sql.json</span> хоста, що збирає
+		<span class="file-name">full.sql</span>, перед платформними скриптами:
+	</p>
+
+<pre class="code-highlight js" data-lang="json">
+<script type="text/template">"inputFiles": [
+	"../MainApp/_sql/platformid.sql",
+	"_assets/sql/a2v10_platform_simple.sql",
+	...
+]
+</script>
+</pre>
+
+	<p class="tip warning">
+		<b>Увага!</b> Тип потрібен кожній базі даних, навіть якщо програма не працює з файлами. Без нього
+		платформний скрипт зупиняється на першому операторі з помилкою <code>dbo.platformid is not declared</code>.
+		Тип оголошується один раз на все життя бази: колонку на alias-типі змінити не можна.
+	</p>
+
+	<p>
+		Таблиці <code>a2blob.Blobs</code> і <code>a2blob.BlobLinks</code> створює платформний скрипт,
+		в базі даних за замовчуванням. Тому кінцева точка з розділом <a href="/app/blobs">blobs</a> не може
+		мати власне джерело даних (<code>source</code>).
+	</p>
+
+	<h2>Файл у полі запису</h2>
+
+	<p>
+		Приклад: контрагент з логотипом. Кінцева точка <span class="file-name">/catalog/agentblob</span>.
+	</p>
+
+	<h4>Таблиця</h4>
+	<p>
+		Посилання на файл — колонка <code>bigint</code> із зовнішнім ключем на <code>a2blob.Blobs</code>:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">create table cat.Agents
+(
+	Id bigint not null constraint PK_Agents primary key ...,
+	[Name] nvarchar(255),
+	...
+	Logo bigint null
+		constraint FK_Agents_Logo_Blobs foreign key references a2blob.Blobs(Id)
+);
+</script>
+</pre>
+
+	<h4>model.json</h4>
+	<p>
+		Розділ <a href="/app/blobs">blobs</a> оголошує поле, в яке можна завантажити файл. Ключ —
+		ім'я поля моделі: <code>Logo</code> означає <code>Agent.Logo</code>.
+	</p>
+
+<pre class="code-highlight js" data-lang="json">
+<script type="text/template">{
+	"schema": "cat",
+	"model": "Agent",
+	"dialogs": {
+		"edit": {
+			"view": "edit.dialog"
+		}
+	},
+	"blobs": {
+		"Logo": { "accept": "image/png,image/jpeg,image/svg+xml", "maxSize": 512 }
+	}
+}
+</script>
+</pre>
+
+	<h4>Процедура Load</h4>
+	<p>
+		Поле — посилання (<code>RefId</code>) на об'єкт файлу. Об'єкти файлів — окремий
+		<a href="/models/mapobject">іменований набір</a>
+		з полями <code>Id</code>, <code>Name</code>, <code>Mime</code> і <code>Token</code>.
+		Токен формується з поля <code>AccessToken</code> за допомогою типу <code>!!Token</code>:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">select [Agent!TAgent!Object] = null, [Id!!Id] = a.Id, [Name!!Name] = a.[Name], a.Memo,
+	[Logo!TBlob!RefId] = a.Logo
+from cat.Agents a
+where a.Id = @Id;
+
+select [!TBlob!Map] = null, [Id!!Id] = b.Id, b.[Name], b.Mime, [Token!!Token] = b.AccessToken
+from a2blob.Blobs b
+	inner join cat.Agents a on b.Id = a.Logo
+where a.Id = @Id;
+</script>
+</pre>
+
+	<p class="tip info">
+		<b>Зверніть увагу!</b> Поле токена називається саме <code>Token</code>. З іншим ім'ям збереження
+		моделі завершиться помилкою.
+	</p>
+
+	<h4>Процедура Update</h4>
+	<p>
+		Колонка <code>Logo bigint</code> в табличному типі, процедура пише її як звичайне поле. Нічого
+		специфічного для файлів тут немає.
+	</p>
+
+	<h4>Вид</h4>
+	<p>
+		Елемент <a class="code-link" href="/xaml/controls/blobimage">BlobImage</a> показує зображення і
+		завантажує нове. <code>Url</code> — кінцева точка, <code>Value</code> — поле:
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<BlobImage Url="/catalog/agentblob" Value="{Bind Agent.Logo}" Height="10rem"/>
+]]>
+</script>
+</pre>
+
+	<p>
+		Завантажений файл одразу показується на формі, а в запис потрапляє при збереженні моделі.
+		Якщо закрити діалог без збереження, запис не зміниться. Новий запис теж можна зберегти разом
+		з файлом.
+	</p>
+
+	<h4>Перевірка при збереженні</h4>
+	<p>
+		Перед <code>Update</code> платформа перевіряє кожне непусте посилання з розділу <code>blobs</code>:
+		воно повинне прийти разом зі своїм токеном. Чесне посилання завжди має токен — з <code>Load</code>
+		або з результату завантаження. Тому записати в поле чужий <code>Id</code> зі скрипту не вийде:
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">// збереження завершиться помилкою "Invalid blob token"
+this.Agent.Logo.Id = 1003;
+</script>
+</pre>
+
+	<p>
+		Очистити посилання (<code>Agent.Logo.$empty()</code>) можна завжди.
+	</p>
+
+	<p class="tip warning">
+		<b>Увага!</b> Перевіряються тільки поля кореневого об'єкта моделі (<code>Agent.Logo</code>).
+		Файл у рядку документа (<code>Document.Rows[].Photo</code>) або у вкладеному об'єкті
+		(<code>Agent.Contact.Photo</code>) не підтримується.
+	</p>
+
+	<h2>Вкладення</h2>
+
+	<p>
+		Одна кінцева точка обслуговує вкладення всієї програми. Власник вкладень визначається двома
+		значеннями: <code>base</code> — адреса кінцевої точки власника, і <code>Id</code> запису.
+		Приклад: кінцева точка <span class="file-name">/attachment</span>.
+	</p>
+
+	<h4>model.json</h4>
+
+<pre class="code-highlight js" data-lang="json">
+<script type="text/template">{
+	"schema": "cat",
+	"model": "Attachment",
+	"requireBase": true,
+	"dialogs": {
+		"index": {
+			"index": true,
+			"template": "index.template",
+			"view": "index.dialog"
+		}
+	},
+	"blobs": {
+		"Upload": { "maxSize": 20480 }
+	},
+	"commands": {
+		"delete": {
+			"type": "sql",
+			"procedure": "Attachment.Delete"
+		}
+	}
+}
+</script>
+</pre>
+
+	<p>
+		<code>requireBase</code> означає, що кожен виклик цієї кінцевої точки повинен містити
+		<code>base</code>. Платформа перевіряє ролі <span class="file-name">model.json</span>, що лежить
+		за адресою <code>base</code>, і тільки потім викликає процедуру. Ключ <code>Upload</code> тут не
+		поле моделі, а просто ім'я, за яким завантажуються файли.
+	</p>
+
+	<h4>Відкриття з форми власника</h4>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<Button Content="Вкладення" Icon="Attach"
+	Command="{BindCmd Dialog, Action=Show, Argument={Bind Agent},
+		Url='/attachment/index?base=/catalog/agentblob', SaveRequired=True}"/>
+]]>
+</script>
+</pre>
+
+	<p>
+		<code>Argument</code> дає <code>Id</code> власника, <code>SaveRequired</code> зберігає новий запис,
+		щоб цей <code>Id</code> з'явився.
+	</p>
+
+	<h4>Процедури</h4>
+	<p>
+		<code>Index</code> отримує <code>@Id</code> власника і <code>@Base</code>, читає
+		<code>a2blob.BlobLinks</code> і повертає файли так само, як <code>Load</code> у першому сценарії.
+		<code>Delete</code> видаляє зв'язок за трьома значеннями — ніколи тільки за <code>Id</code> зв'язку:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">create or alter procedure cat.[Attachment.Index]
+@UserId bigint,
+@Id bigint,
+@Base nvarchar(255)
+as
+begin
+	set nocount on;
+	set transaction isolation level read uncommitted;
+
+	select [Owner!TOwner!Object] = null, [Id!!Id] = @Id, [Base] = @Base;
+
+	select [Attachments!TAttachment!Array] = null, [Id!!Id] = l.Id, [Blob!TBlob!RefId] = l.[Blob]
+	from a2blob.BlobLinks l
+	where l.[Base] = @Base and l.LinkId = @Id
+	order by l.Id;
+
+	select [!TBlob!Map] = null, [Id!!Id] = b.Id, b.[Name], b.Mime, [Token!!Token] = b.AccessToken
+	from a2blob.Blobs b
+		inner join a2blob.BlobLinks l on b.Id = l.[Blob]
+	where l.[Base] = @Base and l.LinkId = @Id;
+end
+go
+
+create or alter procedure cat.[Attachment.Delete]
+@UserId bigint,
+@Id bigint,
+@Base nvarchar(255),
+@Owner bigint
+as
+begin
+	set nocount on;
+	set transaction isolation level read committed;
+
+	delete from a2blob.BlobLinks where Id = @Id and [Base] = @Base and LinkId = @Owner;
+end
+go
+</script>
+</pre>
+
+	<p class="tip warning">
+		<b>Увага!</b> Ролі <code>base</code> зупиняють тільки того, хто не має доступу до жодного власника.
+		Тому кожна процедура вкладень фільтрує за <code>@Base</code> і власником. Тоді чужий <code>base</code>
+		або чужий <code>Id</code> зв'язку нічого не знаходять. Перевірка «цей користувач не бачить документ 42»
+		— справа процедур програми, як і всюди.
+	</p>
+
+	<h4>Вид</h4>
+	<p>
+		Список файлів і перегляд вибраного. Вибраний рядок — через
+		<a class="code-link" href="/xaml/components/slot">Slot</a>: без виділення
+		<a class="code-link" href="/xaml/controls/blobpreview">BlobPreview</a> не відображається, а
+		<code>Fallback</code> пояснює, чому місце пусте.
+	</p>
+
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<![CDATA[
+<Dialog xmlns="clr-namespace:A2v10.Xaml;assembly=A2v10.Xaml" Title="Вкладення" Width="60rem" Height="30rem">
+	<Dialog.Buttons>
+		<Button Content="@[Close]" Command="{BindCmd Close}"/>
+	</Dialog.Buttons>
+	<Grid Columns="20rem,1*" Rows="1*" Height="100%" AlignItems="Stretch">
+		<Grid Rows="Auto,1*" Height="100%" AlignItems="Stretch">
+			<Toolbar>
+				<Button Icon="Upload" Content="Завантажити" Command="{BindCmd Execute, CommandName=upload}"/>
+				<Button Icon="Delete" Command="{BindCmd Execute, CommandName=remove,
+					Argument={Bind Attachments.$selected}, Confirm='@[Confirm.Delete.Element]'}"/>
+			</Toolbar>
+			<List ItemsSource="{Bind Attachments}" AutoSelect="FirstItem">
+				<ListItemSimple Content="{Bind Blob.Name}"/>
+			</List>
+		</Grid>
+		<Slot Scope="{Bind Attachments.$selected}">
+			<BlobPreview Value="{Bind Blob}" Height="100%"/>
+			<Slot.Fallback>
+				<EmptyPanel Content="Для цього елементу ще немає вкладень"/>
+			</Slot.Fallback>
+		</Slot>
+	</Grid>
+</Dialog>
+]]>
+</script>
+</pre>
+
+	<h4>Шаблон</h4>
+	<p>
+		Метод контролера <a href="/client/controller">$uploadBlob</a> завантажує файл і зв'язує його
+		з власником, переданим у третьому аргументі: <code>{ Id, Base }</code>. Тут це об'єкт
+		<code>Owner</code>, який повернула процедура <code>Index</code>. Метод повертає новий рядок
+		<code>{ Id, Blob: { Id, Token, Name, Mime } }</code>. Що з ним робити, вирішує програма:
+	</p>
+
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">const template = {
+	commands: {
+		async upload() {
+			const result = await this.$ctrl.$uploadBlob('/attachment/upload', null, this.Owner);
+			if (!result)
+				return;
+			const row = this.Attachments.$append(result);
+			row.$select();
+		},
+		async remove(row) {
+			if (!row)
+				return;
+			await this.$ctrl.$invoke('delete', { Id: row.Id, Base: this.Owner.Base, Owner: this.Owner.Id });
+			row.$remove();
+		}
+	}
+};
+</script>
+</pre>
+
+	<p>
+		Команда <code>delete</code> передає <code>Base</code> у даних. Платформа перевіряє саме той
+		<code>Base</code>, який отримає процедура.
+	</p>
+
+	<h4>Видалення власника</h4>
+	<p>
+		<code>LinkId</code> не має зовнішнього ключа на запис власника, тому зв'язок переживає власника.
+		Процедура остаточного видалення власника повинна прибрати його зв'язки:
+	</p>
+
+<pre class="code-highlight js" data-lang="sql">
+<script type="text/template">delete from a2blob.BlobLinks where [Base] = N'/catalog/agentblob' and LinkId = @Id;
+</script>
+</pre>
+
+	<p>
+		Позначка видалення (<code>Void</code>) зв'язки зберігає: запис можна відновити.
+		Значення <code>base</code> живе у двох місцях — в адресі діалогу і в цій процедурі. Змінивши одне,
+		змініть і друге.
+	</p>
+
+	<h4>Власні колонки</h4>
+	<p>
+		Якщо вкладенню потрібен коментар або категорія, програма додає колонку сама, у своєму скрипті
+		схеми: <code>alter table a2blob.BlobLinks add Memo nvarchar(255) null</code> (з перевіркою, що колонки
+		ще немає) і пише її окремим викликом.
+	</p>
+
+	<h2>Обмеження</h2>
+	<ul class="std">
+		<li>
+			Явного видалення файлу немає. Замінений логотип, файл без збереження, видалений зв'язок
+			залишаються в сховищі.
+		</li>
+		<li>
+			Файл незмінний: заміна — це завжди новий <code>Id</code>.
+		</li>
+		<li>
+			Зображення з файлу поки не друкується у <a href="/report/index">звітах</a>.
+		</li>
+	</ul>
+
+	<h2>Дивись також</h2>
+	<ul class="std">
+		<li>Розділ <a class="code-link" href="/app/blobs">blobs</a> файла <code>model.json</code>.</li>
+		<li>Елемент керування <a class="code-link" href="/xaml/controls/blobimage">BlobImage</a>.</li>
+		<li>Елемент керування <a class="code-link" href="/xaml/controls/blobpreview">BlobPreview</a>.</li>
+		<li>Метод контролера <a class="code-link" href="/client/controller">$uploadBlob</a>.</li>
+		<li>Зображення у тексті - елемент <a class="code-link" href="/xaml/controls/texteditor">TextEditor</a>.</li>
+	</ul>
+</div>
