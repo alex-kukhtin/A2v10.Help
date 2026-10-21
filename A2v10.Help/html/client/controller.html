@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Контролер-->
-	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;$upload;$uploadBlob;$uploadBlobFile;$ensureSaved;-->
+	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;$upload;$uploadBlob;$uploadBlobFile;$ensureSaved;$longOperation;$requeryNew;$clearFilter;$inlineDepth;$saveCaller;-->
 	<div class="title">
 		<h1>
 			Контролер
@@ -46,6 +46,11 @@ interface IController {
   $uploadBlob(url: string, accept?: string, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
   $uploadBlobFile(url: string, file: File, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
   $ensureSaved(): Promise<boolean>;
+  $longOperation(action: () => Promise<any>): Promise<void>;
+  $requeryNew(id: any): void;
+  $clearFilter(source: object): void;
+  $inlineDepth(): number;
+  $saveCaller(): any;
 }
 
 declare const enum ~CommonStyle {
@@ -460,5 +465,63 @@ interface IConfirm {
 // тут this.Task.Id вже є
 </script>
 </pre>
+	</div>
+
+	<div class="method">
+		<a id="longoperation"></a>
+		<div class="syntax"><pre class="code-highlight js">$longOperation(action: () => Promise&lt;any&gt;): Promise&lt;void&gt;</pre></div>
+		<p>
+			Виконує асинхронну дію і весь час її виконання показує індикатор запиту - так само, як під час
+			звернення до сервера. Індикатор зникає і тоді, коли дія завершилася помилкою; помилка передається далі.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>action</code> - асинхронна функція (або функція, що повертає проміс).</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<a id="requerynew"></a>
+		<div class="syntax"><pre class="code-highlight js">$requeryNew(id: any): void</pre></div>
+		<p>
+			Підставляє <code>id</code> в адресу сторінки (без переходу і без нового запису в історії браузера)
+			і перечитує модель. Сторінка показує запис з цим ідентифікатором.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>id</code> - ідентифікатор запису.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<a id="clearfilter"></a>
+		<div class="syntax"><pre class="code-highlight js">$clearFilter(source: object): void</pre></div>
+		<p>
+			Повертає фільтр <a class="code-link" href="/xaml/components/collectionview">CollectionView</a>
+			до початкових значень (з <code>Filter</code>) і перечитує дані.
+			Працює тільки для <code>RunAt="ServerUrl"</code>.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>source</code> - масив, вказаний в <code>ItemsSource</code> елемента <code>CollectionView</code>.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<a id="inlinedepth"></a>
+		<div class="syntax"><pre class="code-highlight js">$inlineDepth(): number</pre></div>
+		<p>
+			Повертає кількість відкритих вбудованих діалогів
+			(<a class="code-link" href="/xaml/containers/inlinedialog">InlineDialog</a>).
+		</p>
+	</div>
+
+	<div class="method">
+		<a id="savecaller"></a>
+		<div class="syntax"><pre class="code-highlight js">$saveCaller(): any</pre></div>
+		<p>
+			Зберігає модель сторінки, що відкрила поточну (caller), і повертає результат її <code>$save</code>.
+			Якщо такої сторінки немає або її вже закрито, повертає <code>null</code>.
+		</p>
 	</div>
 </div>

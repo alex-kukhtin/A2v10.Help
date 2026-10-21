@@ -13,8 +13,6 @@
 	</div>
 
 	<!--
-		DataGridColumn.Monospace
-
 		Length.Min,Max,Clamp (CoreOnly)
 
 		Index - упорядочить Nuget-ccылки. Написать про основные и модули.
@@ -32,29 +30,21 @@
 		ListItemSimple - new element
 		Lazy - компонент
 
-		Dialog.HeaderMenu
-
 		DataModel.GroupingModel = use Object
 		DataModel.TreeModel = [InitExpand!!Expanded] - имя поля обязательно
 
-		IController.$requeryNew, $showSidePane, $hideSidePane, $longOperation, $inlineDepth
+		IController.$showSidePane, $hideSidePane
 
 		Scheduler - описание
 
 		описание {Bind Icon}
-
-		enums: ColumnControlType, ControlSize, WrapMode, TextColor
 
 		BindCmd: проверить остальные команды.
 
 		TreeViewItem.IsFolder2
 		TreeViewItem.IsGroup binding
 
-		utils.int2time, time2int
-
-		ctrl.$savePartial, ctrl.$saveCaller?,
-
-		PropertyGrid.NameMaxChars, ValueMaxChars, PropertyGridItem.NameMaxChars, ValueMaxChars
+		ctrl.$savePartial
 
 		TODO: StaticResource/ResourceDictionary
 		TODO: /ChatItem/StateCard/TableMarkCell/ValidatorLabel
@@ -73,7 +63,6 @@
 		TreeGrid.IsFolder, Mark, MarkStyle
 
 
-		controller.$clearFilter
 		events. LazyLoad Children+SubItems, .load
 
 		$permissions
@@ -91,7 +80,6 @@
 
 		api v2 - опис.
 		<li>%%%TRoot додано метод <code>$createModelInfo</code>.</li>
-		<li>%%%IElementArray додано метод <code>$lockUpdate</code>.</li>
 
 		Special Folders
 		===============
@@ -112,10 +100,8 @@
 		datedeff('second', 'minute')
 		utils.format('#.00')
 
-		array.$load, $loadLazy, $renumberRows, $ModelInfo
-
-		vm.$isDirty, $isPristine, $canSave
-		IRoot.$dirty, $readOnly, $stateReadOnly
+		vm.$canSave
+		IRoot.$dirty
 		vm.$setCurrentUrl
 		Map.$setProperty
 
@@ -183,6 +169,19 @@
 			<code>CheckAll</code> і <code>Done</code> та ролі <code>Code</code> і <code>Fit</code>.
 		</li>
 		<li>
+			В елементі <a class="code-link" href="/xaml/controls/datagrid">DataGrid</a> описано властивості
+			<code>GroupBy</code> - групування рядків - і <code>GridLines</code>.
+		</li>
+		<li>
+			В елементах <a class="code-link" href="/xaml/controls/propertygrid">PropertyGrid</a> і
+			<a class="code-link" href="/xaml/controls/propertygriditem">PropertyGridItem</a> описано властивості
+			<code>NameMaxChars</code> і <code>ValueMaxChars</code>.
+		</li>
+		<li>
+			В елементі <a class="code-link" href="/xaml/containers/dialog">Dialog</a> описано властивість
+			<code>HeaderMenu</code> - меню в заголовку діалогу.
+		</li>
+		<li>
 			Уточнено опис властивості <code>EnterCommand</code> елемента
 			<a class="code-link" href="/xaml/controls/textbox">TextBox</a>: команда виконується до оновлення моделі.
 		</li>
@@ -203,6 +202,10 @@
 			<span class="core-only">Тільки NET.Core</span>
 			Опція шаблона <a href="/template/options">skipDirty</a> приймає шлях масиву: його
 			<code>$append</code>, <code>$remove</code>, <code>$empty</code> не змінюють <code>$isDirty</code>.
+		</li>
+		<li>
+			В <a href="/client/controller">контролері</a> описано методи <code>$longOperation</code>,
+			<code>$requeryNew</code>, <code>$clearFilter</code>, <code>$inlineDepth</code> і <code>$saveCaller</code>.
 		</li>
 	</ul>
 </div>
