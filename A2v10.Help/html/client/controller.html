@@ -23,7 +23,7 @@ interface IController {
   readonly $isPristine: boolean;
   // methods
   $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
-  $requery(): void;
+  $requery(query?: object): void;
   $reload(args?: any): Promise<void>;
   $modalClose(result?: any): void;
   $msg(msg: string, title?: string, style?:~CommonStyle): Promise<boolean>;
@@ -478,6 +478,31 @@ interface IConfirm {
 		<ul class="params">
 			<li><code>action</code> - асинхронна функція (або функція, що повертає проміс).</li>
 		</ul>
+	</div>
+
+	<div class="method">
+		<a id="requery"></a>
+		<div class="syntax"><pre class="code-highlight js">$requery(query?: object): void</pre></div>
+		<p>
+			Завантажує сторінку заново - розмітку і модель. На відміну від <code>$reload</code>, який оновлює
+			тільки дані.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>query</code> - необов'язково. <span class="core-only">Тільки NET.Core</span> та <b>Layout: Tabbed</b>.
+				Параметри запиту: додаються до параметрів в адресі вкладки (параметр з тим самим ім'ям замінюється),
+				і сторінка завантажується з новою адресою. Параметри залишаються в адресі вкладки.
+				Дата і період передаються у форматі <code>DateUrl</code>, об'єкт - своїм ідентифікатором,
+				масив - ідентифікаторами елементів через кому. Властивості, імена яких починаються з
+				<code>_</code> або <code>$</code>, не передаються.
+			</li>
+		</ul>
+		<p>
+			Властивість <code>Run: true</code> в адресу не записується: сторінка завантажується один раз
+			з параметром <code>run=true</code>.
+			В діалозі і в інших макетах аргумент <code>query</code> ігнорується - сторінка просто завантажується заново.
+		</p>
 	</div>
 
 	<div class="method">
