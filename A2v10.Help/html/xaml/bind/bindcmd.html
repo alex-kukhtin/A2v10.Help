@@ -153,6 +153,66 @@
 	</div>
 
 	<div class="method">
+		<div class="command"><b>Append</b>, <b>Prepend</b> - додати елемент</div>
+		<p>
+			Додає новий порожній елемент у кінець (<code>Append</code>) або на початок (<code>Prepend</code>) масиву
+			і робить його виділеним. Перед додаванням виникає подія <code>Масив[].adding</code>:
+			якщо обробник поверне <code>false</code>, елемент не додається
+			(див. <a href="/template/events">події</a>).
+			Якщо модель тільки для читання, команду заборонено.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>Argument</code> - Прив'язка до масиву. Обов'язково.</li>
+		</ul>
+	</div>
+
+	<div class="method">
+		<div class="command"><b>Remove</b>, <b>RemoveSelected</b> - видалити елемент</div>
+		<p>
+			Видаляє елемент з масиву лише на клієнті: модель стає зміненою, а в базі елемент зникне
+			при збереженні. Виникає подія <code>Масив[].remove</code>.
+			Якщо модель тільки для читання, команду заборонено.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>Argument</code> - Для <code>Remove</code> це прив'язка до елемента. Не обов'язково:
+				всередині рядка (наприклад, <a class="code-link" href="/xaml/controls/datagrid">DataGrid</a>) без аргументу
+				видаляється поточний елемент. Для <code>RemoveSelected</code> це прив'язка до масиву, видаляється
+				його виділений елемент; поки виділеного нема, команду заборонено.
+			</li>
+			<li><code>Confirm</code> - Підтвердження перед видаленням.</li>
+		</ul>
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<DataGridColumn>
+	<Hyperlink Icon="Delete" Command="{BindCmd Remove, Confirm='Видалити рядок?'}"/>
+</DataGridColumn>
+</script>
+</pre>
+	</div>
+
+	<div class="method">
+		<div class="command"><b>DbRemove</b>, <b>DbRemoveSelected</b> - видалити з бази</div>
+		<p>
+			Одразу видаляє елемент у базі даних, без збереження моделі, а після успіху прибирає його з масиву.
+			Сервер викликає процедуру <code>[Схема].[Модель.Delete]</code> з параметром <code>@Id</code> -
+			ідентифікатором елемента. Для <a href="/models/array">"лінивого масиву"</a> процедура
+			<code>[Схема].[Модель.Властивість.Delete]</code>, де <code>Властивість</code> - ім'я масиву.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li>
+				<code>Argument</code> - Для <code>DbRemove</code> це прив'язка до елемента. Обов'язково.
+				Для <code>DbRemoveSelected</code> це прив'язка до масиву, видаляється його виділений елемент;
+				поки виділеного нема, команду заборонено.
+			</li>
+			<li><code>Confirm</code> - Підтвердження перед видаленням.</li>
+		</ul>
+	</div>
+
+	<div class="method">
 		<div class="command"><b>Execute</b>, <b>ExecuteSelected</b> - виконати</div>
 		<p>
 			Виконує команду шаблона.
@@ -197,6 +257,20 @@
 		<p>
 			Тільки для діалогів. Закриває поточний діалог з відповіддю <code>true</code>. Команда не має аргументів.
 		</p>
+	</div>
+	<div class="method">
+		<div class="command"><b>Select</b>, <b>SelectChecked</b> - обрати</div>
+		<p>
+			Для діалогів вибору. Закриває діалог і повертає результат: <code>Select</code> - виділений
+			елемент масиву, <code>SelectChecked</code> - масив позначених елементів
+			(<a class="code-link" href="/client/arrayprops">$checked</a>).
+			Поки нічого не виділено або не позначено, команду заборонено.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>Argument</code> - Прив'язка до масиву. Обов'язково.</li>
+			<li><code>ValidRequired</code> - Тільки для <code>Select</code>: модель має бути валідною.</li>
+		</ul>
 	</div>
 	<div class="method">
 		<div class="command"><b>Reload</b>, <b>Refresh</b> - оновити</div>

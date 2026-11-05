@@ -1,0 +1,138 @@
+<div>
+	<!--title:Що нового. Листопад 2026-->
+	<!--keywords:Що нового-->
+	<div class="title">
+		<h1>
+			Випуск 51 - версії 8672-8672 (Листопад 2026)
+		</h1>
+		<div class="breadcrumb">
+			<a href="index">Всі випуски</a>|
+			<a href="w202610">« Попередній випуск</a>|
+			<a href="" class="disabled">Наступний випуск »</a>
+		</div>
+	</div>
+
+	<!--
+		Length.Min,Max,Clamp (CoreOnly)
+
+		Index - упорядочить Nuget-ccылки. Написать про основные и модули.
+		Выделить Net.Core и Net. Framework.
+
+		StyleResource - Name = "Empty".
+
+
+		Xaml. MultiSelect (дописать про использование)
+
+		Component.Slots
+
+		InlineTextBox - новый елемент
+
+		ListItemSimple - new element
+		Lazy - компонент
+
+		DataModel.GroupingModel = use Object
+		DataModel.TreeModel = [InitExpand!!Expanded] - имя поля обязательно
+
+		IController.$showSidePane, $hideSidePane
+
+		Scheduler - описание
+
+		описание {Bind Icon}
+
+		BindCmd: не описаны Create, OpenSelectedFrame, Move, MoveSelected, Browse, Export, ExportTo,
+			Invoke, Navigate, NavigateExternal, MailTo, CallPhone, Attachment, Help.
+
+		TreeViewItem.IsFolder2
+		TreeViewItem.IsGroup binding
+
+		ctrl.$savePartial
+
+		TODO: StaticResource/ResourceDictionary
+		TODO: /ChatItem/StateCard/TableMarkCell/ValidatorLabel
+		TODO: /Thickness/Confirm/Validator (Component)/FilterDescription
+		Validator Converter (Component)
+		SheetColumnCollection, TableColumnCollection -> Convertor
+		Card - зробити приклад
+
+
+		signalR (CORE ONLY!). - команда типа signal - просто отправляет юзеру
+			signal: 'true' - выбирает из результата Signal: {User: 99, Message: "message", Data: {}}
+				и отправляет заданному юзеру.
+
+		Diagram/Group/Path
+		plain for json.
+		TreeGrid.IsFolder, Mark, MarkStyle
+
+
+		events. LazyLoad Children+SubItems, .load
+
+		$permissions
+
+		javascript command. fetch, executeSql, loadModel
+
+		Розширення розмітки
+
+		IIS: appSettings
+
+		models: update
+
+		IController.$report
+		FileImage - зробити детальний опис (files/sql - load/save, azureStorage)
+
+		api v2 - опис.
+		<li>%%%TRoot додано метод <code>$createModelInfo</code>.</li>
+
+		Special Folders
+		===============
+		_localization
+		_home
+		_navpane
+		_profile
+
+
+		BindCmd Toast, Permission, Viewer
+		Bind.Format for Number, Currency
+		Bind, DataType=Date, Format='MMMM yyyy';
+		Export - Argument,Data, Url
+
+		redirect.json
+
+		dateutils.now();
+		datedeff('second', 'minute')
+		utils.format('#.00')
+
+		vm.$canSave
+		IRoot.$dirty
+		vm.$setCurrentUrl
+		Map.$setProperty
+
+		model.json - events.AfterSave
+
+		export.template expression {{}}
+
+		commands... method (for api) /*get/post*/
+		model.json (commandTimeout)
+
+		 FROM PAPER:
+		1. Client localization
+		2. XAML Styles
+		4. Export - опис команди і шаблона Excel
+		6. Period
+		7. Render - опис
+		5. Search - підсвітка знайденого тексту.
+		8. MakeHelp - StopWords назовні.
+		-->
+
+	<h3>Xaml</h3>
+	<ul class="std">
+		<li>
+			В опис прив'язки <a class="code-link" href="/xaml/bind/bind">Bind</a> додано розділ про лапки:
+			коли значення параметра брати в одинарні лапки і чому <code>Path</code> - шлях, а не вираз.
+		</li>
+		<li>
+			В опис <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> додано команди
+			<code>Append</code>, <code>Prepend</code>, <code>Remove</code>, <code>RemoveSelected</code>,
+			<code>DbRemove</code>, <code>DbRemoveSelected</code>, <code>Select</code> і <code>SelectChecked</code>.
+		</li>
+	</ul>
+</div>
