@@ -9,4 +9,71 @@
 			<a href="index">Всі компоненти</a>
 		</div>
 	</div>
+	<p>
+		Підтвердження, яке користувач має дати перед виконанням команди. Задається властивістю
+		<code>Confirm</code> прив'язки <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a>;
+		якщо користувач відмовився, команда не виконується.
+	</p>
+	<p>
+		Зазвичай досить тексту повідомлення: рядок у властивості <code>Confirm</code> стає значенням
+		<code>Message</code>. Повна форма потрібна, лише щоб змінити заголовок або написи на кнопках.
+	</p>
+
+	<h3>Властивості</h3>
+	<table class="table-props">
+		<thead>
+			<tr>
+				<th>Ім'я</th>
+				<th>Тип</th>
+				<th>Опис</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="prop-name">Message</td>
+				<td class="fit">String</td>
+				<td>За замовчуванням. Текст повідомлення.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">Title</td>
+				<td>String</td>
+				<td>Заголовок вікна.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">OkText</td>
+				<td>String</td>
+				<td>Напис на кнопці підтвердження.</td>
+			</tr>
+			<tr>
+				<td class="prop-name">CancelText</td>
+				<td>String</td>
+				<td>Напис на кнопці скасування.</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Кожна властивість може бути прив'язкою (<a class="code-link" href="/xaml/bind/bind">Bind</a>).
+		Значення, які не задано, беруться з локалізації - див.
+		<a href="/template/commands">властивості об'єкта confirm</a>.
+	</p>
+
+	<h3>Приклад</h3>
+<pre class="code-highlight xml" data-lang="xml">
+<script type="text/template">
+<!-- тільки текст -->
+<Button Content="Видалити" Command="{BindCmd DbRemoveSelected, Argument={Bind Documents},
+	Confirm='@[Confirm.Delete.Element]'}"/>
+
+<!-- повна форма -->
+<Button Content="Провести">
+	<Button.Command>
+		<BindCmd Command="Execute" CommandName="apply">
+			<BindCmd.Confirm>
+				<Confirm Message="Провести документ?" Title="Проведення" OkText="Провести"/>
+			</BindCmd.Confirm>
+		</BindCmd>
+	</Button.Command>
+</Button>
+</script>
+</pre>
 </div>

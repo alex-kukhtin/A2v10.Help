@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Властивості і методи об'єкта-->
-	<!--keywords:$empty;$merge;$root;$parent;$id;$name;$isNew;$isEmpty;$valid;$invalid;$ctrl;-->
+	<!--keywords:$empty;$merge;$root;$parent;$id;$name;$isNew;$isEmpty;$valid;$invalid;$ctrl;$noChangeEvents;-->
 	<div class="title">
 		<h1>
 			Властивості і методи об'єкту
@@ -33,6 +33,7 @@ interface IElement {
 	// methods
 	$empty(): IElement;
 	$merge(src:Object) : IElement;
+	$noChangeEvents(fn: (elem: IElement) => any): any;
 }
 ]]>
 </script>
@@ -65,5 +66,32 @@ interface IElement {
 		<ul class="params">
 			<li>Посилання на самого себе.</li>
 		</ul>
+	</div>
+	<div class="method">
+		<a id="nochangeevents"></a>
+		<div class="syntax"><pre class="code-highlight js">$noChangeEvents(fn: (elem: IElement) => any): any</pre></div>
+		<h4>Опис</h4>
+		<p>
+			Викликає функцію так, щоб зміни властивостей цього об'єкта не викликали
+			<a href="/template/events">подій</a> <code>.changing</code> і <code>.change</code>.
+			Модель при цьому все одно стає зміненою (<code>$dirty</code>).
+			Блокуються події лише власних властивостей об'єкта: зміни у вкладених об'єктах і масивах
+			викликають події як завжди.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>fn</code> - функція; <code>this</code> і аргумент в ній - сам об'єкт.</li>
+		</ul>
+		<h4>Повертає:</h4>
+		<ul class="params">
+			<li>Те, що поверне <code>fn</code>.</li>
+		</ul>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">'Document.Rows[].Price.change'(row) {
+	// Sum перераховується без події Document.Rows[].Sum.change
+	row.$noChangeEvents(r => r.Sum = r.Price * r.Qty);
+}
+</script>
+</pre>
 	</div>
 </div>

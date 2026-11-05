@@ -33,8 +33,6 @@
 		DataModel.GroupingModel = use Object
 		DataModel.TreeModel = [InitExpand!!Expanded] - имя поля обязательно
 
-		IController.$showSidePane, $hideSidePane
-
 		Scheduler - описание
 
 		описание {Bind Icon}
@@ -42,14 +40,9 @@
 		BindCmd: не описаны Create, OpenSelectedFrame, Move, MoveSelected, Browse, Export, ExportTo,
 			Invoke, Navigate, NavigateExternal, MailTo, CallPhone, Attachment, Help.
 
-		TreeViewItem.IsFolder2
-		TreeViewItem.IsGroup binding
-
-		ctrl.$savePartial
-
 		TODO: StaticResource/ResourceDictionary
 		TODO: /ChatItem/StateCard/TableMarkCell/ValidatorLabel
-		TODO: /Thickness/Confirm/Validator (Component)/FilterDescription
+		TODO: /Thickness/Validator (Component)/FilterDescription
 		Validator Converter (Component)
 		SheetColumnCollection, TableColumnCollection -> Convertor
 		Card - зробити приклад
@@ -61,7 +54,7 @@
 
 		Diagram/Group/Path
 		plain for json.
-		TreeGrid.IsFolder, Mark, MarkStyle
+		TreeView.Style (SideBarMenu) - не описано
 
 
 		events. LazyLoad Children+SubItems, .load
@@ -97,13 +90,12 @@
 
 		redirect.json
 
-		dateutils.now();
-		datedeff('second', 'minute')
-		utils.format('#.00')
-
-		vm.$canSave
+		vm.$canSave, vm.$setCurrentUrl - є у view model, але не в $ctrl
+		ctrl.$savePart (не $savePartial)
+		ctrl: не описані $save, $close, $navigate, $notifyOwner, $expand, $file, $emitGlobal,
+			$emitParentTab, $dirtyCaller, $shareUrl
+		IElement.$lockEvents, $unlockEvents, $eventsLocked
 		IRoot.$dirty
-		vm.$setCurrentUrl
 		Map.$setProperty
 
 		model.json - events.AfterSave
@@ -133,6 +125,31 @@
 			В опис <a class="code-link" href="/xaml/bind/bindcmd">BindCmd</a> додано команди
 			<code>Append</code>, <code>Prepend</code>, <code>Remove</code>, <code>RemoveSelected</code>,
 			<code>DbRemove</code>, <code>DbRemoveSelected</code>, <code>Select</code> і <code>SelectChecked</code>.
+		</li>
+		<li>
+			Описано компонент <a class="code-link" href="/xaml/components/confirm">Confirm</a> - підтвердження
+			перед виконанням команди.
+		</li>
+		<li>
+			Виправлено опис <a class="code-link" href="/xaml/controls/treeviewitem">TreeViewItem</a>: папку задає
+			властивість <code>IsFolder2</code>, а <code>IsFolder</code> - інше ім'я <code>IsGroup</code>.
+			Описано властивість <code>InitialExpand</code>.
+		</li>
+		<li>
+			В елементі <a class="code-link" href="/xaml/controls/treegrid">TreeGrid</a> описано властивості
+			<code>IsFolder</code>, <code>Mark</code> і <code>MarkerStyle</code>.
+		</li>
+	</ul>
+
+	<h3>Програмування клієнта</h3>
+	<ul class="std">
+		<li>
+			В <a href="/client/controller">контролері</a> описано методи <code>$showSidePane</code> і
+			<code>$hideSidePane</code> - бокова панель.
+		</li>
+		<li>
+			В <a href="/client/elemprops">об'єкт</a> додано метод <code>$noChangeEvents</code> - змінити
+			властивості без подій <code>.changing</code> і <code>.change</code>.
 		</li>
 	</ul>
 </div>

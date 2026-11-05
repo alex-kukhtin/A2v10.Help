@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Xaml.TreeViewItem-->
-	<!--keywords:TreeViewItem-->
+	<!--keywords:TreeViewItem;IsFolder2;IsGroup-->
 	<div class="title">
 		<h1>
 			Елемент TreeViewItem
@@ -53,15 +53,35 @@
 					батьківського елементу <a href="treeview">TreeView</a>.
 				</td>
 			</tr>
+			<tr class="top">
+				<td class="prop-name fit">IsFolder2</td>
+				<td>Boolean?</td>
+				<td>
+					Завжди прив'язка. Чи є елемент папкою: у папки є стрілка розгортання, а клік її розгортає
+					замість виділення (якщо в <code>TreeView</code> не встановлено <code>FolderSelect</code>). Потрібна для <a href="/models/tree">динамічних дерев</a>, де папка ще не має
+					завантажених дочірніх елементів. Без неї папкою вважається елемент з
+					<code>$hasChildren</code> або з непорожнім <code>ItemsSource</code>; <code>$hasChildren</code>
+					має перевагу і над цією властивістю.
+				</td>
+			</tr>
+			<tr class="top">
+				<td class="prop-name fit">IsGroup</td>
+				<td>Boolean?</td>
+				<td>
+					Завжди прив'язка. Чи починає елемент групу. Додає елементу css-клас <code>group</code>; у стилі
+					<code>SideBarMenu</code> елемента <a class="code-link" href="treeview">TreeView</a> над ним
+					малюється роздільник. На те, чи є елемент папкою, не впливає.
+				</td>
+			</tr>
 			<tr>
 				<td class="prop-name fit">IsFolder</td>
 				<td>Boolean?</td>
-				<td>Завжди прив'язка. Чи є елемент папкою. Використовується для роботи з динамічно заповнюваними деревами.</td>
+				<td>Інше ім'я <code>IsGroup</code> - не плутати з <code>IsFolder2</code>.</td>
 			</tr>
 			<tr>
-				<td class="prop-name fit">IsGroup</td>
-				<td>Boolean?</td>
-				<td>Завжди прив'язка. Чи є елемент групою. Використовується для роботи з динамічно заповнюваними деревами.</td>
+				<td class="prop-name fit">InitialExpand</td>
+				<td>Boolean</td>
+				<td>Розгортати папки при створенні і після оновлення даних.</td>
 			</tr>
 			<tr>
 				<td colspan="3">

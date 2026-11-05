@@ -1,6 +1,6 @@
 ﻿<div>
 	<!--title:Контролер-->
-	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;$upload;$uploadBlob;$uploadBlobFile;$ensureSaved;$longOperation;$requeryNew;$clearFilter;$inlineDepth;$saveCaller;-->
+	<!--keywords:IController;$isDirty;$IsPristine;$invoke;$requery;$reload;$modalClose;$msg;$alert;$confirm;$toast;$defer;$showDialog;$asyncValid;$saveModified;$setFilter;$focus;$upload;$uploadBlob;$uploadBlobFile;$ensureSaved;$longOperation;$requeryNew;$clearFilter;$inlineDepth;$saveCaller;$showSidePane;$hideSidePane;-->
 	<div class="title">
 		<h1>
 			Контролер
@@ -51,6 +51,8 @@ interface IController {
   $clearFilter(source: object): void;
   $inlineDepth(): number;
   $saveCaller(): any;
+  $showSidePane(url: string, arg?: string | number, data?: object): void;
+  $hideSidePane(): void;
 }
 
 declare const enum ~CommonStyle {
@@ -547,6 +549,35 @@ interface IConfirm {
 		<p>
 			Зберігає модель сторінки, що відкрила поточну (caller), і повертає результат її <code>$save</code>.
 			Якщо такої сторінки немає або її вже закрито, повертає <code>null</code>.
+		</p>
+	</div>
+
+	<div class="method">
+		<a id="showsidepane"></a>
+		<div class="syntax"><pre class="code-highlight js">$showSidePane(url: string, arg?: string | number, data?: object): void</pre></div>
+		<p>
+			Відкриває сторінку в боковій панелі. Сторінка береться зі спеціальної папки програми
+			<span class="file-name">_navpane</span>. Повторний виклик з тими самими аргументами закриває панель.
+			Панель закривається і при переході на іншу сторінку.
+		</p>
+		<h4>Аргументи:</h4>
+		<ul class="params">
+			<li><code>url</code> - шлях кінцевої точки всередині <span class="file-name">_navpane</span>.</li>
+			<li><code>arg</code> - необов'язково. Ідентифікатор, за замовчуванням <code>0</code>.</li>
+			<li><code>data</code> - необов'язково. Параметри запиту.</li>
+		</ul>
+<pre class="code-highlight js" data-lang="js">
+<script type="text/template">// відкриває /_navpane/agent/info/15
+this.$ctrl.$showSidePane('/agent/info', agent.Id);
+</script>
+</pre>
+	</div>
+
+	<div class="method">
+		<a id="hidesidepane"></a>
+		<div class="syntax"><pre class="code-highlight js">$hideSidePane(): void</pre></div>
+		<p>
+			Закриває бокову панель, відкриту методом <code>$showSidePane</code>.
 		</p>
 	</div>
 </div>
